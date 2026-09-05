@@ -1,0 +1,233 @@
+{
+  "schema": "demo_site_controls/v1",
+  "passed": 45,
+  "total": 45,
+  "all_pass": true,
+  "controls": [
+    {
+      "name": "condition privileged scores 15/50",
+      "ok": true,
+      "detail": "expected '15 / 50'"
+    },
+    {
+      "name": "condition privileged scores 15/50 [negative control]",
+      "ok": true,
+      "detail": "corrupted '22 / 50' must be absent"
+    },
+    {
+      "name": "condition privileged is named on the page",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "condition perceived scores 12/50",
+      "ok": true,
+      "detail": "expected '12 / 50'"
+    },
+    {
+      "name": "condition perceived scores 12/50 [negative control]",
+      "ok": true,
+      "detail": "corrupted '19 / 50' must be absent"
+    },
+    {
+      "name": "condition perceived is named on the page",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "condition blind scores 9/50",
+      "ok": true,
+      "detail": "expected '9 / 50'"
+    },
+    {
+      "name": "condition blind scores 9/50 [negative control]",
+      "ok": true,
+      "detail": "corrupted '16 / 50' must be absent"
+    },
+    {
+      "name": "condition blind is named on the page",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "blind < perceived < privileged holds in the evidence",
+      "ok": true,
+      "detail": "9 < 12 < 15"
+    },
+    {
+      "name": "placement drawer_open = 10/10",
+      "ok": true,
+      "detail": "expected '10 / 10 seeds'"
+    },
+    {
+      "name": "placement drawer_open = 10/10 [negative control]",
+      "ok": true,
+      "detail": "corrupted '17 / 10 seeds' must be absent"
+    },
+    {
+      "name": "placement fork_placed = 0/10",
+      "ok": true,
+      "detail": "expected '0 / 10 seeds'"
+    },
+    {
+      "name": "placement fork_placed = 0/10 [negative control]",
+      "ok": true,
+      "detail": "corrupted '7 / 10 seeds' must be absent"
+    },
+    {
+      "name": "placement spoon_placed = 0/10",
+      "ok": true,
+      "detail": "expected '0 / 10 seeds'"
+    },
+    {
+      "name": "placement spoon_placed = 0/10 [negative control]",
+      "ok": true,
+      "detail": "corrupted '7 / 10 seeds' must be absent"
+    },
+    {
+      "name": "placement plate_placed = 4/10",
+      "ok": true,
+      "detail": "expected '4 / 10 seeds'"
+    },
+    {
+      "name": "placement plate_placed = 4/10 [negative control]",
+      "ok": true,
+      "detail": "corrupted '11 / 10 seeds' must be absent"
+    },
+    {
+      "name": "placement mug_placed = 1/10",
+      "ok": true,
+      "detail": "expected '1 / 10 seeds'"
+    },
+    {
+      "name": "placement mug_placed = 1/10 [negative control]",
+      "ok": true,
+      "detail": "corrupted '8 / 10 seeds' must be absent"
+    },
+    {
+      "name": "page carries an embedded run-data block",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "run-data covers exactly the evaluated seeds",
+      "ok": true,
+      "detail": "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]"
+    },
+    {
+      "name": "every seed's outcome matches envs/task.py's score",
+      "ok": true,
+      "detail": "mismatched seeds: []"
+    },
+    {
+      "name": "seed-outcome comparison [negative control]",
+      "ok": true,
+      "detail": "a displaced count must be caught; caught [0]"
+    },
+    {
+      "name": "demo video frame count and fps",
+      "ok": true,
+      "detail": "expected '7290 frames at 25 fps'"
+    },
+    {
+      "name": "demo video frame count and fps [negative control]",
+      "ok": true,
+      "detail": "corrupted '7297 frames at 25 fps' must be absent"
+    },
+    {
+      "name": "demo video duration",
+      "ok": true,
+      "detail": "expected '291.6 s at'"
+    },
+    {
+      "name": "demo video duration [negative control]",
+      "ok": true,
+      "detail": "corrupted '298.6 s at' must be absent"
+    },
+    {
+      "name": "video presentation duration",
+      "ok": true,
+      "detail": "expected '4:36'"
+    },
+    {
+      "name": "video presentation duration [negative control]",
+      "ok": true,
+      "detail": "corrupted '11:36' must be absent"
+    },
+    {
+      "name": "slide deck page count",
+      "ok": true,
+      "detail": "expected '13 pages'"
+    },
+    {
+      "name": "slide deck page count [negative control]",
+      "ok": true,
+      "detail": "corrupted '20 pages' must be absent"
+    },
+    {
+      "name": "every local asset referenced by the page exists",
+      "ok": true,
+      "detail": "missing: []"
+    },
+    {
+      "name": "the page references local assets at all",
+      "ok": true,
+      "detail": "['evidence/demo_scripted_10seeds.mp4', 'evidence/seeds/seed_00.png', 'evidence/seeds/seed_01.png', 'evidence/seeds/seed_02.png', 'evidence/seeds/seed_03.png', 'evidence/seeds/seed_04.png', 'evidence/seeds/seed_05.png', 'evidence/seeds/seed_06.png', 'evidence/seeds/seed_07.png', 'evidence/seeds/seed_08.png', 'evidence/seeds/seed_09.png', 'evidence/slides_presentation.pdf', 'evidence/video_presentation.mp4']"
+    },
+    {
+      "name": "asset existence check [negative control]",
+      "ok": true,
+      "detail": "a path that should not exist must not resolve"
+    },
+    {
+      "name": "task success is still 0 in the evidence",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "name": "the page states the task-success count in its ledger",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "the page states that the repository holds no learned policy",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "the page states the OpenVINO numbers are not the required measurement",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "the page does not claim to be hosted on Streamlit",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "the page does not claim to be hosted on Replit",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "the page does not claim to be hosted on Vercel",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "the builder re-runs cleanly",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "a fresh build is byte-identical to the shipped page",
+      "ok": true,
+      "detail": "161a1b18317b vs 161a1b18317b"
+    },
+    {
+      "name": "evidence/demo_site.json pins the shipped bytes",
+      "ok": true,
+      "detail": "161a1b18317b vs 161a1b18317b"
+    }
+  ]
+}

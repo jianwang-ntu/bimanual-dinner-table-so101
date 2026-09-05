@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bimanual dinner-table manipulation on SO-101 &mdash; demo</title>
+<meta name="description" content="Demo viewer for the AI Infra Summit Bimanual VLA Manipulation entry: recorded rollout, per-seed evaluation, and the ledger of what does not work.">
+<style>
+:root{--bg:#0d1117;--fg:#e6edf3;--dim:#8b949e;--ok:#3fb950;--no:#f85149;--card:#161b22;--line:#30363d;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:28px 20px 80px}
+h1{font-size:26px;margin:0 0 4px} h2{font-size:19px;margin:34px 0 10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.sub{color:var(--dim);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;margin:12px 0}
+video{width:100%;border-radius:6px;background:#000}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+th{color:var(--dim);font-weight:600}
+.seedbar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.seedbar button{background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:7px 13px;cursor:pointer;font:inherit}
+.seedbar button[aria-pressed=true]{border-color:var(--acc);color:var(--acc);background:#132135}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.grid img{width:100%;border-radius:6px;border:1px solid var(--line)}
+.yes{color:var(--ok)} .no{color:var(--no)}
+ul.ledger li{margin:6px 0}
+code{background:#1f2630;padding:1px 5px;border-radius:4px;font-size:13px}
+a{color:var(--acc)}
+.kv{display:flex;gap:22px;flex-wrap:wrap;color:var(--dim);font-size:14px}
+.warn{border-left:3px solid var(--no);padding-left:12px}
+</style></head><body><main>
+
+<h1>Bimanual dinner-table manipulation on SO-101</h1>
+<p class="sub">Demo viewer for the AI Infra Summit &mdash; Bimanual VLA Manipulation track.
+Every figure on this page is read out of the repository's own evidence files by
+<code>scripts/make_demo_site.py</code>; nothing here is typed in by hand.
+Built at commit <code>5ab8365</code>.</p>
+
+<div class="card"><div class="kv">
+<span><a href="https://github.com/jianwang-ntu/bimanual-dinner-table-so101">source repository</a></span>
+<span><a href="evidence/slides_presentation.pdf">slide deck (PDF, 13 pages)</a></span>
+<span><a href="evidence/video_presentation.mp4">video presentation (4:36)</a></span>
+</div></div>
+
+<h2>The task</h2>
+<div class="card"><p>Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.</p>
+<p class="sub">Two SO-101 arms, MuJoCo, 10 randomized evaluation seeds,
+5 scored sub-goals per seed.</p></div>
+
+<h2>The rollout, as recorded</h2>
+<div class="card">
+<video controls preload="metadata" poster="evidence/seeds/seed_00.png">
+  <source src="evidence/demo_scripted_10seeds.mp4" type="video/mp4">
+</video>
+<p class="sub">7290 frames at 25 fps &mdash; 291.6 s at
+8x real time, 960x540, 15.76 MB. This is the simulator's own
+output for the same 10 seeds scored below.</p>
+</div>
+
+<h2>Every evaluation seed</h2>
+<p class="sub">Pick a seed. The outcome shown is the one in
+<code>evidence/eval_seeds_scripted.json</code>, scored by
+<code>envs/task.py</code>.</p>
+<div class="seedbar"><button data-seed="0">seed 0</button><button data-seed="1">seed 1</button><button data-seed="2">seed 2</button><button data-seed="3">seed 3</button><button data-seed="4">seed 4</button><button data-seed="5">seed 5</button><button data-seed="6">seed 6</button><button data-seed="7">seed 7</button><button data-seed="8">seed 8</button><button data-seed="9">seed 9</button></div>
+<div class="grid">
+  <div><img id="seed-img" src="" alt=""></div>
+  <div id="seed-table"></div>
+</div>
+
+<h2>Where the controller gets its object positions</h2>
+<div class="card"><table>
+<tr><th>scene source</th><th>what the controller reads</th><th>sub-goals</th><th>task success</th></tr>
+<tr><td><code>--scene privileged</code></td><td>controller reads MjData, as it always did</td><td>15 / 50</td><td>0 / 10</td></tr><tr><td><code>--scene perceived</code></td><td>controller reads top_cam -&gt; OpenVINO IR -&gt; seven numbers</td><td>12 / 50</td><td>0 / 10</td></tr><tr><td><code>--scene blind</code></td><td>controller reads the nominal, un-randomized layout</td><td>9 / 50</td><td>0 / 10</td></tr>
+</table>
+<p class="sub">The <code>blind</code> row is the negative control: it hands the
+controller a fixed nominal layout. If the controller ignored what it was handed,
+all three rows would be identical. <code>perceived</code> scores below
+<code>privileged</code>, and that is the direction stated here rather than the
+other way round.</p></div>
+
+<h2>Which objects are actually placed</h2>
+<div class="card"><table>
+<tr><th>sub-goal</th><th>met on</th></tr>
+<tr><td>drawer_open</td><td>10 / 10 seeds</td></tr><tr><td>fork_placed</td><td>0 / 10 seeds</td></tr><tr><td>spoon_placed</td><td>0 / 10 seeds</td></tr><tr><td>plate_placed</td><td>4 / 10 seeds</td></tr><tr><td>mug_placed</td><td>1 / 10 seeds</td></tr>
+</table>
+<p class="sub">Both arms are used on 10 of 10 seeds. An object
+is handed between the arms on seeds 0, 2, 6, 8, 9.</p></div>
+
+<h2>What does not work</h2>
+<div class="card warn"><ul class="ledger"><li>Task success is 0 of 10 seeds. No episode completes the whole instruction.</li><li>The fork and the spoon are placed on 0 of 10 seeds -- the perception network has no output for either object.</li><li>The mug reaches its mat on 1 of 10 seeds, and on the seed it does it arrives lying on its side.</li><li>There is no learned policy in this repository. The controller is a scripted IK waypoint state machine with no trained parameters.</li><li>No measurement was taken on Intel Core Ultra silicon. The OpenVINO numbers in the repository were produced on an AMD EPYC host and the bench script stamps them NOT_THE_REQUIRED_MEASUREMENT.</li><li>Natural-language interpretation, multi-step task context and re-planning are absent. The instruction is fixed and is not parsed.</li></ul></div>
+
+<script type="application/json" id="run-data">{"episodes":[{"bimanual":true,"dropped":[],"handoff_objects":["drawer","mug"],"handoffs":[{"from":"right","object":"drawer","t":34.4,"to":"left"},{"from":"left","object":"mug","t":135.1,"to":"right"},{"from":"left","object":"drawer","t":198.7,"to":"right"}],"image":"evidence/seeds/seed_00.png","max_ik_err_mm":12.9,"met":2,"moves":152,"seed":0,"sim_time_s":206.2,"subgoals":{"drawer_open":true,"fork_placed":false,"mug_placed":false,"plate_placed":true,"spoon_placed":false},"success":false,"total":5},{"bimanual":true,"dropped":[],"handoff_objects":["drawer"],"handoffs":[{"from":"right","object":"drawer","t":21.6,"to":"left"},{"from":"left","object":"drawer","t":75.4,"to":"right"}],"image":"evidence/seeds/seed_01.png","max_ik_err_mm":21.7,"met":1,"moves":177,"seed":1,"sim_time_s":229.5,"subgoals":{"drawer_open":true,"fork_placed":false,"mug_placed":false,"plate_placed":false,"spoon_placed":false},"success":false,"total":5},{"bimanual":true,"dropped":[],"handoff_objects":["drawer","mug"],"handoffs":[{"from":"right","object":"drawer","t":21.5,"to":"left"},{"from":"left","object":"drawer","t":42.3,"to":"right"},{"from":"left","object":"mug","t":122.5,"to":"right"}],"image":"evidence/seeds/seed_02.png","max_ik_err_mm":361.9,"met":1,"moves":162,"seed":2,"sim_time_s":214.0,"subgoals":{"drawer_open":true,"fork_placed":false,"mug_placed":false,"plate_placed":false,"spoon_placed":false},"success":false,"total":5},{"bimanual":true,"dropped":[],"handoff_objects":["drawer"],"handoffs":[{"from":"right","object":"drawer","t":22.3,"to":"left"},{"from":"left","object":"drawer","t":46.0,"to":"right"},{"from":"right","object":"drawer","t":133.9,"to":"left"},{"from":"left","object":"drawer","t":204.1,"to":"right"}],"image":"evidence/seeds/seed_03.png","max_ik_err_mm":25.8,"met":2,"moves":170,"seed":3,"sim_time_s":224.6,"subgoals":{"drawer_open":true,"fork_placed":false,"mug_placed":false,"plate_placed":true,"spoon_placed":false},"success":false,"total":5},{"bimanual":true,"dropped":[],"handoff_objects":["drawer"],"handoffs":[{"from":"right","object":"drawer","t":21.1,"to":"left"},{"from":"left","object":"drawer","t":41.3,"to":"right"}],"image":"evidence/seeds/seed_04.png","max_ik_err_mm":200.4,"met":2,"moves":189,"seed":4,"sim_time_s":239.7,"subgoals":{"drawer_open":true,"fork_placed":false,"mug_placed":false,"plate_placed":true,"spoon_placed":false},"success":false,"total":5},{"bimanual":true,"dropped":[],"handoff_objects":["drawer"],"handoffs":[{"from":"right","object":"drawer","t":34.1,"to":"left"},{"from":"left","object":"drawer","t":41.3,"to":"right"}],"image":"evidence/seeds/seed_05.png","max_ik_err_mm":290.6,"met":1,"moves":201,"seed":5,"sim_time_s":255.1,"subgoals":{"drawer_open":true,"fork_placed":false,"mug_placed":false,"plate_placed":false,"spoon_placed":false},"success":false,"total":5},{"bimanual":true,"dropped":[],"handoff_objects":["drawer","mug"],"handoffs":[{"from":"right","object":"drawer","t":24.6,"to":"left"},{"from":"left","object":"drawer","t":41.2,"to":"right"},{"from":"right","object":"drawer","t":149.0,"to":"left"},{"from":"left","object":"mug","t":155.9,"to":"right"},{"from":"left","object":"drawer","t":215.8,"to":"right"}],"image":"evidence/seeds/seed_06.png","max_ik_err_mm":294.9,"met":1,"moves":209,"seed":6,"sim_time_s":260.5,"subgoals":{"drawer_open":true,"fork_placed":false,"mug_placed":false,"plate_placed":false,"spoon_placed":false},"success":false,"total":5},{"bimanual":true,"dropped":[],"handoff_objects":["drawer"],"handoffs":[{"from":"right","object":"drawer","t":21.4,"to":"left"},{"from":"left","object":"drawer","t":42.0,"to":"right"}],"image":"evidence/seeds/seed_07.png","max_ik_err_mm":161.5,"met":1,"moves":195,"seed":7,"sim_time_s":244.8,"subgoals":{"drawer_open":true,"fork_placed":false,"mug_placed":false,"plate_placed":false,"spoon_placed":false},"success":false,"total":5},{"bimanual":true,"dropped":[],"handoff_objects":["drawer","mug"],"handoffs":[{"from":"right","object":"drawer","t":24.9,"to":"left"},{"from":"left","object":"mug","t":125.2,"to":"right"},{"from":"left","object":"drawer","t":206.8,"to":"right"}],"image":"evidence/seeds/seed_08.png","max_ik_err_mm":27.8,"met":2,"moves":174,"seed":8,"sim_time_s":227.3,"subgoals":{"drawer_open":true,"fork_placed":false,"mug_placed":true,"plate_placed":false,"spoon_placed":false},"success":false,"total":5},{"bimanual":true,"dropped":[],"handoff_objects":["drawer","mug"],"handoffs":[{"from":"right","object":"drawer","t":29.7,"to":"left"},{"from":"left","object":"mug","t":143.2,"to":"right"},{"from":"left","object":"drawer","t":224.7,"to":"right"}],"image":"evidence/seeds/seed_09.png","max_ik_err_mm":21.3,"met":2,"moves":181,"seed":9,"sim_time_s":232.2,"subgoals":{"drawer_open":true,"fork_placed":false,"mug_placed":false,"plate_placed":true,"spoon_placed":false},"success":false,"total":5}]}</script>
+<script>
+const D = JSON.parse(document.getElementById('run-data').textContent);
+const GOALS = ["drawer_open", "fork_placed", "spoon_placed", "plate_placed", "mug_placed"];
+function pick(seed){
+  const ep = D.episodes.find(e => e.seed === seed);
+  document.querySelectorAll('.seedbar button').forEach(b =>
+    b.setAttribute('aria-pressed', String(Number(b.dataset.seed) === seed)));
+  document.getElementById('seed-img').src = ep.image;
+  document.getElementById('seed-img').alt = 'Initial scene, seed ' + seed;
+  const rows = GOALS.map(g =>
+    '<tr><td>' + g + '</td><td class="' + (ep.subgoals[g] ? 'yes">met' : 'no">not met') +
+    '</td></tr>').join('');
+  const ho = ep.handoffs.length
+    ? ep.handoffs.map(h => h.object + ' ' + h.from + '\u2192' + h.to + ' at ' + h.t + ' s').join('; ')
+    : 'none';
+  document.getElementById('seed-table').innerHTML =
+    '<table><tr><th>sub-goal</th><th>seed ' + seed + '</th></tr>' + rows +
+    '<tr><td>sub-goals met</td><td>' + ep.met + ' / ' + ep.total + '</td></tr>' +
+    '<tr><td>task success</td><td class="' + (ep.success ? 'yes">yes' : 'no">no') + '</td></tr>' +
+    '<tr><td>both arms used</td><td class="' + (ep.bimanual ? 'yes">yes' : 'no">no') + '</td></tr>' +
+    '<tr><td>hand-offs</td><td>' + ho + '</td></tr>' +
+    '<tr><td>waypoints</td><td>' + ep.moves + '</td></tr>' +
+    '<tr><td>sim time</td><td>' + ep.sim_time_s + ' s</td></tr>' +
+    '<tr><td>peak IK error</td><td>' + ep.max_ik_err_mm + ' mm</td></tr>' +
+    '<tr><td>objects dropped</td><td>' + (ep.dropped.length ? ep.dropped.join(', ') : 'none') + '</td></tr>' +
+    '</table>';
+}
+document.querySelectorAll('.seedbar button').forEach(b =>
+  b.addEventListener('click', () => pick(Number(b.dataset.seed))));
+pick(D.episodes[0].seed);
+</script>
+</main></body></html>

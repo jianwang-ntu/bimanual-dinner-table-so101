@@ -1,0 +1,60 @@
+{
+  "schema": "demo_site/v1",
+  "requirement": "req_application_url / req_demo_platform -- lablab Rule Book 'Application Components': Demo Application Platform, Application URL",
+  "built_by": "scripts/make_demo_site.py",
+  "built_at_head": "5ab8365",
+  "page": "index.html",
+  "bytes": 13102,
+  "sha256": "161a1b18317bc3a2d7c7c1a7e5e33549a616b574793d3ff4dc1be15648b5828f",
+  "figures_derived_from": [
+    "evidence/eval_seeds_scripted.json",
+    "evidence/eval_seeds_scripted_perceived.json",
+    "evidence/eval_seeds_scripted_blind.json",
+    "evidence/demo_scripted_10seeds.json",
+    "evidence/video_presentation.json",
+    "evidence/slides_presentation.json"
+  ],
+  "facts": {
+    "seeds": 10,
+    "subgoals_per_seed": 5,
+    "conditions": {
+      "privileged": {
+        "total": 15,
+        "denominator": 50,
+        "task_success": 0
+      },
+      "perceived": {
+        "total": 12,
+        "denominator": 50,
+        "task_success": 0
+      },
+      "blind": {
+        "total": 9,
+        "denominator": 50,
+        "task_success": 0
+      }
+    },
+    "placed": {
+      "drawer_open": 10,
+      "fork_placed": 0,
+      "spoon_placed": 0,
+      "plate_placed": 4,
+      "mug_placed": 1
+    },
+    "bimanual_seeds": 10,
+    "mug_handoff_seeds": [
+      0,
+      2,
+      6,
+      8,
+      9
+    ],
+    "demo_video_seconds": 291.6,
+    "presentation_mmss": "4:36",
+    "slides_pages": 13
+  },
+  "not_claimed": [
+    "The page is a static viewer over recorded evidence. It does not run the simulator in the browser and does not claim to.",
+    "It is hosted on GitHub Pages, which is not one of the three platforms the Rule Book names (Streamlit, Replit, Vercel). Whether the submission form accepts it is UNKNOWN and is not resolved in our favour."
+  ]
+}
