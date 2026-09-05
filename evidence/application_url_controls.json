@@ -1,0 +1,84 @@
+{
+ "site": "https://jianwang-ntu.github.io/bimanual-dinner-table-so101/",
+ "head": "31f07bc38e64169a9d858616f7e029a99630dbc7",
+ "served_index_sha256": "93c5f78fe2db21af7b805b5e77fd049110a83360a655a5862f5780cadf901747",
+ "referenced_assets": [
+  "evidence/demo_scripted_10seeds.mp4",
+  "evidence/seeds/seed_00.png",
+  "evidence/seeds/seed_01.png",
+  "evidence/seeds/seed_02.png",
+  "evidence/seeds/seed_03.png",
+  "evidence/seeds/seed_04.png",
+  "evidence/seeds/seed_05.png",
+  "evidence/seeds/seed_06.png",
+  "evidence/seeds/seed_07.png",
+  "evidence/seeds/seed_08.png",
+  "evidence/seeds/seed_09.png",
+  "evidence/slides_presentation.pdf",
+  "evidence/video_presentation.mp4"
+ ],
+ "controls": [
+  {
+   "control": "site_root_answers_200_anonymously",
+   "pass": true,
+   "detail": "HTTP 200, 13296 bytes"
+  },
+  {
+   "control": "negctl_unknown_path_is_404",
+   "pass": true,
+   "detail": "HTTP 404 for https://jianwang-ntu.github.io/bimanual-dinner-table-so101/this-path-does-not-exist-3f9a1c/ (a 200 here would mean the root 200 proves nothing)"
+  },
+  {
+   "control": "served_index_is_byte_identical_to_commit",
+   "pass": true,
+   "detail": "served 93c5f78fe2db21af == committed 93c5f78fe2db21af"
+  },
+  {
+   "control": "negctl_one_flipped_bit_is_rejected",
+   "pass": true,
+   "detail": "a single flipped bit no longer matches the served page"
+  },
+  {
+   "control": "served_by_github_not_by_this_host",
+   "pass": true,
+   "detail": "Server='GitHub.com', request-id header present=True"
+  },
+  {
+   "control": "negctl_local_copy_is_not_github_hosted",
+   "pass": true,
+   "detail": "a local server returns HTTP 200 with identical bytes (identical) yet fails the hosted check -- so the hosted check tests hosting, not content"
+  },
+  {
+   "control": "page_references_at_least_one_asset",
+   "pass": true,
+   "detail": "13 relative refs: evidence/demo_scripted_10seeds.mp4, evidence/seeds/seed_00.png, evidence/seeds/seed_01.png, evidence/seeds/seed_02.png ..."
+  },
+  {
+   "control": "every_referenced_asset_200_and_byte_identical",
+   "pass": true,
+   "detail": "13/13 assets served unmodified"
+  },
+  {
+   "control": "negctl_injected_reference_is_detected",
+   "pass": true,
+   "detail": "the reference scanner sees a reference the page did not have before, so a silently added asset cannot escape the loop above"
+  },
+  {
+   "control": "negctl_missing_asset_would_404",
+   "pass": true,
+   "detail": "HTTP 404 -- an asset path that is not published does not answer 200"
+  },
+  {
+   "control": "pages_api_reports_built_at_this_commit",
+   "pass": true,
+   "detail": "status=built commit=31f07bc38e (HEAD=31f07bc38e)"
+  },
+  {
+   "control": "negctl_wrong_commit_would_be_rejected",
+   "pass": true,
+   "detail": "the same comparison against an impossible commit fails"
+  }
+ ],
+ "passed": 12,
+ "ran": 12
+}
