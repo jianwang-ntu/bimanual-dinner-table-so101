@@ -1,0 +1,1886 @@
+{
+ "seeds": 10,
+ "seconds_per_episode": 4.0,
+ "policy": "act",
+ "policy_detail": {
+  "policy": "ACT (lerobot.policies.act.modeling_act.ACTPolicy)",
+  "device": "cuda",
+  "chunk_size": 50,
+  "n_action_steps": 25,
+  "policy_steps": 4856,
+  "network_queries": 195,
+  "trained_on_seeds": [
+   3000,
+   3001,
+   3002,
+   3003,
+   3004,
+   3005,
+   3006,
+   3007,
+   3008,
+   3009,
+   3010,
+   3011,
+   3012,
+   3013,
+   3014,
+   3015,
+   3016,
+   3017,
+   3018,
+   3019,
+   3020,
+   3021,
+   3022,
+   3023,
+   3024,
+   3025,
+   3026,
+   3027,
+   3028,
+   3029,
+   3030,
+   3031,
+   3032,
+   3033,
+   3034
+  ],
+  "policy_steps_per_episode": 4856,
+  "sim_steps_per_policy_step": 25,
+  "checkpoint": "models/act_policy.pt"
+ },
+ "policy_note": "A LeRobot ACT policy (lerobot.policies.act.modeling_act.ACTPolicy), trained by behaviour cloning on the scripted controller's rollouts on seeds it never sees at evaluation. It holds learned parameters and no waypoint script: at every policy step it is handed twelve joint positions and seven scene numbers and returns twelve actuator targets. It cannot exceed its demonstrator on sub-goals the demonstrator never achieves. Scored by the same predicates as the no-policy control and the scripted run. The controller read the world pose of the object it was about to touch straight out of MjData. This is the privileged control.",
+ "scene_source": "privileged",
+ "scene_source_detail": "privileged",
+ "scene_source_note": "The controller read the world pose of the object it was about to touch straight out of MjData. This is the privileged control.",
+ "scorer_reads": "MjData -- envs/task.py is never routed through the scene source",
+ "estimate_error_mm": null,
+ "all_episodes_valid_and_stable": true,
+ "subgoals_met_per_seed": [
+  0,
+  0,
+  0,
+  0,
+  1,
+  1,
+  0,
+  1,
+  0,
+  0
+ ],
+ "subgoals_met_mean": 0.3,
+ "task_success_count": 0,
+ "handoff_seeds": [
+  2,
+  7
+ ],
+ "episodes": [
+  {
+   "seed": 0,
+   "policy": "act",
+   "rollout": {
+    "moves": 4856,
+    "sim_time_s": 242.8,
+    "max_ik_err_mm": null,
+    "act": {
+     "policy": "ACT (lerobot.policies.act.modeling_act.ACTPolicy)",
+     "device": "cuda",
+     "chunk_size": 50,
+     "n_action_steps": 25,
+     "policy_steps": 4856,
+     "network_queries": 195,
+     "trained_on_seeds": [
+      3000,
+      3001,
+      3002,
+      3003,
+      3004,
+      3005,
+      3006,
+      3007,
+      3008,
+      3009,
+      3010,
+      3011,
+      3012,
+      3013,
+      3014,
+      3015,
+      3016,
+      3017,
+      3018,
+      3019,
+      3020,
+      3021,
+      3022,
+      3023,
+      3024,
+      3025,
+      3026,
+      3027,
+      3028,
+      3029,
+      3030,
+      3031,
+      3032,
+      3033,
+      3034
+     ]
+    }
+   },
+   "randomization": {
+    "seed": 0,
+    "dims": {
+     "plate_r": 0.0536,
+     "mug_r": 0.0262,
+     "mug_h": 0.0285,
+     "bottle_r": 0.0221,
+     "bottle_h": 0.0572,
+     "cutlery_l": 0.043
+    },
+    "model": {
+     "mass_scale": {
+      "plate": 1.329,
+      "mug": 1.144,
+      "bottle": 1.535,
+      "spoon": 1.416,
+      "fork": 0.603
+     },
+     "friction_scale": 1.085,
+     "light": {
+      "pos": [
+       0.25,
+       -0.926,
+       2.0
+      ],
+      "diffuse": 0.815
+     },
+     "material_lightness": {
+      "wood": 0.52,
+      "grid_mat": 0.795
+     }
+    },
+    "state": {
+     "plate": {
+      "xy": [
+       0.2537,
+       0.097
+      ],
+      "yaw": -0.486
+     },
+     "mug": {
+      "xy": [
+       -0.2925,
+       0.0812
+      ],
+      "yaw": 1.072
+     },
+     "bottle": {
+      "xy": [
+       0.3632,
+       -0.0096
+      ],
+      "yaw": -0.731
+     },
+     "drawer_slide": 0.0199
+    }
+   },
+   "initial_state": {
+    "plate": {
+     "z": 0.76,
+     "nearest_arm_m": 0.239
+    },
+    "mug": {
+     "z": 0.7815,
+     "nearest_arm_m": 0.233
+    },
+    "bottle": {
+     "z": 0.8112,
+     "nearest_arm_m": 0.194
+    },
+    "spoon": {
+     "z": 0.784,
+     "nearest_arm_m": 0.347
+    },
+    "fork": {
+     "z": 0.784,
+     "nearest_arm_m": 0.387
+    }
+   },
+   "initial_state_valid": {
+    "all_on_table": true,
+    "all_reachable": true,
+    "no_initial_penetration": true
+   },
+   "episode_stable": true,
+   "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
+   "task": {
+    "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
+    "subgoals": {
+     "drawer_open": false,
+     "fork_placed": false,
+     "spoon_placed": false,
+     "plate_placed": false,
+     "mug_placed": false
+    },
+    "subgoals_met": 0,
+    "subgoals_total": 5,
+    "in_order_prefix": 0,
+    "task_success": false,
+    "handoffs": [],
+    "handoff_occurred": false,
+    "arms_that_touched_an_object": [
+     "right"
+    ],
+    "bimanual": false,
+    "objects_dropped": [],
+    "max_drawer_travel_m": 0.0199,
+    "first_completion_times_s": {},
+    "sim_time_s": 242.8
+   }
+  },
+  {
+   "seed": 1,
+   "policy": "act",
+   "rollout": {
+    "moves": 4856,
+    "sim_time_s": 242.8,
+    "max_ik_err_mm": null,
+    "act": {
+     "policy": "ACT (lerobot.policies.act.modeling_act.ACTPolicy)",
+     "device": "cuda",
+     "chunk_size": 50,
+     "n_action_steps": 25,
+     "policy_steps": 4856,
+     "network_queries": 195,
+     "trained_on_seeds": [
+      3000,
+      3001,
+      3002,
+      3003,
+      3004,
+      3005,
+      3006,
+      3007,
+      3008,
+      3009,
+      3010,
+      3011,
+      3012,
+      3013,
+      3014,
+      3015,
+      3016,
+      3017,
+      3018,
+      3019,
+      3020,
+      3021,
+      3022,
+      3023,
+      3024,
+      3025,
+      3026,
+      3027,
+      3028,
+      3029,
+      3030,
+      3031,
+      3032,
+      3033,
+      3034
+     ]
+    }
+   },
+   "randomization": {
+    "seed": 1,
+    "dims": {
+     "plate_r": 0.0521,
+     "mug_r": 0.0316,
+     "mug_h": 0.0297,
+     "bottle_r": 0.0296,
+     "bottle_h": 0.0497,
+     "cutlery_l": 0.0371
+    },
+    "model": {
+     "mass_scale": {
+      "plate": 1.009,
+      "mug": 1.15,
+      "bottle": 0.628,
+      "spoon": 1.354,
+      "fork": 1.138
+     },
+     "friction_scale": 1.262,
+     "light": {
+      "pos": [
+       -0.119,
+       -0.398,
+       2.0
+      ],
+      "diffuse": 0.602
+     },
+     "material_lightness": {
+      "wood": 0.631,
+      "grid_mat": 0.504
+     }
+    },
+    "state": {
+     "plate": {
+      "xy": [
+       0.2413,
+       0.0883
+      ],
+      "yaw": -1.493
+     },
+     "mug": {
+      "xy": [
+       -0.2275,
+       0.0952
+      ],
+      "yaw": -0.093
+     },
+     "bottle": {
+      "xy": [
+       0.3933,
+       0.0215
+      ],
+      "yaw": 1.412
+     },
+     "drawer_slide": 0.0108
+    }
+   },
+   "initial_state": {
+    "plate": {
+     "z": 0.76,
+     "nearest_arm_m": 0.229
+    },
+    "mug": {
+     "z": 0.7827,
+     "nearest_arm_m": 0.235
+    },
+    "bottle": {
+     "z": 0.8037,
+     "nearest_arm_m": 0.237
+    },
+    "spoon": {
+     "z": 0.784,
+     "nearest_arm_m": 0.347
+    },
+    "fork": {
+     "z": 0.784,
+     "nearest_arm_m": 0.387
+    }
+   },
+   "initial_state_valid": {
+    "all_on_table": true,
+    "all_reachable": true,
+    "no_initial_penetration": true
+   },
+   "episode_stable": true,
+   "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
+   "task": {
+    "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
+    "subgoals": {
+     "drawer_open": false,
+     "fork_placed": false,
+     "spoon_placed": false,
+     "plate_placed": false,
+     "mug_placed": false
+    },
+    "subgoals_met": 0,
+    "subgoals_total": 5,
+    "in_order_prefix": 0,
+    "task_success": false,
+    "handoffs": [],
+    "handoff_occurred": false,
+    "arms_that_touched_an_object": [
+     "right"
+    ],
+    "bimanual": false,
+    "objects_dropped": [],
+    "max_drawer_travel_m": 0.0279,
+    "first_completion_times_s": {},
+    "sim_time_s": 242.8
+   }
+  },
+  {
+   "seed": 2,
+   "policy": "act",
+   "rollout": {
+    "moves": 4856,
+    "sim_time_s": 242.8,
+    "max_ik_err_mm": null,
+    "act": {
+     "policy": "ACT (lerobot.policies.act.modeling_act.ACTPolicy)",
+     "device": "cuda",
+     "chunk_size": 50,
+     "n_action_steps": 25,
+     "policy_steps": 4856,
+     "network_queries": 195,
+     "trained_on_seeds": [
+      3000,
+      3001,
+      3002,
+      3003,
+      3004,
+      3005,
+      3006,
+      3007,
+      3008,
+      3009,
+      3010,
+      3011,
+      3012,
+      3013,
+      3014,
+      3015,
+      3016,
+      3017,
+      3018,
+      3019,
+      3020,
+      3021,
+      3022,
+      3023,
+      3024,
+      3025,
+      3026,
+      3027,
+      3028,
+      3029,
+      3030,
+      3031,
+      3032,
+      3033,
+      3034
+     ]
+    }
+   },
+   "randomization": {
+    "seed": 2,
+    "dims": {
+     "plate_r": 0.0491,
+     "mug_r": 0.0264,
+     "mug_h": 0.0378,
+     "bottle_r": 0.0227,
+     "bottle_h": 0.054,
+     "cutlery_l": 0.0407
+    },
+    "model": {
+     "mass_scale": {
+      "plate": 0.655,
+      "mug": 0.875,
+      "bottle": 1.257,
+      "spoon": 1.162,
+      "fork": 0.75
+     },
+     "friction_scale": 0.75,
+     "light": {
+      "pos": [
+       -0.047,
+       -0.481,
+       2.0
+      ],
+      "diffuse": 0.661
+     },
+     "material_lightness": {
+      "wood": 0.703,
+      "grid_mat": 0.837
+     }
+    },
+    "state": {
+     "plate": {
+      "xy": [
+       0.2665,
+       0.1052
+      ],
+      "yaw": -1.965
+     },
+     "mug": {
+      "xy": [
+       -0.2639,
+       0.116
+      ],
+      "yaw": 2.458
+     },
+     "bottle": {
+      "xy": [
+       0.3748,
+       -0.0364
+      ],
+      "yaw": 2.665
+     },
+     "drawer_slide": 0.0094
+    }
+   },
+   "initial_state": {
+    "plate": {
+     "z": 0.76,
+     "nearest_arm_m": 0.25
+    },
+    "mug": {
+     "z": 0.7908,
+     "nearest_arm_m": 0.26
+    },
+    "bottle": {
+     "z": 0.808,
+     "nearest_arm_m": 0.186
+    },
+    "spoon": {
+     "z": 0.784,
+     "nearest_arm_m": 0.347
+    },
+    "fork": {
+     "z": 0.784,
+     "nearest_arm_m": 0.387
+    }
+   },
+   "initial_state_valid": {
+    "all_on_table": true,
+    "all_reachable": true,
+    "no_initial_penetration": true
+   },
+   "episode_stable": true,
+   "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
+   "task": {
+    "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
+    "subgoals": {
+     "drawer_open": false,
+     "fork_placed": false,
+     "spoon_placed": false,
+     "plate_placed": false,
+     "mug_placed": false
+    },
+    "subgoals_met": 0,
+    "subgoals_total": 5,
+    "in_order_prefix": 0,
+    "task_success": false,
+    "handoffs": [
+     {
+      "object": "drawer",
+      "from": "right",
+      "to": "left",
+      "t": 160.056
+     },
+     {
+      "object": "drawer",
+      "from": "left",
+      "to": "right",
+      "t": 204.864
+     },
+     {
+      "object": "drawer",
+      "from": "right",
+      "to": "left",
+      "t": 231.29
+     }
+    ],
+    "handoff_occurred": true,
+    "arms_that_touched_an_object": [
+     "left",
+     "right"
+    ],
+    "bimanual": true,
+    "objects_dropped": [],
+    "max_drawer_travel_m": 0.0919,
+    "first_completion_times_s": {
+     "drawer_open": 138.52
+    },
+    "sim_time_s": 242.8
+   }
+  },
+  {
+   "seed": 3,
+   "policy": "act",
+   "rollout": {
+    "moves": 4856,
+    "sim_time_s": 242.8,
+    "max_ik_err_mm": null,
+    "act": {
+     "policy": "ACT (lerobot.policies.act.modeling_act.ACTPolicy)",
+     "device": "cuda",
+     "chunk_size": 50,
+     "n_action_steps": 25,
+     "policy_steps": 4856,
+     "network_queries": 195,
+     "trained_on_seeds": [
+      3000,
+      3001,
+      3002,
+      3003,
+      3004,
+      3005,
+      3006,
+      3007,
+      3008,
+      3009,
+      3010,
+      3011,
+      3012,
+      3013,
+      3014,
+      3015,
+      3016,
+      3017,
+      3018,
+      3019,
+      3020,
+      3021,
+      3022,
+      3023,
+      3024,
+      3025,
+      3026,
+      3027,
+      3028,
+      3029,
+      3030,
+      3031,
+      3032,
+      3033,
+      3034
+     ]
+    }
+   },
+   "randomization": {
+    "seed": 3,
+    "dims": {
+     "plate_r": 0.047,
+     "mug_r": 0.0259,
+     "mug_h": 0.0376,
+     "bottle_r": 0.0267,
+     "bottle_h": 0.0464,
+     "cutlery_l": 0.0372
+    },
+    "model": {
+     "mass_scale": {
+      "plate": 0.76,
+      "mug": 1.335,
+      "bottle": 0.714,
+      "spoon": 0.991,
+      "fork": 1.117
+     },
+     "friction_scale": 0.983,
+     "light": {
+      "pos": [
+       -0.049,
+       -0.539,
+       2.0
+      ],
+      "diffuse": 0.819
+     },
+     "material_lightness": {
+      "wood": 0.833,
+      "grid_mat": 0.564
+     }
+    },
+    "state": {
+     "plate": {
+      "xy": [
+       0.2634,
+       0.1327
+      ],
+      "yaw": -1.302
+     },
+     "mug": {
+      "xy": [
+       -0.2949,
+       0.1576
+      ],
+      "yaw": -1.267
+     },
+     "bottle": {
+      "xy": [
+       0.3333,
+       0.0153
+      ],
+      "yaw": 0.535
+     },
+     "drawer_slide": 0.0094
+    }
+   },
+   "initial_state": {
+    "plate": {
+     "z": 0.76,
+     "nearest_arm_m": 0.276
+    },
+    "mug": {
+     "z": 0.7906,
+     "nearest_arm_m": 0.307
+    },
+    "bottle": {
+     "z": 0.8004,
+     "nearest_arm_m": 0.192
+    },
+    "spoon": {
+     "z": 0.784,
+     "nearest_arm_m": 0.347
+    },
+    "fork": {
+     "z": 0.784,
+     "nearest_arm_m": 0.387
+    }
+   },
+   "initial_state_valid": {
+    "all_on_table": true,
+    "all_reachable": true,
+    "no_initial_penetration": true
+   },
+   "episode_stable": true,
+   "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
+   "task": {
+    "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
+    "subgoals": {
+     "drawer_open": false,
+     "fork_placed": false,
+     "spoon_placed": false,
+     "plate_placed": false,
+     "mug_placed": false
+    },
+    "subgoals_met": 0,
+    "subgoals_total": 5,
+    "in_order_prefix": 0,
+    "task_success": false,
+    "handoffs": [],
+    "handoff_occurred": false,
+    "arms_that_touched_an_object": [
+     "right"
+    ],
+    "bimanual": false,
+    "objects_dropped": [],
+    "max_drawer_travel_m": 0.0094,
+    "first_completion_times_s": {},
+    "sim_time_s": 242.8
+   }
+  },
+  {
+   "seed": 4,
+   "policy": "act",
+   "rollout": {
+    "moves": 4856,
+    "sim_time_s": 242.8,
+    "max_ik_err_mm": null,
+    "act": {
+     "policy": "ACT (lerobot.policies.act.modeling_act.ACTPolicy)",
+     "device": "cuda",
+     "chunk_size": 50,
+     "n_action_steps": 25,
+     "policy_steps": 4856,
+     "network_queries": 195,
+     "trained_on_seeds": [
+      3000,
+      3001,
+      3002,
+      3003,
+      3004,
+      3005,
+      3006,
+      3007,
+      3008,
+      3009,
+      3010,
+      3011,
+      3012,
+      3013,
+      3014,
+      3015,
+      3016,
+      3017,
+      3018,
+      3019,
+      3020,
+      3021,
+      3022,
+      3023,
+      3024,
+      3025,
+      3026,
+      3027,
+      3028,
+      3029,
+      3030,
+      3031,
+      3032,
+      3033,
+      3034
+     ]
+    }
+   },
+   "randomization": {
+    "seed": 4,
+    "dims": {
+     "plate_r": 0.0573,
+     "mug_r": 0.0281,
+     "mug_h": 0.0397,
+     "bottle_r": 0.0226,
+     "bottle_h": 0.0541,
+     "cutlery_l": 0.0365
+    },
+    "model": {
+     "mass_scale": {
+      "plate": 0.775,
+      "mug": 1.472,
+      "bottle": 1.144,
+      "spoon": 1.502,
+      "fork": 1.077
+     },
+     "friction_scale": 1.242,
+     "light": {
+      "pos": [
+       -0.049,
+       -0.398,
+       2.0
+      ],
+      "diffuse": 0.942
+     },
+     "material_lightness": {
+      "wood": 0.598,
+      "grid_mat": 0.838
+     }
+    },
+    "state": {
+     "plate": {
+      "xy": [
+       0.2886,
+       0.086
+      ],
+      "yaw": 0.684
+     },
+     "mug": {
+      "xy": [
+       -0.2316,
+       0.1549
+      ],
+      "yaw": 1.041
+     },
+     "bottle": {
+      "xy": [
+       0.3913,
+       -0.0335
+      ],
+      "yaw": -1.736
+     },
+     "drawer_slide": 0.0104
+    }
+   },
+   "initial_state": {
+    "plate": {
+     "z": 0.76,
+     "nearest_arm_m": 0.236
+    },
+    "mug": {
+     "z": 0.7927,
+     "nearest_arm_m": 0.295
+    },
+    "bottle": {
+     "z": 0.8081,
+     "nearest_arm_m": 0.202
+    },
+    "spoon": {
+     "z": 0.784,
+     "nearest_arm_m": 0.347
+    },
+    "fork": {
+     "z": 0.784,
+     "nearest_arm_m": 0.387
+    }
+   },
+   "initial_state_valid": {
+    "all_on_table": true,
+    "all_reachable": true,
+    "no_initial_penetration": true
+   },
+   "episode_stable": true,
+   "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
+   "task": {
+    "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
+    "subgoals": {
+     "drawer_open": false,
+     "fork_placed": false,
+     "spoon_placed": false,
+     "plate_placed": true,
+     "mug_placed": false
+    },
+    "subgoals_met": 1,
+    "subgoals_total": 5,
+    "in_order_prefix": 0,
+    "task_success": false,
+    "handoffs": [],
+    "handoff_occurred": false,
+    "arms_that_touched_an_object": [
+     "left",
+     "right"
+    ],
+    "bimanual": true,
+    "objects_dropped": [],
+    "max_drawer_travel_m": 0.0104,
+    "first_completion_times_s": {
+     "plate_placed": 23.518
+    },
+    "sim_time_s": 242.8
+   }
+  },
+  {
+   "seed": 5,
+   "policy": "act",
+   "rollout": {
+    "moves": 4856,
+    "sim_time_s": 242.8,
+    "max_ik_err_mm": null,
+    "act": {
+     "policy": "ACT (lerobot.policies.act.modeling_act.ACTPolicy)",
+     "device": "cuda",
+     "chunk_size": 50,
+     "n_action_steps": 25,
+     "policy_steps": 4856,
+     "network_queries": 195,
+     "trained_on_seeds": [
+      3000,
+      3001,
+      3002,
+      3003,
+      3004,
+      3005,
+      3006,
+      3007,
+      3008,
+      3009,
+      3010,
+      3011,
+      3012,
+      3013,
+      3014,
+      3015,
+      3016,
+      3017,
+      3018,
+      3019,
+      3020,
+      3021,
+      3022,
+      3023,
+      3024,
+      3025,
+      3026,
+      3027,
+      3028,
+      3029,
+      3030,
+      3031,
+      3032,
+      3033,
+      3034
+     ]
+    }
+   },
+   "randomization": {
+    "seed": 5,
+    "dims": {
+     "plate_r": 0.0557,
+     "mug_r": 0.0305,
+     "mug_h": 0.0342,
+     "bottle_r": 0.0243,
+     "bottle_h": 0.0458,
+     "cutlery_l": 0.0366
+    },
+    "model": {
+     "mass_scale": {
+      "plate": 0.645,
+      "mug": 0.649,
+      "bottle": 1.599,
+      "spoon": 1.252,
+      "fork": 0.835
+     },
+     "friction_scale": 0.927,
+     "light": {
+      "pos": [
+       -0.046,
+       -0.268,
+       2.0
+      ],
+      "diffuse": 0.899
+     },
+     "material_lightness": {
+      "wood": 0.788,
+      "grid_mat": 0.607
+     }
+    },
+    "state": {
+     "plate": {
+      "xy": [
+       0.2494,
+       0.1309
+      ],
+      "yaw": -2.76
+     },
+     "mug": {
+      "xy": [
+       -0.245,
+       0.0944
+      ],
+      "yaw": 2.385
+     },
+     "bottle": {
+      "xy": [
+       0.3108,
+       -0.0039
+      ],
+      "yaw": 2.325
+     },
+     "drawer_slide": 0.0045
+    }
+   },
+   "initial_state": {
+    "plate": {
+     "z": 0.76,
+     "nearest_arm_m": 0.272
+    },
+    "mug": {
+     "z": 0.7872,
+     "nearest_arm_m": 0.236
+    },
+    "bottle": {
+     "z": 0.7998,
+     "nearest_arm_m": 0.164
+    },
+    "spoon": {
+     "z": 0.784,
+     "nearest_arm_m": 0.347
+    },
+    "fork": {
+     "z": 0.784,
+     "nearest_arm_m": 0.387
+    }
+   },
+   "initial_state_valid": {
+    "all_on_table": true,
+    "all_reachable": true,
+    "no_initial_penetration": true
+   },
+   "episode_stable": true,
+   "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
+   "task": {
+    "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
+    "subgoals": {
+     "drawer_open": true,
+     "fork_placed": false,
+     "spoon_placed": false,
+     "plate_placed": false,
+     "mug_placed": false
+    },
+    "subgoals_met": 1,
+    "subgoals_total": 5,
+    "in_order_prefix": 1,
+    "task_success": false,
+    "handoffs": [],
+    "handoff_occurred": false,
+    "arms_that_touched_an_object": [],
+    "bimanual": false,
+    "objects_dropped": [],
+    "max_drawer_travel_m": 0.0684,
+    "first_completion_times_s": {
+     "drawer_open": 12.554
+    },
+    "sim_time_s": 242.8
+   }
+  },
+  {
+   "seed": 6,
+   "policy": "act",
+   "rollout": {
+    "moves": 4856,
+    "sim_time_s": 242.8,
+    "max_ik_err_mm": null,
+    "act": {
+     "policy": "ACT (lerobot.policies.act.modeling_act.ACTPolicy)",
+     "device": "cuda",
+     "chunk_size": 50,
+     "n_action_steps": 25,
+     "policy_steps": 4856,
+     "network_queries": 195,
+     "trained_on_seeds": [
+      3000,
+      3001,
+      3002,
+      3003,
+      3004,
+      3005,
+      3006,
+      3007,
+      3008,
+      3009,
+      3010,
+      3011,
+      3012,
+      3013,
+      3014,
+      3015,
+      3016,
+      3017,
+      3018,
+      3019,
+      3020,
+      3021,
+      3022,
+      3023,
+      3024,
+      3025,
+      3026,
+      3027,
+      3028,
+      3029,
+      3030,
+      3031,
+      3032,
+      3033,
+      3034
+     ]
+    }
+   },
+   "randomization": {
+    "seed": 6,
+    "dims": {
+     "plate_r": 0.0525,
+     "mug_r": 0.0267,
+     "mug_h": 0.0324,
+     "bottle_r": 0.025,
+     "bottle_h": 0.0598,
+     "cutlery_l": 0.0396
+    },
+    "model": {
+     "mass_scale": {
+      "plate": 0.93,
+      "mug": 1.28,
+      "bottle": 0.723,
+      "spoon": 0.652,
+      "fork": 1.45
+     },
+     "friction_scale": 1.139,
+     "light": {
+      "pos": [
+       -0.344,
+       -0.265,
+       2.0
+      ],
+      "diffuse": 0.864
+     },
+     "material_lightness": {
+      "wood": 0.764,
+      "grid_mat": 0.469
+     }
+    },
+    "state": {
+     "plate": {
+      "xy": [
+       0.2237,
+       0.1465
+      ],
+      "yaw": -0.424
+     },
+     "mug": {
+      "xy": [
+       -0.2385,
+       0.081
+      ],
+      "yaw": -1.971
+     },
+     "bottle": {
+      "xy": [
+       0.3498,
+       0.0034
+      ],
+      "yaw": 0.25
+     },
+     "drawer_slide": 0.0021
+    }
+   },
+   "initial_state": {
+    "plate": {
+     "z": 0.76,
+     "nearest_arm_m": 0.287
+    },
+    "mug": {
+     "z": 0.7854,
+     "nearest_arm_m": 0.222
+    },
+    "bottle": {
+     "z": 0.8138,
+     "nearest_arm_m": 0.193
+    },
+    "spoon": {
+     "z": 0.784,
+     "nearest_arm_m": 0.347
+    },
+    "fork": {
+     "z": 0.784,
+     "nearest_arm_m": 0.387
+    }
+   },
+   "initial_state_valid": {
+    "all_on_table": true,
+    "all_reachable": true,
+    "no_initial_penetration": true
+   },
+   "episode_stable": true,
+   "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
+   "task": {
+    "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
+    "subgoals": {
+     "drawer_open": false,
+     "fork_placed": false,
+     "spoon_placed": false,
+     "plate_placed": false,
+     "mug_placed": false
+    },
+    "subgoals_met": 0,
+    "subgoals_total": 5,
+    "in_order_prefix": 0,
+    "task_success": false,
+    "handoffs": [],
+    "handoff_occurred": false,
+    "arms_that_touched_an_object": [],
+    "bimanual": false,
+    "objects_dropped": [],
+    "max_drawer_travel_m": 0.0037,
+    "first_completion_times_s": {},
+    "sim_time_s": 242.8
+   }
+  },
+  {
+   "seed": 7,
+   "policy": "act",
+   "rollout": {
+    "moves": 4856,
+    "sim_time_s": 242.8,
+    "max_ik_err_mm": null,
+    "act": {
+     "policy": "ACT (lerobot.policies.act.modeling_act.ACTPolicy)",
+     "device": "cuda",
+     "chunk_size": 50,
+     "n_action_steps": 25,
+     "policy_steps": 4856,
+     "network_queries": 195,
+     "trained_on_seeds": [
+      3000,
+      3001,
+      3002,
+      3003,
+      3004,
+      3005,
+      3006,
+      3007,
+      3008,
+      3009,
+      3010,
+      3011,
+      3012,
+      3013,
+      3014,
+      3015,
+      3016,
+      3017,
+      3018,
+      3019,
+      3020,
+      3021,
+      3022,
+      3023,
+      3024,
+      3025,
+      3026,
+      3027,
+      3028,
+      3029,
+      3030,
+      3031,
+      3032,
+      3033,
+      3034
+     ]
+    }
+   },
+   "randomization": {
+    "seed": 7,
+    "dims": {
+     "plate_r": 0.0535,
+     "mug_r": 0.0312,
+     "mug_h": 0.0373,
+     "bottle_r": 0.0238,
+     "bottle_h": 0.0495,
+     "cutlery_l": 0.0425
+    },
+    "model": {
+     "mass_scale": {
+      "plate": 1.421,
+      "mug": 1.397,
+      "bottle": 1.068,
+      "spoon": 0.903,
+      "fork": 0.878
+     },
+     "friction_scale": 0.604,
+     "light": {
+      "pos": [
+       -0.172,
+       -0.638,
+       2.0
+      ],
+      "diffuse": 0.702
+     },
+     "material_lightness": {
+      "wood": 0.671,
+      "grid_mat": 0.848
+     }
+    },
+    "state": {
+     "plate": {
+      "xy": [
+       0.2763,
+       0.126
+      ],
+      "yaw": 3.072
+     },
+     "mug": {
+      "xy": [
+       -0.2756,
+       0.0844
+      ],
+      "yaw": 0.707
+     },
+     "bottle": {
+      "xy": [
+       0.309,
+       -0.0618
+      ],
+      "yaw": 0.094
+     },
+     "drawer_slide": 0.0093
+    }
+   },
+   "initial_state": {
+    "plate": {
+     "z": 0.76,
+     "nearest_arm_m": 0.272
+    },
+    "mug": {
+     "z": 0.7903,
+     "nearest_arm_m": 0.231
+    },
+    "bottle": {
+     "z": 0.8035,
+     "nearest_arm_m": 0.118
+    },
+    "spoon": {
+     "z": 0.784,
+     "nearest_arm_m": 0.347
+    },
+    "fork": {
+     "z": 0.784,
+     "nearest_arm_m": 0.387
+    }
+   },
+   "initial_state_valid": {
+    "all_on_table": true,
+    "all_reachable": true,
+    "no_initial_penetration": true
+   },
+   "episode_stable": true,
+   "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
+   "task": {
+    "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
+    "subgoals": {
+     "drawer_open": true,
+     "fork_placed": false,
+     "spoon_placed": false,
+     "plate_placed": false,
+     "mug_placed": false
+    },
+    "subgoals_met": 1,
+    "subgoals_total": 5,
+    "in_order_prefix": 1,
+    "task_success": false,
+    "handoffs": [
+     {
+      "object": "drawer",
+      "from": "right",
+      "to": "left",
+      "t": 23.78
+     },
+     {
+      "object": "drawer",
+      "from": "left",
+      "to": "right",
+      "t": 43.678
+     }
+    ],
+    "handoff_occurred": true,
+    "arms_that_touched_an_object": [
+     "right"
+    ],
+    "bimanual": false,
+    "objects_dropped": [],
+    "max_drawer_travel_m": 0.0923,
+    "first_completion_times_s": {
+     "drawer_open": 6.432
+    },
+    "sim_time_s": 242.8
+   }
+  },
+  {
+   "seed": 8,
+   "policy": "act",
+   "rollout": {
+    "moves": 4856,
+    "sim_time_s": 242.8,
+    "max_ik_err_mm": null,
+    "act": {
+     "policy": "ACT (lerobot.policies.act.modeling_act.ACTPolicy)",
+     "device": "cuda",
+     "chunk_size": 50,
+     "n_action_steps": 25,
+     "policy_steps": 4856,
+     "network_queries": 195,
+     "trained_on_seeds": [
+      3000,
+      3001,
+      3002,
+      3003,
+      3004,
+      3005,
+      3006,
+      3007,
+      3008,
+      3009,
+      3010,
+      3011,
+      3012,
+      3013,
+      3014,
+      3015,
+      3016,
+      3017,
+      3018,
+      3019,
+      3020,
+      3021,
+      3022,
+      3023,
+      3024,
+      3025,
+      3026,
+      3027,
+      3028,
+      3029,
+      3030,
+      3031,
+      3032,
+      3033,
+      3034
+     ]
+    }
+   },
+   "randomization": {
+    "seed": 8,
+    "dims": {
+     "plate_r": 0.0499,
+     "mug_r": 0.0319,
+     "mug_h": 0.0318,
+     "bottle_r": 0.0283,
+     "bottle_h": 0.058,
+     "cutlery_l": 0.0367
+    },
+    "model": {
+     "mass_scale": {
+      "plate": 0.973,
+      "mug": 0.707,
+      "bottle": 1.079,
+      "spoon": 0.841,
+      "fork": 0.857
+     },
+     "friction_scale": 0.95,
+     "light": {
+      "pos": [
+       -0.221,
+       -0.814,
+       2.0
+      ],
+      "diffuse": 0.857
+     },
+     "material_lightness": {
+      "wood": 0.619,
+      "grid_mat": 0.552
+     }
+    },
+    "state": {
+     "plate": {
+      "xy": [
+       0.2582,
+       0.1244
+      ],
+      "yaw": 0.923
+     },
+     "mug": {
+      "xy": [
+       -0.213,
+       0.0835
+      ],
+      "yaw": -0.808
+     },
+     "bottle": {
+      "xy": [
+       0.3306,
+       -0.0635
+      ],
+      "yaw": -2.001
+     },
+     "drawer_slide": 0.0079
+    }
+   },
+   "initial_state": {
+    "plate": {
+     "z": 0.76,
+     "nearest_arm_m": 0.267
+    },
+    "mug": {
+     "z": 0.7848,
+     "nearest_arm_m": 0.224
+    },
+    "bottle": {
+     "z": 0.812,
+     "nearest_arm_m": 0.134
+    },
+    "spoon": {
+     "z": 0.784,
+     "nearest_arm_m": 0.347
+    },
+    "fork": {
+     "z": 0.784,
+     "nearest_arm_m": 0.387
+    }
+   },
+   "initial_state_valid": {
+    "all_on_table": true,
+    "all_reachable": true,
+    "no_initial_penetration": true
+   },
+   "episode_stable": true,
+   "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
+   "task": {
+    "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
+    "subgoals": {
+     "drawer_open": false,
+     "fork_placed": false,
+     "spoon_placed": false,
+     "plate_placed": false,
+     "mug_placed": false
+    },
+    "subgoals_met": 0,
+    "subgoals_total": 5,
+    "in_order_prefix": 0,
+    "task_success": false,
+    "handoffs": [],
+    "handoff_occurred": false,
+    "arms_that_touched_an_object": [],
+    "bimanual": false,
+    "objects_dropped": [],
+    "max_drawer_travel_m": 0.0079,
+    "first_completion_times_s": {},
+    "sim_time_s": 242.8
+   }
+  },
+  {
+   "seed": 9,
+   "policy": "act",
+   "rollout": {
+    "moves": 4856,
+    "sim_time_s": 242.8,
+    "max_ik_err_mm": null,
+    "act": {
+     "policy": "ACT (lerobot.policies.act.modeling_act.ACTPolicy)",
+     "device": "cuda",
+     "chunk_size": 50,
+     "n_action_steps": 25,
+     "policy_steps": 4856,
+     "network_queries": 195,
+     "trained_on_seeds": [
+      3000,
+      3001,
+      3002,
+      3003,
+      3004,
+      3005,
+      3006,
+      3007,
+      3008,
+      3009,
+      3010,
+      3011,
+      3012,
+      3013,
+      3014,
+      3015,
+      3016,
+      3017,
+      3018,
+      3019,
+      3020,
+      3021,
+      3022,
+      3023,
+      3024,
+      3025,
+      3026,
+      3027,
+      3028,
+      3029,
+      3030,
+      3031,
+      3032,
+      3033,
+      3034
+     ]
+    }
+   },
+   "randomization": {
+    "seed": 9,
+    "dims": {
+     "plate_r": 0.0564,
+     "mug_r": 0.0263,
+     "mug_h": 0.0352,
+     "bottle_r": 0.0282,
+     "bottle_h": 0.0557,
+     "cutlery_l": 0.043
+    },
+    "model": {
+     "mass_scale": {
+      "plate": 1.518,
+      "mug": 0.627,
+      "bottle": 1.037,
+      "spoon": 1.085,
+      "fork": 0.665
+     },
+     "friction_scale": 1.288,
+     "light": {
+      "pos": [
+       -0.346,
+       -0.369,
+       2.0
+      ],
+      "diffuse": 0.942
+     },
+     "material_lightness": {
+      "wood": 0.764,
+      "grid_mat": 0.576
+     }
+    },
+    "state": {
+     "plate": {
+      "xy": [
+       0.2685,
+       0.0969
+      ],
+      "yaw": 1.513
+     },
+     "mug": {
+      "xy": [
+       -0.2698,
+       0.1404
+      ],
+      "yaw": 3.065
+     },
+     "bottle": {
+      "xy": [
+       0.3938,
+       0.0145
+      ],
+      "yaw": 2.594
+     },
+     "drawer_slide": 0.0142
+    }
+   },
+   "initial_state": {
+    "plate": {
+     "z": 0.76,
+     "nearest_arm_m": 0.242
+    },
+    "mug": {
+     "z": 0.7882,
+     "nearest_arm_m": 0.285
+    },
+    "bottle": {
+     "z": 0.8097,
+     "nearest_arm_m": 0.232
+    },
+    "spoon": {
+     "z": 0.784,
+     "nearest_arm_m": 0.347
+    },
+    "fork": {
+     "z": 0.784,
+     "nearest_arm_m": 0.387
+    }
+   },
+   "initial_state_valid": {
+    "all_on_table": true,
+    "all_reachable": true,
+    "no_initial_penetration": true
+   },
+   "episode_stable": true,
+   "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
+   "task": {
+    "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
+    "subgoals": {
+     "drawer_open": false,
+     "fork_placed": false,
+     "spoon_placed": false,
+     "plate_placed": false,
+     "mug_placed": false
+    },
+    "subgoals_met": 0,
+    "subgoals_total": 5,
+    "in_order_prefix": 0,
+    "task_success": false,
+    "handoffs": [],
+    "handoff_occurred": false,
+    "arms_that_touched_an_object": [
+     "right"
+    ],
+    "bimanual": false,
+    "objects_dropped": [],
+    "max_drawer_travel_m": 0.0142,
+    "first_completion_times_s": {},
+    "sim_time_s": 242.8
+   }
+  }
+ ]
+}

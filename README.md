@@ -6,10 +6,17 @@ hackathon, lablab.ai). Target scenario: *Setting Up a Dinner Table*.
 
 ## What is in here, and what is not
 
-This repository contains **the environment, the scorer, and a scripted
-controller that solves two sub-goals of five on 5 seeds of 10, and never the
-whole task. There is no learned policy.** Read that before reading anything
-else.
+This repository contains **the environment, the scorer, a scripted
+controller that solves two sub-goals of five on 5 seeds of 10 and never the
+whole task, and — since 2026-09-05 — a learned ACT policy that is worse than
+that scripted controller.** Read that before reading anything else.
+
+The learned policy is real and it is not the headline. A LeRobot ACT
+(action-chunking transformer) trained by behaviour cloning on 35 rollouts of the
+scripted controller scores **3 sub-goals of 50** over the same ten evaluation
+seeds, against the scripted controller's **15 of 50** — with *more* simulator
+time per episode, not less. Every number this README quotes is the scripted
+controller's unless the row says `ACT`.
 
 Since 2026-09-06 the controller can also be run with **no privileged object
 poses at all** — see *Perception in the control loop* below. That run scores
@@ -32,7 +39,8 @@ number is what this README quotes unless a row says otherwise.
 | Slide presentation, 13 slides, 16:9 PDF | generated from `evidence/`, **no figure typed by hand** | `evidence/slides_presentation.pdf` + `.json`, `evidence/slides_controls.json` (12/12) |
 | Video presentation, 4:36, 1280×720 MP4 | generated from `evidence/`, **real footage pasted unscaled from the demo MP4** | `evidence/video_presentation.mp4` + `.json`, `evidence/video_controls.json` (38/38) |
 | Perception in the control loop | built, **12 / 50 perceived vs 15 / 50 privileged vs 9 / 50 blind** | `evidence/eval_seeds_scripted_perceived.json`, `evidence/scene_source_controls.json` (15/15) |
-| VLA / imitation policy | **not started** | — |
+| VLA / imitation policy — LeRobot ACT, behaviour-cloned | built, **3 / 50 sub-goals — five times worse than its own demonstrator** | `evidence/act_train.json`, `evidence/eval_seeds_act.json`, `evidence/act_policy_controls.json` (19/19) |
+| Demonstrations the policy was trained on, 40 episodes on seeds 3000–3039 | recorded and committed, 8.4 MB | `data/demos/`, `scripts/collect_demos.py` |
 | Language conditioning, multi-step task context, re-planning | **not started** — three of T2's four demands | — |
 | Intel Core Ultra Series 2/3 benchmark numbers | **not measured, and cannot be measured here** | see *Hardware* below |
 
@@ -150,6 +158,12 @@ python3 scripts/test_cover_image.py                # 14 controls, stdlib only
 # the mandatory slide deck, and the controls that read the shipped PDF back
 python3 scripts/make_slides.py                     # 13-slide 16:9 PDF from evidence/
 python3 scripts/test_slides.py                     # 12 controls on the PDF bytes
+
+# the learned ACT policy: demonstrations, training, closed-loop evaluation
+python3 scripts/collect_demos.py --seed-start 3000 --count 40 --out data/demos/demos_3000.npz
+python3 scripts/train_act.py --steps 6000 --out models/act_policy.pt
+python3 scripts/eval_seeds.py --seeds 10 --policy act --scene privileged --no-render
+python3 scripts/test_act_policy.py
 
 # the mandatory video presentation, and the controls that decode it back
 python3 scripts/make_video.py                      # 4:36 1280x720 MP4 from evidence/
@@ -407,6 +421,64 @@ with `INFERENCE_PRECISION_HINT=f32`:
 | forced `f32` | 0.00009 mm |
 
 The drift is the CPU plugin's own precision choice, not a conversion loss.
+
+## A learned policy: ACT, and it loses to the script
+
+Track Objective 4 asks for a policy *trained* in MuJoCo — "using Hugging Face
+LeRobot or compatible tooling … SmolVLA, Pi0.5, ACT, or another appropriate
+VLA / imitation-learning policy". Until now this repository had none, and said
+so. It now has one, and the honest headline is that **it is worse than the
+scripted controller it was cloned from.**
+
+What it is: `lerobot.policies.act.modeling_act.ACTPolicy` — the real LeRobot
+class, version 0.6.1, not a re-implementation — with 40,158,924 parameters, a
+chunk size of 50 and 25 actions executed per network query. Its inputs are
+twelve actuated joint positions and the seven scene numbers
+`envs/perception.py` regresses; its output is twelve actuator position targets.
+
+How it was trained: `scripts/collect_demos.py` replays the scripted controller
+on **seeds 3000–3039** — never an evaluation seed — and logs
+`(state, env_state, action)` at 20 Hz, 40 episodes and 186,670 samples, 8.4 MB,
+committed under `data/demos/`. `scripts/train_act.py` then behaviour-clones
+6,000 steps at batch 128 in 286 s on one L40S. Held-out L1 on five episodes the
+optimiser never saw is **0.167** in normalized action units, against **0.810**
+for the same architecture with random weights.
+
+How it does, closed-loop, on the same ten seeds and the same untouched scorer:
+
+| | scripted controller | ACT policy |
+|---|---|---|
+| sub-goals over 10 seeds | **15 / 50** | **3 / 50** |
+| task success | 0 / 10 | 0 / 10 |
+| simulator seconds per episode | 206.2 | **242.8** |
+| what it ever achieves | drawer 10/10, plate 4/10, mug 1/10 | drawer 2/10 (seeds 5, 7), plate 1/10 (seed 4) |
+
+The policy was given **more** simulator time than its demonstrator, not less —
+its horizon is the median demonstration length — so the gap is not a clipped
+episode. Behaviour cloning on 35 long-horizon episodes recovers about a fifth of
+the demonstrator's sub-goal rate, and the reasons are ordinary and unfixed here:
+no image input, no temporal ensembling, one seed's worth of coverage per
+episode, and 4,856 open-loop-ish policy steps per episode in which small errors
+compound.
+
+`scripts/test_act_policy.py` is 19 controls, each with the reject side that
+makes the accept side mean something — that the class really is LeRobot's, that
+inference assembles the observation in exactly the byte order
+`collect_demos.py` recorded it, that no evaluation seed is in the training set,
+that the trained weights beat a random-init policy of the same shape, that
+moving the seven scene numbers moves the action while the same observation twice
+does not, and that the figures above re-derive from the shipped episode list.
+
+The checkpoint itself is **160.8 MB and is not in the repository** — over
+GitHub's file limit. The demonstrations are, so
+`python3 scripts/train_act.py` rebuilds it from a clean clone.
+
+**Not claimed.** This is imitation of a script. It consumes no language: the
+instruction string in `envs/task.py` reaches nothing, and the policy is
+configured with exactly two inputs, neither of which is an image or a token
+stream. It does not make the entry's demo video, cover image, slide deck or
+demo page — all of those still show the scripted controller, because that is
+still the better of the two.
 
 ## Hardware — an open gap
 

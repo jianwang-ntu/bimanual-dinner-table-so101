@@ -75,12 +75,14 @@ teleoperating the arms.
 
 ## 2. VLA / VLM model choice
 
-**No VLA or VLM is used, and none is claimed.** Criterion T2 ("correctly
-interprets natural-language instructions and visual observations, maintains
-multi-step task context, selects appropriate actions, adapts the plan") scores
-zero on this entry. There is no language encoder, no instruction conditioning
-and no learned action head anywhere in the repository. The task instruction in
-`envs/task.py` is a fixed string that the scorer prints; nothing consumes it.
+**No VLA or VLM is used, and none is claimed. There is now a learned action
+head, and it is an imitation-learning policy, not a vision-language one.**
+Criterion T2 ("correctly interprets natural-language instructions and visual
+observations, maintains multi-step task context, selects appropriate actions,
+adapts the plan") is answered on exactly one of its four demands. There is no
+language encoder and no instruction conditioning anywhere in the repository: the
+task instruction in `envs/task.py` is a fixed string that the scorer prints, and
+nothing consumes it.
 
 What exists instead, and what it is worth:
 
@@ -112,11 +114,18 @@ What exists instead, and what it is worth:
   context, plan adaptation — remain worth exactly nothing here, because none of
   them exists.
 
-The choice that would be made next, recorded as a plan and not as work done:
-**ACT or SmolVLA via LeRobot**, trained on rollouts of the scripted controller
-in this same environment, because the controller already produces labelled
-bimanual trajectories at 1.5 sub-goals per episode and the scorer is policy
-agnostic. **Nothing of that is built.**
+- **The policy that used to be a plan here is now built, and it loses.** This
+  paragraph read "the choice that would be made next … **nothing of that is
+  built**" until 2026-09-05. What is built is `lerobot.policies.act.modeling_act.ACTPolicy`
+  — LeRobot 0.6.1's action-chunking transformer, 40,158,924 parameters, chunk
+  50, 25 actions per query — behaviour-cloned on 35 rollouts of the scripted
+  controller on seeds 3000–3034 and validated on 3035–3039. Closed-loop over the
+  same ten evaluation seeds and the same untouched scorer it reaches **3 / 50
+  sub-goals against the scripted controller's 15 / 50**, with 242.8 simulator
+  seconds per episode against the script's 206.2 — more time, not less. It opens
+  the drawer on seeds 5 and 7 and places the plate on seed 4, and does nothing
+  else on any seed. Section 4 has the training detail and section 8 keeps the
+  ledger.
 
 ## 3. Bimanual coordination strategy
 
@@ -182,7 +191,37 @@ and it is unfixed.
 
 ## 4. Training approach
 
-One model is trained. **No policy is trained.**
+**Two models are trained: a perception CNN, and an ACT policy that is worse
+than the script it was cloned from.**
+
+### 4a. The ACT policy (Objective 4)
+
+| | |
+|---|---|
+| Policy | `lerobot.policies.act.modeling_act.ACTPolicy`, LeRobot **0.6.1** — the library's own class, not a re-implementation |
+| Size | **40,158,924** parameters, chunk size **50**, **25** actions executed per network query |
+| Inputs | `observation.state` — 12 actuated joint positions; `observation.environment_state` — the 7 numbers `envs/perception.py` regresses. **No image feature, no token stream** |
+| Output | 12 actuator position targets |
+| Data | **186,670** samples at 20 Hz from **40** scripted episodes, seeds **3000–3039**, 8.4 MB, committed under `data/demos/` |
+| Split rule | disjoint **episode seeds** — train 3000–3034, validation 3035–3039, evaluation 0–9 — and `eval_seeds.py` refuses to run a checkpoint trained on an evaluation seed |
+| Schedule | **6,000** steps, batch 128, AdamW at lr 1e-4, L1 + KL(β=10) as LeRobot's ACT defines it, seed 0 |
+| Cost | **286.5 s** on one NVIDIA L40S |
+| Held-out L1 | **0.167** normalized action units, against **0.810** for the same architecture with random weights |
+| Closed-loop | **3 / 50** sub-goals over the ten evaluation seeds against the scripted controller's **15 / 50**; task success **0 / 10** |
+| Controls | `scripts/test_act_policy.py`, **19/19**, every accept paired with a reject |
+
+The demonstrator is the scripted controller, which itself scores 54 sub-goals of
+200 over those 40 demonstration seeds — so the ceiling behaviour cloning could
+reach here is about 1.35 sub-goals per episode, and what it reaches is 0.30.
+Normalization is done by `scripts/train_act.py` and stored in the checkpoint,
+because LeRobot 0.6 moved normalization out of `ACTPolicy` into dataset
+processors this project does not use.
+
+The checkpoint is **160.8 MB** and is not committed — it is over GitHub's file
+limit. The demonstrations are, so `python3 scripts/train_act.py` reproduces it
+from a clean clone.
+
+### 4b. The perception model
 
 | | |
 |---|---|
@@ -358,9 +397,17 @@ needed; the IRs are committed.
 
 Stated here in one place so no reader has to infer it:
 
-1. **No VLA, no VLM, no learned policy, no language conditioning.** Of T2's
-   four demands, only *visual observation* is now on the scored path; natural
-   language, multi-step task context and plan adaptation score zero.
+1. **No VLA, no VLM, no language conditioning.** There *is* a learned policy
+   since 2026-09-05 — an imitation-learning ACT, section 4a — but it consumes
+   no language and no image, and it is **five times worse than the scripted
+   controller** (3 / 50 against 15 / 50), so nothing this document quotes as a
+   headline comes from it. Of T2's four demands, only *visual observation* is on
+   the scored path; natural language, multi-step task context and plan
+   adaptation score zero.
+1b. **The learned policy is not in the demo.** The demo video, cover image,
+   slide deck and demo page all show the scripted controller. Replacing them
+   with the ACT rollout would make the entry worse, and claiming the ACT policy
+   produced them would be false.
 2. **The headline result is still the privileged one.** Every figure in this
    document that is not explicitly labelled perceived or blind was produced by a
    controller reading privileged `MjData` poses. Perception in the loop is

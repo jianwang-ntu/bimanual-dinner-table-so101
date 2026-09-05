@@ -58,7 +58,8 @@ OBJECTS = ("plate", "mug", "bottle", "spoon", "fork")
 
 def episode(seed: int, seconds: float, render: pathlib.Path | None,
             policy: str = "none", scene: str = "privileged",
-            scene_kw: dict | None = None) -> dict:
+            scene_kw: dict | None = None, runner=None,
+            policy_steps: int = 0, stride: int = 25) -> dict:
     model, data, log = make_env(seed)
     mon = TaskMonitor(model)
     src = scene_source.make(scene, **(scene_kw or {}))
@@ -86,6 +87,28 @@ def episode(seed: int, seconds: float, render: pathlib.Path | None,
     try:
         if policy == "scripted":
             rollout = run_dinner_table(model, data, monitor=mon)
+        elif policy == "act":
+            # The learned policy drives the same actuators the scripted
+            # controller does, at the rate the demonstrations were sampled at.
+            # Every number it sees comes through `src`, so --scene decides
+            # whether it is looking at the simulator or at a camera.
+            from envs import act_policy                        # noqa: PLC0415
+            adr = act_policy.actuated_qpos_adr(model)
+            lo = model.actuator_ctrlrange[:, 0].copy()
+            hi = model.actuator_ctrlrange[:, 1].copy()
+            free = model.actuator_ctrllimited == 0
+            lo[free], hi[free] = -np.inf, np.inf
+            runner.reset()
+            for _ in range(policy_steps):
+                st, ev = act_policy.observe(model, data, src, adr)
+                data.ctrl[:] = np.clip(runner.act(st, ev), lo, hi)
+                for _ in range(stride):
+                    mujoco.mj_step(model, data)
+                    mon.step(data)
+            rollout = {"moves": runner.steps,
+                       "sim_time_s": round(float(data.time), 3),
+                       "max_ik_err_mm": None,
+                       "act": runner.report()}
         else:
             steps = int(seconds / model.opt.timestep)
             for _ in range(steps):
@@ -125,7 +148,16 @@ def main() -> int:
     ap.add_argument("--seeds", type=int, default=10)
     ap.add_argument("--seconds", type=float, default=4.0)
     ap.add_argument("--no-render", action="store_true")
-    ap.add_argument("--policy", choices=("none", "scripted"), default="none")
+    ap.add_argument("--policy", choices=("none", "scripted", "act"),
+                    default="none")
+    ap.add_argument("--policy-ckpt", default="models/act_policy.pt",
+                    help="--policy act: the trained ACT checkpoint")
+    ap.add_argument("--policy-steps", type=int, default=0,
+                    help="--policy act: policy steps per episode "
+                         "(0 = the median demonstration length)")
+    ap.add_argument("--stride", type=int, default=25,
+                    help="--policy act: simulator steps between policy "
+                         "queries; must match collect_demos.py --stride")
     ap.add_argument("--scene", choices=tuple(scene_source.SOURCES),
                     default="privileged",
                     help="where the controller reads object positions from")
@@ -145,11 +177,30 @@ def main() -> int:
     frames.mkdir(parents=True, exist_ok=True)
     scene_kw = ({"precision": args.precision, "device": args.device,
                  "backend": args.backend} if args.scene == "perceived" else {})
+    runner, policy_steps = None, args.policy_steps
+    if args.policy == "act":
+        from envs import act_policy                            # noqa: PLC0415
+        runner = act_policy.ActRunner(ROOT / args.policy_ckpt)
+        if policy_steps == 0:
+            # As long as the demonstrator's own episodes ran, so the learned
+            # policy is given the same wall of simulator time to work in and
+            # neither run is scored over a longer horizon than the other.
+            lens = [-(-e["sim_steps"] // args.stride)
+                    for f in sorted((ROOT / "data/demos").glob("*.json"))
+                    for e in json.loads(f.read_text())["episodes"]]
+            policy_steps = int(np.median(lens))
+        clash = sorted(set(runner.train_seeds) & set(range(args.seeds)))
+        if clash:
+            print(f"REFUSED: checkpoint was trained on evaluation seeds "
+                  f"{clash}.", file=sys.stderr)
+            return 2
+
     rows = []
     for s in range(args.seeds):
         png = None if args.no_render else frames / f"seed_{s:02d}.png"
         row = episode(s, args.seconds, png, policy=args.policy,
-                      scene=args.scene, scene_kw=scene_kw)
+                      scene=args.scene, scene_kw=scene_kw, runner=runner,
+                      policy_steps=policy_steps, stride=args.stride)
         rows.append(row)
         v = row["initial_state_valid"]
         print(f"seed {s:2d}  on_table={v['all_on_table']!s:5s} "
@@ -177,10 +228,20 @@ def main() -> int:
                       "estimate. It must score worse than privileged; if it does "
                       "not, the controller is not consuming the scene source.",
     }
+    ACT_NOTE = (
+        "A LeRobot ACT policy (lerobot.policies.act.modeling_act.ACTPolicy), "
+        "trained by behaviour cloning on the scripted controller's rollouts on "
+        "seeds it never sees at evaluation. It holds learned parameters and no "
+        "waypoint script: at every policy step it is handed twelve joint "
+        "positions and seven scene numbers and returns twelve actuator "
+        "targets. It cannot exceed its demonstrator on sub-goals the "
+        "demonstrator never achieves. Scored by the same predicates as the "
+        "no-policy control and the scripted run. ")
     note = ("No policy is loaded. The arms hold the home pose, so a task score "
             "of 0 is the expected and correct result; this run scores the "
             "ENVIRONMENT, not a controller."
             if args.policy == "none" else
+            ACT_NOTE + SCENE_NOTE[args.scene] if args.policy == "act" else
             "envs/controller.py, a scripted IK waypoint state machine. It "
             "holds no learned parameters. Scored by the same predicates as the "
             "no-policy control, and by a scorer that always reads the "
@@ -191,7 +252,11 @@ def main() -> int:
     out = {
         "seeds": args.seeds,
         "seconds_per_episode": args.seconds,
-        "policy": None if args.policy == "none" else "scripted",
+        "policy": None if args.policy == "none" else args.policy,
+        "policy_detail": (None if runner is None else
+                          {**runner.report(), "policy_steps_per_episode":
+                           policy_steps, "sim_steps_per_policy_step":
+                           args.stride, "checkpoint": args.policy_ckpt}),
         "policy_note": note,
         "scene_source": args.scene,
         "scene_source_detail": (rows[0]["scene_source"]["source"] if rows
@@ -229,8 +294,9 @@ def main() -> int:
         "episodes": rows,
     }
     EVID.mkdir(parents=True, exist_ok=True)
-    default = ("eval_seeds.json" if args.policy == "none"
-               else "eval_seeds_scripted.json")
+    default = {"none": "eval_seeds.json",
+               "scripted": "eval_seeds_scripted.json",
+               "act": "eval_seeds_act.json"}[args.policy]
     if args.scene != "privileged" and args.out is None:
         default = f"eval_seeds_{args.policy}_{args.scene}.json"
     name = args.out or default

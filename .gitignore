@@ -9,3 +9,8 @@ data/*.npz
 # headline numbers are quoted on, and scripts/bench_openvino.py needs them to
 # run from a clean clone.
 !data/perception_eval10.npz
+
+# the trained ACT checkpoint -- 160.8 MB, over GitHub's file limit. The
+# demonstrations it was trained on ARE committed (data/demos/), so
+# `python3 scripts/train_act.py` rebuilds it from a clean clone.
+models/act_policy.pt

@@ -1,0 +1,255 @@
+{
+ "policy": "ACT (Action Chunking Transformer, CVAE)",
+ "implementation": "lerobot.policies.act.modeling_act.ACTPolicy",
+ "lerobot_version": "0.6.1",
+ "trained_by": "behaviour cloning on envs/controller.py rollouts",
+ "parameters": 40158924,
+ "device": "cuda",
+ "chunk_size": 50,
+ "n_action_steps": 25,
+ "batch": 128,
+ "lr": 0.0001,
+ "steps_run": 6000,
+ "wall_s": 286.5,
+ "train_episodes": [
+  3000,
+  3001,
+  3002,
+  3003,
+  3004,
+  3005,
+  3006,
+  3007,
+  3008,
+  3009,
+  3010,
+  3011,
+  3012,
+  3013,
+  3014,
+  3015,
+  3016,
+  3017,
+  3018,
+  3019,
+  3020,
+  3021,
+  3022,
+  3023,
+  3024,
+  3025,
+  3026,
+  3027,
+  3028,
+  3029,
+  3030,
+  3031,
+  3032,
+  3033,
+  3034
+ ],
+ "val_episodes": [
+  3035,
+  3036,
+  3037,
+  3038,
+  3039
+ ],
+ "train_samples": 163038,
+ "val_samples": 23632,
+ "val_l1_normalized": 0.16745,
+ "loss_history": [
+  {
+   "step": 1,
+   "loss": 70.06114,
+   "l1_loss": 0.84251,
+   "kld_loss": 6.92186,
+   "wall_s": 0.6
+  },
+  {
+   "step": 250,
+   "loss": 0.72812,
+   "l1_loss": 0.23436,
+   "kld_loss": 0.04938,
+   "wall_s": 12.4
+  },
+  {
+   "step": 500,
+   "loss": 0.42201,
+   "l1_loss": 0.23167,
+   "kld_loss": 0.01903,
+   "wall_s": 24.1
+  },
+  {
+   "step": 750,
+   "loss": 0.2952,
+   "l1_loss": 0.19482,
+   "kld_loss": 0.01004,
+   "wall_s": 36.0
+  },
+  {
+   "step": 1000,
+   "loss": 0.27423,
+   "l1_loss": 0.19198,
+   "kld_loss": 0.00822,
+   "wall_s": 47.8
+  },
+  {
+   "step": 1250,
+   "loss": 0.22555,
+   "l1_loss": 0.17101,
+   "kld_loss": 0.00545,
+   "wall_s": 59.7
+  },
+  {
+   "step": 1500,
+   "loss": 0.22556,
+   "l1_loss": 0.17674,
+   "kld_loss": 0.00488,
+   "wall_s": 71.5
+  },
+  {
+   "step": 1750,
+   "loss": 0.20734,
+   "l1_loss": 0.16593,
+   "kld_loss": 0.00414,
+   "wall_s": 83.4
+  },
+  {
+   "step": 2000,
+   "loss": 0.17442,
+   "l1_loss": 0.15483,
+   "kld_loss": 0.00196,
+   "wall_s": 95.2
+  },
+  {
+   "step": 2250,
+   "loss": 0.17108,
+   "l1_loss": 0.15096,
+   "kld_loss": 0.00201,
+   "wall_s": 107.0
+  },
+  {
+   "step": 2500,
+   "loss": 0.16835,
+   "l1_loss": 0.15151,
+   "kld_loss": 0.00168,
+   "wall_s": 118.8
+  },
+  {
+   "step": 2750,
+   "loss": 0.14686,
+   "l1_loss": 0.13375,
+   "kld_loss": 0.00131,
+   "wall_s": 130.7
+  },
+  {
+   "step": 3000,
+   "loss": 0.16705,
+   "l1_loss": 0.15395,
+   "kld_loss": 0.00131,
+   "wall_s": 142.7
+  },
+  {
+   "step": 3250,
+   "loss": 0.15225,
+   "l1_loss": 0.1407,
+   "kld_loss": 0.00115,
+   "wall_s": 154.7
+  },
+  {
+   "step": 3500,
+   "loss": 0.1553,
+   "l1_loss": 0.14693,
+   "kld_loss": 0.00084,
+   "wall_s": 166.6
+  },
+  {
+   "step": 3750,
+   "loss": 0.15093,
+   "l1_loss": 0.14301,
+   "kld_loss": 0.00079,
+   "wall_s": 178.5
+  },
+  {
+   "step": 4000,
+   "loss": 0.1385,
+   "l1_loss": 0.1321,
+   "kld_loss": 0.00064,
+   "wall_s": 190.5
+  },
+  {
+   "step": 4250,
+   "loss": 0.13343,
+   "l1_loss": 0.12633,
+   "kld_loss": 0.00071,
+   "wall_s": 202.5
+  },
+  {
+   "step": 4500,
+   "loss": 0.12905,
+   "l1_loss": 0.12077,
+   "kld_loss": 0.00083,
+   "wall_s": 214.5
+  },
+  {
+   "step": 4750,
+   "loss": 0.13248,
+   "l1_loss": 0.12752,
+   "kld_loss": 0.0005,
+   "wall_s": 226.3
+  },
+  {
+   "step": 5000,
+   "loss": 0.1281,
+   "l1_loss": 0.12264,
+   "kld_loss": 0.00055,
+   "wall_s": 238.1
+  },
+  {
+   "step": 5250,
+   "loss": 0.13885,
+   "l1_loss": 0.13243,
+   "kld_loss": 0.00064,
+   "wall_s": 250.0
+  },
+  {
+   "step": 5500,
+   "loss": 0.1211,
+   "l1_loss": 0.11717,
+   "kld_loss": 0.00039,
+   "wall_s": 261.9
+  },
+  {
+   "step": 5750,
+   "loss": 0.11138,
+   "l1_loss": 0.10662,
+   "kld_loss": 0.00048,
+   "wall_s": 273.7
+  },
+  {
+   "step": 6000,
+   "loss": 0.12566,
+   "l1_loss": 0.12164,
+   "kld_loss": 0.0004,
+   "wall_s": 285.5
+  }
+ ],
+ "demo_files": [
+  "demos_3000.npz",
+  "demos_3005.npz",
+  "demos_3010.npz",
+  "demos_3015.npz",
+  "demos_3020.npz",
+  "demos_3025.npz",
+  "demos_3030.npz",
+  "demos_3035.npz"
+ ],
+ "observation": {
+  "observation.state": "12 actuated joint positions",
+  "observation.environment_state": "plate_x, plate_y, mug_x, mug_y, bottle_x, bottle_y, drawer_q -- the outputs of envs/perception.py"
+ },
+ "no_image_feature": "ACT is configured with no camera input. The camera reaches the policy only through the seven environment-state numbers, which at evaluation time envs/scene_source.py can produce from a top_cam frame through the OpenVINO IR. This is a state-conditioned ACT, not an image-conditioned one, and no claim is made otherwise.",
+ "normalization": "mean/std over the TRAIN episodes only, stored in the checkpoint; lerobot 0.6 does not normalize inside ACTPolicy.",
+ "not_claimed": "This is imitation of a scripted controller. It cannot exceed its demonstrator on the sub-goals the demonstrator never achieves, and no language input is consumed anywhere."
+}

@@ -1,0 +1,110 @@
+{
+ "seeds": [
+  3005,
+  3006,
+  3007,
+  3008,
+  3009
+ ],
+ "stride": 25,
+ "hz": 20.0,
+ "state_dim": 12,
+ "env_state_dim": 7,
+ "env_state_names": [
+  "plate_x",
+  "plate_y",
+  "mug_x",
+  "mug_y",
+  "bottle_x",
+  "bottle_y",
+  "drawer_q"
+ ],
+ "action_dim": 12,
+ "action_is": "data.ctrl -- actuator position targets, same units as state",
+ "env_state_source": "MjData (training labels). At evaluation the same seven numbers come from envs/scene_source.py.",
+ "eval_seeds_excluded": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9
+ ],
+ "episodes": [
+  {
+   "seed": 3005,
+   "sim_time_s": 259.146,
+   "sim_steps": 129573,
+   "wall_s": 24.45,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1
+  },
+  {
+   "seed": 3006,
+   "sim_time_s": 236.282,
+   "sim_steps": 118141,
+   "wall_s": 22.63,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1
+  },
+  {
+   "seed": 3007,
+   "sim_time_s": 211.622,
+   "sim_steps": 105811,
+   "wall_s": 20.88,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "subgoals_met": 2
+  },
+  {
+   "seed": 3008,
+   "sim_time_s": 242.122,
+   "sim_steps": 121061,
+   "wall_s": 23.75,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "subgoals_met": 2
+  },
+  {
+   "seed": 3009,
+   "sim_time_s": 179.374,
+   "sim_steps": 89687,
+   "wall_s": 16.41,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "subgoals_met": 2
+  }
+ ],
+ "total_samples": 22573
+}

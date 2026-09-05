@@ -1,0 +1,103 @@
+{
+ "controls": 19,
+ "passed": 19,
+ "all_pass": true,
+ "checkpoint": "models/act_policy.pt",
+ "results": [
+  {
+   "control": "provenance/is_lerobot_act",
+   "pass": true,
+   "detail": "lerobot.policies.act.modeling_act.ACTPolicy"
+  },
+  {
+   "control": "provenance/lookalike_rejected [negative control]",
+   "pass": true,
+   "detail": "a class named ACTPolicy in __main__ does not satisfy the provenance check"
+  },
+  {
+   "control": "provenance/version_matches_report",
+   "pass": true,
+   "detail": "installed 0.6.1 == reported 0.6.1"
+  },
+  {
+   "control": "contract/joint_order_agrees",
+   "pass": true,
+   "detail": "inference and collection address the same 12 qpos slots"
+  },
+  {
+   "control": "contract/permuted_order_rejected [negative control]",
+   "pass": true,
+   "detail": "a reversed address vector is not accepted as agreeing"
+  },
+  {
+   "control": "contract/observation_matches_collection",
+   "pass": true,
+   "detail": "state max|d|=0, env max|d|=0"
+  },
+  {
+   "control": "seeds/no_evaluation_seed_in_training",
+   "pass": true,
+   "detail": "trained on 35 seeds 3000..3034; evaluation seeds are 0..9"
+  },
+  {
+   "control": "seeds/overlap_is_caught [negative control]",
+   "pass": true,
+   "detail": "adding evaluation seed 3 to the training list is detected"
+  },
+  {
+   "control": "weights/trained_beats_random_init",
+   "pass": true,
+   "detail": "held-out L1 0.1946 (trained) < 0.8100 (same architecture, random weights) on episodes [3035, 3036, 3037, 3038, 3039]"
+  },
+  {
+   "control": "weights/random_init_is_a_real_alternative [negative control]",
+   "pass": true,
+   "detail": "the untrained baseline is genuinely bad (0.8100), so the comparison is not two numbers that are both ~0"
+  },
+  {
+   "control": "input/same_observation_same_action [negative control]",
+   "pass": true,
+   "detail": "max|d| = 0 -- inference is deterministic, so any change below is attributable to the input"
+  },
+  {
+   "control": "input/env_state_is_consumed",
+   "pass": true,
+   "detail": "moving the six object coordinates by 0.090 m moves the action by 0.04884 rad against 0 of determinism noise"
+  },
+  {
+   "control": "claims/train_report_matches_checkpoint",
+   "pass": true,
+   "detail": "parameters=40,158,924, chunk=50, n_action_steps=25, val_episodes=[3035, 3036, 3037, 3038, 3039]"
+  },
+  {
+   "control": "claims/corrupted_train_report_caught [negative control]",
+   "pass": true,
+   "detail": "a parameter count off by one is rejected"
+  },
+  {
+   "control": "claims/eval_figures_rederive",
+   "pass": true,
+   "detail": "subgoals 3/50, mean 0.300, task_success 0/10 re-derived from the shipped episode list"
+  },
+  {
+   "control": "claims/corrupted_eval_figure_caught [negative control]",
+   "pass": true,
+   "detail": "a per-seed sub-goal count off by one is rejected"
+  },
+  {
+   "control": "scorer/same_predicates_as_scripted_run",
+   "pass": true,
+   "detail": "5 sub-goals ['drawer_open', 'fork_placed', 'mug_placed', 'plate_placed', 'spoon_placed'] and one instruction, identical in both runs"
+  },
+  {
+   "control": "scorer/doctored_subgoal_set_caught [negative control]",
+   "pass": true,
+   "detail": "an extra sub-goal in the ACT run would be detected"
+  },
+  {
+   "control": "language/no_image_or_token_input",
+   "pass": true,
+   "detail": "inputs = ['observation.environment_state', 'observation.state']; the report's 'no language input is consumed anywhere' is what the configuration says"
+  }
+ ]
+}
