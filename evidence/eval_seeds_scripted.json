@@ -5,18 +5,18 @@
  "policy_note": "envs/controller.py, a scripted IK waypoint state machine. It holds no learned parameters and reads no camera; it reads the world pose of the object it is about to touch, which is what a perception stack would supply. Scored by the same predicates as the no-policy control.",
  "all_episodes_valid_and_stable": true,
  "subgoals_met_per_seed": [
+  2,
   1,
-  0,
-  1,
-  1,
-  1,
-  1,
-  1,
+  2,
+  2,
+  2,
   1,
   1,
-  1
+  1,
+  2,
+  2
  ],
- "subgoals_met_mean": 0.9,
+ "subgoals_met_mean": 1.6,
  "task_success_count": 0,
  "handoff_seeds": [
   0,
@@ -35,9 +35,9 @@
    "seed": 0,
    "policy": "scripted",
    "rollout": {
-    "moves": 63,
-    "sim_time_s": 88.028,
-    "max_ik_err_mm": 11.8
+    "moves": 95,
+    "sim_time_s": 124.96,
+    "max_ik_err_mm": 12.9
    },
    "randomization": {
     "seed": 0,
@@ -139,10 +139,10 @@
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": false,
+     "plate_placed": true,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 2,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
@@ -151,35 +151,37 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 30.258
+      "t": 34.428
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 58.852
+      "t": 117.444
      }
     ],
     "handoff_occurred": true,
     "arms_that_touched_an_object": [
+     "left",
      "right"
     ],
-    "bimanual": false,
+    "bimanual": true,
     "objects_dropped": [],
     "max_drawer_travel_m": 0.0923,
     "first_completion_times_s": {
-     "drawer_open": 5.61
+     "drawer_open": 5.61,
+     "plate_placed": 70.002
     },
-    "sim_time_s": 88.028
+    "sim_time_s": 124.96
    }
   },
   {
    "seed": 1,
    "policy": "scripted",
    "rollout": {
-    "moves": 63,
-    "sim_time_s": 88.028,
-    "max_ik_err_mm": 7.74
+    "moves": 103,
+    "sim_time_s": 130.352,
+    "max_ik_err_mm": 21.7
    },
    "randomization": {
     "seed": 1,
@@ -278,62 +280,51 @@
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
     "subgoals": {
-     "drawer_open": false,
+     "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
      "plate_placed": false,
      "mug_placed": false
     },
-    "subgoals_met": 0,
+    "subgoals_met": 1,
     "subgoals_total": 5,
-    "in_order_prefix": 0,
+    "in_order_prefix": 1,
     "task_success": false,
     "handoffs": [
      {
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 23.544
+      "t": 21.616
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 41.35
-     },
-     {
-      "object": "drawer",
-      "from": "right",
-      "to": "left",
-      "t": 74.296
-     },
-     {
-      "object": "drawer",
-      "from": "left",
-      "to": "right",
-      "t": 81.218
+      "t": 75.37
      }
     ],
     "handoff_occurred": true,
     "arms_that_touched_an_object": [
+     "left",
      "right"
     ],
-    "bimanual": false,
+    "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0919,
+    "max_drawer_travel_m": 0.092,
     "first_completion_times_s": {
      "drawer_open": 5.87
     },
-    "sim_time_s": 88.028
+    "sim_time_s": 130.352
    }
   },
   {
    "seed": 2,
    "policy": "scripted",
    "rollout": {
-    "moves": 63,
-    "sim_time_s": 88.028,
-    "max_ik_err_mm": 7.99
+    "moves": 84,
+    "sim_time_s": 111.084,
+    "max_ik_err_mm": 12.36
    },
    "randomization": {
     "seed": 2,
@@ -435,10 +426,10 @@
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": false,
+     "plate_placed": true,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 2,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
@@ -447,13 +438,13 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 33.432
+      "t": 21.492
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 44.884
+      "t": 42.312
      }
     ],
     "handoff_occurred": true,
@@ -464,18 +455,19 @@
     "objects_dropped": [],
     "max_drawer_travel_m": 0.0914,
     "first_completion_times_s": {
-     "drawer_open": 5.932
+     "drawer_open": 5.932,
+     "plate_placed": 71.058
     },
-    "sim_time_s": 88.028
+    "sim_time_s": 111.084
    }
   },
   {
    "seed": 3,
    "policy": "scripted",
    "rollout": {
-    "moves": 63,
-    "sim_time_s": 88.028,
-    "max_ik_err_mm": 7.74
+    "moves": 113,
+    "sim_time_s": 143.332,
+    "max_ik_err_mm": 25.8
    },
    "randomization": {
     "seed": 3,
@@ -577,10 +569,10 @@
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": false,
+     "plate_placed": true,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 2,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
@@ -589,25 +581,13 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 21.522
+      "t": 22.282
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 41.268
-     },
-     {
-      "object": "drawer",
-      "from": "right",
-      "to": "left",
-      "t": 71.12
-     },
-     {
-      "object": "drawer",
-      "from": "left",
-      "to": "right",
-      "t": 81.218
+      "t": 45.958
      }
     ],
     "handoff_occurred": true,
@@ -616,20 +596,21 @@
     ],
     "bimanual": false,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0916,
+    "max_drawer_travel_m": 0.0918,
     "first_completion_times_s": {
-     "drawer_open": 5.926
+     "drawer_open": 5.926,
+     "plate_placed": 70.876
     },
-    "sim_time_s": 88.028
+    "sim_time_s": 143.332
    }
   },
   {
    "seed": 4,
    "policy": "scripted",
    "rollout": {
-    "moves": 54,
-    "sim_time_s": 75.796,
-    "max_ik_err_mm": 7.38
+    "moves": 115,
+    "sim_time_s": 140.536,
+    "max_ik_err_mm": 200.43
    },
    "randomization": {
     "seed": 4,
@@ -731,10 +712,10 @@
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": false,
+     "plate_placed": true,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 2,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
@@ -743,35 +724,37 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 33.594
+      "t": 21.092
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 49.964
+      "t": 41.266
      }
     ],
     "handoff_occurred": true,
     "arms_that_touched_an_object": [
+     "left",
      "right"
     ],
-    "bimanual": false,
+    "bimanual": true,
     "objects_dropped": [],
     "max_drawer_travel_m": 0.0919,
     "first_completion_times_s": {
-     "drawer_open": 5.884
+     "drawer_open": 5.884,
+     "plate_placed": 114.67
     },
-    "sim_time_s": 75.796
+    "sim_time_s": 140.536
    }
   },
   {
    "seed": 5,
    "policy": "scripted",
    "rollout": {
-    "moves": 63,
-    "sim_time_s": 88.028,
-    "max_ik_err_mm": 8.13
+    "moves": 125,
+    "sim_time_s": 153.516,
+    "max_ik_err_mm": 290.63
    },
    "randomization": {
     "seed": 5,
@@ -885,35 +868,36 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 20.696
+      "t": 34.088
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 40.616
+      "t": 41.258
      }
     ],
     "handoff_occurred": true,
     "arms_that_touched_an_object": [
+     "left",
      "right"
     ],
-    "bimanual": false,
+    "bimanual": true,
     "objects_dropped": [],
     "max_drawer_travel_m": 0.0916,
     "first_completion_times_s": {
      "drawer_open": 6.532
     },
-    "sim_time_s": 88.028
+    "sim_time_s": 153.516
    }
   },
   {
    "seed": 6,
    "policy": "scripted",
    "rollout": {
-    "moves": 54,
-    "sim_time_s": 75.796,
-    "max_ik_err_mm": 7.73
+    "moves": 131,
+    "sim_time_s": 157.56,
+    "max_ik_err_mm": 294.95
    },
    "randomization": {
     "seed": 6,
@@ -1027,35 +1011,35 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 25.8
+      "t": 24.64
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 40.434
+      "t": 41.214
      }
     ],
     "handoff_occurred": true,
     "arms_that_touched_an_object": [
-     "right"
+     "left"
     ],
     "bimanual": false,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0977,
+    "max_drawer_travel_m": 0.0917,
     "first_completion_times_s": {
-     "drawer_open": 17.89
+     "drawer_open": 152.554
     },
-    "sim_time_s": 75.796
+    "sim_time_s": 157.56
    }
   },
   {
    "seed": 7,
    "policy": "scripted",
    "rollout": {
-    "moves": 54,
-    "sim_time_s": 75.796,
-    "max_ik_err_mm": 11.85
+    "moves": 117,
+    "sim_time_s": 141.884,
+    "max_ik_err_mm": 161.42
    },
    "randomization": {
     "seed": 7,
@@ -1169,41 +1153,36 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 29.028
+      "t": 21.42
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 59.292
-     },
-     {
-      "object": "drawer",
-      "from": "right",
-      "to": "left",
-      "t": 66.728
+      "t": 42.05
      }
     ],
     "handoff_occurred": true,
     "arms_that_touched_an_object": [
+     "left",
      "right"
     ],
-    "bimanual": false,
+    "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0913,
+    "max_drawer_travel_m": 0.0918,
     "first_completion_times_s": {
      "drawer_open": 5.93
     },
-    "sim_time_s": 75.796
+    "sim_time_s": 141.884
    }
   },
   {
    "seed": 8,
    "policy": "scripted",
    "rollout": {
-    "moves": 54,
-    "sim_time_s": 75.796,
-    "max_ik_err_mm": 9.41
+    "moves": 100,
+    "sim_time_s": 128.108,
+    "max_ik_err_mm": 17.05
    },
    "randomization": {
     "seed": 8,
@@ -1305,10 +1284,10 @@
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": false,
+     "plate_placed": true,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 2,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
@@ -1317,13 +1296,13 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 21.796
+      "t": 24.932
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 42.88
+      "t": 107.57
      }
     ],
     "handoff_occurred": true,
@@ -1335,18 +1314,19 @@
     "objects_dropped": [],
     "max_drawer_travel_m": 0.0916,
     "first_completion_times_s": {
-     "drawer_open": 5.99
+     "drawer_open": 5.99,
+     "plate_placed": 65.734
     },
-    "sim_time_s": 75.796
+    "sim_time_s": 128.108
    }
   },
   {
    "seed": 9,
    "policy": "scripted",
    "rollout": {
-    "moves": 54,
-    "sim_time_s": 75.796,
-    "max_ik_err_mm": 7.49
+    "moves": 107,
+    "sim_time_s": 133.048,
+    "max_ik_err_mm": 21.33
    },
    "randomization": {
     "seed": 9,
@@ -1448,10 +1428,10 @@
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": false,
+     "plate_placed": true,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 2,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
@@ -1460,19 +1440,13 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 25.834
+      "t": 29.746
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 47.026
-     },
-     {
-      "object": "drawer",
-      "from": "right",
-      "to": "left",
-      "t": 71.07
+      "t": 125.552
      }
     ],
     "handoff_occurred": true,
@@ -1482,11 +1456,12 @@
     ],
     "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0921,
+    "max_drawer_travel_m": 0.0922,
     "first_completion_times_s": {
-     "drawer_open": 5.668
+     "drawer_open": 5.668,
+     "plate_placed": 96.182
     },
-    "sim_time_s": 75.796
+    "sim_time_s": 133.048
    }
   }
  ]
