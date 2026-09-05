@@ -21,3 +21,12 @@ pypdf>=4.0
 # the demo MP4's frames and decodes the SHIPPED presentation back; ffmpeg must be
 # on the path -- it is the encoder, and it is not a pip package here.
 opencv-python>=4.9
+
+# the learned ACT policy (scripts/train_act.py, envs/act_policy.py,
+# scripts/test_act_policy.py). lerobot supplies the policy class itself --
+# lerobot.policies.act.modeling_act.ACTPolicy -- and nothing here
+# re-implements it. av is pinned because lerobot 0.6.1's dataset layer calls
+# av.option, which PyAV dropped after 15.x; the policy path does not use the
+# dataset layer but does import through it.
+lerobot==0.6.1
+av>=15,<16
