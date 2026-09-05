@@ -19,7 +19,7 @@
   {
    "control": "accept_splits_are_seed_disjoint",
    "pass": true,
-   "detail": "train 500, val 60, eval10 10 compile seeds, overlap []"
+   "detail": "train 500, val 60, eval10 10 compile seeds (from {'train': 'npz', 'val': 'npz', 'eval10': 'npz'}), overlap []"
   },
   {
    "control": "reject_noise_images_score_like_real_ones",

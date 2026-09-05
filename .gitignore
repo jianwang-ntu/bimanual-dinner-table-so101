@@ -5,3 +5,7 @@ MUJOCO_LOG.TXT
 
 # rendered perception datasets -- regenerate with scripts/make_perception_dataset.py
 data/*.npz
+# ...except the ten evaluation frames: they are 231 KiB, they are what the
+# headline numbers are quoted on, and scripts/bench_openvino.py needs them to
+# run from a clean clone.
+!data/perception_eval10.npz

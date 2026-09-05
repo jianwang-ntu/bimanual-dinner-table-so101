@@ -101,19 +101,32 @@ def main() -> int:
                 sh >= bv and sh > 5 * mv,
                 f"shuffled {sh:.2f} mm, baseline {bv:.2f} mm, model {mv:.2f} mm")
 
-    seeds = {}
+    # From a clean clone only the eval10 frames are present -- the train and val
+    # renders are regenerated, not shipped. Fall back to the committed dataset
+    # metadata, which records the seed range each split was built from.
+    seeds, basis = {}, {}
     for split in ("train", "val", "eval10"):
-        f = ROOT / "data" / f"perception_{split}.npz"
-        seeds[split] = set(np.load(f)["seeds"].tolist()) if f.exists() else set()
+        npz = ROOT / "data" / f"perception_{split}.npz"
+        meta = ROOT / "data" / f"perception_{split}.json"
+        if npz.exists():
+            seeds[split] = set(np.load(npz)["seeds"].tolist())
+            basis[split] = "npz"
+        elif meta.exists():
+            lo, hi = json.loads(meta.read_text())["seed_range"]
+            seeds[split] = set(range(lo, hi + 1))
+            basis[split] = "metadata seed_range"
+        else:
+            seeds[split] = set()
+            basis[split] = "absent"
     if all(seeds.values()):
         overlap = (seeds["train"] & seeds["val"]) | (seeds["train"] & seeds["eval10"])
         ok &= check("accept_splits_are_seed_disjoint", not overlap,
                     f"train {len(seeds['train'])}, val {len(seeds['val'])}, "
-                    f"eval10 {len(seeds['eval10'])} compile seeds, overlap "
-                    f"{sorted(overlap)}")
+                    f"eval10 {len(seeds['eval10'])} compile seeds "
+                    f"(from {basis}), overlap {sorted(overlap)}")
     else:
         ok &= check("accept_splits_are_seed_disjoint", False,
-                    "dataset npz files absent -- cannot check")
+                    f"split records absent -- cannot check ({basis})")
 
     net = _model()
     d = np.load(ROOT / "data" / "perception_eval10.npz")
