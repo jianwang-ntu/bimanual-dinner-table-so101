@@ -207,13 +207,17 @@ def layout_violations(fig):
                 bad.append({"kind": "text_on_text", "page": _page["n"],
                             "a": a["text"][:50], "b": b["text"][:50],
                             "overlap": [round(ov_x, 4), round(ov_y, 4)]})
+    # A panel is checked with CLEARANCE, not mere containment: text that stops
+    # 1 px short of a panel border reads as touching it, and the containment
+    # test alone passed exactly that on two slides.
+    CLEAR = 0.008
     for pan in [p for p in panels if p["page"] == _page["n"]]:
         px0, py0, pw, ph = pan["rect"]
         px1, py1 = px0 + pw, py0 + ph
         for b in boxes:
-            inter_x = min(b["x1"], px1) - max(b["x0"], px0)
-            inter_y = min(b["y1"], py1) - max(b["y0"], py0)
-            if inter_x <= 0.002 or inter_y <= 0.002:
+            inter_x = min(b["x1"], px1 + CLEAR) - max(b["x0"], px0 - CLEAR)
+            inter_y = min(b["y1"], py1 + CLEAR) - max(b["y0"], py0 - CLEAR)
+            if inter_x <= 0 or inter_y <= 0:
                 continue
             inside = (b["x0"] >= px0 - 0.002 and b["x1"] <= px1 + 0.002
                       and b["y0"] >= py0 - 0.002 and b["y1"] <= py1 + 0.002)
@@ -817,7 +821,7 @@ def s13_verify(F):
          "re-derives every figure on these slides and fails if one has gone stale"),
     ]
     for i, (cmd, what) in enumerate(cmds):
-        y = 0.655 - i * 0.104
+        y = 0.648 - i * 0.098
         say(fig, L, y, cmd, size=14.5, family=MONO, color=ACCENT)
         flow(fig, L, y - 0.042, what, size=13, color=MUTED, maxw=R - L)
     panel(fig, [L, 0.085, R - L, 0.100])

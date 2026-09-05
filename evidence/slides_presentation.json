@@ -1,8 +1,8 @@
 {
  "schema": "slides_presentation/v1",
  "pdf": "evidence/slides_presentation.pdf",
- "sha256": "f6f31d1e82ada3e38de4604bed4bd71cb8b3ec7580e2841d38e202b7a17d84cd",
- "bytes": 164085,
+ "sha256": "5d3e88c223927cef73642d83e812315e768e609b476f7c4c3ef02209ad3c99d3",
+ "bytes": 164084,
  "pages": 13,
  "page_size_inches": [
   13.333,
@@ -13,7 +13,7 @@
  "title": "SO-101 Dinner Table: a scored bimanual benchmark",
  "track": "Bimanual VLA Manipulation with Multi-Modal Reasoning \u2014 Setting Up a Dinner Table",
  "built_by": "scripts/make_slides.py",
- "built_at_head": "6c621e37274be56297e822b977774a63248b04a7",
+ "built_at_head": "2847fab616a40f7c833da35034ee030f6c22d56c",
  "source_date_epoch": "1757000000",
  "deterministic": "SOURCE_DATE_EPOCH is pinned, so two builds from the same evidence produce byte-identical PDFs.",
  "layout_violations": [],
