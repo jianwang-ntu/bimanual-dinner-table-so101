@@ -1,8 +1,8 @@
 {
  "schema": "slides_presentation/v1",
  "pdf": "evidence/slides_presentation.pdf",
- "sha256": "316fdb99c546d1ad09f66edbf06005f29280621fc91e77cc5bded4a0d79c76c1",
- "bytes": 164465,
+ "sha256": "a286fb97a3fa054383776ad6df9aa3a42fa8f16b1d25d86fa381bf5f1e4d6767",
+ "bytes": 164591,
  "pages": 13,
  "page_size_inches": [
   13.333,
@@ -13,16 +13,21 @@
  "title": "SO-101 Dinner Table: a scored bimanual benchmark",
  "track": "Bimanual VLA Manipulation with Multi-Modal Reasoning \u2014 Setting Up a Dinner Table",
  "built_by": "scripts/make_slides.py",
- "built_at_head": "938ef11bf48f4f30320b8d76131a23475b27ce69",
+ "built_at_head": "bd360c6b98b3a0c6ba2036677807dc2a103593d5",
  "source_date_epoch": "1757000000",
  "deterministic": "SOURCE_DATE_EPOCH is pinned, so two builds from the same evidence produce byte-identical PDFs.",
  "layout_violations": [],
  "layout_check": "every string is measured with the real font metrics; off-page, text-on-text, text-straddling-a-panel and text-on-chart all fail the build",
  "figures_derived_from": [
+  "act_policy_controls.json",
+  "act_train.json",
   "cover_image.json",
   "cover_image_controls.json",
   "demo_scripted_10seeds.json",
+  "demo_site.json",
+  "demo_site_controls.json",
   "eval_seeds.json",
+  "eval_seeds_act.json",
   "eval_seeds_scripted.json",
   "eval_seeds_scripted_blind.json",
   "eval_seeds_scripted_perceived.json",
@@ -503,12 +508,12 @@
   {
    "slide": 7,
    "role": "body",
-   "text": "Stated plainly: this is perception, not a policy. It outputs scene state, not actions, and it is not in the control loop \u2014 the controller still reads privileged simulator state."
+   "text": "Stated plainly: this is perception, not a policy. It outputs scene state, not actions. It IS in the control loop, and it costs 3 sub-goals to put it there: 12 / 50 against 15 / 50."
   },
   {
    "slide": 7,
    "role": "body",
-   "text": "Wiring it in is the next step, and until it is taken this entry claims nothing for the VLA criterion."
+   "text": "It answers one of the VLA criterion's four demands. Natural language, multi-step task context and re-planning are still absent."
   },
   {
    "slide": 8,
@@ -678,7 +683,12 @@
   {
    "slide": 10,
    "role": "bullet",
-   "text": "\u2014  No learned policy: no VLA, no imitation learning, no language conditioning."
+   "text": "\u2014  The learned ACT policy loses to the script: 3 / 50 against 15 / 50."
+  },
+  {
+   "slide": 10,
+   "role": "bullet",
+   "text": "\u2014  No VLA, no language conditioning: the instruction is a fixed string."
   },
   {
    "slide": 10,
@@ -698,7 +708,7 @@
   {
    "slide": 10,
    "role": "bullet",
-   "text": "\u2014  Perception is not in the control loop; the controller reads privileged simulator state."
+   "text": "\u2014  Perception in the loop costs 3 sub-goals (12 / 50 against 15 / 50) and estimates no height, yaw, dimensions, fork or spoon."
   },
   {
    "slide": 10,
@@ -904,6 +914,8 @@
  "facts": {
   "seeds": 10,
   "denom": 50,
+  "act_total": 3,
+  "perceived_total": 12,
   "total": 15,
   "control_total": 0,
   "task_success": 0,
@@ -956,5 +968,5 @@
   "moves_total": 1810,
   "ik_err_mm": 361.93
  },
- "not_claimed": "The deck reports task success 0/10, object hand-offs 5/10, fork_placed 0/10, spoon_placed 0/10, mug_placed 1/10, perception outside the control loop and no Intel Core Ultra measurement. It claims no completed dinner table and no learned policy."
+ "not_claimed": "The deck reports task success 0/10, object hand-offs 5/10, fork_placed 0/10, spoon_placed 0/10, mug_placed 1/10, perception in the control loop at a measured cost, and no Intel Core Ultra measurement. It claims no completed dinner table, and it states that the learned policy scores less than the scripted controller."
 }

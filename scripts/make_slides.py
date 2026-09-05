@@ -256,12 +256,16 @@ def load():
         "export": j("openvino_export.json"),
         "bench": json.loads(bench_files[0].read_text(encoding="utf-8")),
         "demo": j("demo_scripted_10seeds.json"),
+        "act": j("eval_seeds_act.json"),
+        "perceived": j("eval_seeds_scripted_perceived.json"),
     }
 
 
 def facts(e):
     """Every number the deck is allowed to print, derived here and nowhere else."""
     sc, ctl = e["scripted"], e["control"]
+    act_total = sum(e["act"]["subgoals_met_per_seed"])
+    perceived_total = sum(e["perceived"]["subgoals_met_per_seed"])
     seeds = sc["seeds"]
     per_goal, order = {}, []
     for ep in sc["episodes"]:
@@ -291,6 +295,7 @@ def facts(e):
                      if c["control"] == "reject_non_core_ultra_host_is_the_required_hardware")
     return {
         "seeds": seeds, "denom": denom,
+        "act_total": act_total, "perceived_total": perceived_total,
         "total": sum(sc["subgoals_met_per_seed"]),
         "control_total": sum(ctl["subgoals_met_per_seed"]),
         "per_seed": list(sc["subgoals_met_per_seed"]),
@@ -618,13 +623,16 @@ def s07_perception(F):
         f"{F['shuffled_mm']:.2f} mm", size=13)
 
     flow(fig, L, 0.265,
-         "Stated plainly: this is perception, not a policy. It outputs scene "
-         "state, not actions, and it is not in the control loop — the controller "
-         "still reads privileged simulator state.",
+         f"Stated plainly: this is perception, not a policy. It outputs scene "
+         f"state, not actions. It IS in the control loop, and it costs "
+         f"{F['total'] - F['perceived_total']} sub-goals to put it "
+         f"there: {F['perceived_total']} / {F['denom']} against "
+         f"{F['total']} / {F['denom']}.",
          size=16, color=WARN, maxw=R - L)
     flow(fig, L, 0.135,
-         "Wiring it in is the next step, and until it is taken this entry claims "
-         "nothing for the VLA criterion.", size=14, color=MUTED, maxw=R - L)
+         "It answers one of the VLA criterion's four demands. Natural language, "
+         "multi-step task context and re-planning are still absent.",
+         size=14, color=MUTED, maxw=R - L)
     return fig
 
 
@@ -716,7 +724,9 @@ def s10_absences(F):
              "This entry is smaller than the track asks for, and exact about "
              "which parts are missing.", size=18, weight="bold", maxw=R - L)
     bullets(fig, L, y - 0.030, [
-        "No learned policy: no VLA, no imitation learning, no language conditioning.",
+        f"The learned ACT policy loses to the script: {F['act_total']} / "
+        f"{F['denom']} against {F['total']} / {F['denom']}.",
+        "No VLA, no language conditioning: the instruction is a fixed string.",
         f"Task success {F['task_success']} / {F['seeds']} — the table has never "
         f"been set.",
         ", ".join(f"{g} {F['per_goal'][g]} / {F['seeds']}"
@@ -726,11 +736,13 @@ def s10_absences(F):
          if F['object_handoffs'] == 0 else
          f"Object hand-off only ever with the mug, on "
          f"{F['object_handoffs']} / {F['seeds']} seeds."),
-        "Perception is not in the control loop; the controller reads privileged "
-        "simulator state.",
+        f"Perception in the loop costs {F['total'] - F['perceived_total']} "
+        f"sub-goals ({F['perceived_total']} / {F['denom']} against "
+        f"{F['total']} / {F['denom']}) and estimates no height, yaw, "
+        f"dimensions, fork or spoon.",
         f"No Intel Core Ultra measurement: {F['bench_verdict']}.",
         "The plate is dragged by its rim, not carried.",
-    ], size=15, maxw=R - L - 0.02, gap=0.019)
+    ], size=13.5, maxw=R - L - 0.02, gap=0.014)
 
     panel(fig, [L, 0.095, R - L, 0.115])
     flow(fig, L + 0.02, 0.175,
@@ -900,8 +912,10 @@ def build(pdf_path=PDF, sidecar_path=SIDECAR):
             f"fork_placed {F['per_goal']['fork_placed']}/{F['seeds']}, "
             f"spoon_placed {F['per_goal']['spoon_placed']}/{F['seeds']}, "
             f"mug_placed {F['per_goal']['mug_placed']}/{F['seeds']}, perception "
-            "outside the control loop and no Intel Core Ultra measurement. It "
-            "claims no completed dinner table and no learned policy."),
+            "in the control loop at a measured cost, and no Intel Core Ultra "
+            "measurement. It claims no completed dinner table, and it states "
+            "that the learned policy scores less than the scripted "
+            "controller."),
     }
     pathlib.Path(sidecar_path).write_text(
         json.dumps(sidecar, indent=1) + "\n", encoding="utf-8")

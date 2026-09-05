@@ -1,9 +1,9 @@
 {
  "schema": "slides_controls/v1",
  "artifact": "evidence/slides_presentation.pdf",
- "sha256": "316fdb99c546d1ad09f66edbf06005f29280621fc91e77cc5bded4a0d79c76c1",
+ "sha256": "a286fb97a3fa054383776ad6df9aa3a42fa8f16b1d25d86fa381bf5f1e4d6767",
  "claims_checked": 37,
- "absences_checked": 6,
+ "absences_checked": 7,
  "all_pass": true,
  "controls": [
   {
@@ -24,7 +24,7 @@
   {
    "control": "accept_every_absence_is_stated",
    "pass": true,
-   "detail": "6 / 6 absences stated"
+   "detail": "7 / 7 absences stated"
   },
   {
    "control": "reject_an_inflated_task_success",
@@ -34,12 +34,12 @@
   {
    "control": "reject_a_deck_with_the_absences_deleted",
    "pass": true,
-   "detail": "with the ledger removed, all 6 absence controls report missing"
+   "detail": "with the ledger removed, all 7 absence controls report missing"
   },
   {
    "control": "accept_sidecar_matches_the_file",
    "pass": true,
-   "detail": "sha256 316fdb99c546d1ad\u2026 == sidecar 316fdb99c546d1ad\u2026"
+   "detail": "sha256 a286fb97a3fa0543\u2026 == sidecar a286fb97a3fa0543\u2026"
   },
   {
    "control": "reject_a_sidecar_sha_that_does_not_match",

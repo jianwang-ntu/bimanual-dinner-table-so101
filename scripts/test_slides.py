@@ -71,6 +71,8 @@ def load_evidence(ev: pathlib.Path) -> dict:
         "export": j("openvino_export.json"),
         "bench": json.loads(bench[0].read_text(encoding="utf-8")),
         "demo": j("demo_scripted_10seeds.json"),
+        "act": j("eval_seeds_act.json"),
+        "perceived": j("eval_seeds_scripted_perceived.json"),
     }
 
 
@@ -179,16 +181,30 @@ def honesty_claims(e: dict) -> list[tuple[str, str]]:
     sc = e["scripted"]
     seeds = sc["seeds"]
     per = subgoal_counts(sc)
+    denom = seeds * sc["episodes"][0]["task"]["subgoals_total"]
+    act_total = sum(e["act"]["subgoals_met_per_seed"])
+    perceived_total = sum(e["perceived"]["subgoals_met_per_seed"])
+    total = sum(sc["subgoals_met_per_seed"])
+    # These two entries read "No learned policy: no VLA, no imitation learning,
+    # no language conditioning." and "Perception is not in the control loop;
+    # the controller reads privileged simulator state." Both had gone FALSE --
+    # perception entered the loop at 5ab8365 and a LeRobot ACT policy was
+    # trained at 9e805f8 -- and this suite was pinning them PRESENT, so it was
+    # a control keeping two false sentences on a shipped slide. Re-sited onto
+    # the results themselves, derived from the evidence.
     out = [
-        ("no_learned_policy",
-         "No learned policy: no VLA, no imitation learning, no language "
-         "conditioning."),
+        ("learned_policy_loses",
+         f"The learned ACT policy loses to the script: {act_total} / {denom} "
+         f"against {total} / {denom}."),
+        ("no_vla_no_language",
+         "No VLA, no language conditioning: the instruction is a fixed string."),
         ("never_set",
          f"Task success {sc['task_success_count']} / {seeds} — the table has "
          f"never been set."),
-        ("not_in_loop",
-         "Perception is not in the control loop; the controller reads privileged "
-         "simulator state."),
+        ("perception_in_loop_costs",
+         f"Perception in the loop costs {total - perceived_total} sub-goals "
+         f"({perceived_total} / {denom} against {total} / {denom}) and "
+         f"estimates no height, yaw, dimensions, fork or spoon."),
         ("no_intel",
          f"No Intel Core Ultra measurement: "
          f"{e['bench']['required_hardware']['verdict']}."),
