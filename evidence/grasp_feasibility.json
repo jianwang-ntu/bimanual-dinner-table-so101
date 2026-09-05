@@ -1,0 +1,3616 @@
+{
+ "question": "is the cutlery grasp pose collision-free in PLAN, before any dynamics?",
+ "cross_summary": {
+  "left:fork": {
+   "scripted": false,
+   "min_clear_dz_mm": [
+    10.0,
+    8.0,
+    8.0
+   ],
+   "median_min_clear_dz_mm": 8.0,
+   "blocked_seeds": 0
+  },
+  "left:spoon": {
+   "scripted": true,
+   "min_clear_dz_mm": [
+    46.0,
+    40.0,
+    40.0
+   ],
+   "median_min_clear_dz_mm": 40.0,
+   "blocked_seeds": 0
+  },
+  "right:fork": {
+   "scripted": true,
+   "min_clear_dz_mm": [
+    18.0,
+    20.0,
+    4.0
+   ],
+   "median_min_clear_dz_mm": 18.0,
+   "blocked_seeds": 0
+  },
+  "right:spoon": {
+   "scripted": false,
+   "min_clear_dz_mm": [
+    12.0,
+    30.0,
+    54.0
+   ],
+   "median_min_clear_dz_mm": 30.0,
+   "blocked_seeds": 0
+  }
+ },
+ "crosses": [
+  {
+   "seed": 0,
+   "pairs": {
+    "left:fork": {
+     "min_clear_dz_mm": 10.0,
+     "scripted": false,
+     "blockers_at_dz0": [
+      "drawer_side_l",
+      "drawer_floor",
+      "drawer_side_l"
+     ],
+     "ik_err_mm_at_min_clear": 7.11
+    },
+    "left:spoon": {
+     "min_clear_dz_mm": 46.0,
+     "scripted": true,
+     "blockers_at_dz0": [
+      "drawer_front",
+      "drawer_front",
+      "drawer_floor"
+     ],
+     "ik_err_mm_at_min_clear": 3.69
+    },
+    "right:fork": {
+     "min_clear_dz_mm": 18.0,
+     "scripted": true,
+     "blockers_at_dz0": [
+      "drawer_floor",
+      "drawer_floor",
+      "drawer_floor"
+     ],
+     "ik_err_mm_at_min_clear": 2.12
+    },
+    "right:spoon": {
+     "min_clear_dz_mm": 12.0,
+     "scripted": false,
+     "blockers_at_dz0": [
+      "drawer_front",
+      "drawer_front",
+      "drawer_front"
+     ],
+     "ik_err_mm_at_min_clear": 7.12
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "pairs": {
+    "left:fork": {
+     "min_clear_dz_mm": 8.0,
+     "scripted": false,
+     "blockers_at_dz0": [
+      "drawer_side_l",
+      "drawer_floor",
+      "drawer_side_l"
+     ],
+     "ik_err_mm_at_min_clear": 7.29
+    },
+    "left:spoon": {
+     "min_clear_dz_mm": 40.0,
+     "scripted": true,
+     "blockers_at_dz0": [
+      "drawer_front",
+      "drawer_front",
+      "drawer_front"
+     ],
+     "ik_err_mm_at_min_clear": 4.3
+    },
+    "right:fork": {
+     "min_clear_dz_mm": 20.0,
+     "scripted": true,
+     "blockers_at_dz0": [
+      "drawer_floor",
+      "drawer_floor",
+      "drawer_side_r"
+     ],
+     "ik_err_mm_at_min_clear": 2.43
+    },
+    "right:spoon": {
+     "min_clear_dz_mm": 30.0,
+     "scripted": false,
+     "blockers_at_dz0": [
+      "drawer_front",
+      "drawer_front",
+      "drawer_front"
+     ],
+     "ik_err_mm_at_min_clear": 2.83
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "pairs": {
+    "left:fork": {
+     "min_clear_dz_mm": 8.0,
+     "scripted": false,
+     "blockers_at_dz0": [
+      "drawer_side_l",
+      "drawer_floor",
+      "drawer_side_l"
+     ],
+     "ik_err_mm_at_min_clear": 7.29
+    },
+    "left:spoon": {
+     "min_clear_dz_mm": 40.0,
+     "scripted": true,
+     "blockers_at_dz0": [
+      "drawer_front",
+      "drawer_front",
+      "drawer_front"
+     ],
+     "ik_err_mm_at_min_clear": 4.36
+    },
+    "right:fork": {
+     "min_clear_dz_mm": 4.0,
+     "scripted": true,
+     "blockers_at_dz0": [
+      "drawer_floor",
+      "drawer_floor",
+      "drawer_floor"
+     ],
+     "ik_err_mm_at_min_clear": 2.23
+    },
+    "right:spoon": {
+     "min_clear_dz_mm": 54.0,
+     "scripted": false,
+     "blockers_at_dz0": [
+      "drawer_front",
+      "drawer_front",
+      "drawer_floor"
+     ],
+     "ik_err_mm_at_min_clear": 2.36
+    }
+   }
+  }
+ ],
+ "site_sweep": [
+  {
+   "seed": 0,
+   "spoon_world_y_m": 0.0571,
+   "fork_world_y_m": 0.1071,
+   "stations": [
+    {
+     "dy_mm": -40.0,
+     "world_y_m": 0.0171,
+     "clearance_to_fork_mm": 90.0,
+     "left": 34.0,
+     "right": 44.0
+    },
+    {
+     "dy_mm": -35.0,
+     "world_y_m": 0.0221,
+     "clearance_to_fork_mm": 85.0,
+     "left": 36.0,
+     "right": 42.0
+    },
+    {
+     "dy_mm": -30.0,
+     "world_y_m": 0.0271,
+     "clearance_to_fork_mm": 80.0,
+     "left": 38.0,
+     "right": 40.0
+    },
+    {
+     "dy_mm": -25.0,
+     "world_y_m": 0.0321,
+     "clearance_to_fork_mm": 75.0,
+     "left": 38.0,
+     "right": 46.0
+    },
+    {
+     "dy_mm": -20.0,
+     "world_y_m": 0.0371,
+     "clearance_to_fork_mm": 70.0,
+     "left": 38.0,
+     "right": 52.0
+    },
+    {
+     "dy_mm": -15.0,
+     "world_y_m": 0.0421,
+     "clearance_to_fork_mm": 65.0,
+     "left": 36.0,
+     "right": 58.0
+    },
+    {
+     "dy_mm": -10.0,
+     "world_y_m": 0.0471,
+     "clearance_to_fork_mm": 60.0,
+     "left": 38.0,
+     "right": 24.0
+    },
+    {
+     "dy_mm": -5.0,
+     "world_y_m": 0.0521,
+     "clearance_to_fork_mm": 55.0,
+     "left": 42.0,
+     "right": 14.0
+    },
+    {
+     "dy_mm": 0.0,
+     "world_y_m": 0.0571,
+     "clearance_to_fork_mm": 50.0,
+     "left": 46.0,
+     "right": 12.0
+    },
+    {
+     "dy_mm": 5.0,
+     "world_y_m": 0.0621,
+     "clearance_to_fork_mm": 45.0,
+     "left": 18.0,
+     "right": 18.0
+    },
+    {
+     "dy_mm": 10.0,
+     "world_y_m": 0.0671,
+     "clearance_to_fork_mm": 40.0,
+     "left": 6.0,
+     "right": 26.0
+    },
+    {
+     "dy_mm": 15.0,
+     "world_y_m": 0.0721,
+     "clearance_to_fork_mm": 35.0,
+     "left": 6.0,
+     "right": 34.0
+    },
+    {
+     "dy_mm": 20.0,
+     "world_y_m": 0.0771,
+     "clearance_to_fork_mm": 30.0,
+     "left": 8.0,
+     "right": 40.0
+    },
+    {
+     "dy_mm": 25.0,
+     "world_y_m": 0.0821,
+     "clearance_to_fork_mm": 25.0,
+     "left": 8.0,
+     "right": 38.0
+    },
+    {
+     "dy_mm": 30.0,
+     "world_y_m": 0.0871,
+     "clearance_to_fork_mm": 20.0,
+     "left": 6.0,
+     "right": 6.0
+    },
+    {
+     "dy_mm": 35.0,
+     "world_y_m": 0.0921,
+     "clearance_to_fork_mm": 15.0,
+     "left": 6.0,
+     "right": 6.0
+    },
+    {
+     "dy_mm": 40.0,
+     "world_y_m": 0.0971,
+     "clearance_to_fork_mm": 10.0,
+     "left": 6.0,
+     "right": 10.0
+    },
+    {
+     "dy_mm": 45.0,
+     "world_y_m": 0.1021,
+     "clearance_to_fork_mm": 5.0,
+     "left": 8.0,
+     "right": 14.0
+    },
+    {
+     "dy_mm": 50.0,
+     "world_y_m": 0.1071,
+     "clearance_to_fork_mm": 0.0,
+     "left": 10.0,
+     "right": 18.0
+    },
+    {
+     "dy_mm": 55.0,
+     "world_y_m": 0.1121,
+     "clearance_to_fork_mm": 5.0,
+     "left": 10.0,
+     "right": 22.0
+    },
+    {
+     "dy_mm": 60.0,
+     "world_y_m": 0.1171,
+     "clearance_to_fork_mm": 10.0,
+     "left": 12.0,
+     "right": 6.0
+    }
+   ]
+  },
+  {
+   "seed": 1,
+   "spoon_world_y_m": 0.049,
+   "fork_world_y_m": 0.099,
+   "stations": [
+    {
+     "dy_mm": -40.0,
+     "world_y_m": 0.009,
+     "clearance_to_fork_mm": 90.0,
+     "left": 50.0,
+     "right": 48.0
+    },
+    {
+     "dy_mm": -35.0,
+     "world_y_m": 0.014,
+     "clearance_to_fork_mm": 85.0,
+     "left": 32.0,
+     "right": 46.0
+    },
+    {
+     "dy_mm": -30.0,
+     "world_y_m": 0.019,
+     "clearance_to_fork_mm": 80.0,
+     "left": 34.0,
+     "right": 44.0
+    },
+    {
+     "dy_mm": -25.0,
+     "world_y_m": 0.024,
+     "clearance_to_fork_mm": 75.0,
+     "left": 36.0,
+     "right": 42.0
+    },
+    {
+     "dy_mm": -20.0,
+     "world_y_m": 0.029,
+     "clearance_to_fork_mm": 70.0,
+     "left": 38.0,
+     "right": 40.0
+    },
+    {
+     "dy_mm": -15.0,
+     "world_y_m": 0.034,
+     "clearance_to_fork_mm": 65.0,
+     "left": 38.0,
+     "right": 40.0
+    },
+    {
+     "dy_mm": -10.0,
+     "world_y_m": 0.039,
+     "clearance_to_fork_mm": 60.0,
+     "left": 36.0,
+     "right": 40.0
+    },
+    {
+     "dy_mm": -5.0,
+     "world_y_m": 0.044,
+     "clearance_to_fork_mm": 55.0,
+     "left": 36.0,
+     "right": 32.0
+    },
+    {
+     "dy_mm": 0.0,
+     "world_y_m": 0.049,
+     "clearance_to_fork_mm": 50.0,
+     "left": 40.0,
+     "right": 30.0
+    },
+    {
+     "dy_mm": 5.0,
+     "world_y_m": 0.054,
+     "clearance_to_fork_mm": 45.0,
+     "left": 44.0,
+     "right": 28.0
+    },
+    {
+     "dy_mm": 10.0,
+     "world_y_m": 0.059,
+     "clearance_to_fork_mm": 40.0,
+     "left": 48.0,
+     "right": 20.0
+    },
+    {
+     "dy_mm": 15.0,
+     "world_y_m": 0.064,
+     "clearance_to_fork_mm": 35.0,
+     "left": 10.0,
+     "right": 10.0
+    },
+    {
+     "dy_mm": 20.0,
+     "world_y_m": 0.069,
+     "clearance_to_fork_mm": 30.0,
+     "left": 6.0,
+     "right": 6.0
+    },
+    {
+     "dy_mm": 25.0,
+     "world_y_m": 0.074,
+     "clearance_to_fork_mm": 25.0,
+     "left": 8.0,
+     "right": 6.0
+    },
+    {
+     "dy_mm": 30.0,
+     "world_y_m": 0.079,
+     "clearance_to_fork_mm": 20.0,
+     "left": 8.0,
+     "right": 6.0
+    },
+    {
+     "dy_mm": 35.0,
+     "world_y_m": 0.084,
+     "clearance_to_fork_mm": 15.0,
+     "left": 10.0,
+     "right": 8.0
+    },
+    {
+     "dy_mm": 40.0,
+     "world_y_m": 0.089,
+     "clearance_to_fork_mm": 10.0,
+     "left": 6.0,
+     "right": 12.0
+    },
+    {
+     "dy_mm": 45.0,
+     "world_y_m": 0.094,
+     "clearance_to_fork_mm": 5.0,
+     "left": 6.0,
+     "right": 16.0
+    },
+    {
+     "dy_mm": 50.0,
+     "world_y_m": 0.099,
+     "clearance_to_fork_mm": 0.0,
+     "left": 8.0,
+     "right": 20.0
+    },
+    {
+     "dy_mm": 55.0,
+     "world_y_m": 0.104,
+     "clearance_to_fork_mm": 5.0,
+     "left": 8.0,
+     "right": 24.0
+    },
+    {
+     "dy_mm": 60.0,
+     "world_y_m": 0.109,
+     "clearance_to_fork_mm": 10.0,
+     "left": 10.0,
+     "right": 26.0
+    }
+   ]
+  },
+  {
+   "seed": 2,
+   "spoon_world_y_m": 0.0486,
+   "fork_world_y_m": 0.0986,
+   "stations": [
+    {
+     "dy_mm": -40.0,
+     "world_y_m": 0.0086,
+     "clearance_to_fork_mm": 90.0,
+     "left": 50.0,
+     "right": 50.0
+    },
+    {
+     "dy_mm": -35.0,
+     "world_y_m": 0.0136,
+     "clearance_to_fork_mm": 85.0,
+     "left": 32.0,
+     "right": 46.0
+    },
+    {
+     "dy_mm": -30.0,
+     "world_y_m": 0.0186,
+     "clearance_to_fork_mm": 80.0,
+     "left": 34.0,
+     "right": 46.0
+    },
+    {
+     "dy_mm": -25.0,
+     "world_y_m": 0.0236,
+     "clearance_to_fork_mm": 75.0,
+     "left": 36.0,
+     "right": 44.0
+    },
+    {
+     "dy_mm": -20.0,
+     "world_y_m": 0.0286,
+     "clearance_to_fork_mm": 70.0,
+     "left": 38.0,
+     "right": 42.0
+    },
+    {
+     "dy_mm": -15.0,
+     "world_y_m": 0.0336,
+     "clearance_to_fork_mm": 65.0,
+     "left": 38.0,
+     "right": 38.0
+    },
+    {
+     "dy_mm": -10.0,
+     "world_y_m": 0.0386,
+     "clearance_to_fork_mm": 60.0,
+     "left": 38.0,
+     "right": 44.0
+    },
+    {
+     "dy_mm": -5.0,
+     "world_y_m": 0.0436,
+     "clearance_to_fork_mm": 55.0,
+     "left": 36.0,
+     "right": 48.0
+    },
+    {
+     "dy_mm": 0.0,
+     "world_y_m": 0.0486,
+     "clearance_to_fork_mm": 50.0,
+     "left": 40.0,
+     "right": 54.0
+    },
+    {
+     "dy_mm": 5.0,
+     "world_y_m": 0.0536,
+     "clearance_to_fork_mm": 45.0,
+     "left": 44.0,
+     "right": 56.0
+    },
+    {
+     "dy_mm": 10.0,
+     "world_y_m": 0.0586,
+     "clearance_to_fork_mm": 40.0,
+     "left": 48.0,
+     "right": 60.0
+    },
+    {
+     "dy_mm": 15.0,
+     "world_y_m": 0.0636,
+     "clearance_to_fork_mm": 35.0,
+     "left": 12.0,
+     "right": null
+    },
+    {
+     "dy_mm": 20.0,
+     "world_y_m": 0.0686,
+     "clearance_to_fork_mm": 30.0,
+     "left": 6.0,
+     "right": 60.0
+    },
+    {
+     "dy_mm": 25.0,
+     "world_y_m": 0.0736,
+     "clearance_to_fork_mm": 25.0,
+     "left": 8.0,
+     "right": 34.0
+    },
+    {
+     "dy_mm": 30.0,
+     "world_y_m": 0.0786,
+     "clearance_to_fork_mm": 20.0,
+     "left": 8.0,
+     "right": 36.0
+    },
+    {
+     "dy_mm": 35.0,
+     "world_y_m": 0.0836,
+     "clearance_to_fork_mm": 15.0,
+     "left": 8.0,
+     "right": 42.0
+    },
+    {
+     "dy_mm": 40.0,
+     "world_y_m": 0.0886,
+     "clearance_to_fork_mm": 10.0,
+     "left": 6.0,
+     "right": 6.0
+    },
+    {
+     "dy_mm": 45.0,
+     "world_y_m": 0.0936,
+     "clearance_to_fork_mm": 5.0,
+     "left": 6.0,
+     "right": 6.0
+    },
+    {
+     "dy_mm": 50.0,
+     "world_y_m": 0.0986,
+     "clearance_to_fork_mm": 0.0,
+     "left": 8.0,
+     "right": 4.0
+    },
+    {
+     "dy_mm": 55.0,
+     "world_y_m": 0.1036,
+     "clearance_to_fork_mm": 5.0,
+     "left": 8.0,
+     "right": 8.0
+    },
+    {
+     "dy_mm": 60.0,
+     "world_y_m": 0.1086,
+     "clearance_to_fork_mm": 10.0,
+     "left": 10.0,
+     "right": 12.0
+    }
+   ]
+  }
+ ],
+ "method": "solve the grasp pose at dz above the object, teleport the arm onto it, run MuJoCo's collision pass; report the lowest dz with no woodwork penetration >= 0.5 mm",
+ "penetration_threshold_mm": 0.5,
+ "summary": {
+  "fork_descend": {
+   "seeds": 3,
+   "min_clear_dz_mm": [
+    6.0,
+    6.0,
+    6.0
+   ],
+   "blocked_seeds": 0,
+   "median_min_clear_dz_mm": 6.0,
+   "handle_thickness_mm": 5.0,
+   "jaw_below_handle_top_mm_at_min_clear": [
+    3.9,
+    3.3,
+    3.6
+   ],
+   "grips_at_min_clear": true
+  },
+  "spoon_descend": {
+   "seeds": 3,
+   "min_clear_dz_mm": [
+    58.0,
+    22.0,
+    44.0
+   ],
+   "blocked_seeds": 0,
+   "median_min_clear_dz_mm": 44.0,
+   "handle_thickness_mm": 5.0,
+   "jaw_below_handle_top_mm_at_min_clear": [
+    -48.4,
+    -10.4,
+    -33.8
+   ],
+   "grips_at_min_clear": false
+  }
+ },
+ "runs": [
+  {
+   "seed": 0,
+   "waypoints": {
+    "fork_descend": {
+     "arm": "right",
+     "asked_z_m": 0.7865,
+     "min_clear_dz_mm": 6.0,
+     "handle_thickness_mm": 5.0,
+     "jaw_below_handle_top_mm_at_min_clear": 3.9,
+     "blocked_all_the_way": false,
+     "levels": [
+      {
+       "dz_mm": 0.0,
+       "ik_err_mm": 4.8,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 9.9,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 6.29
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 6.17
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 3.99
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 7.97
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 5.81
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 2.0,
+       "ik_err_mm": 4.95,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 8.0,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 4.39
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 4.27
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 2.1
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 9.39
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 9.27
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 4.0,
+       "ik_err_mm": 5.04,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 6.0,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 2.36
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 2.23
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 7.36
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 7.23
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 6.0,
+       "ik_err_mm": 5.13,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 3.9,
+       "woodwork_hits": [],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 5.32
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 5.18
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 8.0,
+       "ik_err_mm": 5.23,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 1.9,
+       "woodwork_hits": [],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 3.28
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 3.14
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 10.0,
+       "ik_err_mm": 5.32,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -0.2,
+       "woodwork_hits": [],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 1.24
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 1.09
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 12.0,
+       "ik_err_mm": 5.42,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -2.3,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 14.0,
+       "ik_err_mm": 5.52,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -4.3,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 16.0,
+       "ik_err_mm": 5.62,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -6.4,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 18.0,
+       "ik_err_mm": 5.73,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -8.4,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 20.0,
+       "ik_err_mm": 5.83,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -10.5,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 22.0,
+       "ik_err_mm": 6.01,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -12.5,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 24.0,
+       "ik_err_mm": 6.11,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -14.5,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 26.0,
+       "ik_err_mm": 6.22,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -16.6,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 28.0,
+       "ik_err_mm": 6.34,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -18.7,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 30.0,
+       "ik_err_mm": 6.45,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -20.8,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 32.0,
+       "ik_err_mm": 6.57,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -22.9,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 34.0,
+       "ik_err_mm": 6.69,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -25.0,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 36.0,
+       "ik_err_mm": 6.81,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -27.1,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 38.0,
+       "ik_err_mm": 7.01,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -29.1,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 40.0,
+       "ik_err_mm": 7.14,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -31.2,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 42.0,
+       "ik_err_mm": 6.78,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -28.9,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 44.0,
+       "ik_err_mm": 6.24,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -31.3,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 46.0,
+       "ik_err_mm": 5.7,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -33.8,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 48.0,
+       "ik_err_mm": 5.15,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -36.3,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 50.0,
+       "ik_err_mm": 4.59,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -38.9,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 52.0,
+       "ik_err_mm": 3.96,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -41.7,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 54.0,
+       "ik_err_mm": 3.43,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -44.5,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 56.0,
+       "ik_err_mm": 2.93,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -47.3,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 58.0,
+       "ik_err_mm": 2.48,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -50.1,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 60.0,
+       "ik_err_mm": 2.12,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -53.1,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      }
+     ]
+    },
+    "spoon_descend": {
+     "arm": "left",
+     "asked_z_m": 0.7865,
+     "min_clear_dz_mm": 58.0,
+     "handle_thickness_mm": 5.0,
+     "jaw_below_handle_top_mm_at_min_clear": -48.4,
+     "blocked_all_the_way": false,
+     "levels": [
+      {
+       "dz_mm": 0.0,
+       "ik_err_mm": 2.64,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 5.9,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 22.32
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.98
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 9.23
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 6.06
+        },
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 6.04
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 2.0,
+       "ik_err_mm": 2.69,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 3.8,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 21.15
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 14.0
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 9.94
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 3.98
+        },
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 3.97
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 4.0,
+       "ik_err_mm": 2.74,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 1.7,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 19.78
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 14.02
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 10.58
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 1.9
+        },
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 1.9
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 6.0,
+       "ik_err_mm": 2.73,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 2.1,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 17.08
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 16.73
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 12.67
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 2.06
+        },
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 1.97
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 8.0,
+       "ik_err_mm": 2.46,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -0.1,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 17.03
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 15.63
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.38
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 10.0,
+       "ik_err_mm": 2.19,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -2.2,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 16.95
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 14.55
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.98
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 12.0,
+       "ik_err_mm": 1.93,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -4.4,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 16.83
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 14.49
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.49
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 14.0,
+       "ik_err_mm": 1.7,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -6.5,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 16.63
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 14.84
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 12.53
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 16.0,
+       "ik_err_mm": 1.48,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -8.7,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 15.94
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 11.52
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 18.0,
+       "ik_err_mm": 1.3,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -10.8,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 14.96
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 10.55
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 20.0,
+       "ik_err_mm": 1.19,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -13.0,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.94
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 9.62
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 22.0,
+       "ik_err_mm": 1.16,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -15.2,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 12.88
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 8.73
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 24.0,
+       "ik_err_mm": 1.24,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -17.4,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 11.78
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 7.89
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 26.0,
+       "ik_err_mm": 1.4,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -19.6,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 10.64
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 7.1
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 28.0,
+       "ik_err_mm": 1.63,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -21.8,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 9.45
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 6.36
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 30.0,
+       "ik_err_mm": 1.95,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -24.0,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 8.23
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 5.77
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 32.0,
+       "ik_err_mm": 2.25,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -26.2,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 6.95
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 4.72
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 2.82
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 34.0,
+       "ik_err_mm": 2.57,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -28.4,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 5.62
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 3.62
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 1.25
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 36.0,
+       "ik_err_mm": 2.39,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -27.8,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 5.48
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 4.18
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 2.36
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 38.0,
+       "ik_err_mm": 2.29,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -29.7,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 5.77
+        },
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 3.2
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 3.06
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 40.0,
+       "ik_err_mm": 2.2,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -31.6,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 6.05
+        },
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 4.31
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 1.93
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 42.0,
+       "ik_err_mm": 2.12,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -33.4,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 6.32
+        },
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 5.46
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 0.78
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 44.0,
+       "ik_err_mm": 2.22,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -35.2,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 5.44
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 46.0,
+       "ik_err_mm": 2.15,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -37.1,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 4.47
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 48.0,
+       "ik_err_mm": 2.1,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -39.0,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 3.57
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 50.0,
+       "ik_err_mm": 2.07,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -40.9,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 2.74
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 52.0,
+       "ik_err_mm": 2.06,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -42.8,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 1.99
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 54.0,
+       "ik_err_mm": 2.07,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -44.7,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 1.32
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 56.0,
+       "ik_err_mm": 2.24,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -46.5,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 0.67
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 58.0,
+       "ik_err_mm": 2.27,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -48.4,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 60.0,
+       "ik_err_mm": 2.31,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -50.3,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      }
+     ]
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "waypoints": {
+    "fork_descend": {
+     "arm": "right",
+     "asked_z_m": 0.7865,
+     "min_clear_dz_mm": 6.0,
+     "handle_thickness_mm": 5.0,
+     "jaw_below_handle_top_mm_at_min_clear": 3.3,
+     "blocked_all_the_way": false,
+     "levels": [
+      {
+       "dz_mm": 0.0,
+       "ik_err_mm": 1.85,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 9.0,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 5.61
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 3.84
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 2.58
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 4.05
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 2.86
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 2.0,
+       "ik_err_mm": 1.82,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 7.1,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 3.67
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 2.01
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 1.87
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 5.35
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 3.63
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 4.0,
+       "ik_err_mm": 1.79,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 5.1,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 1.73
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 5.03
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 4.94
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 6.0,
+       "ik_err_mm": 1.94,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 3.3,
+       "woodwork_hits": [],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 4.93
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 3.08
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 8.0,
+       "ik_err_mm": 1.92,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 1.3,
+       "woodwork_hits": [],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 2.98
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 1.24
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 10.0,
+       "ik_err_mm": 1.91,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -0.6,
+       "woodwork_hits": [],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 1.04
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 12.0,
+       "ik_err_mm": 1.9,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -2.6,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 14.0,
+       "ik_err_mm": 1.9,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -4.6,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 16.0,
+       "ik_err_mm": 1.92,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -6.5,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 18.0,
+       "ik_err_mm": 1.94,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -8.5,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 20.0,
+       "ik_err_mm": 1.97,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -10.5,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 22.0,
+       "ik_err_mm": 2.01,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -12.4,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 24.0,
+       "ik_err_mm": 2.05,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -14.4,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 26.0,
+       "ik_err_mm": 2.25,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -16.2,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 28.0,
+       "ik_err_mm": 2.3,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -18.2,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 30.0,
+       "ik_err_mm": 2.36,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -20.2,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 32.0,
+       "ik_err_mm": 2.43,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -22.2,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 34.0,
+       "ik_err_mm": 2.51,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -24.1,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 36.0,
+       "ik_err_mm": 2.6,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -26.1,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 38.0,
+       "ik_err_mm": 2.69,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -28.1,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 40.0,
+       "ik_err_mm": 2.92,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -30.0,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 42.0,
+       "ik_err_mm": 3.01,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -31.9,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 44.0,
+       "ik_err_mm": 3.11,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -33.9,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 46.0,
+       "ik_err_mm": 3.22,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -35.9,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 48.0,
+       "ik_err_mm": 3.01,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -38.9,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 50.0,
+       "ik_err_mm": 1.91,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -42.7,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 52.0,
+       "ik_err_mm": 1.64,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -45.6,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 54.0,
+       "ik_err_mm": 1.83,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -48.3,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 56.0,
+       "ik_err_mm": 2.78,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -51.1,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 58.0,
+       "ik_err_mm": 4.0,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -54.0,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 60.0,
+       "ik_err_mm": 1.72,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -51.4,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      }
+     ]
+    },
+    "spoon_descend": {
+     "arm": "left",
+     "asked_z_m": 0.7865,
+     "min_clear_dz_mm": 22.0,
+     "handle_thickness_mm": 5.0,
+     "jaw_below_handle_top_mm_at_min_clear": -10.4,
+     "blocked_all_the_way": false,
+     "levels": [
+      {
+       "dz_mm": 0.0,
+       "ik_err_mm": 2.97,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 10.0,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 26.43
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 16.49
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 15.33
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 3.7
+        },
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 2.89
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 2.0,
+       "ik_err_mm": 3.61,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 8.2,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 26.29
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 15.67
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 14.54
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 5.63
+        },
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 4.67
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 4.0,
+       "ik_err_mm": 4.29,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 6.2,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 25.62
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 14.51
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.43
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 6.82
+        },
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 4.97
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 6.0,
+       "ik_err_mm": 4.66,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 4.4,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 24.27
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 23.03
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 19.04
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 6.06
+        },
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 2.93
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 8.0,
+       "ik_err_mm": 4.75,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 2.4,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 22.56
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 21.46
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 17.06
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 4.06
+        },
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 1.55
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 10.0,
+       "ik_err_mm": 4.85,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 0.4,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 20.85
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 19.9
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 15.08
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 2.07
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 12.0,
+       "ik_err_mm": 4.95,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -1.7,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 19.15
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 18.34
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.09
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 14.0,
+       "ik_err_mm": 5.06,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -3.7,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 17.46
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 16.78
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 12.21
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 16.0,
+       "ik_err_mm": 5.16,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -5.7,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 15.77
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 15.24
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 12.06
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 18.0,
+       "ik_err_mm": 7.33,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -4.9,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 8.57
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 3.54
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 2.75
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 20.0,
+       "ik_err_mm": 6.42,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -7.5,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 3.24
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 1.14
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 22.0,
+       "ik_err_mm": 5.49,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -10.4,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 24.0,
+       "ik_err_mm": 4.58,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -13.4,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 26.0,
+       "ik_err_mm": 3.65,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -16.7,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 28.0,
+       "ik_err_mm": 2.86,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -20.1,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 30.0,
+       "ik_err_mm": 2.29,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -23.6,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 32.0,
+       "ik_err_mm": 2.13,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -26.4,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 34.0,
+       "ik_err_mm": 2.5,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -29.0,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 36.0,
+       "ik_err_mm": 3.24,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -31.7,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 38.0,
+       "ik_err_mm": 2.26,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -30.6,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 9.48
+        },
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 7.18
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 2.81
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 40.0,
+       "ik_err_mm": 1.57,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -31.5,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 5.52
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 2.28
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 42.0,
+       "ik_err_mm": 1.69,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -32.9,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 6.06
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 44.0,
+       "ik_err_mm": 2.42,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -34.5,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 2.8
+        },
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 1.3
+        },
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 0.83
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 46.0,
+       "ik_err_mm": 2.61,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -36.4,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 48.0,
+       "ik_err_mm": 3.68,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -38.2,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 50.0,
+       "ik_err_mm": 4.84,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -40.3,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 52.0,
+       "ik_err_mm": 6.06,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -42.8,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 54.0,
+       "ik_err_mm": 7.08,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -40.6,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 56.0,
+       "ik_err_mm": 6.77,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -42.8,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 58.0,
+       "ik_err_mm": 6.45,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -45.0,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 60.0,
+       "ik_err_mm": 6.13,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -47.3,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      }
+     ]
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "waypoints": {
+    "fork_descend": {
+     "arm": "right",
+     "asked_z_m": 0.7865,
+     "min_clear_dz_mm": 6.0,
+     "handle_thickness_mm": 5.0,
+     "jaw_below_handle_top_mm_at_min_clear": 3.6,
+     "blocked_all_the_way": false,
+     "levels": [
+      {
+       "dz_mm": 0.0,
+       "ik_err_mm": 5.47,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 9.8,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 6.18
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 6.04
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 3.96
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 9.11
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 6.05
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 2.0,
+       "ik_err_mm": 5.57,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 7.7,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 4.14
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 3.99
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 3.93
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 9.13
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 8.99
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 4.0,
+       "ik_err_mm": 5.68,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 5.7,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 2.09
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 1.94
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 1.9
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 7.09
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 6.94
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 6.0,
+       "ik_err_mm": 5.78,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 3.6,
+       "woodwork_hits": [],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 5.04
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 4.88
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 8.0,
+       "ik_err_mm": 5.94,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 1.7,
+       "woodwork_hits": [],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 3.11
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 2.95
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 10.0,
+       "ik_err_mm": 6.05,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -0.4,
+       "woodwork_hits": [],
+       "own_object_hits": [
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 1.05
+        },
+        {
+         "geom": "fork_handle",
+         "penetration_mm": 0.88
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 12.0,
+       "ik_err_mm": 6.16,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -2.5,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 14.0,
+       "ik_err_mm": 6.27,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -4.6,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 16.0,
+       "ik_err_mm": 6.38,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -6.7,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 18.0,
+       "ik_err_mm": 6.5,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -8.8,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 20.0,
+       "ik_err_mm": 6.62,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -10.9,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 22.0,
+       "ik_err_mm": 6.74,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -13.0,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 24.0,
+       "ik_err_mm": 6.86,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -15.1,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 26.0,
+       "ik_err_mm": 7.05,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -17.0,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 28.0,
+       "ik_err_mm": 7.02,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -14.9,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 3.78
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 1.13
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 30.0,
+       "ik_err_mm": 6.48,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -17.2,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 3.03
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 1.21
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 32.0,
+       "ik_err_mm": 5.95,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -19.6,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 1.93
+        },
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 1.06
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 34.0,
+       "ik_err_mm": 5.4,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -22.1,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_floor",
+         "penetration_mm": 0.64
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 0.5
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 36.0,
+       "ik_err_mm": 4.85,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -24.7,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 38.0,
+       "ik_err_mm": 4.3,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -27.3,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 40.0,
+       "ik_err_mm": 3.76,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -30.0,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 42.0,
+       "ik_err_mm": 3.16,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -32.9,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 44.0,
+       "ik_err_mm": 2.67,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -35.7,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 46.0,
+       "ik_err_mm": 2.25,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -38.6,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 48.0,
+       "ik_err_mm": 1.94,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -41.5,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 50.0,
+       "ik_err_mm": 1.83,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -44.1,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 52.0,
+       "ik_err_mm": 1.87,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -45.7,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 54.0,
+       "ik_err_mm": 1.95,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -48.2,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 56.0,
+       "ik_err_mm": 2.27,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -50.6,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 58.0,
+       "ik_err_mm": 1.99,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -50.0,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 60.0,
+       "ik_err_mm": 0.98,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -52.8,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      }
+     ]
+    },
+    "spoon_descend": {
+     "arm": "left",
+     "asked_z_m": 0.7865,
+     "min_clear_dz_mm": 44.0,
+     "handle_thickness_mm": 5.0,
+     "jaw_below_handle_top_mm_at_min_clear": -33.8,
+     "blocked_all_the_way": false,
+     "levels": [
+      {
+       "dz_mm": 0.0,
+       "ik_err_mm": 1.36,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 7.3,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 20.44
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 17.18
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 5.86
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 6.13
+        },
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 6.11
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 2.0,
+       "ik_err_mm": 1.08,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 5.1,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 19.67
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 16.01
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 5.64
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 5.65
+        },
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 5.07
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 4.0,
+       "ik_err_mm": 0.93,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 2.9,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 19.07
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 17.67
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 14.89
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 3.58
+        },
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 3.4
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 6.0,
+       "ik_err_mm": 1.01,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": 0.7,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 18.42
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 18.25
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.81
+        }
+       ],
+       "own_object_hits": [
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 1.5
+        },
+        {
+         "geom": "spoon_handle",
+         "penetration_mm": 1.34
+        }
+       ],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 8.0,
+       "ik_err_mm": 1.28,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -1.5,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 18.84
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 18.0
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 12.79
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 10.0,
+       "ik_err_mm": 1.64,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -3.8,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 19.45
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 17.82
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 11.8
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 12.0,
+       "ik_err_mm": 2.18,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -3.2,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.67
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.65
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.42
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 14.0,
+       "ik_err_mm": 2.09,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -5.8,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 14.24
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 14.24
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 14.11
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 16.0,
+       "ik_err_mm": 1.98,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -7.7,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 14.12
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 14.12
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.92
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 18.0,
+       "ik_err_mm": 1.88,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -9.5,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.97
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.93
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.58
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 20.0,
+       "ik_err_mm": 1.81,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -11.4,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.5
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.46
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 13.1
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 22.0,
+       "ik_err_mm": 1.77,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -13.2,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 12.41
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 12.2
+        },
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 9.91
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 24.0,
+       "ik_err_mm": 1.76,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -15.1,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 11.2
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 10.92
+        },
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 9.89
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 26.0,
+       "ik_err_mm": 1.78,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -16.9,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 9.94
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 9.63
+        },
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 9.18
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 28.0,
+       "ik_err_mm": 1.83,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -18.8,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 8.66
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 8.64
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 8.3
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 30.0,
+       "ik_err_mm": 1.92,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -20.6,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 8.3
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 7.29
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 6.95
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 32.0,
+       "ik_err_mm": 2.03,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -22.5,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 8.11
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 5.9
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 5.58
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 34.0,
+       "ik_err_mm": 2.18,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -24.4,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 8.07
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 4.46
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 4.17
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 36.0,
+       "ik_err_mm": 2.34,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -26.3,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 8.19
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 2.96
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 2.74
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 38.0,
+       "ik_err_mm": 2.54,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -28.2,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 8.47
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 1.37
+        },
+        {
+         "geom": "drawer_front",
+         "penetration_mm": 1.28
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 40.0,
+       "ik_err_mm": 2.74,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -30.1,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 5.93
+        },
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 4.53
+        },
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 2.98
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 42.0,
+       "ik_err_mm": 2.96,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -32.0,
+       "woodwork_hits": [
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 2.86
+        },
+        {
+         "geom": "drawer_side_l",
+         "penetration_mm": 1.62
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 44.0,
+       "ik_err_mm": 3.2,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -33.8,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 46.0,
+       "ik_err_mm": 3.45,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -35.8,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 48.0,
+       "ik_err_mm": 3.7,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -37.7,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 50.0,
+       "ik_err_mm": 3.99,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -39.6,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 52.0,
+       "ik_err_mm": 4.26,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -41.6,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 54.0,
+       "ik_err_mm": 4.55,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -43.5,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 56.0,
+       "ik_err_mm": 4.84,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -45.5,
+       "woodwork_hits": [],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 58.0,
+       "ik_err_mm": 5.14,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -47.5,
+       "woodwork_hits": [
+        {
+         "geom": "cab_left",
+         "penetration_mm": 0.68
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      },
+      {
+       "dz_mm": 60.0,
+       "ik_err_mm": 5.47,
+       "handle_thickness_mm": 5.0,
+       "jaw_below_handle_top_mm": -49.6,
+       "woodwork_hits": [
+        {
+         "geom": "cab_left",
+         "penetration_mm": 0.78
+        }
+       ],
+       "own_object_hits": [],
+       "other_hits": []
+      }
+     ]
+    }
+   }
+  }
+ ]
+}

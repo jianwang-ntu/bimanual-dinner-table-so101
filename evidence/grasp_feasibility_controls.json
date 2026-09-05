@@ -1,0 +1,90 @@
+{
+ "all_pass": true,
+ "controls": [
+  {
+   "control": "accept_lowest_z_exact_on_axis_aligned_box",
+   "pass": true,
+   "detail": "drawer_floor bottom 0.773000 m vs 0.773000 m from its own half-size"
+  },
+  {
+   "control": "reject_max_half_size_shortcut_agrees",
+   "pass": true,
+   "detail": "over 64 sampled arm poses the shortcut misplaces a jaw box by up to 17.5 mm, against a smallest measured fork overlap of 3.3 mm -- the shortcut can flip the grip verdict on its own, so the exact form is load-bearing"
+  },
+  {
+   "control": "accept_jaw_geoms_found_both_arms",
+   "pass": true,
+   "detail": "left=16 right=16 jaw geoms"
+  },
+  {
+   "control": "reject_empty_jaw_set_passes_silently",
+   "pass": true,
+   "detail": "an arm with no jaw geoms raises instead of returning an empty set that would make every overlap vacuous"
+  },
+  {
+   "control": "accept_fork_pose_both_clears_and_grips",
+   "pass": true,
+   "detail": "fork clears at 6.0 mm with jaws [3.9, 3.3, 3.6] mm below the top of a 5.0 mm handle"
+  },
+  {
+   "control": "accept_spoon_pose_clears_only_above_the_handle",
+   "pass": true,
+   "detail": "spoon clears only at 44.0 mm, jaws [-48.4, -10.4, -33.8] mm below the handle top -- negative means above it"
+  },
+  {
+   "control": "reject_spoon_verdict_survives_sign_flip",
+   "pass": true,
+   "detail": "flipping the measured signs flips the verdict, so the control reads the numbers rather than a stored boolean"
+  },
+  {
+   "control": "accept_fork_and_spoon_differ",
+   "pass": true,
+   "detail": "the two never-scoring sub-goals fail for different reasons, which is the claim being made"
+  },
+  {
+   "control": "accept_spoon_pose_penetrates_woodwork_at_dz0",
+   "pass": true,
+   "detail": "at dz=0 the solved spoon pose is up to 26.43 mm inside the woodwork (threshold 0.5 mm)"
+  },
+  {
+   "control": "reject_threshold_above_measured_still_blocks",
+   "pass": true,
+   "detail": "the deepest penetration 26.43 mm is a finite measured depth, so a threshold lifted above it would report the pose clear -- the test grades depth, not presence"
+  },
+  {
+   "control": "accept_sliding_spoon_deeper_makes_it_feasible",
+   "pass": true,
+   "detail": "left arm needs 40.0 mm of give-up at the authored position and 6.0 mm 20 mm deeper"
+  },
+  {
+   "control": "accept_depth_baseline_reproduces_shipped_score",
+   "pass": true,
+   "detail": "dy=0 scores 15/50 over 10 seeds, which is the figure every shipped artifact quotes"
+  },
+  {
+   "control": "accept_feasible_pose_still_places_no_spoon",
+   "pass": true,
+   "detail": "spoon_placed is 0 at every depth station: +0mm=0, +10mm=0, +20mm=0, +30mm=0"
+  },
+  {
+   "control": "reject_depth_sweep_had_a_nonzero_station",
+   "pass": true,
+   "detail": "no station is quietly carrying a placement that the verdict line would have hidden"
+  },
+  {
+   "control": "accept_no_standoff_variant_places_cutlery",
+   "pass": true,
+   "detail": "12 variants, 10 cutlery slots each, 0 placed in every one"
+  },
+  {
+   "control": "accept_standoff_baseline_measured_not_quoted",
+   "pass": true,
+   "detail": "the unmodified controller is one of the swept variants, so the comparison is inside one code state"
+  },
+  {
+   "control": "accept_earlier_refuted_scope_reproduced",
+   "pass": true,
+   "detail": "the exact waypoint set measure_cutlery_block.py flipped is re-run here, so the earlier refutation is reproduced rather than argued with"
+  }
+ ]
+}

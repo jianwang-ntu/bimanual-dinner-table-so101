@@ -1,0 +1,5472 @@
+{
+ "question": "does a non-zero grasp standoff lift the cutlery out of the drawer?",
+ "seeds": 5,
+ "pinch_waypoints": [
+  "fork_descend",
+  "spoon_descend",
+  "fork_take",
+  "spoon_take"
+ ],
+ "scopes": {
+  "none": [],
+  "descend": [
+   "fork_descend",
+   "spoon_descend"
+  ],
+  "pinch": [
+   "fork_descend",
+   "spoon_descend",
+   "fork_take",
+   "spoon_take"
+  ],
+  "all": [
+   "fork_above",
+   "fork_descend",
+   "fork_lift",
+   "fork_take_above",
+   "fork_take",
+   "spoon_above",
+   "spoon_descend",
+   "spoon_lift",
+   "spoon_take_above",
+   "spoon_take",
+   "target_fork_over",
+   "target_fork_down",
+   "target_spoon_over",
+   "target_spoon_down"
+  ]
+ },
+ "baseline": {
+  "standoff_m": 0.0,
+  "scope": "none",
+  "cutlery_placed": 0,
+  "max_cutlery_lift_mm": 4.8,
+  "stall_mm_median": 36.4,
+  "subgoals_total": 8
+ },
+ "best": {
+  "standoff_m": 0.0,
+  "scope": "pinch",
+  "cutlery_placed": 0,
+  "max_cutlery_lift_mm": 121.1,
+  "stall_mm_median": 61.3,
+  "subgoals_total": 7
+ },
+ "verdict": "NO PLACEMENT GAIN -- see max_cutlery_lift_mm and stalls",
+ "variants": [
+  {
+   "standoff_m": 0.0,
+   "scope": "none",
+   "seeds": 5,
+   "cutlery_placed": 0,
+   "cutlery_placed_of": 10,
+   "max_cutlery_lift_mm": 4.8,
+   "stall_mm_median": 36.4,
+   "stall_mm_min": 21.1,
+   "subgoals_total": 8,
+   "subgoals_of": 25,
+   "errors": []
+  },
+  {
+   "standoff_m": 0.0,
+   "scope": "descend",
+   "seeds": 5,
+   "cutlery_placed": 0,
+   "cutlery_placed_of": 10,
+   "max_cutlery_lift_mm": 3.6,
+   "stall_mm_median": 26.0,
+   "stall_mm_min": 9.4,
+   "subgoals_total": 7,
+   "subgoals_of": 25,
+   "errors": []
+  },
+  {
+   "standoff_m": 0.0,
+   "scope": "pinch",
+   "seeds": 5,
+   "cutlery_placed": 0,
+   "cutlery_placed_of": 10,
+   "max_cutlery_lift_mm": 121.1,
+   "stall_mm_median": 61.3,
+   "stall_mm_min": 3.0,
+   "subgoals_total": 7,
+   "subgoals_of": 25,
+   "errors": []
+  },
+  {
+   "standoff_m": 0.0,
+   "scope": "all",
+   "seeds": 5,
+   "cutlery_placed": 0,
+   "cutlery_placed_of": 10,
+   "max_cutlery_lift_mm": 2.1,
+   "stall_mm_median": 26.7,
+   "stall_mm_min": 3.8,
+   "subgoals_total": 7,
+   "subgoals_of": 25,
+   "errors": []
+  },
+  {
+   "standoff_m": 0.006,
+   "scope": "none",
+   "seeds": 5,
+   "cutlery_placed": 0,
+   "cutlery_placed_of": 10,
+   "max_cutlery_lift_mm": 22.6,
+   "stall_mm_median": 46.6,
+   "stall_mm_min": 20.6,
+   "subgoals_total": 9,
+   "subgoals_of": 25,
+   "errors": []
+  },
+  {
+   "standoff_m": 0.006,
+   "scope": "descend",
+   "seeds": 5,
+   "cutlery_placed": 0,
+   "cutlery_placed_of": 10,
+   "max_cutlery_lift_mm": 1.3,
+   "stall_mm_median": 37.5,
+   "stall_mm_min": 8.1,
+   "subgoals_total": 10,
+   "subgoals_of": 25,
+   "errors": []
+  },
+  {
+   "standoff_m": 0.006,
+   "scope": "pinch",
+   "seeds": 5,
+   "cutlery_placed": 0,
+   "cutlery_placed_of": 10,
+   "max_cutlery_lift_mm": 1.2,
+   "stall_mm_median": 19.5,
+   "stall_mm_min": -15.4,
+   "subgoals_total": 8,
+   "subgoals_of": 25,
+   "errors": []
+  },
+  {
+   "standoff_m": 0.006,
+   "scope": "all",
+   "seeds": 5,
+   "cutlery_placed": 0,
+   "cutlery_placed_of": 10,
+   "max_cutlery_lift_mm": 5.8,
+   "stall_mm_median": 77.7,
+   "stall_mm_min": 5.6,
+   "subgoals_total": 7,
+   "subgoals_of": 25,
+   "errors": []
+  },
+  {
+   "standoff_m": 0.01,
+   "scope": "none",
+   "seeds": 5,
+   "cutlery_placed": 0,
+   "cutlery_placed_of": 10,
+   "max_cutlery_lift_mm": 7.4,
+   "stall_mm_median": 34.5,
+   "stall_mm_min": 14.7,
+   "subgoals_total": 8,
+   "subgoals_of": 25,
+   "errors": []
+  },
+  {
+   "standoff_m": 0.01,
+   "scope": "descend",
+   "seeds": 5,
+   "cutlery_placed": 0,
+   "cutlery_placed_of": 10,
+   "max_cutlery_lift_mm": 2.6,
+   "stall_mm_median": 20.4,
+   "stall_mm_min": 9.0,
+   "subgoals_total": 8,
+   "subgoals_of": 25,
+   "errors": []
+  },
+  {
+   "standoff_m": 0.01,
+   "scope": "pinch",
+   "seeds": 5,
+   "cutlery_placed": 0,
+   "cutlery_placed_of": 10,
+   "max_cutlery_lift_mm": 2.6,
+   "stall_mm_median": 45.8,
+   "stall_mm_min": 8.6,
+   "subgoals_total": 9,
+   "subgoals_of": 25,
+   "errors": []
+  },
+  {
+   "standoff_m": 0.01,
+   "scope": "all",
+   "seeds": 5,
+   "cutlery_placed": 0,
+   "cutlery_placed_of": 10,
+   "max_cutlery_lift_mm": 5.8,
+   "stall_mm_median": 82.2,
+   "stall_mm_min": 6.3,
+   "subgoals_total": 8,
+   "subgoals_of": 25,
+   "errors": []
+  }
+ ],
+ "runs": [
+  {
+   "seed": 0,
+   "standoff_m": 0.0,
+   "scope": "none",
+   "squared_waypoints": 0,
+   "standoff_waypoints": 0,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 73.3,
+     "final_to_target_mm": 172.0,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 1.3,
+     "planar_move_mm": 72.6,
+     "final_to_target_mm": 130.7,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8104,
+     "stalled_above_target_mm": 23.9,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 377
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8133,
+     "stalled_above_target_mm": 26.8,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 1432
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.838,
+     "stalled_above_target_mm": 50.5,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_head",
+       "steps": 1028
+      },
+      {
+       "geom": "drawer_side_l",
+       "steps": 161
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 1.0111,
+     "stalled_above_target_mm": 223.6,
+     "blocking_contacts": [
+      {
+       "geom": "left_camera_box2",
+       "steps": 856
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 1,
+   "standoff_m": 0.0,
+   "scope": "none",
+   "squared_waypoints": 0,
+   "standoff_waypoints": 0,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.0,
+     "final_to_target_mm": 167.2,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.0,
+     "final_to_target_mm": 126.7,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8076,
+     "stalled_above_target_mm": 21.1,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 953
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.823,
+     "stalled_above_target_mm": 36.5,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_side_l",
+       "steps": 325
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 83
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8395,
+     "stalled_above_target_mm": 52.0,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_side_l",
+       "steps": 562
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 274
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8635,
+     "stalled_above_target_mm": 76.0,
+     "blocking_contacts": [
+      {
+       "geom": "left_fixed_jaw_box6",
+       "steps": 1611
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 674
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 2,
+   "standoff_m": 0.0,
+   "scope": "none",
+   "squared_waypoints": 0,
+   "standoff_waypoints": 0,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 76.2,
+     "final_to_target_mm": 169.6,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 76.2,
+     "final_to_target_mm": 128.8,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8106,
+     "stalled_above_target_mm": 24.1,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 509
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8228,
+     "stalled_above_target_mm": 36.3,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 1098
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8369,
+     "stalled_above_target_mm": 49.4,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_side_l",
+       "steps": 635
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 331
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8605,
+     "stalled_above_target_mm": 73.0,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 1033
+      },
+      {
+       "geom": "drawer_handle",
+       "steps": 83
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 3,
+   "standoff_m": 0.0,
+   "scope": "none",
+   "squared_waypoints": 0,
+   "standoff_waypoints": 0,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.5,
+     "final_to_target_mm": 166.7,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 4.8,
+     "planar_move_mm": 85.6,
+     "final_to_target_mm": 111.0,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8115,
+     "stalled_above_target_mm": 25.0,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 1007
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.843,
+     "stalled_above_target_mm": 56.5,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 774
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.82,
+     "stalled_above_target_mm": 32.5,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_head",
+       "steps": 1137
+      },
+      {
+       "geom": "drawer_floor",
+       "steps": 310
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9448,
+     "stalled_above_target_mm": 157.3,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 929
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 4,
+   "standoff_m": 0.0,
+   "scope": "none",
+   "squared_waypoints": 0,
+   "standoff_waypoints": 0,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 81.1,
+     "final_to_target_mm": 165.3,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 81.6,
+     "final_to_target_mm": 125.2,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8076,
+     "stalled_above_target_mm": 21.1,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 953
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8219,
+     "stalled_above_target_mm": 35.4,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 415
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8186,
+     "stalled_above_target_mm": 31.1,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 402
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 389
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8642,
+     "stalled_above_target_mm": 76.7,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 1238
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 0,
+   "standoff_m": 0.0,
+   "scope": "descend",
+   "squared_waypoints": 2,
+   "standoff_waypoints": 0,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 3.6,
+     "planar_move_mm": 58.9,
+     "final_to_target_mm": 184.9,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.3,
+     "planar_move_mm": 59.2,
+     "final_to_target_mm": 142.1,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7985,
+     "stalled_above_target_mm": 12.0,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 976
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7959,
+     "stalled_above_target_mm": 9.4,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 847
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8677,
+     "stalled_above_target_mm": 80.2,
+     "blocking_contacts": [
+      {
+       "geom": "right_fixed_jaw_box1",
+       "steps": 2022
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 674
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8092,
+     "stalled_above_target_mm": 21.7,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 1015
+      },
+      {
+       "geom": "cab_top",
+       "steps": 181
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 1,
+   "standoff_m": 0.0,
+   "scope": "descend",
+   "squared_waypoints": 2,
+   "standoff_waypoints": 0,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.5,
+     "final_to_target_mm": 166.8,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.5,
+     "final_to_target_mm": 126.4,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7996,
+     "stalled_above_target_mm": 13.1,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_back",
+       "steps": 373
+      },
+      {
+       "geom": "fork_handle",
+       "steps": 38
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8385,
+     "stalled_above_target_mm": 52.0,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 1596
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8707,
+     "stalled_above_target_mm": 83.2,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 1718
+      },
+      {
+       "geom": "right_camera_box1",
+       "steps": 698
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8824,
+     "stalled_above_target_mm": 94.9,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 462
+      },
+      {
+       "geom": "left_fixed_jaw_box1",
+       "steps": 255
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 2,
+   "standoff_m": 0.0,
+   "scope": "descend",
+   "squared_waypoints": 2,
+   "standoff_waypoints": 0,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 81.7,
+     "final_to_target_mm": 164.9,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.8,
+     "planar_move_mm": 81.0,
+     "final_to_target_mm": 125.2,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7999,
+     "stalled_above_target_mm": 13.4,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_back",
+       "steps": 398
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8077,
+     "stalled_above_target_mm": 21.2,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 900
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.871,
+     "stalled_above_target_mm": 83.5,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 1337
+      },
+      {
+       "geom": "right_camera_box1",
+       "steps": 851
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8026,
+     "stalled_above_target_mm": 15.1,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_floor",
+       "steps": 531
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 266
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 3,
+   "standoff_m": 0.0,
+   "scope": "descend",
+   "squared_waypoints": 2,
+   "standoff_waypoints": 0,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 81.7,
+     "final_to_target_mm": 164.9,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 81.6,
+     "final_to_target_mm": 124.8,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7999,
+     "stalled_above_target_mm": 13.4,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_back",
+       "steps": 400
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.807,
+     "stalled_above_target_mm": 20.5,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 829
+      },
+      {
+       "geom": "geom126",
+       "steps": 517
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8577,
+     "stalled_above_target_mm": 70.2,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 1485
+      },
+      {
+       "geom": "right_camera_box1",
+       "steps": 812
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9626,
+     "stalled_above_target_mm": 175.1,
+     "blocking_contacts": [
+      {
+       "geom": "left_fixed_jaw_box1",
+       "steps": 663
+      },
+      {
+       "geom": "geom67",
+       "steps": 561
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 4,
+   "standoff_m": 0.0,
+   "scope": "descend",
+   "squared_waypoints": 2,
+   "standoff_waypoints": 0,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.6,
+     "final_to_target_mm": 165.8,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.7,
+     "final_to_target_mm": 125.5,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8001,
+     "stalled_above_target_mm": 13.6,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_back",
+       "steps": 438
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8168,
+     "stalled_above_target_mm": 30.3,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 962
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8577,
+     "stalled_above_target_mm": 70.2,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 1591
+      },
+      {
+       "geom": "right_camera_box1",
+       "steps": 1217
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9788,
+     "stalled_above_target_mm": 191.3,
+     "blocking_contacts": [
+      {
+       "geom": "left_fixed_jaw_box1",
+       "steps": 1218
+      },
+      {
+       "geom": "left_moving_jaw_box1",
+       "steps": 14
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 0,
+   "standoff_m": 0.0,
+   "scope": "pinch",
+   "squared_waypoints": 4,
+   "standoff_waypoints": 0,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 3.8,
+     "planar_move_mm": 99.2,
+     "final_to_target_mm": 148.9,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 69.6,
+     "final_to_target_mm": 133.9,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7985,
+     "stalled_above_target_mm": 12.0,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 976
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8392,
+     "stalled_above_target_mm": 52.7,
+     "blocking_contacts": [
+      {
+       "geom": "cab_left",
+       "steps": 775
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8574,
+     "stalled_above_target_mm": 69.9,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 672
+      },
+      {
+       "geom": "geom115",
+       "steps": 558
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9642,
+     "stalled_above_target_mm": 176.7,
+     "blocking_contacts": [
+      {
+       "geom": "left_fixed_jaw_box1",
+       "steps": 508
+      },
+      {
+       "geom": "cab_top",
+       "steps": 333
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 1,
+   "standoff_m": 0.0,
+   "scope": "pinch",
+   "squared_waypoints": 4,
+   "standoff_waypoints": 0,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.8,
+     "final_to_target_mm": 166.5,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.8,
+     "final_to_target_mm": 126.5,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7996,
+     "stalled_above_target_mm": 13.1,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_back",
+       "steps": 373
+      },
+      {
+       "geom": "fork_handle",
+       "steps": 38
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7962,
+     "stalled_above_target_mm": 9.7,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 992
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8716,
+     "stalled_above_target_mm": 84.1,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 875
+      },
+      {
+       "geom": "right_camera_box1",
+       "steps": 803
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.951,
+     "stalled_above_target_mm": 163.5,
+     "blocking_contacts": [
+      {
+       "geom": "geom56",
+       "steps": 451
+      },
+      {
+       "geom": "left_fixed_jaw_box1",
+       "steps": 317
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 2,
+   "standoff_m": 0.0,
+   "scope": "pinch",
+   "squared_waypoints": 4,
+   "standoff_waypoints": 0,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.9,
+     "planar_move_mm": 80.1,
+     "final_to_target_mm": 166.2,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 121.1,
+     "planar_move_mm": 231.8,
+     "final_to_target_mm": 108.5,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7999,
+     "stalled_above_target_mm": 13.4,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_back",
+       "steps": 398
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7895,
+     "stalled_above_target_mm": 3.0,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_floor",
+       "steps": 459
+      },
+      {
+       "geom": "spoon_handle",
+       "steps": 279
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8735,
+     "stalled_above_target_mm": 86.0,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 780
+      },
+      {
+       "geom": "right_camera_box1",
+       "steps": 717
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7565,
+     "lowest_tip_z_m": 0.8973,
+     "stalled_above_target_mm": 140.8,
+     "blocking_contacts": [
+      {
+       "geom": "left_fixed_jaw_box6",
+       "steps": 1168
+      },
+      {
+       "geom": "geom56",
+       "steps": 443
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 3,
+   "standoff_m": 0.0,
+   "scope": "pinch",
+   "squared_waypoints": 4,
+   "standoff_waypoints": 0,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 83.5,
+     "final_to_target_mm": 163.3,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 81.7,
+     "final_to_target_mm": 124.6,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7999,
+     "stalled_above_target_mm": 13.4,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_back",
+       "steps": 400
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7943,
+     "stalled_above_target_mm": 7.9,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_floor",
+       "steps": 524
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 364
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8711,
+     "stalled_above_target_mm": 83.6,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box1",
+       "steps": 729
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 705
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9678,
+     "stalled_above_target_mm": 180.3,
+     "blocking_contacts": [
+      {
+       "geom": "left_fixed_jaw_box1",
+       "steps": 1516
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 4,
+   "standoff_m": 0.0,
+   "scope": "pinch",
+   "squared_waypoints": 4,
+   "standoff_waypoints": 0,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.3,
+     "final_to_target_mm": 166.1,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.5,
+     "planar_move_mm": 81.4,
+     "final_to_target_mm": 125.7,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8001,
+     "stalled_above_target_mm": 13.6,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_back",
+       "steps": 438
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7912,
+     "stalled_above_target_mm": 4.7,
+     "blocking_contacts": [
+      {
+       "geom": "geom126",
+       "steps": 850
+      },
+      {
+       "geom": "drawer_floor",
+       "steps": 510
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8712,
+     "stalled_above_target_mm": 83.7,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 975
+      },
+      {
+       "geom": "right_camera_box1",
+       "steps": 757
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9557,
+     "stalled_above_target_mm": 168.2,
+     "blocking_contacts": [
+      {
+       "geom": "left_camera_box2",
+       "steps": 1784
+      },
+      {
+       "geom": "left_fixed_jaw_box1",
+       "steps": 674
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 0,
+   "standoff_m": 0.0,
+   "scope": "all",
+   "squared_waypoints": 14,
+   "standoff_waypoints": 0,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": true
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.1,
+     "planar_move_mm": 52.8,
+     "final_to_target_mm": 189.9,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 71.1,
+     "final_to_target_mm": 132.7,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7919,
+     "stalled_above_target_mm": 5.4,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_floor",
+       "steps": 755
+      },
+      {
+       "geom": "drawer_back",
+       "steps": 54
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8533,
+     "stalled_above_target_mm": 66.8,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 774
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9564,
+     "stalled_above_target_mm": 168.9,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 1321
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 1.0119,
+     "stalled_above_target_mm": 224.4,
+     "blocking_contacts": [
+      {
+       "geom": "geom67",
+       "steps": 2066
+      },
+      {
+       "geom": "left_fixed_jaw_box1",
+       "steps": 674
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 1,
+   "standoff_m": 0.0,
+   "scope": "all",
+   "squared_waypoints": 14,
+   "standoff_waypoints": 0,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 75.9,
+     "final_to_target_mm": 169.9,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 74.8,
+     "final_to_target_mm": 129.9,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8112,
+     "stalled_above_target_mm": 24.7,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_back",
+       "steps": 694
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7903,
+     "stalled_above_target_mm": 3.8,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_floor",
+       "steps": 846
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 323
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 1.0229,
+     "stalled_above_target_mm": 235.4,
+     "blocking_contacts": [
+      {
+       "geom": "right_fixed_jaw_box1",
+       "steps": 1643
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8156,
+     "stalled_above_target_mm": 28.1,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 548
+      },
+      {
+       "geom": "left_camera_box2",
+       "steps": 387
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 2,
+   "standoff_m": 0.0,
+   "scope": "all",
+   "squared_waypoints": 14,
+   "standoff_waypoints": 0,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 73.8,
+     "final_to_target_mm": 171.8,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 72.6,
+     "final_to_target_mm": 131.5,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8118,
+     "stalled_above_target_mm": 25.3,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_back",
+       "steps": 396
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7995,
+     "stalled_above_target_mm": 13.0,
+     "blocking_contacts": [
+      {
+       "geom": "geom125",
+       "steps": 2374
+      },
+      {
+       "geom": "right_moving_jaw_box1",
+       "steps": 703
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 1.0242,
+     "stalled_above_target_mm": 236.7,
+     "blocking_contacts": [
+      {
+       "geom": "geom115",
+       "steps": 1348
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 946
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 1.0308,
+     "stalled_above_target_mm": 243.3,
+     "blocking_contacts": [
+      {
+       "geom": "left_fixed_jaw_box1",
+       "steps": 1348
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 3,
+   "standoff_m": 0.0,
+   "scope": "all",
+   "squared_waypoints": 14,
+   "standoff_waypoints": 0,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.9,
+     "final_to_target_mm": 165.6,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 82.1,
+     "final_to_target_mm": 124.5,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8118,
+     "stalled_above_target_mm": 25.3,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_back",
+       "steps": 396
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7906,
+     "stalled_above_target_mm": 4.1,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_floor",
+       "steps": 620
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 333
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 1.0268,
+     "stalled_above_target_mm": 239.3,
+     "blocking_contacts": [
+      {
+       "geom": "right_fixed_jaw_box1",
+       "steps": 1492
+      },
+      {
+       "geom": "geom104",
+       "steps": 674
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.7975,
+     "stalled_above_target_mm": 10.0,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 1025
+      },
+      {
+       "geom": "drawer_side_r",
+       "steps": 247
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 4,
+   "standoff_m": 0.0,
+   "scope": "all",
+   "squared_waypoints": 14,
+   "standoff_waypoints": 0,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.1,
+     "planar_move_mm": 111.0,
+     "final_to_target_mm": 140.4,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 2.1,
+     "planar_move_mm": 79.8,
+     "final_to_target_mm": 127.1,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8118,
+     "stalled_above_target_mm": 25.3,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_back",
+       "steps": 396
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8817,
+     "stalled_above_target_mm": 95.2,
+     "blocking_contacts": [
+      {
+       "geom": "geom104",
+       "steps": 992
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 990
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 1.0189,
+     "stalled_above_target_mm": 231.4,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 1034
+      },
+      {
+       "geom": "right_fixed_jaw_box1",
+       "steps": 280
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8033,
+     "stalled_above_target_mm": 15.9,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_floor",
+       "steps": 668
+      },
+      {
+       "geom": "spoon_handle",
+       "steps": 320
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 0,
+   "standoff_m": 0.006,
+   "scope": "none",
+   "squared_waypoints": 0,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": true
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 70.4,
+     "final_to_target_mm": 174.4,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 7.8,
+     "planar_move_mm": 72.3,
+     "final_to_target_mm": 127.8,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8098,
+     "stalled_above_target_mm": 23.3,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 702
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.837,
+     "stalled_above_target_mm": 50.5,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 870
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8325,
+     "stalled_above_target_mm": 45.0,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_head",
+       "steps": 2298
+      },
+      {
+       "geom": "spoon_handle",
+       "steps": 572
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8409,
+     "stalled_above_target_mm": 53.4,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 865
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 1,
+   "standoff_m": 0.006,
+   "scope": "none",
+   "squared_waypoints": 0,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.3,
+     "final_to_target_mm": 165.8,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 22.6,
+     "planar_move_mm": 89.2,
+     "final_to_target_mm": 118.8,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8071,
+     "stalled_above_target_mm": 20.6,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 1016
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8094,
+     "stalled_above_target_mm": 22.9,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 637
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8405,
+     "stalled_above_target_mm": 53.0,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_head",
+       "steps": 1692
+      },
+      {
+       "geom": "drawer_side_l",
+       "steps": 196
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9644,
+     "stalled_above_target_mm": 176.9,
+     "blocking_contacts": [
+      {
+       "geom": "left_camera_box2",
+       "steps": 823
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 2,
+   "standoff_m": 0.006,
+   "scope": "none",
+   "squared_waypoints": 0,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.1,
+     "planar_move_mm": 64.6,
+     "final_to_target_mm": 179.4,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 69.5,
+     "final_to_target_mm": 134.0,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8112,
+     "stalled_above_target_mm": 24.7,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 743
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8086,
+     "stalled_above_target_mm": 22.1,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_side_l",
+       "steps": 476
+      },
+      {
+       "geom": "drawer_floor",
+       "steps": 174
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8333,
+     "stalled_above_target_mm": 45.8,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 506
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.837,
+     "stalled_above_target_mm": 49.5,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 813
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 3,
+   "standoff_m": 0.006,
+   "scope": "none",
+   "squared_waypoints": 0,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 75.2,
+     "final_to_target_mm": 170.0,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 6.8,
+     "planar_move_mm": 73.7,
+     "final_to_target_mm": 131.7,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8529,
+     "stalled_above_target_mm": 66.4,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 619
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.818,
+     "stalled_above_target_mm": 31.5,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 1177
+      },
+      {
+       "geom": "cab_left",
+       "steps": 472
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8392,
+     "stalled_above_target_mm": 51.7,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_head",
+       "steps": 578
+      },
+      {
+       "geom": "drawer_floor",
+       "steps": 315
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8544,
+     "stalled_above_target_mm": 66.9,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 674
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 4,
+   "standoff_m": 0.006,
+   "scope": "none",
+   "squared_waypoints": 0,
+   "standoff_waypoints": 2,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 83.4,
+     "final_to_target_mm": 163.2,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 11.5,
+     "planar_move_mm": 82.9,
+     "final_to_target_mm": 120.8,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8071,
+     "stalled_above_target_mm": 20.6,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 1016
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8219,
+     "stalled_above_target_mm": 35.4,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_side_l",
+       "steps": 400
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 72
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8349,
+     "stalled_above_target_mm": 47.4,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_head",
+       "steps": 2057
+      },
+      {
+       "geom": "drawer_side_l",
+       "steps": 276
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9298,
+     "stalled_above_target_mm": 142.3,
+     "blocking_contacts": [
+      {
+       "geom": "left_moving_jaw_box1",
+       "steps": 1373
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 0,
+   "standoff_m": 0.006,
+   "scope": "descend",
+   "squared_waypoints": 2,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.1,
+     "planar_move_mm": 75.7,
+     "final_to_target_mm": 170.1,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 75.7,
+     "final_to_target_mm": 129.1,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7987,
+     "stalled_above_target_mm": 12.2,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 894
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7991,
+     "stalled_above_target_mm": 12.6,
+     "blocking_contacts": [
+      {
+       "geom": "geom115",
+       "steps": 686
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 76
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8672,
+     "stalled_above_target_mm": 79.7,
+     "blocking_contacts": [
+      {
+       "geom": "right_fixed_jaw_box1",
+       "steps": 2227
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 996
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8214,
+     "stalled_above_target_mm": 33.9,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 1283
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 1,
+   "standoff_m": 0.006,
+   "scope": "descend",
+   "squared_waypoints": 2,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.5,
+     "final_to_target_mm": 166.9,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.4,
+     "final_to_target_mm": 126.4,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7983,
+     "stalled_above_target_mm": 11.8,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 890
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8911,
+     "stalled_above_target_mm": 104.6,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 2345
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.86,
+     "stalled_above_target_mm": 72.5,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 1448
+      },
+      {
+       "geom": "right_camera_box1",
+       "steps": 1413
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8138,
+     "stalled_above_target_mm": 26.3,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 1213
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 2,
+   "standoff_m": 0.006,
+   "scope": "descend",
+   "squared_waypoints": 2,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.1,
+     "planar_move_mm": 90.8,
+     "final_to_target_mm": 161.7,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.1,
+     "final_to_target_mm": 126.7,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7983,
+     "stalled_above_target_mm": 11.8,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 904
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7946,
+     "stalled_above_target_mm": 8.1,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 558
+      },
+      {
+       "geom": "drawer_floor",
+       "steps": 434
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8489,
+     "stalled_above_target_mm": 61.4,
+     "blocking_contacts": [
+      {
+       "geom": "geom115",
+       "steps": 2550
+      },
+      {
+       "geom": "right_fixed_jaw_box2",
+       "steps": 1743
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9865,
+     "stalled_above_target_mm": 199.0,
+     "blocking_contacts": [
+      {
+       "geom": "left_fixed_jaw_box1",
+       "steps": 1827
+      },
+      {
+       "geom": "left_moving_jaw_box1",
+       "steps": 1348
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 3,
+   "standoff_m": 0.006,
+   "scope": "descend",
+   "squared_waypoints": 2,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 1.3,
+     "planar_move_mm": 76.7,
+     "final_to_target_mm": 170.0,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 67.8,
+     "final_to_target_mm": 135.2,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7983,
+     "stalled_above_target_mm": 11.8,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 897
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7996,
+     "stalled_above_target_mm": 13.1,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 1188
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 24
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8477,
+     "stalled_above_target_mm": 60.2,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 803
+      },
+      {
+       "geom": "geom115",
+       "steps": 577
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8285,
+     "stalled_above_target_mm": 41.0,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 344
+      },
+      {
+       "geom": "left_fixed_jaw_box1",
+       "steps": 224
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 4,
+   "standoff_m": 0.006,
+   "scope": "descend",
+   "squared_waypoints": 2,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.3,
+     "final_to_target_mm": 167.0,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.3,
+     "final_to_target_mm": 126.5,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7983,
+     "stalled_above_target_mm": 11.8,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 890
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8301,
+     "stalled_above_target_mm": 43.6,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 1213
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 631
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8621,
+     "stalled_above_target_mm": 74.6,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box1",
+       "steps": 1333
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 894
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.979,
+     "stalled_above_target_mm": 191.5,
+     "blocking_contacts": [
+      {
+       "geom": "geom58",
+       "steps": 1853
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 0,
+   "standoff_m": 0.006,
+   "scope": "pinch",
+   "squared_waypoints": 4,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": true
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 1.2,
+     "planar_move_mm": 96.6,
+     "final_to_target_mm": 151.7,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 67.5,
+     "final_to_target_mm": 135.5,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7987,
+     "stalled_above_target_mm": 12.2,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 894
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8574,
+     "stalled_above_target_mm": 70.9,
+     "blocking_contacts": [
+      {
+       "geom": "cab_left",
+       "steps": 774
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8591,
+     "stalled_above_target_mm": 71.6,
+     "blocking_contacts": [
+      {
+       "geom": "geom115",
+       "steps": 893
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 801
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.7721,
+     "stalled_above_target_mm": -15.4,
+     "blocking_contacts": [
+      {
+       "geom": "geom78",
+       "steps": 1348
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 1,
+   "standoff_m": 0.006,
+   "scope": "pinch",
+   "squared_waypoints": 4,
+   "standoff_waypoints": 2,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.3,
+     "final_to_target_mm": 167.1,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.4,
+     "final_to_target_mm": 126.4,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7983,
+     "stalled_above_target_mm": 11.8,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 890
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7932,
+     "stalled_above_target_mm": 6.7,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_floor",
+       "steps": 524
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 310
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8712,
+     "stalled_above_target_mm": 83.7,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 907
+      },
+      {
+       "geom": "right_camera_box1",
+       "steps": 793
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.7983,
+     "stalled_above_target_mm": 10.8,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_side_r",
+       "steps": 282
+      },
+      {
+       "geom": "left_camera_box2",
+       "steps": 20
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 2,
+   "standoff_m": 0.006,
+   "scope": "pinch",
+   "squared_waypoints": 4,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 69.8,
+     "final_to_target_mm": 175.3,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 68.3,
+     "final_to_target_mm": 136.4,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7983,
+     "stalled_above_target_mm": 11.8,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 904
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7952,
+     "stalled_above_target_mm": 8.7,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 861
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 249
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.839,
+     "stalled_above_target_mm": 51.5,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 1089
+      },
+      {
+       "geom": "right_fixed_jaw_box2",
+       "steps": 284
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9152,
+     "stalled_above_target_mm": 127.7,
+     "blocking_contacts": [
+      {
+       "geom": "left_camera_box2",
+       "steps": 1424
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 3,
+   "standoff_m": 0.006,
+   "scope": "pinch",
+   "squared_waypoints": 4,
+   "standoff_waypoints": 2,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 75.8,
+     "final_to_target_mm": 170.2,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 76.3,
+     "final_to_target_mm": 128.8,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7983,
+     "stalled_above_target_mm": 11.8,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 897
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7939,
+     "stalled_above_target_mm": 7.4,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 567
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 71
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8286,
+     "stalled_above_target_mm": 41.1,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 993
+      },
+      {
+       "geom": "cab_left",
+       "steps": 352
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8143,
+     "stalled_above_target_mm": 26.8,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 1307
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 4,
+   "standoff_m": 0.006,
+   "scope": "pinch",
+   "squared_waypoints": 4,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 83.6,
+     "final_to_target_mm": 163.4,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 83.6,
+     "final_to_target_mm": 123.3,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7983,
+     "stalled_above_target_mm": 11.8,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 890
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8644,
+     "stalled_above_target_mm": 77.9,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 750
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8713,
+     "stalled_above_target_mm": 83.8,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 884
+      },
+      {
+       "geom": "right_camera_box1",
+       "steps": 789
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.898,
+     "stalled_above_target_mm": 110.5,
+     "blocking_contacts": [
+      {
+       "geom": "left_fixed_jaw_box6",
+       "steps": 660
+      },
+      {
+       "geom": "left_camera_box2",
+       "steps": 405
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 0,
+   "standoff_m": 0.006,
+   "scope": "all",
+   "squared_waypoints": 14,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": true
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 76.8,
+     "final_to_target_mm": 169.2,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 77.0,
+     "final_to_target_mm": 128.3,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7967,
+     "stalled_above_target_mm": 10.2,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 834
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8554,
+     "stalled_above_target_mm": 68.9,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 774
+      },
+      {
+       "geom": "cab_top",
+       "steps": 610
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8911,
+     "stalled_above_target_mm": 103.6,
+     "blocking_contacts": [
+      {
+       "geom": "geom104",
+       "steps": 680
+      },
+      {
+       "geom": "geom106",
+       "steps": 674
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9425,
+     "stalled_above_target_mm": 155.0,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 1554
+      },
+      {
+       "geom": "left_camera_box2",
+       "steps": 674
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 1,
+   "standoff_m": 0.006,
+   "scope": "all",
+   "squared_waypoints": 14,
+   "standoff_waypoints": 2,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 5.8,
+     "planar_move_mm": 89.0,
+     "final_to_target_mm": 159.4,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 1.2,
+     "planar_move_mm": 68.8,
+     "final_to_target_mm": 134.5,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7966,
+     "stalled_above_target_mm": 10.1,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 769
+      },
+      {
+       "geom": "drawer_back",
+       "steps": 295
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7922,
+     "stalled_above_target_mm": 5.7,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 1343
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8872,
+     "stalled_above_target_mm": 99.7,
+     "blocking_contacts": [
+      {
+       "geom": "geom104",
+       "steps": 1575
+      },
+      {
+       "geom": "geom106",
+       "steps": 483
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9957,
+     "stalled_above_target_mm": 208.2,
+     "blocking_contacts": [
+      {
+       "geom": "left_camera_box2",
+       "steps": 1348
+      },
+      {
+       "geom": "geom56",
+       "steps": 674
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 2,
+   "standoff_m": 0.006,
+   "scope": "all",
+   "squared_waypoints": 14,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 57.8,
+     "final_to_target_mm": 185.8,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 59.7,
+     "final_to_target_mm": 141.6,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7962,
+     "stalled_above_target_mm": 9.8,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 979
+      },
+      {
+       "geom": "drawer_back",
+       "steps": 306
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8497,
+     "stalled_above_target_mm": 63.2,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 676
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8877,
+     "stalled_above_target_mm": 100.2,
+     "blocking_contacts": [
+      {
+       "geom": "geom104",
+       "steps": 1374
+      },
+      {
+       "geom": "geom106",
+       "steps": 574
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9749,
+     "stalled_above_target_mm": 187.4,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 1252
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 3,
+   "standoff_m": 0.006,
+   "scope": "all",
+   "squared_waypoints": 14,
+   "standoff_waypoints": 2,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 68.2,
+     "final_to_target_mm": 176.6,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 69.7,
+     "final_to_target_mm": 133.7,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7963,
+     "stalled_above_target_mm": 9.8,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 897
+      },
+      {
+       "geom": "drawer_back",
+       "steps": 302
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8502,
+     "stalled_above_target_mm": 63.7,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 684
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8875,
+     "stalled_above_target_mm": 100.0,
+     "blocking_contacts": [
+      {
+       "geom": "geom104",
+       "steps": 1215
+      },
+      {
+       "geom": "geom106",
+       "steps": 552
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8739,
+     "stalled_above_target_mm": 86.4,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 699
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 4,
+   "standoff_m": 0.006,
+   "scope": "all",
+   "squared_waypoints": 14,
+   "standoff_waypoints": 2,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 5.8,
+     "planar_move_mm": 92.1,
+     "final_to_target_mm": 156.9,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 3.1,
+     "planar_move_mm": 71.9,
+     "final_to_target_mm": 132.1,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7965,
+     "stalled_above_target_mm": 10.0,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 750
+      },
+      {
+       "geom": "drawer_back",
+       "steps": 301
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7921,
+     "stalled_above_target_mm": 5.6,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 1344
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8872,
+     "stalled_above_target_mm": 99.7,
+     "blocking_contacts": [
+      {
+       "geom": "geom104",
+       "steps": 1569
+      },
+      {
+       "geom": "geom106",
+       "steps": 485
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9701,
+     "stalled_above_target_mm": 182.6,
+     "blocking_contacts": [
+      {
+       "geom": "left_camera_box2",
+       "steps": 710
+      },
+      {
+       "geom": "cab_top",
+       "steps": 350
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 0,
+   "standoff_m": 0.01,
+   "scope": "none",
+   "squared_waypoints": 0,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 68.2,
+     "final_to_target_mm": 176.3,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 7.4,
+     "planar_move_mm": 73.4,
+     "final_to_target_mm": 120.8,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8091,
+     "stalled_above_target_mm": 22.6,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 1137
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8307,
+     "stalled_above_target_mm": 44.2,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 1255
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8257,
+     "stalled_above_target_mm": 38.2,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_head",
+       "steps": 1819
+      },
+      {
+       "geom": "spoon_handle",
+       "steps": 281
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9868,
+     "stalled_above_target_mm": 199.3,
+     "blocking_contacts": [
+      {
+       "geom": "left_moving_jaw_box1",
+       "steps": 1124
+      },
+      {
+       "geom": "geom77",
+       "steps": 840
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 1,
+   "standoff_m": 0.01,
+   "scope": "none",
+   "squared_waypoints": 0,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.3,
+     "final_to_target_mm": 166.0,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.6,
+     "final_to_target_mm": 125.6,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8037,
+     "stalled_above_target_mm": 17.2,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_floor",
+       "steps": 286
+      },
+      {
+       "geom": "fork_handle",
+       "steps": 256
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8438,
+     "stalled_above_target_mm": 57.3,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_side_l",
+       "steps": 418
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 303
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8395,
+     "stalled_above_target_mm": 52.0,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_side_l",
+       "steps": 565
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 264
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8125,
+     "stalled_above_target_mm": 25.0,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 1740
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 2,
+   "standoff_m": 0.01,
+   "scope": "none",
+   "squared_waypoints": 0,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 76.3,
+     "final_to_target_mm": 170.0,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 68.0,
+     "final_to_target_mm": 137.0,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8068,
+     "stalled_above_target_mm": 20.3,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_floor",
+       "steps": 309
+      },
+      {
+       "geom": "fork_handle",
+       "steps": 158
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8012,
+     "stalled_above_target_mm": 14.7,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_floor",
+       "steps": 575
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 373
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8116,
+     "stalled_above_target_mm": 24.1,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 1360
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8118,
+     "stalled_above_target_mm": 24.3,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 822
+      },
+      {
+       "geom": "left_fixed_jaw_box1",
+       "steps": 42
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 3,
+   "standoff_m": 0.01,
+   "scope": "none",
+   "squared_waypoints": 0,
+   "standoff_waypoints": 2,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 2.8,
+     "planar_move_mm": 112.1,
+     "final_to_target_mm": 139.8,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 4.4,
+     "planar_move_mm": 91.5,
+     "final_to_target_mm": 129.8,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.853,
+     "stalled_above_target_mm": 66.5,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 615
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8461,
+     "stalled_above_target_mm": 59.6,
+     "blocking_contacts": [
+      {
+       "geom": "cab_left",
+       "steps": 1214
+      },
+      {
+       "geom": "drawer_side_l",
+       "steps": 271
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8394,
+     "stalled_above_target_mm": 51.9,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_head",
+       "steps": 676
+      },
+      {
+       "geom": "drawer_floor",
+       "steps": 412
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8565,
+     "stalled_above_target_mm": 69.0,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 841
+      },
+      {
+       "geom": "drawer_floor",
+       "steps": 219
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 4,
+   "standoff_m": 0.01,
+   "scope": "none",
+   "squared_waypoints": 0,
+   "standoff_waypoints": 2,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.2,
+     "planar_move_mm": 87.7,
+     "final_to_target_mm": 159.7,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.3,
+     "planar_move_mm": 88.1,
+     "final_to_target_mm": 119.9,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.804,
+     "stalled_above_target_mm": 17.5,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_floor",
+       "steps": 290
+      },
+      {
+       "geom": "fork_handle",
+       "steps": 248
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8172,
+     "stalled_above_target_mm": 30.7,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 1195
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8408,
+     "stalled_above_target_mm": 53.3,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_floor",
+       "steps": 402
+      },
+      {
+       "geom": "drawer_side_l",
+       "steps": 293
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8177,
+     "stalled_above_target_mm": 30.2,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 897
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 0,
+   "standoff_m": 0.01,
+   "scope": "descend",
+   "squared_waypoints": 2,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 2.6,
+     "planar_move_mm": 74.9,
+     "final_to_target_mm": 170.8,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 74.1,
+     "final_to_target_mm": 130.2,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7989,
+     "stalled_above_target_mm": 12.4,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 826
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8017,
+     "stalled_above_target_mm": 15.2,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 528
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 496
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8678,
+     "stalled_above_target_mm": 80.3,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 1687
+      },
+      {
+       "geom": "right_fixed_jaw_box1",
+       "steps": 674
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 1.0049,
+     "stalled_above_target_mm": 217.4,
+     "blocking_contacts": [
+      {
+       "geom": "geom77",
+       "steps": 2823
+      },
+      {
+       "geom": "geom53",
+       "steps": 1102
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 1,
+   "standoff_m": 0.01,
+   "scope": "descend",
+   "squared_waypoints": 2,
+   "standoff_waypoints": 2,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 1.1,
+     "planar_move_mm": 87.3,
+     "final_to_target_mm": 160.2,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.1,
+     "planar_move_mm": 87.5,
+     "final_to_target_mm": 120.7,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7985,
+     "stalled_above_target_mm": 12.0,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 837
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8859,
+     "stalled_above_target_mm": 99.4,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 1896
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8608,
+     "stalled_above_target_mm": 73.3,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box1",
+       "steps": 1437
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 1404
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8038,
+     "stalled_above_target_mm": 16.3,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 1150
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 483
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 2,
+   "standoff_m": 0.01,
+   "scope": "descend",
+   "squared_waypoints": 2,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 1.7,
+     "planar_move_mm": 107.4,
+     "final_to_target_mm": 148.1,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.8,
+     "planar_move_mm": 89.8,
+     "final_to_target_mm": 118.8,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7985,
+     "stalled_above_target_mm": 12.0,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 837
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7955,
+     "stalled_above_target_mm": 9.0,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 972
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.848,
+     "stalled_above_target_mm": 60.5,
+     "blocking_contacts": [
+      {
+       "geom": "right_fixed_jaw_box2",
+       "steps": 1953
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 674
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9798,
+     "stalled_above_target_mm": 192.3,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 1194
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 3,
+   "standoff_m": 0.01,
+   "scope": "descend",
+   "squared_waypoints": 2,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.1,
+     "planar_move_mm": 95.9,
+     "final_to_target_mm": 155.1,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 88.0,
+     "final_to_target_mm": 120.4,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7985,
+     "stalled_above_target_mm": 12.0,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 836
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.796,
+     "stalled_above_target_mm": 9.5,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 812
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 325
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8458,
+     "stalled_above_target_mm": 58.4,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 3250
+      },
+      {
+       "geom": "geom115",
+       "steps": 1697
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.812,
+     "stalled_above_target_mm": 24.5,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 1058
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 4,
+   "standoff_m": 0.01,
+   "scope": "descend",
+   "squared_waypoints": 2,
+   "standoff_waypoints": 2,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.7,
+     "planar_move_mm": 78.5,
+     "final_to_target_mm": 167.7,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 78.8,
+     "final_to_target_mm": 127.0,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7984,
+     "stalled_above_target_mm": 11.9,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 837
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8789,
+     "stalled_above_target_mm": 92.4,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 2114
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8621,
+     "stalled_above_target_mm": 74.6,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box1",
+       "steps": 1295
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 717
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8024,
+     "stalled_above_target_mm": 14.9,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 1147
+      },
+      {
+       "geom": "drawer_front",
+       "steps": 381
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 0,
+   "standoff_m": 0.01,
+   "scope": "pinch",
+   "squared_waypoints": 4,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 2.6,
+     "planar_move_mm": 70.4,
+     "final_to_target_mm": 174.5,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 71.9,
+     "final_to_target_mm": 130.9,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7989,
+     "stalled_above_target_mm": 12.4,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 826
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7951,
+     "stalled_above_target_mm": 8.6,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 1032
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8617,
+     "stalled_above_target_mm": 74.2,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 820
+      },
+      {
+       "geom": "geom104",
+       "steps": 441
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9588,
+     "stalled_above_target_mm": 171.3,
+     "blocking_contacts": [
+      {
+       "geom": "left_camera_box2",
+       "steps": 964
+      },
+      {
+       "geom": "cab_top",
+       "steps": 498
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 1,
+   "standoff_m": 0.01,
+   "scope": "pinch",
+   "squared_waypoints": 4,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 1.1,
+     "planar_move_mm": 79.6,
+     "final_to_target_mm": 166.8,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.5,
+     "final_to_target_mm": 126.4,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7985,
+     "stalled_above_target_mm": 12.0,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 837
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8314,
+     "stalled_above_target_mm": 44.9,
+     "blocking_contacts": [
+      {
+       "geom": "drawer_front",
+       "steps": 1447
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 815
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8716,
+     "stalled_above_target_mm": 84.1,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 883
+      },
+      {
+       "geom": "right_camera_box1",
+       "steps": 763
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9919,
+     "stalled_above_target_mm": 204.4,
+     "blocking_contacts": [
+      {
+       "geom": "geom78",
+       "steps": 2250
+      },
+      {
+       "geom": "left_moving_jaw_box1",
+       "steps": 487
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 2,
+   "standoff_m": 0.01,
+   "scope": "pinch",
+   "squared_waypoints": 4,
+   "standoff_waypoints": 2,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.9,
+     "final_to_target_mm": 165.6,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.1,
+     "final_to_target_mm": 126.6,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7985,
+     "stalled_above_target_mm": 12.0,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 837
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7955,
+     "stalled_above_target_mm": 9.0,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 799
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 272
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8383,
+     "stalled_above_target_mm": 50.8,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 1160
+      },
+      {
+       "geom": "right_fixed_jaw_box2",
+       "steps": 569
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9716,
+     "stalled_above_target_mm": 184.1,
+     "blocking_contacts": [
+      {
+       "geom": "left_camera_box2",
+       "steps": 779
+      },
+      {
+       "geom": "cab_top",
+       "steps": 349
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 3,
+   "standoff_m": 0.01,
+   "scope": "pinch",
+   "squared_waypoints": 4,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.1,
+     "planar_move_mm": 80.4,
+     "final_to_target_mm": 166.1,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.7,
+     "planar_move_mm": 80.4,
+     "final_to_target_mm": 125.0,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7985,
+     "stalled_above_target_mm": 12.0,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 836
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.796,
+     "stalled_above_target_mm": 9.6,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 628
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 301
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8342,
+     "stalled_above_target_mm": 46.7,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 1757
+      },
+      {
+       "geom": "drawer_side_l",
+       "steps": 46
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9399,
+     "stalled_above_target_mm": 152.4,
+     "blocking_contacts": [
+      {
+       "geom": "left_camera_box2",
+       "steps": 674
+      },
+      {
+       "geom": "cab_top",
+       "steps": 217
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 4,
+   "standoff_m": 0.01,
+   "scope": "pinch",
+   "squared_waypoints": 4,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.7,
+     "planar_move_mm": 80.1,
+     "final_to_target_mm": 166.4,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.0,
+     "final_to_target_mm": 126.0,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7984,
+     "stalled_above_target_mm": 11.9,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 837
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7958,
+     "stalled_above_target_mm": 9.3,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 815
+      },
+      {
+       "geom": "right_camera_box2",
+       "steps": 15
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8716,
+     "stalled_above_target_mm": 84.1,
+     "blocking_contacts": [
+      {
+       "geom": "right_camera_box2",
+       "steps": 833
+      },
+      {
+       "geom": "right_camera_box1",
+       "steps": 726
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9767,
+     "stalled_above_target_mm": 189.2,
+     "blocking_contacts": [
+      {
+       "geom": "left_fixed_jaw_box1",
+       "steps": 702
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 0,
+   "standoff_m": 0.01,
+   "scope": "all",
+   "squared_waypoints": 14,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 5.8,
+     "planar_move_mm": 92.9,
+     "final_to_target_mm": 156.2,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 71.4,
+     "final_to_target_mm": 132.4,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7969,
+     "stalled_above_target_mm": 10.4,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 785
+      },
+      {
+       "geom": "cab_top",
+       "steps": 3
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7928,
+     "stalled_above_target_mm": 6.3,
+     "blocking_contacts": [
+      {
+       "geom": "spoon_handle",
+       "steps": 1293
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8941,
+     "stalled_above_target_mm": 106.6,
+     "blocking_contacts": [
+      {
+       "geom": "geom104",
+       "steps": 1200
+      },
+      {
+       "geom": "right_fixed_jaw_box1",
+       "steps": 822
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9703,
+     "stalled_above_target_mm": 182.8,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 891
+      },
+      {
+       "geom": "left_camera_box2",
+       "steps": 882
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 1,
+   "standoff_m": 0.01,
+   "scope": "all",
+   "squared_waypoints": 14,
+   "standoff_waypoints": 2,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.2,
+     "final_to_target_mm": 167.0,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.3,
+     "final_to_target_mm": 126.5,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7965,
+     "stalled_above_target_mm": 10.0,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 1048
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8513,
+     "stalled_above_target_mm": 64.8,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 694
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8871,
+     "stalled_above_target_mm": 99.6,
+     "blocking_contacts": [
+      {
+       "geom": "geom104",
+       "steps": 1065
+      },
+      {
+       "geom": "geom106",
+       "steps": 435
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9747,
+     "stalled_above_target_mm": 187.2,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 1348
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 2,
+   "standoff_m": 0.01,
+   "scope": "all",
+   "squared_waypoints": 14,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 57.7,
+     "final_to_target_mm": 185.9,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 59.7,
+     "final_to_target_mm": 141.6,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7965,
+     "stalled_above_target_mm": 10.0,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 1048
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8508,
+     "stalled_above_target_mm": 64.3,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 684
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8873,
+     "stalled_above_target_mm": 99.8,
+     "blocking_contacts": [
+      {
+       "geom": "geom104",
+       "steps": 913
+      },
+      {
+       "geom": "geom106",
+       "steps": 604
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9749,
+     "stalled_above_target_mm": 187.4,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 1348
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 3,
+   "standoff_m": 0.01,
+   "scope": "all",
+   "squared_waypoints": 14,
+   "standoff_waypoints": 2,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 83.6,
+     "final_to_target_mm": 162.7,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 82.5,
+     "final_to_target_mm": 124.1,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7965,
+     "stalled_above_target_mm": 10.0,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 1048
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8507,
+     "stalled_above_target_mm": 64.2,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 683
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8878,
+     "stalled_above_target_mm": 100.3,
+     "blocking_contacts": [
+      {
+       "geom": "geom104",
+       "steps": 726
+      },
+      {
+       "geom": "right_fixed_jaw_box1",
+       "steps": 565
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9748,
+     "stalled_above_target_mm": 187.3,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 1348
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "seed": 4,
+   "standoff_m": 0.01,
+   "scope": "all",
+   "squared_waypoints": 14,
+   "standoff_waypoints": 2,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "objects": {
+    "fork": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.3,
+     "final_to_target_mm": 166.1,
+     "placed": false
+    },
+    "spoon": {
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.4,
+     "final_to_target_mm": 125.7,
+     "placed": false
+    }
+   },
+   "waypoints": [
+    {
+     "waypoint": "fork_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7965,
+     "stalled_above_target_mm": 10.0,
+     "blocking_contacts": [
+      {
+       "geom": "fork_handle",
+       "steps": 1048
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_descend",
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.851,
+     "stalled_above_target_mm": 64.5,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 688
+      }
+     ]
+    },
+    {
+     "waypoint": "fork_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.8871,
+     "stalled_above_target_mm": 99.6,
+     "blocking_contacts": [
+      {
+       "geom": "geom104",
+       "steps": 1181
+      },
+      {
+       "geom": "geom106",
+       "steps": 497
+      }
+     ]
+    },
+    {
+     "waypoint": "spoon_take",
+     "asked_tip_z_m": 0.7875,
+     "lowest_tip_z_m": 0.9747,
+     "stalled_above_target_mm": 187.2,
+     "blocking_contacts": [
+      {
+       "geom": "cab_top",
+       "steps": 1348
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
