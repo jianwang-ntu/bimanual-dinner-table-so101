@@ -24,6 +24,7 @@ else.
 | Controls for all of the above, accept and reject | 13/13 | `evidence/perception_pipeline_controls.json` |
 | Technical summary / architecture — Required Deliverable 5 | written, claims machine-checked | [`TECHNICAL_SUMMARY.md`](TECHNICAL_SUMMARY.md), `evidence/technical_summary_controls.json` (11/11) |
 | Submission cover image, 1920×1080 PNG rendered from the simulator | rendered, **captioned from `evidence/`, not typed** | `evidence/cover_image.png` + `.json`, `evidence/cover_image_controls.json` (14/14) |
+| Slide presentation, 13 slides, 16:9 PDF | generated from `evidence/`, **no figure typed by hand** | `evidence/slides_presentation.pdf` + `.json`, `evidence/slides_controls.json` (12/12) |
 | VLA / imitation policy | **not started** | — |
 | Perception in the control loop | **not started** — the controller still reads privileged state | — |
 | Intel Core Ultra Series 2/3 benchmark numbers | **not measured, and cannot be measured here** | see *Hardware* below |
@@ -122,6 +123,10 @@ python3 scripts/test_technical_summary.py          # stdlib only -- runs before 
 # the submission cover image, and the controls that keep it honest
 python3 scripts/render_cover.py                    # 16:9 PNG from a live rollout
 python3 scripts/test_cover_image.py                # 14 controls, stdlib only
+
+# the mandatory slide deck, and the controls that read the shipped PDF back
+python3 scripts/make_slides.py                     # 13-slide 16:9 PDF from evidence/
+python3 scripts/test_slides.py                     # 12 controls on the PDF bytes
 ```
 
 Headless rendering uses EGL (`MUJOCO_GL=egl`, set by the scripts). On a machine

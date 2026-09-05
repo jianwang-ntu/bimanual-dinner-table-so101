@@ -1,0 +1,954 @@
+{
+ "schema": "slides_presentation/v1",
+ "pdf": "evidence/slides_presentation.pdf",
+ "sha256": "f6f31d1e82ada3e38de4604bed4bd71cb8b3ec7580e2841d38e202b7a17d84cd",
+ "bytes": 164085,
+ "pages": 13,
+ "page_size_inches": [
+  13.333,
+  7.5
+ ],
+ "aspect_ratio": "16:9",
+ "requirement": "lablab Hackathon Rule Book, \"Cover Image and Presentation\": \"Video and Slide Presentation: MP4 and PDF formats are mandatory.\"",
+ "title": "SO-101 Dinner Table: a scored bimanual benchmark",
+ "track": "Bimanual VLA Manipulation with Multi-Modal Reasoning \u2014 Setting Up a Dinner Table",
+ "built_by": "scripts/make_slides.py",
+ "built_at_head": "6c621e37274be56297e822b977774a63248b04a7",
+ "source_date_epoch": "1757000000",
+ "deterministic": "SOURCE_DATE_EPOCH is pinned, so two builds from the same evidence produce byte-identical PDFs.",
+ "layout_violations": [],
+ "layout_check": "every string is measured with the real font metrics; off-page, text-on-text, text-straddling-a-panel and text-on-chart all fail the build",
+ "figures_derived_from": [
+  "cover_image.json",
+  "cover_image_controls.json",
+  "demo_scripted_10seeds.json",
+  "eval_seeds.json",
+  "eval_seeds_scripted.json",
+  "openvino_bench_amd_epyc_9654_96_core_processor.json",
+  "openvino_export.json",
+  "perception_pipeline_controls.json",
+  "perception_train.json",
+  "scene_verification.json",
+  "slides_controls.json",
+  "task_predicate_controls.json",
+  "technical_summary_controls.json"
+ ],
+ "text": [
+  {
+   "slide": 1,
+   "role": "kicker",
+   "text": "AI INFRA SUMMIT HACKATHON"
+  },
+  {
+   "slide": 1,
+   "role": "title",
+   "text": "SO-101 Dinner Table: a scored bimanual benchmark"
+  },
+  {
+   "slide": 1,
+   "role": "subtitle",
+   "text": "Bimanual VLA Manipulation with Multi-Modal Reasoning \u2014 Setting Up a Dinner Table"
+  },
+  {
+   "slide": 1,
+   "role": "subtitle",
+   "text": "AI Infra Summit Hackathon \u00b7 Intel Physical AI Online Challenge \u00b7 lablab.ai"
+  },
+  {
+   "slide": 1,
+   "role": "body",
+   "text": "What it is"
+  },
+  {
+   "slide": 1,
+   "role": "bullet",
+   "text": "\u2014  A randomized dual-SO-101 dinner-table task in MuJoCo"
+  },
+  {
+   "slide": 1,
+   "role": "bullet",
+   "text": "\u2014  Five ordered success predicates, scored per seed"
+  },
+  {
+   "slide": 1,
+   "role": "bullet",
+   "text": "\u2014  A scorer controlled both ways, so its number can be falsified"
+  },
+  {
+   "slide": 1,
+   "role": "body",
+   "text": "What it measured"
+  },
+  {
+   "slide": 1,
+   "role": "headline",
+   "text": "16 / 50 sub-goals over 10 seeds"
+  },
+  {
+   "slide": 1,
+   "role": "headline",
+   "text": "0 / 50 with the arms held in the home pose  \u00b7  task success 0 / 10"
+  },
+  {
+   "slide": 2,
+   "role": "kicker",
+   "text": "PROBLEM"
+  },
+  {
+   "slide": 2,
+   "role": "title",
+   "text": "The problem this entry actually attacks"
+  },
+  {
+   "slide": 2,
+   "role": "body",
+   "text": "A bimanual demo video is easy to make and impossible to check."
+  },
+  {
+   "slide": 2,
+   "role": "bullet",
+   "text": "\u2014  Did the result survive a new random seed, or was it one lucky run?"
+  },
+  {
+   "slide": 2,
+   "role": "bullet",
+   "text": "\u2014  Would the scorer have fired anyway with the arms held still?"
+  },
+  {
+   "slide": 2,
+   "role": "bullet",
+   "text": "\u2014  Which of the five steps in the instruction actually happened?"
+  },
+  {
+   "slide": 2,
+   "role": "bullet",
+   "text": "\u2014  Was it one arm doing everything, with the second along for the ride?"
+  },
+  {
+   "slide": 2,
+   "role": "body",
+   "text": "Who has this problem"
+  },
+  {
+   "slide": 2,
+   "role": "body",
+   "text": "Teams training manipulation policies for the low-cost open arms this track names report success rates on environments nobody else can rerun. So this entry built the measuring instrument first, and reports what the instrument says \u2014 including the zeros."
+  },
+  {
+   "slide": 3,
+   "role": "kicker",
+   "text": "SOLUTION"
+  },
+  {
+   "slide": 3,
+   "role": "title",
+   "text": "What is built"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "SCENE  envs/dinner_table.py"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "Two SO-101 arms \u2014 five positioning joints and a parallel jaw each"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "A cabinet with a prismatic drawer holding the fork and the spoon"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "Plate, mug and bottle on the table"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "nq=48 nu=12 nbody=25 ngeom=133 nmesh=36"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "RANDOMIZER  envs/randomize.py"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "Object geometry, mass, friction, lighting, background and placement vary per seed"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "Rejection-sampled: every episode is reachable and never blocks the drawer"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "plate 94\u2013115 mm across"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "SCORER  envs/task.py"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "Five ordered sub-goals: drawer, fork, spoon, plate, mug"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "45\u201350 mm placement tolerance, 25\u00b0 upright check"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "Also logs order, arm, hand-off and drops"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "5 predicates \u00b7 10 seeds"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "The instruction, verbatim from envs/task.py:"
+  },
+  {
+   "slide": 3,
+   "role": "body",
+   "text": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate."
+  },
+  {
+   "slide": 4,
+   "role": "kicker",
+   "text": "METHOD"
+  },
+  {
+   "slide": 4,
+   "role": "title",
+   "text": "The number ships with its own falsifier"
+  },
+  {
+   "slide": 4,
+   "role": "body",
+   "text": "16 / 50"
+  },
+  {
+   "slide": 4,
+   "role": "body",
+   "text": "0 / 50"
+  },
+  {
+   "slide": 4,
+   "role": "body",
+   "text": "Same seeds. Same scorer bytes. Only the controller differs."
+  },
+  {
+   "slide": 4,
+   "role": "body",
+   "text": "Any sub-goal that fired with the arms held still would mean the scorer produced the result, not the controller. None fires."
+  },
+  {
+   "slide": 4,
+   "role": "body",
+   "text": "Controls that pass, both directions"
+  },
+  {
+   "slide": 4,
+   "role": "body",
+   "text": "16 / 16 scene checks"
+  },
+  {
+   "slide": 4,
+   "role": "body",
+   "text": "structure and physics"
+  },
+  {
+   "slide": 4,
+   "role": "body",
+   "text": "11 / 11 scorer controls"
+  },
+  {
+   "slide": 4,
+   "role": "body",
+   "text": "accept and reject"
+  },
+  {
+   "slide": 4,
+   "role": "body",
+   "text": "13 / 13 perception + OpenVINO controls"
+  },
+  {
+   "slide": 4,
+   "role": "body",
+   "text": "accept and reject"
+  },
+  {
+   "slide": 4,
+   "role": "body",
+   "text": "A scorer that can only say yes proves nothing. Every predicate is driven from both sides: a state that must score, and a state that must not. Both are in the repository and both run in seconds."
+  },
+  {
+   "slide": 5,
+   "role": "kicker",
+   "text": "RESULTS"
+  },
+  {
+   "slide": 5,
+   "role": "title",
+   "text": "Results, per sub-goal \u2014 including the zeros"
+  },
+  {
+   "slide": 5,
+   "role": "body",
+   "text": "drawer_open 10 / 10"
+  },
+  {
+   "slide": 5,
+   "role": "body",
+   "text": "fork_placed 0 / 10"
+  },
+  {
+   "slide": 5,
+   "role": "body",
+   "text": "spoon_placed 0 / 10"
+  },
+  {
+   "slide": 5,
+   "role": "body",
+   "text": "plate_placed 6 / 10"
+  },
+  {
+   "slide": 5,
+   "role": "body",
+   "text": "mug_placed 0 / 10"
+  },
+  {
+   "slide": 5,
+   "role": "body",
+   "text": "What the run does not show"
+  },
+  {
+   "slide": 5,
+   "role": "body",
+   "text": "task success 0 / 10"
+  },
+  {
+   "slide": 5,
+   "role": "body",
+   "text": "in-order prefix 1 of 5 on every seed"
+  },
+  {
+   "slide": 5,
+   "role": "body",
+   "text": "object hand-offs 0 / 10"
+  },
+  {
+   "slide": 5,
+   "role": "body",
+   "text": "objects dropped 0"
+  },
+  {
+   "slide": 5,
+   "role": "body",
+   "text": "both arms touched an object on 7 / 10 seeds"
+  },
+  {
+   "slide": 5,
+   "role": "body",
+   "text": "all 10 recorded hand-offs are the two arms taking the drawer handle in turn, not an object"
+  },
+  {
+   "slide": 5,
+   "role": "body",
+   "text": "The plate is hooked by its rim and dragged flat, not picked and placed: it is 94\u2013115 mm across the ten evaluation seeds, wider than the jaw can both clear and close on. The scorer does not ask how the plate reached the mat. This deck does."
+  },
+  {
+   "slide": 5,
+   "role": "body",
+   "text": "Worst IK residual over the ten rollouts: 294.9 mm across 1,090 planned moves \u2014 waypoints the arm never reaches are the open defect this entry has not fixed."
+  },
+  {
+   "slide": 6,
+   "role": "kicker",
+   "text": "ROBUSTNESS"
+  },
+  {
+   "slide": 6,
+   "role": "title",
+   "text": "Robustness: one controller, ten random seeds"
+  },
+  {
+   "slide": 6,
+   "role": "body",
+   "text": "What varies per seed"
+  },
+  {
+   "slide": 6,
+   "role": "body",
+   "text": "plate diameter 94\u2013115 mm"
+  },
+  {
+   "slide": 6,
+   "role": "body",
+   "text": "mug height 28\u201340 mm"
+  },
+  {
+   "slide": 6,
+   "role": "body",
+   "text": "cutlery length 36\u201343 mm"
+  },
+  {
+   "slide": 6,
+   "role": "body",
+   "text": "mass \u00d70.60\u20131.60"
+  },
+  {
+   "slide": 6,
+   "role": "body",
+   "text": "friction \u00d70.60\u20131.29"
+  },
+  {
+   "slide": 6,
+   "role": "body",
+   "text": "light diffuse 0.60\u20130.94"
+  },
+  {
+   "slide": 6,
+   "role": "body",
+   "text": "Robustness is evidenced for the two steps that fire and for nothing else: the drawer on 10 / 10 seeds and the plate on 6 / 10. There is still no performance on the other three sub-goals to be robust about. Placement randomization is rejection-sampled, so a failed episode is a controller failure and never an impossible scene."
+  },
+  {
+   "slide": 6,
+   "role": "body",
+   "text": "The demo video covers the same 10 seeds and is captioned frame by frame from the live predicate state, so it cannot claim more than the evaluation reports \u00b7 sha256 b39b2cfe69cf\u2026"
+  },
+  {
+   "slide": 7,
+   "role": "kicker",
+   "text": "TECHNOLOGY"
+  },
+  {
+   "slide": 7,
+   "role": "title",
+   "text": "Application of technology \u2014 perception"
+  },
+  {
+   "slide": 7,
+   "role": "body",
+   "text": "1.32"
+  },
+  {
+   "slide": 7,
+   "role": "body",
+   "text": "1.83"
+  },
+  {
+   "slide": 7,
+   "role": "body",
+   "text": "34.29"
+  },
+  {
+   "slide": 7,
+   "role": "body",
+   "text": "46.37"
+  },
+  {
+   "slide": 7,
+   "role": "body",
+   "text": "One overhead frame in, table layout out"
+  },
+  {
+   "slide": 7,
+   "role": "bullet",
+   "text": "\u2014  520,768 parameters, spatial softmax head"
+  },
+  {
+   "slide": 7,
+   "role": "bullet",
+   "text": "\u2014  4,000 training frames, 240 validation, 10 evaluation"
+  },
+  {
+   "slide": 7,
+   "role": "bullet",
+   "text": "\u2014  80 epochs; the three splits are seed-disjoint by construction"
+  },
+  {
+   "slide": 7,
+   "role": "bullet",
+   "text": "\u2014  1.32 mm validation, 1.83 mm on the ten evaluation seeds"
+  },
+  {
+   "slide": 7,
+   "role": "body",
+   "text": "Two controls it has to beat"
+  },
+  {
+   "slide": 7,
+   "role": "body",
+   "text": "no-vision baseline 34.29 mm  \u00b7  shuffled labels 46.37 mm"
+  },
+  {
+   "slide": 7,
+   "role": "body",
+   "text": "Stated plainly: this is perception, not a policy. It outputs scene state, not actions, and it is not in the control loop \u2014 the controller still reads privileged simulator state."
+  },
+  {
+   "slide": 7,
+   "role": "body",
+   "text": "Wiring it in is the next step, and until it is taken this entry claims nothing for the VLA criterion."
+  },
+  {
+   "slide": 8,
+   "role": "kicker",
+   "text": "TECHNOLOGY"
+  },
+  {
+   "slide": 8,
+   "role": "title",
+   "text": "Application of technology \u2014 OpenVINO"
+  },
+  {
+   "slide": 8,
+   "role": "body",
+   "text": "Exported IR, and what each precision costs"
+  },
+  {
+   "slide": 8,
+   "role": "body",
+   "text": "precision      weights    eval error"
+  },
+  {
+   "slide": 8,
+   "role": "body",
+   "text": "FP32          2,031 KiB       1.81 mm"
+  },
+  {
+   "slide": 8,
+   "role": "body",
+   "text": "FP16          1,015 KiB       2.04 mm"
+  },
+  {
+   "slide": 8,
+   "role": "body",
+   "text": "INT8            515 KiB       3.98 mm"
+  },
+  {
+   "slide": 8,
+   "role": "body",
+   "text": "INT8 is 3.9\u00d7 smaller than FP32 and costs 2.16 mm"
+  },
+  {
+   "slide": 8,
+   "role": "body",
+   "text": "What the bench reports"
+  },
+  {
+   "slide": 8,
+   "role": "body",
+   "text": "\u2014  single-stream latency, p50 through p99"
+  },
+  {
+   "slide": 8,
+   "role": "body",
+   "text": "\u2014  async throughput at the plugin's own optimal request count"
+  },
+  {
+   "slide": 8,
+   "role": "body",
+   "text": "\u2014  the execution precision the plugin actually chose"
+  },
+  {
+   "slide": 8,
+   "role": "body",
+   "text": "\u2014  the model's task quality in millimetres"
+  },
+  {
+   "slide": 8,
+   "role": "body",
+   "text": "\u2014  9 device/precision rows on this host"
+  },
+  {
+   "slide": 8,
+   "role": "body",
+   "text": "On this host, OpenVINO 2026.3.1: CPU/FP32 0.436 ms p50, 5,220 fps async."
+  },
+  {
+   "slide": 8,
+   "role": "body",
+   "text": "The cost of INT8 is reported and not hidden \u2014 a control named reject_int8_is_free fails if INT8 is ever recorded as no worse than FP32."
+  },
+  {
+   "slide": 8,
+   "role": "body",
+   "text": "Those latency numbers are not the measurement this track scores. The next slide says why, and what would fix it."
+  },
+  {
+   "slide": 9,
+   "role": "kicker",
+   "text": "HONESTY"
+  },
+  {
+   "slide": 9,
+   "role": "title",
+   "text": "No Intel Core Ultra measurement exists here"
+  },
+  {
+   "slide": 9,
+   "role": "body",
+   "text": "The track asks for: Intel Core Ultra Series 2/3 with OpenVINO"
+  },
+  {
+   "slide": 9,
+   "role": "body",
+   "text": "What this box is"
+  },
+  {
+   "slide": 9,
+   "role": "body",
+   "text": "AMD EPYC 9654 96-Core Processor"
+  },
+  {
+   "slide": 9,
+   "role": "body",
+   "text": "two NVIDIA L40S, no Intel silicon, no NPU"
+  },
+  {
+   "slide": 9,
+   "role": "body",
+   "text": "NOT_THE_REQUIRED_MEASUREMENT"
+  },
+  {
+   "slide": 9,
+   "role": "body",
+   "text": "What closes it"
+  },
+  {
+   "slide": 9,
+   "role": "body",
+   "text": "one unchanged run of"
+  },
+  {
+   "slide": 9,
+   "role": "body",
+   "text": "python3 scripts/bench_openvino.py"
+  },
+  {
+   "slide": 9,
+   "role": "body",
+   "text": "on a Core Ultra Series 2/3 machine, NPU included"
+  },
+  {
+   "slide": 9,
+   "role": "body",
+   "text": "The accept path is tested without owning the hardware: the verdict function accepts 3 real Core Ultra part strings and rejects 4 non-Core-Ultra ones, including this host, a Xeon and a Core i9. So the branch that would report success is exercised, not merely the branch that refuses."
+  },
+  {
+   "slide": 9,
+   "role": "body",
+   "text": "AMD numbers are not offered under an Intel heading. The report stamps itself, in the file, as not the required measurement \u2014 because a judge who cannot trust the small claims cannot check the large ones."
+  },
+  {
+   "slide": 10,
+   "role": "kicker",
+   "text": "HONESTY"
+  },
+  {
+   "slide": 10,
+   "role": "title",
+   "text": "What is not built"
+  },
+  {
+   "slide": 10,
+   "role": "body",
+   "text": "This entry is smaller than the track asks for, and exact about which parts are missing."
+  },
+  {
+   "slide": 10,
+   "role": "bullet",
+   "text": "\u2014  No learned policy: no VLA, no imitation learning, no language conditioning."
+  },
+  {
+   "slide": 10,
+   "role": "bullet",
+   "text": "\u2014  Task success 0 / 10 \u2014 the table has never been set."
+  },
+  {
+   "slide": 10,
+   "role": "bullet",
+   "text": "\u2014  fork_placed 0 / 10, spoon_placed 0 / 10, mug_placed 0 / 10."
+  },
+  {
+   "slide": 10,
+   "role": "bullet",
+   "text": "\u2014  No object hand-off on any seed: object hand-offs 0 / 10."
+  },
+  {
+   "slide": 10,
+   "role": "bullet",
+   "text": "\u2014  Perception is not in the control loop; the controller reads privileged simulator state."
+  },
+  {
+   "slide": 10,
+   "role": "bullet",
+   "text": "\u2014  No Intel Core Ultra measurement: NOT_THE_REQUIRED_MEASUREMENT."
+  },
+  {
+   "slide": 10,
+   "role": "bullet",
+   "text": "\u2014  The plate is dragged by its rim, not carried."
+  },
+  {
+   "slide": 10,
+   "role": "body",
+   "text": "Every one of these is also stated in the repository README, in TECHNICAL_SUMMARY.md section 8 and in the submission text \u2014 and scripts/test_slides.py fails if this slide stops stating any of them."
+  },
+  {
+   "slide": 11,
+   "role": "kicker",
+   "text": "BUSINESS VALUE"
+  },
+  {
+   "slide": 11,
+   "role": "title",
+   "text": "Value: who it is for, and what would pay for it"
+  },
+  {
+   "slide": 11,
+   "role": "body",
+   "text": "The user"
+  },
+  {
+   "slide": 11,
+   "role": "body",
+   "text": "Robotics teams training manipulation policies for low-cost open arms. Today they report success rates on environments nobody else can rerun."
+  },
+  {
+   "slide": 11,
+   "role": "body",
+   "text": "The offer"
+  },
+  {
+   "slide": 11,
+   "role": "body",
+   "text": "The instrument, not the policy: a seeded, randomized, ordered-sub-goal task with a falsifier attached \u2014 cheap enough to run on a laptop."
+  },
+  {
+   "slide": 11,
+   "role": "body",
+   "text": "The route to revenue"
+  },
+  {
+   "slide": 11,
+   "role": "body",
+   "text": "A versioned open benchmark with hosted evaluation, so a team can quote a number it can defend. Sponsorship and private leaderboards follow that, not the other way round."
+  },
+  {
+   "slide": 11,
+   "role": "body",
+   "text": "Market size is not estimated here, because nothing was measured that would support an estimate. None of the route above is built: there are no users and there is no revenue. It is the route, not a claim."
+  },
+  {
+   "slide": 11,
+   "role": "body",
+   "text": "What exists today that another team could use: the scene, the randomizer, the scorer, the two-way controls and the evaluation script."
+  },
+  {
+   "slide": 12,
+   "role": "kicker",
+   "text": "ROADMAP"
+  },
+  {
+   "slide": 12,
+   "role": "title",
+   "text": "Future goals and plans"
+  },
+  {
+   "slide": 12,
+   "role": "body",
+   "text": "Perception into the control loop"
+  },
+  {
+   "slide": 12,
+   "role": "body",
+   "text": "closes the privileged-state gap; the model already reads the layout to 1.83 mm on the evaluation seeds"
+  },
+  {
+   "slide": 12,
+   "role": "body",
+   "text": "A language-conditioned policy"
+  },
+  {
+   "slide": 12,
+   "role": "body",
+   "text": "trained on scripted-controller rollouts \u2014 the missing VLA the track scores"
+  },
+  {
+   "slide": 12,
+   "role": "body",
+   "text": "A grasp the plate survives"
+  },
+  {
+   "slide": 12,
+   "role": "body",
+   "text": "a 94\u2013115 mm plate against a jaw that cannot both clear it and close on it"
+  },
+  {
+   "slide": 12,
+   "role": "body",
+   "text": "Run the bench on Core Ultra Series 2/3"
+  },
+  {
+   "slide": 12,
+   "role": "body",
+   "text": "one unchanged run turns NOT_THE_REQUIRED_MEASUREMENT into the measurement the track asks for"
+  },
+  {
+   "slide": 12,
+   "role": "body",
+   "text": "Publish the benchmark versioned"
+  },
+  {
+   "slide": 12,
+   "role": "body",
+   "text": "seeds, scorer and controls pinned, so a number reported against it stays comparable"
+  },
+  {
+   "slide": 12,
+   "role": "body",
+   "text": "Ordered by what the measurements say is blocking, not by what is easiest to demonstrate."
+  },
+  {
+   "slide": 13,
+   "role": "kicker",
+   "text": "VERIFICATION"
+  },
+  {
+   "slide": 13,
+   "role": "title",
+   "text": "Check every number in this deck"
+  },
+  {
+   "slide": 13,
+   "role": "body",
+   "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101  \u00b7  public, MIT-licensed"
+  },
+  {
+   "slide": 13,
+   "role": "body",
+   "text": "python3 scripts/verify_scene.py"
+  },
+  {
+   "slide": 13,
+   "role": "body",
+   "text": "16 / 16 structural and physical checks"
+  },
+  {
+   "slide": 13,
+   "role": "body",
+   "text": "python3 scripts/test_task_predicates.py"
+  },
+  {
+   "slide": 13,
+   "role": "body",
+   "text": "11 / 11 scorer accept and reject controls"
+  },
+  {
+   "slide": 13,
+   "role": "body",
+   "text": "python3 scripts/test_perception_pipeline.py"
+  },
+  {
+   "slide": 13,
+   "role": "body",
+   "text": "13 / 13 perception and OpenVINO controls"
+  },
+  {
+   "slide": 13,
+   "role": "body",
+   "text": "python3 scripts/eval_seeds.py"
+  },
+  {
+   "slide": 13,
+   "role": "body",
+   "text": "regenerates the 16 / 50 and the 0 / 50 no-policy control"
+  },
+  {
+   "slide": 13,
+   "role": "body",
+   "text": "python3 scripts/test_slides.py"
+  },
+  {
+   "slide": 13,
+   "role": "body",
+   "text": "re-derives every figure on these slides and fails if one has gone stale"
+  },
+  {
+   "slide": 13,
+   "role": "body",
+   "text": "This deck is generated by scripts/make_slides.py, which reads evidence/*.json. No figure on any slide was typed by hand."
+  }
+ ],
+ "facts": {
+  "seeds": 10,
+  "denom": 50,
+  "total": 16,
+  "control_total": 0,
+  "task_success": 0,
+  "bimanual": 7,
+  "in_order": 1,
+  "subgoals_total": 5,
+  "dropped": 0,
+  "object_handoffs": 0,
+  "drawer_handoff_seeds": 10,
+  "plate_d_lo": 94.0,
+  "plate_d_hi": 114.6,
+  "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
+  "scene_pass": 16,
+  "scene_n": 16,
+  "scene_detail": "nq=48 nu=12 nbody=25 ngeom=133 nmesh=36",
+  "pred_pass": 11,
+  "pred_n": 11,
+  "perc_pass": 13,
+  "perc_n": 13,
+  "params": 520768,
+  "train_n": 4000,
+  "val_n": 240,
+  "eval_n": 10,
+  "epochs": 80,
+  "val_mm": 1.3183772563934326,
+  "eval_mm": 1.8333436250686646,
+  "base_val_mm": 34.29194641113281,
+  "base_eval_mm": 42.097721099853516,
+  "shuffled_mm": 46.36643981933594,
+  "int8_ratio": 3.941941941941942,
+  "int8_cost_mm": 2.1633317470550537,
+  "bench_rows": 9,
+  "bench_cpu": "AMD EPYC 9654 96-Core Processor",
+  "bench_verdict": "NOT_THE_REQUIRED_MEASUREMENT",
+  "bench_asks": "Intel Core Ultra Series 2/3 with OpenVINO",
+  "cpu_p50": 0.436,
+  "cpu_fps": 5219.7,
+  "openvino": "2026.3.1",
+  "mass_lo": 0.603,
+  "mass_hi": 1.599,
+  "fric_lo": 0.604,
+  "fric_hi": 1.288,
+  "light_lo": 0.602,
+  "light_hi": 0.942,
+  "ultra_accept": 3,
+  "ultra_reject": 4,
+  "demo_seeds": 10,
+  "demo_sha": "b39b2cfe69cf",
+  "moves": 95,
+  "moves_total": 1090,
+  "ik_err_mm": 294.95
+ },
+ "not_claimed": "The deck reports task success 0/10, object hand-offs 0/10, fork_placed 0/10, spoon_placed 0/10, mug_placed 0/10, perception outside the control loop and no Intel Core Ultra measurement. It claims no completed dinner table and no learned policy."
+}

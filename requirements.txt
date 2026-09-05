@@ -10,3 +10,9 @@ torch>=2.4
 onnx>=1.16
 openvino>=2024.4
 nncf>=2.12          # INT8 post-training quantization; export skips INT8 without it
+
+# slide deck (scripts/make_slides.py, scripts/test_slides.py). matplotlib draws
+# the vector PDF; pypdf reads the SHIPPED bytes back so the controls test the
+# artifact a judge downloads rather than the script that made it.
+matplotlib>=3.8
+pypdf>=4.0

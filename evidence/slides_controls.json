@@ -1,0 +1,70 @@
+{
+ "schema": "slides_controls/v1",
+ "artifact": "evidence/slides_presentation.pdf",
+ "sha256": "f6f31d1e82ada3e38de4604bed4bd71cb8b3ec7580e2841d38e202b7a17d84cd",
+ "claims_checked": 37,
+ "absences_checked": 6,
+ "all_pass": true,
+ "controls": [
+  {
+   "control": "accept_every_figure_is_in_the_pdf",
+   "pass": true,
+   "detail": "37 / 37 claims found"
+  },
+  {
+   "control": "reject_a_corrupted_figure",
+   "pass": true,
+   "detail": "37 corrupted claims, 37 correctly absent from the PDF"
+  },
+  {
+   "control": "reject_the_pdf_when_the_evidence_moves",
+   "pass": true,
+   "detail": "one extra mug placement in the evidence makes 2 claim(s) stop matching the shipped PDF: ['headline', 'subgoal_mug_placed']"
+  },
+  {
+   "control": "accept_every_absence_is_stated",
+   "pass": true,
+   "detail": "6 / 6 absences stated"
+  },
+  {
+   "control": "reject_an_inflated_task_success",
+   "pass": true,
+   "detail": "no inflated task-success string among 10 tested"
+  },
+  {
+   "control": "reject_a_deck_with_the_absences_deleted",
+   "pass": true,
+   "detail": "with the ledger removed, all 6 absence controls report missing"
+  },
+  {
+   "control": "accept_sidecar_matches_the_file",
+   "pass": true,
+   "detail": "sha256 f6f31d1e82ada3e3\u2026 == sidecar f6f31d1e82ada3e3\u2026"
+  },
+  {
+   "control": "reject_a_sidecar_sha_that_does_not_match",
+   "pass": true,
+   "detail": "a one-character change to the recorded sha256 stops matching"
+  },
+  {
+   "control": "accept_pages_and_aspect_ratio",
+   "pass": true,
+   "detail": "13 pages (sidecar says 13), 960x540 pt, ratio 1.7777"
+  },
+  {
+   "control": "accept_shipped_bytes_are_the_builder_output_today",
+   "pass": true,
+   "detail": "a fresh build from today's evidence is byte-identical"
+  },
+  {
+   "control": "accept_layout_check_is_clean",
+   "pass": true,
+   "detail": "0 layout violations on the rebuild"
+  },
+  {
+   "control": "reject_a_title_that_would_collide_with_the_rule",
+   "pass": true,
+   "detail": "the builder's title-wrap detector fires on an overlong title"
+  }
+ ]
+}
