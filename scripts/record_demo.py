@@ -31,7 +31,7 @@ from envs.task import TaskMonitor, SUBGOAL_ORDER, INSTRUCTION  # noqa: E402
 from envs.controller import run_dinner_table                   # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-W, H, FPS, SPEED = 960, 540, 25, 4.0
+W, H, FPS, SPEED = 960, 540, 25, 8.0
 FONT = ImageFont.load_default(15)
 SMALL = ImageFont.load_default(12)
 

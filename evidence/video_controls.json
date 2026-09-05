@@ -1,7 +1,7 @@
 {
  "schema": "video_controls/v1",
  "artifact": "evidence/video_presentation.mp4",
- "sha256": "b11e3fce2f307236a60ba3a456a7d74002894ebcddff18da1707ee0d1c61ac86",
+ "sha256": "1dbc0a83089ec1e22e11c98220de464b81a13f070f7459e7d22bff25f45122a2",
  "duration_s": 275.56,
  "all_pass": true,
  "controls": [
@@ -18,7 +18,7 @@
   {
    "control": "accept_size_under_the_published_cap",
    "pass": true,
-   "detail": "4.7 MB against the published 300 MB"
+   "detail": "5.1 MB against the published 300 MB"
   },
   {
    "control": "reject_a_duration_over_five_minutes",
@@ -48,12 +48,12 @@
   {
    "control": "reject_a_clip_segment_that_does_not_move",
    "pass": true,
-   "detail": "5 clip segments, smallest change 2.083 (> 1.5); every card is quieter than every clip by 1.448 -- a clip that held still would be a card mislabelled as footage"
+   "detail": "5 clip segments, smallest change 3.124 (> 1.5); every card is quieter than every clip by 2.488 -- a clip that held still would be a card mislabelled as footage"
   },
   {
    "control": "accept_headline_subgoals_is_on_screen",
    "pass": true,
-   "detail": "segment 0 card 1: the line carrying '16/50' matches the decoded frame at 0.9994; the same line with '16/50' corrupted to '26/50' matches at 0.9906"
+   "detail": "segment 0 card 1: the line carrying '15/50' matches the decoded frame at 0.9994; the same line with '15/50' corrupted to '25/50' matches at 0.9905"
   },
   {
    "control": "accept_no_policy_control_is_on_screen",
@@ -68,7 +68,7 @@
   {
    "control": "accept_plate_placed_is_on_screen",
    "pass": true,
-   "detail": "segment 11 card 12: the line carrying '6/10' matches the decoded frame at 0.9997; the same line with '6/10' corrupted to '7/10' matches at 0.7943"
+   "detail": "segment 11 card 12: the line carrying '4/10' matches the decoded frame at 0.9997; the same line with '4/10' corrupted to '5/10' matches at 0.8938"
   },
   {
    "control": "accept_scene_checks_is_on_screen",
@@ -128,12 +128,12 @@
   {
    "control": "accept_object_handoffs_is_on_screen",
    "pass": true,
-   "detail": "segment 12 card 13: the line carrying 'Object hand-offs: 0' matches the decoded frame at 0.9997; the same line with 'Object hand-offs: 0' corrupted to 'Object hand-offs: 1' matches at 0.9863"
+   "detail": "segment 12 card 13: the line carrying 'Object hand-offs: 5' matches the decoded frame at 0.9997; the same line with 'Object hand-offs: 5' corrupted to 'Object hand-offs: 6' matches at 0.9941"
   },
   {
    "control": "accept_demo_frames_is_on_screen",
    "pass": true,
-   "detail": "segment 5 card 6: the line carrying '8522 frames' matches the decoded frame at 0.9996; the same line with '8522 frames' corrupted to '9522 frames' matches at 0.9925"
+   "detail": "segment 5 card 6: the line carrying '7290 frames' matches the decoded frame at 0.9996; the same line with '7290 frames' corrupted to '8290 frames' matches at 0.9874"
   },
   {
    "control": "reject_every_corrupted_figure",
@@ -158,17 +158,17 @@
   {
    "control": "accept_every_clip_is_the_shipped_demo_bytes",
    "pass": true,
-   "detail": "whole window seed 0: 0.9997  seed 1: 0.9997  seed 3: 0.9999  seed 6: 0.9998  seed 8: 0.9998  (>= 0.97)"
+   "detail": "whole window seed 0: 0.9998  seed 1: 0.9998  seed 3: 0.9999  seed 6: 0.9998  seed 8: 0.9998  (>= 0.97)"
   },
   {
    "control": "reject_a_clip_matched_against_a_different_seed",
    "pass": true,
-   "detail": "caption band, where two seeds differ: true 0:0.9994  1:0.9994  3:0.9996  6:0.9993  8:0.9992  |  decoy 0:0.8096  1:0.8164  3:0.8106  6:0.8160  8:0.7019  (< 0.9). Whole-window decoy scores 0:0.9110  1:0.9477  3:0.9737  6:0.9644  8:0.9386 -- too close to use, because every episode films the same table."
+   "detail": "caption band, where two seeds differ: true 0:0.9994  1:0.9993  3:0.9995  6:0.9992  8:0.9992  |  decoy 0:0.7648  1:0.8181  3:0.8953  6:0.7698  8:0.8384  (< 0.9). Whole-window decoy scores 0:0.9027  1:0.9273  3:0.9389  6:0.9517  8:0.9365 -- too close to use, because every episode films the same table."
   },
   {
    "control": "accept_sidecar_sha256_matches_the_file",
    "pass": true,
-   "detail": "b11e3fce2f307236\u2026 and 4661159 bytes"
+   "detail": "1dbc0a83089ec1e2\u2026 and 5149879 bytes"
   },
   {
    "control": "reject_a_one_character_change_to_the_sha256",

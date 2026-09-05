@@ -51,7 +51,7 @@
   {
    "control": "reject_the_stale_demo_sentence_passes",
    "pass": true,
-   "detail": "the literal that actually shipped -- 'the drawer only' -- is caught: ['task_success 0/10 not stated', 'earned but unstated: drawer_open 10/10', 'never earned and unnamed: fork_placed', 'never earned and unnamed: mug_placed', 'earned but unstated: plate_placed 6/10', 'never earned and unnamed: spoon_placed']"
+   "detail": "the literal that actually shipped -- 'the drawer only' -- is caught: ['task_success 0/10 not stated', 'earned but unstated: drawer_open 10/10', 'never earned and unnamed: fork_placed', 'earned but unstated: mug_placed 1/10', 'earned but unstated: plate_placed 4/10', 'never earned and unnamed: spoon_placed']"
   },
   {
    "control": "reject_document_going_stale_when_the_evidence_moves",

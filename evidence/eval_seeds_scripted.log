@@ -110,7 +110,7 @@ ls_iterations: parent has 50 (default), child has 20, keeping parent value
 
 seed  0  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=2/5
 seed  1  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=1/5
-seed  2  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=2/5
+seed  2  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=1/5
 seed  3  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=2/5
 seed  4  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=2/5
 seed  5  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=1/5
@@ -119,5 +119,5 @@ seed  7  on_table=True  reachable=True  no_penetration=True  stable=True  subgoa
 seed  8  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=2/5
 seed  9  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=2/5
 
-10 seeds, policy=scripted: all valid and stable; subgoals 16/50, task_success 0/10 -> evidence/eval_seeds_scripted.json
-scripted rc=0
+10 seeds, policy=scripted: all valid and stable; subgoals 15/50, task_success 0/10 -> evidence/eval_seeds_scripted.json
+PYTHONPATH=. python3 scripts/eval_seeds.py --seeds 10 --policy scripted  231.44s user 4.55s system 103% cpu 3:47.39 total

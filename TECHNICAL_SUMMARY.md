@@ -14,7 +14,7 @@ disagree, so a stale figure here is a red suite rather than a reader's problem.
 
 | The rubric asks for | This entry has |
 |---|---|
-| End-to-end dinner-table task, two arms | **16 / 50** sub-goals over 10 seeds; task success **0 / 10** |
+| End-to-end dinner-table task, two arms | **15 / 50** sub-goals over 10 seeds; task success **0 / 10** |
 | A VLA / multi-modal policy | **nothing.** No VLA, no VLM, no learned policy, no language input |
 | OpenVINO on Intel Core Ultra Series 2/3 | OpenVINO yes, measured; **Core Ultra silicon: none, and none claimed** |
 
@@ -93,7 +93,7 @@ What exists instead, and what it is worth:
 The choice that would be made next, recorded as a plan and not as work done:
 **ACT or SmolVLA via LeRobot**, trained on rollouts of the scripted controller
 in this same environment, because the controller already produces labelled
-bimanual trajectories at 1.6 sub-goals per episode and the scorer is policy
+bimanual trajectories at 1.5 sub-goals per episode and the scorer is policy
 agnostic. **Nothing of that is built.**
 
 ## 3. Bimanual coordination strategy
@@ -134,18 +134,21 @@ measurement:
 | Sub-goal | Scripted | No-policy control |
 |---|---|---|
 | `drawer_open` | **10 / 10** | 0 |
-| `plate_placed` | **6 / 10** | 0 |
+| `plate_placed` | **4 / 10** | 0 |
 | `fork_placed` | **0 / 10** | 0 |
 | `spoon_placed` | **0 / 10** | 0 |
-| `mug_placed` | **0 / 10** | 0 |
-| total | **16 / 50** | **0 / 50** |
+| `mug_placed` | **1 / 10** | 0 |
+| total | **15 / 50** | **0 / 50** |
 | task success | **0 / 10** | 0 / 10 |
 
-Both arms touch a manipulable object on **7 / 10** seeds. `handoff_occurred` is
-true on all ten and that number is misleading: **every recorded hand-off is on
-the drawer handle**, the two arms taking it in turn during the end-of-episode
-re-check. **No object hand-off has ever occurred**, so the coordination strategy
-described above is implemented and is not yet demonstrated. The plate is hooked
+Both arms touch a manipulable object on **10 / 10** seeds. `handoff_occurred`
+is true on all ten, and most of what it counts is still the drawer handle, the
+two arms taking it in turn during the end-of-episode re-check. It is no longer
+only that: the **mug is passed from the left arm to the right on 5 / 10 seeds**
+(0, 2, 6, 8, 9), so the coordination strategy described above is demonstrated on
+half the seeds rather than none. It cost two plates — seeds 2 and 8 fall outside
+the 50 mm tolerance when the arms cross the table carrying the mug — and the
+ten-seed total went from 16/50 to **15/50**. The plate is hooked
 by its rim and dragged flat, not picked and placed: it is 92–116 mm across
 against a 101 mm jaw span, so no jaw opening both clears it and closes on it.
 
@@ -307,8 +310,9 @@ Stated here in one place so no reader has to infer it:
    controller reading privileged `MjData` poses.
 3. **No Intel Core Ultra measurement.** The benchmark script exists and runs;
    the required silicon does not exist here.
-4. **The task has never been completed.** Task success **0 / 10**; three of five
-   sub-goals have never fired; no object hand-off has ever occurred.
+4. **The task has never been completed.** Task success **0 / 10**; two of five
+   sub-goals have never fired; the one mug that reaches its mat arrives on its
+   side (upright cosine 0.000 against a 0.906 bar).
 5. The plate is dragged, not carried.
 6. Mid-rollout perception, where the arms occlude the table, is unmeasured.
 

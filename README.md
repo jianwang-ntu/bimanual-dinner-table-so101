@@ -65,27 +65,43 @@ Same environment, same scorer, 10 seeds, the only difference the controller:
 | Run | Sub-goals | Task success | Evidence |
 |---|---|---|---|
 | `--policy none` (arms hold the home pose) | **0 / 50** | 0 / 10 | `evidence/eval_seeds.json` |
-| `--policy scripted` | **16 / 50** | 0 / 10 | `evidence/eval_seeds_scripted.json` |
+| `--policy scripted` | **15 / 50** | 0 / 10 | `evidence/eval_seeds_scripted.json` |
 
-Broken out: `drawer_open` **10/10**, `plate_placed` **6/10**, and
-`fork_placed`, `spoon_placed`, `mug_placed` **0/10 each**. Read the rest of the
-row before reading anything into it:
+Broken out: `drawer_open` **10/10**, `plate_placed` **4/10**,
+`mug_placed` **1/10**, and `fork_placed`, `spoon_placed` **0/10 each**. Read the
+rest of the row before reading anything into it:
 
 - **The task has never been completed.** `task_success` is 0/10 and
   `in_order_prefix` is 1 on every seed — the drawer, and then the first gap.
   The plate is scored out of order, so it adds a point and no sequencing.
-- **Three of the four placements have never fired.** The fork and the spoon are
-  never picked out of the drawer and the mug is never lifted.
+- **Two of the four placements have never fired.** The fork and the spoon are
+  never picked out of the drawer. The mug is gripped and lifted on 8 seeds of
+  10 and reaches its mat on **1** — the only object other than the plate this
+  entry has ever placed, and it arrives lying on its side (see below).
 - The plate is not *carried*. It is hooked by its rim and dragged flat across
   the table (see below). The scorer asks for the plate on the mat, upright and
   resting, and does not ask how it got there — but a drag is not a pick and
   place, and the write-up says so.
 - `bimanual`, meaning both arms touched a manipulable object, is true on
-  **7 seeds of 10**; on 2 only the right arm touches one and on 1 only the left.
-- `handoff_occurred` is true on 10/10 and that number is misleading: every
-  recorded hand-off is on the **drawer**, the two arms taking its handle in
-  turn during the end-of-episode re-check. **No object hand-off has been
-  achieved on any seed.** The script asks for two; it gets none.
+  **10 seeds of 10**.
+- `handoff_occurred` is true on 10/10, and most of what it counts is still the
+  **drawer** — the two arms taking its handle in turn during the end-of-episode
+  re-check. But it is no longer only that: the **mug** is passed from the left
+  arm to the right on **5 seeds of 10** (0, 2, 6, 8, 9). The script asks for
+  two object hand-offs; it gets one, on half the seeds.
+- **The total went down, not up.** Squaring the jaws onto the object (see
+  `plan_pose_squared`) is what earned the mug; it also cost the plate on seeds
+  2 and 8, where the arms now cross the table carrying the mug after the plate
+  is already down and nudge it outside its 50 mm tolerance. Sub-goals went
+  **16/50 to 15/50**, mean 1.6 to **1.5**. The trade is stated in both
+  directions because it is a trade: the first object hand-off and the first
+  non-plate placement, bought with two plates.
+- **The mug that is placed is lying on its side.** On seed 8 it finishes 9.8 mm
+  from its mat — well inside tolerance — with an upright cosine of 0.000
+  against the 0.906 bar the scorer wants, so it scores the placement and not
+  the pose. It is gripped 5 mm below the rim because that is where the scene
+  puts `mug_grasp`, and a 57 mm mug dragged from its top rim tips. Gripping at
+  the base, at mid-height, and lifting clear were all measured and all worse.
 - Nothing is dropped on any seed, and every episode is numerically stable.
 - The worst single planning residual across the ten episodes is 295 mm: one
   waypoint in a plate correction cycle that the IK could not reach at all.

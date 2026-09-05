@@ -1,8 +1,8 @@
 {
  "schema": "video_presentation/v1",
  "video": "evidence/video_presentation.mp4",
- "sha256": "b11e3fce2f307236a60ba3a456a7d74002894ebcddff18da1707ee0d1c61ac86",
- "bytes": 4661159,
+ "sha256": "1dbc0a83089ec1e22e11c98220de464b81a13f070f7459e7d22bff25f45122a2",
+ "bytes": 5149879,
  "duration_s": 275.56,
  "duration_mmss": "4:36",
  "fps": 25,
@@ -22,14 +22,14 @@
   "min_seconds": 180.0,
   "max_bytes": 300000000,
   "measured_seconds": 275.56,
-  "measured_bytes": 4661159
+  "measured_bytes": 5149879
  },
  "distinct_from": {
   "file": "evidence/demo_scripted_10seeds.mp4",
   "why": "that is the track's Required Deliverable 4, the full 10-seed rollout at 340.88 s; it is over the platform's 5-minute limit for this slot and does not state the problem, the solution or the value proposition."
  },
  "built_by": "scripts/make_video.py",
- "built_at_head": "7d43c4ec8d013b2010573ecc0b02a37632e66f33",
+ "built_at_head": "e33ae9c032c4aab653f3e4321354bfad5ea1264c",
  "source_date_epoch": "1757000000",
  "deterministic": "frames are generated, SOURCE_DATE_EPOCH is pinned and ffmpeg is invoked bitexact with a pinned thread count, so two builds from the same evidence produce byte-identical MP4s. scripts/test_video.py rebuilds and compares.",
  "audio": "none. The presentation is silent and reads from the screen; no narration is claimed and none is present.",
@@ -49,8 +49,10 @@
   "scene_verification.json",
   "slides_controls.json",
   "slides_presentation.json",
+  "squared_ik_controls.json",
   "task_predicate_controls.json",
-  "technical_summary_controls.json"
+  "technical_summary_controls.json",
+  "video_controls.json"
  ],
  "segments": [
   {
@@ -82,7 +84,7 @@
     },
     {
      "role": "bullet",
-     "text": "\u2014  A scripted bimanual controller that earns 16/50 of them, and no more"
+     "text": "\u2014  A scripted bimanual controller that earns 15/50 of them, and no more"
     },
     {
      "role": "body",
@@ -139,7 +141,7 @@
      "style": "normal"
     },
     {
-     "text": "\u2014 A scripted bimanual controller that earns 16/50 of them, and no more",
+     "text": "\u2014 A scripted bimanual controller that earns 15/50 of them, and no more",
      "size": 17,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -733,7 +735,7 @@
     },
     {
      "role": "bullet",
-     "text": "\u2014  Recorded by scripts/record_demo.py: 10 seeds, 8522 frames at 25 fps, 4\u00d7 real time."
+     "text": "\u2014  Recorded by scripts/record_demo.py: 10 seeds, 7290 frames at 25 fps, 8\u00d7 real time."
     },
     {
      "role": "bullet",
@@ -745,7 +747,7 @@
     },
     {
      "role": "body",
-     "text": "evidence/demo_scripted_10seeds.mp4   sha256 b39b2cfe69cf0f9dc5d7cab0bc3139a6\u2026"
+     "text": "evidence/demo_scripted_10seeds.mp4   sha256 eea237a0b41a80cc3a4374a4d960abf2\u2026"
     },
     {
      "role": "body",
@@ -786,7 +788,7 @@
      "style": "normal"
     },
     {
-     "text": "\u2014 Recorded by scripts/record_demo.py: 10 seeds, 8522 frames at 25 fps, 4\u00d7 real time.",
+     "text": "\u2014 Recorded by scripts/record_demo.py: 10 seeds, 7290 frames at 25 fps, 8\u00d7 real time.",
      "size": 18,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -834,7 +836,7 @@
      "style": "normal"
     },
     {
-     "text": "evidence/demo_scripted_10seeds.mp4   sha256 b39b2cfe69cf0f9dc5d7cab0bc3139a6\u2026",
+     "text": "evidence/demo_scripted_10seeds.mp4   sha256 eea237a0b41a80cc3a4374a4d960abf2\u2026",
      "size": 14,
      "color": "#94A3B1",
      "weight": "normal",
@@ -924,11 +926,11 @@
    "clip": {
     "seed": 0,
     "source": "evidence/demo_scripted_10seeds.mp4",
-    "source_sha256": "b39b2cfe69cf0f9dc5d7cab0bc3139a6ac1bb3f9316af28ee9a1ea6555385aa2",
+    "source_sha256": "eea237a0b41a80cc3a4374a4d960abf2fa067538c40da310a9de8298f6e5c86e",
     "source_start_frame": 0,
     "source_end_frame": 470,
     "episode_start_frame": 0,
-    "episode_frames": 781,
+    "episode_frames": 644,
     "pasted_unscaled_at": [
      160,
      96,
@@ -1010,11 +1012,11 @@
    "clip": {
     "seed": 1,
     "source": "evidence/demo_scripted_10seeds.mp4",
-    "source_sha256": "b39b2cfe69cf0f9dc5d7cab0bc3139a6ac1bb3f9316af28ee9a1ea6555385aa2",
-    "source_start_frame": 1462,
-    "source_end_frame": 1592,
-    "episode_start_frame": 781,
-    "episode_frames": 814,
+    "source_sha256": "eea237a0b41a80cc3a4374a4d960abf2fa067538c40da310a9de8298f6e5c86e",
+    "source_start_frame": 984,
+    "source_end_frame": 1114,
+    "episode_start_frame": 644,
+    "episode_frames": 717,
     "pasted_unscaled_at": [
      160,
      96,
@@ -1096,11 +1098,11 @@
    "clip": {
     "seed": 3,
     "source": "evidence/demo_scripted_10seeds.mp4",
-    "source_sha256": "b39b2cfe69cf0f9dc5d7cab0bc3139a6ac1bb3f9316af28ee9a1ea6555385aa2",
-    "source_start_frame": 2664,
-    "source_end_frame": 2964,
-    "episode_start_frame": 2289,
-    "episode_frames": 895,
+    "source_sha256": "eea237a0b41a80cc3a4374a4d960abf2fa067538c40da310a9de8298f6e5c86e",
+    "source_start_frame": 2216,
+    "source_end_frame": 2516,
+    "episode_start_frame": 2029,
+    "episode_frames": 701,
     "pasted_unscaled_at": [
      160,
      96,
@@ -1122,7 +1124,7 @@
     },
     {
      "role": "body",
-     "text": "drawer_open at 152.6s of 158s"
+     "text": "drawer_open at 255.3s of 260s"
     },
     {
      "role": "title",
@@ -1147,7 +1149,7 @@
      "style": "normal"
     },
     {
-     "text": "drawer_open at 152.6s of 158s",
+     "text": "drawer_open at 255.3s of 260s",
      "size": 13,
      "color": "#94A3B1",
      "weight": "normal",
@@ -1182,11 +1184,11 @@
    "clip": {
     "seed": 6,
     "source": "evidence/demo_scripted_10seeds.mp4",
-    "source_sha256": "b39b2cfe69cf0f9dc5d7cab0bc3139a6ac1bb3f9316af28ee9a1ea6555385aa2",
-    "source_start_frame": 5877,
-    "source_end_frame": 6001,
-    "episode_start_frame": 5021,
-    "episode_frames": 984,
+    "source_sha256": "eea237a0b41a80cc3a4374a4d960abf2fa067538c40da310a9de8298f6e5c86e",
+    "source_start_frame": 4704,
+    "source_end_frame": 4828,
+    "episode_start_frame": 4276,
+    "episode_frames": 814,
     "pasted_unscaled_at": [
      160,
      96,
@@ -1216,7 +1218,7 @@
     },
     {
      "role": "caption",
-     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed"
+     "text": "live predicate state: drawer_open, mug_placed  \u00b7  2/5 sub-goals on this seed"
     },
     {
      "role": "caption",
@@ -1249,7 +1251,7 @@
      "style": "normal"
     },
     {
-     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed",
+     "text": "live predicate state: drawer_open, mug_placed  \u00b7  2/5 sub-goals on this seed",
      "size": 14,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -1268,11 +1270,11 @@
    "clip": {
     "seed": 8,
     "source": "evidence/demo_scripted_10seeds.mp4",
-    "source_sha256": "b39b2cfe69cf0f9dc5d7cab0bc3139a6ac1bb3f9316af28ee9a1ea6555385aa2",
-    "source_start_frame": 7228,
-    "source_end_frame": 7418,
-    "episode_start_frame": 6891,
-    "episode_frames": 800,
+    "source_sha256": "eea237a0b41a80cc3a4374a4d960abf2fa067538c40da310a9de8298f6e5c86e",
+    "source_start_frame": 6023,
+    "source_end_frame": 6213,
+    "episode_start_frame": 5855,
+    "episode_frames": 710,
     "pasted_unscaled_at": [
      160,
      96,
@@ -1302,7 +1304,7 @@
     },
     {
      "role": "headline",
-     "text": "16/50"
+     "text": "15/50"
     },
     {
      "role": "body",
@@ -1354,7 +1356,7 @@
     },
     {
      "role": "body",
-     "text": "6/10"
+     "text": "4/10"
     },
     {
      "role": "body",
@@ -1362,7 +1364,7 @@
     },
     {
      "role": "body",
-     "text": "0/10"
+     "text": "1/10"
     },
     {
      "role": "body",
@@ -1370,7 +1372,7 @@
     },
     {
      "role": "body",
-     "text": "Both arms touched an object on 7 of 10 seeds. The longest in-order prefix reached on any seed is 1 of 5. Objects dropped: 0."
+     "text": "Both arms touched an object on 10 of 10 seeds. The longest in-order prefix reached on any seed is 1 of 5. Objects dropped: 0."
     }
    ],
    "lines": [
@@ -1415,7 +1417,7 @@
      "style": "normal"
     },
     {
-     "text": "16/50",
+     "text": "15/50",
      "size": 46,
      "color": "#E9EEF3",
      "weight": "bold",
@@ -1519,7 +1521,7 @@
      "style": "normal"
     },
     {
-     "text": "6/10",
+     "text": "4/10",
      "size": 17,
      "color": "#E9EEF3",
      "weight": "bold",
@@ -1529,15 +1531,15 @@
     {
      "text": "mug_placed",
      "size": 17,
-     "color": "#D9534F",
+     "color": "#E9EEF3",
      "weight": "normal",
      "family": "DejaVu Sans",
      "style": "normal"
     },
     {
-     "text": "0/10",
+     "text": "1/10",
      "size": 17,
-     "color": "#D9534F",
+     "color": "#E9EEF3",
      "weight": "bold",
      "family": "DejaVu Sans",
      "style": "normal"
@@ -1551,7 +1553,7 @@
      "style": "normal"
     },
     {
-     "text": "Both arms touched an object on 7 of 10 seeds. The",
+     "text": "Both arms touched an object on 10 of 10 seeds.",
      "size": 15,
      "color": "#94A3B1",
      "weight": "normal",
@@ -1559,7 +1561,7 @@
      "style": "normal"
     },
     {
-     "text": "longest in-order prefix reached on any seed is 1 of",
+     "text": "The longest in-order prefix reached on any seed is",
      "size": 15,
      "color": "#94A3B1",
      "weight": "normal",
@@ -1567,7 +1569,7 @@
      "style": "normal"
     },
     {
-     "text": "5. Objects dropped: 0.",
+     "text": "1 of 5. Objects dropped: 0.",
      "size": 15,
      "color": "#94A3B1",
      "weight": "normal",
@@ -1601,7 +1603,7 @@
     },
     {
      "role": "bullet",
-     "text": "\u2014  Object hand-offs: 0. The hand-offs the monitor records on 10 seeds are the two arms taking the drawer handle in turn."
+     "text": "\u2014  Object hand-offs: 5, every one of them the mug. The monitor also records a hand-off on 10 seeds for the drawer handle, which is the two arms taking it in turn and is not an object hand-off."
     },
     {
      "role": "bullet",
@@ -1670,7 +1672,7 @@
      "style": "normal"
     },
     {
-     "text": "\u2014 Object hand-offs: 0. The hand-offs the monitor records on 10 seeds are the two arms",
+     "text": "\u2014 Object hand-offs: 5, every one of them the mug. The monitor also records a hand-off on 10",
      "size": 17,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -1678,7 +1680,15 @@
      "style": "normal"
     },
     {
-     "text": "taking the drawer handle in turn.",
+     "text": "seeds for the drawer handle, which is the two arms taking it in turn and is not an object",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "hand-off.",
      "size": 17,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -2169,7 +2179,7 @@
     },
     {
      "role": "bullet",
-     "text": "\u2014  The benchmark ships its own falsifier: a no-policy control on identical seeds and an unchanged scorer, so the headline 16/50 cannot be an artefact of the measurement."
+     "text": "\u2014  The benchmark ships its own falsifier: a no-policy control on identical seeds and an unchanged scorer, so the headline 15/50 cannot be an artefact of the measurement."
     },
     {
      "role": "bullet",
@@ -2226,7 +2236,7 @@
      "style": "normal"
     },
     {
-     "text": "scorer, so the headline 16/50 cannot be an artefact of the measurement.",
+     "text": "scorer, so the headline 15/50 cannot be an artefact of the measurement.",
      "size": 16,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -2316,7 +2326,7 @@
     },
     {
      "role": "ledger",
-     "text": "Task success 0/10. No object hand-off. fork_placed, spoon_placed and mug_placed 0/10 each. No learned policy. Perception outside the control loop. No Intel Core Ultra measurement. No hosted demo application."
+     "text": "Task success 0/10. Object hand-offs 5, all mug. fork_placed 0/10, spoon_placed 0/10. No learned policy. Perception outside the control loop. No Intel Core Ultra measurement. No hosted demo application."
     },
     {
      "role": "bullet",
@@ -2373,7 +2383,7 @@
      "style": "normal"
     },
     {
-     "text": "Task success 0/10. No object hand-off. fork_placed, spoon_placed and mug_placed 0/10",
+     "text": "Task success 0/10. Object hand-offs 5, all mug. fork_placed 0/10, spoon_placed 0/10. No",
      "size": 17,
      "color": "#E2A24A",
      "weight": "normal",
@@ -2381,7 +2391,7 @@
      "style": "normal"
     },
     {
-     "text": "each. No learned policy. Perception outside the control loop. No Intel Core Ultra",
+     "text": "learned policy. Perception outside the control loop. No Intel Core Ultra measurement. No",
      "size": 17,
      "color": "#E2A24A",
      "weight": "normal",
@@ -2389,7 +2399,7 @@
      "style": "normal"
     },
     {
-     "text": "measurement. No hosted demo application.",
+     "text": "hosted demo application.",
      "size": 17,
      "color": "#E2A24A",
      "weight": "normal",
@@ -2458,14 +2468,14 @@
  "facts": {
   "seeds": 10,
   "denom": 50,
-  "total": 16,
+  "total": 15,
   "control_total": 0,
   "task_success": 0,
-  "bimanual": 7,
+  "bimanual": 10,
   "in_order": 1,
   "subgoals_total": 5,
   "dropped": 0,
-  "object_handoffs": 0,
+  "object_handoffs": 5,
   "drawer_handoff_seeds": 10,
   "plate_d_lo": 94.0,
   "plate_d_hi": 114.6,
@@ -2505,20 +2515,20 @@
   "light_lo": 0.602,
   "light_hi": 0.942,
   "demo_seeds": 10,
-  "demo_frames": 8522,
+  "demo_frames": 7290,
   "demo_fps": 25,
-  "demo_speed": 4.0,
-  "demo_sha": "b39b2cfe69cf0f9dc5d7cab0bc3139a6ac1bb3f9316af28ee9a1ea6555385aa2",
-  "demo_not_claimed": "This video does NOT show the task being completed: task_success is 0/10. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is drawer_open 10/10, plate_placed 6/10. Never earned on any seed: fork_placed, spoon_placed, mug_placed.",
-  "moves": 131,
+  "demo_speed": 8.0,
+  "demo_sha": "eea237a0b41a80cc3a4374a4d960abf2fa067538c40da310a9de8298f6e5c86e",
+  "demo_not_claimed": "This video does NOT show the task being completed: task_success is 0/10. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is drawer_open 10/10, plate_placed 4/10, mug_placed 1/10. Never earned on any seed: fork_placed, spoon_placed.",
+  "moves": 209,
   "slides_pages": 13
  },
  "per_goal": {
   "drawer_open": 10,
   "fork_placed": 0,
   "spoon_placed": 0,
-  "plate_placed": 6,
-  "mug_placed": 0
+  "plate_placed": 4,
+  "mug_placed": 1
  },
- "not_claimed": "Task success 0/10. Object hand-offs 0. fork_placed, spoon_placed and mug_placed 0/10 each. No learned policy. Perception outside the control loop. No Intel Core Ultra measurement. No hosted demo application. The video claims none of these and says so on screen."
+ "not_claimed": "Task success 0/10. Object hand-offs 5. fork_placed 0/10, spoon_placed 0/10. No learned policy. Perception outside the control loop. No Intel Core Ultra measurement. No hosted demo application. The video claims none of these and says so on screen."
 }

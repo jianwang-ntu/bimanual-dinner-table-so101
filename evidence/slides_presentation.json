@@ -1,8 +1,8 @@
 {
  "schema": "slides_presentation/v1",
  "pdf": "evidence/slides_presentation.pdf",
- "sha256": "5d3e88c223927cef73642d83e812315e768e609b476f7c4c3ef02209ad3c99d3",
- "bytes": 164084,
+ "sha256": "a0cbc4023eddef236e02677d38c4235ee4ca8041ccdf2e5ff7ddb40a54c506ff",
+ "bytes": 164420,
  "pages": 13,
  "page_size_inches": [
   13.333,
@@ -13,7 +13,7 @@
  "title": "SO-101 Dinner Table: a scored bimanual benchmark",
  "track": "Bimanual VLA Manipulation with Multi-Modal Reasoning \u2014 Setting Up a Dinner Table",
  "built_by": "scripts/make_slides.py",
- "built_at_head": "2847fab616a40f7c833da35034ee030f6c22d56c",
+ "built_at_head": "e33ae9c032c4aab653f3e4321354bfad5ea1264c",
  "source_date_epoch": "1757000000",
  "deterministic": "SOURCE_DATE_EPOCH is pinned, so two builds from the same evidence produce byte-identical PDFs.",
  "layout_violations": [],
@@ -30,8 +30,11 @@
   "perception_train.json",
   "scene_verification.json",
   "slides_controls.json",
+  "squared_ik_controls.json",
   "task_predicate_controls.json",
-  "technical_summary_controls.json"
+  "technical_summary_controls.json",
+  "video_controls.json",
+  "video_presentation.json"
  ],
  "text": [
   {
@@ -82,7 +85,7 @@
   {
    "slide": 1,
    "role": "headline",
-   "text": "16 / 50 sub-goals over 10 seeds"
+   "text": "15 / 50 sub-goals over 10 seeds"
   },
   {
    "slide": 1,
@@ -237,7 +240,7 @@
   {
    "slide": 4,
    "role": "body",
-   "text": "16 / 50"
+   "text": "15 / 50"
   },
   {
    "slide": 4,
@@ -322,12 +325,12 @@
   {
    "slide": 5,
    "role": "body",
-   "text": "plate_placed 6 / 10"
+   "text": "plate_placed 4 / 10"
   },
   {
    "slide": 5,
    "role": "body",
-   "text": "mug_placed 0 / 10"
+   "text": "mug_placed 1 / 10"
   },
   {
    "slide": 5,
@@ -347,7 +350,7 @@
   {
    "slide": 5,
    "role": "body",
-   "text": "object hand-offs 0 / 10"
+   "text": "object hand-offs 5 / 10"
   },
   {
    "slide": 5,
@@ -357,7 +360,7 @@
   {
    "slide": 5,
    "role": "body",
-   "text": "both arms touched an object on 7 / 10 seeds"
+   "text": "both arms touched an object on 10 / 10 seeds"
   },
   {
    "slide": 5,
@@ -372,7 +375,7 @@
   {
    "slide": 5,
    "role": "body",
-   "text": "Worst IK residual over the ten rollouts: 294.9 mm across 1,090 planned moves \u2014 waypoints the arm never reaches are the open defect this entry has not fixed."
+   "text": "Worst IK residual over the ten rollouts: 361.9 mm across 1,810 planned moves \u2014 waypoints the arm never reaches are the open defect this entry has not fixed."
   },
   {
    "slide": 6,
@@ -422,12 +425,12 @@
   {
    "slide": 6,
    "role": "body",
-   "text": "Robustness is evidenced for the two steps that fire and for nothing else: the drawer on 10 / 10 seeds and the plate on 6 / 10. There is still no performance on the other three sub-goals to be robust about. Placement randomization is rejection-sampled, so a failed episode is a controller failure and never an impossible scene."
+   "text": "Robustness is evidenced for the two steps that fire and for nothing else: the drawer on 10 / 10 seeds and the plate on 4 / 10. There is still no performance on the other three sub-goals to be robust about. Placement randomization is rejection-sampled, so a failed episode is a controller failure and never an impossible scene."
   },
   {
    "slide": 6,
    "role": "body",
-   "text": "The demo video covers the same 10 seeds and is captioned frame by frame from the live predicate state, so it cannot claim more than the evaluation reports \u00b7 sha256 b39b2cfe69cf\u2026"
+   "text": "The demo video covers the same 10 seeds and is captioned frame by frame from the live predicate state, so it cannot claim more than the evaluation reports \u00b7 sha256 eea237a0b41a\u2026"
   },
   {
    "slide": 7,
@@ -682,12 +685,12 @@
   {
    "slide": 10,
    "role": "bullet",
-   "text": "\u2014  fork_placed 0 / 10, spoon_placed 0 / 10, mug_placed 0 / 10."
+   "text": "\u2014  fork_placed 0 / 10, spoon_placed 0 / 10."
   },
   {
    "slide": 10,
    "role": "bullet",
-   "text": "\u2014  No object hand-off on any seed: object hand-offs 0 / 10."
+   "text": "\u2014  Object hand-off only ever with the mug, on 5 / 10 seeds."
   },
   {
    "slide": 10,
@@ -877,7 +880,7 @@
   {
    "slide": 13,
    "role": "body",
-   "text": "regenerates the 16 / 50 and the 0 / 50 no-policy control"
+   "text": "regenerates the 15 / 50 and the 0 / 50 no-policy control"
   },
   {
    "slide": 13,
@@ -898,14 +901,14 @@
  "facts": {
   "seeds": 10,
   "denom": 50,
-  "total": 16,
+  "total": 15,
   "control_total": 0,
   "task_success": 0,
-  "bimanual": 7,
+  "bimanual": 10,
   "in_order": 1,
   "subgoals_total": 5,
   "dropped": 0,
-  "object_handoffs": 0,
+  "object_handoffs": 5,
   "drawer_handoff_seeds": 10,
   "plate_d_lo": 94.0,
   "plate_d_hi": 114.6,
@@ -945,10 +948,10 @@
   "ultra_accept": 3,
   "ultra_reject": 4,
   "demo_seeds": 10,
-  "demo_sha": "b39b2cfe69cf",
-  "moves": 95,
-  "moves_total": 1090,
-  "ik_err_mm": 294.95
+  "demo_sha": "eea237a0b41a",
+  "moves": 152,
+  "moves_total": 1810,
+  "ik_err_mm": 361.93
  },
- "not_claimed": "The deck reports task success 0/10, object hand-offs 0/10, fork_placed 0/10, spoon_placed 0/10, mug_placed 0/10, perception outside the control loop and no Intel Core Ultra measurement. It claims no completed dinner table and no learned policy."
+ "not_claimed": "The deck reports task success 0/10, object hand-offs 5/10, fork_placed 0/10, spoon_placed 0/10, mug_placed 1/10, perception outside the control loop and no Intel Core Ultra measurement. It claims no completed dinner table and no learned policy."
 }

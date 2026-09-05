@@ -1,0 +1,56 @@
+{
+ "all_pass": true,
+ "measured": {
+  "squared_axis_deg": 28.21,
+  "position_only_axis_deg": 65.76,
+  "squared_pos_err_mm": 2.28,
+  "position_only_pos_err_mm": 11.68
+ },
+ "controls": [
+  {
+   "control": "accept_squared_puts_the_jaws_on_the_requested_line",
+   "pass": true,
+   "detail": "28.2 deg off the line, 2.3 mm off the point"
+  },
+  {
+   "control": "reject_position_only_solver_does_not",
+   "pass": true,
+   "detail": "position-only solver leaves the jaws 65.8 deg off (squared: 28.2)"
+  },
+  {
+   "control": "accept_squared_is_no_worse_on_position",
+   "pass": true,
+   "detail": "squared 2.3 mm vs position-only 11.7 mm"
+  },
+  {
+   "control": "accept_reversed_request_gives_the_same_jaw_line",
+   "pass": true,
+   "detail": "+x -> 28.2 deg, -x -> 28.2 deg"
+  },
+  {
+   "control": "accept_standoff_follows_the_requested_sense",
+   "pass": true,
+   "detail": "meeting point offset along +x: -4.8 mm for a +x request, +5.6 mm for -x"
+  },
+  {
+   "control": "accept_seed_term_keeps_the_answer_reachable",
+   "pass": true,
+   "detail": "limit margin 0.370 rad with the seed term, 0.000 rad without; joint travel 1.61 vs 1.94 rad"
+  },
+  {
+   "control": "accept_unreachable_target_falls_back_to_plan_pose",
+   "pass": true,
+   "detail": "squared residual 852 mm > 20 mm accept bar, answer identical to plan_pose: 0.00e+00 rad"
+  },
+  {
+   "control": "accept_reachable_target_does_not_fall_back",
+   "pass": true,
+   "detail": "reachable target answered by the squared solve, max joint difference from plan_pose 1.206 rad"
+  },
+  {
+   "control": "accept_empty_jaw_request_defers_to_plan_pose",
+   "pass": true,
+   "detail": "a zero-length jaw direction returns a plan_pose answer rather than dividing by it"
+  }
+ ]
+}

@@ -25,10 +25,12 @@ read top to bottom against the task instruction it implements.
 """
 from __future__ import annotations
 
+import os
+
 import numpy as np
 import mujoco
 
-from .ik import site_ik, ARM_JOINTS
+from .ik import site_ik, arm_dof, ARM_JOINTS
 from .dinner_table import ARM_X as dt_ARM_X, ARM_Y as dt_ARM_Y
 
 GRIPPER_OPEN = 1.20          # rad; jaw tips ~101 mm apart
@@ -222,6 +224,113 @@ def plan_pose(model, scratch, grip: Gripper, tip_target: np.ndarray, *,
     return best, best_err
 
 
+def plan_pose_squared(model, scratch, grip: Gripper, tip_target: np.ndarray, *,
+                      jaw_dir: np.ndarray, opening: float | None = None,
+                      standoff: float = 0.0, iters: int = 200,
+                      damping: float = 0.05, step: float = 0.5,
+                      w_axis: float = 0.05, w_seed: float = 0.01,
+                      accept_m: float = 0.020
+                      ) -> tuple[np.ndarray, float]:
+    """``plan_pose``, but the jaw closing axis is solved for, not left to chance.
+
+    ``site_ik`` constrains three numbers and the arm has five joints, so two
+    degrees of freedom fall out of the damped-least-squares step with nothing
+    asking anything of them.  What they fell out as was a gripper whose jaws
+    closed nearly straight down: measured on seed 0, the achieved jaw axis at
+    the fork, spoon and mug grasps was [-0.30 0.31 0.90], [-0.34 -0.28 0.90]
+    and [-0.53 0.55 0.65] against horizontal requests -- 64 to 66 degrees out
+    of the plane the object had to be pinched across.  Every pinch therefore
+    closed onto the table instead of around the object, and the mug was lifted
+    on 0 of 10 seeds.
+
+    ``align_roll`` cannot repair that.  It turns the jaws about ``wrist_roll``,
+    and the angle between the jaw axis and that roll axis is fixed by the
+    gripper's own geometry -- 87.8 degrees at the 50 mm opening, 62.0 at 115 mm,
+    swept out of this model.  Rolling moves the jaw axis around a cone of fixed
+    half-angle; if the cone is pointing the wrong way no roll on it is
+    horizontal.  Only the arm's other joints can tip the cone, which means the
+    orientation has to enter the solve.
+
+    So this solver stacks three residuals and lets DLS trade them off:
+
+    ``position``  the jaw meeting point on ``tip_target`` (as ``plan_pose``);
+    ``axis``      ``jaw_axis x jaw_dir``, which vanishes when the jaws close
+                  along the requested line.  The jaw axis is a line, not an
+                  arrow, so the nearer of the two senses is taken;
+    ``seed``      a weak pull back to the pose the arm is already in.
+
+    The seed term is not cosmetic.  Without it the solver returns poses that
+    are kinematically valid and physically unreachable -- on seed 0 it asked
+    for ``shoulder_lift`` 1.742 rad against a 1.745 limit, and the arm arrived
+    1.17 rad short with ``elbow_flex`` 1.8 rad out, because the servos are
+    force-limited at 2.94 Nm and the route there runs through the cabinet.
+    With it the achieved pose matches the planned one and the mug is lifted on
+    8 of 10 seeds.
+
+    If the position residual is worse than ``accept_m`` the squared solve is
+    discarded and ``plan_pose`` answers instead: a squared jaw that cannot
+    reach the object is worse than a badly-rolled one that can.
+    """
+    qadr, _ = arm_dof(model, grip.prefix)
+    qadr = np.asarray(qadr)
+    lo = np.array([model.jnt_range[mujoco.mj_name2id(
+        model, mujoco.mjtObj.mjOBJ_JOINT, grip.prefix + j)][0] for j in ARM_JOINTS])
+    hi = np.array([model.jnt_range[mujoco.mj_name2id(
+        model, mujoco.mjtObj.mjOBJ_JOINT, grip.prefix + j)][1] for j in ARM_JOINTS])
+
+    if opening is not None:
+        scratch.qpos[grip.grip_q] = opening
+    mujoco.mj_kinematics(model, scratch)
+    seed_q = scratch.qpos[qadr].copy()
+
+    want = np.asarray(jaw_dir, float)
+    n = float(np.linalg.norm(want))
+    if n < 1e-9:
+        return plan_pose(model, scratch, grip, tip_target, jaw_dir=None,
+                         opening=opening, standoff=standoff)
+    want = want / n
+    target = np.asarray(tip_target, float)
+
+    def resid(dat):
+        mujoco.mj_kinematics(model, dat)
+        ax = grip.jaw_axis(model, dat)
+        sense = 1.0 if float(ax @ want) >= 0.0 else -1.0
+        goal = target - standoff * (sense * ax) if standoff else target
+        return np.concatenate([goal - grip.tip_mid(model, dat),
+                               w_axis * np.cross(sense * ax, want),
+                               w_seed * (seed_q - dat.qpos[qadr])])
+
+    best = scratch.qpos[qadr].copy()
+    best_cost, best_pos = np.inf, np.inf
+    eps = 1e-5
+    for _ in range(iters):
+        r = resid(scratch)
+        pos = float(np.linalg.norm(r[:3]))
+        ang = float(np.linalg.norm(r[3:6])) / w_axis
+        cost = pos + 0.03 * ang
+        if cost < best_cost:
+            best_cost, best, best_pos = cost, scratch.qpos[qadr].copy(), pos
+        if pos < 1.5e-3 and ang < 0.05:
+            break
+        q0 = scratch.qpos[qadr].copy()
+        J = np.zeros((len(r), 5))
+        for k in range(5):
+            scratch.qpos[qadr[k]] = q0[k] + eps
+            J[:, k] = (resid(scratch) - r) / eps
+            scratch.qpos[qadr[k]] = q0[k]
+        J = -J
+        dq = np.linalg.solve(J.T @ J + damping ** 2 * np.eye(5), J.T @ r)
+        scratch.qpos[qadr] = np.clip(q0 + step * dq, lo, hi)
+
+    if best_pos > accept_m:
+        return plan_pose(model, scratch, grip, tip_target, jaw_dir=want,
+                         opening=opening, standoff=standoff)
+    scratch.qpos[qadr] = best
+    mujoco.mj_kinematics(model, scratch)
+    mujoco.mj_comPos(model, scratch)
+    return scratch.qpos[grip.qadr].copy(), best_pos
+
+
 # ------------------------------------------------------------------- primitives
 class Move:
     """One arm going somewhere, with the target resolved when the move starts.
@@ -231,10 +340,17 @@ class Move:
     """
 
     def __init__(self, arm: str, where, *, jaw=None, opening=None,
-                 grip=None, plan_at=None, standoff=0.0, label=""):
+                 grip=None, plan_at=None, standoff=0.0, square=False, label=""):
         self.arm, self.where, self.jaw = arm, where, jaw
         self.opening, self.grip, self.label = opening, grip, label
         self.standoff = standoff
+        # ``square`` sends this waypoint through ``plan_pose_squared``, which
+        # also solves for the direction the jaws close in.  It is opt-in per
+        # move rather than global because the plate is not pinched at all: it
+        # is hooked by the rim and dragged, and squaring the jaws for it costs
+        # the placement -- measured, 2 of 3 seeds lost when it was switched on
+        # everywhere.
+        self.square = square
         # The jaws meet ~41 mm nearer the wrist closed than open, so a pose
         # solved with them open puts the object in front of the closing point
         # and the grasp brushes past it.  ``plan_at`` solves the arm at the
@@ -464,18 +580,18 @@ def const_xy(xy):
     return lambda model, data: q
 
 
-def drag_toward(arm: str, aim, frac: float):
-    """Tip waypoint carrying the plate ``frac`` of the way to ``aim``.
+def drag_toward(arm: str, aim, frac: float, body: str = "plate"):
+    """Tip waypoint carrying ``body`` ``frac`` of the way to ``aim``.
 
     Read live at the moment the move starts and never cached: the waypoint is
-    where the jaws are now, plus a share of the plate's OWN remaining offset.
-    If the plate has slipped in the jaws, the next waypoint aims from where it
+    where the jaws are now, plus a share of the object's OWN remaining offset.
+    If it has slipped in the jaws, the next waypoint aims from where it
     actually is rather than from where the grasp assumed it would be.
     """
     def f(model, data):
         g = _grip(model, arm)
         tip = g.tip_mid(model, data)
-        c = data.xpos[_body(model, "plate")][:2]
+        c = data.xpos[_body(model, body)][:2]
         v = (np.asarray(aim(model, data), float) - c) * frac
         return np.array([tip[0] + v[0], tip[1] + v[1], tip[2]])
     return f
@@ -529,6 +645,11 @@ def _drag_plate(suffix: str = ""):
 
 HORIZ = np.array([0.0, 0.0, 1.0])          # jaws closing top-to-bottom
 X_AXIS = np.array([1.0, 0.0, 0.0])
+MUG_HOP = float(os.environ.get('MUG_HOP', 0.004))
+MUG_HOLD_FRAC = float(os.environ.get('MUG_HOLD_FRAC', 2.0))
+MUG_APPROACH = float(os.environ.get('MUG_APPROACH', 0.060))
+MUG_DESCEND = float(os.environ.get('MUG_DESCEND', -0.004))
+Y_AXIS = np.array([0.0, 1.0, 0.0])
 
 
 def dinner_table_script() -> list[tuple[dict, float]]:
@@ -574,15 +695,48 @@ def dinner_table_script() -> list[tuple[dict, float]]:
     S.append(("if", _plate_short, _drag_plate("_again")))
     S.append(("if", _plate_short, _drag_plate("_again2")))
 
-    # --- 5. mug: the left arm sets it down to the right of the plate ----------
+    # --- 5. mug: gripped and shunted across the table, one arm then the other -
+    # The mug starts ~290 mm left of centre and its mat is 140 mm right of it,
+    # which is not one arm's job: solved from home, the right arm reaches
+    # ``target_mug`` to 1.0 mm and the left arm cannot hold the pose it needs
+    # there at all.  Nor can the mug be CARRIED across -- the left arm lifted
+    # it cleanly and then stalled 151 mm short of the hand-off site, because
+    # the servos saturate at 2.94 Nm and a mug held out at arm's length is over
+    # that line, the same limit that made the plate a drag rather than a lift.
+    #
+    # So it is gripped and shunted along the table, which lets the table carry
+    # the weight and keeps the mug upright and resting -- both of which the
+    # scorer asks of it.  One long drag per grasp, not a chain of them: a
+    # single grasp moved it 129 mm and then slipped, and the three waypoints
+    # after the slip added 27 mm between them.  Re-reading the mug's own pose
+    # for every new grasp is what makes the next shunt aim from where it
+    # actually is.
+    #
+    # The grasp itself is what changed this tick.  With the jaws left to the
+    # position-only solver the mug was gripped on 0 of 10 seeds; squared, on
+    # 8 of 10.
     mug_grip = pinch(geom_width("mug_wall", 0), squeeze=0.014)
-    S.extend(_pick(("left", "mug", "mug_grasp", mug_grip, X_AXIS),
-                   open_to=GRIPPER_WIDE, lift=(0, 0, 0.060),
-                   approach=(0, 0, 0.060), descend_z=-0.004))
-    S.extend(_place("left", "target_mug", mug_grip, X_AXIS, drop_z=0.045,
-                    over_z=0.065, open_to=GRIPPER_WIDE))
+    mug_at = (None if MUG_HOLD_FRAC >= 1.95
+              else hold_above_base("mug", "mug_wall", MUG_HOLD_FRAC))
+    S.extend(_shunt("left", "mug", mug_grip, (0.32, 0.32, 0.32), hop=MUG_HOP,
+                    at=mug_at, approach_z=MUG_APPROACH, descend_z=MUG_DESCEND))
+    S.append(({"left": Home("left", label="mug_left_home"),
+               "right": Home("right", label="mug_right_home")}, 1.6))
+    # The second arm takes over from the table.  Both arms end up having held
+    # the same object, which is what ``TaskMonitor`` records as a hand-off.
+    S.extend(_shunt("right", "mug", mug_grip,
+                    (0.45, 0.60, 0.75, 0.90, 0.90, 0.90), hop=MUG_HOP,
+                    at=mug_at, approach_z=MUG_APPROACH, descend_z=MUG_DESCEND))
 
-    # --- 6. look back at the drawer ------------------------------------------
+    # --- 6. look back at the plate -------------------------------------------
+    # The mug crosses the table after the plate is already on its mat, and the
+    # arms nudge it on the way past: seed 2 finished at 45.4 mm before this
+    # section existed and outside the 50 mm tolerance after it.  Same pattern
+    # as the drawer below -- an action the controller really performed, undone
+    # by a later one, is worth re-checking rather than assuming.
+    S.append(("if", _plate_short, _drag_plate("_final")))
+
+    # --- 7. look back at the drawer ------------------------------------------
     # Twice, because once is measurably not enough: the drawer is opened on
     # every seed and ends shut on four of ten, and a single retry left three of
     # those four still shut.  The arms work over an open drawer for two thirds
@@ -633,7 +787,7 @@ def _open_drawer(suffix: str = "", from_home: bool = False):
 
 
 def _pick(spec, *, lift=(0.0, 0.0, 0.070), approach=(0.0, 0.0, 0.070),
-          open_to=GRIPPER_OPEN, descend_z=0.002):
+          open_to=GRIPPER_OPEN, descend_z=0.002, square=False):
     """Approach, descend, close, lift.
 
     ``approach`` and ``lift`` are vectors, not heights, because the cutlery
@@ -653,54 +807,120 @@ def _pick(spec, *, lift=(0.0, 0.0, 0.070), approach=(0.0, 0.0, 0.070),
     # The approach pose is solved with the jaws where they will be OPEN: it is
     # only a via point, and solving it closed costs 40 mm of reach the arm
     # does not have at the far corners of the table.
-    out.append(({arm: Move(arm, point(approach), jaw=jaw,
+    out.append(({arm: Move(arm, point(approach), jaw=jaw, square=square,
                            opening=open_to, label=f"{body}_above")}, 1.5))
     out.append(({arm: Move(arm, point((0.0, 0.0, descend_z)), jaw=jaw,
-                           opening=open_to, plan_at=close_to,
+                           opening=open_to, plan_at=close_to, square=square,
                            label=f"{body}_descend")}, 1.2))
     out.append(({arm: Grip(arm, close_to, label=f"{body}_close")}, 0.8))
-    out.append(({arm: Move(arm, point(lift), jaw=jaw,
+    out.append(({arm: Move(arm, point(lift), jaw=jaw, square=square,
                            label=f"{body}_lift")}, 1.2))
     return out
 
 
 def _place(arm, target, hold, jaw, *, drop_z=0.030, over_z=0.090,
-           open_to=GRIPPER_OPEN):
+           open_to=GRIPPER_OPEN, square=False):
     return [
-        ({arm: Move(arm, site_xyz(target, dz=over_z), jaw=jaw, label=f"{target}_over")}, 1.5),
-        ({arm: Move(arm, site_xyz(target, dz=drop_z), jaw=jaw, label=f"{target}_down")}, 1.2),
+        ({arm: Move(arm, site_xyz(target, dz=over_z), jaw=jaw, square=square,
+                    label=f"{target}_over")}, 1.5),
+        ({arm: Move(arm, site_xyz(target, dz=drop_z), jaw=jaw, square=square,
+                    label=f"{target}_down")}, 1.2),
         ({arm: Grip(arm, open_to, label=f"{target}_release")}, 0.6),
         ({arm: Move(arm, site_xyz(target, dz=0.110), opening=open_to,
                     label=f"{target}_retreat")}, 1.1),
     ]
 
 
-def _handoff(giver, taker, body, target, jaw, *, hold=GRIP_PINCH):
+def hold_above_base(body: str, geom: str, frac: float):
+    """A grip point ``up`` metres above the body's own base, read live.
+
+    The scene puts ``mug_grasp`` 5 mm below the rim, which is the worst place
+    on a 57 mm mug to pull from: dragging it from the top rim tipped it over on
+    every seed that reached the mat -- seed 0 finished 9.8 mm from its target
+    with an upright cosine of 0.000 against a 0.906 bar, which scores nothing.
+    Pulling near the base puts the force under the centre of mass instead.
+    """
+    def f(model, data):
+        gid = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_GEOM, geom)
+        half = float(model.geom_size[gid][1])
+        c = data.xpos[_body(model, body)].copy()
+        c[2] = c[2] - half + frac * half
+        return c
+    return f
+
+
+def _shunt(arm, body, hold, fracs, *, target="target_mug", jaw=None,
+           open_to=GRIPPER_WIDE, at=None, hop=0.004, approach_z=0.060,
+           descend_z=-0.004):
+    """Grip ``body``, drag it a share of the way to ``target``, let go, repeat.
+
+    One drag per grasp.  A grip on a 52 mm mug wall holds for one long pull and
+    then slips -- measured, 129 mm on the first waypoint and 27 mm across the
+    three after it -- so the alternative to re-grasping is a waypoint chain
+    that stops moving the object while the arm keeps moving.  Every grasp in
+    the sequence re-reads the mug's live pose, so a slip costs distance, not
+    correctness.
+    """
+    jaw = X_AXIS if jaw is None else jaw
+    out = []
+    for i, frac in enumerate(fracs):
+        tag = f"{body}_{arm}{i + 1}"
+        out += _pick((arm, tag, at if at is not None else f"{body}_grasp",
+                      hold, jaw),
+                     open_to=open_to, lift=(0, 0, hop),
+                     approach=(0, 0, approach_z), descend_z=descend_z,
+                     square=True)
+        out.append(({arm: Move(arm, drag_toward(arm, site_xy(target), frac,
+                                                body=body),
+                               jaw=jaw, square=True,
+                               label=f"{tag}_drag")}, 1.4))
+        if hop > 0.006:
+            out.append(({arm: Move(arm, tip_up(arm, -hop), jaw=jaw, square=True,
+                                   label=f"{tag}_set_down")}, 1.0))
+        out.append(({arm: Grip(arm, open_to, label=f"{tag}_release")}, 0.6))
+        out.append(({arm: Move(arm, tip_up(arm, 0.085), opening=open_to,
+                               label=f"{tag}_clear")}, 1.0))
+    return out
+
+
+def _handoff(giver, taker, body, target, jaw, *, hold=GRIP_PINCH,
+             open_to=GRIPPER_OPEN, square=False, drop_z=0.030, over_z=0.090,
+             taker_jaw=None, square_carry=None):
     """Giver holds the object over the shared zone; taker grasps and places it.
 
     The taker closes before the giver opens, so the object is held by both arms
     for a moment -- that overlap is what ``TaskMonitor`` records as a hand-off.
     """
     grasp = f"{body}_grasp"
+    # The taker cannot use the giver's own grip line: on a mug the giver's jaws
+    # occupy the two faces ``jaw`` names, and a taker aimed at the same line
+    # closes on the giver's fingers.  ``taker_jaw`` is the perpendicular.
+    tjaw = jaw if taker_jaw is None else taker_jaw
+    # Carrying is not grasping.  Squaring the jaws for the CARRY waypoints asks
+    # for a wrist the loaded arm cannot hold -- measured on seed 0, the giver
+    # planned the hand-off site to 5.3 mm and arrived 191.8 mm away, and the
+    # mug fell.  Squaring is kept for the moves that pinch.
+    carry = square if square_carry is None else square_carry
     return [
         # giver presents it; taker comes in from above at the same time
         ({giver: Move(giver, site_xyz("handoff", dz=0.030), jaw=jaw,
-                      label=f"{body}_present"),
-          taker: Move(taker, site_xyz("handoff", dz=0.115), jaw=jaw,
-                      opening=GRIPPER_OPEN, label=f"{body}_meet")}, 1.8),
-        ({taker: Move(taker, site_xyz(grasp, dz=0.040), jaw=jaw,
-                      opening=GRIPPER_OPEN, plan_at=hold,
+                      square=carry, label=f"{body}_present"),
+          taker: Move(taker, site_xyz("handoff", dz=0.115), jaw=tjaw,
+                      opening=open_to, label=f"{body}_meet")}, 1.8),
+        ({taker: Move(taker, site_xyz(grasp, dz=0.040), jaw=tjaw,
+                      opening=open_to, plan_at=hold, square=square,
                       label=f"{body}_take_above")}, 1.2),
-        ({taker: Move(taker, site_xyz(grasp, dz=0.004), jaw=jaw,
-                      opening=GRIPPER_OPEN, plan_at=hold,
+        ({taker: Move(taker, site_xyz(grasp, dz=0.004), jaw=tjaw,
+                      opening=open_to, plan_at=hold, square=square,
                       label=f"{body}_take")}, 1.0),
         ({taker: Grip(taker, hold, label=f"{body}_taker_close")}, 0.8),
-        ({giver: Grip(giver, GRIPPER_OPEN, label=f"{body}_giver_release")}, 0.6),
-        ({giver: Move(giver, tip_up(giver, 0.085), opening=GRIPPER_OPEN,
+        ({giver: Grip(giver, open_to, label=f"{body}_giver_release")}, 0.6),
+        ({giver: Move(giver, tip_up(giver, 0.085), opening=open_to,
                       label=f"{body}_giver_clear"),
-          taker: Move(taker, site_xyz(grasp, dz=0.075), jaw=jaw,
+          taker: Move(taker, site_xyz(grasp, dz=0.075), jaw=tjaw, square=carry,
                       label=f"{body}_taker_lift")}, 1.5),
-    ] + _place(taker, target, hold, jaw)
+    ] + _place(taker, target, hold, tjaw, open_to=open_to, square=square,
+               drop_z=drop_z, over_z=over_z)
 
 
 # -------------------------------------------------------------------- execution
@@ -738,10 +958,12 @@ class Rollout:
         standoff = mv.standoff
         if callable(standoff):
             standoff = standoff(self.model, self.data, g)
-        q, err = plan_pose(self.model, self.scratch, g, target,
-                           jaw_dir=None if jaw is None else np.asarray(jaw, float),
-                           opening=plan_at if plan_at is not None else opening,
-                           standoff=standoff)
+        solver = (plan_pose_squared if (mv.square and jaw is not None)
+                  else plan_pose)
+        q, err = solver(self.model, self.scratch, g, target,
+                        jaw_dir=None if jaw is None else np.asarray(jaw, float),
+                        opening=plan_at if plan_at is not None else opening,
+                        standoff=standoff)
         self.last_err = err
         out = q.copy()
         out[-1] = opening if opening is not None else cur[-1]

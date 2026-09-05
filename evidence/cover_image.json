@@ -1,7 +1,7 @@
 {
  "image": "evidence/cover_image.png",
- "sha256": "ad0b3deb7b10344815501ac1f43449e626b93ae557ee2a3d4aa720497ff463ba",
- "bytes": 526093,
+ "sha256": "a1b8964448598a6ae02ce902161b97eb32439a32e922b3ef919ff74991c41646",
+ "bytes": 530547,
  "format": "PNG",
  "size": [
   1920,
@@ -17,7 +17,7 @@
   "inset_camera": "top_cam",
   "state": "final state of a live rollout of envs/controller.py",
   "mujoco": "3.12.0",
-  "sim_time_s": 124.96
+  "sim_time_s": 206.23
  },
  "cross_check": {
   "live": {
@@ -43,10 +43,10 @@
     "drawer_open": 10,
     "fork_placed": 0,
     "spoon_placed": 0,
-    "plate_placed": 6,
-    "mug_placed": 0
+    "plate_placed": 4,
+    "mug_placed": 1
    },
-   "subgoals_met": 16,
+   "subgoals_met": 15,
    "subgoals_total": 50,
    "task_success": 0
   },
@@ -75,29 +75,29 @@
   },
   {
    "role": "measured",
-   "text": "Measured over 10 randomized seeds: drawer_open 10/10  fork_placed 0/10  spoon_placed 0/10  plate_placed 6/10  mug_placed 0/10"
+   "text": "Measured over 10 randomized seeds: drawer_open 10/10  fork_placed 0/10  spoon_placed 0/10  plate_placed 4/10  mug_placed 1/10"
   },
   {
    "role": "scored",
-   "text": "16/50 sub-goals against a 0/50 no-policy control on the same seeds and the same scorer."
+   "text": "15/50 sub-goals against a 0/50 no-policy control on the same seeds and the same scorer."
   },
   {
    "role": "absent",
-   "text": "NOT SHOWN: task_success is 0/10 -- the table is never fully set. Never earned on any seed: fork_placed, spoon_placed, mug_placed. No learned policy: envs/controller.py is scripted IK and reads no camera."
+   "text": "NOT SHOWN: task_success is 0/10 -- the table is never fully set. Never earned on any seed: fork_placed, spoon_placed. No learned policy: envs/controller.py is scripted IK and reads no camera."
   },
   {
    "role": "frame",
-   "text": "This frame is the real final state of seed 0 after 125.0 s of simulation -- earned here: drawer_open, plate_placed."
+   "text": "This frame is the real final state of seed 0 after 206.2 s of simulation -- earned here: drawer_open, plate_placed."
   },
   {
    "role": "earned_goals",
-   "text": "drawer_open, plate_placed"
+   "text": "drawer_open, plate_placed, mug_placed"
   }
  ],
  "fonts": {
   "title": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
   "body": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
  },
- "not_claimed": "The cover shows one real final state and the measured tallies beside it. It does not show a completed dinner table: task_success is 0/10. fork_placed, spoon_placed, mug_placed were never earned on any seed. The controller is scripted IK over privileged simulator state, not a learned or camera-driven policy, and no Intel hardware measurement appears on this image.",
+ "not_claimed": "The cover shows one real final state and the measured tallies beside it. It does not show a completed dinner table: task_success is 0/10. fork_placed, spoon_placed were never earned on any seed. The controller is scripted IK over privileged simulator state, not a learned or camera-driven policy, and no Intel hardware measurement appears on this image.",
  "reproducibility": "Deterministic on this machine: same seed, same controller bytes, same MuJoCo build. The sha256 is an integrity anchor for THIS file; a different GPU or font build re-renders equivalent pixels, not identical bytes."
 }

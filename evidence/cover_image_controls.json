@@ -1,6 +1,6 @@
 {
  "image": "evidence/cover_image.png",
- "sha256": "ad0b3deb7b10344815501ac1f43449e626b93ae557ee2a3d4aa720497ff463ba",
+ "sha256": "a1b8964448598a6ae02ce902161b97eb32439a32e922b3ef919ff74991c41646",
  "ihdr": {
   "width": 1920,
   "height": 1080,
@@ -12,15 +12,15 @@
  },
  "pixel_stats": {
   "render_region": {
-   "mean": 122.69,
-   "std": 67.44,
-   "distinct_colours": 493,
+   "mean": 123.15,
+   "std": 67.72,
+   "distinct_colours": 508,
    "samples": 28050
   },
   "caption_band": {
-   "mean": 39.15,
-   "std": 57.97,
-   "distinct_colours": 188,
+   "mean": 39.08,
+   "std": 57.86,
+   "distinct_colours": 187,
    "samples": 9900
   }
  },
@@ -38,17 +38,17 @@
   {
    "control": "integrity.accept",
    "pass": true,
-   "detail": "sha256 ad0b3deb7b103448 over 526093 bytes matches the record"
+   "detail": "sha256 a1b8964448598a6a over 530547 bytes matches the record"
   },
   {
    "control": "integrity.reject_flipped_byte",
    "pass": true,
-   "detail": "one flipped byte at offset 263046 is caught"
+   "detail": "one flipped byte at offset 265273 is caught"
   },
   {
    "control": "figures.accept",
    "pass": true,
-   "detail": "16/50 sub-goals and the 0/50 control re-derived verbatim"
+   "detail": "15/50 sub-goals and the 0/50 control re-derived verbatim"
   },
   {
    "control": "figures.reject_stale_after_evidence_moves",
@@ -58,7 +58,7 @@
   {
    "control": "honesty.accept",
    "pass": true,
-   "detail": "states task_success 0/10, names all 3 never-earned sub-goals, discloses the scripted controller"
+   "detail": "states task_success 0/10, names all 2 never-earned sub-goals, discloses the scripted controller"
   },
   {
    "control": "honesty.reject_inflated_success",
@@ -68,7 +68,7 @@
   {
    "control": "honesty.reject_deleted_absence_clause",
    "pass": true,
-   "detail": "deleting the never-earned list is caught: never-earned sub-goals not named on the cover: ['fork_placed', 'spoon_placed', 'mug_placed']"
+   "detail": "deleting the never-earned list is caught: never-earned sub-goals not named on the cover: ['fork_placed', 'spoon_placed']"
   },
   {
    "control": "provenance.accept",
@@ -83,7 +83,7 @@
   {
    "control": "pixels.accept_real_render",
    "pass": true,
-   "detail": "render region std 67.4 over 493 distinct colours; caption band mean luma 39.1"
+   "detail": "render region std 67.7 over 508 distinct colours; caption band mean luma 39.1"
   },
   {
    "control": "pixels.reject_flat_placeholder",

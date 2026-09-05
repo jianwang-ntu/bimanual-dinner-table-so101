@@ -563,8 +563,12 @@ def build_tail_cards(F, dur):
         f"The plate is hooked by its rim and dragged flat, not picked and placed: it is "
         f"{F['plate_d_lo']:.0f}–{F['plate_d_hi']:.0f} mm across against a 101 mm jaw span, so no jaw "
         f"opening both clears it and closes on it.",
-        f"Object hand-offs: {F['object_handoffs']}. The hand-offs the monitor records on "
-        f"{F['drawer_handoff_seeds']} seeds are the two arms taking the drawer handle in turn.",
+        (f"Object hand-offs: {F['object_handoffs']}. The hand-offs the monitor records on "
+         f"{F['drawer_handoff_seeds']} seeds are the two arms taking the drawer handle in turn."
+         if F['object_handoffs'] == 0 else
+         f"Object hand-offs: {F['object_handoffs']}, every one of them the mug. The monitor also "
+         f"records a hand-off on {F['drawer_handoff_seeds']} seeds for the drawer handle, which is "
+         f"the two arms taking it in turn and is not an object hand-off."),
         "There is no learned policy: no VLA, no imitation learning, no language conditioning. "
         "The controller is scripted and reads privileged simulator state.",
     ], size=17, maxw=R - L - 0.02)
@@ -650,9 +654,13 @@ def build_tail_cards(F, dur):
     fig = new_card("What this entry does not claim", kicker="8 / close")
     panel(fig, (L, 0.545, R - L, 0.225))
     flow(fig, L + 0.025, 0.720,
-         "Task success 0/10. No object hand-off. fork_placed, spoon_placed and mug_placed 0/10 each. "
-         "No learned policy. Perception outside the control loop. No Intel Core Ultra measurement. "
-         "No hosted demo application.",
+         (f"Task success {F['task_success']}/{F['seeds']}. "
+          + ("No object hand-off. " if F['object_handoffs'] == 0
+             else f"Object hand-offs {F['object_handoffs']}, all mug. ")
+          + ", ".join(f"{g} {F['per_goal'][g]}/{F['seeds']}"
+                      for g in F['goal_order'] if F['per_goal'][g] == 0)
+          + ". No learned policy. Perception outside the control loop. "
+            "No Intel Core Ultra measurement. No hosted demo application."),
          size=17, color=WARN, maxw=R - L - 0.06, role="ledger")
     bullets(fig, L, 0.470, [
         f"Reproduce the headline from a clean clone: python3 scripts/eval_seeds.py --seeds "
@@ -908,8 +916,10 @@ def build(out_mp4: pathlib.Path, out_sidecar: pathlib.Path) -> dict:
         "per_goal": F["per_goal"],
         "not_claimed": (
             f"Task success {F['task_success']}/{F['seeds']}. Object hand-offs "
-            f"{F['object_handoffs']}. fork_placed, spoon_placed and mug_placed "
-            f"0/{F['seeds']} each. No learned policy. Perception outside the control loop. "
+            f"{F['object_handoffs']}. "
+            + ", ".join(f"{g} {F['per_goal'][g]}/{F['seeds']}"
+                        for g in F['goal_order'] if F['per_goal'][g] == 0)
+            + f". No learned policy. Perception outside the control loop. "
             f"No Intel Core Ultra measurement. No hosted demo application. The video claims "
             f"none of these and says so on screen."
         ),

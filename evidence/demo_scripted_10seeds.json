@@ -1,19 +1,19 @@
 {
  "video": "evidence/demo_scripted_10seeds.mp4",
- "sha256": "b39b2cfe69cf0f9dc5d7cab0bc3139a6ac1bb3f9316af28ee9a1ea6555385aa2",
+ "sha256": "eea237a0b41a80cc3a4374a4d960abf2fa067538c40da310a9de8298f6e5c86e",
  "seeds": 10,
  "fps": 25,
- "speed": 4.0,
+ "speed": 8.0,
  "size": [
   960,
   540
  ],
- "frames": 8522,
+ "frames": 7290,
  "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
  "subgoals_met_per_seed": [
   2,
   1,
-  2,
+  1,
   2,
   2,
   1,
@@ -22,9 +22,9 @@
   2,
   2
  ],
- "subgoals_met_total": "16/50",
+ "subgoals_met_total": "15/50",
  "task_success_count": 0,
- "not_claimed": "This video does NOT show the task being completed: task_success is 0/10. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is drawer_open 10/10, plate_placed 6/10. Never earned on any seed: fork_placed, spoon_placed, mug_placed.",
+ "not_claimed": "This video does NOT show the task being completed: task_success is 0/10. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is drawer_open 10/10, plate_placed 4/10, mug_placed 1/10. Never earned on any seed: fork_placed, spoon_placed.",
  "episodes": [
   {
    "seed": 0,
@@ -86,8 +86,8 @@
     }
    },
    "rollout": {
-    "moves": 95,
-    "sim_time_s": 124.96,
+    "moves": 152,
+    "sim_time_s": 206.23,
     "max_ik_err_mm": 12.9
    },
    "task": {
@@ -110,10 +110,16 @@
       "t": 34.428
      },
      {
+      "object": "mug",
+      "from": "left",
+      "to": "right",
+      "t": 135.114
+     },
+     {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 117.444
+      "t": 198.67
      }
     ],
     "handoff_occurred": true,
@@ -128,7 +134,7 @@
      "drawer_open": 5.61,
      "plate_placed": 70.002
     },
-    "sim_time_s": 124.96
+    "sim_time_s": 206.23
    }
   },
   {
@@ -191,8 +197,8 @@
     }
    },
    "rollout": {
-    "moves": 103,
-    "sim_time_s": 130.352,
+    "moves": 177,
+    "sim_time_s": 229.542,
     "max_ik_err_mm": 21.7
    },
    "task": {
@@ -232,7 +238,7 @@
     "first_completion_times_s": {
      "drawer_open": 5.87
     },
-    "sim_time_s": 130.352
+    "sim_time_s": 229.542
    }
   },
   {
@@ -295,19 +301,19 @@
     }
    },
    "rollout": {
-    "moves": 84,
-    "sim_time_s": 111.084,
-    "max_ik_err_mm": 12.36
+    "moves": 162,
+    "sim_time_s": 214.018,
+    "max_ik_err_mm": 361.93
    },
    "task": {
     "subgoals": {
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": true,
+     "plate_placed": false,
      "mug_placed": false
     },
-    "subgoals_met": 2,
+    "subgoals_met": 1,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
@@ -323,20 +329,27 @@
       "from": "left",
       "to": "right",
       "t": 42.312
+     },
+     {
+      "object": "mug",
+      "from": "left",
+      "to": "right",
+      "t": 122.47
      }
     ],
     "handoff_occurred": true,
     "arms_that_touched_an_object": [
+     "left",
      "right"
     ],
-    "bimanual": false,
+    "bimanual": true,
     "objects_dropped": [],
     "max_drawer_travel_m": 0.0914,
     "first_completion_times_s": {
      "drawer_open": 5.932,
      "plate_placed": 71.058
     },
-    "sim_time_s": 111.084
+    "sim_time_s": 214.018
    }
   },
   {
@@ -399,8 +412,8 @@
     }
    },
    "rollout": {
-    "moves": 113,
-    "sim_time_s": 143.332,
+    "moves": 170,
+    "sim_time_s": 224.602,
     "max_ik_err_mm": 25.8
    },
    "task": {
@@ -427,20 +440,33 @@
       "from": "left",
       "to": "right",
       "t": 45.958
+     },
+     {
+      "object": "drawer",
+      "from": "right",
+      "to": "left",
+      "t": 133.876
+     },
+     {
+      "object": "drawer",
+      "from": "left",
+      "to": "right",
+      "t": 204.106
      }
     ],
     "handoff_occurred": true,
     "arms_that_touched_an_object": [
+     "left",
      "right"
     ],
-    "bimanual": false,
+    "bimanual": true,
     "objects_dropped": [],
     "max_drawer_travel_m": 0.0918,
     "first_completion_times_s": {
      "drawer_open": 5.926,
      "plate_placed": 70.876
     },
-    "sim_time_s": 143.332
+    "sim_time_s": 224.602
    }
   },
   {
@@ -503,8 +529,8 @@
     }
    },
    "rollout": {
-    "moves": 115,
-    "sim_time_s": 140.536,
+    "moves": 189,
+    "sim_time_s": 239.726,
     "max_ik_err_mm": 200.43
    },
    "task": {
@@ -545,7 +571,7 @@
      "drawer_open": 5.884,
      "plate_placed": 114.67
     },
-    "sim_time_s": 140.536
+    "sim_time_s": 239.726
    }
   },
   {
@@ -608,8 +634,8 @@
     }
    },
    "rollout": {
-    "moves": 125,
-    "sim_time_s": 153.516,
+    "moves": 201,
+    "sim_time_s": 255.102,
     "max_ik_err_mm": 290.63
    },
    "task": {
@@ -649,7 +675,7 @@
     "first_completion_times_s": {
      "drawer_open": 6.532
     },
-    "sim_time_s": 153.516
+    "sim_time_s": 255.102
    }
   },
   {
@@ -712,8 +738,8 @@
     }
    },
    "rollout": {
-    "moves": 131,
-    "sim_time_s": 157.56,
+    "moves": 209,
+    "sim_time_s": 260.494,
     "max_ik_err_mm": 294.95
    },
    "task": {
@@ -740,19 +766,38 @@
       "from": "left",
       "to": "right",
       "t": 41.214
+     },
+     {
+      "object": "drawer",
+      "from": "right",
+      "to": "left",
+      "t": 149.002
+     },
+     {
+      "object": "mug",
+      "from": "left",
+      "to": "right",
+      "t": 155.88
+     },
+     {
+      "object": "drawer",
+      "from": "left",
+      "to": "right",
+      "t": 215.798
      }
     ],
     "handoff_occurred": true,
     "arms_that_touched_an_object": [
-     "left"
+     "left",
+     "right"
     ],
-    "bimanual": false,
+    "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0917,
+    "max_drawer_travel_m": 0.0918,
     "first_completion_times_s": {
-     "drawer_open": 152.554
+     "drawer_open": 255.328
     },
-    "sim_time_s": 157.56
+    "sim_time_s": 260.494
    }
   },
   {
@@ -815,9 +860,9 @@
     }
    },
    "rollout": {
-    "moves": 117,
-    "sim_time_s": 141.884,
-    "max_ik_err_mm": 161.42
+    "moves": 195,
+    "sim_time_s": 244.818,
+    "max_ik_err_mm": 161.48
    },
    "task": {
     "subgoals": {
@@ -856,7 +901,7 @@
     "first_completion_times_s": {
      "drawer_open": 5.93
     },
-    "sim_time_s": 141.884
+    "sim_time_s": 244.818
    }
   },
   {
@@ -919,17 +964,17 @@
     }
    },
    "rollout": {
-    "moves": 100,
-    "sim_time_s": 128.108,
-    "max_ik_err_mm": 17.05
+    "moves": 174,
+    "sim_time_s": 227.298,
+    "max_ik_err_mm": 27.77
    },
    "task": {
     "subgoals": {
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": true,
-     "mug_placed": false
+     "plate_placed": false,
+     "mug_placed": true
     },
     "subgoals_met": 2,
     "subgoals_total": 5,
@@ -943,10 +988,16 @@
       "t": 24.932
      },
      {
+      "object": "mug",
+      "from": "left",
+      "to": "right",
+      "t": 125.234
+     },
+     {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 107.57
+      "t": 206.76
      }
     ],
     "handoff_occurred": true,
@@ -959,9 +1010,10 @@
     "max_drawer_travel_m": 0.0916,
     "first_completion_times_s": {
      "drawer_open": 5.99,
-     "plate_placed": 65.734
+     "plate_placed": 65.734,
+     "mug_placed": 159.916
     },
-    "sim_time_s": 128.108
+    "sim_time_s": 227.298
    }
   },
   {
@@ -1024,8 +1076,8 @@
     }
    },
    "rollout": {
-    "moves": 107,
-    "sim_time_s": 133.048,
+    "moves": 181,
+    "sim_time_s": 232.238,
     "max_ik_err_mm": 21.33
    },
    "task": {
@@ -1048,10 +1100,16 @@
       "t": 29.746
      },
      {
+      "object": "mug",
+      "from": "left",
+      "to": "right",
+      "t": 143.164
+     },
+     {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 125.552
+      "t": 224.694
      }
     ],
     "handoff_occurred": true,
@@ -1061,14 +1119,13 @@
     ],
     "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0922,
+    "max_drawer_travel_m": 0.0921,
     "first_completion_times_s": {
      "drawer_open": 5.668,
      "plate_placed": 96.182
     },
-    "sim_time_s": 133.048
+    "sim_time_s": 232.238
    }
   }
- ],
- "not_claimed_amended": "2026-09-05T10:15Z: the previous sentence was a hand-written literal that said the only sub-goal earned was the drawer. That stopped being true when plate_placed started firing on 6 of 10 seeds, and the literal was never updated. It is now derived by scripts/record_demo.py::not_claimed() from these same episode rows. No measurement, and no byte of the video, was changed. Previous text: This video does NOT show the task being completed. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is the drawer only."
+ ]
 }

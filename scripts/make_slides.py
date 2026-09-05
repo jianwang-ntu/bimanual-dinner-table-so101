@@ -719,11 +719,13 @@ def s10_absences(F):
         "No learned policy: no VLA, no imitation learning, no language conditioning.",
         f"Task success {F['task_success']} / {F['seeds']} — the table has never "
         f"been set.",
-        f"fork_placed {F['per_goal']['fork_placed']} / {F['seeds']}, spoon_placed "
-        f"{F['per_goal']['spoon_placed']} / {F['seeds']}, mug_placed "
-        f"{F['per_goal']['mug_placed']} / {F['seeds']}.",
-        f"No object hand-off on any seed: object hand-offs "
-        f"{F['object_handoffs']} / {F['seeds']}.",
+        ", ".join(f"{g} {F['per_goal'][g]} / {F['seeds']}"
+                  for g in F['goal_order'] if F['per_goal'][g] == 0) + ".",
+        (f"No object hand-off on any seed: object hand-offs "
+         f"{F['object_handoffs']} / {F['seeds']}."
+         if F['object_handoffs'] == 0 else
+         f"Object hand-off only ever with the mug, on "
+         f"{F['object_handoffs']} / {F['seeds']} seeds."),
         "Perception is not in the control loop; the controller reads privileged "
         "simulator state.",
         f"No Intel Core Ultra measurement: {F['bench_verdict']}.",
