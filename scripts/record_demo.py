@@ -105,6 +105,28 @@ class FFmpeg:
             raise RuntimeError("ffmpeg failed")
 
 
+def not_claimed(rows: list[dict]) -> str:
+    """Say what the video does NOT show, derived from the rollouts it filmed.
+
+    This sentence was a hand-written literal until 2026-09-05 and it went stale
+    the moment the controller started placing the plate: it still said the only
+    sub-goal earned was the drawer.  Deriving it means it cannot say that again.
+    """
+    counts: dict[str, int] = {}
+    for r in rows:
+        for goal, ok in r["task"]["subgoals"].items():
+            counts[goal] = counts.get(goal, 0) + bool(ok)
+    n = len(rows)
+    earned = [f"{g} {c}/{n}" for g, c in counts.items() if c]
+    never = [g for g, c in counts.items() if not c]
+    wins = sum(1 for r in rows if r["task"]["task_success"])
+    return (f"This video does NOT show the task being completed: task_success is "
+            f"{wins}/{n}. It shows the scripted controller running on {n} "
+            f"randomized seeds and the live sub-goal state it earns, which is "
+            + (", ".join(earned) if earned else "nothing")
+            + (f". Never earned on any seed: {', '.join(never)}." if never else "."))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--seeds", type=int, default=10)
@@ -131,10 +153,7 @@ def main() -> int:
         "subgoals_met_per_seed": met,
         "subgoals_met_total": f"{sum(met)}/{5 * len(met)}",
         "task_success_count": sum(1 for r in rows if r["task"]["task_success"]),
-        "not_claimed": "This video does NOT show the task being completed. It "
-                       "shows the scripted controller running on 10 randomized "
-                       "seeds and the live sub-goal state it earns, which is "
-                       "the drawer only.",
+        "not_claimed": not_claimed(rows),
         "episodes": rows,
     }
     import hashlib

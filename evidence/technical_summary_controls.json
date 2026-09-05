@@ -1,0 +1,62 @@
+{
+ "all_pass": true,
+ "document": "TECHNICAL_SUMMARY.md",
+ "claims_checked": 29,
+ "controls": [
+  {
+   "control": "accept_every_quoted_figure_is_re_derived_from_evidence",
+   "pass": true,
+   "detail": "29/29 claims found verbatim"
+  },
+  {
+   "control": "accept_all_seven_deliverable5_topics_present",
+   "pass": true,
+   "detail": "7/7 topics"
+  },
+  {
+   "control": "accept_task_success_is_not_inflated",
+   "pass": true,
+   "detail": "no line claims more than 0/10"
+  },
+  {
+   "control": "accept_absence_ledger_states_every_recorded_absence",
+   "pass": true,
+   "detail": "all five absences stated"
+  },
+  {
+   "control": "accept_demo_record_prose_matches_its_own_rows",
+   "pass": true,
+   "detail": "evidence/demo_scripted_10seeds.json not_claimed re-derives"
+  },
+  {
+   "control": "reject_any_one_corrupted_figure_passes",
+   "pass": true,
+   "detail": "29/29 claims corrupted one at a time, each caught and no other claim disturbed"
+  },
+  {
+   "control": "reject_a_removed_topic_passes",
+   "pass": true,
+   "detail": "7/7 removals caught"
+  },
+  {
+   "control": "reject_an_inflated_task_success_passes",
+   "pass": true,
+   "detail": "'0 / 10' -> '10 / 10' is caught"
+  },
+  {
+   "control": "reject_a_deleted_absence_passes",
+   "pass": true,
+   "detail": "deleting the completion statement is caught: ['task never completed']"
+  },
+  {
+   "control": "reject_the_stale_demo_sentence_passes",
+   "pass": true,
+   "detail": "the literal that actually shipped -- 'the drawer only' -- is caught: ['task_success 0/10 not stated', 'earned but unstated: drawer_open 10/10', 'never earned and unnamed: fork_placed', 'never earned and unnamed: mug_placed', 'earned but unstated: plate_placed 6/10', 'never earned and unnamed: spoon_placed']"
+  },
+  {
+   "control": "reject_document_going_stale_when_the_evidence_moves",
+   "pass": true,
+   "detail": "evidence task_success_count 0 -> 1 makes this document fail"
+  }
+ ]
+}

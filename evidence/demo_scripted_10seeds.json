@@ -24,7 +24,7 @@
  ],
  "subgoals_met_total": "16/50",
  "task_success_count": 0,
- "not_claimed": "This video does NOT show the task being completed. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is the drawer only.",
+ "not_claimed": "This video does NOT show the task being completed: task_success is 0/10. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is drawer_open 10/10, plate_placed 6/10. Never earned on any seed: fork_placed, spoon_placed, mug_placed.",
  "episodes": [
   {
    "seed": 0,
@@ -1069,5 +1069,6 @@
     "sim_time_s": 133.048
    }
   }
- ]
+ ],
+ "not_claimed_amended": "2026-09-05T10:15Z: the previous sentence was a hand-written literal that said the only sub-goal earned was the drawer. That stopped being true when plate_placed started firing on 6 of 10 seeds, and the literal was never updated. It is now derived by scripts/record_demo.py::not_claimed() from these same episode rows. No measurement, and no byte of the video, was changed. Previous text: This video does NOT show the task being completed. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is the drawer only."
 }

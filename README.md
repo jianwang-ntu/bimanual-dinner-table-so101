@@ -22,6 +22,7 @@ else.
 | OpenVINO conversion — FP32, FP16, INT8 (NNCF) | built, accuracy of each measured | `evidence/openvino_export.json` |
 | Bench-test script — latency, throughput, device, precision | built, **run here on AMD, not on Intel** | `evidence/openvino_bench_*.json` |
 | Controls for all of the above, accept and reject | 13/13 | `evidence/perception_pipeline_controls.json` |
+| Technical summary / architecture — Required Deliverable 5 | written, claims machine-checked | [`TECHNICAL_SUMMARY.md`](TECHNICAL_SUMMARY.md), `evidence/technical_summary_controls.json` (11/11) |
 | VLA / imitation policy | **not started** | — |
 | Perception in the control loop | **not started** — the controller still reads privileged state | — |
 | Intel Core Ultra Series 2/3 benchmark numbers | **not measured, and cannot be measured here** | see *Hardware* below |
@@ -113,6 +114,9 @@ python3 scripts/train_perception.py --epochs 80     # ~4 min on one L40S
 python3 scripts/export_openvino.py                  # ONNX -> IR at FP32/FP16/INT8
 python3 scripts/bench_openvino.py                   # Required Deliverable 3
 python3 scripts/test_perception_pipeline.py         # 13 accept/reject controls
+
+# the architecture summary, and the controls that keep its numbers true
+python3 scripts/test_technical_summary.py          # stdlib only -- runs before pip install
 ```
 
 Headless rendering uses EGL (`MUJOCO_GL=egl`, set by the scripts). On a machine
