@@ -1,0 +1,102 @@
+{
+ "image": "evidence/cover_image.png",
+ "sha256": "ad0b3deb7b10344815501ac1f43449e626b93ae557ee2a3d4aa720497ff463ba",
+ "ihdr": {
+  "width": 1920,
+  "height": 1080,
+  "bit_depth": 8,
+  "colour_type": 2,
+  "compression": 0,
+  "filter": 0,
+  "interlace": 0
+ },
+ "pixel_stats": {
+  "render_region": {
+   "mean": 122.69,
+   "std": 67.44,
+   "distinct_colours": 493,
+   "samples": 28050
+  },
+  "caption_band": {
+   "mean": 39.15,
+   "std": 57.97,
+   "distinct_colours": 188,
+   "samples": 9900
+  }
+ },
+ "controls": [
+  {
+   "control": "format.accept",
+   "pass": true,
+   "detail": "IHDR 1920x1080, 8-bit truecolour, non-interlaced, 1920*9 == 1080*16"
+  },
+  {
+   "control": "format.reject_non_16_9",
+   "pass": true,
+   "detail": "a 1920x1440 IHDR is refused by the same test"
+  },
+  {
+   "control": "integrity.accept",
+   "pass": true,
+   "detail": "sha256 ad0b3deb7b103448 over 526093 bytes matches the record"
+  },
+  {
+   "control": "integrity.reject_flipped_byte",
+   "pass": true,
+   "detail": "one flipped byte at offset 263046 is caught"
+  },
+  {
+   "control": "figures.accept",
+   "pass": true,
+   "detail": "16/50 sub-goals and the 0/50 control re-derived verbatim"
+  },
+  {
+   "control": "figures.reject_stale_after_evidence_moves",
+   "pass": true,
+   "detail": "flipping drawer_open on seed 0 in the evaluation is caught: measured line is 'Measured over 10 randomized seeds: drawer_open 10/10  fork_placed 0/10', evidence derives 'Measured over 10 randomized seeds: drawer_open 9/10  fork_placed 0/10 '"
+  },
+  {
+   "control": "honesty.accept",
+   "pass": true,
+   "detail": "states task_success 0/10, names all 3 never-earned sub-goals, discloses the scripted controller"
+  },
+  {
+   "control": "honesty.reject_inflated_success",
+   "pass": true,
+   "detail": "a cover claiming 10/10 success is refused: the cover does not state task_success 0/10"
+  },
+  {
+   "control": "honesty.reject_deleted_absence_clause",
+   "pass": true,
+   "detail": "deleting the never-earned list is caught: never-earned sub-goals not named on the cover: ['fork_placed', 'spoon_placed', 'mug_placed']"
+  },
+  {
+   "control": "provenance.accept",
+   "pass": true,
+   "detail": "seed 0 is the choice rule's answer and its live sub-goals equal the recorded episode"
+  },
+  {
+   "control": "provenance.reject_frame_disagreeing_with_evaluation",
+   "pass": true,
+   "detail": "a frame claiming a sub-goal the evaluation did not record is caught"
+  },
+  {
+   "control": "pixels.accept_real_render",
+   "pass": true,
+   "detail": "render region std 67.4 over 493 distinct colours; caption band mean luma 39.1"
+  },
+  {
+   "control": "pixels.reject_flat_placeholder",
+   "pass": true,
+   "detail": "a uniform image of the same width is refused: std 0.0, 1 distinct colours"
+  },
+  {
+   "control": "title.accept_matches_readme",
+   "pass": true,
+   "detail": "cover title is the repository H1: 'Bimanual dinner-table manipulation \u2014 dual SO-101 in MuJoCo'"
+  }
+ ],
+ "passed": 14,
+ "total": 14,
+ "all_pass": true
+}
