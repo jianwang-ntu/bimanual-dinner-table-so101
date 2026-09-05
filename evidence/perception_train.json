@@ -1,6 +1,6 @@
 {
  "schema": "perception_train/v1",
- "written_at": "2026-09-05T09:24:15Z",
+ "written_at": "2026-09-05T16:06:25Z",
  "model": {
   "class": "SceneStateCNN",
   "parameters": 520768,
@@ -23,10 +23,18 @@
   "checkpoint": "models/scene_state_cnn.pt"
  },
  "data": {
-  "train": 4000,
-  "val": 240,
+  "train": 6990,
+  "val": 840,
   "eval10": 10,
-  "split_rule": "disjoint compile seeds -- train 1000..1499, val 2000..2059, eval10 0..9",
+  "train_splits": {
+   "train": 4000,
+   "train_rollout": 2990
+  },
+  "val_splits": {
+   "val": 240,
+   "val_rollout": 600
+  },
+  "split_rule": "disjoint compile seeds -- train 1000..1499, val 2000..2059, eval10 0..9. The _rollout splits reuse their own side's seed base (train_rollout 1000.., val_rollout 2000..), so the train/val/eval separation is unchanged.",
   "eval10_note": "the ten seeds scripts/eval_seeds.py scores, at their evaluation initial state"
  },
  "training": {
@@ -38,564 +46,645 @@
   "seed": 7,
   "device": "cuda",
   "device_name": "NVIDIA L40S",
-  "seconds": 103.5,
+  "seconds": 184.5,
   "selection": "best val worst-centre + drawer error"
  },
  "error_mm": {
   "val": {
-   "plate_x": 0.7970076203346252,
-   "plate_y": 0.6449143886566162,
-   "mug_x": 0.978044331073761,
-   "mug_y": 0.695270299911499,
-   "bottle_x": 0.7659038305282593,
-   "bottle_y": 0.5115923881530762,
-   "drawer_q": 0.21237927675247192,
-   "plate_centre_mm": 1.1321581602096558,
-   "mug_centre_mm": 1.3183772563934326,
-   "bottle_centre_mm": 1.0210002660751343,
-   "worst_centre_mm": 1.3183772563934326
+   "plate_x": 16.626760482788086,
+   "plate_y": 5.426855087280273,
+   "mug_x": 10.200814247131348,
+   "mug_y": 11.480546951293945,
+   "bottle_x": 6.567622661590576,
+   "bottle_y": 6.597100734710693,
+   "drawer_q": 0.8557053208351135,
+   "plate_centre_mm": 18.408641815185547,
+   "mug_centre_mm": 16.97068977355957,
+   "bottle_centre_mm": 10.287535667419434,
+   "worst_centre_mm": 18.408641815185547
   },
   "eval10": {
-   "plate_x": 1.1479393243789673,
-   "plate_y": 0.9207569360733032,
-   "mug_x": 1.3622015714645386,
-   "mug_y": 0.8753255009651184,
-   "bottle_x": 0.7215052843093872,
-   "bottle_y": 0.4324015974998474,
-   "drawer_q": 0.15404078364372253,
-   "plate_centre_mm": 1.7165688276290894,
-   "mug_centre_mm": 1.8333436250686646,
-   "bottle_centre_mm": 0.9653477072715759,
-   "worst_centre_mm": 1.8333436250686646
+   "plate_x": 1.674303412437439,
+   "plate_y": 0.570518434047699,
+   "mug_x": 2.0798354148864746,
+   "mug_y": 0.879627525806427,
+   "bottle_x": 1.2809425592422485,
+   "bottle_y": 0.9081516265869141,
+   "drawer_q": 0.37313365936279297,
+   "plate_centre_mm": 1.9185694456100464,
+   "mug_centre_mm": 2.3894293308258057,
+   "bottle_centre_mm": 1.7099499702453613,
+   "worst_centre_mm": 2.3894293308258057
+  },
+  "val::val": {
+   "plate_x": 1.5604170560836792,
+   "plate_y": 1.1117197275161743,
+   "mug_x": 1.5875475406646729,
+   "mug_y": 1.03026282787323,
+   "bottle_x": 1.2664000988006592,
+   "bottle_y": 0.8785517811775208,
+   "drawer_q": 0.32835909724235535,
+   "plate_centre_mm": 2.0865490436553955,
+   "mug_centre_mm": 2.0670557022094727,
+   "bottle_centre_mm": 1.68520188331604,
+   "worst_centre_mm": 2.0865490436553955
+  },
+  "val::val_rollout": {
+   "plate_x": 22.65329933166504,
+   "plate_y": 7.1529083251953125,
+   "mug_x": 13.64612102508545,
+   "mug_y": 15.660660743713379,
+   "bottle_x": 8.688112258911133,
+   "bottle_y": 8.884519577026367,
+   "drawer_q": 1.0666438341140747,
+   "plate_centre_mm": 24.93747901916504,
+   "mug_centre_mm": 22.932144165039062,
+   "bottle_centre_mm": 13.728470802307129,
+   "worst_centre_mm": 24.93747901916504
   }
  },
+ "error_mm_note": "'val' is the pooled validation set. The 'val::<split>' rows break it out so a split the model is bad at cannot be hidden inside a pooled mean.",
  "controls": {
   "constant_baseline_val": {
-   "plate_x": 22.377607345581055,
-   "plate_y": 22.709997177124023,
-   "mug_x": 21.876522064208984,
-   "mug_y": 21.543994903564453,
-   "bottle_x": 22.924131393432617,
-   "bottle_y": 20.60108184814453,
-   "drawer_q": 22.11945343017578,
-   "plate_centre_mm": 34.29194641113281,
-   "mug_centre_mm": 33.361690521240234,
-   "bottle_centre_mm": 33.473670959472656,
-   "worst_centre_mm": 34.29194641113281
+   "plate_x": 57.08518600463867,
+   "plate_y": 58.18600082397461,
+   "mug_x": 37.39349365234375,
+   "mug_y": 32.70469665527344,
+   "bottle_x": 17.32921600341797,
+   "bottle_y": 23.49924659729004,
+   "drawer_q": 28.934024810791016,
+   "plate_centre_mm": 84.35719299316406,
+   "mug_centre_mm": 52.02833938598633,
+   "bottle_centre_mm": 31.660564422607422,
+   "worst_centre_mm": 84.35719299316406
   },
   "constant_baseline_eval10": {
-   "plate_x": 16.03318214416504,
-   "plate_y": 18.698009490966797,
-   "mug_x": 24.109413146972656,
-   "mug_y": 27.9080810546875,
-   "bottle_x": 28.29852294921875,
-   "bottle_y": 28.45367431640625,
-   "drawer_q": 35.309913635253906,
-   "plate_centre_mm": 25.942644119262695,
-   "mug_centre_mm": 38.25747299194336,
-   "bottle_centre_mm": 42.097721099853516,
-   "worst_centre_mm": 42.097721099853516
+   "plate_x": 29.609390258789062,
+   "plate_y": 19.940807342529297,
+   "mug_x": 30.083776473999023,
+   "mug_y": 26.984994888305664,
+   "bottle_x": 28.298519134521484,
+   "bottle_y": 26.399822235107422,
+   "drawer_q": 27.484710693359375,
+   "plate_centre_mm": 39.345420837402344,
+   "mug_centre_mm": 43.768760681152344,
+   "bottle_centre_mm": 41.20703887939453,
+   "worst_centre_mm": 43.768760681152344
   },
   "shuffled_labels_val": {
-   "plate_x": 31.894086837768555,
-   "plate_y": 27.115760803222656,
-   "mug_x": 29.00874900817871,
-   "mug_y": 29.200193405151367,
-   "bottle_x": 32.03031921386719,
-   "bottle_y": 26.60304832458496,
-   "drawer_q": 27.007831573486328,
-   "plate_centre_mm": 46.36643981933594,
-   "mug_centre_mm": 45.90113067626953,
-   "bottle_centre_mm": 45.5130729675293,
-   "worst_centre_mm": 46.36643981933594
+   "plate_x": 70.39856719970703,
+   "plate_y": 72.63671112060547,
+   "mug_x": 56.38340759277344,
+   "mug_y": 40.35734558105469,
+   "bottle_x": 26.084259033203125,
+   "bottle_y": 26.623605728149414,
+   "drawer_q": 26.810604095458984,
+   "plate_centre_mm": 106.90510559082031,
+   "mug_centre_mm": 74.85112762451172,
+   "bottle_centre_mm": 40.64751434326172,
+   "worst_centre_mm": 106.90510559082031
   },
-  "what_the_controls_mean": "constant_baseline is the no-vision predictor: the train-set mean layout, scored the same way -- a model that does not beat it has learned nothing from pixels. shuffled_labels_val re-scores the SAME predictions against permuted labels; pairing two independent draws it lands at or above the constant baseline, and if it ever landed near the model's own error the metric would not be reading the image at all."
+  "what_the_controls_mean": "constant_baseline is the no-vision predictor: the train-set mean layout, scored the same way -- a model that does not beat it has learned nothing from pixels. shuffled_labels_val re-scores the SAME predictions against permuted labels; pairing two independent draws it lands at or above the constant baseline, and if it ever landed near the model's own error the metric would not be reading the image at all.",
+  "why_per_split": "A pooled baseline is not a fair bar once the validation set spans two regimes. The constant predictor is much worse on mid-rollout frames -- objects have been dragged away from the nominal layout it predicts -- so pooling flatters the model on the easy split and punishes it on the hard one. Each split therefore carries its own baseline and its own shuffled control, and the suite checks every one of them.",
+  "constant_baseline_val::val": {
+   "plate_x": 27.519269943237305,
+   "plate_y": 24.809030532836914,
+   "mug_x": 28.73120880126953,
+   "mug_y": 21.54955291748047,
+   "bottle_x": 23.167621612548828,
+   "bottle_y": 29.50609588623047,
+   "drawer_q": 23.000789642333984,
+   "plate_centre_mm": 40.469783782958984,
+   "mug_centre_mm": 39.13857650756836,
+   "bottle_centre_mm": 40.371315002441406,
+   "worst_centre_mm": 40.469783782958984
+  },
+  "constant_baseline_val::val_rollout": {
+   "plate_x": 68.91154479980469,
+   "plate_y": 71.53678131103516,
+   "mug_x": 40.85840606689453,
+   "mug_y": 37.1667594909668,
+   "bottle_x": 14.993854522705078,
+   "bottle_y": 21.096508026123047,
+   "drawer_q": 31.307321548461914,
+   "plate_centre_mm": 101.91215515136719,
+   "mug_centre_mm": 57.18424606323242,
+   "bottle_centre_mm": 28.1762638092041,
+   "worst_centre_mm": 101.91215515136719
+  },
+  "shuffled_labels_val::val": {
+   "plate_x": 31.864412307739258,
+   "plate_y": 30.10584259033203,
+   "mug_x": 28.560304641723633,
+   "mug_y": 29.17235565185547,
+   "bottle_x": 30.49395751953125,
+   "bottle_y": 27.52500343322754,
+   "drawer_q": 28.868452072143555,
+   "plate_centre_mm": 48.601810455322266,
+   "mug_centre_mm": 44.81693649291992,
+   "bottle_centre_mm": 44.77069091796875,
+   "worst_centre_mm": 48.601810455322266
+  },
+  "shuffled_labels_val::val_rollout": {
+   "plate_x": 86.5760269165039,
+   "plate_y": 89.25314331054688,
+   "mug_x": 60.68583297729492,
+   "mug_y": 43.23616027832031,
+   "bottle_x": 21.62833595275879,
+   "bottle_y": 24.375028610229492,
+   "drawer_q": 15.485434532165527,
+   "plate_centre_mm": 130.0576934814453,
+   "mug_centre_mm": 80.70401763916016,
+   "bottle_centre_mm": 35.774391174316406,
+   "worst_centre_mm": 130.0576934814453
+  }
  },
  "history": [
   {
    "epoch": 0,
-   "train_loss": 0.182843,
-   "val_worst_centre_mm": 39.01,
-   "val_drawer_mm": 22.23
+   "train_loss": 0.164835,
+   "val_worst_centre_mm": 88.45,
+   "val_drawer_mm": 24.13
   },
   {
    "epoch": 1,
-   "train_loss": 0.075344,
-   "val_worst_centre_mm": 34.77,
-   "val_drawer_mm": 22.05
+   "train_loss": 0.093872,
+   "val_worst_centre_mm": 58.78,
+   "val_drawer_mm": 17.49
   },
   {
    "epoch": 2,
-   "train_loss": 0.067186,
-   "val_worst_centre_mm": 36.16,
-   "val_drawer_mm": 21.99
+   "train_loss": 0.0674,
+   "val_worst_centre_mm": 38.31,
+   "val_drawer_mm": 17.49
   },
   {
    "epoch": 3,
-   "train_loss": 0.059298,
-   "val_worst_centre_mm": 29.65,
-   "val_drawer_mm": 21.71
+   "train_loss": 0.051389,
+   "val_worst_centre_mm": 31.3,
+   "val_drawer_mm": 11.89
   },
   {
    "epoch": 4,
-   "train_loss": 0.040021,
-   "val_worst_centre_mm": 15.15,
-   "val_drawer_mm": 11.6
+   "train_loss": 0.030208,
+   "val_worst_centre_mm": 26.93,
+   "val_drawer_mm": 4.15
   },
   {
    "epoch": 5,
-   "train_loss": 0.011216,
-   "val_worst_centre_mm": 14.02,
-   "val_drawer_mm": 3.42
+   "train_loss": 0.020011,
+   "val_worst_centre_mm": 25.51,
+   "val_drawer_mm": 2.69
   },
   {
    "epoch": 6,
-   "train_loss": 0.005186,
-   "val_worst_centre_mm": 5.82,
-   "val_drawer_mm": 1.2
+   "train_loss": 0.014976,
+   "val_worst_centre_mm": 23.57,
+   "val_drawer_mm": 4.64
   },
   {
    "epoch": 7,
-   "train_loss": 0.004241,
-   "val_worst_centre_mm": 15.18,
-   "val_drawer_mm": 1.06
+   "train_loss": 0.01196,
+   "val_worst_centre_mm": 23.22,
+   "val_drawer_mm": 2.36
   },
   {
    "epoch": 8,
-   "train_loss": 0.003711,
-   "val_worst_centre_mm": 5.31,
-   "val_drawer_mm": 3.36
-  },
-  {
-   "epoch": 9,
-   "train_loss": 0.004749,
-   "val_worst_centre_mm": 9.94,
-   "val_drawer_mm": 1.12
-  },
-  {
-   "epoch": 10,
-   "train_loss": 0.005191,
-   "val_worst_centre_mm": 8.98,
-   "val_drawer_mm": 2.02
-  },
-  {
-   "epoch": 11,
-   "train_loss": 0.00579,
-   "val_worst_centre_mm": 11.74,
-   "val_drawer_mm": 3.8
-  },
-  {
-   "epoch": 12,
-   "train_loss": 0.00566,
-   "val_worst_centre_mm": 18.59,
-   "val_drawer_mm": 1.81
-  },
-  {
-   "epoch": 13,
-   "train_loss": 0.006579,
-   "val_worst_centre_mm": 12.85,
-   "val_drawer_mm": 1.3
-  },
-  {
-   "epoch": 14,
-   "train_loss": 0.003404,
-   "val_worst_centre_mm": 15.51,
-   "val_drawer_mm": 2.48
-  },
-  {
-   "epoch": 15,
-   "train_loss": 0.006445,
-   "val_worst_centre_mm": 10.87,
-   "val_drawer_mm": 1.22
-  },
-  {
-   "epoch": 16,
-   "train_loss": 0.006246,
-   "val_worst_centre_mm": 11.58,
-   "val_drawer_mm": 1.98
-  },
-  {
-   "epoch": 17,
-   "train_loss": 0.008877,
-   "val_worst_centre_mm": 12.9,
-   "val_drawer_mm": 2.93
-  },
-  {
-   "epoch": 18,
-   "train_loss": 0.004976,
-   "val_worst_centre_mm": 14.01,
-   "val_drawer_mm": 1.6
-  },
-  {
-   "epoch": 19,
-   "train_loss": 0.003879,
-   "val_worst_centre_mm": 8.39,
-   "val_drawer_mm": 0.9
-  },
-  {
-   "epoch": 20,
-   "train_loss": 0.00473,
-   "val_worst_centre_mm": 11.99,
-   "val_drawer_mm": 0.96
-  },
-  {
-   "epoch": 21,
-   "train_loss": 0.0043,
-   "val_worst_centre_mm": 11.92,
-   "val_drawer_mm": 3.02
-  },
-  {
-   "epoch": 22,
-   "train_loss": 0.00472,
-   "val_worst_centre_mm": 16.33,
-   "val_drawer_mm": 0.79
-  },
-  {
-   "epoch": 23,
-   "train_loss": 0.003586,
-   "val_worst_centre_mm": 6.46,
-   "val_drawer_mm": 1.74
-  },
-  {
-   "epoch": 24,
-   "train_loss": 0.003714,
-   "val_worst_centre_mm": 7.42,
-   "val_drawer_mm": 0.58
-  },
-  {
-   "epoch": 25,
-   "train_loss": 0.005739,
-   "val_worst_centre_mm": 11.58,
-   "val_drawer_mm": 1.29
-  },
-  {
-   "epoch": 26,
-   "train_loss": 0.003594,
-   "val_worst_centre_mm": 5.11,
-   "val_drawer_mm": 1.21
-  },
-  {
-   "epoch": 27,
-   "train_loss": 0.001845,
-   "val_worst_centre_mm": 13.12,
+   "train_loss": 0.00989,
+   "val_worst_centre_mm": 27.93,
    "val_drawer_mm": 2.11
   },
   {
+   "epoch": 9,
+   "train_loss": 0.009622,
+   "val_worst_centre_mm": 29.47,
+   "val_drawer_mm": 1.87
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.008596,
+   "val_worst_centre_mm": 40.58,
+   "val_drawer_mm": 7.25
+  },
+  {
+   "epoch": 11,
+   "train_loss": 0.008746,
+   "val_worst_centre_mm": 23.6,
+   "val_drawer_mm": 2.78
+  },
+  {
+   "epoch": 12,
+   "train_loss": 0.008202,
+   "val_worst_centre_mm": 25.6,
+   "val_drawer_mm": 2.81
+  },
+  {
+   "epoch": 13,
+   "train_loss": 0.007565,
+   "val_worst_centre_mm": 46.61,
+   "val_drawer_mm": 8.05
+  },
+  {
+   "epoch": 14,
+   "train_loss": 0.00733,
+   "val_worst_centre_mm": 25.88,
+   "val_drawer_mm": 1.78
+  },
+  {
+   "epoch": 15,
+   "train_loss": 0.007268,
+   "val_worst_centre_mm": 30.98,
+   "val_drawer_mm": 2.0
+  },
+  {
+   "epoch": 16,
+   "train_loss": 0.007757,
+   "val_worst_centre_mm": 26.34,
+   "val_drawer_mm": 2.92
+  },
+  {
+   "epoch": 17,
+   "train_loss": 0.008296,
+   "val_worst_centre_mm": 26.8,
+   "val_drawer_mm": 2.53
+  },
+  {
+   "epoch": 18,
+   "train_loss": 0.009083,
+   "val_worst_centre_mm": 26.48,
+   "val_drawer_mm": 1.65
+  },
+  {
+   "epoch": 19,
+   "train_loss": 0.007552,
+   "val_worst_centre_mm": 24.21,
+   "val_drawer_mm": 1.88
+  },
+  {
+   "epoch": 20,
+   "train_loss": 0.006221,
+   "val_worst_centre_mm": 24.9,
+   "val_drawer_mm": 1.39
+  },
+  {
+   "epoch": 21,
+   "train_loss": 0.005886,
+   "val_worst_centre_mm": 29.1,
+   "val_drawer_mm": 1.29
+  },
+  {
+   "epoch": 22,
+   "train_loss": 0.00613,
+   "val_worst_centre_mm": 73.96,
+   "val_drawer_mm": 5.8
+  },
+  {
+   "epoch": 23,
+   "train_loss": 0.006974,
+   "val_worst_centre_mm": 25.6,
+   "val_drawer_mm": 1.7
+  },
+  {
+   "epoch": 24,
+   "train_loss": 0.004651,
+   "val_worst_centre_mm": 23.45,
+   "val_drawer_mm": 1.4
+  },
+  {
+   "epoch": 25,
+   "train_loss": 0.004783,
+   "val_worst_centre_mm": 24.52,
+   "val_drawer_mm": 1.33
+  },
+  {
+   "epoch": 26,
+   "train_loss": 0.004174,
+   "val_worst_centre_mm": 23.6,
+   "val_drawer_mm": 1.34
+  },
+  {
+   "epoch": 27,
+   "train_loss": 0.004372,
+   "val_worst_centre_mm": 22.29,
+   "val_drawer_mm": 1.84
+  },
+  {
    "epoch": 28,
-   "train_loss": 0.002274,
-   "val_worst_centre_mm": 5.54,
-   "val_drawer_mm": 0.57
+   "train_loss": 0.004671,
+   "val_worst_centre_mm": 22.12,
+   "val_drawer_mm": 1.28
   },
   {
    "epoch": 29,
-   "train_loss": 0.002738,
-   "val_worst_centre_mm": 13.47,
-   "val_drawer_mm": 1.02
+   "train_loss": 0.003693,
+   "val_worst_centre_mm": 25.26,
+   "val_drawer_mm": 1.03
   },
   {
    "epoch": 30,
-   "train_loss": 0.002288,
-   "val_worst_centre_mm": 4.53,
-   "val_drawer_mm": 1.96
+   "train_loss": 0.00391,
+   "val_worst_centre_mm": 26.76,
+   "val_drawer_mm": 1.29
   },
   {
    "epoch": 31,
-   "train_loss": 0.00213,
-   "val_worst_centre_mm": 5.09,
-   "val_drawer_mm": 0.64
+   "train_loss": 0.003663,
+   "val_worst_centre_mm": 21.29,
+   "val_drawer_mm": 0.94
   },
   {
    "epoch": 32,
-   "train_loss": 0.001565,
-   "val_worst_centre_mm": 7.96,
-   "val_drawer_mm": 0.69
+   "train_loss": 0.003399,
+   "val_worst_centre_mm": 22.65,
+   "val_drawer_mm": 0.94
   },
   {
    "epoch": 33,
-   "train_loss": 0.001462,
-   "val_worst_centre_mm": 3.12,
-   "val_drawer_mm": 0.77
+   "train_loss": 0.003294,
+   "val_worst_centre_mm": 22.03,
+   "val_drawer_mm": 2.58
   },
   {
    "epoch": 34,
-   "train_loss": 0.001216,
-   "val_worst_centre_mm": 5.34,
-   "val_drawer_mm": 0.52
+   "train_loss": 0.002795,
+   "val_worst_centre_mm": 21.33,
+   "val_drawer_mm": 1.7
   },
   {
    "epoch": 35,
-   "train_loss": 0.000968,
-   "val_worst_centre_mm": 3.07,
-   "val_drawer_mm": 0.41
+   "train_loss": 0.002897,
+   "val_worst_centre_mm": 22.08,
+   "val_drawer_mm": 1.2
   },
   {
    "epoch": 36,
-   "train_loss": 0.001572,
-   "val_worst_centre_mm": 2.64,
-   "val_drawer_mm": 0.4
+   "train_loss": 0.002422,
+   "val_worst_centre_mm": 22.07,
+   "val_drawer_mm": 1.18
   },
   {
    "epoch": 37,
-   "train_loss": 0.001287,
-   "val_worst_centre_mm": 2.37,
-   "val_drawer_mm": 0.58
+   "train_loss": 0.002148,
+   "val_worst_centre_mm": 22.76,
+   "val_drawer_mm": 1.59
   },
   {
    "epoch": 38,
-   "train_loss": 0.001133,
-   "val_worst_centre_mm": 3.3,
-   "val_drawer_mm": 0.74
+   "train_loss": 0.00289,
+   "val_worst_centre_mm": 22.6,
+   "val_drawer_mm": 1.38
   },
   {
    "epoch": 39,
-   "train_loss": 0.001288,
-   "val_worst_centre_mm": 5.03,
-   "val_drawer_mm": 0.67
+   "train_loss": 0.002267,
+   "val_worst_centre_mm": 22.5,
+   "val_drawer_mm": 0.93
   },
   {
    "epoch": 40,
-   "train_loss": 0.000782,
-   "val_worst_centre_mm": 3.62,
-   "val_drawer_mm": 0.57
+   "train_loss": 0.002153,
+   "val_worst_centre_mm": 27.99,
+   "val_drawer_mm": 1.66
   },
   {
    "epoch": 41,
-   "train_loss": 0.000866,
-   "val_worst_centre_mm": 2.59,
-   "val_drawer_mm": 0.33
+   "train_loss": 0.001815,
+   "val_worst_centre_mm": 19.35,
+   "val_drawer_mm": 0.91
   },
   {
    "epoch": 42,
-   "train_loss": 0.00054,
-   "val_worst_centre_mm": 3.46,
-   "val_drawer_mm": 0.69
+   "train_loss": 0.001921,
+   "val_worst_centre_mm": 21.29,
+   "val_drawer_mm": 1.84
   },
   {
    "epoch": 43,
-   "train_loss": 0.000873,
-   "val_worst_centre_mm": 3.35,
-   "val_drawer_mm": 0.4
+   "train_loss": 0.00182,
+   "val_worst_centre_mm": 20.81,
+   "val_drawer_mm": 0.98
   },
   {
    "epoch": 44,
-   "train_loss": 0.000489,
-   "val_worst_centre_mm": 2.47,
-   "val_drawer_mm": 0.43
+   "train_loss": 0.00179,
+   "val_worst_centre_mm": 21.75,
+   "val_drawer_mm": 1.05
   },
   {
    "epoch": 45,
-   "train_loss": 0.000714,
-   "val_worst_centre_mm": 4.13,
-   "val_drawer_mm": 0.28
+   "train_loss": 0.001638,
+   "val_worst_centre_mm": 20.86,
+   "val_drawer_mm": 0.88
   },
   {
    "epoch": 46,
-   "train_loss": 0.000596,
-   "val_worst_centre_mm": 2.37,
-   "val_drawer_mm": 0.33
+   "train_loss": 0.001454,
+   "val_worst_centre_mm": 21.33,
+   "val_drawer_mm": 0.9
   },
   {
    "epoch": 47,
-   "train_loss": 0.000385,
-   "val_worst_centre_mm": 1.95,
-   "val_drawer_mm": 0.25
+   "train_loss": 0.001375,
+   "val_worst_centre_mm": 19.81,
+   "val_drawer_mm": 1.56
   },
   {
    "epoch": 48,
-   "train_loss": 0.000593,
-   "val_worst_centre_mm": 2.79,
-   "val_drawer_mm": 0.32
+   "train_loss": 0.001318,
+   "val_worst_centre_mm": 21.06,
+   "val_drawer_mm": 0.9
   },
   {
    "epoch": 49,
-   "train_loss": 0.000599,
-   "val_worst_centre_mm": 2.09,
-   "val_drawer_mm": 0.48
+   "train_loss": 0.001197,
+   "val_worst_centre_mm": 21.81,
+   "val_drawer_mm": 1.08
   },
   {
    "epoch": 50,
-   "train_loss": 0.000451,
-   "val_worst_centre_mm": 2.24,
-   "val_drawer_mm": 0.32
+   "train_loss": 0.001118,
+   "val_worst_centre_mm": 20.87,
+   "val_drawer_mm": 1.18
   },
   {
    "epoch": 51,
-   "train_loss": 0.000468,
-   "val_worst_centre_mm": 2.13,
-   "val_drawer_mm": 0.5
+   "train_loss": 0.001146,
+   "val_worst_centre_mm": 19.65,
+   "val_drawer_mm": 1.05
   },
   {
    "epoch": 52,
-   "train_loss": 0.000326,
-   "val_worst_centre_mm": 2.13,
-   "val_drawer_mm": 0.37
+   "train_loss": 0.001064,
+   "val_worst_centre_mm": 19.85,
+   "val_drawer_mm": 0.91
   },
   {
    "epoch": 53,
-   "train_loss": 0.000221,
-   "val_worst_centre_mm": 1.61,
-   "val_drawer_mm": 0.23
+   "train_loss": 0.001316,
+   "val_worst_centre_mm": 19.74,
+   "val_drawer_mm": 0.85
   },
   {
    "epoch": 54,
-   "train_loss": 0.000275,
-   "val_worst_centre_mm": 2.45,
-   "val_drawer_mm": 0.33
+   "train_loss": 0.000931,
+   "val_worst_centre_mm": 19.91,
+   "val_drawer_mm": 0.88
   },
   {
    "epoch": 55,
-   "train_loss": 0.000182,
-   "val_worst_centre_mm": 1.5,
-   "val_drawer_mm": 0.24
+   "train_loss": 0.000728,
+   "val_worst_centre_mm": 18.52,
+   "val_drawer_mm": 0.96
   },
   {
    "epoch": 56,
-   "train_loss": 0.000181,
-   "val_worst_centre_mm": 1.51,
-   "val_drawer_mm": 0.26
+   "train_loss": 0.000719,
+   "val_worst_centre_mm": 18.41,
+   "val_drawer_mm": 0.86
   },
   {
    "epoch": 57,
-   "train_loss": 0.000226,
-   "val_worst_centre_mm": 1.87,
-   "val_drawer_mm": 0.25
+   "train_loss": 0.000713,
+   "val_worst_centre_mm": 18.81,
+   "val_drawer_mm": 0.85
   },
   {
    "epoch": 58,
-   "train_loss": 0.000162,
-   "val_worst_centre_mm": 2.25,
-   "val_drawer_mm": 0.25
+   "train_loss": 0.000722,
+   "val_worst_centre_mm": 20.41,
+   "val_drawer_mm": 0.89
   },
   {
    "epoch": 59,
-   "train_loss": 0.000164,
-   "val_worst_centre_mm": 2.71,
-   "val_drawer_mm": 0.3
+   "train_loss": 0.000617,
+   "val_worst_centre_mm": 18.98,
+   "val_drawer_mm": 0.8
   },
   {
    "epoch": 60,
-   "train_loss": 0.000205,
-   "val_worst_centre_mm": 2.46,
-   "val_drawer_mm": 0.27
+   "train_loss": 0.000502,
+   "val_worst_centre_mm": 19.74,
+   "val_drawer_mm": 0.84
   },
   {
    "epoch": 61,
-   "train_loss": 0.000156,
-   "val_worst_centre_mm": 1.79,
-   "val_drawer_mm": 0.27
+   "train_loss": 0.000474,
+   "val_worst_centre_mm": 19.2,
+   "val_drawer_mm": 0.93
   },
   {
    "epoch": 62,
-   "train_loss": 0.000124,
-   "val_worst_centre_mm": 1.61,
-   "val_drawer_mm": 0.23
+   "train_loss": 0.000493,
+   "val_worst_centre_mm": 19.24,
+   "val_drawer_mm": 0.94
   },
   {
    "epoch": 63,
-   "train_loss": 0.000124,
-   "val_worst_centre_mm": 1.58,
-   "val_drawer_mm": 0.27
+   "train_loss": 0.000392,
+   "val_worst_centre_mm": 19.41,
+   "val_drawer_mm": 0.91
   },
   {
    "epoch": 64,
-   "train_loss": 0.000139,
-   "val_worst_centre_mm": 1.69,
-   "val_drawer_mm": 0.23
+   "train_loss": 0.000353,
+   "val_worst_centre_mm": 18.8,
+   "val_drawer_mm": 0.79
   },
   {
    "epoch": 65,
-   "train_loss": 0.000107,
-   "val_worst_centre_mm": 1.37,
-   "val_drawer_mm": 0.23
+   "train_loss": 0.000394,
+   "val_worst_centre_mm": 18.89,
+   "val_drawer_mm": 0.8
   },
   {
    "epoch": 66,
-   "train_loss": 0.00011,
-   "val_worst_centre_mm": 1.38,
-   "val_drawer_mm": 0.22
+   "train_loss": 0.000311,
+   "val_worst_centre_mm": 18.47,
+   "val_drawer_mm": 0.8
   },
   {
    "epoch": 67,
-   "train_loss": 9.1e-05,
-   "val_worst_centre_mm": 1.4,
-   "val_drawer_mm": 0.23
+   "train_loss": 0.000317,
+   "val_worst_centre_mm": 18.62,
+   "val_drawer_mm": 0.81
   },
   {
    "epoch": 68,
-   "train_loss": 7.5e-05,
-   "val_worst_centre_mm": 1.66,
-   "val_drawer_mm": 0.23
+   "train_loss": 0.000277,
+   "val_worst_centre_mm": 18.81,
+   "val_drawer_mm": 0.81
   },
   {
    "epoch": 69,
-   "train_loss": 8.6e-05,
-   "val_worst_centre_mm": 1.37,
-   "val_drawer_mm": 0.22
+   "train_loss": 0.000219,
+   "val_worst_centre_mm": 19.1,
+   "val_drawer_mm": 0.82
   },
   {
    "epoch": 70,
-   "train_loss": 7.9e-05,
-   "val_worst_centre_mm": 1.36,
-   "val_drawer_mm": 0.22
+   "train_loss": 0.00018,
+   "val_worst_centre_mm": 18.59,
+   "val_drawer_mm": 0.82
   },
   {
    "epoch": 71,
-   "train_loss": 7.1e-05,
-   "val_worst_centre_mm": 1.39,
-   "val_drawer_mm": 0.22
+   "train_loss": 0.000176,
+   "val_worst_centre_mm": 18.59,
+   "val_drawer_mm": 0.81
   },
   {
    "epoch": 72,
-   "train_loss": 8.6e-05,
-   "val_worst_centre_mm": 1.41,
-   "val_drawer_mm": 0.23
+   "train_loss": 0.000143,
+   "val_worst_centre_mm": 18.76,
+   "val_drawer_mm": 0.81
   },
   {
    "epoch": 73,
-   "train_loss": 6.8e-05,
-   "val_worst_centre_mm": 1.34,
-   "val_drawer_mm": 0.23
+   "train_loss": 0.000134,
+   "val_worst_centre_mm": 18.68,
+   "val_drawer_mm": 0.8
   },
   {
    "epoch": 74,
-   "train_loss": 6.1e-05,
-   "val_worst_centre_mm": 1.33,
-   "val_drawer_mm": 0.21
+   "train_loss": 0.000109,
+   "val_worst_centre_mm": 18.67,
+   "val_drawer_mm": 0.79
   },
   {
    "epoch": 75,
-   "train_loss": 5.7e-05,
-   "val_worst_centre_mm": 1.32,
-   "val_drawer_mm": 0.22
+   "train_loss": 0.000103,
+   "val_worst_centre_mm": 18.71,
+   "val_drawer_mm": 0.8
   },
   {
    "epoch": 76,
-   "train_loss": 5.4e-05,
-   "val_worst_centre_mm": 1.33,
-   "val_drawer_mm": 0.21
+   "train_loss": 8.9e-05,
+   "val_worst_centre_mm": 18.68,
+   "val_drawer_mm": 0.8
   },
   {
    "epoch": 77,
-   "train_loss": 5.4e-05,
-   "val_worst_centre_mm": 1.32,
-   "val_drawer_mm": 0.21
+   "train_loss": 8.8e-05,
+   "val_worst_centre_mm": 18.66,
+   "val_drawer_mm": 0.79
   },
   {
    "epoch": 78,
-   "train_loss": 5.2e-05,
-   "val_worst_centre_mm": 1.33,
-   "val_drawer_mm": 0.21
+   "train_loss": 8.4e-05,
+   "val_worst_centre_mm": 18.7,
+   "val_drawer_mm": 0.8
   },
   {
    "epoch": 79,
-   "train_loss": 5.1e-05,
-   "val_worst_centre_mm": 1.32,
-   "val_drawer_mm": 0.21
+   "train_loss": 8.2e-05,
+   "val_worst_centre_mm": 18.63,
+   "val_drawer_mm": 0.8
   }
  ],
  "not_claimed": [
-  "This is a perception model, not a policy. It outputs scene state, not actions, and it is not in the control loop -- the 16/50 sub-goal result in evidence/eval_seeds_scripted.json is unchanged by it.",
-  "Trained and evaluated on initial states with both arms at the home keyframe. Mid-rollout frames, where the arms occlude the table, are not measured here.",
-  "The fork and the spoon start inside the drawer and are not regressed."
+  "This is a perception model, not a policy. It outputs scene state, not actions. envs/scene_source.py can put it inside the control loop, and evidence/eval_seeds_scripted_perceived.json is what happens when it is -- that file, not this one, is where the task result under perception is reported.",
+  "Nothing here is a natural-language capability. The network takes pixels and emits seven numbers; no instruction is parsed anywhere in this repository.",
+  "Position only. There is no output for object yaw, object height or object size, and the fork and the spoon -- which start inside the drawer -- are not regressed at all.",
+  "The error quoted for a split is only as representative as that split. Read error_mm['val::<split>'], not the pooled row, before believing a number covers a regime."
  ]
 }

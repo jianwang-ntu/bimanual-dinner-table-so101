@@ -1,8 +1,8 @@
 {
  "schema": "slides_presentation/v1",
  "pdf": "evidence/slides_presentation.pdf",
- "sha256": "a0cbc4023eddef236e02677d38c4235ee4ca8041ccdf2e5ff7ddb40a54c506ff",
- "bytes": 164420,
+ "sha256": "316fdb99c546d1ad09f66edbf06005f29280621fc91e77cc5bded4a0d79c76c1",
+ "bytes": 164465,
  "pages": 13,
  "page_size_inches": [
   13.333,
@@ -13,7 +13,7 @@
  "title": "SO-101 Dinner Table: a scored bimanual benchmark",
  "track": "Bimanual VLA Manipulation with Multi-Modal Reasoning \u2014 Setting Up a Dinner Table",
  "built_by": "scripts/make_slides.py",
- "built_at_head": "e33ae9c032c4aab653f3e4321354bfad5ea1264c",
+ "built_at_head": "938ef11bf48f4f30320b8d76131a23475b27ce69",
  "source_date_epoch": "1757000000",
  "deterministic": "SOURCE_DATE_EPOCH is pinned, so two builds from the same evidence produce byte-identical PDFs.",
  "layout_violations": [],
@@ -24,10 +24,13 @@
   "demo_scripted_10seeds.json",
   "eval_seeds.json",
   "eval_seeds_scripted.json",
+  "eval_seeds_scripted_blind.json",
+  "eval_seeds_scripted_perceived.json",
   "openvino_bench_amd_epyc_9654_96_core_processor.json",
   "openvino_export.json",
   "perception_pipeline_controls.json",
   "perception_train.json",
+  "scene_source_controls.json",
   "scene_verification.json",
   "slides_controls.json",
   "squared_ik_controls.json",
@@ -285,7 +288,7 @@
   {
    "slide": 4,
    "role": "body",
-   "text": "13 / 13 perception + OpenVINO controls"
+   "text": "18 / 18 perception + OpenVINO controls"
   },
   {
    "slide": 4,
@@ -445,22 +448,22 @@
   {
    "slide": 7,
    "role": "body",
-   "text": "1.32"
+   "text": "18.41"
   },
   {
    "slide": 7,
    "role": "body",
-   "text": "1.83"
+   "text": "2.39"
   },
   {
    "slide": 7,
    "role": "body",
-   "text": "34.29"
+   "text": "84.36"
   },
   {
    "slide": 7,
    "role": "body",
-   "text": "46.37"
+   "text": "106.91"
   },
   {
    "slide": 7,
@@ -475,7 +478,7 @@
   {
    "slide": 7,
    "role": "bullet",
-   "text": "\u2014  4,000 training frames, 240 validation, 10 evaluation"
+   "text": "\u2014  6,990 training frames, 840 validation, 10 evaluation"
   },
   {
    "slide": 7,
@@ -485,7 +488,7 @@
   {
    "slide": 7,
    "role": "bullet",
-   "text": "\u2014  1.32 mm validation, 1.83 mm on the ten evaluation seeds"
+   "text": "\u2014  18.41 mm validation, 2.39 mm on the ten evaluation seeds"
   },
   {
    "slide": 7,
@@ -495,7 +498,7 @@
   {
    "slide": 7,
    "role": "body",
-   "text": "no-vision baseline 34.29 mm  \u00b7  shuffled labels 46.37 mm"
+   "text": "no-vision baseline 84.36 mm  \u00b7  shuffled labels 106.91 mm"
   },
   {
    "slide": 7,
@@ -530,22 +533,22 @@
   {
    "slide": 8,
    "role": "body",
-   "text": "FP32          2,031 KiB       1.81 mm"
+   "text": "FP32          2,031 KiB       2.44 mm"
   },
   {
    "slide": 8,
    "role": "body",
-   "text": "FP16          1,015 KiB       2.04 mm"
+   "text": "FP16          1,015 KiB       2.29 mm"
   },
   {
    "slide": 8,
    "role": "body",
-   "text": "INT8            515 KiB       3.98 mm"
+   "text": "INT8            515 KiB      12.51 mm"
   },
   {
    "slide": 8,
    "role": "body",
-   "text": "INT8 is 3.9\u00d7 smaller than FP32 and costs 2.16 mm"
+   "text": "INT8 is 3.9\u00d7 smaller than FP32 and costs 10.07 mm"
   },
   {
    "slide": 8,
@@ -580,7 +583,7 @@
   {
    "slide": 8,
    "role": "body",
-   "text": "On this host, OpenVINO 2026.3.1: CPU/FP32 0.436 ms p50, 5,220 fps async."
+   "text": "On this host, OpenVINO 2026.3.1: CPU/FP32 0.426 ms p50, 5,488 fps async."
   },
   {
    "slide": 8,
@@ -780,7 +783,7 @@
   {
    "slide": 12,
    "role": "body",
-   "text": "closes the privileged-state gap; the model already reads the layout to 1.83 mm on the evaluation seeds"
+   "text": "closes the privileged-state gap; the model already reads the layout to 2.39 mm on the evaluation seeds"
   },
   {
    "slide": 12,
@@ -870,7 +873,7 @@
   {
    "slide": 13,
    "role": "body",
-   "text": "13 / 13 perception and OpenVINO controls"
+   "text": "18 / 18 perception and OpenVINO controls"
   },
   {
    "slide": 13,
@@ -918,26 +921,26 @@
   "scene_detail": "nq=48 nu=12 nbody=25 ngeom=133 nmesh=36",
   "pred_pass": 11,
   "pred_n": 11,
-  "perc_pass": 13,
-  "perc_n": 13,
+  "perc_pass": 18,
+  "perc_n": 18,
   "params": 520768,
-  "train_n": 4000,
-  "val_n": 240,
+  "train_n": 6990,
+  "val_n": 840,
   "eval_n": 10,
   "epochs": 80,
-  "val_mm": 1.3183772563934326,
-  "eval_mm": 1.8333436250686646,
-  "base_val_mm": 34.29194641113281,
-  "base_eval_mm": 42.097721099853516,
-  "shuffled_mm": 46.36643981933594,
+  "val_mm": 18.408641815185547,
+  "eval_mm": 2.3894293308258057,
+  "base_val_mm": 84.35719299316406,
+  "base_eval_mm": 43.768760681152344,
+  "shuffled_mm": 106.90510559082031,
   "int8_ratio": 3.941941941941942,
-  "int8_cost_mm": 2.1633317470550537,
+  "int8_cost_mm": 10.072448015213013,
   "bench_rows": 9,
   "bench_cpu": "AMD EPYC 9654 96-Core Processor",
   "bench_verdict": "NOT_THE_REQUIRED_MEASUREMENT",
   "bench_asks": "Intel Core Ultra Series 2/3 with OpenVINO",
-  "cpu_p50": 0.436,
-  "cpu_fps": 5219.7,
+  "cpu_p50": 0.426,
+  "cpu_fps": 5488.5,
   "openvino": "2026.3.1",
   "mass_lo": 0.603,
   "mass_hi": 1.599,

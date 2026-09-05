@@ -1,12 +1,12 @@
 {
  "all_pass": true,
  "document": "TECHNICAL_SUMMARY.md",
- "claims_checked": 29,
+ "claims_checked": 34,
  "controls": [
   {
    "control": "accept_every_quoted_figure_is_re_derived_from_evidence",
    "pass": true,
-   "detail": "29/29 claims found verbatim"
+   "detail": "34/34 claims found verbatim"
   },
   {
    "control": "accept_all_seven_deliverable5_topics_present",
@@ -21,7 +21,7 @@
   {
    "control": "accept_absence_ledger_states_every_recorded_absence",
    "pass": true,
-   "detail": "all five absences stated"
+   "detail": "every absence the evidence records is stated"
   },
   {
    "control": "accept_demo_record_prose_matches_its_own_rows",
@@ -31,7 +31,7 @@
   {
    "control": "reject_any_one_corrupted_figure_passes",
    "pass": true,
-   "detail": "29/29 claims corrupted one at a time, each caught and no other claim disturbed"
+   "detail": "34/34 claims corrupted one at a time, each caught and no other claim disturbed"
   },
   {
    "control": "reject_a_removed_topic_passes",

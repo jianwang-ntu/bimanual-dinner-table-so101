@@ -1,7 +1,7 @@
 {
  "schema": "video_controls/v1",
  "artifact": "evidence/video_presentation.mp4",
- "sha256": "1dbc0a83089ec1e22e11c98220de464b81a13f070f7459e7d22bff25f45122a2",
+ "sha256": "9a0934cf7ae3f534550023c0012bc48c50a8ce8f5249228c849ff3f3a496fbdb",
  "duration_s": 275.56,
  "all_pass": true,
  "controls": [
@@ -18,7 +18,7 @@
   {
    "control": "accept_size_under_the_published_cap",
    "pass": true,
-   "detail": "5.1 MB against the published 300 MB"
+   "detail": "5.2 MB against the published 300 MB"
   },
   {
    "control": "reject_a_duration_over_five_minutes",
@@ -43,12 +43,12 @@
   {
    "control": "accept_card_segments_hold_still",
    "pass": true,
-   "detail": "13 card segments, worst first-to-last mean pixel change 0.636 (< 1.0). It is not zero because H.264 requantises a static picture; what matters is that it is far below a clip."
+   "detail": "13 card segments, worst first-to-last mean pixel change 0.637 (< 1.0). It is not zero because H.264 requantises a static picture; what matters is that it is far below a clip."
   },
   {
    "control": "reject_a_clip_segment_that_does_not_move",
    "pass": true,
-   "detail": "5 clip segments, smallest change 3.124 (> 1.5); every card is quieter than every clip by 2.488 -- a clip that held still would be a card mislabelled as footage"
+   "detail": "5 clip segments, smallest change 3.124 (> 1.5); every card is quieter than every clip by 2.487 -- a clip that held still would be a card mislabelled as footage"
   },
   {
    "control": "accept_headline_subgoals_is_on_screen",
@@ -88,7 +88,7 @@
   {
    "control": "accept_perception_error_is_on_screen",
    "pass": true,
-   "detail": "segment 13 card 14: the line carrying '1.83 mm' matches the decoded frame at 0.9997; the same line with '1.83 mm' corrupted to '2.83 mm' matches at 0.9931"
+   "detail": "segment 13 card 14: the line carrying '2.39 mm' matches the decoded frame at 0.9997; the same line with '2.39 mm' corrupted to '3.39 mm' matches at 0.9944"
   },
   {
    "control": "accept_int8_ratio_is_on_screen",
@@ -98,12 +98,12 @@
   {
    "control": "accept_int8_cost_is_on_screen",
    "pass": true,
-   "detail": "segment 13 card 14: the line carrying '2.16 mm of accuracy' matches the decoded frame at 0.9997; the same line with '2.16 mm of accuracy' corrupted to '3.16 mm of accuracy' matches at 0.9945"
+   "detail": "segment 13 card 14: the line carrying '10.07 mm of accuracy' matches the decoded frame at 0.9997; the same line with '10.07 mm of accuracy' corrupted to '20.07 mm of accuracy' matches at 0.9925"
   },
   {
    "control": "accept_int8_bytes_is_on_screen",
    "pass": true,
-   "detail": "segment 13 card 14: the line carrying '527,472' matches the decoded frame at 0.9997; the same line with '527,472' corrupted to '627,472' matches at 0.9945"
+   "detail": "segment 13 card 14: the line carrying '527,472' matches the decoded frame at 0.9997; the same line with '527,472' corrupted to '627,472' matches at 0.9946"
   },
   {
    "control": "accept_bench_rows_is_on_screen",
@@ -168,7 +168,7 @@
   {
    "control": "accept_sidecar_sha256_matches_the_file",
    "pass": true,
-   "detail": "1dbc0a83089ec1e2\u2026 and 5149879 bytes"
+   "detail": "9a0934cf7ae3f534\u2026 and 5151485 bytes"
   },
   {
    "control": "reject_a_one_character_change_to_the_sha256",

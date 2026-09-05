@@ -37,19 +37,24 @@ Two layers, and only the first is scored today.
      envs/controller.py  --------+      +---------->  envs/task.py
      scripted waypoint FSM                            5 sub-goals, sequencing,
      over damped-least-squares IK                     hand-off, drop, stability
-     reads MjData object poses  <-- privileged
-                                 :
-                                 : NOT CONNECTED
-                                 :
-   evidence/frames -> envs/perception.py -> models/*.onnx -> OpenVINO IR
-   one 128x224 top_cam frame       520,768-param CNN        FP32 / FP16 / INT8
-                                   -> 7 scene-state numbers  scripts/bench_openvino.py
+              |                                       ALWAYS reads MjData
+              | every object position, through
+              v
+     envs/scene_source.py   --- privileged --> MjData            (the control)
+     one seam, three sources --- perceived --> top_cam -> IR     (no true pose)
+                            --- blind ------> nominal layout    (neg. control)
+                                                 |
+   scripts/make_perception_dataset.py -> envs/perception.py -> models/*.onnx
+   top_cam frames, home AND mid-rollout   520,768-param CNN      FP32/FP16/INT8
+                                          -> 7 scene-state nums  bench_openvino.py
 ```
 
-The dotted edge is the honest centre of this entry: `envs/perception.py` can
-recover the table layout from a camera to **1.83 mm**, but `envs/controller.py`
-still reads object poses out of `MjData`. Closing that edge is the single
-largest piece of unbuilt work and is not counted anywhere below.
+That edge is no longer dotted. `envs/scene_source.py` is the seam every object
+position now passes through, and under `--scene perceived` **no true object
+pose reaches the control path**: the planar centres of plate, mug and bottle
+and the drawer opening come from one rendered `top_cam` frame per planning
+instant, through the exported OpenVINO IR. What that costs is measured in §5,
+and the headline result in this document is still the privileged one.
 
 | File | Role |
 |---|---|
@@ -85,10 +90,27 @@ What exists instead, and what it is worth:
   plate, mug and bottle and how far the drawer is out. A global average pool
   cannot do coordinate regression — averaging over space discards the position
   being asked for — so each channel becomes a soft keypoint instead.
-  Worst object centre **1.32 mm** on unseen validation seeds and **1.83 mm** on
-  the ten evaluation seeds, against **34.29 mm** for the no-vision baseline.
-- This is *visual observation*, one of the four things T2 asks for, and it is
-  not in the control loop, so it earns nothing on the scored path.
+  Worst object centre **18.41 mm** on unseen validation seeds and **2.39 mm** on
+  the ten evaluation seeds, against **84.36 mm** for the no-vision baseline.
+  Those two numbers are far apart because the validation set now spans two
+  regimes and is reported per regime rather than pooled: **2.09 mm** on
+  home-pose frames, **24.94 mm** on mid-rollout frames where two arms are over
+  the table and an object can be entirely hidden. The pooled row is 4.6x better
+  than no vision and the mid-rollout row 4.1x; only the unoccluded rows clear
+  the 5x margin, and `scripts/test_perception_pipeline.py` prints every ratio
+  rather than assuming any of them.
+- **`envs/scene_source.py` — the seam that puts it in the loop.** This is what
+  changed: the CNN is no longer beside the controller, it can be inside it.
+  Running the same scripted controller and the same scorer over the same ten
+  seeds with `--scene perceived` gives **12 / 50** sub-goals with perception in
+  the loop, against 15 / 50 privileged and **9 / 50** for the blind negative
+  control. It took **1,067** inferences to do it, and the view it planned from
+  was wrong by **2.94 mm** at t=0 and **60.48 mm** averaged over every planning
+  instant.
+- So T2's *visual observation* is now on the scored path and can be priced.
+  Its other three demands — natural-language instructions, multi-step task
+  context, plan adaptation — remain worth exactly nothing here, because none of
+  them exists.
 
 The choice that would be made next, recorded as a plan and not as work done:
 **ACT or SmolVLA via LeRobot**, trained on rollouts of the scripted controller
@@ -165,7 +187,7 @@ One model is trained. **No policy is trained.**
 | | |
 |---|---|
 | Model | `SceneStateCNN`, **520,768** parameters, input 1×3×128×224 |
-| Data | **4,000** training frames, **240** validation, **10** evaluation |
+| Data | **6,990** training frames, **840** validation, **10** evaluation |
 | Split rule | disjoint **compile seeds** — train 1000–1499, val 2000–2059, eval 0–9 — not a shuffle |
 | Labels | from the simulator, not annotated |
 | Schedule | **80** epochs, batch 64, AdamW + OneCycle at lr 2e-3, SmoothL1(β=0.02), seed 7 |
@@ -229,10 +251,39 @@ Raising the drawer's slide friction so it would not drift was tried first and
 made things worse — 2/50, because the arm could no longer pull it fully open.
 It was reverted; the friction in the scene is the original 0.35.
 
+**Robustness to losing the privileged view.** The randomization above varies
+the scene; this varies what the controller is allowed to *know* about it. Same
+controller, same seeds, same scorer — only `--scene` changes:
+
+| what the controller reads | total | `drawer_open` | `plate_placed` | `mug_placed` |
+|---|---|---|---|---|
+| `privileged` — MjData | **15 / 50** | 10 / 10 | 4 / 10 | 1 / 10 |
+| `perceived` — one `top_cam` frame per planning instant, through the IR | **12 / 50** sub-goals with perception in the loop | 9 / 10 | 3 / 10 | 0 / 10 |
+| `blind` — the nominal, un-randomized layout | **9 / 50** for the blind negative control | 9 / 10 | 0 / 10 | 0 / 10 |
+
+The blind row is why the other two mean anything: if the controller ignored
+what the scene source handed it, all three rows would be identical. They are
+not, so the seam is load-bearing.
+
+The failure is legible rather than diffuse. The perceived view was wrong by
+**2.94 mm** at t=0 and **60.48 mm** averaged over every planning instant — and that average is not spread evenly.
+The drawer, which nothing occludes, is estimated to 1.8 mm and `drawer_open`
+survives almost intact. The plate, which spends most of the episode underneath
+the arm that is dragging it, is estimated to 53 mm, and `plate_placed` is the
+sub-goal that falls. The model is being asked about an object it cannot see,
+and the cost lands exactly where that is true.
+
+Both perception runs use FP32. **1,067** inferences were made across the ten
+episodes, one per planning instant, not one per physics step.
+
 **Verification.** `scripts/verify_scene.py` **16 / 16** structural and physical
 checks; `scripts/test_task_predicates.py` **11 / 11** accept *and* reject
-controls on the scorer; `scripts/test_perception_pipeline.py` **13 / 13**
-accept and reject controls on the model, the exports and the hardware gate.
+controls on the scorer; `scripts/test_perception_pipeline.py` **18 / 18**
+accept and reject controls on the model, the exports and the hardware gate;
+`scripts/test_scene_source.py` **15 / 15** on the seam itself — that the
+privileged source is MjData verbatim, that an estimate reaches a waypoint and
+a grasp site but not a world site or an unmodelled body, and that the scorer
+never consults it.
 
 ## 6. OpenVINO optimization
 
@@ -242,11 +293,13 @@ three precisions and checks each against the PyTorch model it came from, in
 
 | Precision | Weights | Error on the 10 evaluation seeds | Max drift vs PyTorch |
 |---|---|---|---|
-| IR FP32 | **2031 KiB** | **1.81 mm** | **0.45 mm** |
-| IR FP16 | **1015 KiB** | **2.04 mm** | **1.12 mm** |
-| IR INT8 (NNCF 3.3.0 PTQ, 300 calibration frames) | **515 KiB** | **3.98 mm** | **5.87 mm** |
+| IR FP32 | **2031 KiB** | **2.44 mm** | **0.46 mm** |
+| IR FP16 | **1015 KiB** | **2.29 mm** | **1.35 mm** |
+| IR INT8 (NNCF 3.3.0 PTQ, 300 calibration frames) | **515 KiB** | **12.51 mm** | **20.08 mm** |
 
-INT8 is 3.9× smaller than FP32 and costs 2.2 mm of accuracy. That cost is
+INT8 is 3.9× smaller than FP32 and costs 10.1 mm of accuracy — four times the
+penalty the previous, easier model paid, and a reason the perceived rollout is
+run at FP32 rather than INT8. That cost is
 reported rather than buried: `test_perception_pipeline.py` carries a control
 that **fails** if the INT8 error is ever recorded as no worse than FP32.
 
@@ -255,8 +308,8 @@ measurement rather than asserted — the same IR is run twice:
 
 | Execution precision | Max drift vs PyTorch |
 |---|---|
-| plugin default (`bfloat16` on this host) | **0.4488 mm** |
-| forced `INFERENCE_PRECISION_HINT=f32` | **0.00009 mm** |
+| plugin default (`bfloat16` on this host) | **0.4620 mm** |
+| forced `INFERENCE_PRECISION_HINT=f32` | **0.00012 mm** |
 
 So the drift is the CPU plugin's own precision choice, not a conversion loss.
 Conversion itself is host-independent; latency and throughput are not.
@@ -285,7 +338,7 @@ Run on *this* host it produces **9** device/precision rows and stamps the
 report `NOT_THE_REQUIRED_MEASUREMENT`:
 
 ```
-CPU/FP32   0.436 ms p50   5220 fps async   1.81 mm   (bfloat16)
+CPU/FP32   0.426 ms p50   5488 fps async   2.44 mm   (bfloat16)
 host: AMD EPYC 9654 96-Core Processor
 ```
 
@@ -305,16 +358,28 @@ needed; the IRs are committed.
 
 Stated here in one place so no reader has to infer it:
 
-1. **No VLA, no VLM, no learned policy, no language conditioning.** T2 scores zero.
-2. **Perception is not in the control loop.** The scored result is produced by a
-   controller reading privileged `MjData` poses.
-3. **No Intel Core Ultra measurement.** The benchmark script exists and runs;
+1. **No VLA, no VLM, no learned policy, no language conditioning.** Of T2's
+   four demands, only *visual observation* is now on the scored path; natural
+   language, multi-step task context and plan adaptation score zero.
+2. **The headline result is still the privileged one.** Every figure in this
+   document that is not explicitly labelled perceived or blind was produced by a
+   controller reading privileged `MjData` poses. Perception in the loop is
+   measured and reported, and it **costs** 3 of 15 sub-goals; it is not what the
+   headline quotes.
+3. **Perception is position-only and partial.** Object height, object yaw and
+   object dimensions are read from the simulator even under `--scene perceived`,
+   and the spoon and fork are not regressed at all — the network has no output
+   for them. `envs/scene_source.py` lists every one of these.
+4. **No Intel Core Ultra measurement.** The benchmark script exists and runs;
    the required silicon does not exist here.
-4. **The task has never been completed.** Task success **0 / 10**; two of five
+5. **The task has never been completed.** Task success **0 / 10**; two of five
    sub-goals have never fired; the one mug that reaches its mat arrives on its
    side (upright cosine 0.000 against a 0.906 bar).
-5. The plate is dragged, not carried.
-6. Mid-rollout perception, where the arms occlude the table, is unmeasured.
+6. The plate is dragged, not carried.
+7. **Mid-rollout perception is weak, and it is measured rather than hidden.**
+   24.94 mm on occluded frames against 2.09 mm unoccluded — 4.1x better than no
+   vision where the unoccluded splits are 19x. An object held in a gripper or
+   hidden under an arm is not recoverable from a top-down frame by this model.
 
 ## 9. Reproducing every number in this document
 
@@ -329,10 +394,20 @@ python3 scripts/record_demo.py --seeds 10                   # the demo video
 python3 scripts/make_perception_dataset.py --split train --compiles 500 --per-compile 8
 python3 scripts/make_perception_dataset.py --split val   --compiles 60  --per-compile 4
 python3 scripts/make_perception_dataset.py --split eval10
-python3 scripts/train_perception.py --epochs 80             # evidence/perception_train.json
+python3 scripts/make_perception_dataset.py --split train --arm-poses rollout \
+    --compiles 30 --per-compile 100 --out data/perception_train_rollout.npz
+python3 scripts/make_perception_dataset.py --split val   --arm-poses rollout \
+    --compiles 6  --per-compile 100 --out data/perception_val_rollout.npz
+python3 scripts/train_perception.py --epochs 80 \
+    --train-splits train train_rollout --val-splits val val_rollout
 python3 scripts/export_openvino.py                          # evidence/openvino_export.json
 python3 scripts/bench_openvino.py                           # evidence/openvino_bench_*.json
-python3 scripts/test_perception_pipeline.py                 # 13/13
+python3 scripts/test_perception_pipeline.py                 # 18/18
+
+# perception in the control loop, and the control on either side of it
+python3 scripts/eval_seeds.py --seeds 10 --policy scripted --scene perceived
+python3 scripts/eval_seeds.py --seeds 10 --policy scripted --scene blind
+python3 scripts/test_scene_source.py                        # 15/15
 
 python3 scripts/test_technical_summary.py                   # this document vs the evidence
 ```

@@ -14,10 +14,29 @@ more than one split:
          evaluation initial state (no extra draw), so perception error can be
          quoted on the same scenes the task result is quoted on
 
+``--arm-poses`` chooses WHEN in an episode the frames are taken, and it is the
+difference between a model that works at t=0 and one that works in the loop:
+
+  home     the arms sit at the home keyframe, clear of the table.  This is the
+           original dataset and it is the whole reason the first model was
+           unusable inside the control loop -- the controller looks at the table
+           while two arms are over it, which is a distribution this split does
+           not contain a single example of.
+  rollout  the scripted controller drives the episode and frames are taken every
+           ``--capture-stride`` physics steps.  Arm poses, occlusions and
+           mid-manipulation object positions are then exactly the ones the
+           control loop will ask about, because they were produced by it.
+
+Capture always runs the controller against the PRIVILEGED scene source.  Letting
+it run against the model being trained would make the training distribution a
+function of the model's own errors.
+
 Run:
   python3 scripts/make_perception_dataset.py --split train --compiles 500 --per-compile 8
   python3 scripts/make_perception_dataset.py --split val   --compiles 60  --per-compile 4
   python3 scripts/make_perception_dataset.py --split eval10
+  python3 scripts/make_perception_dataset.py --split train --arm-poses rollout \
+      --compiles 30 --per-compile 100 --out data/perception_train_rollout.npz
 """
 from __future__ import annotations
 
@@ -36,6 +55,8 @@ import mujoco                                               # noqa: E402
 
 from envs.randomize import make_env, randomize_state        # noqa: E402
 from envs import perception as P                            # noqa: E402
+from envs import scene_source                                # noqa: E402
+from envs.controller import run_dinner_table                 # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SPLITS = {                       # split -> (seed base, default compiles, draws)
@@ -62,6 +83,11 @@ def main() -> int:
     ap.add_argument("--compiles", type=int, default=None)
     ap.add_argument("--per-compile", type=int, default=None)
     ap.add_argument("--out", default=None)
+    ap.add_argument("--arm-poses", choices=("home", "rollout"), default="home",
+                    help="where in an episode the frames come from")
+    ap.add_argument("--capture-stride", type=int, default=1000,
+                    help="--arm-poses rollout: physics steps between frames "
+                         "(an episode is ~103k steps)")
     args = ap.parse_args()
 
     base, n_comp, n_draw = SPLITS[args.split]
@@ -75,7 +101,40 @@ def main() -> int:
     extra_draws = args.split != "eval10"
 
     imgs, labs, seeds, t0, skipped = [], [], [], time.time(), 0
-    for i in range(n_comp):
+
+    if args.arm_poses == "rollout":
+        if args.split == "eval10":
+            print("refused: the eval10 split is the evaluated initial state by "
+                  "definition and must not be taken mid-rollout")
+            return 2
+        for i in range(n_comp):
+            seed = base + i
+            model, data, _ = make_env(seed)
+            scene_source.install(scene_source.PrivilegedScene())
+            n_before = len(imgs)
+            with mujoco.Renderer(model, height=P.IMG_H, width=P.IMG_W) as r:
+                state = {"k": 0}
+
+                def grab(d, _r=r, _model=model, _state=state, _seed=seed):
+                    _state["k"] += 1
+                    if _state["k"] % args.capture_stride:
+                        return
+                    if len(imgs) - n_before >= n_draw:
+                        return
+                    _r.update_scene(d, camera=P.CAMERA)
+                    imgs.append(_r.render().copy())
+                    labs.append(_labels(_model, d))
+                    seeds.append(_seed)
+
+                run_dinner_table(model, data, on_step=grab)
+            scene_source.reset()
+            print(f"  seed {seed}  +{len(imgs)-n_before} frames  "
+                  f"{len(imgs)} total  {time.time()-t0:.0f}s", flush=True)
+        n_draw_note = f"every {args.capture_stride} physics steps, capped at {n_draw}"
+    else:
+        n_draw_note = None
+
+    for i in range(0 if args.arm_poses == "home" else n_comp, n_comp):
         seed = base + i
         model, data, _ = make_env(seed)
         with mujoco.Renderer(model, height=P.IMG_H, width=P.IMG_W) as r:
@@ -117,9 +176,26 @@ def main() -> int:
         "seed_base": base, "seed_range": [base, base + n_comp - 1],
         "camera": P.CAMERA, "image": [P.IMG_H, P.IMG_W, 3],
         "outputs": list(P.OUT_NAMES),
-        "extra_placement_draws": extra_draws,
-        "drawer_range_m": [0.0, P.DRAWER_TRAVEL_M] if extra_draws
-                          else "envs/randomize.py RANGES['drawer_q'] only",
+        "arm_poses": args.arm_poses,
+        "arm_poses_note": (
+            "frames taken at the home keyframe -- no arm is ever over the table"
+            if args.arm_poses == "home" else
+            "frames taken during a scripted rollout driven against the "
+            "PRIVILEGED scene source, " + str(n_draw_note) + "; arm poses, "
+            "occlusions and mid-manipulation object positions are the ones the "
+            "control loop actually produces"),
+        "extra_placement_draws": extra_draws and args.arm_poses == "home",
+        # Measured off the labels actually written rather than declared from
+        # the sampler: under --arm-poses rollout nothing is sampled at all, the
+        # drawer goes wherever the controller pulls it.
+        "drawer_range_m": [round(float(v), 4) for v in
+                           (P.decode(labels)[:, P.OUT_NAMES.index("drawer_q")].min(),
+                            P.decode(labels)[:, P.OUT_NAMES.index("drawer_q")].max())],
+        "drawer_range_basis": ("observed in the captured rollouts"
+                               if args.arm_poses == "rollout" else
+                               "sampled uniformly here on top of "
+                               "envs/randomize.py" if extra_draws else
+                               "envs/randomize.py RANGES['drawer_q'] only"),
         "label_source": "MjData after mj_forward -- body xpos and drawer_slide qpos",
         "file": str(out.relative_to(ROOT)) if out.is_relative_to(ROOT) else str(out),
         "bytes": out.stat().st_size,

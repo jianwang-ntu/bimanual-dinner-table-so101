@@ -2,19 +2,44 @@
  "all_pass": true,
  "controls": [
   {
-   "control": "accept_beats_no_vision_baseline_val",
-   "pass": true,
-   "detail": "model 1.32 mm vs constant baseline 34.29 mm"
-  },
-  {
    "control": "accept_beats_no_vision_baseline_eval10",
    "pass": true,
-   "detail": "model 1.83 mm vs constant baseline 42.10 mm"
+   "detail": "model 2.39 mm vs constant baseline 43.77 mm = 18.3x (regime 'home', bar 5x)"
+  },
+  {
+   "control": "accept_beats_no_vision_baseline_val",
+   "pass": true,
+   "detail": "model 18.41 mm vs constant baseline 84.36 mm = 4.6x (regime 'mixed', bar 1x)"
+  },
+  {
+   "control": "accept_reads_the_image_val",
+   "pass": true,
+   "detail": "model 18.41 mm vs its own shuffled-label null 106.91 mm = 5.8x (bar 5x)"
+  },
+  {
+   "control": "accept_beats_no_vision_baseline_val::val",
+   "pass": true,
+   "detail": "model 2.09 mm vs constant baseline 40.47 mm = 19.4x (regime 'home', bar 5x)"
+  },
+  {
+   "control": "accept_reads_the_image_val::val",
+   "pass": true,
+   "detail": "model 2.09 mm vs its own shuffled-label null 48.60 mm = 23.3x (bar 5x)"
+  },
+  {
+   "control": "accept_beats_no_vision_baseline_val::val_rollout",
+   "pass": true,
+   "detail": "model 24.94 mm vs constant baseline 101.91 mm = 4.1x (regime 'rollout', bar 1x)"
+  },
+  {
+   "control": "accept_reads_the_image_val::val_rollout",
+   "pass": true,
+   "detail": "model 24.94 mm vs its own shuffled-label null 130.06 mm = 5.2x (bar 5x)"
   },
   {
    "control": "reject_shuffled_labels_score_like_the_model",
    "pass": true,
-   "detail": "shuffled 46.37 mm, baseline 34.29 mm, model 1.32 mm"
+   "detail": "shuffled 106.91 mm, baseline 84.36 mm, model 18.41 mm"
   },
   {
    "control": "accept_splits_are_seed_disjoint",
@@ -24,17 +49,17 @@
   {
    "control": "reject_noise_images_score_like_real_ones",
    "pass": true,
-   "detail": "noise 306.2 mm vs real frames 1.83 mm"
+   "detail": "noise 182.8 mm vs real frames 2.39 mm"
   },
   {
    "control": "accept_prediction_follows_a_moved_object",
    "pass": true,
-   "detail": "mug moved 60 mm, prediction moved 59.0 mm; untouched plate prediction moved 0.4 mm"
+   "detail": "mug moved 60 mm, prediction moved 62.6 mm; untouched plate prediction moved 1.2 mm"
   },
   {
    "control": "accept_fp32_ir_reproduces_torch",
    "pass": true,
-   "detail": "plugin default 0.4488 mm, forced f32 9e-05 mm"
+   "detail": "plugin default 0.4620 mm, forced f32 0.00012 mm"
   },
   {
    "control": "accept_int8_is_smaller_than_fp32",
@@ -44,7 +69,7 @@
   {
    "control": "reject_int8_is_free",
    "pass": true,
-   "detail": "INT8 3.98 mm vs FP32 1.81 mm -- the cost is measured and reported, not hidden"
+   "detail": "INT8 12.51 mm vs FP32 2.44 mm -- the cost is measured and reported, not hidden"
   },
   {
    "control": "accept_core_ultra_host_is_the_required_hardware",

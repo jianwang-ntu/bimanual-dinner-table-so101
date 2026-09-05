@@ -1,0 +1,39 @@
+{
+ "split": "train",
+ "samples": 2990,
+ "compiles": 30,
+ "per_compile": 100,
+ "seed_base": 1000,
+ "seed_range": [
+  1000,
+  1029
+ ],
+ "camera": "top_cam",
+ "image": [
+  128,
+  224,
+  3
+ ],
+ "outputs": [
+  "plate_x",
+  "plate_y",
+  "mug_x",
+  "mug_y",
+  "bottle_x",
+  "bottle_y",
+  "drawer_q"
+ ],
+ "arm_poses": "rollout",
+ "arm_poses_note": "frames taken during a scripted rollout driven against the PRIVILEGED scene source, every 1000 physics steps, capped at 100; arm poses, occlusions and mid-manipulation object positions are the ones the control loop actually produces",
+ "extra_placement_draws": false,
+ "drawer_range_m": [
+  0.0029,
+  0.0959
+ ],
+ "label_source": "MjData after mj_forward -- body xpos and drawer_slide qpos",
+ "file": "data/perception_train_rollout.npz",
+ "bytes": 79236945,
+ "skipped_draws": 0,
+ "seconds": 413.9,
+ "drawer_range_basis": "observed in the captured rollouts"
+}

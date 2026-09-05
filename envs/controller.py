@@ -1,13 +1,23 @@
 #!/usr/bin/env python3
 """A scripted bimanual controller for the dinner-table task.
 
-This is a *controller*, not a policy: it holds no learned parameters and reads
-no camera.  It exists so that the evaluation harness in ``envs/task.py`` has
-something to score other than an arm holding still, and so the demonstration
-video has a rollout to film.  What it does read from the simulator is only what
-a perception stack would supply -- the world pose of the object it is about to
-touch -- and every waypoint is resolved from that pose at the moment the move
-starts, so the same script runs against a randomized scene.
+This is a *controller*, not a policy: it holds no learned parameters.  It
+exists so that the evaluation harness in ``envs/task.py`` has something to
+score other than an arm holding still, and so the demonstration video has a
+rollout to film.
+
+Where its object positions come from is no longer fixed.  Every read of an
+object's place goes through ``envs/scene_source.py``: install
+``PrivilegedScene`` and it is ``MjData``, as it always was; install
+``PerceivedScene`` and it is one ``top_cam`` frame per planning instant through
+the exported OpenVINO IR, and no true object pose reaches the control path.
+Read that module for exactly which quantities are and are not replaced -- the
+substitution is planar and covers three of the five objects, and the rest is
+still privileged.
+
+Every waypoint is resolved at the moment the move starts, so the same script
+runs against a randomized scene and, under a perceived source, re-looks rather
+than trusting a stale estimate.
 
 The mechanism is three small pieces:
 
@@ -32,6 +42,7 @@ import mujoco
 
 from .ik import site_ik, arm_dof, ARM_JOINTS
 from .dinner_table import ARM_X as dt_ARM_X, ARM_Y as dt_ARM_Y
+from . import scene_source as _scene
 
 GRIPPER_OPEN = 1.20          # rad; jaw tips ~101 mm apart
 GRIPPER_WIDE = 1.45          # rad; ~117 mm, for reaching around a mug
@@ -407,12 +418,18 @@ def site_xyz(name, dz=0.0, dy=0.0, dx=0.0, off=None):
     d = np.array([dx, dy, dz]) if off is None else np.asarray(off, float)
 
     def f(model, data):
-        return data.site_xpos[_site(model, name)] + d
+        return _scene.active().site_xpos(model, data, name) + d
     return f
 
 
 def long_axis(body: str):
-    """Horizontal direction of a cutlery body's own +y (its handle-to-head line)."""
+    """Horizontal direction of a cutlery body's own +y (its handle-to-head line).
+
+    Privileged, deliberately and visibly: ``envs/perception.py`` regresses
+    centres, not orientations, so there is no estimate of yaw for this to use.
+    It is called for the spoon and the fork, which the network has no output
+    for at all.
+    """
     def f(model, data):
         R = data.xmat[_body(model, body)].reshape(3, 3)
         v = R[:, 1].copy()
@@ -441,7 +458,7 @@ def _rim_radius(model, body: str) -> float:
 
 
 def _rim_dir(model, data, body: str, arm: str) -> np.ndarray:
-    c = data.xpos[_body(model, body)][:2]
+    c = _scene.active().body_xpos(model, data, body)[:2]
     v = ARM_BASE[arm] - c
     n = float(np.linalg.norm(v))
     v = v / n if n > 1e-6 else np.array([1.0, 0.0])
@@ -457,7 +474,7 @@ def rim_toward(body: str, arm: str, dz: float = 0.006):
     does this.
     """
     def f(model, data):
-        c = data.xpos[_body(model, body)]
+        c = _scene.active().body_xpos(model, data, body)
         v = _rim_dir(model, data, body, arm)
         r = _rim_radius(model, body)
         return np.array([c[0] + v[0] * r, c[1] + v[1] * r, c[2] + dz])
@@ -474,8 +491,9 @@ def rim_jaw(body: str, arm: str):
 def radial(body: str, site: str):
     """Plate rim: close across the rim, i.e. along the plate's radius."""
     def f(model, data):
-        c = data.xpos[_body(model, body)][:2]
-        p = data.site_xpos[_site(model, site)][:2]
+        s = _scene.active()
+        c = s.body_xpos(model, data, body)[:2]
+        p = s.site_xpos(model, data, site)[:2]
         v = p - c
         n = float(np.linalg.norm(v))
         v = v / n if n > 1e-6 else np.array([1.0, 0.0])
@@ -560,18 +578,19 @@ def _plate_untouched(model, data) -> bool:
 
 def _plate_short(model, data) -> bool:
     """True while the plate is further from its mat than the scorer allows."""
-    c = data.xpos[_body(model, "plate")][:2]
-    t = data.site_xpos[_site(model, "target_plate")][:2]
+    s = _scene.active()
+    c = s.body_xpos(model, data, "plate")[:2]
+    t = s.site_xpos(model, data, "target_plate")[:2]
     return float(np.linalg.norm(c - t)) > PLATE_TOL
 
 
 def _plate_east(model, data) -> bool:
-    return float(data.xpos[_body(model, "plate")][0]) > PLATE_EAST
+    return float(_scene.active().body_xpos(model, data, "plate")[0]) > PLATE_EAST
 
 
 def site_xy(name):
     def f(model, data):
-        return data.site_xpos[_site(model, name)][:2]
+        return _scene.active().site_xpos(model, data, name)[:2]
     return f
 
 
@@ -591,7 +610,7 @@ def drag_toward(arm: str, aim, frac: float, body: str = "plate"):
     def f(model, data):
         g = _grip(model, arm)
         tip = g.tip_mid(model, data)
-        c = data.xpos[_body(model, body)][:2]
+        c = _scene.active().body_xpos(model, data, body)[:2]
         v = (np.asarray(aim(model, data), float) - c) * frac
         return np.array([tip[0] + v[0], tip[1] + v[1], tip[2]])
     return f
@@ -753,9 +772,7 @@ DRAWER_OPEN_M = 0.060          # mirrors envs/task.py; not imported, so that
 
 
 def _drawer_shut(model, data) -> bool:
-    adr = model.jnt_qposadr[mujoco.mj_name2id(
-        model, mujoco.mjtObj.mjOBJ_JOINT, "drawer_slide")]
-    return float(data.qpos[adr]) < DRAWER_OPEN_M + 0.005
+    return _scene.active().drawer_q(model, data) < DRAWER_OPEN_M + 0.005
 
 
 def _open_drawer(suffix: str = "", from_home: bool = False):
@@ -843,7 +860,7 @@ def hold_above_base(body: str, geom: str, frac: float):
     def f(model, data):
         gid = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_GEOM, geom)
         half = float(model.geom_size[gid][1])
-        c = data.xpos[_body(model, body)].copy()
+        c = _scene.active().body_xpos(model, data, body)
         c[2] = c[2] - half + frac * half
         return c
     return f

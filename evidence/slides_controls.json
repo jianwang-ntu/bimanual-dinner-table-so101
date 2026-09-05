@@ -1,7 +1,7 @@
 {
  "schema": "slides_controls/v1",
  "artifact": "evidence/slides_presentation.pdf",
- "sha256": "a0cbc4023eddef236e02677d38c4235ee4ca8041ccdf2e5ff7ddb40a54c506ff",
+ "sha256": "316fdb99c546d1ad09f66edbf06005f29280621fc91e77cc5bded4a0d79c76c1",
  "claims_checked": 37,
  "absences_checked": 6,
  "all_pass": true,
@@ -39,7 +39,7 @@
   {
    "control": "accept_sidecar_matches_the_file",
    "pass": true,
-   "detail": "sha256 a0cbc4023eddef23\u2026 == sidecar a0cbc4023eddef23\u2026"
+   "detail": "sha256 316fdb99c546d1ad\u2026 == sidecar 316fdb99c546d1ad\u2026"
   },
   {
    "control": "reject_a_sidecar_sha_that_does_not_match",

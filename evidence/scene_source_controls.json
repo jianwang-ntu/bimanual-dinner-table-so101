@@ -1,0 +1,89 @@
+{
+ "suite": "scene_source",
+ "passed": 15,
+ "total": 15,
+ "all_pass": true,
+ "offset_basis": "envs.randomize.RANGES['place_xy'] full width",
+ "offset_m": [
+  0.09,
+  -0.09,
+  0.0
+ ],
+ "controls": [
+  {
+   "control": "accept_privileged_is_mjdata_verbatim",
+   "pass": true,
+   "detail": "10/10 reads bit-identical to MjData"
+  },
+  {
+   "control": "accept_offset_reaches_the_bodys_own_grasp_site",
+   "pass": true,
+   "detail": "mug_grasp moved [90.0, -90.0, 0.0] mm for an offset of [90.0, -90.0, 0.0] mm"
+  },
+  {
+   "control": "accept_offset_reaches_a_controller_waypoint",
+   "pass": true,
+   "detail": "the plate-rim waypoint moved 101.7 mm"
+  },
+  {
+   "control": "reject_offset_reaching_a_world_site",
+   "pass": true,
+   "detail": "target_plate is welded to the world and did not move"
+  },
+  {
+   "control": "reject_offset_reaching_an_unmodelled_body",
+   "pass": true,
+   "detail": "fork_grasp did not move -- the network has no fork output, and PERCEIVED_BODIES is ['plate', 'mug', 'bottle']"
+  },
+  {
+   "control": "reject_spoon_or_fork_being_claimed_as_perceived",
+   "pass": true,
+   "detail": "PERCEIVED_BODIES = ['plate', 'mug', 'bottle'], network outputs = ['plate_x', 'plate_y', 'mug_x', 'mug_y', 'bottle_x', 'bottle_y', 'drawer_q']"
+  },
+  {
+   "control": "accept_drawer_estimate_slides_the_handle_along_its_axis",
+   "pass": true,
+   "detail": "handle moved [0.0, -10.0, 0.0] mm along axis [0.0, -1.0, 0.0]"
+  },
+  {
+   "control": "accept_drawer_estimate_reaches_the_controllers_predicate",
+   "pass": true,
+   "detail": "drawer_q 0.0199 -> 0.0299 m"
+  },
+  {
+   "control": "reject_the_scorer_consulting_the_scene_source",
+   "pass": true,
+   "detail": "envs/task.py returns the same report under a source that displaces every object by [90.0, -90.0, 0.0] mm"
+  },
+  {
+   "control": "accept_blind_control_actually_corrupts",
+   "pass": true,
+   "detail": "nominal layout is 54.3 mm from the truth on seed 0, against a placement jitter of 90 mm"
+  },
+  {
+   "control": "accept_blind_control_is_tied_to_randomize_not_a_literal",
+   "pass": true,
+   "detail": "BlindScene's estimate equals envs.randomize.NOMINAL_XY and the midpoint of RANGES['drawer_q'] (0.0100 m) exactly"
+  },
+  {
+   "control": "accept_perceived_matches_the_reported_model_error",
+   "pass": true,
+   "detail": "worst centre 3.53 mm over seeds 0-2 at t=0, against 2.39 mm reported on eval10 (bar 7.17 mm)"
+  },
+  {
+   "control": "accept_what_the_controller_gets_is_the_network_output",
+   "pass": true,
+   "detail": "body_xpos returned the decoded network prediction, not the simulator's value, on every seed checked"
+  },
+  {
+   "control": "reject_perception_keeping_skill_on_a_noise_image",
+   "pass": true,
+   "detail": "noise gives 179.8 mm against 3.53 mm on the real frame"
+  },
+  {
+   "control": "accept_default_source_is_privileged",
+   "pass": true,
+   "detail": "after reset the active source is PrivilegedScene"
+  }
+ ]
+}

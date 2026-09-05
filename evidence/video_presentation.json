@@ -1,8 +1,8 @@
 {
  "schema": "video_presentation/v1",
  "video": "evidence/video_presentation.mp4",
- "sha256": "1dbc0a83089ec1e22e11c98220de464b81a13f070f7459e7d22bff25f45122a2",
- "bytes": 5149879,
+ "sha256": "9a0934cf7ae3f534550023c0012bc48c50a8ce8f5249228c849ff3f3a496fbdb",
+ "bytes": 5151485,
  "duration_s": 275.56,
  "duration_mmss": "4:36",
  "fps": 25,
@@ -22,14 +22,14 @@
   "min_seconds": 180.0,
   "max_bytes": 300000000,
   "measured_seconds": 275.56,
-  "measured_bytes": 5149879
+  "measured_bytes": 5151485
  },
  "distinct_from": {
   "file": "evidence/demo_scripted_10seeds.mp4",
   "why": "that is the track's Required Deliverable 4, the full 10-seed rollout at 340.88 s; it is over the platform's 5-minute limit for this slot and does not state the problem, the solution or the value proposition."
  },
  "built_by": "scripts/make_video.py",
- "built_at_head": "e33ae9c032c4aab653f3e4321354bfad5ea1264c",
+ "built_at_head": "938ef11bf48f4f30320b8d76131a23475b27ce69",
  "source_date_epoch": "1757000000",
  "deterministic": "frames are generated, SOURCE_DATE_EPOCH is pinned and ffmpeg is invoked bitexact with a pinned thread count, so two builds from the same evidence produce byte-identical MP4s. scripts/test_video.py rebuilds and compares.",
  "audio": "none. The presentation is silent and reads from the screen; no narration is claimed and none is present.",
@@ -42,10 +42,13 @@
   "demo_scripted_10seeds.json",
   "eval_seeds.json",
   "eval_seeds_scripted.json",
+  "eval_seeds_scripted_blind.json",
+  "eval_seeds_scripted_perceived.json",
   "openvino_bench_amd_epyc_9654_96_core_processor.json",
   "openvino_export.json",
   "perception_pipeline_controls.json",
   "perception_train.json",
+  "scene_source_controls.json",
   "scene_verification.json",
   "slides_controls.json",
   "slides_presentation.json",
@@ -1738,15 +1741,15 @@
     },
     {
      "role": "bullet",
-     "text": "\u2014  envs/perception.py is a 520,768-parameter scene-state CNN that regresses the table layout from one overhead frame, trained on 4,000 simulator-rendered images for 80 epochs."
+     "text": "\u2014  envs/perception.py is a 520,768-parameter scene-state CNN that regresses the table layout from one overhead frame, trained on 6,990 simulator-rendered images for 80 epochs."
     },
     {
      "role": "bullet",
-     "text": "\u2014  Worst-object error 1.32 mm on validation and 1.83 mm on the ten evaluation seeds, against a no-vision baseline of 42.1 mm and shuffled labels at 46.4 mm. 13/13 pipeline controls pass."
+     "text": "\u2014  Worst-object error 18.41 mm on validation and 2.39 mm on the ten evaluation seeds, against a no-vision baseline of 43.8 mm and shuffled labels at 106.9 mm. 18/18 pipeline controls pass."
     },
     {
      "role": "bullet",
-     "text": "\u2014  Exported to OpenVINO 2026.3.1 IR at FP32, FP16 and NNCF INT8. INT8 is 3.9\u00d7 smaller than FP32 (527,472 against 2,079,264 weight bytes) and costs 2.16 mm of accuracy \u2014 3.976 against 1.812 mm."
+     "text": "\u2014  Exported to OpenVINO 2026.3.1 IR at FP32, FP16 and NNCF INT8. INT8 is 3.9\u00d7 smaller than FP32 (527,472 against 2,079,264 weight bytes) and costs 10.07 mm of accuracy \u2014 12.513 against 2.441 mm."
     },
     {
      "role": "bullet",
@@ -1799,7 +1802,7 @@
      "style": "normal"
     },
     {
-     "text": "from one overhead frame, trained on 4,000 simulator-rendered images for 80 epochs.",
+     "text": "from one overhead frame, trained on 6,990 simulator-rendered images for 80 epochs.",
      "size": 16,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -1807,7 +1810,7 @@
      "style": "normal"
     },
     {
-     "text": "\u2014 Worst-object error 1.32 mm on validation and 1.83 mm on the ten evaluation seeds, against a",
+     "text": "\u2014 Worst-object error 18.41 mm on validation and 2.39 mm on the ten evaluation seeds, against a",
      "size": 16,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -1815,7 +1818,7 @@
      "style": "normal"
     },
     {
-     "text": "no-vision baseline of 42.1 mm and shuffled labels at 46.4 mm. 13/13 pipeline controls pass.",
+     "text": "no-vision baseline of 43.8 mm and shuffled labels at 106.9 mm. 18/18 pipeline controls pass.",
      "size": 16,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -1831,7 +1834,7 @@
      "style": "normal"
     },
     {
-     "text": "(527,472 against 2,079,264 weight bytes) and costs 2.16 mm of accuracy \u2014 3.976 against 1.812",
+     "text": "(527,472 against 2,079,264 weight bytes) and costs 10.07 mm of accuracy \u2014 12.513 against 2.441",
      "size": 16,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -1893,7 +1896,7 @@
     },
     {
      "role": "bullet",
-     "text": "\u2014  On this host that is AMD EPYC 9654 96-Core Processor: 0.436 ms median latency, 5,220 inferences/s at FP32."
+     "text": "\u2014  On this host that is AMD EPYC 9654 96-Core Processor: 0.426 ms median latency, 5,488 inferences/s at FP32."
     },
     {
      "role": "bullet",
@@ -1966,7 +1969,7 @@
      "style": "normal"
     },
     {
-     "text": "\u2014 On this host that is AMD EPYC 9654 96-Core Processor: 0.436 ms median latency, 5,220",
+     "text": "\u2014 On this host that is AMD EPYC 9654 96-Core Processor: 0.426 ms median latency, 5,488",
      "size": 17,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -2485,28 +2488,28 @@
   "scene_detail": "nq=48 nu=12 nbody=25 ngeom=133 nmesh=36",
   "pred_pass": 11,
   "pred_n": 11,
-  "perc_pass": 13,
-  "perc_n": 13,
+  "perc_pass": 18,
+  "perc_n": 18,
   "params": 520768,
-  "train_n": 4000,
-  "val_n": 240,
+  "train_n": 6990,
+  "val_n": 840,
   "epochs": 80,
-  "val_mm": 1.3183772563934326,
-  "eval_mm": 1.8333436250686646,
-  "base_eval_mm": 42.097721099853516,
-  "shuffled_mm": 46.36643981933594,
+  "val_mm": 18.408641815185547,
+  "eval_mm": 2.3894293308258057,
+  "base_eval_mm": 43.768760681152344,
+  "shuffled_mm": 106.90510559082031,
   "fp32_bytes": 2079264,
   "int8_bytes": 527472,
   "int8_ratio": 3.941941941941942,
-  "int8_mm": 3.975828170776367,
-  "fp32_mm": 1.8124964237213135,
-  "int8_cost_mm": 2.1633317470550537,
+  "int8_mm": 12.5132474899292,
+  "fp32_mm": 2.4407994747161865,
+  "int8_cost_mm": 10.072448015213013,
   "bench_rows": 9,
   "bench_cpu": "AMD EPYC 9654 96-Core Processor",
   "bench_verdict": "NOT_THE_REQUIRED_MEASUREMENT",
   "bench_asks": "Intel Core Ultra Series 2/3 with OpenVINO",
-  "cpu_p50": 0.436,
-  "cpu_fps": 5219.7,
+  "cpu_p50": 0.426,
+  "cpu_fps": 5488.5,
   "openvino": "2026.3.1",
   "mass_lo": 0.603,
   "mass_hi": 1.599,

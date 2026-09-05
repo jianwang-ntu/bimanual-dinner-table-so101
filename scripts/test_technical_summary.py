@@ -58,10 +58,20 @@ def load_evidence(ev: pathlib.Path) -> dict:
     def j(name):
         return json.loads((ev / name).read_text(encoding="utf-8"))
 
+    def opt(name):
+        f = ev / name
+        return json.loads(f.read_text(encoding="utf-8")) if f.exists() else None
+
     bench = sorted(ev.glob("openvino_bench_*.json"))
     if not bench:
         raise FileNotFoundError(f"no openvino_bench_*.json under {ev}")
     return {
+        # Optional because the perceived and blind runs are a second pass over
+        # the same seeds; a clone that has only run the headline evaluation
+        # still gets a document check, it just gets fewer claims.
+        "scripted_perceived": opt("eval_seeds_scripted_perceived.json"),
+        "scripted_blind": opt("eval_seeds_scripted_blind.json"),
+        "scene_controls": opt("scene_source_controls.json"),
         "scripted": j("eval_seeds_scripted.json"),
         "control": j("eval_seeds.json"),
         "scene": j("scene_verification.json"),
@@ -137,6 +147,27 @@ def claims_from_evidence(e: dict) -> list[tuple[str, str]]:
         ("bench_cpu_latency", f"{cpu32['latency_stream']['p50_ms']:.3f} ms p50"),
         ("bench_cpu_throughput", f"{cpu32['throughput']['fps']:.0f} fps async"),
     ]
+    if e.get("scene_controls"):
+        sco = e["scene_controls"]
+        c.append(("scene_source_controls",
+                  f"**{sco['passed']} / {sco['total']}**"))
+    pv, bl = e.get("scripted_perceived"), e.get("scripted_blind")
+    if pv:
+        pv_total = sum(pv["subgoals_met_per_seed"])
+        err = pv["estimate_error_mm"]
+        c.append(("perceived_total",
+                  f"**{pv_total} / {denom}** sub-goals with perception in the "
+                  f"loop"))
+        c.append(("perceived_error",
+                  f"**{err['at_t0_worst_object_mean']:.2f} mm** at t=0 and "
+                  f"**{err['worst_object_mean_over_seeds']:.2f} mm** averaged "
+                  f"over every planning instant"))
+        c.append(("perceived_inferences",
+                  f"**{err['inferences_total']:,}** inferences"))
+    if bl:
+        c.append(("blind_total",
+                  f"**{sum(bl['subgoals_met_per_seed'])} / {denom}** for the "
+                  f"blind negative control"))
     for goal, n in sorted(per.items()):
         c.append((f"subgoal_{goal}", f"| `{goal}` | **{n} / {seeds}** |"))
     for name in ("FP32", "FP16", "INT8"):
@@ -224,8 +255,26 @@ def missing_absences(text: str, e: dict) -> list[str]:
         gaps.append("sub-goals that never fired")
     if object_handoffs == 0 and "no object hand-off has ever occurred" not in low:
         gaps.append("no object hand-off")
-    if "not in the control loop" not in low:
-        gaps.append("perception outside the control loop")
+    # Derived from the run, not asserted: which scene source produced the
+    # headline number decides what the document has to admit about it. When
+    # this was an unconditional string check it was a test asserting a
+    # limitation, and it would have gone on passing after the limitation was
+    # lifted -- and failing once the document told the truth.
+    if sc.get("scene_source", "privileged") == "privileged" \
+            and "reading privileged" not in low:
+        gaps.append("headline result is produced from privileged poses")
+    pv = e.get("scripted_perceived")
+    if pv is not None:
+        err = pv["estimate_error_mm"]
+        drift = err["worst_object_mean_over_seeds"] / max(
+            err["at_t0_worst_object_mean"], 1e-9)
+        if drift > 5.0 and "occlu" not in low:
+            gaps.append(f"perception drifts {drift:.0f}x mid-rollout and the "
+                        "document does not mention occlusion")
+        if sum(pv["subgoals_met_per_seed"]) < sum(sc["subgoals_met_per_seed"]) \
+                and "costs" not in low:
+            gaps.append("perception in the loop costs sub-goals and the "
+                        "document does not say so")
     if (e["bench"]["required_hardware"]["verdict"] != "MEASURED_ON_REQUIRED_HARDWARE"
             and "has no intel silicon" not in low):
         gaps.append("no Intel Core Ultra measurement")
@@ -258,7 +307,8 @@ def main() -> int:
                 else f"{len(over)} line(s) claim more than {successes}/{seeds}: {over}")
     gaps = missing_absences(text, e)
     ok &= check("accept_absence_ledger_states_every_recorded_absence", not gaps,
-                "all five absences stated" if not gaps else f"not stated: {gaps}")
+                "every absence the evidence records is stated" if not gaps
+                else f"not stated: {gaps}")
 
     dgaps = demo_prose_gaps(e["demo"])
     ok &= check("accept_demo_record_prose_matches_its_own_rows", not dgaps,

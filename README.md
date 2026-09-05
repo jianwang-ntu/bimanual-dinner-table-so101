@@ -7,27 +7,33 @@ hackathon, lablab.ai). Target scenario: *Setting Up a Dinner Table*.
 ## What is in here, and what is not
 
 This repository contains **the environment, the scorer, and a scripted
-controller that solves two sub-goals of five on 6 seeds of 10, and never the
+controller that solves two sub-goals of five on 5 seeds of 10, and never the
 whole task. There is no learned policy.** Read that before reading anything
 else.
+
+Since 2026-09-06 the controller can also be run with **no privileged object
+poses at all** — see *Perception in the control loop* below. That run scores
+**12 / 50**, three sub-goals below the privileged one, and the privileged
+number is what this README quotes unless a row says otherwise.
 
 | Piece | State | Evidence |
 |---|---|---|
 | Dual SO-101 MuJoCo scene, drawer, plate, mug, bottle, cutlery | built, verified | `evidence/scene_verification.json` (16/16) |
 | Seeded domain randomization — geometry, mass, friction, lighting, background, placement | built, verified over 10 seeds | `evidence/eval_seeds.json` |
 | Task definition and success predicates | built, controls both ways | `evidence/task_predicate_controls.json` (11/11) |
-| Scripted bimanual controller | built, **16 sub-goals of 50 over 10 seeds** | `evidence/eval_seeds_scripted.json` |
+| Scripted bimanual controller | built, **15 sub-goals of 50 over 10 seeds** | `evidence/eval_seeds_scripted.json` |
 | Demo video, 10 randomized seeds, captioned from the simulator | recorded, **shows a partial rollout** | `evidence/demo_scripted_10seeds.mp4` + `.json` |
-| Scene-state perception CNN, trained on rendered frames | built, **1.3 mm val / 1.8 mm on the evaluation seeds** | `evidence/perception_train.json` |
+| Scene-state perception CNN, trained on rendered frames | built, **2.09 mm on unoccluded / 24.94 mm on mid-rollout frames** | `evidence/perception_train.json` |
 | OpenVINO conversion — FP32, FP16, INT8 (NNCF) | built, accuracy of each measured | `evidence/openvino_export.json` |
 | Bench-test script — latency, throughput, device, precision | built, **run here on AMD, not on Intel** | `evidence/openvino_bench_*.json` |
-| Controls for all of the above, accept and reject | 13/13 | `evidence/perception_pipeline_controls.json` |
+| Controls for all of the above, accept and reject | 18/18 | `evidence/perception_pipeline_controls.json` |
 | Technical summary / architecture — Required Deliverable 5 | written, claims machine-checked | [`TECHNICAL_SUMMARY.md`](TECHNICAL_SUMMARY.md), `evidence/technical_summary_controls.json` (11/11) |
 | Submission cover image, 1920×1080 PNG rendered from the simulator | rendered, **captioned from `evidence/`, not typed** | `evidence/cover_image.png` + `.json`, `evidence/cover_image_controls.json` (14/14) |
 | Slide presentation, 13 slides, 16:9 PDF | generated from `evidence/`, **no figure typed by hand** | `evidence/slides_presentation.pdf` + `.json`, `evidence/slides_controls.json` (12/12) |
 | Video presentation, 4:36, 1280×720 MP4 | generated from `evidence/`, **real footage pasted unscaled from the demo MP4** | `evidence/video_presentation.mp4` + `.json`, `evidence/video_controls.json` (38/38) |
+| Perception in the control loop | built, **12 / 50 perceived vs 15 / 50 privileged vs 9 / 50 blind** | `evidence/eval_seeds_scripted_perceived.json`, `evidence/scene_source_controls.json` (15/15) |
 | VLA / imitation policy | **not started** | — |
-| Perception in the control loop | **not started** — the controller still reads privileged state | — |
+| Language conditioning, multi-step task context, re-planning | **not started** — three of T2's four demands | — |
 | Intel Core Ultra Series 2/3 benchmark numbers | **not measured, and cannot be measured here** | see *Hardware* below |
 
 ### Three defects found by measurement, and what they cost
@@ -269,7 +275,7 @@ there because an open-loop version was measured failing:
   changes the next waypoint instead of being carried forward. If the plate is
   still short of the mat at the end, the whole cycle repeats, twice.
 
-It works on 6 seeds of 10. On the other 4 the hook never engages and the plate
+It works on 4 seeds of 10. On the other 6 the hook never engages and the plate
 is left between 80 mm and 300 mm from the mat.
 
 ## Robustness and recovery
@@ -306,27 +312,73 @@ softmax** — a global average pool cannot do coordinate regression, because
 averaging over space discards the position being asked for; a spatial softmax
 turns each channel into a soft keypoint and keeps it.
 
-**What it is not.** It is not a policy, it emits scene state rather than
-actions, and **it is not in the control loop**. The 16/50 sub-goal result is
-still produced by the privileged scripted controller and is unchanged by
-anything here.
+**What it is not.** It is not a policy — it emits scene state, not actions —
+and it does not read or produce language. It *can* now be put in the control
+loop; see the next section for what that costs.
 
-**Data.** Rendered from the simulator, labelled by the simulator: 4,000 training
-frames from compile seeds 1000–1499, 240 validation frames from 2000–2059, and
-the ten evaluation seeds at exactly their scored initial state. The splits are
+**Data.** Rendered from the simulator, labelled by the simulator: 6,990 training
+frames and 840 validation frames, over two regimes. The `home` splits are the
+original ones — both arms at the home keyframe, nothing over the table. The
+`rollout` splits are frames taken every 1,000 physics steps *during a scripted
+episode*, so the arm poses, the occlusions and the mid-manipulation object
+positions are the ones the control loop actually asks about. The splits are
 disjoint *by compile seed*, not by shuffling.
 
 | | worst object centre | drawer travel |
 |---|---|---|
-| model, validation (unseen seeds) | **1.3 mm** | 0.2 mm |
-| model, the ten evaluation seeds | **1.8 mm** | 0.15 mm |
-| no-vision baseline (train-set mean layout) | 34.3 mm | 22.1 mm |
-| the same model on random-noise images | 306 mm | — |
+| model, unoccluded validation frames | **2.09 mm** | 0.25 mm |
+| model, the ten evaluation seeds | **2.39 mm** | 0.21 mm |
+| model, **mid-rollout** validation frames | **24.94 mm** | 0.87 mm |
+| no-vision baseline, unoccluded / mid-rollout | 40.5 mm / 101.9 mm | 28.9 mm |
+| the same predictions against shuffled labels | 48.6 mm / 130.1 mm | — |
+| the same model on random-noise images | 314 mm | — |
 
-The last two rows are the point: a metric that cannot fail proves nothing.
-`scripts/test_perception_pipeline.py` adds a causal control — move the mug
-60 mm in the scene, re-render, re-predict: the mug prediction moves 59.0 mm and
-the untouched plate prediction moves 0.4 mm.
+The bottom three rows are the point: a metric that cannot fail proves nothing.
+Read them together and the honest summary is that the model is 19× better than
+no vision where the object is visible and **4.1× better where an arm is over
+it** — it is reading the image in both regimes (the shuffled null is 5.2× worse
+even on the hard one), it is just not reading it well when there is nothing to
+read. `scripts/test_perception_pipeline.py` checks every one of those ratios
+per split rather than pooling them, and adds a causal control: move the mug
+60 mm in the scene, re-render, re-predict, and see whether the mug prediction
+moves and the untouched plate prediction does not.
+
+## Perception in the control loop
+
+`envs/scene_source.py` is the seam. Every object position the controller reads
+goes through it, and three sources can be installed:
+
+| `--scene` | what the controller reads | sub-goals |
+|---|---|---|
+| `privileged` | `MjData`, as it always did | **15 / 50** |
+| `perceived` | one `top_cam` frame per planning instant → OpenVINO IR → seven numbers | **12 / 50** |
+| `blind` | the nominal, un-randomized layout from `envs/randomize.py` | **9 / 50** |
+
+```bash
+python3 scripts/eval_seeds.py --seeds 10 --policy scripted --scene perceived
+python3 scripts/eval_seeds.py --seeds 10 --policy scripted --scene blind
+python3 scripts/test_scene_source.py     # 15/15 on the seam itself
+```
+
+The `blind` row is the negative control and it is why the other two mean
+anything: if the controller ignored what it was handed, all three rows would be
+identical. They are not.
+
+**What is and is not replaced.** Under `perceived`, the planar centres of the
+plate, mug and bottle and the drawer opening come from the network, and a site
+welded to one of those bodies — `plate_grasp`, `mug_grasp`,
+`drawer_handle_site` — moves with its parent's estimate. Object **height**,
+object **yaw**, object **dimensions**, and the **spoon and fork** are still
+read from the simulator: the network has no output for any of them. The
+scorer in `envs/task.py` is never routed through the seam, and
+`test_scene_source.py` checks that by displacing every object 90 mm and
+confirming the score does not move.
+
+**Where the 3 sub-goals go.** Not evenly. The drawer is never occluded, is
+estimated to 1.8 mm, and `drawer_open` survives at 9/10. The plate spends most
+of the episode underneath the arm dragging it, is estimated to 53 mm, and
+`plate_placed` drops from 4/10 to 3/10 with the mug lost entirely. The cost
+lands exactly where the model cannot see.
 
 ### Conversion and precision
 

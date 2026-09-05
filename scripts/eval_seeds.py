@@ -16,7 +16,21 @@ Two modes, and the difference between them is the point:
                        drives the same episodes and is scored by the same
                        predicates.
 
+Orthogonal to the policy, ``--scene`` chooses where that controller's object
+positions come from (see ``envs/scene_source.py``):
+
+``privileged``  ``MjData``.  The number this entry has always reported.
+``perceived``   one ``top_cam`` frame per planning instant through the exported
+                OpenVINO IR.  No true object pose reaches the control path.
+``blind``       the nominal, un-randomized layout.  The negative control: it
+                must score WORSE, or the controller is not consuming the source
+                and the perceived number would mean nothing.
+
+The scorer in ``envs/task.py`` is untouched by ``--scene`` and always reads the
+simulator.  A run that let the estimate grade itself would not be an evaluation.
+
 Run:  python3 scripts/eval_seeds.py --seeds 10 --policy scripted
+      python3 scripts/eval_seeds.py --seeds 10 --policy scripted --scene perceived
 """
 from __future__ import annotations
 
@@ -35,6 +49,7 @@ import mujoco                                                 # noqa: E402
 from envs.randomize import make_env, ARM_BASES, REACH_MAX      # noqa: E402
 from envs.task import TaskMonitor, TABLE_TOP_Z                 # noqa: E402
 from envs.controller import run_dinner_table                   # noqa: E402
+from envs import scene_source                                  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 EVID = ROOT / "evidence"
@@ -42,9 +57,12 @@ OBJECTS = ("plate", "mug", "bottle", "spoon", "fork")
 
 
 def episode(seed: int, seconds: float, render: pathlib.Path | None,
-            policy: str = "none") -> dict:
+            policy: str = "none", scene: str = "privileged",
+            scene_kw: dict | None = None) -> dict:
     model, data, log = make_env(seed)
     mon = TaskMonitor(model)
+    src = scene_source.make(scene, **(scene_kw or {}))
+    scene_source.install(src)
 
     # initial-state validity, measured before a single step is taken
     init = {}
@@ -65,13 +83,18 @@ def episode(seed: int, seconds: float, render: pathlib.Path | None,
     }
 
     rollout = None
-    if policy == "scripted":
-        rollout = run_dinner_table(model, data, monitor=mon)
-    else:
-        steps = int(seconds / model.opt.timestep)
-        for _ in range(steps):
-            mujoco.mj_step(model, data)
-            mon.step(data)
+    try:
+        if policy == "scripted":
+            rollout = run_dinner_table(model, data, monitor=mon)
+        else:
+            steps = int(seconds / model.opt.timestep)
+            for _ in range(steps):
+                mujoco.mj_step(model, data)
+                mon.step(data)
+        scene_report = src.report()
+    finally:
+        src.close()
+        scene_source.reset()
 
     stable = bool(np.all(np.isfinite(data.qpos))
                   and int(data.warning.number.sum()) == 0)
@@ -92,6 +115,7 @@ def episode(seed: int, seconds: float, render: pathlib.Path | None,
         "initial_state_valid": valid,
         "episode_stable": stable,
         "warnings": data.warning.number.tolist(),
+        "scene_source": scene_report,
         "task": mon.report(data),
     }
 
@@ -102,16 +126,30 @@ def main() -> int:
     ap.add_argument("--seconds", type=float, default=4.0)
     ap.add_argument("--no-render", action="store_true")
     ap.add_argument("--policy", choices=("none", "scripted"), default="none")
+    ap.add_argument("--scene", choices=tuple(scene_source.SOURCES),
+                    default="privileged",
+                    help="where the controller reads object positions from")
+    ap.add_argument("--precision", default="FP32",
+                    choices=("FP32", "FP16", "INT8"),
+                    help="--scene perceived: which exported IR to run")
+    ap.add_argument("--device", default="CPU",
+                    help="--scene perceived: OpenVINO device")
+    ap.add_argument("--backend", default="openvino",
+                    choices=("openvino", "torch"),
+                    help="--scene perceived: inference runtime")
     ap.add_argument("--out", default=None,
                     help="evidence file to write (default depends on --policy)")
     args = ap.parse_args()
 
     frames = EVID / "seeds"
     frames.mkdir(parents=True, exist_ok=True)
+    scene_kw = ({"precision": args.precision, "device": args.device,
+                 "backend": args.backend} if args.scene == "perceived" else {})
     rows = []
     for s in range(args.seeds):
         png = None if args.no_render else frames / f"seed_{s:02d}.png"
-        row = episode(s, args.seconds, png, policy=args.policy)
+        row = episode(s, args.seconds, png, policy=args.policy,
+                      scene=args.scene, scene_kw=scene_kw)
         rows.append(row)
         v = row["initial_state_valid"]
         print(f"seed {s:2d}  on_table={v['all_on_table']!s:5s} "
@@ -124,20 +162,65 @@ def main() -> int:
     ok = all(all(r["initial_state_valid"].values()) and r["episode_stable"]
              for r in rows)
     met = [r["task"]["subgoals_met"] for r in rows]
+    SCENE_NOTE = {
+        "privileged": "The controller read the world pose of the object it was "
+                      "about to touch straight out of MjData. This is the "
+                      "privileged control.",
+        "perceived":  "The controller read NO true object pose. The planar "
+                      "centres of plate, mug and bottle and the drawer opening "
+                      "came from one top_cam frame per planning instant through "
+                      "the exported OpenVINO IR. Object height, yaw and "
+                      "dimensions, and the spoon and fork, are still privileged "
+                      "-- envs/scene_source.py lists exactly which.",
+        "blind":      "NEGATIVE CONTROL. The controller was handed the nominal, "
+                      "un-randomized layout from envs/randomize.py instead of an "
+                      "estimate. It must score worse than privileged; if it does "
+                      "not, the controller is not consuming the scene source.",
+    }
     note = ("No policy is loaded. The arms hold the home pose, so a task score "
             "of 0 is the expected and correct result; this run scores the "
             "ENVIRONMENT, not a controller."
             if args.policy == "none" else
             "envs/controller.py, a scripted IK waypoint state machine. It "
-            "holds no learned parameters and reads no camera; it reads the "
-            "world pose of the object it is about to touch, which is what a "
-            "perception stack would supply. Scored by the same predicates as "
-            "the no-policy control.")
+            "holds no learned parameters. Scored by the same predicates as the "
+            "no-policy control, and by a scorer that always reads the "
+            "simulator whatever --scene is set to. "
+            + SCENE_NOTE[args.scene])
+    est = [r["scene_source"] for r in rows
+           if r["scene_source"].get("worst_object_mean_mm") is not None]
     out = {
         "seeds": args.seeds,
         "seconds_per_episode": args.seconds,
         "policy": None if args.policy == "none" else "scripted",
         "policy_note": note,
+        "scene_source": args.scene,
+        "scene_source_detail": (rows[0]["scene_source"]["source"] if rows
+                                else args.scene),
+        "scene_source_note": SCENE_NOTE[args.scene],
+        "scorer_reads": "MjData -- envs/task.py is never routed through the "
+                        "scene source",
+        "estimate_error_mm": None if not est else {
+            "worst_object_mean_over_seeds": round(
+                float(np.mean([e["worst_object_mean_mm"] for e in est])), 3),
+            "worst_object_max_over_seeds": round(
+                float(np.max([max(e[k]["max"] for k in
+                                  ("plate_mm", "mug_mm", "bottle_mm"))
+                              for e in est])), 3),
+            "at_t0_worst_object_mean": round(
+                float(np.mean([max(e[k]["first"] for k in
+                                   ("plate_mm", "mug_mm", "bottle_mm"))
+                               for e in est])), 3),
+            "inferences_total": int(sum(e["inferences"] for e in est)),
+            "note": "distance from the true planar centre, in millimetres, at "
+                    "every planning instant -- how wrong the controller's view "
+                    "of the table was when it planned each waypoint. "
+                    + ("For --scene blind there is no inference: this is the "
+                       "fixed gap between the nominal layout and the "
+                       "randomized one, and it is the control's whole point."
+                       if args.scene == "blind" else
+                       "t0 is an unoccluded table; later instants have two arms "
+                       "over it."),
+        },
         "all_episodes_valid_and_stable": ok,
         "subgoals_met_per_seed": met,
         "subgoals_met_mean": round(float(np.mean(met)), 3) if met else 0.0,
@@ -146,10 +229,13 @@ def main() -> int:
         "episodes": rows,
     }
     EVID.mkdir(parents=True, exist_ok=True)
-    name = args.out or ("eval_seeds.json" if args.policy == "none"
-                        else "eval_seeds_scripted.json")
+    default = ("eval_seeds.json" if args.policy == "none"
+               else "eval_seeds_scripted.json")
+    if args.scene != "privileged" and args.out is None:
+        default = f"eval_seeds_{args.policy}_{args.scene}.json"
+    name = args.out or default
     (EVID / name).write_text(json.dumps(out, indent=1), encoding="utf-8")
-    print(f"\n{args.seeds} seeds, policy={args.policy}: "
+    print(f"\n{args.seeds} seeds, policy={args.policy}, scene={args.scene}: "
           f"{'all valid and stable' if ok else 'FAILURES PRESENT'}; "
           f"subgoals {sum(met)}/{5 * len(met)}, "
           f"task_success {out['task_success_count']}/{len(met)} "

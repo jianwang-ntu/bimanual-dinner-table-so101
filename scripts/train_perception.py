@@ -14,7 +14,18 @@ scenes the network never saw, next to a baseline that has no vision at all:
 
 Both are computed here, on the same tensors, by the same code path.
 
+``--train-splits`` and ``--val-splits`` take more than one dataset because the
+distribution the control loop asks about is not the one the first model was
+fitted on.  ``perception_train.npz`` holds only home-keyframe frames -- no arm
+is ever over the table in it -- and a model trained on that alone drifts by two
+orders of magnitude once ``envs/scene_source.py`` starts asking it mid-rollout.
+``perception_train_rollout.npz`` is the same scenes with the arms where the
+controller actually puts them.  Error is reported per validation split as well
+as pooled, so the home-pose number stays visible and cannot be averaged away.
+
 Run:  python3 scripts/train_perception.py --epochs 60
+      python3 scripts/train_perception.py --epochs 60 \
+          --train-splits train train_rollout --val-splits val val_rollout
 """
 from __future__ import annotations
 
@@ -58,6 +69,14 @@ def to_batches(images, labels, device, batch, shuffle, generator=None):
         yield x, y
 
 
+def _derangement(n: int, rng) -> np.ndarray:
+    """A permutation with no fixed point, so nothing is paired with itself."""
+    perm = rng.permutation(n)
+    while np.any(perm == np.arange(n)):
+        perm = rng.permutation(n)
+    return perm
+
+
 @torch.no_grad()
 def predict(model, images, device, batch=128) -> np.ndarray:
     model.eval()
@@ -75,15 +94,29 @@ def main() -> int:
     ap.add_argument("--lr", type=float, default=2e-3)
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
+    ap.add_argument("--train-splits", nargs="+", default=["train"])
+    ap.add_argument("--val-splits", nargs="+", default=["val"])
     args = ap.parse_args()
 
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
     device = torch.device(args.device)
 
-    xtr, ytr, str_ = load("train")
-    xva, yva, sva = load("val")
+    def load_many(splits):
+        parts = [load(sp) for sp in splits]
+        return (np.concatenate([a for a, _, _ in parts]),
+                np.concatenate([b for _, b, _ in parts]),
+                np.concatenate([c for _, _, c in parts]),
+                {sp: len(a) for sp, (a, _, _) in zip(splits, parts)})
+
+    xtr, ytr, str_, n_tr = load_many(args.train_splits)
+    xva, yva, sva, n_va = load_many(args.val_splits)
     xev, yev, sev = load("eval10")
+    va_parts = {}                       # split -> slice into the pooled val set
+    at = 0
+    for sp in args.val_splits:
+        va_parts[sp] = slice(at, at + n_va[sp])
+        at += n_va[sp]
     assert not (set(str_.tolist()) & set(sva.tolist())), "train/val seed overlap"
     assert not (set(str_.tolist()) & set(sev.tolist())), "train/eval seed overlap"
 
@@ -139,9 +172,7 @@ def main() -> int:
     const = ytr.mean(0, keepdims=True)
 
     rng = np.random.default_rng(args.seed)
-    perm = rng.permutation(len(yva))
-    while np.any(perm == np.arange(len(yva))):           # no fixed points
-        perm = rng.permutation(len(yva))
+    perm = _derangement(len(yva), rng)
 
     report = {
         "schema": "perception_train/v1",
@@ -152,8 +183,13 @@ def main() -> int:
                   "checkpoint": str(ckpt.relative_to(ROOT))},
         "data": {"train": int(len(xtr)), "val": int(len(xva)),
                  "eval10": int(len(xev)),
+                 "train_splits": {k: int(v) for k, v in n_tr.items()},
+                 "val_splits": {k: int(v) for k, v in n_va.items()},
                  "split_rule": "disjoint compile seeds -- train 1000..1499, "
-                               "val 2000..2059, eval10 0..9",
+                               "val 2000..2059, eval10 0..9. The _rollout "
+                               "splits reuse their own side's seed base "
+                               "(train_rollout 1000.., val_rollout 2000..), so "
+                               "the train/val/eval separation is unchanged.",
                  "eval10_note": "the ten seeds scripts/eval_seeds.py scores, at "
                                 "their evaluation initial state"},
         "training": {"epochs": args.epochs, "batch": args.batch, "lr": args.lr,
@@ -163,11 +199,15 @@ def main() -> int:
                                      if device.type == "cuda" else platform.processor()),
                      "seconds": round(time.time() - t0, 1),
                      "selection": "best val worst-centre + drawer error"},
-        "error_mm": {
-            "val": P.position_error_mm(pred_va, yva),
-            "eval10": P.position_error_mm(pred_ev, yev),
-        },
-        "controls": {
+        "error_mm": dict(
+            {"val": P.position_error_mm(pred_va, yva),
+             "eval10": P.position_error_mm(pred_ev, yev)},
+            **{f"val::{sp}": P.position_error_mm(pred_va[sl], yva[sl])
+               for sp, sl in va_parts.items()}),
+        "error_mm_note": "'val' is the pooled validation set. The 'val::<split>' "
+                         "rows break it out so a split the model is bad at "
+                         "cannot be hidden inside a pooled mean.",
+        "controls": dict({
             "constant_baseline_val": P.position_error_mm(
                 np.repeat(const, len(yva), axis=0), yva),
             "constant_baseline_eval10": P.position_error_mm(
@@ -181,16 +221,36 @@ def main() -> int:
                 "draws it lands at or above the constant baseline, and if it ever "
                 "landed near the model's own error the metric would not be reading "
                 "the image at all.",
+            "why_per_split": "A pooled baseline is not a fair bar once the "
+                "validation set spans two regimes. The constant predictor is "
+                "much worse on mid-rollout frames -- objects have been dragged "
+                "away from the nominal layout it predicts -- so pooling flatters "
+                "the model on the easy split and punishes it on the hard one. "
+                "Each split therefore carries its own baseline and its own "
+                "shuffled control, and the suite checks every one of them.",
         },
+            **{f"constant_baseline_val::{sp}": P.position_error_mm(
+                   np.repeat(const, yva[sl].shape[0], axis=0), yva[sl])
+               for sp, sl in va_parts.items()},
+            **{f"shuffled_labels_val::{sp}": P.position_error_mm(
+                   pred_va[sl], yva[sl][_derangement(yva[sl].shape[0], rng)])
+               for sp, sl in va_parts.items()}),
         "history": history,
         "not_claimed": [
             "This is a perception model, not a policy. It outputs scene state, "
-            "not actions, and it is not in the control loop -- the 16/50 sub-goal "
-            "result in evidence/eval_seeds_scripted.json is unchanged by it.",
-            "Trained and evaluated on initial states with both arms at the home "
-            "keyframe. Mid-rollout frames, where the arms occlude the table, are "
-            "not measured here.",
-            "The fork and the spoon start inside the drawer and are not regressed.",
+            "not actions. envs/scene_source.py can put it inside the control "
+            "loop, and evidence/eval_seeds_scripted_perceived.json is what "
+            "happens when it is -- that file, not this one, is where the task "
+            "result under perception is reported.",
+            "Nothing here is a natural-language capability. The network takes "
+            "pixels and emits seven numbers; no instruction is parsed anywhere "
+            "in this repository.",
+            "Position only. There is no output for object yaw, object height or "
+            "object size, and the fork and the spoon -- which start inside the "
+            "drawer -- are not regressed at all.",
+            "The error quoted for a split is only as representative as that "
+            "split. Read error_mm['val::<split>'], not the pooled row, before "
+            "believing a number covers a regime.",
         ],
     }
     out = ROOT / "evidence" / "perception_train.json"
