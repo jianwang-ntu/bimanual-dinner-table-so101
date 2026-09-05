@@ -1,3 +1,12 @@
 mujoco==3.12.0
 numpy>=2.0
 imageio>=2.30
+Pillow>=10.0
+
+# perception + OpenVINO path (scripts/train_perception.py, export_openvino.py,
+# bench_openvino.py). torch is needed to train and to export; the bench script
+# itself needs only openvino and numpy.
+torch>=2.4
+onnx>=1.16
+openvino>=2024.4
+nncf>=2.12          # INT8 post-training quantization; export skips INT8 without it

@@ -1,0 +1,79 @@
+{
+ "all_pass": true,
+ "controls": [
+  {
+   "control": "accept_beats_no_vision_baseline_val",
+   "pass": true,
+   "detail": "model 1.32 mm vs constant baseline 34.29 mm"
+  },
+  {
+   "control": "accept_beats_no_vision_baseline_eval10",
+   "pass": true,
+   "detail": "model 1.83 mm vs constant baseline 42.10 mm"
+  },
+  {
+   "control": "reject_shuffled_labels_score_like_the_model",
+   "pass": true,
+   "detail": "shuffled 46.37 mm, baseline 34.29 mm, model 1.32 mm"
+  },
+  {
+   "control": "accept_splits_are_seed_disjoint",
+   "pass": true,
+   "detail": "train 500, val 60, eval10 10 compile seeds, overlap []"
+  },
+  {
+   "control": "reject_noise_images_score_like_real_ones",
+   "pass": true,
+   "detail": "noise 306.2 mm vs real frames 1.83 mm"
+  },
+  {
+   "control": "accept_prediction_follows_a_moved_object",
+   "pass": true,
+   "detail": "mug moved 60 mm, prediction moved 59.0 mm; untouched plate prediction moved 0.4 mm"
+  },
+  {
+   "control": "accept_fp32_ir_reproduces_torch",
+   "pass": true,
+   "detail": "plugin default 0.4488 mm, forced f32 9e-05 mm"
+  },
+  {
+   "control": "accept_int8_is_smaller_than_fp32",
+   "pass": true,
+   "detail": "515 KiB vs 2031 KiB"
+  },
+  {
+   "control": "reject_int8_is_free",
+   "pass": true,
+   "detail": "INT8 3.98 mm vs FP32 1.81 mm -- the cost is measured and reported, not hidden"
+  },
+  {
+   "control": "accept_core_ultra_host_is_the_required_hardware",
+   "pass": true,
+   "detail": {
+    "Intel(R) Core(TM) Ultra 7 268V": "MEASURED_ON_REQUIRED_HARDWARE",
+    "Intel(R) Core(TM) Ultra 9 285H": "MEASURED_ON_REQUIRED_HARDWARE",
+    "Intel(R) Core(TM) Ultra 5 225U": "MEASURED_ON_REQUIRED_HARDWARE"
+   }
+  },
+  {
+   "control": "reject_non_core_ultra_host_is_the_required_hardware",
+   "pass": true,
+   "detail": {
+    "AMD EPYC 9654 96-Core Processor": "NOT_THE_REQUIRED_MEASUREMENT",
+    "Intel(R) Xeon(R) Platinum 8480+": "NOT_THE_REQUIRED_MEASUREMENT",
+    "Intel(R) Core(TM) i9-13900K": "NOT_THE_REQUIRED_MEASUREMENT",
+    "Apple M3 Pro": "NOT_THE_REQUIRED_MEASUREMENT"
+   }
+  },
+  {
+   "control": "reject_this_run_claims_intel_numbers",
+   "pass": true,
+   "detail": "openvino_bench_amd_epyc_9654_96_core_processor.json: NOT_THE_REQUIRED_MEASUREMENT on AMD EPYC 9654 96-Core Processor"
+  },
+  {
+   "control": "accept_bench_reports_all_four_required_fields",
+   "pass": true,
+   "detail": "9 device/precision combinations, each with latency, throughput, device precision and task quality"
+  }
+ ]
+}

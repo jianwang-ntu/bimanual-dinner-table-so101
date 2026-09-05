@@ -1,0 +1,404 @@
+{
+ "schema": "openvino_bench/v1",
+ "written_at": "2026-09-05T09:24:41Z",
+ "deliverable": "AI Infra Summit robotics track, Required Deliverable 3 -- bench-test script reporting latency, throughput, device selection and model precision",
+ "model": {
+  "stem": "scene_state_cnn",
+  "input": [
+   1,
+   3,
+   128,
+   224
+  ],
+  "outputs": [
+   "plate_x",
+   "plate_y",
+   "mug_x",
+   "mug_y",
+   "bottle_x",
+   "bottle_y",
+   "drawer_q"
+  ],
+  "what_it_does": "regresses the table layout from one top_cam frame; see envs/perception.py"
+ },
+ "host": {
+  "cpu": "AMD EPYC 9654 96-Core Processor",
+  "platform": "Linux-5.15.0-170-generic-x86_64-with-glibc2.35",
+  "python": "3.13.9",
+  "openvino": "2026.3.1-22476-759c5a6ab8c-releases/2026/3",
+  "available_devices": [
+   "CPU",
+   "GPU.0",
+   "GPU.1"
+  ],
+  "npu_device_node_present": false,
+  "is_intel_core_ultra": false,
+  "device_names": {
+   "CPU": "AMD EPYC 9654 96-Core Processor                ",
+   "GPU.0": "NVIDIA L40S (dGPU)",
+   "GPU.1": "NVIDIA L40S (dGPU)"
+  }
+ },
+ "run": {
+  "iterations": 300,
+  "warmup": 30,
+  "devices": [
+   "CPU",
+   "GPU.0",
+   "GPU.1"
+  ],
+  "precisions": [
+   "FP32",
+   "FP16",
+   "INT8"
+  ]
+ },
+ "results": {
+  "CPU/FP32": {
+   "compile_seconds": 0.066,
+   "execution_precision": "<Type: 'bfloat16'>",
+   "latency_stream": {
+    "iterations": 300,
+    "warmup": 30,
+    "mean_ms": 0.4394,
+    "p50_ms": 0.436,
+    "p90_ms": 0.4555,
+    "p99_ms": 0.4788,
+    "min_ms": 0.4185,
+    "max_ms": 0.5036,
+    "stdev_ms": 0.0123,
+    "fps_single_stream": 2275.8
+   },
+   "throughput": {
+    "infer_requests": 192,
+    "iterations": 1536,
+    "wall_seconds": 0.2943,
+    "fps": 5219.7
+   },
+   "task_quality_mm": {
+    "plate_x": 1.165,
+    "plate_y": 0.908,
+    "mug_x": 1.363,
+    "mug_y": 0.864,
+    "bottle_x": 0.874,
+    "bottle_y": 0.451,
+    "drawer_q": 0.168,
+    "plate_centre_mm": 1.693,
+    "mug_centre_mm": 1.812,
+    "bottle_centre_mm": 1.09,
+    "worst_centre_mm": 1.812
+   },
+   "ir_precision": "FP32",
+   "ir_weight_bytes": 2079264
+  },
+  "CPU/FP16": {
+   "compile_seconds": 0.035,
+   "execution_precision": "<Type: 'bfloat16'>",
+   "latency_stream": {
+    "iterations": 300,
+    "warmup": 30,
+    "mean_ms": 0.5698,
+    "p50_ms": 0.5557,
+    "p90_ms": 0.6295,
+    "p99_ms": 0.6741,
+    "min_ms": 0.5363,
+    "max_ms": 0.7109,
+    "stdev_ms": 0.0335,
+    "fps_single_stream": 1755.1
+   },
+   "throughput": {
+    "infer_requests": 192,
+    "iterations": 1536,
+    "wall_seconds": 0.2967,
+    "fps": 5176.6
+   },
+   "task_quality_mm": {
+    "plate_x": 1.506,
+    "plate_y": 1.071,
+    "mug_x": 1.396,
+    "mug_y": 0.856,
+    "bottle_x": 0.774,
+    "bottle_y": 0.545,
+    "drawer_q": 0.158,
+    "plate_centre_mm": 2.038,
+    "mug_centre_mm": 1.859,
+    "bottle_centre_mm": 1.086,
+    "worst_centre_mm": 2.038
+   },
+   "ir_precision": "FP16",
+   "ir_weight_bytes": 1039650
+  },
+  "CPU/INT8": {
+   "compile_seconds": 0.059,
+   "execution_precision": "<Type: 'bfloat16'>",
+   "latency_stream": {
+    "iterations": 300,
+    "warmup": 30,
+    "mean_ms": 0.5557,
+    "p50_ms": 0.5554,
+    "p90_ms": 0.5761,
+    "p99_ms": 0.615,
+    "min_ms": 0.3643,
+    "max_ms": 0.6317,
+    "stdev_ms": 0.0229,
+    "fps_single_stream": 1799.4
+   },
+   "throughput": {
+    "infer_requests": 192,
+    "iterations": 1536,
+    "wall_seconds": 0.2832,
+    "fps": 5423.9
+   },
+   "task_quality_mm": {
+    "plate_x": 3.361,
+    "plate_y": 1.874,
+    "mug_x": 1.61,
+    "mug_y": 1.694,
+    "bottle_x": 2.169,
+    "bottle_y": 1.854,
+    "drawer_q": 0.842,
+    "plate_centre_mm": 3.976,
+    "mug_centre_mm": 2.492,
+    "bottle_centre_mm": 3.139,
+    "worst_centre_mm": 3.976
+   },
+   "ir_precision": "INT8",
+   "ir_weight_bytes": 527472
+  },
+  "GPU.0/FP32": {
+   "compile_seconds": 0.463,
+   "execution_precision": "<Type: 'float16'>",
+   "latency_stream": {
+    "iterations": 300,
+    "warmup": 30,
+    "mean_ms": 0.6057,
+    "p50_ms": 0.6026,
+    "p90_ms": 0.6107,
+    "p99_ms": 0.6544,
+    "min_ms": 0.5733,
+    "max_ms": 1.4302,
+    "stdev_ms": 0.0489,
+    "fps_single_stream": 1650.9
+   },
+   "throughput": {
+    "infer_requests": 4,
+    "iterations": 300,
+    "wall_seconds": 0.1128,
+    "fps": 2660.1
+   },
+   "task_quality_mm": {
+    "plate_x": 1.148,
+    "plate_y": 0.921,
+    "mug_x": 1.362,
+    "mug_y": 0.875,
+    "bottle_x": 0.722,
+    "bottle_y": 0.432,
+    "drawer_q": 0.154,
+    "plate_centre_mm": 1.717,
+    "mug_centre_mm": 1.833,
+    "bottle_centre_mm": 0.965,
+    "worst_centre_mm": 1.833
+   },
+   "ir_precision": "FP32",
+   "ir_weight_bytes": 2079264
+  },
+  "GPU.0/FP16": {
+   "compile_seconds": 0.139,
+   "execution_precision": "<Type: 'float16'>",
+   "latency_stream": {
+    "iterations": 300,
+    "warmup": 30,
+    "mean_ms": 0.6057,
+    "p50_ms": 0.604,
+    "p90_ms": 0.6128,
+    "p99_ms": 0.6248,
+    "min_ms": 0.5889,
+    "max_ms": 1.128,
+    "stdev_ms": 0.031,
+    "fps_single_stream": 1650.9
+   },
+   "throughput": {
+    "infer_requests": 4,
+    "iterations": 300,
+    "wall_seconds": 0.0626,
+    "fps": 4791.8
+   },
+   "task_quality_mm": {
+    "plate_x": 1.165,
+    "plate_y": 0.93,
+    "mug_x": 1.353,
+    "mug_y": 0.875,
+    "bottle_x": 0.73,
+    "bottle_y": 0.431,
+    "drawer_q": 0.155,
+    "plate_centre_mm": 1.737,
+    "mug_centre_mm": 1.825,
+    "bottle_centre_mm": 0.974,
+    "worst_centre_mm": 1.825
+   },
+   "ir_precision": "FP16",
+   "ir_weight_bytes": 1039650
+  },
+  "GPU.0/INT8": {
+   "compile_seconds": 0.91,
+   "execution_precision": "<Type: 'float16'>",
+   "latency_stream": {
+    "iterations": 300,
+    "warmup": 30,
+    "mean_ms": 0.6912,
+    "p50_ms": 0.6877,
+    "p90_ms": 0.6998,
+    "p99_ms": 0.7163,
+    "min_ms": 0.6779,
+    "max_ms": 1.2441,
+    "stdev_ms": 0.033,
+    "fps_single_stream": 1446.7
+   },
+   "throughput": {
+    "infer_requests": 4,
+    "iterations": 300,
+    "wall_seconds": 0.0909,
+    "fps": 3300.9
+   },
+   "task_quality_mm": {
+    "plate_x": 3.337,
+    "plate_y": 1.879,
+    "mug_x": 1.494,
+    "mug_y": 1.597,
+    "bottle_x": 1.958,
+    "bottle_y": 1.865,
+    "drawer_q": 0.825,
+    "plate_centre_mm": 3.997,
+    "mug_centre_mm": 2.359,
+    "bottle_centre_mm": 2.954,
+    "worst_centre_mm": 3.997
+   },
+   "ir_precision": "INT8",
+   "ir_weight_bytes": 527472
+  },
+  "GPU.1/FP32": {
+   "compile_seconds": 0.263,
+   "execution_precision": "<Type: 'float16'>",
+   "latency_stream": {
+    "iterations": 300,
+    "warmup": 30,
+    "mean_ms": 0.606,
+    "p50_ms": 0.6024,
+    "p90_ms": 0.6142,
+    "p99_ms": 0.6584,
+    "min_ms": 0.5787,
+    "max_ms": 0.9623,
+    "stdev_ms": 0.0228,
+    "fps_single_stream": 1650.1
+   },
+   "throughput": {
+    "infer_requests": 4,
+    "iterations": 300,
+    "wall_seconds": 0.0814,
+    "fps": 3684.0
+   },
+   "task_quality_mm": {
+    "plate_x": 1.148,
+    "plate_y": 0.921,
+    "mug_x": 1.362,
+    "mug_y": 0.875,
+    "bottle_x": 0.722,
+    "bottle_y": 0.432,
+    "drawer_q": 0.154,
+    "plate_centre_mm": 1.717,
+    "mug_centre_mm": 1.833,
+    "bottle_centre_mm": 0.965,
+    "worst_centre_mm": 1.833
+   },
+   "ir_precision": "FP32",
+   "ir_weight_bytes": 2079264
+  },
+  "GPU.1/FP16": {
+   "compile_seconds": 0.14,
+   "execution_precision": "<Type: 'float16'>",
+   "latency_stream": {
+    "iterations": 300,
+    "warmup": 30,
+    "mean_ms": 0.6058,
+    "p50_ms": 0.6058,
+    "p90_ms": 0.6137,
+    "p99_ms": 0.6232,
+    "min_ms": 0.5926,
+    "max_ms": 0.6719,
+    "stdev_ms": 0.0078,
+    "fps_single_stream": 1650.7
+   },
+   "throughput": {
+    "infer_requests": 4,
+    "iterations": 300,
+    "wall_seconds": 0.0821,
+    "fps": 3653.0
+   },
+   "task_quality_mm": {
+    "plate_x": 1.165,
+    "plate_y": 0.93,
+    "mug_x": 1.353,
+    "mug_y": 0.875,
+    "bottle_x": 0.73,
+    "bottle_y": 0.431,
+    "drawer_q": 0.155,
+    "plate_centre_mm": 1.737,
+    "mug_centre_mm": 1.825,
+    "bottle_centre_mm": 0.974,
+    "worst_centre_mm": 1.825
+   },
+   "ir_precision": "FP16",
+   "ir_weight_bytes": 1039650
+  },
+  "GPU.1/INT8": {
+   "compile_seconds": 0.174,
+   "execution_precision": "<Type: 'float16'>",
+   "latency_stream": {
+    "iterations": 300,
+    "warmup": 30,
+    "mean_ms": 0.5673,
+    "p50_ms": 0.5641,
+    "p90_ms": 0.5767,
+    "p99_ms": 0.619,
+    "min_ms": 0.5564,
+    "max_ms": 0.6479,
+    "stdev_ms": 0.0101,
+    "fps_single_stream": 1762.7
+   },
+   "throughput": {
+    "infer_requests": 4,
+    "iterations": 300,
+    "wall_seconds": 0.1191,
+    "fps": 2518.1
+   },
+   "task_quality_mm": {
+    "plate_x": 3.337,
+    "plate_y": 1.879,
+    "mug_x": 1.494,
+    "mug_y": 1.597,
+    "bottle_x": 1.958,
+    "bottle_y": 1.865,
+    "drawer_q": 0.825,
+    "plate_centre_mm": 3.997,
+    "mug_centre_mm": 2.359,
+    "bottle_centre_mm": 2.954,
+    "worst_centre_mm": 3.997
+   },
+   "ir_precision": "INT8",
+   "ir_weight_bytes": 527472
+  }
+ },
+ "errors": {},
+ "required_hardware": {
+  "track_asks_for": "Intel Core Ultra Series 2/3 with OpenVINO",
+  "this_host_is_intel_core_ultra": false,
+  "verdict": "NOT_THE_REQUIRED_MEASUREMENT",
+  "note": "Latency and throughput below were measured on 'AMD EPYC 9654 96-Core Processor'. They are NOT Intel Core Ultra numbers and must not be quoted as if they were. Running this script unchanged on a Core Ultra Series 2/3 machine produces the measurement the track scores, including the NPU device if its driver is installed."
+ },
+ "how_to_read_this": {
+  "latency_stream": "one request at a time under the LATENCY hint; p50/p90/p99 over --iters inferences on real frames",
+  "throughput": "AsyncInferQueue at the plugin's own optimal_number_of_infer_requests under the THROUGHPUT hint",
+  "task_quality_mm": "mean position error against MuJoCo ground truth on the ten evaluation seeds, so a cheaper precision shows its accuracy cost in the same table as its speed",
+  "execution_precision": "what the plugin chose at runtime, which can differ from ir_precision"
+ }
+}

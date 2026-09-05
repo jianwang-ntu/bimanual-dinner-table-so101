@@ -1,0 +1,195 @@
+{
+ "schema": "openvino_export/v1",
+ "written_at": "2026-09-05T09:24:26Z",
+ "openvino": "2026.3.1-22476-759c5a6ab8c-releases/2026/3",
+ "torch": "2.10.0+cu128",
+ "source_checkpoint": "models/scene_state_cnn.pt",
+ "onnx": {
+  "file": "models/scene_state_cnn.onnx",
+  "opset": 17,
+  "bytes": 2086070,
+  "input": [
+   1,
+   3,
+   128,
+   224
+  ]
+ },
+ "torch_reference_accuracy_mm": {
+  "val": {
+   "plate_x": 0.7972280383110046,
+   "plate_y": 0.6447705030441284,
+   "mug_x": 0.9779878854751587,
+   "mug_y": 0.6952611207962036,
+   "bottle_x": 0.765978217124939,
+   "bottle_y": 0.511564314365387,
+   "drawer_q": 0.21228502690792084,
+   "plate_centre_mm": 1.1322271823883057,
+   "mug_centre_mm": 1.3182910680770874,
+   "bottle_centre_mm": 1.021031379699707,
+   "worst_centre_mm": 1.3182910680770874
+  },
+  "eval10": {
+   "plate_x": 1.1484622955322266,
+   "plate_y": 0.9209752082824707,
+   "mug_x": 1.3616502285003662,
+   "mug_y": 0.8748568296432495,
+   "bottle_x": 0.7222115397453308,
+   "bottle_y": 0.4315885603427887,
+   "drawer_q": 0.15394282341003418,
+   "plate_centre_mm": 1.7169849872589111,
+   "mug_centre_mm": 1.8330223560333252,
+   "bottle_centre_mm": 0.9651910662651062,
+   "worst_centre_mm": 1.8330223560333252
+  }
+ },
+ "variants": {
+  "FP32": {
+   "xml": "models/scene_state_cnn_fp32.xml",
+   "checked_on": {
+    "device": "CPU",
+    "full_device_name": "AMD EPYC 9654 96-Core Processor                ",
+    "execution_precision": "<Type: 'bfloat16'>"
+   },
+   "bin_bytes": 2079264,
+   "accuracy_mm": {
+    "val": {
+     "plate_x": 0.800812840461731,
+     "plate_y": 0.6856313347816467,
+     "mug_x": 0.983931839466095,
+     "mug_y": 0.7059091925621033,
+     "bottle_x": 0.8383957147598267,
+     "bottle_y": 0.5353679656982422,
+     "drawer_q": 0.22324486076831818,
+     "plate_centre_mm": 1.1728169918060303,
+     "mug_centre_mm": 1.3297897577285767,
+     "bottle_centre_mm": 1.0927014350891113,
+     "worst_centre_mm": 1.3297897577285767
+    },
+    "eval10": {
+     "plate_x": 1.164682149887085,
+     "plate_y": 0.907701313495636,
+     "mug_x": 1.362985372543335,
+     "mug_y": 0.8644074201583862,
+     "bottle_x": 0.8743613958358765,
+     "bottle_y": 0.4509630799293518,
+     "drawer_q": 0.1681346446275711,
+     "plate_centre_mm": 1.6929839849472046,
+     "mug_centre_mm": 1.8124964237213135,
+     "bottle_centre_mm": 1.0904362201690674,
+     "worst_centre_mm": 1.8124964237213135
+    }
+   },
+   "vs_torch_mm": {
+    "val_max_abs": 0.8344054222106934,
+    "val_mean_abs": 0.13802312314510345,
+    "eval10_max_abs": 0.4487931728363037
+   }
+  },
+  "FP16": {
+   "xml": "models/scene_state_cnn_fp16.xml",
+   "checked_on": {
+    "device": "CPU",
+    "full_device_name": "AMD EPYC 9654 96-Core Processor                ",
+    "execution_precision": "<Type: 'bfloat16'>"
+   },
+   "bin_bytes": 1039650,
+   "accuracy_mm": {
+    "val": {
+     "plate_x": 0.8924503326416016,
+     "plate_y": 0.6926438808441162,
+     "mug_x": 1.0402438640594482,
+     "mug_y": 0.7057768106460571,
+     "bottle_x": 0.9094750881195068,
+     "bottle_y": 0.5395287275314331,
+     "drawer_q": 0.22579267621040344,
+     "plate_centre_mm": 1.2451738119125366,
+     "mug_centre_mm": 1.3695306777954102,
+     "bottle_centre_mm": 1.1654642820358276,
+     "worst_centre_mm": 1.3695306777954102
+    },
+    "eval10": {
+     "plate_x": 1.5062556266784668,
+     "plate_y": 1.0710723400115967,
+     "mug_x": 1.3955234289169312,
+     "mug_y": 0.8562415838241577,
+     "bottle_x": 0.7740885019302368,
+     "bottle_y": 0.544814944267273,
+     "drawer_q": 0.15756529569625854,
+     "plate_centre_mm": 2.0376293659210205,
+     "mug_centre_mm": 1.8589518070220947,
+     "bottle_centre_mm": 1.0857042074203491,
+     "worst_centre_mm": 2.0376293659210205
+    }
+   },
+   "vs_torch_mm": {
+    "val_max_abs": 1.45818293094635,
+    "val_mean_abs": 0.2954674959182739,
+    "eval10_max_abs": 1.1232495307922363
+   }
+  },
+  "INT8": {
+   "xml": "models/scene_state_cnn_int8.xml",
+   "checked_on": {
+    "device": "CPU",
+    "full_device_name": "AMD EPYC 9654 96-Core Processor                ",
+    "execution_precision": "<Type: 'bfloat16'>"
+   },
+   "bin_bytes": 527472,
+   "accuracy_mm": {
+    "val": {
+     "plate_x": 2.2033989429473877,
+     "plate_y": 1.861374020576477,
+     "mug_x": 2.1764607429504395,
+     "mug_y": 1.556799054145813,
+     "bottle_x": 2.939321994781494,
+     "bottle_y": 1.3427261114120483,
+     "drawer_q": 0.5875633955001831,
+     "plate_centre_mm": 3.119508981704712,
+     "mug_centre_mm": 2.8939929008483887,
+     "bottle_centre_mm": 3.4606595039367676,
+     "worst_centre_mm": 3.4606595039367676
+    },
+    "eval10": {
+     "plate_x": 3.3613619804382324,
+     "plate_y": 1.8739230632781982,
+     "mug_x": 1.6095192432403564,
+     "mug_y": 1.6935102939605713,
+     "bottle_x": 2.1687209606170654,
+     "bottle_y": 1.8544318675994873,
+     "drawer_q": 0.841814398765564,
+     "plate_centre_mm": 3.975828170776367,
+     "mug_centre_mm": 2.4919331073760986,
+     "bottle_centre_mm": 3.139120101928711,
+     "worst_centre_mm": 3.975828170776367
+    }
+   },
+   "vs_torch_mm": {
+    "val_max_abs": 13.482868194580078,
+    "val_mean_abs": 1.704385757446289,
+    "eval10_max_abs": 5.873143672943115
+   }
+  }
+ },
+ "int8": {
+  "tool": "nncf 3.3.0",
+  "calibration_frames": 300,
+  "calibration_source": "training split, random subset, seed 11",
+  "seconds": 2.2
+ },
+ "how_to_read_this": "accuracy_mm is the exported model's own error against MuJoCo ground truth. vs_torch_mm is how far the export drifted from the PyTorch model it was converted from. Both are in millimetres of table position on data no fitting used: val is 60 unseen compile seeds, eval10 is the ten seeds the task result is quoted on.",
+ "precision_hint_ab": {
+  "plugin_default": {
+   "execution_precision": "<Type: 'bfloat16'>",
+   "eval10_max_abs_vs_torch_mm": 0.4487931728363037
+  },
+  "forced_f32": {
+   "execution_precision": "<Type: 'float32'>",
+   "eval10_max_abs_vs_torch_mm": 8.940696716308594e-05
+  }
+ },
+ "why_fp32_ir_is_not_bit_identical_to_torch": "the CPU plugin picks its own execution precision. precision_hint_ab runs the SAME FP32 IR twice -- once at the plugin default, once with INFERENCE_PRECISION_HINT=f32 -- so the drift is attributed by measurement rather than by assertion. Each variant above records the execution precision it was checked at.",
+ "not_claimed": [
+  "No measurement here was taken on Intel Core Ultra hardware. Conversion is host-independent; the latency and throughput the track asks for are not, and are not reported by this script."
+ ]
+}

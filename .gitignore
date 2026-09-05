@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .DS_Store
 MUJOCO_LOG.TXT
+
+# rendered perception datasets -- regenerate with scripts/make_perception_dataset.py
+data/*.npz

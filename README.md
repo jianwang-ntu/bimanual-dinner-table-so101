@@ -18,9 +18,13 @@ else.
 | Task definition and success predicates | built, controls both ways | `evidence/task_predicate_controls.json` (11/11) |
 | Scripted bimanual controller | built, **16 sub-goals of 50 over 10 seeds** | `evidence/eval_seeds_scripted.json` |
 | Demo video, 10 randomized seeds, captioned from the simulator | recorded, **shows a partial rollout** | `evidence/demo_scripted_10seeds.mp4` + `.json` |
+| Scene-state perception CNN, trained on rendered frames | built, **1.3 mm val / 1.8 mm on the evaluation seeds** | `evidence/perception_train.json` |
+| OpenVINO conversion — FP32, FP16, INT8 (NNCF) | built, accuracy of each measured | `evidence/openvino_export.json` |
+| Bench-test script — latency, throughput, device, precision | built, **run here on AMD, not on Intel** | `evidence/openvino_bench_*.json` |
+| Controls for all of the above, accept and reject | 13/13 | `evidence/perception_pipeline_controls.json` |
 | VLA / imitation policy | **not started** | — |
-| OpenVINO conversion and quantization | **not started** | — |
-| Intel Core Ultra Series 2/3 benchmark | **not started, and cannot be run here** | see *Hardware* below |
+| Perception in the control loop | **not started** — the controller still reads privileged state | — |
+| Intel Core Ultra Series 2/3 benchmark numbers | **not measured, and cannot be measured here** | see *Hardware* below |
 
 ### Three defects found by measurement, and what they cost
 
@@ -100,6 +104,15 @@ python3 scripts/test_task_predicates.py   # 11 accept/reject controls on the sco
 python3 scripts/eval_seeds.py --seeds 10                    # control: no policy
 python3 scripts/eval_seeds.py --seeds 10 --policy scripted  # the controller
 python3 scripts/record_demo.py --seeds 10                   # the demo video
+
+# perception + OpenVINO
+python3 scripts/make_perception_dataset.py --split train --compiles 500 --per-compile 8
+python3 scripts/make_perception_dataset.py --split val   --compiles 60  --per-compile 4
+python3 scripts/make_perception_dataset.py --split eval10
+python3 scripts/train_perception.py --epochs 80     # ~4 min on one L40S
+python3 scripts/export_openvino.py                  # ONNX -> IR at FP32/FP16/INT8
+python3 scripts/bench_openvino.py                   # Required Deliverable 3
+python3 scripts/test_perception_pipeline.py         # 13 accept/reject controls
 ```
 
 Headless rendering uses EGL (`MUJOCO_GL=egl`, set by the scripts). On a machine
@@ -240,14 +253,105 @@ Raising the drawer's slide friction so it would not drift was tried first and
 made things worse — 2/50, because the arm could no longer pull it fully open.
 That change was reverted; the friction in the scene is the original 0.35.
 
+## Perception and OpenVINO
+
+The scripted controller reads object positions out of `MjData`. That is
+privileged information a real robot does not have, and it is also why this
+project had no inference cost to optimise. `envs/perception.py` is the first
+piece that replaces it.
+
+**What it is.** A 0.52 M-parameter CNN that takes one 128×224 `top_cam` frame
+and regresses seven numbers: the planar centres of the plate, mug and bottle,
+and how far the drawer is out. Four stride-2 conv blocks, then a **spatial
+softmax** — a global average pool cannot do coordinate regression, because
+averaging over space discards the position being asked for; a spatial softmax
+turns each channel into a soft keypoint and keeps it.
+
+**What it is not.** It is not a policy, it emits scene state rather than
+actions, and **it is not in the control loop**. The 16/50 sub-goal result is
+still produced by the privileged scripted controller and is unchanged by
+anything here.
+
+**Data.** Rendered from the simulator, labelled by the simulator: 4,000 training
+frames from compile seeds 1000–1499, 240 validation frames from 2000–2059, and
+the ten evaluation seeds at exactly their scored initial state. The splits are
+disjoint *by compile seed*, not by shuffling.
+
+| | worst object centre | drawer travel |
+|---|---|---|
+| model, validation (unseen seeds) | **1.3 mm** | 0.2 mm |
+| model, the ten evaluation seeds | **1.8 mm** | 0.15 mm |
+| no-vision baseline (train-set mean layout) | 34.3 mm | 22.1 mm |
+| the same model on random-noise images | 306 mm | — |
+
+The last two rows are the point: a metric that cannot fail proves nothing.
+`scripts/test_perception_pipeline.py` adds a causal control — move the mug
+60 mm in the scene, re-render, re-predict: the mug prediction moves 59.0 mm and
+the untouched plate prediction moves 0.4 mm.
+
+### Conversion and precision
+
+`scripts/export_openvino.py` goes PyTorch → ONNX (opset 17) → OpenVINO IR at
+three precisions, and checks each one against the PyTorch model it came from,
+in millimetres of table position rather than tensor norms:
+
+| precision | weights | error on the evaluation seeds | max drift vs PyTorch |
+|---|---|---|---|
+| PyTorch FP32 | 2058 KiB | 1.83 mm | — |
+| IR FP32 | 2031 KiB | 1.81 mm | 0.45 mm |
+| IR FP16 | 1015 KiB | 2.04 mm | 1.12 mm |
+| IR INT8 (NNCF PTQ, 300 calibration frames) | **515 KiB** | 3.98 mm | 5.87 mm |
+
+INT8 is 4× smaller and costs 2.2 mm of accuracy. That cost is reported, not
+buried: `test_perception_pipeline.py` has a control that **fails** if the INT8
+error is ever recorded as no worse than FP32.
+
+The FP32 IR is not bit-identical to PyTorch, and the reason is measured rather
+than asserted — the same IR is run twice, once at the plugin default and once
+with `INFERENCE_PRECISION_HINT=f32`:
+
+| execution precision | max drift vs PyTorch |
+|---|---|
+| plugin default (`bfloat16` on this host) | 0.4488 mm |
+| forced `f32` | 0.00009 mm |
+
+The drift is the CPU plugin's own precision choice, not a conversion loss.
+
 ## Hardware — an open gap
 
 The track brief requires the final demonstration and benchmark to run on an
 **Intel Core Ultra Series 2/3** system with OpenVINO. The machine this was
-developed on is AMD EPYC with NVIDIA L40S GPUs and has no Intel silicon, so no
-Core Ultra latency, throughput or NPU/iGPU utilisation figure has been
-measured, and none is reported anywhere in this repository. Publishing AMD
-numbers under an Intel heading would be false, so the row is left empty.
+developed on is AMD EPYC 9654 with NVIDIA L40S GPUs and has no Intel silicon.
+
+`scripts/bench_openvino.py` — Required Deliverable 3 — is written and runs. It
+enumerates every OpenVINO device on the host and, for each device and each
+exported precision, reports single-stream latency (mean, p50, p90, p99),
+async throughput at the plugin's own optimal request count, the execution
+precision the plugin chose, and the model's task quality in millimetres on the
+same ten seeds the task result is quoted on.
+
+Run on this machine it produces nine device/precision rows and stamps the
+report `NOT_THE_REQUIRED_MEASUREMENT`:
+
+```
+CPU/FP32   0.436 ms p50   5220 fps async   1.81 mm   (bfloat16)
+CPU/INT8   0.555 ms p50   5424 fps async   3.98 mm   (bfloat16)
+GPU.0/FP16 0.604 ms p50   4792 fps async   1.82 mm   (float16)
+…                       host: AMD EPYC 9654 96-Core Processor
+```
+
+**Those are not Intel Core Ultra numbers and are not offered as any.** The
+script decides that itself: `required_hardware_verdict()` reads the host CPU
+name and returns `MEASURED_ON_REQUIRED_HARDWARE` only for a Core Ultra part.
+Because that branch cannot fire on this machine, it is exercised directly by
+`test_perception_pipeline.py` against three real Core Ultra model strings and
+five non-Core-Ultra ones — an accept path that is never run is how a gate ships
+broken.
+
+To get the figure the track scores, run `python3 scripts/bench_openvino.py`
+unchanged on a Core Ultra Series 2/3 machine. It will pick up `NPU` and the
+Intel iGPU automatically if their drivers are present, and the report it writes
+will say `MEASURED_ON_REQUIRED_HARDWARE`.
 
 ## Licence
 

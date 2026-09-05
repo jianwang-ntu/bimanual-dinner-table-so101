@@ -1,0 +1,36 @@
+{
+ "split": "val",
+ "samples": 240,
+ "compiles": 60,
+ "per_compile": 4,
+ "seed_base": 2000,
+ "seed_range": [
+  2000,
+  2059
+ ],
+ "camera": "top_cam",
+ "image": [
+  128,
+  224,
+  3
+ ],
+ "outputs": [
+  "plate_x",
+  "plate_y",
+  "mug_x",
+  "mug_y",
+  "bottle_x",
+  "bottle_y",
+  "drawer_q"
+ ],
+ "extra_placement_draws": true,
+ "drawer_range_m": [
+  0.0,
+  0.09
+ ],
+ "label_source": "MjData after mj_forward -- body xpos and drawer_slide qpos",
+ "file": "data/perception_val.npz",
+ "bytes": 6143155,
+ "skipped_draws": 0,
+ "seconds": 28.7
+}

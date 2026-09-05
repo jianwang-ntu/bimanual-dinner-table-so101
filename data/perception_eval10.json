@@ -1,0 +1,33 @@
+{
+ "split": "eval10",
+ "samples": 10,
+ "compiles": 10,
+ "per_compile": 1,
+ "seed_base": 0,
+ "seed_range": [
+  0,
+  9
+ ],
+ "camera": "top_cam",
+ "image": [
+  128,
+  224,
+  3
+ ],
+ "outputs": [
+  "plate_x",
+  "plate_y",
+  "mug_x",
+  "mug_y",
+  "bottle_x",
+  "bottle_y",
+  "drawer_q"
+ ],
+ "extra_placement_draws": false,
+ "drawer_range_m": "envs/randomize.py RANGES['drawer_q'] only",
+ "label_source": "MjData after mj_forward -- body xpos and drawer_slide qpos",
+ "file": "data/perception_eval10.npz",
+ "bytes": 236675,
+ "skipped_draws": 0,
+ "seconds": 5.3
+}

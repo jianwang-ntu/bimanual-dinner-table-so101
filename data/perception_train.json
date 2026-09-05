@@ -1,0 +1,36 @@
+{
+ "split": "train",
+ "samples": 4000,
+ "compiles": 500,
+ "per_compile": 8,
+ "seed_base": 1000,
+ "seed_range": [
+  1000,
+  1499
+ ],
+ "camera": "top_cam",
+ "image": [
+  128,
+  224,
+  3
+ ],
+ "outputs": [
+  "plate_x",
+  "plate_y",
+  "mug_x",
+  "mug_y",
+  "bottle_x",
+  "bottle_y",
+  "drawer_q"
+ ],
+ "extra_placement_draws": true,
+ "drawer_range_m": [
+  0.0,
+  0.09
+ ],
+ "label_source": "MjData after mj_forward -- body xpos and drawer_slide qpos",
+ "file": "data/perception_train.npz",
+ "bytes": 103792275,
+ "skipped_draws": 0,
+ "seconds": 235.0
+}
