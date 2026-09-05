@@ -26,7 +26,7 @@ number is what this README quotes unless a row says otherwise.
 | Piece | State | Evidence |
 |---|---|---|
 | Dual SO-101 MuJoCo scene, drawer, plate, mug, bottle, cutlery | built, verified | `evidence/scene_verification.json` (16/16) |
-| Seeded domain randomization — geometry, mass, friction, lighting, background, placement | built, verified over 10 seeds | `evidence/eval_seeds.json` |
+| Seeded domain randomization — geometry, mass, friction, lighting, background, placement | built, verified over 10 seeds; **placement covers 3 of the 5 graspables** — the fork and the spoon are fixed | `evidence/eval_seeds.json` + `evidence/randomization_coverage_controls.json` |
 | Task definition and success predicates | built, controls both ways | `evidence/task_predicate_controls.json` (11/11) |
 | Scripted bimanual controller | built, **15 sub-goals of 50 over 10 seeds** | `evidence/eval_seeds_scripted.json` |
 | Demo video, 10 randomized seeds, captioned from the simulator | recorded, **shows a partial rollout** | `evidence/demo_scripted_10seeds.mp4` + `.json` |
@@ -232,14 +232,29 @@ Three stages, because only the first needs a recompile. Ranges are in
 |---|---|
 | geometry | plate radius, mug radius and height, bottle radius and height, cutlery length |
 | model | per-object mass (0.6–1.6×), sliding friction (0.6–1.4×), key-light position and intensity, table and floor lightness |
-| state | object x, y and yaw, initial drawer opening |
+| state | object x, y and yaw for the plate, the mug and the bottle; initial drawer opening |
+
+**The fork and the spoon are not placement-randomized.** `NOMINAL_XY` names
+three bodies and `GRASPABLES` names five: the cutlery starts in the drawer at
+the same x, y and yaw on every seed, 0.347 m and 0.387 m from the nearest arm
+base on all ten. Its *length* and its *mass* are randomized — 6.5 mm and 0.85×
+of spread across the run — so this is a gap in placement only, and it is a gap
+against the track's own wording ("randomized object placement"). Closing it
+means jittering the cutlery inside the drawer and re-scoring; that has not been
+done, and until it is, `fork_placed` and `spoon_placed` are 0/10 against one
+fixed layout rather than ten. `scripts/test_randomization_coverage.py` reads
+both tables out of the randomizer and pins this.
 
 Placements are rejection-sampled against three conditions — inside an arm's
 reach, not overlapping another object, not blocking the drawer — so a failed
-episode is a policy failure rather than an impossible scene. Across seeds 0–9
-every episode was on-table, reachable, free of initial interpenetration, and
-numerically stable for the full episode, in both the no-policy control (4 s)
-and the scripted run (111–158 s).
+episode is a policy failure rather than an impossible scene. The reach
+condition is a 0.40 m planar envelope; `scripts/measure_reach.py` drives the
+right arm out along the bearing of the fork and it puts its jaws at 0.417 m of
+planar radius, so the envelope is not optimistic and the cutlery's fixed
+placement is not an out-of-reach one. Across seeds 0–9 every episode was
+on-table, reachable, free of initial interpenetration, and numerically stable
+for the full episode, in both the no-policy control (4 s) and the scripted run
+(111–158 s).
 
 ## Task and scoring
 

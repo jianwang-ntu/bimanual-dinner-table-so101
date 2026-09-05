@@ -1,0 +1,87 @@
+{
+ "all_pass": true,
+ "graspables": [
+  "bottle",
+  "fork",
+  "mug",
+  "plate",
+  "spoon"
+ ],
+ "placement_randomized": [
+  "bottle",
+  "mug",
+  "plate"
+ ],
+ "never_placement_randomized": [
+  "fork",
+  "spoon"
+ ],
+ "seeds": 10,
+ "controls": [
+  {
+   "control": "randomizer_places_three_of_five_graspables",
+   "pass": true,
+   "detail": "GRASPABLES=['bottle', 'fork', 'mug', 'plate', 'spoon'], NOMINAL_XY=['bottle', 'mug', 'plate'], never placement-randomized=['fork', 'spoon']"
+  },
+  {
+   "control": "reject_a_table_that_covered_four",
+   "pass": true,
+   "detail": "with the spoon added the same reader sees ['bottle', 'mug', 'plate', 'spoon'], so the control fails -- it is reading the table, not a constant"
+  },
+  {
+   "control": "cutlery_distance_is_identical_on_every_seed",
+   "pass": true,
+   "detail": "over 10 seeds, spread in distance to the nearest arm: fork 0.000 mm, spoon 0.000 mm"
+  },
+  {
+   "control": "placed_bodies_do_vary_on_the_same_measure",
+   "pass": true,
+   "detail": "bottle 119.0 mm, mug 85.0 mm, plate 58.0 mm -- so a zero spread is a finding, not an artefact of the measure"
+  },
+  {
+   "control": "reject_a_run_where_one_cutlery_distance_moved",
+   "pass": true,
+   "detail": "perturbing seed 3's fork by 10 mm gives spread 10.000 mm, so the check can fail"
+  },
+  {
+   "control": "no_state_log_names_the_fork_or_the_spoon",
+   "pass": true,
+   "detail": "state keys logged across all 10 episodes: ['bottle', 'drawer_slide', 'mug', 'plate']"
+  },
+  {
+   "control": "reject_a_log_that_names_the_fork",
+   "pass": true,
+   "detail": "a forged state log is caught"
+  },
+  {
+   "control": "cutlery_shape_and_mass_ARE_randomized",
+   "pass": true,
+   "detail": "cutlery_l spread 6.5 mm; mass_scale spread fork 0.847x, spoon 0.850x -- the correction is about placement only"
+  },
+  {
+   "control": "measured_envelope_covers_the_cutlery_radius",
+   "pass": true,
+   "detail": "the arm reached 0.417 m of planar radius; the fork sits at 0.387 m -- the fixed placement is not an out-of-reach placement"
+  },
+  {
+   "control": "reject_a_probe_that_stopped_short",
+   "pass": true,
+   "detail": "a probe capped at 0.280 m fails the same check"
+  },
+  {
+   "control": "README.md_states_the_restriction",
+   "pass": true,
+   "detail": "the document names the fork and the spoon as not placement-randomized"
+  },
+  {
+   "control": "TECHNICAL_SUMMARY.md_states_the_restriction",
+   "pass": true,
+   "detail": "the document names the fork and the spoon as not placement-randomized"
+  },
+  {
+   "control": "reject_the_unqualified_sentence_that_shipped",
+   "pass": true,
+   "detail": "the row that actually shipped -- '| Stage | What varies |\\n| state | object x, y and yaw, initial drawer opening |' -- is not accepted"
+  }
+ ]
+}

@@ -260,11 +260,23 @@ first needs a recompile; every draw is logged per episode):
 |---|---|
 | geometry | plate radius, mug radius and height, bottle radius and height, cutlery length |
 | model | per-object mass 0.6–1.6×, sliding friction 0.6–1.4×, key-light position and intensity, table and floor lightness |
-| state | object x, y and yaw, initial drawer opening |
+| state | object x, y and yaw for the plate, the mug and the bottle; initial drawer opening |
+
+**The fork and the spoon are not placement-randomized.** `NOMINAL_XY` names
+three bodies and `GRASPABLES` names five, so the cutlery starts in the drawer at
+the same x, y and yaw on every seed — 0.347 m and 0.387 m from the nearest arm
+base on all ten. Its length and mass are randomized; its pose is not. That is a
+gap against the criterion's own wording, and it means `fork_placed` and
+`spoon_placed` are 0/10 against one fixed layout rather than ten.
 
 Placements are rejection-sampled against three conditions — inside an arm's
 reach, not overlapping another object, not blocking the drawer — so a failed
-episode is a policy failure and not an impossible scene. Across seeds 0–9 every
+episode is a policy failure and not an impossible scene. The reach condition is
+a 0.40 m planar envelope, and it is not optimistic: `scripts/measure_reach.py`
+drives the right arm out along the bearing of the fork and it puts its jaws at
+0.417 m of planar radius, with three joints at the 2.94 Nm limit the whole way.
+Saturation costs 17–64 mm of tip accuracy across that sweep; it does not stop
+the travel, so whatever loses the two cutlery sub-goals, it is not gross reach. Across seeds 0–9 every
 episode was on-table, reachable, free of initial interpenetration and
 numerically stable for its full length, in both the control and the scripted
 run. Nothing is dropped on any seed.
