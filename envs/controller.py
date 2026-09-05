@@ -670,6 +670,15 @@ MUG_APPROACH = float(os.environ.get('MUG_APPROACH', 0.060))
 MUG_DESCEND = float(os.environ.get('MUG_DESCEND', -0.004))
 Y_AXIS = np.array([0.0, 1.0, 0.0])
 
+# --- cutlery descent -------------------------------------------------------
+# Read at ``dinner_table_script()`` call time, not at import, so a sweep can
+# set them per variant inside one process pool.  The shipped values are the
+# ones every published figure was measured at; see
+# ``scripts/measure_fork_descent.py`` for what moved them.
+CUTLERY_DESCEND_STEPS = 1     # solved poses between ``_above`` and the grasp
+CUTLERY_DESCEND_Z = 0.003     # m above the cutlery grasp site
+CUTLERY_DESCEND_SQUARE = False   # square the descent only, never the carry
+
 
 def dinner_table_script() -> list[tuple[dict, float]]:
     """The rollout, as (moves-for-this-step, seconds) pairs.
@@ -690,7 +699,9 @@ def dinner_table_script() -> list[tuple[dict, float]]:
     # --- 2. fork: right picks it out of the drawer, hands it to the left ------
     fork_grip = pinch(geom_width("fork_handle", 0))
     S.extend(_pick(("right", "fork", "fork_grasp", fork_grip, across("fork")),
-                   open_to=GRIPPER_NARROW, descend_z=0.003,
+                   open_to=GRIPPER_NARROW, descend_z=CUTLERY_DESCEND_Z,
+                   descend_steps=CUTLERY_DESCEND_STEPS,
+                   descend_square=CUTLERY_DESCEND_SQUARE,
                    approach=(0.0, 0.0, 0.075), lift=(0.0, 0.0, 0.085)))
     S.extend(_handoff("right", "left", "fork", "target_fork", across("fork"),
                       hold=fork_grip))
@@ -698,7 +709,9 @@ def dinner_table_script() -> list[tuple[dict, float]]:
     # --- 3. spoon: the mirror image, left to right ----------------------------
     spoon_grip = pinch(geom_width("spoon_handle", 0))
     S.extend(_pick(("left", "spoon", "spoon_grasp", spoon_grip, across("spoon")),
-                   open_to=GRIPPER_NARROW, descend_z=0.003,
+                   open_to=GRIPPER_NARROW, descend_z=CUTLERY_DESCEND_Z,
+                   descend_steps=CUTLERY_DESCEND_STEPS,
+                   descend_square=CUTLERY_DESCEND_SQUARE,
                    approach=(0.0, 0.0, 0.075), lift=(0.0, 0.0, 0.085)))
     S.extend(_handoff("left", "right", "spoon", "target_spoon", across("spoon"),
                       hold=spoon_grip))
@@ -804,12 +817,22 @@ def _open_drawer(suffix: str = "", from_home: bool = False):
 
 
 def _pick(spec, *, lift=(0.0, 0.0, 0.070), approach=(0.0, 0.0, 0.070),
-          open_to=GRIPPER_OPEN, descend_z=0.002, square=False):
+          open_to=GRIPPER_OPEN, descend_z=0.002, square=False,
+          descend_steps=1, descend_square=None):
     """Approach, descend, close, lift.
 
     ``approach`` and ``lift`` are vectors, not heights, because the cutlery
     starts under the cabinet's own top panel: straight down onto it is a
     collision, and the arm has to come in over the open drawer front instead.
+
+    ``descend_steps`` splits the descent into that many solved poses instead of
+    one.  ``Rollout.run`` ramps in JOINT space between two solved poses, so a
+    single 72 mm descent traces whatever curve joint-space interpolation
+    happens to produce -- which is not vertical, and which sweeps the open jaws
+    sideways through whatever they were supposed to straddle.  Solving the
+    intermediate heights keeps the ramp short enough that the joint-space chord
+    stays near the Cartesian line.  1 is the shipped behaviour and emits
+    exactly the moves it always did.
     """
     arm, body, site, close_to, jaw = spec
     at = site if callable(site) else None
@@ -826,9 +849,19 @@ def _pick(spec, *, lift=(0.0, 0.0, 0.070), approach=(0.0, 0.0, 0.070),
     # does not have at the far corners of the table.
     out.append(({arm: Move(arm, point(approach), jaw=jaw, square=square,
                            opening=open_to, label=f"{body}_above")}, 1.5))
-    out.append(({arm: Move(arm, point((0.0, 0.0, descend_z)), jaw=jaw,
-                           opening=open_to, plan_at=close_to, square=square,
-                           label=f"{body}_descend")}, 1.2))
+    n_desc = max(1, int(descend_steps))
+    sq_desc = square if descend_square is None else bool(descend_square)
+    a_vec = np.asarray(approach, float)
+    end = np.array([0.0, 0.0, float(descend_z)])
+    for i in range(1, n_desc + 1):
+        frac = i / n_desc
+        # The final step keeps the label ``<body>_descend``: every probe and
+        # every evidence file in the tree keys the grasp on that string.
+        label = f"{body}_descend" if i == n_desc else f"{body}_descend{i}"
+        out.append(({arm: Move(arm, point(a_vec * (1.0 - frac) + end * frac),
+                               jaw=jaw, opening=open_to, plan_at=close_to,
+                               square=sq_desc, label=label)},
+                    max(0.4, 1.2 / n_desc)))
     out.append(({arm: Grip(arm, close_to, label=f"{body}_close")}, 0.8))
     out.append(({arm: Move(arm, point(lift), jaw=jaw, square=square,
                            label=f"{body}_lift")}, 1.2))

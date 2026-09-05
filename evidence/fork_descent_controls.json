@@ -1,0 +1,114 @@
+{
+ "all_pass": true,
+ "sweep": "evidence/fork_descent.json",
+ "variants": 16,
+ "seeds": 10,
+ "verdict": "NO PLACEMENT GAINED",
+ "controls": [
+  {
+   "control": "committed_defaults_emit_the_shipped_descent",
+   "pass": true,
+   "detail": "dinner_table_script() at the committed defaults emits [('fork_descend', False)] -- one solved pose, unsquared, exactly as every published figure was measured"
+  },
+  {
+   "control": "reject_a_default_that_had_stepped_the_descent",
+   "pass": true,
+   "detail": "with CUTLERY_DESCEND_STEPS=2 the same reader sees [('fork_descend1', False), ('fork_descend', False)], so the control is reading the script, not a constant"
+  },
+  {
+   "control": "reject_a_default_that_had_squared_the_descent",
+   "pass": true,
+   "detail": "with CUTLERY_DESCEND_SQUARE=True the same reader sees [('fork_descend', True)]"
+  },
+  {
+   "control": "squaring_the_descent_never_squares_the_carry",
+   "pass": true,
+   "detail": "with the knob full on, the squared fork moves are ['fork_descend1', 'fork_descend2', 'fork_descend3', 'fork_descend'] and the unsquared ones include fork_above and fork_lift -- _handoff already measured that squaring a loaded carry asks for a wrist the arm cannot hold"
+  },
+  {
+   "control": "reject_a_reader_that_cannot_see_the_carry",
+   "pass": true,
+   "detail": "the same reader sees all 12 unsquared fork moves at the committed defaults, so the control above is looking at the carry rather than at a filtered-out label"
+  },
+  {
+   "control": "the_baseline_is_the_shipped_setting",
+   "pass": true,
+   "detail": "baseline = 1 solved pose, 3 mm end height, unsquared"
+  },
+  {
+   "control": "reject_a_sweep_whose_baseline_was_relabelled",
+   "pass": true,
+   "detail": "moving the shipped flag to the 2-pose variant is caught"
+  },
+  {
+   "control": "every_variant_ran_every_seed_with_no_errors",
+   "pass": true,
+   "detail": "16 variants x 10 seeds, 0 errors"
+  },
+  {
+   "control": "no_variant_places_the_fork",
+   "pass": true,
+   "detail": "fork_placed is 0/10 in all 16 variants; verdict 'NO PLACEMENT GAINED'"
+  },
+  {
+   "control": "reject_a_sweep_in_which_one_variant_placed_it",
+   "pass": true,
+   "detail": "a single placement anywhere in the sweep is caught, so '0 everywhere' is a reading and not a constant"
+  },
+  {
+   "control": "the_spoon_negative_control_holds",
+   "pass": true,
+   "detail": "measure_grasp_feasibility.py found no collision-free spoon grasp pose exists (jaws 10.4-48.4 mm ABOVE the handle top at first clearance); a trajectory fix must not place it, and none of the 16 variants does"
+  },
+  {
+   "control": "squaring_the_descent_collapses_the_shove",
+   "pass": true,
+   "detail": "median planar shove of the fork during its own descent, unsquared -> squared: 4.1->0.5, 3.2->0.6, 25.8->0.7, 44.5->0.6, 47.5->0.0, 39.9->0.0, 79.0->0.0, 78.6->0.0 mm -- the intervention is not inert"
+  },
+  {
+   "control": "reject_a_copy_where_squaring_changed_nothing",
+   "pass": true,
+   "detail": "with the squared shoves overwritten by the unsquared ones the same test fails, so it is measuring a difference"
+  },
+  {
+   "control": "squaring_improves_arrival_and_still_buys_nothing",
+   "pass": true,
+   "detail": "best arrival 10.7 mm against the shipped 24.5 mm (and against measure_cutlery_block.py's recorded 43.0 mm median) -- and the fork is still placed 0/10"
+  },
+  {
+   "control": "more_solved_poses_bows_the_path_more_not_less",
+   "pass": true,
+   "detail": "median lateral bow of the jaw meeting point off the straight Cartesian line: 18.2 mm at one solved pose, 43.3 mm at eight -- the joint-space-chord story predicted the opposite, which is what refutes it"
+  },
+  {
+   "control": "reject_the_two_bow_medians_swapped",
+   "pass": true,
+   "detail": "with the medians exchanged the same test fails"
+  },
+  {
+   "control": "the_blocking_geom_changes_identity_under_squaring",
+   "pass": true,
+   "detail": "shipped descent is blocked by 'fork_handle' (5288 steps of contact, the object it is trying to grasp); the squared descent by 'drawer_back' (4069 steps) -- two different walls, so squaring trades the object for the back of the drawer"
+  },
+  {
+   "control": "reject_a_forged_contact_tally",
+   "pass": true,
+   "detail": "rewriting the squared variant's contacts to name the fork flips the reader, so it is reading the tally"
+  },
+  {
+   "control": "the_subgoal_gain_touches_nothing_the_intervention_touches",
+   "pass": true,
+   "detail": "the 6 mm end height scores 19/50 against the shipped 15/50, and all 4 of the gain is plate and mug -- drawer_open 10->10, fork_placed 0->0, spoon_placed 0->0, plate_placed 4->7, mug_placed 1->2; the fork and spoon contribution to the delta is 0"
+  },
+  {
+   "control": "and_it_is_not_significant_so_it_is_not_shipped",
+   "pass": true,
+   "detail": "paired sign test over the 20 plate/mug seed-slots: 5 gained, 1 lost, p=0.219 -- indistinguishable from chaos sensitivity to a 3 mm change in a waypoint the plate and the mug never touch, so the committed default stays at 3 mm and no published figure moves"
+  },
+  {
+   "control": "reject_a_copy_in_which_the_gain_reached_the_fork",
+   "pass": true,
+   "detail": "if the 6 mm variant had placed the fork the same reader sees a fork contribution of 10, so 'the gain touches nothing we touched' is a measurement"
+  }
+ ]
+}
