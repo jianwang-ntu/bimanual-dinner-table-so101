@@ -86,6 +86,8 @@ def load_evidence(ev: pathlib.Path) -> dict:
         "export": j("openvino_export.json"),
         "bench": json.loads(bench[0].read_text(encoding="utf-8")),
         "demo": j("demo_scripted_10seeds.json"),
+        "act": j("eval_seeds_act.json"),
+        "perceived": j("eval_seeds_scripted_perceived.json"),
     }
 
 
@@ -105,6 +107,11 @@ def rederive(e: dict) -> dict:
     return {
         "seeds": seeds,
         "denom": denom,
+        # re-derived from the episode lists, not read off the summary fields
+        "act_total": sum(ep["task"]["subgoals_met"]
+                         for ep in e["act"]["episodes"]),
+        "perceived_total": sum(ep["task"]["subgoals_met"]
+                               for ep in e["perceived"]["episodes"]),
         "total": sum(ep["task"]["subgoals_met"] for ep in sc["episodes"]),
         "control_total": sum(ep["task"]["subgoals_met"] for ep in ctl["episodes"]),
         "per_goal": per_goal,
@@ -364,8 +371,13 @@ def main() -> int:
     absences = [
         f"Task success is {F['task_success']}/{F['seeds']}",
         f"Object hand-offs: {F['object_handoffs']}",
-        "no learned policy",
-        "NOT in the control loop",
+        # Both of these used to be literal absence sentences -- "no learned
+        # policy" and "NOT in the control loop". A LeRobot ACT policy was
+        # trained at 9e805f8 and perception entered the loop at 5ab8365, so
+        # this suite was requiring two false sentences to stay on screen.
+        # Re-sited onto the results, derived from the evidence.
+        f"ACT policy loses to the script: {F['act_total']}/{F['denom']}",
+        "IS in the control loop",
         F["bench_verdict"],
     ]
     all_lines = [ln["text"] for seg in segs for ln in seg.get("lines", [])]
@@ -378,8 +390,9 @@ def main() -> int:
     # deleted, and requires it to notice.  A presence check that cannot fail is
     # not a control.
     ledger = side["not_claimed"]
-    required = ("Task success", "Object hand-offs", "No learned policy",
-                "Perception outside the control loop", "No Intel Core Ultra measurement")
+    required = ("Task success", "Object hand-offs", "Learned ACT policy",
+                "Perception in the control loop costs",
+                "No Intel Core Ultra measurement")
     complete = [w for w in required if w not in ledger]
     censored = ledger.replace("No Intel Core Ultra measurement. ", "")
     fired = [w for w in required if w not in censored]

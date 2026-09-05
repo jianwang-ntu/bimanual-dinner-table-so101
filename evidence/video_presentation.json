@@ -1,8 +1,8 @@
 {
  "schema": "video_presentation/v1",
  "video": "evidence/video_presentation.mp4",
- "sha256": "9a0934cf7ae3f534550023c0012bc48c50a8ce8f5249228c849ff3f3a496fbdb",
- "bytes": 5151485,
+ "sha256": "b829010752f8381d395bedf8022e7f30ef3af0148a6d5e4f60fa779b52606ad2",
+ "bytes": 5180908,
  "duration_s": 275.56,
  "duration_mmss": "4:36",
  "fps": 25,
@@ -22,14 +22,14 @@
   "min_seconds": 180.0,
   "max_bytes": 300000000,
   "measured_seconds": 275.56,
-  "measured_bytes": 5151485
+  "measured_bytes": 5180908
  },
  "distinct_from": {
   "file": "evidence/demo_scripted_10seeds.mp4",
   "why": "that is the track's Required Deliverable 4, the full 10-seed rollout at 340.88 s; it is over the platform's 5-minute limit for this slot and does not state the problem, the solution or the value proposition."
  },
  "built_by": "scripts/make_video.py",
- "built_at_head": "938ef11bf48f4f30320b8d76131a23475b27ce69",
+ "built_at_head": "596ff50d76fd6c32a90d1015f45a368150647f2b",
  "source_date_epoch": "1757000000",
  "deterministic": "frames are generated, SOURCE_DATE_EPOCH is pinned and ffmpeg is invoked bitexact with a pinned thread count, so two builds from the same evidence produce byte-identical MP4s. scripts/test_video.py rebuilds and compares.",
  "audio": "none. The presentation is silent and reads from the screen; no narration is claimed and none is present.",
@@ -37,10 +37,15 @@
  "layout_violations": [],
  "layout_check": "every string is measured with the real font metrics; off-frame, text-on-text, text-straddling-a-panel and text-over-the-footage-window all fail the build",
  "figures_derived_from": [
+  "act_policy_controls.json",
+  "act_train.json",
   "cover_image.json",
   "cover_image_controls.json",
   "demo_scripted_10seeds.json",
+  "demo_site.json",
+  "demo_site_controls.json",
   "eval_seeds.json",
+  "eval_seeds_act.json",
   "eval_seeds_scripted.json",
   "eval_seeds_scripted_blind.json",
   "eval_seeds_scripted_perceived.json",
@@ -1610,7 +1615,7 @@
     },
     {
      "role": "bullet",
-     "text": "\u2014  There is no learned policy: no VLA, no imitation learning, no language conditioning. The controller is scripted and reads privileged simulator state."
+     "text": "\u2014  The learned ACT policy loses to the script: 3/50 against 15/50. No VLA and no language conditioning: the task instruction is a fixed string that nothing parses."
     },
     {
      "role": "body",
@@ -1699,7 +1704,7 @@
      "style": "normal"
     },
     {
-     "text": "\u2014 There is no learned policy: no VLA, no imitation learning, no language conditioning. The",
+     "text": "\u2014 The learned ACT policy loses to the script: 3/50 against 15/50. No VLA and no language",
      "size": 17,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -1707,7 +1712,7 @@
      "style": "normal"
     },
     {
-     "text": "controller is scripted and reads privileged simulator state.",
+     "text": "conditioning: the task instruction is a fixed string that nothing parses.",
      "size": 17,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -1757,7 +1762,7 @@
     },
     {
      "role": "body",
-     "text": "The perception model is NOT in the control loop. That is what the VLA criterion asks for, and it is the next thing to build."
+     "text": "The perception model IS in the control loop, and putting it there costs 3 sub-goals: 12/50 perceived against 15/50 privileged."
     }
    ],
    "lines": [
@@ -1858,7 +1863,7 @@
      "style": "normal"
     },
     {
-     "text": "The perception model is NOT in the control loop. That is what the VLA criterion asks for, and it is the",
+     "text": "The perception model IS in the control loop, and putting it there costs 3 sub-goals: 12/50 perceived",
      "size": 16,
      "color": "#E2A24A",
      "weight": "normal",
@@ -1866,7 +1871,7 @@
      "style": "normal"
     },
     {
-     "text": "next thing to build.",
+     "text": "against 15/50 privileged.",
      "size": 16,
      "color": "#E2A24A",
      "weight": "normal",
@@ -2329,7 +2334,7 @@
     },
     {
      "role": "ledger",
-     "text": "Task success 0/10. Object hand-offs 5, all mug. fork_placed 0/10, spoon_placed 0/10. No learned policy. Perception outside the control loop. No Intel Core Ultra measurement. No hosted demo application."
+     "text": "Task success 0/10. Object hand-offs 5, all mug. fork_placed 0/10, spoon_placed 0/10. Learned ACT policy 3/50 against the script's 15/50. Perception in the control loop costs 3. No Intel Core Ultra measurement. No hosted demo application."
     },
     {
      "role": "bullet",
@@ -2386,7 +2391,7 @@
      "style": "normal"
     },
     {
-     "text": "Task success 0/10. Object hand-offs 5, all mug. fork_placed 0/10, spoon_placed 0/10. No",
+     "text": "Task success 0/10. Object hand-offs 5, all mug. fork_placed 0/10, spoon_placed 0/10.",
      "size": 17,
      "color": "#E2A24A",
      "weight": "normal",
@@ -2394,7 +2399,7 @@
      "style": "normal"
     },
     {
-     "text": "learned policy. Perception outside the control loop. No Intel Core Ultra measurement. No",
+     "text": "Learned ACT policy 3/50 against the script's 15/50. Perception in the control loop costs 3.",
      "size": 17,
      "color": "#E2A24A",
      "weight": "normal",
@@ -2402,7 +2407,7 @@
      "style": "normal"
     },
     {
-     "text": "hosted demo application.",
+     "text": "No Intel Core Ultra measurement. No hosted demo application.",
      "size": 17,
      "color": "#E2A24A",
      "weight": "normal",
@@ -2471,6 +2476,8 @@
  "facts": {
   "seeds": 10,
   "denom": 50,
+  "act_total": 3,
+  "perceived_total": 12,
   "total": 15,
   "control_total": 0,
   "task_success": 0,
@@ -2533,5 +2540,5 @@
   "plate_placed": 4,
   "mug_placed": 1
  },
- "not_claimed": "Task success 0/10. Object hand-offs 5. fork_placed 0/10, spoon_placed 0/10. No learned policy. Perception outside the control loop. No Intel Core Ultra measurement. No hosted demo application. The video claims none of these and says so on screen."
+ "not_claimed": "Task success 0/10. Object hand-offs 5. fork_placed 0/10, spoon_placed 0/10. Learned ACT policy 3/50 against the script's 15/50. Perception in the control loop costs 3. No Intel Core Ultra measurement. No hosted demo application. The video claims none of these and says so on screen."
 }

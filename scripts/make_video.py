@@ -270,6 +270,8 @@ def load():
         "bench": json.loads(bench_files[0].read_text(encoding="utf-8")),
         "demo": j("demo_scripted_10seeds.json"),
         "slides": j("slides_presentation.json"),
+        "act": j("eval_seeds_act.json"),
+        "perceived": j("eval_seeds_scripted_perceived.json"),
     }
 
 
@@ -277,6 +279,8 @@ def facts(e):
     """Every number this video is allowed to show, derived here and nowhere else."""
     sc, ctl, dm = e["scripted"], e["control"], e["demo"]
     seeds = sc["seeds"]
+    act_total = sum(e["act"]["subgoals_met_per_seed"])
+    perceived_total = sum(e["perceived"]["subgoals_met_per_seed"])
     per_goal, order = {}, []
     for ep in sc["episodes"]:
         for goal, met in ep["task"]["subgoals"].items():
@@ -298,6 +302,7 @@ def facts(e):
     light = [ep["randomization"]["model"]["light"]["diffuse"] for ep in sc["episodes"]]
     return {
         "seeds": seeds, "denom": denom,
+        "act_total": act_total, "perceived_total": perceived_total,
         "total": sum(sc["subgoals_met_per_seed"]),
         "control_total": sum(ctl["subgoals_met_per_seed"]),
         "per_goal": per_goal, "goal_order": order,
@@ -569,8 +574,9 @@ def build_tail_cards(F, dur):
          f"Object hand-offs: {F['object_handoffs']}, every one of them the mug. The monitor also "
          f"records a hand-off on {F['drawer_handoff_seeds']} seeds for the drawer handle, which is "
          f"the two arms taking it in turn and is not an object hand-off."),
-        "There is no learned policy: no VLA, no imitation learning, no language conditioning. "
-        "The controller is scripted and reads privileged simulator state.",
+        f"The learned ACT policy loses to the script: {F['act_total']}/{F['denom']} against "
+        f"{F['total']}/{F['denom']}. No VLA and no language conditioning: the task instruction "
+        f"is a fixed string that nothing parses.",
     ], size=17, maxw=R - L - 0.02)
     say(fig, L, 0.135,
         "This is the entry's own scorer reporting against the entry. Nothing above is rounded "
@@ -594,8 +600,10 @@ def build_tail_cards(F, dur):
         "than FP32.",
     ], size=16, maxw=R - L - 0.02)
     flow(fig, L, 0.120,
-         "The perception model is NOT in the control loop. That is what the VLA criterion asks "
-         "for, and it is the next thing to build.", size=16, color=WARN, maxw=R - L, role="body")
+         f"The perception model IS in the control loop, and putting it there costs "
+         f"{F['total'] - F['perceived_total']} sub-goals: {F['perceived_total']}/{F['denom']} "
+         f"perceived against {F['total']}/{F['denom']} privileged.",
+         size=16, color=WARN, maxw=R - L, role="body")
     emit(fig, dur["tech"])
 
     # ------------------------------------------------------------------ Intel
@@ -659,7 +667,9 @@ def build_tail_cards(F, dur):
              else f"Object hand-offs {F['object_handoffs']}, all mug. ")
           + ", ".join(f"{g} {F['per_goal'][g]}/{F['seeds']}"
                       for g in F['goal_order'] if F['per_goal'][g] == 0)
-          + ". No learned policy. Perception outside the control loop. "
+          + f". Learned ACT policy {F['act_total']}/{F['denom']} against the script's "
+            f"{F['total']}/{F['denom']}. Perception in the control loop costs "
+            f"{F['total'] - F['perceived_total']}. "
             "No Intel Core Ultra measurement. No hosted demo application."),
          size=17, color=WARN, maxw=R - L - 0.06, role="ledger")
     bullets(fig, L, 0.470, [
@@ -919,7 +929,9 @@ def build(out_mp4: pathlib.Path, out_sidecar: pathlib.Path) -> dict:
             f"{F['object_handoffs']}. "
             + ", ".join(f"{g} {F['per_goal'][g]}/{F['seeds']}"
                         for g in F['goal_order'] if F['per_goal'][g] == 0)
-            + f". No learned policy. Perception outside the control loop. "
+            + f". Learned ACT policy {F['act_total']}/{F['denom']} against the script's "
+            f"{F['total']}/{F['denom']}. Perception in the control loop costs "
+            f"{F['total'] - F['perceived_total']}. "
             f"No Intel Core Ultra measurement. No hosted demo application. The video claims "
             f"none of these and says so on screen."
         ),

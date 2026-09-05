@@ -1,7 +1,7 @@
 {
  "schema": "video_controls/v1",
  "artifact": "evidence/video_presentation.mp4",
- "sha256": "9a0934cf7ae3f534550023c0012bc48c50a8ce8f5249228c849ff3f3a496fbdb",
+ "sha256": "b829010752f8381d395bedf8022e7f30ef3af0148a6d5e4f60fa779b52606ad2",
  "duration_s": 275.56,
  "all_pass": true,
  "controls": [
@@ -43,12 +43,12 @@
   {
    "control": "accept_card_segments_hold_still",
    "pass": true,
-   "detail": "13 card segments, worst first-to-last mean pixel change 0.637 (< 1.0). It is not zero because H.264 requantises a static picture; what matters is that it is far below a clip."
+   "detail": "13 card segments, worst first-to-last mean pixel change 0.482 (< 1.0). It is not zero because H.264 requantises a static picture; what matters is that it is far below a clip."
   },
   {
    "control": "reject_a_clip_segment_that_does_not_move",
    "pass": true,
-   "detail": "5 clip segments, smallest change 3.124 (> 1.5); every card is quieter than every clip by 2.487 -- a clip that held still would be a card mislabelled as footage"
+   "detail": "5 clip segments, smallest change 3.124 (> 1.5); every card is quieter than every clip by 2.642 -- a clip that held still would be a card mislabelled as footage"
   },
   {
    "control": "accept_headline_subgoals_is_on_screen",
@@ -108,17 +108,17 @@
   {
    "control": "accept_bench_rows_is_on_screen",
    "pass": true,
-   "detail": "segment 14 card 15: the line carrying '9 device/precision rows' matches the decoded frame at 0.9997; the same line with '9 device/precision rows' corrupted to '0 device/precision rows' matches at 0.9917"
+   "detail": "segment 14 card 15: the line carrying '9 device/precision rows' matches the decoded frame at 0.9997; the same line with '9 device/precision rows' corrupted to '0 device/precision rows' matches at 0.9918"
   },
   {
    "control": "accept_bench_verdict_is_on_screen",
    "pass": true,
-   "detail": "segment 14 card 15: the line carrying 'NOT_THE_REQUIRED_MEASUREMENT' matches the decoded frame at 0.9994; the same line with 'NOT_THE_REQUIRED_MEASUREMENT' corrupted to 'TNEMERUSAEM_DERIUQER_EHT_TON' matches at 0.5848"
+   "detail": "segment 14 card 15: the line carrying 'NOT_THE_REQUIRED_MEASUREMENT' matches the decoded frame at 0.9997; the same line with 'NOT_THE_REQUIRED_MEASUREMENT' corrupted to 'TNEMERUSAEM_DERIUQER_EHT_TON' matches at 0.5846"
   },
   {
    "control": "accept_bench_host_is_on_screen",
    "pass": true,
-   "detail": "segment 14 card 15: the line carrying 'AMD EPYC 9654 96-Core Processor' matches the decoded frame at 0.9994; the same line with 'AMD EPYC 9654 96-Core Processor' corrupted to 'AMD EPYC 0654 96-Core Processor' matches at 0.9953"
+   "detail": "segment 14 card 15: the line carrying 'AMD EPYC 9654 96-Core Processor' matches the decoded frame at 0.9996; the same line with 'AMD EPYC 9654 96-Core Processor' corrupted to 'AMD EPYC 0654 96-Core Processor' matches at 0.9955"
   },
   {
    "control": "accept_plate_span_is_on_screen",
@@ -168,7 +168,7 @@
   {
    "control": "accept_sidecar_sha256_matches_the_file",
    "pass": true,
-   "detail": "9a0934cf7ae3f534\u2026 and 5151485 bytes"
+   "detail": "b829010752f8381d\u2026 and 5180908 bytes"
   },
   {
    "control": "reject_a_one_character_change_to_the_sha256",
