@@ -2,10 +2,10 @@
   "schema": "demo_site/v1",
   "requirement": "req_application_url / req_demo_platform -- lablab Rule Book 'Application Components': Demo Application Platform, Application URL",
   "built_by": "scripts/make_demo_site.py",
-  "built_at_head": "9e805f8",
+  "built_at_head": "f71b52a",
   "page": "index.html",
   "bytes": 13296,
-  "sha256": "258d8049c8676eba8d45edd9b02e219867d81b637d0ff9c06aecab98d0fc2c6b",
+  "sha256": "93c5f78fe2db21af7b805b5e77fd049110a83360a655a5862f5780cadf901747",
   "figures_derived_from": [
     "evidence/eval_seeds_scripted.json",
     "evidence/eval_seeds_scripted_perceived.json",
