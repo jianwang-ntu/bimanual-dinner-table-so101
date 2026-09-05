@@ -16,3 +16,8 @@ nncf>=2.12          # INT8 post-training quantization; export skips INT8 without
 # artifact a judge downloads rather than the script that made it.
 matplotlib>=3.8
 pypdf>=4.0
+
+# video presentation (scripts/make_video.py, scripts/test_video.py). opencv reads
+# the demo MP4's frames and decodes the SHIPPED presentation back; ffmpeg must be
+# on the path -- it is the encoder, and it is not a pip package here.
+opencv-python>=4.9

@@ -25,6 +25,7 @@ else.
 | Technical summary / architecture — Required Deliverable 5 | written, claims machine-checked | [`TECHNICAL_SUMMARY.md`](TECHNICAL_SUMMARY.md), `evidence/technical_summary_controls.json` (11/11) |
 | Submission cover image, 1920×1080 PNG rendered from the simulator | rendered, **captioned from `evidence/`, not typed** | `evidence/cover_image.png` + `.json`, `evidence/cover_image_controls.json` (14/14) |
 | Slide presentation, 13 slides, 16:9 PDF | generated from `evidence/`, **no figure typed by hand** | `evidence/slides_presentation.pdf` + `.json`, `evidence/slides_controls.json` (12/12) |
+| Video presentation, 4:36, 1280×720 MP4 | generated from `evidence/`, **real footage pasted unscaled from the demo MP4** | `evidence/video_presentation.mp4` + `.json`, `evidence/video_controls.json` (38/38) |
 | VLA / imitation policy | **not started** | — |
 | Perception in the control loop | **not started** — the controller still reads privileged state | — |
 | Intel Core Ultra Series 2/3 benchmark numbers | **not measured, and cannot be measured here** | see *Hardware* below |
@@ -127,7 +128,15 @@ python3 scripts/test_cover_image.py                # 14 controls, stdlib only
 # the mandatory slide deck, and the controls that read the shipped PDF back
 python3 scripts/make_slides.py                     # 13-slide 16:9 PDF from evidence/
 python3 scripts/test_slides.py                     # 12 controls on the PDF bytes
+
+# the mandatory video presentation, and the controls that decode it back
+python3 scripts/make_video.py                      # 4:36 1280x720 MP4 from evidence/
+python3 scripts/test_video.py                      # 38 controls on the DECODED PIXELS
 ```
+
+`scripts/make_video.py` needs `ffmpeg` on the path as well as the Python
+packages; `scripts/test_video.py` rebuilds the video and requires the result to
+be **byte-identical** to the shipped file, so a hand-edited MP4 fails.
 
 Headless rendering uses EGL (`MUJOCO_GL=egl`, set by the scripts). On a machine
 without a GPU, `MUJOCO_GL=osmesa` works too.

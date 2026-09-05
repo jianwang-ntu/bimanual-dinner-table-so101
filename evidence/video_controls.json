@@ -1,0 +1,199 @@
+{
+ "schema": "video_controls/v1",
+ "artifact": "evidence/video_presentation.mp4",
+ "sha256": "b11e3fce2f307236a60ba3a456a7d74002894ebcddff18da1707ee0d1c61ac86",
+ "duration_s": 275.56,
+ "all_pass": true,
+ "controls": [
+  {
+   "control": "accept_container_and_stream",
+   "pass": true,
+   "detail": "mov,mp4,m4a,3gp,3g2,mj2 / h264 1280x720 @ 25 fps, 1 stream(s)"
+  },
+  {
+   "control": "accept_duration_inside_the_published_band",
+   "pass": true,
+   "detail": "275.56s -- lablab publishes 'within 5 minutes duration' and its rubric penalises a presentation video 'less than 3 min'"
+  },
+  {
+   "control": "accept_size_under_the_published_cap",
+   "pass": true,
+   "detail": "4.7 MB against the published 300 MB"
+  },
+  {
+   "control": "reject_a_duration_over_five_minutes",
+   "pass": true,
+   "detail": "the band predicate refuses 300.01s and 179.99s"
+  },
+  {
+   "control": "reject_a_file_over_the_size_cap",
+   "pass": true,
+   "detail": "the size predicate refuses exactly 300 MB"
+  },
+  {
+   "control": "accept_it_is_not_the_demo_video",
+   "pass": true,
+   "detail": "the presentation is 275.6s; the 10-seed demo deliverable is a different file at 340.88s, which would break the 5-minute cap"
+  },
+  {
+   "control": "accept_every_segment_decodes",
+   "pass": true,
+   "detail": "18 segment mid-frames decoded out of the shipped file"
+  },
+  {
+   "control": "accept_card_segments_hold_still",
+   "pass": true,
+   "detail": "13 card segments, worst first-to-last mean pixel change 0.636 (< 1.0). It is not zero because H.264 requantises a static picture; what matters is that it is far below a clip."
+  },
+  {
+   "control": "reject_a_clip_segment_that_does_not_move",
+   "pass": true,
+   "detail": "5 clip segments, smallest change 2.083 (> 1.5); every card is quieter than every clip by 1.448 -- a clip that held still would be a card mislabelled as footage"
+  },
+  {
+   "control": "accept_headline_subgoals_is_on_screen",
+   "pass": true,
+   "detail": "segment 0 card 1: the line carrying '16/50' matches the decoded frame at 0.9994; the same line with '16/50' corrupted to '26/50' matches at 0.9906"
+  },
+  {
+   "control": "accept_no_policy_control_is_on_screen",
+   "pass": true,
+   "detail": "segment 0 card 1: the line carrying '0/50' matches the decoded frame at 0.9993; the same line with '0/50' corrupted to '1/50' matches at 0.9835"
+  },
+  {
+   "control": "accept_drawer_open_is_on_screen",
+   "pass": true,
+   "detail": "segment 11 card 12: the line carrying '10/10' matches the decoded frame at 0.9995; the same line with '10/10' corrupted to '20/10' matches at 0.9326"
+  },
+  {
+   "control": "accept_plate_placed_is_on_screen",
+   "pass": true,
+   "detail": "segment 11 card 12: the line carrying '6/10' matches the decoded frame at 0.9997; the same line with '6/10' corrupted to '7/10' matches at 0.7943"
+  },
+  {
+   "control": "accept_scene_checks_is_on_screen",
+   "pass": true,
+   "detail": "segment 3 card 4: the line carrying '16/16' matches the decoded frame at 0.9996; the same line with '16/16' corrupted to '26/16' matches at 0.9878"
+  },
+  {
+   "control": "accept_scorer_controls_is_on_screen",
+   "pass": true,
+   "detail": "segment 4 card 5: the line carrying '11/11' matches the decoded frame at 0.9996; the same line with '11/11' corrupted to '21/11' matches at 0.9919"
+  },
+  {
+   "control": "accept_perception_params_is_on_screen",
+   "pass": true,
+   "detail": "segment 13 card 14: the line carrying '520,768-parameter' matches the decoded frame at 0.9996; the same line with '520,768-parameter' corrupted to '620,768-parameter' matches at 0.9945"
+  },
+  {
+   "control": "accept_perception_error_is_on_screen",
+   "pass": true,
+   "detail": "segment 13 card 14: the line carrying '1.83 mm' matches the decoded frame at 0.9997; the same line with '1.83 mm' corrupted to '2.83 mm' matches at 0.9931"
+  },
+  {
+   "control": "accept_int8_ratio_is_on_screen",
+   "pass": true,
+   "detail": "segment 13 card 14: the line carrying '3.9\u00d7 smaller' matches the decoded frame at 0.9997; the same line with '3.9\u00d7 smaller' corrupted to '4.9\u00d7 smaller' matches at 0.9898"
+  },
+  {
+   "control": "accept_int8_cost_is_on_screen",
+   "pass": true,
+   "detail": "segment 13 card 14: the line carrying '2.16 mm of accuracy' matches the decoded frame at 0.9997; the same line with '2.16 mm of accuracy' corrupted to '3.16 mm of accuracy' matches at 0.9945"
+  },
+  {
+   "control": "accept_int8_bytes_is_on_screen",
+   "pass": true,
+   "detail": "segment 13 card 14: the line carrying '527,472' matches the decoded frame at 0.9997; the same line with '527,472' corrupted to '627,472' matches at 0.9945"
+  },
+  {
+   "control": "accept_bench_rows_is_on_screen",
+   "pass": true,
+   "detail": "segment 14 card 15: the line carrying '9 device/precision rows' matches the decoded frame at 0.9997; the same line with '9 device/precision rows' corrupted to '0 device/precision rows' matches at 0.9917"
+  },
+  {
+   "control": "accept_bench_verdict_is_on_screen",
+   "pass": true,
+   "detail": "segment 14 card 15: the line carrying 'NOT_THE_REQUIRED_MEASUREMENT' matches the decoded frame at 0.9994; the same line with 'NOT_THE_REQUIRED_MEASUREMENT' corrupted to 'TNEMERUSAEM_DERIUQER_EHT_TON' matches at 0.5848"
+  },
+  {
+   "control": "accept_bench_host_is_on_screen",
+   "pass": true,
+   "detail": "segment 14 card 15: the line carrying 'AMD EPYC 9654 96-Core Processor' matches the decoded frame at 0.9994; the same line with 'AMD EPYC 9654 96-Core Processor' corrupted to 'AMD EPYC 0654 96-Core Processor' matches at 0.9953"
+  },
+  {
+   "control": "accept_plate_span_is_on_screen",
+   "pass": true,
+   "detail": "segment 12 card 13: the line carrying '94\u2013115 mm' matches the decoded frame at 0.9997; the same line with '94\u2013115 mm' corrupted to '04\u2013115 mm' matches at 0.9954"
+  },
+  {
+   "control": "accept_object_handoffs_is_on_screen",
+   "pass": true,
+   "detail": "segment 12 card 13: the line carrying 'Object hand-offs: 0' matches the decoded frame at 0.9997; the same line with 'Object hand-offs: 0' corrupted to 'Object hand-offs: 1' matches at 0.9863"
+  },
+  {
+   "control": "accept_demo_frames_is_on_screen",
+   "pass": true,
+   "detail": "segment 5 card 6: the line carrying '8522 frames' matches the decoded frame at 0.9996; the same line with '8522 frames' corrupted to '9522 frames' matches at 0.9925"
+  },
+  {
+   "control": "reject_every_corrupted_figure",
+   "pass": true,
+   "detail": "17 figures checked; the narrowest true-minus-corrupted margin is 0.0041"
+  },
+  {
+   "control": "accept_the_absence_ledger_is_on_screen",
+   "pass": true,
+   "detail": "5 stated absences all appear in the video's own lines"
+  },
+  {
+   "control": "accept_the_sidecar_ledger_names_every_absence",
+   "pass": true,
+   "detail": "5 absences named in the sidecar's not_claimed"
+  },
+  {
+   "control": "reject_an_absence_deleted_from_the_ledger",
+   "pass": true,
+   "detail": "deleting the Core Ultra sentence from the ledger makes the same checker report exactly that absence as missing"
+  },
+  {
+   "control": "accept_every_clip_is_the_shipped_demo_bytes",
+   "pass": true,
+   "detail": "whole window seed 0: 0.9997  seed 1: 0.9997  seed 3: 0.9999  seed 6: 0.9998  seed 8: 0.9998  (>= 0.97)"
+  },
+  {
+   "control": "reject_a_clip_matched_against_a_different_seed",
+   "pass": true,
+   "detail": "caption band, where two seeds differ: true 0:0.9994  1:0.9994  3:0.9996  6:0.9993  8:0.9992  |  decoy 0:0.8096  1:0.8164  3:0.8106  6:0.8160  8:0.7019  (< 0.9). Whole-window decoy scores 0:0.9110  1:0.9477  3:0.9737  6:0.9644  8:0.9386 -- too close to use, because every episode films the same table."
+  },
+  {
+   "control": "accept_sidecar_sha256_matches_the_file",
+   "pass": true,
+   "detail": "b11e3fce2f307236\u2026 and 4661159 bytes"
+  },
+  {
+   "control": "reject_a_one_character_change_to_the_sha256",
+   "pass": true,
+   "detail": "a one-character change to the recorded sha256 stops matching"
+  },
+  {
+   "control": "reject_the_video_going_stale_when_the_evidence_moves",
+   "pass": true,
+   "detail": "one more sub-goal in the evidence moves the re-derived figures, so a video that kept showing today's numbers would fail the claim controls above"
+  },
+  {
+   "control": "accept_builder_and_suite_agree_on_the_figures",
+   "pass": true,
+   "detail": "the builder's derivation and this file's independent one agree on 9 headline figures"
+  },
+  {
+   "control": "accept_shipped_bytes_are_the_builder_output_today",
+   "pass": true,
+   "detail": "a fresh build from today's evidence is byte-identical"
+  },
+  {
+   "control": "accept_layout_check_is_clean_on_the_rebuild",
+   "pass": true,
+   "detail": "0 layout violations on the rebuild"
+  }
+ ]
+}

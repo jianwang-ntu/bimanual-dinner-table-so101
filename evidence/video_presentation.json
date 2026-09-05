@@ -1,0 +1,2524 @@
+{
+ "schema": "video_presentation/v1",
+ "video": "evidence/video_presentation.mp4",
+ "sha256": "b11e3fce2f307236a60ba3a456a7d74002894ebcddff18da1707ee0d1c61ac86",
+ "bytes": 4661159,
+ "duration_s": 275.56,
+ "duration_mmss": "4:36",
+ "fps": 25,
+ "size": [
+  1280,
+  720
+ ],
+ "frames": 6889,
+ "requirement": {
+  "platform": "lablab.ai AI Hackathon Guidelines, \"Submitting Your AI Hackathon Project\": \"Video Presentation: Provide a link to your video presentation (ensure it's under 300MB and within 5 minutes duration).\"",
+  "rulebook": "lablab.ai Hackathon Rule Book, \"Cover Image and Presentation\": \"Video and Slide Presentation: MP4 and PDF formats are mandatory.\"",
+  "rubric_band_3": "Effectively communicates the problem, solution, and value proposition in less than 5 min.",
+  "rubric_band_2": "Presentation video is less than 3 min."
+ },
+ "bounds": {
+  "max_seconds": 300.0,
+  "min_seconds": 180.0,
+  "max_bytes": 300000000,
+  "measured_seconds": 275.56,
+  "measured_bytes": 4661159
+ },
+ "distinct_from": {
+  "file": "evidence/demo_scripted_10seeds.mp4",
+  "why": "that is the track's Required Deliverable 4, the full 10-seed rollout at 340.88 s; it is over the platform's 5-minute limit for this slot and does not state the problem, the solution or the value proposition."
+ },
+ "built_by": "scripts/make_video.py",
+ "built_at_head": "7d43c4ec8d013b2010573ecc0b02a37632e66f33",
+ "source_date_epoch": "1757000000",
+ "deterministic": "frames are generated, SOURCE_DATE_EPOCH is pinned and ffmpeg is invoked bitexact with a pinned thread count, so two builds from the same evidence produce byte-identical MP4s. scripts/test_video.py rebuilds and compares.",
+ "audio": "none. The presentation is silent and reads from the screen; no narration is claimed and none is present.",
+ "footage_handling": "demo frames are copied out of evidence/demo_scripted_10seeds.mp4 and pasted unscaled at (160,110); no resampling, no re-render, no speed change beyond the 4x already in that file.",
+ "layout_violations": [],
+ "layout_check": "every string is measured with the real font metrics; off-frame, text-on-text, text-straddling-a-panel and text-over-the-footage-window all fail the build",
+ "figures_derived_from": [
+  "cover_image.json",
+  "cover_image_controls.json",
+  "demo_scripted_10seeds.json",
+  "eval_seeds.json",
+  "eval_seeds_scripted.json",
+  "openvino_bench_amd_epyc_9654_96_core_processor.json",
+  "openvino_export.json",
+  "perception_pipeline_controls.json",
+  "perception_train.json",
+  "scene_verification.json",
+  "slides_controls.json",
+  "slides_presentation.json",
+  "task_predicate_controls.json",
+  "technical_summary_controls.json"
+ ],
+ "segments": [
+  {
+   "card": 1,
+   "kind": "card",
+   "start_frame": 0,
+   "n_frames": 325,
+   "seconds": 13.0,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "AI INFRA SUMMIT HACKATHON \u00b7 INTEL PHYSICAL AI ONLINE CHALLENGE"
+    },
+    {
+     "role": "title",
+     "text": "SO-101 Dinner Table: a scored bimanual benchmark"
+    },
+    {
+     "role": "subtitle",
+     "text": "Bimanual VLA Manipulation with Multi-Modal Reasoning \u2014 Setting Up a Dinner Table"
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  A randomized dual-SO-101 dinner-table task in MuJoCo, scored by five ordered predicates"
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  A scorer with a falsifier attached: the same seeds with no policy score 0/50"
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  A scripted bimanual controller that earns 16/50 of them, and no more"
+    },
+    {
+     "role": "body",
+     "text": "Video presentation \u00b7 4:36 \u00b7 silent, read from the screen"
+    },
+    {
+     "role": "body",
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101"
+    },
+    {
+     "role": "body",
+     "text": "Every figure in this video is read from evidence/ in that repository at build time by scripts/make_video.py."
+    }
+   ],
+   "lines": [
+    {
+     "text": "AI INFRA SUMMIT HACKATHON \u00b7 INTEL PHYSICAL AI ONLINE CHALLENGE",
+     "size": 13,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "SO-101 Dinner Table: a scored bimanual benchmark",
+     "size": 28,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Bimanual VLA Manipulation with Multi-Modal Reasoning \u2014 Setting Up a Dinner Table",
+     "size": 17,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 A randomized dual-SO-101 dinner-table task in MuJoCo, scored by five ordered predicates",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 A scorer with a falsifier attached: the same seeds with no policy score 0/50",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 A scripted bimanual controller that earns 16/50 of them, and no more",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Video presentation \u00b7 4:36 \u00b7 silent, read from the screen",
+     "size": 15,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101",
+     "size": 15,
+     "color": "#78C8A0",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Every figure in this video is read from evidence/ in that repository at build time by scripts/make_video.py.",
+     "size": 13,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ]
+  },
+  {
+   "card": 2,
+   "kind": "card",
+   "start_frame": 325,
+   "n_frames": 400,
+   "seconds": 16.0,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "1 / PROBLEM"
+    },
+    {
+     "role": "title",
+     "text": "The problem"
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Two arms setting a table is easy to film and hard to believe."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  A demo video does not say whether the result survives a new random seed."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  It does not say whether the scorer would have fired with the arms held still."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  It does not say which of the five steps actually happened, or in what order."
+    },
+    {
+     "role": "headline",
+     "text": "A number nobody else can rerun is not a measurement."
+    },
+    {
+     "role": "body",
+     "text": "So this entry built the measuring instrument first, and reports exactly how much of the task it can do."
+    }
+   ],
+   "lines": [
+    {
+     "text": "1 / PROBLEM",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "The problem",
+     "size": 28,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "2",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Two arms setting a table is easy to film and hard to believe.",
+     "size": 19,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 A demo video does not say whether the result survives a new random seed.",
+     "size": 19,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 It does not say whether the scorer would have fired with the arms held still.",
+     "size": 19,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 It does not say which of the five steps actually happened, or in what order.",
+     "size": 19,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "A number nobody else can rerun is not a measurement.",
+     "size": 25,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "So this entry built the measuring instrument first, and reports exactly how much of the task it",
+     "size": 16,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "can do.",
+     "size": 16,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ]
+  },
+  {
+   "card": 3,
+   "kind": "card",
+   "start_frame": 725,
+   "n_frames": 400,
+   "seconds": 16.0,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "1 / PROBLEM"
+    },
+    {
+     "role": "title",
+     "text": "What the track asks for"
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Set a dinner table with two SO-101 arms in a MuJoCo simulation."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Interpret language and vision, keep multi-step context, adapt as the scene changes."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Show optimized inference with OpenVINO on Intel Core Ultra Series 2/3 hardware."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Hold up under randomized placement, weights, friction, shapes and lighting, over 10 seeds."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Ship a reproducible repository with deterministic setup, evaluation tooling and benchmarks."
+    },
+    {
+     "role": "body",
+     "text": "This video says which of those five this entry answers, and which it does not."
+    }
+   ],
+   "lines": [
+    {
+     "text": "1 / PROBLEM",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "What the track asks for",
+     "size": 28,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "3",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Set a dinner table with two SO-101 arms in a MuJoCo simulation.",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Interpret language and vision, keep multi-step context, adapt as the scene changes.",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Show optimized inference with OpenVINO on Intel Core Ultra Series 2/3 hardware.",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Hold up under randomized placement, weights, friction, shapes and lighting, over 10",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "seeds.",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Ship a reproducible repository with deterministic setup, evaluation tooling and",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "benchmarks.",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "This video says which of those five this entry answers, and which it does not.",
+     "size": 17,
+     "color": "#E2A24A",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ]
+  },
+  {
+   "card": 4,
+   "kind": "card",
+   "start_frame": 1125,
+   "n_frames": 475,
+   "seconds": 19.0,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "2 / SOLUTION"
+    },
+    {
+     "role": "title",
+     "text": "What is built \u2014 the environment"
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  envs/dinner_table.py generates the scene as code: two SO-101 arms, a cabinet with a prismatic drawer holding a fork and a spoon, and a plate, a mug and a bottle \u2014 nq=48 nu=12 nbody=25 ngeom=133 nmesh=36, five cameras."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  envs/randomize.py varies geometry, mass \u00d70.60\u20131.60, friction \u00d70.60\u20131.29, lighting 0.60\u20130.94, background and placement, per seed."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Placements are rejection-sampled so every episode is reachable, non-overlapping and does not block the drawer: a failed episode is a policy failure, not an impossible scene."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  16/16 structural and physical checks on the scene pass."
+    }
+   ],
+   "lines": [
+    {
+     "text": "2 / SOLUTION",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "What is built \u2014 the environment",
+     "size": 28,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "4",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 envs/dinner_table.py generates the scene as code: two SO-101 arms, a cabinet with a",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "prismatic drawer holding a fork and a spoon, and a plate, a mug and a bottle \u2014 nq=48",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "nu=12 nbody=25 ngeom=133 nmesh=36, five cameras.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 envs/randomize.py varies geometry, mass \u00d70.60\u20131.60, friction \u00d70.60\u20131.29, lighting",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "0.60\u20130.94, background and placement, per seed.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Placements are rejection-sampled so every episode is reachable, non-overlapping and",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "does not block the drawer: a failed episode is a policy failure, not an impossible scene.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 16/16 structural and physical checks on the scene pass.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ]
+  },
+  {
+   "card": 5,
+   "kind": "card",
+   "start_frame": 1600,
+   "n_frames": 475,
+   "seconds": 19.0,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "2 / SOLUTION"
+    },
+    {
+     "role": "title",
+     "text": "What is built \u2014 a scorer with a falsifier"
+    },
+    {
+     "role": "body",
+     "text": "The instruction, verbatim from envs/task.py:"
+    },
+    {
+     "role": "instruction",
+     "text": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Five ordered sub-goals with 45\u201350 mm placement tolerances and a 25\u00b0 upright check; sequencing, which arm touched what, and every hand-off are recorded separately."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  11/11 accept/reject controls on the scorer pass \u2014 it is checked in both directions, so it can be wrong in our favour and be caught."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  The same scorer, the same 10 seeds, the arms held at their home pose: 0/50 sub-goals. That is the falsifier for every number that follows."
+    }
+   ],
+   "lines": [
+    {
+     "text": "2 / SOLUTION",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "What is built \u2014 a scorer with a falsifier",
+     "size": 28,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "5",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "The instruction, verbatim from envs/task.py:",
+     "size": 15,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "italic"
+    },
+    {
+     "text": "setting, put the plate on the mat, then set the mug down to the right of the plate.",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "italic"
+    },
+    {
+     "text": "\u2014 Five ordered sub-goals with 45\u201350 mm placement tolerances and a 25\u00b0 upright check;",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "sequencing, which arm touched what, and every hand-off are recorded separately.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 11/11 accept/reject controls on the scorer pass \u2014 it is checked in both directions, so it can",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "be wrong in our favour and be caught.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 The same scorer, the same 10 seeds, the arms held at their home pose: 0/50 sub-goals.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "That is the falsifier for every number that follows.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ]
+  },
+  {
+   "card": 6,
+   "kind": "card",
+   "start_frame": 2075,
+   "n_frames": 300,
+   "seconds": 12.0,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "3 / DEMONSTRATION"
+    },
+    {
+     "role": "title",
+     "text": "The rollout, on 10 randomized seeds"
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Recorded by scripts/record_demo.py: 10 seeds, 8522 frames at 25 fps, 4\u00d7 real time."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Every caption is drawn per frame from the LIVE predicate state in envs/task.py and from that seed's own randomized draws \u2014 so the video cannot claim more than the evaluation reports."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  What follows is cut from that file unscaled. The pixels on screen are the pixels a judge can download."
+    },
+    {
+     "role": "body",
+     "text": "evidence/demo_scripted_10seeds.mp4   sha256 b39b2cfe69cf0f9dc5d7cab0bc3139a6\u2026"
+    },
+    {
+     "role": "body",
+     "text": "This video does NOT show the task being completed: task_success is 0/10."
+    }
+   ],
+   "lines": [
+    {
+     "text": "3 / DEMONSTRATION",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "The rollout, on 10 randomized seeds",
+     "size": 28,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "6",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Recorded by scripts/record_demo.py: 10 seeds, 8522 frames at 25 fps, 4\u00d7 real time.",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Every caption is drawn per frame from the LIVE predicate state in envs/task.py and",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "from that seed's own randomized draws \u2014 so the video cannot claim more than the",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "evaluation reports.",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 What follows is cut from that file unscaled. The pixels on screen are the pixels a",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "judge can download.",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "evidence/demo_scripted_10seeds.mp4   sha256 b39b2cfe69cf0f9dc5d7cab0bc3139a6\u2026",
+     "size": 14,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans Mono",
+     "style": "normal"
+    },
+    {
+     "text": "This video does NOT show the task being completed: task_success is 0/10.",
+     "size": 17,
+     "color": "#E2A24A",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ]
+  },
+  {
+   "card": 7,
+   "kind": "clip",
+   "start_frame": 2375,
+   "n_frames": 470,
+   "seconds": 18.8,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "3 / DEMONSTRATION \u00b7 SEED 0"
+    },
+    {
+     "role": "body",
+     "text": "drawer_open at 5.6s  \u00b7  plate_placed at 70.0s"
+    },
+    {
+     "role": "title",
+     "text": "Both arms open the drawer, then the plate reaches the mat"
+    },
+    {
+     "role": "caption",
+     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed"
+    },
+    {
+     "role": "caption",
+     "text": "The fork and the spoon are in the open drawer and are never picked up."
+    }
+   ],
+   "lines": [
+    {
+     "text": "3 / DEMONSTRATION \u00b7 SEED 0",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "drawer_open at 5.6s  \u00b7  plate_placed at 70.0s",
+     "size": 13,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Both arms open the drawer, then the plate reaches the mat",
+     "size": 19,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed",
+     "size": 14,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "The fork and the spoon are in the open drawer and are never picked up.",
+     "size": 14,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ],
+   "clip": {
+    "seed": 0,
+    "source": "evidence/demo_scripted_10seeds.mp4",
+    "source_sha256": "b39b2cfe69cf0f9dc5d7cab0bc3139a6ac1bb3f9316af28ee9a1ea6555385aa2",
+    "source_start_frame": 0,
+    "source_end_frame": 470,
+    "episode_start_frame": 0,
+    "episode_frames": 781,
+    "pasted_unscaled_at": [
+     160,
+     96,
+     960,
+     540
+    ]
+   }
+  },
+  {
+   "card": 8,
+   "kind": "clip",
+   "start_frame": 2845,
+   "n_frames": 130,
+   "seconds": 5.2,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "3 / DEMONSTRATION \u00b7 SEED 1"
+    },
+    {
+     "role": "body",
+     "text": "1 of 5 sub-goals"
+    },
+    {
+     "role": "title",
+     "text": "Seed 1 ends with the drawer open and nothing placed"
+    },
+    {
+     "role": "caption",
+     "text": "live predicate state: drawer_open  \u00b7  1/5 sub-goals on this seed"
+    },
+    {
+     "role": "caption",
+     "text": "This is the ordinary outcome on 4 of the 10 seeds, and it is in the average."
+    }
+   ],
+   "lines": [
+    {
+     "text": "3 / DEMONSTRATION \u00b7 SEED 1",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "1 of 5 sub-goals",
+     "size": 13,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Seed 1 ends with the drawer open and nothing placed",
+     "size": 19,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "live predicate state: drawer_open  \u00b7  1/5 sub-goals on this seed",
+     "size": 14,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "This is the ordinary outcome on 4 of the 10 seeds, and it is in the average.",
+     "size": 14,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ],
+   "clip": {
+    "seed": 1,
+    "source": "evidence/demo_scripted_10seeds.mp4",
+    "source_sha256": "b39b2cfe69cf0f9dc5d7cab0bc3139a6ac1bb3f9316af28ee9a1ea6555385aa2",
+    "source_start_frame": 1462,
+    "source_end_frame": 1592,
+    "episode_start_frame": 781,
+    "episode_frames": 814,
+    "pasted_unscaled_at": [
+     160,
+     96,
+     960,
+     540
+    ]
+   }
+  },
+  {
+   "card": 9,
+   "kind": "clip",
+   "start_frame": 2975,
+   "n_frames": 300,
+   "seconds": 12.0,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "3 / DEMONSTRATION \u00b7 SEED 3"
+    },
+    {
+     "role": "body",
+     "text": "plate_placed at 70.9s"
+    },
+    {
+     "role": "title",
+     "text": "Seed 3: the plate is hooked by its rim and dragged, not lifted"
+    },
+    {
+     "role": "caption",
+     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed"
+    },
+    {
+     "role": "caption",
+     "text": "The scorer does not ask how the plate got to the mat. This video says anyway."
+    }
+   ],
+   "lines": [
+    {
+     "text": "3 / DEMONSTRATION \u00b7 SEED 3",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "plate_placed at 70.9s",
+     "size": 13,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Seed 3: the plate is hooked by its rim and dragged, not lifted",
+     "size": 19,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed",
+     "size": 14,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "The scorer does not ask how the plate got to the mat. This video says anyway.",
+     "size": 14,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ],
+   "clip": {
+    "seed": 3,
+    "source": "evidence/demo_scripted_10seeds.mp4",
+    "source_sha256": "b39b2cfe69cf0f9dc5d7cab0bc3139a6ac1bb3f9316af28ee9a1ea6555385aa2",
+    "source_start_frame": 2664,
+    "source_end_frame": 2964,
+    "episode_start_frame": 2289,
+    "episode_frames": 895,
+    "pasted_unscaled_at": [
+     160,
+     96,
+     960,
+     540
+    ]
+   }
+  },
+  {
+   "card": 10,
+   "kind": "clip",
+   "start_frame": 3275,
+   "n_frames": 124,
+   "seconds": 4.96,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "3 / DEMONSTRATION \u00b7 SEED 6"
+    },
+    {
+     "role": "body",
+     "text": "drawer_open at 152.6s of 158s"
+    },
+    {
+     "role": "title",
+     "text": "Seed 6: the drawer only opens with 5 seconds left"
+    },
+    {
+     "role": "caption",
+     "text": "live predicate state: drawer_open  \u00b7  1/5 sub-goals on this seed"
+    },
+    {
+     "role": "caption",
+     "text": "The worst seed of the ten, shown rather than left out."
+    }
+   ],
+   "lines": [
+    {
+     "text": "3 / DEMONSTRATION \u00b7 SEED 6",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "drawer_open at 152.6s of 158s",
+     "size": 13,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Seed 6: the drawer only opens with 5 seconds left",
+     "size": 19,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "live predicate state: drawer_open  \u00b7  1/5 sub-goals on this seed",
+     "size": 14,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "The worst seed of the ten, shown rather than left out.",
+     "size": 14,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ],
+   "clip": {
+    "seed": 6,
+    "source": "evidence/demo_scripted_10seeds.mp4",
+    "source_sha256": "b39b2cfe69cf0f9dc5d7cab0bc3139a6ac1bb3f9316af28ee9a1ea6555385aa2",
+    "source_start_frame": 5877,
+    "source_end_frame": 6001,
+    "episode_start_frame": 5021,
+    "episode_frames": 984,
+    "pasted_unscaled_at": [
+     160,
+     96,
+     960,
+     540
+    ]
+   }
+  },
+  {
+   "card": 11,
+   "kind": "clip",
+   "start_frame": 3399,
+   "n_frames": 190,
+   "seconds": 7.6,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "3 / DEMONSTRATION \u00b7 SEED 8"
+    },
+    {
+     "role": "body",
+     "text": "plate_placed at 65.7s"
+    },
+    {
+     "role": "title",
+     "text": "Seed 8: the fastest placement of the ten"
+    },
+    {
+     "role": "caption",
+     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed"
+    },
+    {
+     "role": "caption",
+     "text": "Same controller, same tolerances, a different random scene."
+    }
+   ],
+   "lines": [
+    {
+     "text": "3 / DEMONSTRATION \u00b7 SEED 8",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "plate_placed at 65.7s",
+     "size": 13,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Seed 8: the fastest placement of the ten",
+     "size": 19,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed",
+     "size": 14,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Same controller, same tolerances, a different random scene.",
+     "size": 14,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ],
+   "clip": {
+    "seed": 8,
+    "source": "evidence/demo_scripted_10seeds.mp4",
+    "source_sha256": "b39b2cfe69cf0f9dc5d7cab0bc3139a6ac1bb3f9316af28ee9a1ea6555385aa2",
+    "source_start_frame": 7228,
+    "source_end_frame": 7418,
+    "episode_start_frame": 6891,
+    "episode_frames": 800,
+    "pasted_unscaled_at": [
+     160,
+     96,
+     960,
+     540
+    ]
+   }
+  },
+  {
+   "card": 12,
+   "kind": "card",
+   "start_frame": 3589,
+   "n_frames": 525,
+   "seconds": 21.0,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "4 / RESULT"
+    },
+    {
+     "role": "title",
+     "text": "What it scores, and against what"
+    },
+    {
+     "role": "label",
+     "text": "SCRIPTED CONTROLLER"
+    },
+    {
+     "role": "headline",
+     "text": "16/50"
+    },
+    {
+     "role": "body",
+     "text": "sub-goals over 10 seeds"
+    },
+    {
+     "role": "label",
+     "text": "NO POLICY \u2014 SAME SEEDS, SAME SCORER"
+    },
+    {
+     "role": "headline",
+     "text": "0/50"
+    },
+    {
+     "role": "body",
+     "text": "the negative control: it fires nothing"
+    },
+    {
+     "role": "body",
+     "text": "Per sub-goal, over the ten seeds:"
+    },
+    {
+     "role": "body",
+     "text": "drawer_open"
+    },
+    {
+     "role": "body",
+     "text": "10/10"
+    },
+    {
+     "role": "body",
+     "text": "fork_placed"
+    },
+    {
+     "role": "body",
+     "text": "0/10"
+    },
+    {
+     "role": "body",
+     "text": "spoon_placed"
+    },
+    {
+     "role": "body",
+     "text": "0/10"
+    },
+    {
+     "role": "body",
+     "text": "plate_placed"
+    },
+    {
+     "role": "body",
+     "text": "6/10"
+    },
+    {
+     "role": "body",
+     "text": "mug_placed"
+    },
+    {
+     "role": "body",
+     "text": "0/10"
+    },
+    {
+     "role": "body",
+     "text": "Task success: 0/10."
+    },
+    {
+     "role": "body",
+     "text": "Both arms touched an object on 7 of 10 seeds. The longest in-order prefix reached on any seed is 1 of 5. Objects dropped: 0."
+    }
+   ],
+   "lines": [
+    {
+     "text": "4 / RESULT",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "What it scores, and against what",
+     "size": 28,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "12",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "SCRIPTED CONTROLLER",
+     "size": 13,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "16/50",
+     "size": 46,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "sub-goals over 10 seeds",
+     "size": 14,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "NO POLICY \u2014 SAME SEEDS, SAME SCORER",
+     "size": 13,
+     "color": "#E2A24A",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "0/50",
+     "size": 46,
+     "color": "#E2A24A",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "the negative control: it fires nothing",
+     "size": 14,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Per sub-goal, over the ten seeds:",
+     "size": 16,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "drawer_open",
+     "size": 17,
+     "color": "#78C8A0",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "10/10",
+     "size": 17,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "fork_placed",
+     "size": 17,
+     "color": "#D9534F",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "0/10",
+     "size": 17,
+     "color": "#D9534F",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "spoon_placed",
+     "size": 17,
+     "color": "#D9534F",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "0/10",
+     "size": 17,
+     "color": "#D9534F",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "plate_placed",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "6/10",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "mug_placed",
+     "size": 17,
+     "color": "#D9534F",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "0/10",
+     "size": 17,
+     "color": "#D9534F",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Task success: 0/10.",
+     "size": 19,
+     "color": "#D9534F",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Both arms touched an object on 7 of 10 seeds. The",
+     "size": 15,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "longest in-order prefix reached on any seed is 1 of",
+     "size": 15,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "5. Objects dropped: 0.",
+     "size": 15,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ]
+  },
+  {
+   "card": 13,
+   "kind": "card",
+   "start_frame": 4114,
+   "n_frames": 475,
+   "seconds": 19.0,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "4 / RESULT"
+    },
+    {
+     "role": "title",
+     "text": "What it does not do"
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Task success is 0/10. The table has never been set."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  The plate is hooked by its rim and dragged flat, not picked and placed: it is 94\u2013115 mm across against a 101 mm jaw span, so no jaw opening both clears it and closes on it."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Object hand-offs: 0. The hand-offs the monitor records on 10 seeds are the two arms taking the drawer handle in turn."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  There is no learned policy: no VLA, no imitation learning, no language conditioning. The controller is scripted and reads privileged simulator state."
+    },
+    {
+     "role": "body",
+     "text": "This is the entry's own scorer reporting against the entry. Nothing above is rounded toward us."
+    }
+   ],
+   "lines": [
+    {
+     "text": "4 / RESULT",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "What it does not do",
+     "size": 28,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "13",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Task success is 0/10. The table has never been set.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 The plate is hooked by its rim and dragged flat, not picked and placed: it is 94\u2013115 mm",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "across against a 101 mm jaw span, so no jaw opening both clears it and closes on it.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Object hand-offs: 0. The hand-offs the monitor records on 10 seeds are the two arms",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "taking the drawer handle in turn.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 There is no learned policy: no VLA, no imitation learning, no language conditioning. The",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "controller is scripted and reads privileged simulator state.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "This is the entry's own scorer reporting against the entry. Nothing above is rounded toward us.",
+     "size": 16,
+     "color": "#78C8A0",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ]
+  },
+  {
+   "card": 14,
+   "kind": "card",
+   "start_frame": 4589,
+   "n_frames": 525,
+   "seconds": 21.0,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "5 / TECHNOLOGY"
+    },
+    {
+     "role": "title",
+     "text": "Application of technology"
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  envs/perception.py is a 520,768-parameter scene-state CNN that regresses the table layout from one overhead frame, trained on 4,000 simulator-rendered images for 80 epochs."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Worst-object error 1.32 mm on validation and 1.83 mm on the ten evaluation seeds, against a no-vision baseline of 42.1 mm and shuffled labels at 46.4 mm. 13/13 pipeline controls pass."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Exported to OpenVINO 2026.3.1 IR at FP32, FP16 and NNCF INT8. INT8 is 3.9\u00d7 smaller than FP32 (527,472 against 2,079,264 weight bytes) and costs 2.16 mm of accuracy \u2014 3.976 against 1.812 mm."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  That cost is reported, not hidden: a control fails if INT8 is ever recorded as no worse than FP32."
+    },
+    {
+     "role": "body",
+     "text": "The perception model is NOT in the control loop. That is what the VLA criterion asks for, and it is the next thing to build."
+    }
+   ],
+   "lines": [
+    {
+     "text": "5 / TECHNOLOGY",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Application of technology",
+     "size": 28,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "14",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 envs/perception.py is a 520,768-parameter scene-state CNN that regresses the table layout",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "from one overhead frame, trained on 4,000 simulator-rendered images for 80 epochs.",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Worst-object error 1.32 mm on validation and 1.83 mm on the ten evaluation seeds, against a",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "no-vision baseline of 42.1 mm and shuffled labels at 46.4 mm. 13/13 pipeline controls pass.",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Exported to OpenVINO 2026.3.1 IR at FP32, FP16 and NNCF INT8. INT8 is 3.9\u00d7 smaller than FP32",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "(527,472 against 2,079,264 weight bytes) and costs 2.16 mm of accuracy \u2014 3.976 against 1.812",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "mm.",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 That cost is reported, not hidden: a control fails if INT8 is ever recorded as no worse than FP32.",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "The perception model is NOT in the control loop. That is what the VLA criterion asks for, and it is the",
+     "size": 16,
+     "color": "#E2A24A",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "next thing to build.",
+     "size": 16,
+     "color": "#E2A24A",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ]
+  },
+  {
+   "card": 15,
+   "kind": "card",
+   "start_frame": 5114,
+   "n_frames": 450,
+   "seconds": 18.0,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "5 / TECHNOLOGY"
+    },
+    {
+     "role": "title",
+     "text": "No Intel Core Ultra measurement exists here"
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  scripts/bench_openvino.py reports single-stream latency, async throughput at the plugin's own optimal request count, the execution precision the plugin actually chose, and task quality in millimetres \u2014 9 device/precision rows."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  On this host that is AMD EPYC 9654 96-Core Processor: 0.436 ms median latency, 5,220 inferences/s at FP32."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  The track asks for Intel Core Ultra Series 2/3 with OpenVINO. This machine has none, so the report stamps itself NOT_THE_REQUIRED_MEASUREMENT rather than offering these numbers as Intel ones."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  The script is committed and runs unchanged on Core Ultra hardware; the IRs it needs are in the repository."
+    },
+    {
+     "role": "body",
+     "text": "Reporting AMD numbers as Intel numbers would be falsifying a result. The row stays unearned."
+    }
+   ],
+   "lines": [
+    {
+     "text": "5 / TECHNOLOGY",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "No Intel Core Ultra measurement exists here",
+     "size": 28,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "15",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 scripts/bench_openvino.py reports single-stream latency, async throughput at the plugin's",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "own optimal request count, the execution precision the plugin actually chose, and task",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "quality in millimetres \u2014 9 device/precision rows.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 On this host that is AMD EPYC 9654 96-Core Processor: 0.436 ms median latency, 5,220",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "inferences/s at FP32.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 The track asks for Intel Core Ultra Series 2/3 with OpenVINO. This machine has none, so",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "the report stamps itself NOT_THE_REQUIRED_MEASUREMENT rather than offering these",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "numbers as Intel ones.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 The script is committed and runs unchanged on Core Ultra hardware; the IRs it needs are",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "in the repository.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Reporting AMD numbers as Intel numbers would be falsifying a result. The row stays unearned.",
+     "size": 16,
+     "color": "#D9534F",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ]
+  },
+  {
+   "card": 16,
+   "kind": "card",
+   "start_frame": 5564,
+   "n_frames": 425,
+   "seconds": 17.0,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "6 / VALUE"
+    },
+    {
+     "role": "title",
+     "text": "Value"
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  The users are teams training manipulation policies for the low-cost open arms this track names, who today report success rates on environments nobody else can rerun."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  What is offered is the instrument: a seeded, randomized, ordered-sub-goal task with a falsifier attached \u2014 cheap enough to run on a laptop and public enough to argue with."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  The sustainable form of that is a versioned open benchmark with hosted evaluation, so a robotics team can quote a number it can defend."
+    },
+    {
+     "role": "body",
+     "text": "None of that is built. There are no users and there is no revenue: it is the route, not a claim."
+    }
+   ],
+   "lines": [
+    {
+     "text": "6 / VALUE",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Value",
+     "size": 28,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "16",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 The users are teams training manipulation policies for the low-cost open arms this",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "track names, who today report success rates on environments nobody else can rerun.",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 What is offered is the instrument: a seeded, randomized, ordered-sub-goal task with",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "a falsifier attached \u2014 cheap enough to run on a laptop and public enough to argue with.",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 The sustainable form of that is a versioned open benchmark with hosted evaluation,",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "so a robotics team can quote a number it can defend.",
+     "size": 18,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "None of that is built. There are no users and there is no revenue: it is the",
+     "size": 17,
+     "color": "#E2A24A",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "route, not a claim.",
+     "size": 17,
+     "color": "#E2A24A",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ]
+  },
+  {
+   "card": 17,
+   "kind": "card",
+   "start_frame": 5989,
+   "n_frames": 475,
+   "seconds": 19.0,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "7 / ORIGINALITY"
+    },
+    {
+     "role": "title",
+     "text": "What is unusual \u2014 and what comes next"
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  The benchmark ships its own falsifier: a no-policy control on identical seeds and an unchanged scorer, so the headline 16/50 cannot be an artefact of the measurement."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Three failures were diagnosed by measurement rather than guessed: the stationary jaw planned 7.1 mm inside the mug wall, joint-space ramps sweeping the arm through the cabinet (18 of 25 probe waypoints missed by 40\u2013300 mm), and servo saturation at about 0.30 m of reach with no contact anywhere on the arm."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Two are closed, and the plate now places on 6 seeds where nothing had ever placed. The third is a property of the robot and remains open."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Next: put envs/perception.py inside the control loop, and find a grasp that lifts the plate instead of dragging it."
+    }
+   ],
+   "lines": [
+    {
+     "text": "7 / ORIGINALITY",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "What is unusual \u2014 and what comes next",
+     "size": 28,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "17",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 The benchmark ships its own falsifier: a no-policy control on identical seeds and an unchanged",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "scorer, so the headline 16/50 cannot be an artefact of the measurement.",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Three failures were diagnosed by measurement rather than guessed: the stationary jaw planned",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "7.1 mm inside the mug wall, joint-space ramps sweeping the arm through the cabinet (18 of 25",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "probe waypoints missed by 40\u2013300 mm), and servo saturation at about 0.30 m of reach with no",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "contact anywhere on the arm.",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Two are closed, and the plate now places on 6 seeds where nothing had ever placed. The third is",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "a property of the robot and remains open.",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Next: put envs/perception.py inside the control loop, and find a grasp that lifts the plate instead",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "of dragging it.",
+     "size": 16,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ]
+  },
+  {
+   "card": 18,
+   "kind": "card",
+   "start_frame": 6464,
+   "n_frames": 425,
+   "seconds": 17.0,
+   "text": [
+    {
+     "role": "kicker",
+     "text": "8 / CLOSE"
+    },
+    {
+     "role": "title",
+     "text": "What this entry does not claim"
+    },
+    {
+     "role": "ledger",
+     "text": "Task success 0/10. No object hand-off. fork_placed, spoon_placed and mug_placed 0/10 each. No learned policy. Perception outside the control loop. No Intel Core Ultra measurement. No hosted demo application."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Reproduce the headline from a clean clone: python3 scripts/eval_seeds.py --seeds 10  \u2014 then run it again with --no-policy for the 0/50."
+    },
+    {
+     "role": "bullet",
+     "text": "\u2014  Everything on screen in this video is re-derived and checked against these shipped MP4 bytes by scripts/test_video.py."
+    },
+    {
+     "role": "body",
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101"
+    },
+    {
+     "role": "body",
+     "text": "SO-101 Dinner Table: a scored bimanual benchmark"
+    },
+    {
+     "role": "body",
+     "text": "AI Infra Summit Hackathon \u00b7 Intel Physical AI Online Challenge \u00b7 lablab.ai"
+    }
+   ],
+   "lines": [
+    {
+     "text": "8 / CLOSE",
+     "size": 12,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "What this entry does not claim",
+     "size": 28,
+     "color": "#E9EEF3",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "18",
+     "size": 11,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "Task success 0/10. No object hand-off. fork_placed, spoon_placed and mug_placed 0/10",
+     "size": 17,
+     "color": "#E2A24A",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "each. No learned policy. Perception outside the control loop. No Intel Core Ultra",
+     "size": 17,
+     "color": "#E2A24A",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "measurement. No hosted demo application.",
+     "size": 17,
+     "color": "#E2A24A",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Reproduce the headline from a clean clone: python3 scripts/eval_seeds.py --seeds 10 \u2014",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "then run it again with --no-policy for the 0/50.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "\u2014 Everything on screen in this video is re-derived and checked against these shipped MP4",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "bytes by scripts/test_video.py.",
+     "size": 17,
+     "color": "#E9EEF3",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "github.com/jianwang-ntu/bimanual-dinner-table-so101",
+     "size": 20,
+     "color": "#78C8A0",
+     "weight": "bold",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "SO-101 Dinner Table: a scored bimanual benchmark",
+     "size": 16,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    },
+    {
+     "text": "AI Infra Summit Hackathon \u00b7 Intel Physical AI Online Challenge \u00b7 lablab.ai",
+     "size": 14,
+     "color": "#94A3B1",
+     "weight": "normal",
+     "family": "DejaVu Sans",
+     "style": "normal"
+    }
+   ]
+  }
+ ],
+ "facts": {
+  "seeds": 10,
+  "denom": 50,
+  "total": 16,
+  "control_total": 0,
+  "task_success": 0,
+  "bimanual": 7,
+  "in_order": 1,
+  "subgoals_total": 5,
+  "dropped": 0,
+  "object_handoffs": 0,
+  "drawer_handoff_seeds": 10,
+  "plate_d_lo": 94.0,
+  "plate_d_hi": 114.6,
+  "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
+  "scene_pass": 16,
+  "scene_n": 16,
+  "scene_detail": "nq=48 nu=12 nbody=25 ngeom=133 nmesh=36",
+  "pred_pass": 11,
+  "pred_n": 11,
+  "perc_pass": 13,
+  "perc_n": 13,
+  "params": 520768,
+  "train_n": 4000,
+  "val_n": 240,
+  "epochs": 80,
+  "val_mm": 1.3183772563934326,
+  "eval_mm": 1.8333436250686646,
+  "base_eval_mm": 42.097721099853516,
+  "shuffled_mm": 46.36643981933594,
+  "fp32_bytes": 2079264,
+  "int8_bytes": 527472,
+  "int8_ratio": 3.941941941941942,
+  "int8_mm": 3.975828170776367,
+  "fp32_mm": 1.8124964237213135,
+  "int8_cost_mm": 2.1633317470550537,
+  "bench_rows": 9,
+  "bench_cpu": "AMD EPYC 9654 96-Core Processor",
+  "bench_verdict": "NOT_THE_REQUIRED_MEASUREMENT",
+  "bench_asks": "Intel Core Ultra Series 2/3 with OpenVINO",
+  "cpu_p50": 0.436,
+  "cpu_fps": 5219.7,
+  "openvino": "2026.3.1",
+  "mass_lo": 0.603,
+  "mass_hi": 1.599,
+  "fric_lo": 0.604,
+  "fric_hi": 1.288,
+  "light_lo": 0.602,
+  "light_hi": 0.942,
+  "demo_seeds": 10,
+  "demo_frames": 8522,
+  "demo_fps": 25,
+  "demo_speed": 4.0,
+  "demo_sha": "b39b2cfe69cf0f9dc5d7cab0bc3139a6ac1bb3f9316af28ee9a1ea6555385aa2",
+  "demo_not_claimed": "This video does NOT show the task being completed: task_success is 0/10. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is drawer_open 10/10, plate_placed 6/10. Never earned on any seed: fork_placed, spoon_placed, mug_placed.",
+  "moves": 131,
+  "slides_pages": 13
+ },
+ "per_goal": {
+  "drawer_open": 10,
+  "fork_placed": 0,
+  "spoon_placed": 0,
+  "plate_placed": 6,
+  "mug_placed": 0
+ },
+ "not_claimed": "Task success 0/10. Object hand-offs 0. fork_placed, spoon_placed and mug_placed 0/10 each. No learned policy. Perception outside the control loop. No Intel Core Ultra measurement. No hosted demo application. The video claims none of these and says so on screen."
+}
