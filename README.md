@@ -6,26 +6,51 @@ hackathon, lablab.ai). Target scenario: *Setting Up a Dinner Table*.
 
 ## What is in here, and what is not
 
-This repository currently contains **the environment and the scorer. There is
-no policy.** Read that before reading anything else — the numbers below are
-about the simulator, not about a robot that solves the task.
+This repository contains **the environment, the scorer, and a scripted
+controller that solves one sub-goal of five. There is no learned policy.**
+Read that before reading anything else.
 
 | Piece | State | Evidence |
 |---|---|---|
 | Dual SO-101 MuJoCo scene, drawer, plate, mug, bottle, cutlery | built, verified | `evidence/scene_verification.json` (16/16) |
 | Seeded domain randomization — geometry, mass, friction, lighting, background, placement | built, verified over 10 seeds | `evidence/eval_seeds.json` |
 | Task definition and success predicates | built, controls both ways | `evidence/task_predicate_controls.json` (11/11) |
+| Scripted bimanual controller | built, **9 sub-goals of 50 over 10 seeds** | `evidence/eval_seeds_scripted.json` |
+| Demo video, 10 randomized seeds, captioned from the simulator | recorded, **shows a partial rollout** | `evidence/demo_scripted_10seeds.mp4` + `.json` |
 | VLA / imitation policy | **not started** | — |
 | OpenVINO conversion and quantization | **not started** | — |
 | Intel Core Ultra Series 2/3 benchmark | **not started, and cannot be run here** | see *Hardware* below |
-| Demo video across 10 seeds | **not started** | — |
 
-`scripts/eval_seeds.py` reports `subgoals 0/5` on every seed. That is the
-correct result, not a bug: with no policy loaded the arms hold their home pose
-and nothing is manipulated. The run is there to show the *environment* is
-valid and stable, and the accept-side controls in
-`scripts/test_task_predicates.py` are there to show the scorer can return a
-non-zero score when a policy eventually earns one.
+### What the controller actually does, measured
+
+Same environment, same scorer, 10 seeds, the only difference the controller:
+
+| Run | Sub-goals | Task success | Evidence |
+|---|---|---|---|
+| `--policy none` (arms hold the home pose) | **0 / 50** | 0 / 10 | `evidence/eval_seeds.json` |
+| `--policy scripted` | **9 / 50** | 0 / 10 | `evidence/eval_seeds_scripted.json` |
+
+All nine are `drawer_open`, earned on 9 seeds of 10. Read the rest of the row
+before reading anything into it:
+
+- **No placement has ever succeeded.** `fork_placed`, `spoon_placed`,
+  `plate_placed` and `mug_placed` are 0/10 each, and `task_success` is 0/10.
+  The arms reach the objects and close on them; the grasps do not survive the
+  lift.
+- `in_order_prefix` is 1 on those nine seeds — the drawer and nothing after it.
+- `bimanual`, meaning both arms touched a manipulable object, is true on
+  **2 seeds of 10**. On the other eight only the right arm ever touches one.
+- `handoff_occurred` is true on 10/10 and that number is misleading: every
+  recorded hand-off is on the **drawer**, the two arms taking its handle in
+  turn during the end-of-episode re-check. **No object hand-off has been
+  achieved on any seed.** The script asks for two; it gets none.
+
+The demo video is captioned with the live predicate state frame by frame, so
+it shows those failures rather than hiding them.
+
+The no-policy run is the negative control for that number: any sub-goal that
+fired with the arms held still would mean the scorer, not the controller,
+produced it. It fires none.
 
 ## Quick start
 
@@ -34,7 +59,9 @@ pip install -r requirements.txt
 python3 scripts/build_scene.py            # writes envs/dinner_table.xml
 python3 scripts/verify_scene.py           # 16 structural + physical checks
 python3 scripts/test_task_predicates.py   # 11 accept/reject controls on the scorer
-python3 scripts/eval_seeds.py --seeds 10  # 10 randomized episodes
+python3 scripts/eval_seeds.py --seeds 10                    # control: no policy
+python3 scripts/eval_seeds.py --seeds 10 --policy scripted  # the controller
+python3 scripts/record_demo.py --seeds 10                   # the demo video
 ```
 
 Headless rendering uses EGL (`MUJOCO_GL=egl`, set by the scripts). On a machine
@@ -48,6 +75,15 @@ inward so their neutral pose faces the workspace. In front of them sits a
 cabinet with a prismatic drawer holding a spoon and a fork, plus a plate, a mug
 and a bottle on the table.
 
+Two things about the cabinet are set by what a gripper can physically do, and
+both were measured rather than guessed. Its carcass is tall enough to leave
+177 mm of clearance above the open drawer rim: with a low top panel the only
+route to the cutlery is a 25 mm slot between the drawer face and the overhang,
+which no SO-101 gripper fits through, and the drawer becomes decorative. And
+the cutlery lies *across* the drawer rather than along it, because lengthwise
+it has to sit near the drawer face, where the SO-101's wrist camera mount fouls
+the face on the way down and the arm stalls with its servos saturated.
+
 - `envs/dinner_table.py` — the scene, as code. `build(dims=...)` returns an
   uncompiled `MjSpec` so object geometry can be varied per episode.
 - `envs/dinner_table.xml` — the nominal scene, generated by
@@ -57,6 +93,15 @@ and a bottle on the table.
   keyframe and available to the controller.
 - `envs/randomize.py` — the randomizer.
 - `envs/task.py` — the instruction, the sub-goals and the scorer.
+- `envs/controller.py` — the scripted bimanual controller: a waypoint state
+  machine over position IK. It holds no learned parameters and reads no
+  camera; what it does read from the simulator is the world pose of the object
+  it is about to touch, which is what a perception stack would supply. Three
+  pieces do the work — a jaw-tip calibration swept out of the model, a
+  `wrist_roll` alignment that squares the jaws onto what they are gripping,
+  and an IK loop that targets the point where the jaws MEET rather than the
+  wrist frame (they differ by ~41 mm, and that difference is why an
+  unmodified position-IK grasp brushes past everything it reaches for).
 
 Verified properties (`scripts/verify_scene.py`, all 16 pass):
 the saved XML loads standalone; both arms expose their full 6-actuator set and
@@ -81,7 +126,8 @@ Placements are rejection-sampled against three conditions — inside an arm's
 reach, not overlapping another object, not blocking the drawer — so a failed
 episode is a policy failure rather than an impossible scene. Across seeds 0–9
 every episode was on-table, reachable, free of initial interpenetration, and
-numerically stable for the full 4 s.
+numerically stable for the full episode, in both the no-policy control (4 s)
+and the scripted run (76–86 s).
 
 ## Task and scoring
 
@@ -106,6 +152,20 @@ ACCEPT control that puts the world in the solved state and requires
 displaced 100 mm, the drawer opened only 40 mm, the mug at the target but
 rotated 90°, the plate at the target x,y but on the floor, and a single-armed
 grasp that must not be reported as a hand-off.
+
+## Robustness and recovery
+
+The controller re-checks the drawer at the end of the episode and re-opens it
+from the home pose if a later reach has nudged it shut. That is not cosmetic:
+before the re-check the drawer reached its full 90 mm travel on 10 seeds of 10
+and was then knocked closed again on 5 of them, so the sub-goal the robot had
+genuinely performed was scored as unearned. The re-check is a plain
+if-then-redo, logged in the rollout trace as `recheck_fired`, and it is the
+difference between 5/50 and 9/50.
+
+Raising the drawer's slide friction so it would not drift was tried first and
+made things worse — 2/50, because the arm could no longer pull it fully open.
+That change was reverted; the friction in the scene is the original 0.35.
 
 ## Hardware — an open gap
 

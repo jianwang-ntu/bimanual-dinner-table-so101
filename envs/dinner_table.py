@@ -34,6 +34,12 @@ ARM_X = 0.22                # arms sit at x = -ARM_X and x = +ARM_X
 ARM_Y = -0.14
 HANDOFF = (0.0, -0.075)     # x, y of the shared hand-off zone
 CAB_Y, CAB_Z = 0.16, TABLE_TOP_Z
+# Half-height of the cabinet carcass.  It has to leave a gripper room to reach
+# down INTO the open drawer: with a low top panel the only way to the cutlery
+# is a 25 mm slot between the drawer front and the overhang, which no SO-101
+# gripper fits through, and the drawer is decorative rather than part of the
+# task.  Measured clearance above the drawer rim at this value: 177 mm.
+CAB_H = 0.12
 DRAWER_TRAVEL = 0.09        # m
 ARM_YAW = 36.0              # deg, left mount; the right mount mirrors it
 HOME_XY = 0.10              # gripper x offset of the home pose
@@ -135,10 +141,10 @@ def build(dims: dict | None = None) -> mujoco.MjSpec:
 
     # drawer cabinet ----------------------------------------------------
     cab = w.add_body(name="cabinet", pos=[0.0, CAB_Y, CAB_Z])
-    box(cab, "cab_back", [0, 0.075, 0.05], [0.11, 0.006, 0.05], "cabinet")
-    box(cab, "cab_left", [-0.104, 0.0, 0.05], [0.006, 0.08, 0.05], "cabinet")
-    box(cab, "cab_right", [0.104, 0.0, 0.05], [0.006, 0.08, 0.05], "cabinet")
-    box(cab, "cab_top", [0, 0.0, 0.104], [0.11, 0.08, 0.006], "cabinet")
+    box(cab, "cab_back", [0, 0.075, CAB_H], [0.11, 0.006, CAB_H], "cabinet")
+    box(cab, "cab_left", [-0.104, 0.0, CAB_H], [0.006, 0.08, CAB_H], "cabinet")
+    box(cab, "cab_right", [0.104, 0.0, CAB_H], [0.006, 0.08, CAB_H], "cabinet")
+    box(cab, "cab_top", [0, 0.0, 2 * CAB_H + 0.006], [0.11, 0.08, 0.006], "cabinet")
 
     dr = cab.add_body(name="drawer", pos=[0.0, 0.0, 0.045])
     dr.add_joint(name="drawer_slide", type=mujoco.mjtJoint.mjJNT_SLIDE,
@@ -155,8 +161,14 @@ def build(dims: dict | None = None) -> mujoco.MjSpec:
     dr.add_site(name="drawer_handle_site", pos=[0.0, -0.087, 0.006], size=[0.004, 0, 0])
 
     # cutlery, resting inside the drawer --------------------------------
-    for nm, off in (("spoon", -0.035), ("fork", 0.035)):
-        b = free_body(spec, nm, [off, CAB_Y - 0.022, CAB_Z + 0.034])
+    # Laid ACROSS the drawer rather than along it.  Lengthwise they have to sit
+    # near the drawer face, and there the SO-101's wrist camera mount fouls the
+    # face on the way down and the arm stalls with its servos saturated --
+    # measured, not assumed.  Across, they clear it by 86 mm and still fit the
+    # 172 mm interior (longest randomized cutlery spans 132 mm).
+    for nm, off in (("spoon", -0.032), ("fork", 0.018)):
+        b = free_body(spec, nm, [0.0, CAB_Y + off, CAB_Z + 0.034])
+        b.quat = zquat(90.0)
         b.add_geom(name=f"{nm}_handle", type=BOX, pos=[0, 0, 0],
                    size=[0.006, D["cutlery_l"], 0.0025], material="steel",
                    mass=D["cutlery_m"], **GRASP)

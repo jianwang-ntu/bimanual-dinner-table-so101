@@ -1,0 +1,618 @@
+#!/usr/bin/env python3
+"""A scripted bimanual controller for the dinner-table task.
+
+This is a *controller*, not a policy: it holds no learned parameters and reads
+no camera.  It exists so that the evaluation harness in ``envs/task.py`` has
+something to score other than an arm holding still, and so the demonstration
+video has a rollout to film.  What it does read from the simulator is only what
+a perception stack would supply -- the world pose of the object it is about to
+touch -- and every waypoint is resolved from that pose at the moment the move
+starts, so the same script runs against a randomized scene.
+
+The mechanism is three small pieces:
+
+``tip_mid``     where the two jaws actually meet, which is *not* the
+                ``gripperframe`` site: at the home opening the meeting point
+                sits ~31 mm along the approach axis from it.
+``align_roll``  ``wrist_roll`` turns the jaw closing direction about the
+                approach axis without moving ``gripperframe`` at all, so the
+                jaws can be squared onto a fork handle or a plate rim.
+``plan_pose``   alternates position IK with those two corrections until the
+                jaw meeting point, not the wrist, lands on the target.
+
+Everything above the primitives is a plain list of moves, so the script can be
+read top to bottom against the task instruction it implements.
+"""
+from __future__ import annotations
+
+import numpy as np
+import mujoco
+
+from .ik import site_ik, ARM_JOINTS
+from .dinner_table import ARM_X as dt_ARM_X, ARM_Y as dt_ARM_Y
+
+GRIPPER_OPEN = 1.20          # rad; jaw tips ~101 mm apart
+GRIPPER_WIDE = 1.45          # rad; ~117 mm, for reaching around a mug
+GRIPPER_NARROW = 0.45        # rad; ~51 mm -- fits between the drawer walls
+GRIP_PINCH = -0.17           # rad; jaw tips ~8 mm apart -- cutlery, handles
+GRIP_RIM = 0.05              # rad; ~21 mm -- plate rim
+GRIP_MUG = 0.20              # rad; ~32 mm -- squeezes a 48-64 mm mug wall
+
+ARMS = ("left", "right")
+
+
+# --------------------------------------------------------------------- geometry
+def jaw_tip_geoms(model: mujoco.MjModel, prefix: str) -> tuple[list[int], list[int]]:
+    """(fixed-jaw tip geoms, moving-jaw tip geoms) for one arm."""
+    fixed, moving = [], []
+    for g in range(model.ngeom):
+        nm = mujoco.mj_id2name(model, mujoco.mjtObj.mjOBJ_GEOM, g) or ""
+        if not nm.startswith(prefix) or "jaw_sph_tip" not in nm:
+            continue
+        (moving if "moving" in nm else fixed).append(g)
+    if not fixed or not moving:
+        raise KeyError(f"no jaw tip geoms for {prefix}")
+    return fixed, moving
+
+
+class Gripper:
+    """Cached ids for one arm's jaws, actuators and joints."""
+
+    def __init__(self, model: mujoco.MjModel, arm: str):
+        self.arm = arm
+        self.prefix = f"{arm}_"
+        self.fixed, self.moving = jaw_tip_geoms(model, self.prefix)
+        self.site = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_SITE,
+                                      self.prefix + "gripperframe")
+        self.qadr, self.vadr = [], []
+        self.act = []
+        for j in ARM_JOINTS + ("gripper",):
+            jid = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_JOINT, self.prefix + j)
+            self.qadr.append(model.jnt_qposadr[jid])
+            aid = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_ACTUATOR,
+                                    self.prefix + j)
+            self.act.append(aid)
+        self.qadr = np.array(self.qadr)
+        self.act = np.array(self.act)
+        self.roll_q = self.qadr[ARM_JOINTS.index("wrist_roll")]
+        self.grip_q = self.qadr[-1]
+        self.lo = model.actuator_ctrlrange[self.act, 0].copy()
+        self.hi = model.actuator_ctrlrange[self.act, 1].copy()
+        self.calibrate(model)
+
+    def calibrate(self, model: mujoco.MjModel) -> None:
+        """Measure jaw separation against joint command, once, from the model.
+
+        Nothing here is a fitted constant: the table is swept out of this
+        model, so it stays correct if the gripper is ever re-dimensioned.
+        """
+        d = mujoco.MjData(model)
+        qs = np.linspace(self.lo[-1], self.hi[-1], 40)
+        seps = []
+        for q in qs:
+            mujoco.mj_resetDataKeyframe(model, d, 0)
+            d.qpos[self.grip_q] = q
+            mujoco.mj_kinematics(model, d)
+            f = np.mean([d.geom_xpos[g] for g in self.fixed], axis=0)
+            m = np.mean([d.geom_xpos[g] for g in self.moving], axis=0)
+            seps.append(float(np.linalg.norm(m - f)))
+        self._cal_q, self._cal_sep = qs, np.array(seps)
+
+    def q_for_sep(self, sep_m: float) -> float:
+        """Joint command whose jaw separation is ``sep_m`` (clamped to range)."""
+        return float(np.interp(sep_m, self._cal_sep, self._cal_q))
+
+    def sep_for_q(self, q: float) -> float:
+        return float(np.interp(q, self._cal_q, self._cal_sep))
+
+    def tip_mid(self, model, data) -> np.ndarray:
+        """World point midway between the two jaw faces."""
+        f = np.mean([data.geom_xpos[g] for g in self.fixed], axis=0)
+        m = np.mean([data.geom_xpos[g] for g in self.moving], axis=0)
+        return (f + m) / 2.0
+
+    def jaw_axis(self, model, data) -> np.ndarray:
+        f = np.mean([data.geom_xpos[g] for g in self.fixed], axis=0)
+        m = np.mean([data.geom_xpos[g] for g in self.moving], axis=0)
+        v = m - f
+        return v / max(float(np.linalg.norm(v)), 1e-9)
+
+    def approach_axis(self, data) -> np.ndarray:
+        """The wrist_roll axis: the one direction wrist_roll cannot turn."""
+        return data.site_xmat[self.site].reshape(3, 3)[:, 0]
+
+
+def align_roll(model, data, grip: Gripper, want: np.ndarray) -> None:
+    """Turn ``wrist_roll`` so the jaws close along ``want`` as nearly as they can.
+
+    The jaw axis is a line, not an arrow, so the half-turn that costs less
+    travel is taken; if the joint limit rules it out the other one is used.
+    """
+    a = grip.approach_axis(data)
+    w = want - float(want @ a) * a
+    n = float(np.linalg.norm(w))
+    if n < 1e-6:                       # asked for the one direction we cannot make
+        return
+    w /= n
+    j = grip.jaw_axis(model, data)
+    u = j - float(j @ a) * a
+    if float(np.linalg.norm(u)) < 1e-6:
+        return
+    u /= np.linalg.norm(u)
+    v = np.cross(a, u)
+    d = float(np.arctan2(w @ v, w @ u))
+
+    lo, hi = model.jnt_range[mujoco.mj_name2id(
+        model, mujoco.mjtObj.mjOBJ_JOINT, grip.prefix + "wrist_roll")]
+    cur = float(data.qpos[grip.roll_q])
+    for cand in sorted((d, d + np.pi, d - np.pi), key=abs):
+        if lo <= cur + cand <= hi:
+            data.qpos[grip.roll_q] = cur + cand
+            mujoco.mj_kinematics(model, data)
+            mujoco.mj_comPos(model, data)
+            return
+
+
+def plan_pose(model, scratch, grip: Gripper, tip_target: np.ndarray, *,
+              jaw_dir: np.ndarray | None = None, opening: float | None = None,
+              rounds: int = 6) -> tuple[np.ndarray, float]:
+    """Joint targets putting the JAW MEETING POINT on ``tip_target``.
+
+    ``scratch`` must already hold the pose to start from; it is modified.
+    Returns the six actuator targets and the residual tip error in metres.
+    """
+    if opening is not None:
+        scratch.qpos[grip.grip_q] = opening
+    mujoco.mj_kinematics(model, scratch)
+    mujoco.mj_comPos(model, scratch)
+
+    best_err = np.inf
+    best = scratch.qpos[grip.qadr].copy()
+    # Seeded from where the arm is now; on failure, re-seeded from the home
+    # pose, because a contorted hand-off pose is a bad start for the DLS solver
+    # and that -- not reach -- was what lost the cutlery placements.
+    for attempt in range(2):
+        if attempt == 1:
+            if best_err < 8e-3:
+                break
+            mujoco.mj_resetDataKeyframe(model, scratch, 0)
+            if opening is not None:
+                scratch.qpos[grip.grip_q] = opening
+            mujoco.mj_kinematics(model, scratch)
+            mujoco.mj_comPos(model, scratch)
+        offset = np.zeros(3)
+        for _ in range(rounds):
+            if jaw_dir is not None:
+                align_roll(model, scratch, grip, jaw_dir)
+            site_ik(model, scratch, grip.prefix, "gripperframe", tip_target + offset)
+            mujoco.mj_kinematics(model, scratch)
+            mujoco.mj_comPos(model, scratch)
+            resid = tip_target - grip.tip_mid(model, scratch)
+            err = float(np.linalg.norm(resid))
+            if err < best_err:
+                best_err, best = err, scratch.qpos[grip.qadr].copy()
+            if err < 2e-3:
+                break
+            offset = offset + resid
+    return best, best_err
+
+
+# ------------------------------------------------------------------- primitives
+class Move:
+    """One arm going somewhere, with the target resolved when the move starts.
+
+    ``where`` is called with (model, data) so a waypoint can be read off the
+    object's *current* pose rather than a number baked in at authoring time.
+    """
+
+    def __init__(self, arm: str, where, *, jaw=None, opening=None,
+                 grip=None, plan_at=None, label=""):
+        self.arm, self.where, self.jaw = arm, where, jaw
+        self.opening, self.grip, self.label = opening, grip, label
+        # The jaws meet ~41 mm nearer the wrist closed than open, so a pose
+        # solved with them open puts the object in front of the closing point
+        # and the grasp brushes past it.  ``plan_at`` solves the arm at the
+        # opening the jaws will HOLD at, and commands them open to get there.
+        self.plan_at = plan_at
+
+
+class Grip(Move):
+    """Close or open one gripper without moving the arm."""
+
+    def __init__(self, arm: str, value: float, label=""):
+        super().__init__(arm, None, grip=value, label=label)
+
+
+class Home(Move):
+    """Back to the keyframe pose -- a known configuration to re-plan from."""
+
+    def __init__(self, arm: str, label=""):
+        super().__init__(arm, None, label=label)
+
+
+# ------------------------------------------------------------------ the script
+def _site(model, name):
+    return mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_SITE, name)
+
+
+def _body(model, name):
+    return mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, name)
+
+
+_GRIP_CACHE: dict = {}
+
+
+def _grip(model, arm: str) -> "Gripper":
+    key = (id(model), arm)
+    if key not in _GRIP_CACHE:
+        _GRIP_CACHE[key] = Gripper(model, arm)
+    return _GRIP_CACHE[key]
+
+
+def tip_up(arm: str, dz: float):
+    """Straight up from wherever this arm's jaws are now.
+
+    Long transits are broken by one of these because the SO-101's own links --
+    not its gripper -- will otherwise sweep the drawer shut on the way past,
+    which costs the sub-goal that was already earned.
+    """
+    def f(model, data):
+        return _grip(model, arm).tip_mid(model, data) + np.array([0.0, 0.0, dz])
+    return f
+
+
+def site_xyz(name, dz=0.0, dy=0.0, dx=0.0, off=None):
+    d = np.array([dx, dy, dz]) if off is None else np.asarray(off, float)
+
+    def f(model, data):
+        return data.site_xpos[_site(model, name)] + d
+    return f
+
+
+def long_axis(body: str):
+    """Horizontal direction of a cutlery body's own +y (its handle-to-head line)."""
+    def f(model, data):
+        R = data.xmat[_body(model, body)].reshape(3, 3)
+        v = R[:, 1].copy()
+        v[2] = 0.0
+        n = float(np.linalg.norm(v))
+        return v / n if n > 1e-6 else np.array([1.0, 0.0, 0.0])
+    return f
+
+
+def across(body: str):
+    """Perpendicular to that: where the jaws must close to pinch the handle."""
+    def f(model, data):
+        v = long_axis(body)(model, data)
+        return np.array([-v[1], v[0], 0.0])
+    return f
+
+
+ARM_BASE = {"left": np.array([-dt_ARM_X, dt_ARM_Y]),
+            "right": np.array([dt_ARM_X, dt_ARM_Y])}
+
+
+def _rim_radius(model, body: str) -> float:
+    """Distance from a plate's centre to its rim geoms."""
+    gid = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_GEOM, f"{body}_rim_0")
+    return float(np.linalg.norm(model.geom_pos[gid][:2]))
+
+
+def _rim_dir(model, data, body: str, arm: str) -> np.ndarray:
+    c = data.xpos[_body(model, body)][:2]
+    v = ARM_BASE[arm] - c
+    n = float(np.linalg.norm(v))
+    v = v / n if n > 1e-6 else np.array([1.0, 0.0])
+    return np.array([v[0], v[1], 0.0])
+
+
+def rim_toward(body: str, arm: str, dz: float = 0.006):
+    """The point on the rim nearest this arm, which is the one it can reach.
+
+    The authored ``plate_grasp`` site is fixed to the plate and spins with the
+    randomized yaw, so half the time it faces away and the arm runs out of
+    envelope reaching around.  A perception stack would pick the near rim; so
+    does this.
+    """
+    def f(model, data):
+        c = data.xpos[_body(model, body)]
+        v = _rim_dir(model, data, body, arm)
+        r = _rim_radius(model, body)
+        return np.array([c[0] + v[0] * r, c[1] + v[1] * r, c[2] + dz])
+    return f
+
+
+def rim_jaw(body: str, arm: str):
+    """Jaws close across the rim, i.e. along the radius."""
+    def f(model, data):
+        return _rim_dir(model, data, body, arm)
+    return f
+
+
+def radial(body: str, site: str):
+    """Plate rim: close across the rim, i.e. along the plate's radius."""
+    def f(model, data):
+        c = data.xpos[_body(model, body)][:2]
+        p = data.site_xpos[_site(model, site)][:2]
+        v = p - c
+        n = float(np.linalg.norm(v))
+        v = v / n if n > 1e-6 else np.array([1.0, 0.0])
+        return np.array([v[0], v[1], 0.0])
+    return f
+
+
+def geom_width(geom: str, axis: int = 0):
+    """Full extent of a named geom along one of its own axes, in metres.
+
+    Object sizes are randomized per episode, so every grip command is derived
+    from the geometry in front of the arm rather than from a constant.
+    """
+    def f(model, data, grip=None):
+        gid = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_GEOM, geom)
+        return 2.0 * float(model.geom_size[gid][axis])
+    return f
+
+
+def pinch(width_fn, squeeze: float = 0.005, floor: float = 0.004):
+    """Close to ``squeeze`` metres narrower than the thing being held.
+
+    Commanding the jaws hard shut on a 60 mm mug just shoves it away -- the
+    servos are force-limited at 2.94 Nm -- so the command is set from the
+    measured width and the calibration table instead.
+    """
+    def f(model, data, grip):
+        w = width_fn(model, data, grip)
+        return grip.q_for_sep(max(w - squeeze, floor))
+    return f
+
+
+HORIZ = np.array([0.0, 0.0, 1.0])          # jaws closing top-to-bottom
+X_AXIS = np.array([1.0, 0.0, 0.0])
+
+
+def dinner_table_script() -> list[tuple[dict, float]]:
+    """The rollout, as (moves-for-this-step, seconds) pairs.
+
+    Read against the task instruction: open the drawer, lay the fork and the
+    spoon either side of the setting, put the plate on the mat, set the mug to
+    its right.  Each cutlery item starts on the far side of the table from its
+    target, so each is handed between the arms rather than carried around.
+    """
+    S: list[tuple[dict, float]] = []
+
+    def step(seconds=1.2, **moves):
+        S.append((moves, seconds))
+
+    # --- 1. the right arm opens the drawer -----------------------------------
+    S.extend(_open_drawer())
+
+    # --- 2. fork: right picks it out of the drawer, hands it to the left ------
+    fork_grip = pinch(geom_width("fork_handle", 0))
+    S.extend(_pick(("right", "fork", "fork_grasp", fork_grip, across("fork")),
+                   open_to=GRIPPER_NARROW, descend_z=0.003,
+                   approach=(0.0, 0.0, 0.075), lift=(0.0, 0.0, 0.085)))
+    S.extend(_handoff("right", "left", "fork", "target_fork", across("fork"),
+                      hold=fork_grip))
+
+    # --- 3. spoon: the mirror image, left to right ----------------------------
+    spoon_grip = pinch(geom_width("spoon_handle", 0))
+    S.extend(_pick(("left", "spoon", "spoon_grasp", spoon_grip, across("spoon")),
+                   open_to=GRIPPER_NARROW, descend_z=0.003,
+                   approach=(0.0, 0.0, 0.075), lift=(0.0, 0.0, 0.085)))
+    S.extend(_handoff("left", "right", "spoon", "target_spoon", across("spoon"),
+                      hold=spoon_grip))
+
+    # --- 4. plate: one arm, rim grasp, straight to the mat --------------------
+    plate_grip = pinch(geom_width("plate_rim_0", 0), squeeze=0.004)
+    S.extend(_pick(("right", "plate", rim_toward("plate", "right"), plate_grip,
+                    rim_jaw("plate", "right")), lift=(0, 0, 0.055),
+                   approach=(0, 0, 0.055), descend_z=0.0))
+    S.extend(_place("right", "target_plate", plate_grip,
+                    rim_jaw("plate", "right"), drop_z=0.030, over_z=0.065))
+
+    # --- 5. mug: the left arm sets it down to the right of the plate ----------
+    mug_grip = pinch(geom_width("mug_wall", 0), squeeze=0.014)
+    S.extend(_pick(("left", "mug", "mug_grasp", mug_grip, X_AXIS),
+                   open_to=GRIPPER_WIDE, lift=(0, 0, 0.060),
+                   approach=(0, 0, 0.060), descend_z=-0.004))
+    S.extend(_place("left", "target_mug", mug_grip, X_AXIS, drop_z=0.045,
+                    over_z=0.065, open_to=GRIPPER_WIDE))
+
+    # --- 6. look back at the drawer ------------------------------------------
+    S.append(("if", _drawer_shut,
+              _open_drawer(suffix="_again", from_home=True)))
+    return S
+
+
+DRAWER_OPEN_M = 0.060          # mirrors envs/task.py; not imported, so that
+                               # the controller cannot drift into the scorer
+
+
+def _drawer_shut(model, data) -> bool:
+    adr = model.jnt_qposadr[mujoco.mj_name2id(
+        model, mujoco.mjtObj.mjOBJ_JOINT, "drawer_slide")]
+    return float(data.qpos[adr]) < DRAWER_OPEN_M + 0.005
+
+
+def _open_drawer(suffix: str = "", from_home: bool = False):
+    """Grasp the handle and pull. Also the recovery block, hence a function."""
+    pre = ([({"right": Home("right", label="drawer_home" + suffix),
+              "left": Home("left", label="clear_home" + suffix)}, 1.6)]
+           if from_home else [])
+    return pre + [
+        ({"right": Move("right", site_xyz("drawer_handle_site", dy=-0.075, dz=0.045),
+                        jaw=HORIZ, opening=GRIPPER_OPEN,
+                        label="drawer_approach" + suffix)}, 1.4),
+        ({"right": Move("right", site_xyz("drawer_handle_site", dy=-0.004),
+                        jaw=HORIZ, opening=GRIPPER_OPEN,
+                        label="drawer_straddle" + suffix)}, 1.2),
+        ({"right": Grip("right", GRIP_PINCH, label="drawer_close" + suffix)}, 0.7),
+        ({"right": Move("right", site_xyz("drawer_handle_site", dy=-0.088),
+                        jaw=HORIZ, label="drawer_pull" + suffix)}, 3.4),
+        ({"right": Grip("right", GRIPPER_OPEN, label="drawer_release" + suffix)}, 0.5),
+        ({"right": Move("right", tip_up("right", 0.090), opening=GRIPPER_OPEN,
+                        label="drawer_retreat" + suffix)}, 1.0),
+    ]
+
+
+def _pick(spec, *, lift=(0.0, 0.0, 0.070), approach=(0.0, 0.0, 0.070),
+          open_to=GRIPPER_OPEN, descend_z=0.002):
+    """Approach, descend, close, lift.
+
+    ``approach`` and ``lift`` are vectors, not heights, because the cutlery
+    starts under the cabinet's own top panel: straight down onto it is a
+    collision, and the arm has to come in over the open drawer front instead.
+    """
+    arm, body, site, close_to, jaw = spec
+    at = site if callable(site) else None
+
+    def point(off):
+        d = np.asarray(off, float)
+        if at is None:
+            return site_xyz(site, off=d)
+        return lambda model, data: at(model, data) + d
+
+    out = []
+    # The approach pose is solved with the jaws where they will be OPEN: it is
+    # only a via point, and solving it closed costs 40 mm of reach the arm
+    # does not have at the far corners of the table.
+    out.append(({arm: Move(arm, point(approach), jaw=jaw,
+                           opening=open_to, label=f"{body}_above")}, 1.5))
+    out.append(({arm: Move(arm, point((0.0, 0.0, descend_z)), jaw=jaw,
+                           opening=open_to, plan_at=close_to,
+                           label=f"{body}_descend")}, 1.2))
+    out.append(({arm: Grip(arm, close_to, label=f"{body}_close")}, 0.8))
+    out.append(({arm: Move(arm, point(lift), jaw=jaw,
+                           label=f"{body}_lift")}, 1.2))
+    return out
+
+
+def _place(arm, target, hold, jaw, *, drop_z=0.030, over_z=0.090,
+           open_to=GRIPPER_OPEN):
+    return [
+        ({arm: Move(arm, site_xyz(target, dz=over_z), jaw=jaw, label=f"{target}_over")}, 1.5),
+        ({arm: Move(arm, site_xyz(target, dz=drop_z), jaw=jaw, label=f"{target}_down")}, 1.2),
+        ({arm: Grip(arm, open_to, label=f"{target}_release")}, 0.6),
+        ({arm: Move(arm, site_xyz(target, dz=0.110), opening=open_to,
+                    label=f"{target}_retreat")}, 1.1),
+    ]
+
+
+def _handoff(giver, taker, body, target, jaw, *, hold=GRIP_PINCH):
+    """Giver holds the object over the shared zone; taker grasps and places it.
+
+    The taker closes before the giver opens, so the object is held by both arms
+    for a moment -- that overlap is what ``TaskMonitor`` records as a hand-off.
+    """
+    grasp = f"{body}_grasp"
+    return [
+        # giver presents it; taker comes in from above at the same time
+        ({giver: Move(giver, site_xyz("handoff", dz=0.030), jaw=jaw,
+                      label=f"{body}_present"),
+          taker: Move(taker, site_xyz("handoff", dz=0.115), jaw=jaw,
+                      opening=GRIPPER_OPEN, label=f"{body}_meet")}, 1.8),
+        ({taker: Move(taker, site_xyz(grasp, dz=0.040), jaw=jaw,
+                      opening=GRIPPER_OPEN, plan_at=hold,
+                      label=f"{body}_take_above")}, 1.2),
+        ({taker: Move(taker, site_xyz(grasp, dz=0.004), jaw=jaw,
+                      opening=GRIPPER_OPEN, plan_at=hold,
+                      label=f"{body}_take")}, 1.0),
+        ({taker: Grip(taker, hold, label=f"{body}_taker_close")}, 0.8),
+        ({giver: Grip(giver, GRIPPER_OPEN, label=f"{body}_giver_release")}, 0.6),
+        ({giver: Move(giver, tip_up(giver, 0.085), opening=GRIPPER_OPEN,
+                      label=f"{body}_giver_clear"),
+          taker: Move(taker, site_xyz(grasp, dz=0.075), jaw=jaw,
+                      label=f"{body}_taker_lift")}, 1.5),
+    ] + _place(taker, target, hold, jaw)
+
+
+# -------------------------------------------------------------------- execution
+class Rollout:
+    """Runs a script against a live model/data, ramping actuator targets."""
+
+    def __init__(self, model: mujoco.MjModel, data: mujoco.MjData):
+        self.model, self.data = model, data
+        self.grips = {a: Gripper(model, a) for a in ARMS}
+        self.scratch = mujoco.MjData(model)
+        self.trace: list[dict] = []
+
+    def _plan(self, mv: Move) -> np.ndarray:
+        g = self.grips[mv.arm]
+        cur = self.data.ctrl[g.act].copy()
+        grip_cmd = mv.grip
+        if callable(grip_cmd):
+            grip_cmd = grip_cmd(self.model, self.data, g)
+        opening = mv.opening
+        if callable(opening):
+            opening = opening(self.model, self.data, g)
+        plan_at = mv.plan_at
+        if callable(plan_at):
+            plan_at = plan_at(self.model, self.data, g)
+        if isinstance(mv, Home):
+            self.last_err = 0.0
+            return self.model.key_ctrl[0][g.act].copy()
+        if isinstance(mv, Grip):
+            cur[-1] = grip_cmd
+            return cur
+        self.scratch.qpos[:] = self.data.qpos
+        self.scratch.qvel[:] = 0.0
+        target = np.asarray(mv.where(self.model, self.data), dtype=float)
+        jaw = mv.jaw(self.model, self.data) if callable(mv.jaw) else mv.jaw
+        q, err = plan_pose(self.model, self.scratch, g, target,
+                           jaw_dir=None if jaw is None else np.asarray(jaw, float),
+                           opening=plan_at if plan_at is not None else opening)
+        self.last_err = err
+        out = q.copy()
+        out[-1] = opening if opening is not None else cur[-1]
+        if grip_cmd is not None:
+            out[-1] = grip_cmd
+        return out
+
+    def run(self, script, monitor=None, on_step=None, settle: float = 0.35) -> dict:
+        dt = self.model.opt.timestep
+        for entry in script:
+            # A conditional block: ("if", predicate, sub-script).  Used to
+            # re-check a sub-goal at the end of the episode -- the arms work
+            # over an open drawer and can nudge it shut behind them, and a
+            # controller that never looks back leaves an action it really
+            # performed undone.
+            if isinstance(entry, tuple) and entry and entry[0] == "if":
+                _, pred, sub = entry
+                if pred(self.model, self.data):
+                    self.trace.append({"label": "recheck_fired", "arm": "-",
+                                       "t": round(float(self.data.time), 3),
+                                       "ik_err_mm": 0.0})
+                    self.run(sub, monitor=monitor, on_step=on_step, settle=settle)
+                continue
+            moves, seconds = entry
+            plans, starts = {}, {}
+            for arm, mv in moves.items():
+                self.last_err = 0.0
+                plans[arm] = np.clip(self._plan(mv), self.grips[arm].lo,
+                                     self.grips[arm].hi)
+                starts[arm] = self.data.ctrl[self.grips[arm].act].copy()
+                self.trace.append({"label": mv.label, "arm": arm,
+                                   "t": round(float(self.data.time), 3),
+                                   "ik_err_mm": round(self.last_err * 1000, 2)})
+            n = max(1, int(seconds / dt))
+            for i in range(n + int(settle / dt)):
+                a = min(1.0, (i + 1) / n)
+                a = a * a * (3 - 2 * a)                 # smoothstep
+                for arm in moves:
+                    g = self.grips[arm]
+                    self.data.ctrl[g.act] = starts[arm] + a * (plans[arm] - starts[arm])
+                mujoco.mj_step(self.model, self.data)
+                if monitor is not None:
+                    monitor.step(self.data)
+                if on_step is not None:
+                    on_step(self.data)
+        return {"moves": len(self.trace),
+                "sim_time_s": round(float(self.data.time), 3),
+                "max_ik_err_mm": round(max((t["ik_err_mm"] for t in self.trace),
+                                           default=0.0), 2),
+                "trace": self.trace}
+
+
+def run_dinner_table(model, data, monitor=None, on_step=None) -> dict:
+    return Rollout(model, data).run(dinner_table_script(), monitor=monitor,
+                                    on_step=on_step)
