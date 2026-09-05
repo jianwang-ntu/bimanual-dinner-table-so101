@@ -1,0 +1,122 @@
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+/data/wj/wj_code/dl_hackathon/devpost_dirs/workspaces/ai-infra-summit-hackathon/build/envs/randomize.py:153: UserWarning: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+  model = spec.compile()
+/data/wj/wj_code/dl_hackathon/devpost_dirs/workspaces/ai-infra-summit-hackathon/build/envs/randomize.py:157: UserWarning: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+  model = spec.compile()
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+WARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'
+timestep: parent has 0.002 (default), child has 0.005, keeping parent value
+iterations: parent has 100 (default), child has 10, keeping parent value
+ls_iterations: parent has 50 (default), child has 20, keeping parent value
+
+seed  0  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=0/5
+seed  1  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=0/5
+seed  2  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=0/5
+seed  3  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=0/5
+seed  4  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=0/5
+seed  5  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=0/5
+seed  6  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=0/5
+seed  7  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=0/5
+seed  8  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=0/5
+seed  9  on_table=True  reachable=True  no_penetration=True  stable=True  subgoals=0/5
+
+10 seeds: all valid and stable -> evidence/eval_seeds.json

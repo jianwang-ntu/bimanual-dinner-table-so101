@@ -1,0 +1,13 @@
+[PASS] accept_all_subgoals: {'drawer_open': True, 'fork_placed': True, 'spoon_placed': True, 'plate_placed': True, 'mug_placed': True}
+[PASS] accept_task_success: subgoals_met=5/5, in_order_prefix=5
+[PASS] reject_fork_placed_displaced: fork_placed=False, every other subgoal still true=True
+[PASS] reject_spoon_placed_displaced: spoon_placed=False, every other subgoal still true=True
+[PASS] reject_plate_placed_displaced: plate_placed=False, every other subgoal still true=True
+[PASS] reject_mug_placed_displaced: mug_placed=False, every other subgoal still true=True
+[PASS] reject_drawer_half_open: travel=0.040 m < threshold 0.06 m
+[PASS] reject_mug_tipped_over: mug at the target but rotated 90 degrees
+[PASS] reject_plate_on_the_floor: dropped=['plate']
+[PASS] handoff_detector_fires: touched=[{'left': ['left']}, {'right': ['left', 'right']}], handoffs=[{'object': 'fork', 'from': 'left', 'to': 'right', 't': 0.0}]
+[PASS] reject_single_arm_is_not_a_handoff: touched=['left'], handoffs=[]
+
+ALL CONTROLS PASS (11/11)

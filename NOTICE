@@ -1,0 +1,12 @@
+Third-party components redistributed in this repository
+=======================================================
+
+third_party/robotstudio_so101/
+    The Robot Studio SO-101 description (MJCF), taken from
+    google-deepmind/mujoco_menagerie, directory robotstudio_so101.
+    Licensed under the Apache License 2.0; the upstream LICENSE file is kept
+    alongside the model, unmodified.
+    Upstream derivation is described in that directory's README.md.
+
+Everything outside third_party/ is original work by the repository author and
+is offered under the MIT License in LICENSE.

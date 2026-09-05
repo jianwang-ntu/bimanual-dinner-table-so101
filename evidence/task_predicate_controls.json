@@ -1,0 +1,66 @@
+{
+ "all_pass": true,
+ "controls": [
+  {
+   "control": "accept_all_subgoals",
+   "pass": true,
+   "detail": {
+    "drawer_open": true,
+    "fork_placed": true,
+    "spoon_placed": true,
+    "plate_placed": true,
+    "mug_placed": true
+   }
+  },
+  {
+   "control": "accept_task_success",
+   "pass": true,
+   "detail": "subgoals_met=5/5, in_order_prefix=5"
+  },
+  {
+   "control": "reject_fork_placed_displaced",
+   "pass": true,
+   "detail": "fork_placed=False, every other subgoal still true=True"
+  },
+  {
+   "control": "reject_spoon_placed_displaced",
+   "pass": true,
+   "detail": "spoon_placed=False, every other subgoal still true=True"
+  },
+  {
+   "control": "reject_plate_placed_displaced",
+   "pass": true,
+   "detail": "plate_placed=False, every other subgoal still true=True"
+  },
+  {
+   "control": "reject_mug_placed_displaced",
+   "pass": true,
+   "detail": "mug_placed=False, every other subgoal still true=True"
+  },
+  {
+   "control": "reject_drawer_half_open",
+   "pass": true,
+   "detail": "travel=0.040 m < threshold 0.06 m"
+  },
+  {
+   "control": "reject_mug_tipped_over",
+   "pass": true,
+   "detail": "mug at the target but rotated 90 degrees"
+  },
+  {
+   "control": "reject_plate_on_the_floor",
+   "pass": true,
+   "detail": "dropped=['plate']"
+  },
+  {
+   "control": "handoff_detector_fires",
+   "pass": true,
+   "detail": "touched=[{'left': ['left']}, {'right': ['left', 'right']}], handoffs=[{'object': 'fork', 'from': 'left', 'to': 'right', 't': 0.0}]"
+  },
+  {
+   "control": "reject_single_arm_is_not_a_handoff",
+   "pass": true,
+   "detail": "touched=['left'], handoffs=[]"
+  }
+ ]
+}

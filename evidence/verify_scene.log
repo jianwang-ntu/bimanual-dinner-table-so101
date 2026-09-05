@@ -1,0 +1,18 @@
+[PASS] standalone_load: nq=48 nu=12 nbody=25 ngeom=133 nmesh=36
+[PASS] left_arm_actuators: 6/6 present
+[PASS] right_arm_actuators: 6/6 present
+[PASS] wrist_cameras: cameras=['scene_cam', 'front_cam', 'top_cam', 'left_wrist_cam', 'right_wrist_cam']
+[PASS] scene_cameras: 5 cameras total
+[PASS] home_keyframe: nkey=1, home id=0
+[PASS] home_pose_holds: worst joint tracking error 0.0004 rad; {'left_shoulder_pan': 0.0, 'left_shoulder_lift': -0.0, 'left_elbow_flex': 0.0004, 'left_wrist_flex': 0.0001, 'left_wrist_roll': 0.0, 'left_gripper': -0.0, 'right_shoulder_pan': -0.0, 'right_shoulder_lift': -0.0, 'right_elbow_flex': 0.0004, 'right_wrist_flex': 0.0001, 'right_wrist_roll': 0.0, 'right_gripper': -0.0}
+[PASS] no_nan: |qvel|max=0.0006
+[PASS] no_warnings: warning counters=[0, 0, 0, 0, 0, 0, 0]
+[PASS] objects_rest_on_table: {'plate': 0.755, 'mug': 0.783, 'bottle': 0.802, 'spoon': 0.7835, 'fork': 0.7835}
+[PASS] scene_quiescent: max|qvel| after 3.0 s = 0.00056 rad/s or m/s
+[PASS] drawer_travel: range=[0.000, 0.090] m (travel 0.090), commanded open reads 0.090
+[PASS] drawer_moves_cutlery: drawer y closed=0.157 open=0.070 delta=0.087 vs joint travel 0.090
+[PASS] every_object_reachable: {'plate': {'left': 0.535, 'right': 0.257}, 'mug': {'left': 0.257, 'right': 0.535}, 'bottle': {'left': 0.582, 'right': 0.177}, 'spoon': {'left': 0.332, 'right': 0.375}, 'fork': {'left': 0.375, 'right': 0.332}, 'drawer': {'left': 0.37, 'right': 0.37}}
+[PASS] handoff_zone_shared: distance from each base to the hand-off site: {'left': 0.229, 'right': 0.229}
+[PASS] offscreen_render: {'scene_cam': [1280, 720, 1], 'front_cam': [1280, 720, 1], 'top_cam': [1280, 720, 1], 'left_wrist_cam': [640, 480, 1], 'right_wrist_cam': [640, 480, 1]}
+
+ALL CHECKS PASS (16/16)
