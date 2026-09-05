@@ -132,12 +132,32 @@ def main() -> int:
           "a path that should not exist must not resolve")
 
     # --- 6. the absence ledger is not silently contradicted -----------------
+    act = load("eval_seeds_act.json")
     success = priv["task_success_count"]
     check(success == 0, "task success is still 0 in the evidence", str(success))
     check("Task success is %d of %d seeds" % (success, n) in page,
           "the page states the task-success count in its ledger")
-    check("no learned policy" in page,
-          "the page states that the repository holds no learned policy")
+    # This read `check("no learned policy" in page, ...)` until 2026-09-05,
+    # when a LeRobot ACT policy was trained and the sentence it pinned became
+    # false. A control that keeps a false sentence on the page is a control
+    # asserting the defect. What must stay on the page is the policy result
+    # and its direction, re-derived here from the evidence rather than quoted.
+    act_total = sum(act["subgoals_met_per_seed"])
+    priv_total = sum(priv["subgoals_met_per_seed"])
+    check(act_total < priv_total,
+          "the learned policy really is worse than the script in the evidence",
+          "ACT %d of 50 against scripted %d of 50" % (act_total, priv_total))
+    # The claim is looked for in the SHIPPED bytes, so it must be written
+    # without an apostrophe: html.escape turns one into &#x27; and a true
+    # sentence would be reported missing for a formatting reason.
+    check("%d of %d sub-goals against the scripted controller at %d"
+          % (act_total, 5 * n, priv_total) in page,
+          "the page states the learned policy's score and that it is the lower "
+          "of the two")
+    check("%d of %d sub-goals against the scripted controller at %d"
+          % (act_total + 1, 5 * n, priv_total) not in page,
+          "an inflated learned-policy score is not on the page "
+          "[negative control]")
     check("NOT_THE_REQUIRED_MEASUREMENT" in page,
           "the page states the OpenVINO numbers are not the required measurement")
     for word in ("Streamlit", "Replit", "Vercel"):

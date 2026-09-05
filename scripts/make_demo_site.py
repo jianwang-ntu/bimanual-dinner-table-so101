@@ -51,6 +51,7 @@ INPUTS = (
     "evidence/demo_scripted_10seeds.json",
     "evidence/video_presentation.json",
     "evidence/slides_presentation.json",
+    "evidence/eval_seeds_act.json",
 )
 
 
@@ -79,6 +80,7 @@ def collect() -> dict:
     pres = load("video_presentation.json")
     slides = load("slides_presentation.json")
     export = load("openvino_export.json")
+    act = load("eval_seeds_act.json")
 
     n_goals = len(SUBGOALS)
     conditions = []
@@ -161,8 +163,15 @@ def collect() -> dict:
             "network has no output for either object." % (placed["fork_placed"], len(episodes)),
             "The mug reaches its mat on %d of %d seeds, and on the seed it does it "
             "arrives lying on its side." % (placed["mug_placed"], len(episodes)),
-            "There is no learned policy in this repository. The controller is a "
-            "scripted IK waypoint state machine with no trained parameters.",
+            "The learned policy loses to the script. A LeRobot ACT policy "
+            "behaviour-cloned on the scripted controller's own rollouts scores "
+            "%d of %d sub-goals against the scripted controller at %d, on the "
+            "same seeds and the same scorer, with more simulator time per "
+            "episode. "
+            "Everything shown on this page is the scripted controller."
+            % (sum(act["subgoals_met_per_seed"]),
+               5 * len(act["subgoals_met_per_seed"]),
+               sum(priv["subgoals_met_per_seed"])),
             "No measurement was taken on Intel Core Ultra silicon. The OpenVINO "
             "numbers in the repository were produced on an AMD EPYC host and the "
             "bench script stamps them NOT_THE_REQUIRED_MEASUREMENT.",

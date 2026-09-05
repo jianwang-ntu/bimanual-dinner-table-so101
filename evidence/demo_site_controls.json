@@ -1,7 +1,7 @@
 {
   "schema": "demo_site_controls/v1",
-  "passed": 45,
-  "total": 45,
+  "passed": 47,
+  "total": 47,
   "all_pass": true,
   "controls": [
     {
@@ -190,7 +190,17 @@
       "detail": ""
     },
     {
-      "name": "the page states that the repository holds no learned policy",
+      "name": "the learned policy really is worse than the script in the evidence",
+      "ok": true,
+      "detail": "ACT 3 of 50 against scripted 15 of 50"
+    },
+    {
+      "name": "the page states the learned policy's score and that it is the lower of the two",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "an inflated learned-policy score is not on the page [negative control]",
       "ok": true,
       "detail": ""
     },
@@ -222,12 +232,12 @@
     {
       "name": "a fresh build is byte-identical to the shipped page",
       "ok": true,
-      "detail": "161a1b18317b vs 161a1b18317b"
+      "detail": "258d8049c867 vs 258d8049c867"
     },
     {
       "name": "evidence/demo_site.json pins the shipped bytes",
       "ok": true,
-      "detail": "161a1b18317b vs 161a1b18317b"
+      "detail": "258d8049c867 vs 258d8049c867"
     }
   ]
 }
