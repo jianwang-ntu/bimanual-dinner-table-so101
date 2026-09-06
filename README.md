@@ -89,7 +89,15 @@ rest of the row before reading anything into it:
   `in_order_prefix` is 1 on every seed — the drawer, and then the first gap.
   The plate is scored out of order, so it adds a point and no sequencing.
 - **Two of the four placements have never fired.** The fork and the spoon are
-  never picked out of the drawer. The mug is gripped and lifted on 8 seeds of
+  never picked out of the drawer — never even lifted off its floor, median peak
+  lift 0.0–0.2 mm. They fail for two *different* measured reasons: the fork has
+  a grasp pose that is collision-free and grips, and the arm never arrives at
+  it; the spoon has no such pose at all where the scene parks it. Six
+  explanations have been tested and falsified across 40 swept variants —
+  reach, jaw squaring, standoff, descent interpolation, approach direction and
+  moving the spoon — and the shipped setting is still the best of the 40. The
+  table is in `TECHNICAL_SUMMARY.md` §8a.
+  The mug is gripped and lifted on 8 seeds of
   10 and reaches its mat on **1** — the only object other than the plate this
   entry has ever placed, and it arrives lying on its side (see below).
 - The plate is not *carried*. It is hooked by its rim and dragged flat across

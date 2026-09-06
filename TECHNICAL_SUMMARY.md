@@ -440,6 +440,76 @@ Stated here in one place so no reader has to infer it:
    vision where the unoccluded splits are 19x. An object held in a gripper or
    hidden under an arm is not recoverable from a top-down frame by this model.
 
+### 8a. Why the fork and the spoon are 0 / 10
+
+Item 5 above says two of five sub-goals have never fired. This is what has been
+measured about them, because "the manipulation is hard" is not a finding.
+
+`fork_placed` and `spoon_placed` are **0 / 10 on every run this project has
+recorded** — 20 of the 50 sub-goals, and the reason `in_order_prefix` stops at 1
+on every seed, since `fork_placed` is second in `SUBGOAL_ORDER`. Both objects
+start on the floor of the drawer, whose own walls stand above them: front
++40.5 mm, left side +26.5 mm, back +26.5 mm, swept out of the compiled model.
+Every route to either object is over that lip.
+
+**It is two different faults, not one.** `scripts/measure_grasp_feasibility.py`
+solves the grasp, teleports the arm onto the solved pose and runs MuJoCo's own
+collision pass — no dynamics, no servos, so saturation and contact rejection
+cannot be the explanation:
+
+| | fork | spoon |
+|---|---|---|
+| lowest pose clearing the woodwork, 3 seeds | 6.0 / 6.0 / 6.0 mm | 58 / 22 / 44 mm |
+| jaws relative to the 5.0 mm handle top there | **3.3–3.9 mm below** | **10.4–48.4 mm above** |
+| grips at that pose | **yes** | **no** |
+| clearance crossed over both arms | 8–18 mm | 30–40 mm |
+
+So the **fork** is an execution failure against a pose that is known good, and
+the **spoon** is a geometric impossibility where the scene parks it. The cross
+over (arm, object) makes the spoon's failure a property of the object rather
+than of the arm it was given. The cause is an authored constant in
+`envs/dinner_table.py` — `('spoon', -0.032)` against `('fork', 0.018)` — which
+parks the spoon 36 mm behind `drawer_front`, the tallest of the four walls,
+while the fork sits 86 mm behind it. It is the same never-randomized constant
+section 5 records: those 20 sub-goals have been scored against one arbitrary
+draw, and that draw is an infeasible one for the spoon.
+
+**Six explanations have been tested and falsified**, across 40 swept variants.
+Every sweep runs the same ten evaluation seeds and the same unchanged scorer,
+and carries the shipped controller as one of its own variants rather than
+quoting a number from an earlier file:
+
+| # | explanation | probe | result |
+|---|---|---|---|
+| 1 | gross reach | `measure_reach.py` | refuted — the jaws reach 0.417 m of planar radius against the 0.347 / 0.387 m the cutlery needs |
+| 2 | the jaws close 64° out of horizontal | `measure_cutlery_standoff.py` | refuted — 4 squaring scopes, cutlery 0 / 10 in all |
+| 3 | the stationary jaw is planned inside the object | `measure_cutlery_standoff.py` | refuted — standoff 0 / 6 / 10 mm, 12 variants, cutlery **0 / 10 in all 12** |
+| 4 | the joint-space descent sweeps the jaws through the handle | `measure_fork_descent.py` | refuted — 16 variants, fork **0 / 10 in all 16**; and the mechanism is refuted too, since more solved poses bow the path **more**, 18.2 mm at one to 43.3 mm at eight |
+| 5 | approach along the drawer's own axis instead of straight down | `measure_cutlery_approach.py` | refuted — 8 variants, fork **0 / 10 in all 8**; the mechanism is refuted in the opposite direction to the prediction (below) |
+| 6 | move the spoon to where its pose *is* feasible | `measure_spoon_depth.py` | refuted — spoon 0 / 10 at dy = 0, +10, +20 and +30 mm |
+
+Explanation 5 is the most recent and the most instructive. Squaring the descent
+moves the wall the arm stalls on from `fork_handle` to `drawer_back`, which
+predicts that leaning the approach *out* over the open drawer front should clear
+it. It does not. Leaning out to −70 mm trades the back wall for the taller front
+one (`drawer_front`, 8,490 steps of contact) and drags the fork 80 mm across the
+drawer; and the offset that leans **into** `drawer_back`, +40 mm, produces the
+**lowest** arrival of all eight variants at 10.4 mm. Arrival height does not
+track distance from the wall the contact tally names, so that wall is not what
+limits it.
+
+**None of this is a near miss.** Across all eight approach variants the fork's
+median peak lift off the drawer floor is 0.0–0.2 mm: it is never picked up at
+all. And no variant of any of the four sweeps beats the shipped 15 / 50, so
+there is no withheld gain here — the shipped setting is the best of the 40.
+
+What that leaves is stated rather than hidden: the arm arrives roughly 7 mm
+above a 5 mm handle it has to close around, the servos are force-limited at
+2.94 Nm with three joints saturated at this reach (section 5), and no change to
+*how the arm gets there* has closed that gap in six attempts. The remaining
+candidates are changes to the scene or to the gripper rather than to the
+trajectory, and neither has been made.
+
 ## 9. Reproducing every number in this document
 
 ```bash

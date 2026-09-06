@@ -678,6 +678,16 @@ Y_AXIS = np.array([0.0, 1.0, 0.0])
 CUTLERY_DESCEND_STEPS = 1     # solved poses between ``_above`` and the grasp
 CUTLERY_DESCEND_Z = 0.003     # m above the cutlery grasp site
 CUTLERY_DESCEND_SQUARE = False   # square the descent only, never the carry
+# The approach VECTOR for the cutlery, in world metres, offset from the grasp
+# site.  ``_pick``'s own docstring says this argument is a vector "because the
+# cutlery starts under the cabinet's own top panel: straight down onto it is a
+# collision, and the arm has to come in over the open drawer front instead" --
+# and both cutlery calls have always passed a pure +z, i.e. straight down onto
+# an object lying in a box.  The drawer slides along -y (``drawer_slide``
+# axis="0 -1 0"), so -y is out over the open front and +y is into the back
+# wall.  See ``scripts/measure_cutlery_approach.py``.  The shipped value is the
+# pure +z every published figure was measured at.
+CUTLERY_APPROACH = (0.0, 0.0, 0.075)
 
 
 def dinner_table_script() -> list[tuple[dict, float]]:
@@ -702,7 +712,7 @@ def dinner_table_script() -> list[tuple[dict, float]]:
                    open_to=GRIPPER_NARROW, descend_z=CUTLERY_DESCEND_Z,
                    descend_steps=CUTLERY_DESCEND_STEPS,
                    descend_square=CUTLERY_DESCEND_SQUARE,
-                   approach=(0.0, 0.0, 0.075), lift=(0.0, 0.0, 0.085)))
+                   approach=CUTLERY_APPROACH, lift=(0.0, 0.0, 0.085)))
     S.extend(_handoff("right", "left", "fork", "target_fork", across("fork"),
                       hold=fork_grip))
 
@@ -712,7 +722,7 @@ def dinner_table_script() -> list[tuple[dict, float]]:
                    open_to=GRIPPER_NARROW, descend_z=CUTLERY_DESCEND_Z,
                    descend_steps=CUTLERY_DESCEND_STEPS,
                    descend_square=CUTLERY_DESCEND_SQUARE,
-                   approach=(0.0, 0.0, 0.075), lift=(0.0, 0.0, 0.085)))
+                   approach=CUTLERY_APPROACH, lift=(0.0, 0.0, 0.085)))
     S.extend(_handoff("left", "right", "spoon", "target_spoon", across("spoon"),
                       hold=spoon_grip))
 
