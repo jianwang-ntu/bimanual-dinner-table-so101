@@ -9,11 +9,24 @@ README.md and TECHNICAL_SUMMARY.md both describe the `state` stage as varying
 so the fork and the spoon start at the same place, at the same yaw, on every
 seed.  Their SHAPE and MASS are randomized; their POSE is not.
 
+Amended 2026-09-08.  `envs/randomize.py::randomize_cutlery` now exists and can
+place the cutlery, and `scripts/measure_cutlery_placement.py` measured what
+turning it on costs: 15/50 sub-goals fall to 13/50 at full spread.  It ships
+OFF -- `CUTLERY_PLACE_SPREAD = 0.0` -- so the sentence above is still true of
+what runs, but it is now true because of a constant rather than because of an
+absent capability, and a suite that did not read that constant would go on
+passing while the shipped scene changed underneath it.
+
 Each mechanism is driven from both sides, because a check that can only pass
 proves nothing:
 
   coverage   ACCEPT the randomizer's own tables say three of five graspables
              are placement-randomized; REJECT a patched table that covers four
+  switch     ACCEPT the cutlery randomizer that exists as of 2026-09-08 is
+             OFF -- CUTLERY_PLACE_SPREAD is 0.0 -- because that is the only
+             reason the coverage claim above is still true; REJECT a source
+             in which it has been left switched on, which would make every
+             published figure a figure of a scene the code no longer builds
   evidence   ACCEPT the shipped 10-seed run shows zero variation in the fork's
              and the spoon's distance to the nearest arm, and non-zero
              variation for the plate, the mug and the bottle; REJECT a run in
@@ -65,9 +78,26 @@ def tables(source: str) -> tuple[set, set]:
         if not isinstance(node, ast.Assign):
             continue
         for t in node.targets:
-            if isinstance(t, ast.Name) and t.id in ("GRASPABLES", "NOMINAL_XY"):
+            if isinstance(t, ast.Name) and t.id in (
+                    "GRASPABLES", "NOMINAL_XY", "CUTLERY",
+                    "CUTLERY_PLACE_SPREAD", "CUTLERY_SEAT_XY",
+                    "CUTLERY_SPLAY_X"):
                 got[t.id] = ast.literal_eval(node.value)
-    return set(got["GRASPABLES"]), set(got["NOMINAL_XY"])
+    return set(got["GRASPABLES"]), set(got["NOMINAL_XY"]), got
+
+
+def scene_switches(got: dict) -> dict:
+    """The three constants that decide where the cutlery actually starts."""
+    return {"CUTLERY_PLACE_SPREAD": got.get("CUTLERY_PLACE_SPREAD"),
+            "CUTLERY_SEAT_XY": got.get("CUTLERY_SEAT_XY"),
+            "CUTLERY_SPLAY_X": got.get("CUTLERY_SPLAY_X")}
+
+
+def switches_are_off(got: dict) -> bool:
+    sw = scene_switches(got)
+    return (sw["CUTLERY_PLACE_SPREAD"] == 0.0
+            and tuple(sw["CUTLERY_SEAT_XY"] or (0.0, 0.0)) == (0.0, 0.0)
+            and sw["CUTLERY_SPLAY_X"] == 0.0)
 
 
 # ------------------------------------------------------------- the evidence
@@ -124,7 +154,7 @@ def doc_states_restriction(text: str, fixed: set) -> bool:
 def main() -> int:
     ok = True
     src = RANDOMIZER.read_text(encoding="utf-8")
-    graspables, placed = tables(src)
+    graspables, placed, consts = tables(src)
     fixed = graspables - placed
 
     print("coverage")
@@ -134,11 +164,34 @@ def main() -> int:
                 f"never placement-randomized={sorted(fixed)}")
 
     patched = re.sub(r"NOMINAL_XY = \{", 'NOMINAL_XY = {\n    "spoon": (0.0, 0.128),', src, count=1)
-    g2, p2 = tables(patched)
+    g2, p2, _ = tables(patched)
     ok &= check("reject_a_table_that_covered_four",
                 not (len(p2) == 3 and (g2 - p2) == {"fork", "spoon"}),
                 f"with the spoon added the same reader sees {sorted(p2)}, so the "
                 "control fails -- it is reading the table, not a constant")
+
+    ok &= check("cutlery_randomizer_exists_and_ships_off",
+                "CUTLERY" in consts and switches_are_off(consts),
+                f"randomize_cutlery covers {sorted(consts.get('CUTLERY', ()))} "
+                f"and every switch is off: {scene_switches(consts)} -- which "
+                "is WHY the claim above still holds")
+    on = re.sub(r"^CUTLERY_PLACE_SPREAD = 0\.0$", "CUTLERY_PLACE_SPREAD = 1.0",
+                src, count=1, flags=re.M)
+    _, _, c_on = tables(on)
+    ok &= check("reject_a_randomizer_left_switched_on",
+                c_on.get("CUTLERY_PLACE_SPREAD") == 1.0
+                and not switches_are_off(c_on),
+                "with CUTLERY_PLACE_SPREAD = 1.0 the same reader sees "
+                f"{scene_switches(c_on)} and the control fails -- so it is "
+                "reading the constant, not asserting a constant")
+    seated = re.sub(r"^CUTLERY_SEAT_XY = \(0\.0, 0\.0\)$",
+                    "CUTLERY_SEAT_XY = (0.0, -0.02)", src, count=1, flags=re.M)
+    _, _, c_seat = tables(seated)
+    ok &= check("reject_a_scene_seated_somewhere_else",
+                not switches_are_off(c_seat),
+                "a -20 mm seat offset is caught by the same reader "
+                f"({scene_switches(c_seat)}) -- the seat moves the scene "
+                "without touching NOMINAL_XY, so the table alone cannot see it")
 
     print("\nevidence")
     run = json.loads(RUN.read_text(encoding="utf-8"))
@@ -210,6 +263,8 @@ def main() -> int:
                     "graspables": sorted(graspables),
                     "placement_randomized": sorted(placed),
                     "never_placement_randomized": sorted(fixed),
+                    "scene_switches": scene_switches(consts),
+                    "cutlery_randomizer": sorted(consts.get("CUTLERY", ())),
                     "seeds": n,
                     "controls": results}, indent=1, ensure_ascii=False),
         encoding="utf-8")

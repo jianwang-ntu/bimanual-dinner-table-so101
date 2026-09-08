@@ -183,11 +183,23 @@ ten-seed total went from 16/50 to **15/50**. The plate is hooked
 by its rim and dragged flat, not picked and placed: it is 92–116 mm across
 against a 101 mm jaw span, so no jaw opening both clears it and closes on it.
 
-The binding physical limit is servo saturation: at a waypoint 0.297 m out,
-`shoulder_pan`, `shoulder_lift` and `elbow_flex` all sit at their ±2.94 N·m
-limit with no contact anywhere on the arm, while random joint sampling reaches
-0.46 m. IK returns poses the arm never reaches. That is a property of the robot
-and it is unfixed.
+One binding physical limit is servo saturation in free space: at a waypoint
+0.297 m out, `shoulder_pan`, `shoulder_lift` and `elbow_flex` all sit at their
+±2.94 N·m limit with no contact anywhere on the arm, while random joint
+sampling reaches 0.46 m. IK returns poses the arm never reaches. That is a
+property of the robot and it is unfixed. It is why the plate is dragged rather
+than carried.
+
+**Corrected 2026-09-08, against us.** That measurement is a free-space one and
+this document used to extend it to the cutlery descent as well. It does not
+carry there. `scripts/measure_descent_tracking.py`, ten seeds, read at the last
+step of each hold: at the approach via-points — same arms, comparable reach,
+nothing under the jaws — the tip lands **1.0 and 1.4 mm** from the asked point
+with **zero** joints saturated. At the descend waypoints 100 mm lower it lands
+**24.7 and 53.8 mm** away with **one and two** joints saturated, in contact on
+**10 of 10** seeds, and the saturating joint's own gravity term is
+**0.48 of 2.94 N·m**. The arm is not failing to hold itself up at that reach;
+it is pushing into the drawer at full torque and stopping. See section 8b.
 
 ## 4. Training approach
 
@@ -504,11 +516,62 @@ all. And no variant of any of the four sweeps beats the shipped 15 / 50, so
 there is no withheld gain here — the shipped setting is the best of the 40.
 
 What that leaves is stated rather than hidden: the arm arrives roughly 7 mm
-above a 5 mm handle it has to close around, the servos are force-limited at
-2.94 Nm with three joints saturated at this reach (section 5), and no change to
-*how the arm gets there* has closed that gap in six attempts. The remaining
-candidates are changes to the scene or to the gripper rather than to the
-trajectory, and neither has been made.
+above a 5 mm handle it has to close around, and no change to *how the arm gets
+there* has closed that gap in six attempts. The remaining candidates were
+changes to the scene or to the gripper rather than to the trajectory. **The
+scene one has now been made, and it is refuted too — section 8a.** The gripper
+one has not been made.
+
+This paragraph used to end "the servos are force-limited at 2.94 Nm with three
+joints saturated at this reach (section 5)". That attribution is withdrawn: it
+was section 5's free-space measurement applied to a waypoint nobody had
+measured, and when measured it is one or two joints, saturated against a
+contact rather than against the reach. Section 5 carries the correction.
+
+## 8a. The scene route, tested and refuted — and what the residual really is
+
+`scripts/measure_cutlery_seat.py`, 36 cells × 10 seeds = **360 rollouts**. The
+cutlery had sat at one seat on every rollout this project has ever run, so the
+six refuted routes had all moved the arm around a fixed object. This moves the
+object. Two mechanisms already measured here point the same way: seating the
+cutlery toward the drawer's open front shortens both arms' reach *and* lifts
+the fork out of the back-wall pocket the contact tally names.
+
+Over the **16 cells whose scene is legal** — the cutlery not started inside a
+wall, tested by MuJoCo's own contact pass at the same −2 mm tolerance
+`eval_seeds.py` uses — the fork's reach was swept **360.0 to 399.1 mm**, and:
+
+| | |
+|---|---|
+| `fork_placed` | **0/10 in all 16** |
+| `spoon_placed` | **0/10 in all 16** |
+| fork stall, unsquared, closest cell (360.0 mm) | 27.3 mm |
+| fork stall, unsquared, lowest of the 16 | 22.6 mm — at **376.7 mm**, 16.7 mm *further out* |
+| best arrival anywhere in the grid (squared, seat −20 mm) | **9.6 mm**, the closest this project has recorded — and still 0/10 |
+
+The stall does not track the reach. Twenty further cells reached down to
+338.4 mm but start the cutlery up to 10.86 mm inside the drawer's woodwork, so
+the legal span is bounded by the drawer and not by the sweep. **One of those
+illegal cells did register a placed spoon**; it is reported here rather than in
+a headline because a spoon that starts inside the drawer front is not a grasp,
+and `scripts/test_cutlery_placement.py` has a control that fails if any
+placement in the grid ever comes from a legal cell.
+
+`scripts/measure_descent_tracking.py` then decomposes the residual, ten seeds:
+
+| waypoint | IK residual | tip miss | joints ≥99% saturated | in contact |
+|---|---|---|---|---|
+| `fork_above` | 3.2 mm | **1.0 mm** | **0** | 0/10 |
+| `spoon_above` | 1.7 mm | **1.4 mm** | **0** | 3/10 |
+| `fork_descend` | 3.9 mm | **24.7 mm** | 1 | 10/10 |
+| `spoon_descend` | 2.9 mm | **53.8 mm** | 2 | 10/10 |
+
+The solver finds the pose to about 3 mm and the arm reaches it to about 1 mm
+when nothing is under the jaws. It misses by 25–54 mm only where it is touching
+the drawer, with `shoulder_lift` at 100% of ±2.94 N·m, its own gravity term at
+0.48 N·m, and |qvel| under 0.3 mrad/s — stopped, not still settling. That is a
+wedge, not a droop, and it is why seven routes that moved *where* the arm goes
+all changed nothing.
 
 ## 9. Reproducing every number in this document
 

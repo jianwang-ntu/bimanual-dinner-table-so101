@@ -70,7 +70,12 @@ three reasons were measured, not guessed, and two of them are fixed here.
    kinematic limit — random joint sampling reaches 0.46 m — so IK reports a
    solved pose and the arm simply never gets there. It is why the plate is
    dragged rather than carried, and it is unfixed: it is a property of the
-   robot, not of the code.
+   robot, not of the code. **Corrected 2026-09-08:** that is a free-space
+   measurement and it does *not* explain the cutlery stall, which this document
+   used to attribute to it. At the approach via-points the same arms land
+   1.0–1.4 mm from the asked point with zero joints saturated; 100 mm lower, in
+   contact on every seed, they miss by 24.7–53.8 mm. See TECHNICAL_SUMMARY.md
+   section 8a.
 
 ### What the controller actually does, measured
 

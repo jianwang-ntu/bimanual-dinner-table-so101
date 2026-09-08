@@ -1,0 +1,201 @@
+{
+ "all_pass": true,
+ "controls": [
+  {
+   "control": "switches_ship_off",
+   "pass": true,
+   "detail": "{'CUTLERY_PLACE_SPREAD': 0.0, 'CUTLERY_SEAT_XY': (0.0, 0.0), 'CUTLERY_SPLAY_X': 0.0} -- so the shipped scene is the one every figure was measured in"
+  },
+  {
+   "control": "reject_a_switch_left_on",
+   "pass": true,
+   "detail": "a 20 mm splay left in the source is read back, so the check above is reading the file and not asserting a literal"
+  },
+  {
+   "control": "draws_are_rejected_by_the_contact_pass",
+   "pass": true,
+   "detail": "randomize_cutlery calls mj_forward and tests _penetrates against PENETRATION_TOL_M"
+  },
+  {
+   "control": "reject_a_randomizer_that_never_checks",
+   "pass": true,
+   "detail": "the check fails BOTH when the guard is replaced by `if True:` and when the penetration is never computed -- neither edit removes the identifier from the file, which is why this reads the syntax tree and not the text"
+  },
+  {
+   "control": "default_reproduces_the_published_tally",
+   "pass": true,
+   "detail": "at spread 0.0: {'drawer_open': 10, 'fork_placed': 0, 'spoon_placed': 0, 'plate_placed': 4, 'mug_placed': 1} = 15/50, which is what every artifact in the repository quotes"
+  },
+  {
+   "control": "reject_a_baseline_that_drifted",
+   "pass": true,
+   "detail": "moving the baseline's plate to 6/10 -- the figure T1's prose still carried -- fails the same comparison"
+  },
+  {
+   "control": "spread_zero_really_is_zero",
+   "pass": true,
+   "detail": "fork and spoon start at one pose on all 10 seeds"
+  },
+  {
+   "control": "spread_one_really_moves",
+   "pass": true,
+   "detail": "spread 0.5: fork y 14.9 mm, spoon y 14.5 mm; spread 1.0: fork y 26.9 mm, spoon y 29.1 mm -- a randomizer that rejected every draw would read as a null result instead of a broken one"
+  },
+  {
+   "control": "reject_a_sweep_that_never_moved_anything",
+   "pass": true,
+   "detail": "flattening every variant's spread to zero fails the check above"
+  },
+  {
+   "control": "plate_mug_bottle_drawer_are_untouched",
+   "pass": true,
+   "detail": "all 30 runs across 3 spreads agree with the baseline seed-for-seed on every non-cutlery draw -- so a change in the score is attributable to the cutlery"
+  },
+  {
+   "control": "reject_a_reshuffled_random_stream",
+   "pass": true,
+   "detail": "moving one seed's drawer_slide in one arm is caught, so the check above can fail"
+  },
+  {
+   "control": "the_cost_of_switching_on_is_measured",
+   "pass": true,
+   "detail": "full spread scores 13/50 against 15/50 -- switching the randomizer on costs 2 sub-goals, and that is the number the record quotes"
+  },
+  {
+   "control": "cutlery_is_still_never_placed",
+   "pass": true,
+   "detail": "fork 0/10 and spoon 0/10 at every spread -- randomizing where they start does not make them graspable"
+  },
+  {
+   "control": "probe_controls_all_pass",
+   "pass": true,
+   "detail": "{'spread_0_is_fixed': True, 'spread_1_moves': True, 'upstream_untouched': True, 'baseline_reproduces': True, 'all_runs_ok': True}"
+  },
+  {
+   "control": "seat_baseline_reproduces_the_published_tally",
+   "pass": true,
+   "detail": "the shipped seat scores {'drawer_open': 10, 'fork_placed': 0, 'spoon_placed': 0, 'plate_placed': 4, 'mug_placed': 1} -- the sweep is measuring this scene and not another one"
+  },
+  {
+   "control": "every_feasible_cell_places_no_cutlery",
+   "pass": true,
+   "detail": "16 feasible cells x 10 seeds = 160 rollouts, fork 0 and spoon 0 in all of them"
+  },
+  {
+   "control": "the_only_placement_in_the_grid_is_in_an_infeasible_cell",
+   "pass": true,
+   "detail": "seat_dy -0.038 splay 0.018 sq 1: fork 0 spoon 1 at -10.86 mm penetration"
+  },
+  {
+   "control": "reject_a_success_in_a_feasible_cell",
+   "pass": true,
+   "detail": "one placed fork in a cell whose scene is legal fails the check above, so the negative result is a measured one"
+  },
+  {
+   "control": "the_sweep_actually_moved_the_reach",
+   "pass": true,
+   "detail": "over the LEGAL cells the fork's reach swept 360.0-399.1 mm, a span of 39.1 mm toward a measured saturation line near 300 mm"
+  },
+  {
+   "control": "wider_seats_were_tried_and_are_infeasible",
+   "pass": true,
+   "detail": "20 cells reached down to 338.4 mm -- 21.6 mm closer than any legal cell -- and every one of them starts the cutlery inside a wall (worst -10.86 mm), so the legal span is bounded by the drawer and not by the sweep"
+  },
+  {
+   "control": "reject_a_sweep_that_held_the_reach_fixed",
+   "pass": true,
+   "detail": "flattening every cell's reach fails the check above"
+  },
+  {
+   "control": "the_stall_does_not_track_the_reach",
+   "pass": true,
+   "detail": "the closest unsquared cell (360.0 mm) stalls 27.3 mm, while the lowest stall (22.6 mm) is at 376.7 mm -- so the residual is not the reach-driven servo saturation the record attributed it to"
+  },
+  {
+   "control": "reject_a_stall_that_did_track_the_reach",
+   "pass": true,
+   "detail": "a synthetic stall made proportional to reach puts the same cell at both minima, and the check above would not fire"
+  },
+  {
+   "control": "squaring_lowers_the_stall_and_still_places_nothing",
+   "pass": true,
+   "detail": "median fork stall 26.2 mm unsquared against 13.5 mm squared -- the best arrival this tree has recorded, and still 0/10"
+  },
+  {
+   "control": "the_refutation_rests_only_on_legal_scenes",
+   "pass": true,
+   "detail": "16 of 36 cells clear the -2 mm tolerance eval_seeds.py uses for no_initial_penetration, and only those carry the result"
+  },
+  {
+   "control": "reject_a_grid_with_no_legal_cell_left",
+   "pass": true,
+   "detail": "burying every cell 10.86 mm into the woodwork -- the depth seat_dy -0.038 really produces -- leaves nothing to conclude from"
+  },
+  {
+   "control": "seat_probe_controls_all_pass",
+   "pass": true,
+   "detail": "{'baseline_reproduces': True, 'seat_is_applied': True, 'control_direction_did_not_help': True, 'all_runs_ok': True}"
+  },
+  {
+   "control": "the_solver_is_not_the_failure",
+   "pass": true,
+   "detail": "fork_descend: solver 3.93 mm, arm 24.66 mm; spoon_descend: solver 2.93 mm, arm 53.77 mm -- the pose is found and then not reached, which is why seven routes that moved the pose changed nothing"
+  },
+  {
+   "control": "reject_a_solver_that_never_found_the_pose",
+   "pass": true,
+   "detail": "a 30 mm IK residual would make this a solver problem and the check above would not fire"
+  },
+  {
+   "control": "only_the_waypoints_in_contact_saturate",
+   "pass": true,
+   "detail": "free via-points: [1.02, 1.38] mm off, [0.0, 0.0] joints saturated, [0, 3]/10 in contact -- against [24.66, 53.77] mm and [1.0, 2.0] joints at the grasps, in contact on every seed. The same arm at a comparable reach tracks to about a millimetre when nothing is under the jaws, so the residual is the contact and not the reach"
+  },
+  {
+   "control": "reject_a_probe_whose_control_saturates_too",
+   "pass": true,
+   "detail": "if the free via-points saturated as well, this probe would be measuring the arm's posture rather than the wall, and the check above would not fire"
+  },
+  {
+   "control": "tracking_probe_controls_all_pass",
+   "pass": true,
+   "detail": "all 8 pass, including fewer_saturated_joints_than_the_record_claims, whose bar is the record's own 'three joints'"
+  },
+  {
+   "control": "no_run_was_silently_dropped",
+   "pass": true,
+   "detail": "placement 30/30 runs complete, seat 360/360 -- a sweep that lost rollouts reads 0/10 in exactly the same way as one that ran them all"
+  },
+  {
+   "control": "reject_a_sweep_that_lost_a_rollout",
+   "pass": true,
+   "detail": "replacing one run with an error row is caught"
+  },
+  {
+   "control": "control_count_is_pinned",
+   "pass": true,
+   "detail": "35 controls, 12 of them rejects, against a pinned 35/12 -- a control that vanishes fails as loudly as one that goes red"
+  }
+ ],
+ "n_controls": 35,
+ "n_rejects": 12,
+ "pinned": {
+  "controls": 35,
+  "rejects": 12
+ },
+ "published_per_goal": {
+  "drawer_open": 10,
+  "fork_placed": 0,
+  "spoon_placed": 0,
+  "plate_placed": 4,
+  "mug_placed": 1
+ },
+ "switches": {
+  "CUTLERY_PLACE_SPREAD": 0.0,
+  "CUTLERY_SEAT_XY": [
+   0.0,
+   0.0
+  ],
+  "CUTLERY_SPLAY_X": 0.0
+ }
+}

@@ -1,0 +1,2815 @@
+{
+ "probe": "measure_descent_tracking.py",
+ "question": "Is the cutlery stall the reach-driven servo saturation the repository attributes it to, or something else?",
+ "finding_id": "F-DESCENT-TRACKING-001",
+ "corrects": "TECHNICAL_SUMMARY.md sections 5 and 8, README.md and manifest T1 defect_open, which attribute the fork descent's residual to reach-driven saturation of three joints",
+ "seeds": 10,
+ "saturation_threshold_pct": 99.0,
+ "controls": {
+  "all_seeds_ok": true,
+  "solver_found_the_pose": true,
+  "tip_misses_by_much_more_than_the_solver": true,
+  "fewer_saturated_joints_than_the_record_claims": true,
+  "the_saturating_joint_is_not_holding_gravity": true,
+  "it_has_stopped_moving": true,
+  "the_arm_is_touching_something_there": true,
+  "free_waypoints_are_not_saturated": true
+ },
+ "waypoints": {
+  "fork_descend": {
+   "n": 10,
+   "ik_err_mm_median": 3.93,
+   "dz_mm_median": 24.66,
+   "tip_err_mm_median": 30.05,
+   "saturated_joint_counts": {
+    "shoulder_lift": 10,
+    "shoulder_pan": 3,
+    "elbow_flex": 2,
+    "wrist_roll": 1
+   },
+   "saturated_joints_per_seed_median": 1.0,
+   "seeds_with_arm_contact": 10,
+   "contact_geoms": [
+    "drawer_floor",
+    "drawer_front",
+    "fork_handle"
+   ],
+   "top_saturated_joint": "shoulder_lift",
+   "top_joint": {
+    "joint": "shoulder_lift",
+    "err_mrad_median": 33.72,
+    "gravity_nm_median": 0.48,
+    "forcerange_nm": 2.94,
+    "qvel_mrad_s_median": 0.28
+   },
+   "other_joints_err_mrad_max": 755.44
+  },
+  "spoon_descend": {
+   "n": 10,
+   "ik_err_mm_median": 2.93,
+   "dz_mm_median": 53.77,
+   "tip_err_mm_median": 58.33,
+   "saturated_joint_counts": {
+    "shoulder_lift": 10,
+    "shoulder_pan": 5,
+    "elbow_flex": 4
+   },
+   "saturated_joints_per_seed_median": 2.0,
+   "seeds_with_arm_contact": 10,
+   "contact_geoms": [
+    "cab_left",
+    "drawer_floor",
+    "drawer_front",
+    "drawer_side_l",
+    "spoon_handle"
+   ],
+   "top_saturated_joint": "shoulder_lift",
+   "top_joint": {
+    "joint": "shoulder_lift",
+    "err_mrad_median": 125.91,
+    "gravity_nm_median": 0.46,
+    "forcerange_nm": 2.94,
+    "qvel_mrad_s_median": 1.15
+   },
+   "other_joints_err_mrad_max": 401.56
+  },
+  "fork_above": {
+   "n": 10,
+   "ik_err_mm_median": 3.22,
+   "dz_mm_median": 1.02,
+   "tip_err_mm_median": 3.12,
+   "saturated_joint_counts": {},
+   "saturated_joints_per_seed_median": 0.0,
+   "seeds_with_arm_contact": 0,
+   "contact_geoms": [],
+   "top_saturated_joint": null
+  },
+  "spoon_above": {
+   "n": 10,
+   "ik_err_mm_median": 1.73,
+   "dz_mm_median": 1.38,
+   "tip_err_mm_median": 2.16,
+   "saturated_joint_counts": {
+    "shoulder_lift": 1,
+    "wrist_flex": 1,
+    "shoulder_pan": 1
+   },
+   "saturated_joints_per_seed_median": 0.0,
+   "seeds_with_arm_contact": 3,
+   "contact_geoms": [
+    "cab_left",
+    "drawer_front",
+    "drawer_side_l"
+   ],
+   "top_saturated_joint": "shoulder_lift",
+   "top_joint": {
+    "joint": "shoulder_lift",
+    "err_mrad_median": -0.35,
+    "gravity_nm_median": 0.39,
+    "forcerange_nm": 2.94,
+    "qvel_mrad_s_median": 0.0
+   },
+   "other_joints_err_mrad_max": 14.7
+  }
+ },
+ "runs": [
+  {
+   "seed": 0,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "t": 12.88,
+     "ik_err_mm": 3.48,
+     "tip_err_mm": 3.39,
+     "dz_mm": 0.69,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.0,
+       "force_nm": -0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.41,
+       "force_nm": -0.409,
+       "forcerange_nm": 2.94,
+       "sat_pct": 13.9,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.409
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.44,
+       "force_nm": -0.435,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.8,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.435
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.11,
+       "force_nm": -0.11,
+       "forcerange_nm": 2.94,
+       "sat_pct": 3.7,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.11
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.01,
+       "force_nm": -0.005,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.2,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": []
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "t": 14.428,
+     "ik_err_mm": 4.8,
+     "tip_err_mm": 29.64,
+     "dz_mm": 24.14,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.02,
+       "force_nm": -0.021,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.7,
+       "qvel_mrad_s": 0.18,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 31.23,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.03,
+       "gravity_nm": 0.508
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 2.59,
+       "force_nm": 2.584,
+       "forcerange_nm": 2.94,
+       "sat_pct": 87.9,
+       "qvel_mrad_s": 0.03,
+       "gravity_nm": 0.388
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 1.43,
+       "force_nm": 1.43,
+       "forcerange_nm": 2.94,
+       "sat_pct": 48.6,
+       "qvel_mrad_s": 0.02,
+       "gravity_nm": 0.101
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.02,
+       "force_nm": -0.022,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.7,
+       "qvel_mrad_s": 0.01,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": [
+      "fork_handle"
+     ]
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "t": 33.752,
+     "ik_err_mm": 1.7,
+     "tip_err_mm": 1.47,
+     "dz_mm": 1.29,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": 0.0,
+       "force_nm": 0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.36,
+       "force_nm": -0.36,
+       "forcerange_nm": 2.94,
+       "sat_pct": 12.2,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.36
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.43,
+       "force_nm": -0.429,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.6,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.429
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.12,
+       "force_nm": -0.121,
+       "forcerange_nm": 2.94,
+       "sat_pct": 4.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.121
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 0.0,
+       "force_nm": 0.002,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.002
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.001,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.001
+      }
+     ],
+     "arm_contacts": []
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "t": 35.3,
+     "ik_err_mm": 2.64,
+     "tip_err_mm": 36.44,
+     "dz_mm": 29.91,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": 1.48,
+       "force_nm": 1.478,
+       "forcerange_nm": 2.94,
+       "sat_pct": 50.3,
+       "qvel_mrad_s": 1.86,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 137.94,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 1.46,
+       "gravity_nm": 0.441
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 1.92,
+       "force_nm": 1.913,
+       "forcerange_nm": 2.94,
+       "sat_pct": 65.1,
+       "qvel_mrad_s": 0.97,
+       "gravity_nm": 0.395
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 0.78,
+       "force_nm": 0.78,
+       "forcerange_nm": 2.94,
+       "sat_pct": 26.5,
+       "qvel_mrad_s": 0.44,
+       "gravity_nm": 0.113
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.23,
+       "force_nm": -0.226,
+       "forcerange_nm": 2.94,
+       "sat_pct": 7.7,
+       "qvel_mrad_s": 0.29,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": -0.03,
+       "force_nm": -0.03,
+       "forcerange_nm": 2.94,
+       "sat_pct": 1.0,
+       "qvel_mrad_s": 0.05,
+       "gravity_nm": 0.0
+      }
+     ],
+     "arm_contacts": [
+      "drawer_front"
+     ]
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "t": 12.88,
+     "ik_err_mm": 3.25,
+     "tip_err_mm": 3.13,
+     "dz_mm": 1.01,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.0,
+       "force_nm": -0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.38,
+       "force_nm": -0.382,
+       "forcerange_nm": 2.94,
+       "sat_pct": 13.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.382
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.43,
+       "force_nm": -0.432,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.7,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.432
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.11,
+       "force_nm": -0.113,
+       "forcerange_nm": 2.94,
+       "sat_pct": 3.8,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.113
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.0,
+       "force_nm": -0.005,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.2,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": []
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "t": 14.428,
+     "ik_err_mm": 1.85,
+     "tip_err_mm": 28.19,
+     "dz_mm": 21.19,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.14,
+       "force_nm": -0.144,
+       "forcerange_nm": 2.94,
+       "sat_pct": 4.9,
+       "qvel_mrad_s": 0.88,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 30.08,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.28,
+       "gravity_nm": 0.485
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 2.58,
+       "force_nm": 2.572,
+       "forcerange_nm": 2.94,
+       "sat_pct": 87.5,
+       "qvel_mrad_s": 0.34,
+       "gravity_nm": 0.383
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 1.46,
+       "force_nm": 1.46,
+       "forcerange_nm": 2.94,
+       "sat_pct": 49.7,
+       "qvel_mrad_s": 0.19,
+       "gravity_nm": 0.104
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 0.04,
+       "force_nm": 0.045,
+       "forcerange_nm": 2.94,
+       "sat_pct": 1.5,
+       "qvel_mrad_s": 0.03,
+       "gravity_nm": 0.002
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": [
+      "fork_handle"
+     ]
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "t": 33.752,
+     "ik_err_mm": 1.02,
+     "tip_err_mm": 0.87,
+     "dz_mm": 0.33,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.0,
+       "force_nm": -0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.39,
+       "force_nm": -0.393,
+       "forcerange_nm": 2.94,
+       "sat_pct": 13.4,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.393
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.44,
+       "force_nm": -0.443,
+       "forcerange_nm": 2.94,
+       "sat_pct": 15.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.443
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.12,
+       "force_nm": -0.117,
+       "forcerange_nm": 2.94,
+       "sat_pct": 4.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.117
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 0.0,
+       "force_nm": 0.004,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.004
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.001,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.001
+      }
+     ],
+     "arm_contacts": []
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "t": 35.3,
+     "ik_err_mm": 2.97,
+     "tip_err_mm": 66.4,
+     "dz_mm": 60.83,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": 31.67,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 5.75,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 170.37,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.01,
+       "gravity_nm": 0.447
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 1.83,
+       "force_nm": 1.824,
+       "forcerange_nm": 2.94,
+       "sat_pct": 62.1,
+       "qvel_mrad_s": 0.01,
+       "gravity_nm": 0.409
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 0.59,
+       "force_nm": 0.585,
+       "forcerange_nm": 2.94,
+       "sat_pct": 19.9,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.113
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 1.27,
+       "force_nm": 1.271,
+       "forcerange_nm": 2.94,
+       "sat_pct": 43.2,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.006
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": [
+      "drawer_side_l"
+     ]
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "t": 12.88,
+     "ik_err_mm": 3.17,
+     "tip_err_mm": 3.07,
+     "dz_mm": 1.04,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.0,
+       "force_nm": -0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.38,
+       "force_nm": -0.378,
+       "forcerange_nm": 2.94,
+       "sat_pct": 12.9,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.378
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.43,
+       "force_nm": -0.432,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.7,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.432
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.11,
+       "force_nm": -0.112,
+       "forcerange_nm": 2.94,
+       "sat_pct": 3.8,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.112
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.01,
+       "force_nm": -0.005,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.2,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.004,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.004
+      }
+     ],
+     "arm_contacts": []
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "t": 14.428,
+     "ik_err_mm": 5.47,
+     "tip_err_mm": 29.57,
+     "dz_mm": 24.28,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.02,
+       "force_nm": -0.019,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.6,
+       "qvel_mrad_s": 0.15,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 31.31,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.04,
+       "gravity_nm": 0.481
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 2.63,
+       "force_nm": 2.627,
+       "forcerange_nm": 2.94,
+       "sat_pct": 89.3,
+       "qvel_mrad_s": 0.05,
+       "gravity_nm": 0.381
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 1.49,
+       "force_nm": 1.487,
+       "forcerange_nm": 2.94,
+       "sat_pct": 50.6,
+       "qvel_mrad_s": 0.03,
+       "gravity_nm": 0.102
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.03,
+       "force_nm": -0.031,
+       "forcerange_nm": 2.94,
+       "sat_pct": 1.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": [
+      "fork_handle"
+     ]
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "t": 33.752,
+     "ik_err_mm": 1.48,
+     "tip_err_mm": 1.34,
+     "dz_mm": 0.51,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.0,
+       "force_nm": -0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.35,
+       "force_nm": -0.348,
+       "forcerange_nm": 2.94,
+       "sat_pct": 11.8,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.348
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.43,
+       "force_nm": -0.433,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.7,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.433
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.11,
+       "force_nm": -0.11,
+       "forcerange_nm": 2.94,
+       "sat_pct": 3.8,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.11
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.01,
+       "force_nm": -0.006,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.2,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.006
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": []
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "t": 35.3,
+     "ik_err_mm": 1.36,
+     "tip_err_mm": 63.19,
+     "dz_mm": 54.72,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.22,
+       "force_nm": -0.219,
+       "forcerange_nm": 2.94,
+       "sat_pct": 7.5,
+       "qvel_mrad_s": 0.05,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 111.03,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.46,
+       "gravity_nm": 0.465
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 144.08,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.49,
+       "gravity_nm": 0.432
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 1.64,
+       "force_nm": 1.633,
+       "forcerange_nm": 2.94,
+       "sat_pct": 55.5,
+       "qvel_mrad_s": 0.01,
+       "gravity_nm": 0.114
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.49,
+       "force_nm": -0.494,
+       "forcerange_nm": 2.94,
+       "sat_pct": 16.8,
+       "qvel_mrad_s": 0.01,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.17,
+       "force_nm": 0.174,
+       "forcerange_nm": 2.94,
+       "sat_pct": 5.9,
+       "qvel_mrad_s": 0.01,
+       "gravity_nm": 0.001
+      }
+     ],
+     "arm_contacts": [
+      "drawer_front"
+     ]
+    }
+   }
+  },
+  {
+   "seed": 3,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "t": 12.88,
+     "ik_err_mm": 3.22,
+     "tip_err_mm": 3.12,
+     "dz_mm": 1.02,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.0,
+       "force_nm": -0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.38,
+       "force_nm": -0.378,
+       "forcerange_nm": 2.94,
+       "sat_pct": 12.9,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.378
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.43,
+       "force_nm": -0.432,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.7,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.432
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.11,
+       "force_nm": -0.112,
+       "forcerange_nm": 2.94,
+       "sat_pct": 3.8,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.112
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.01,
+       "force_nm": -0.005,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.2,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.004,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.004
+      }
+     ],
+     "arm_contacts": []
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "t": 14.428,
+     "ik_err_mm": 6.39,
+     "tip_err_mm": 30.21,
+     "dz_mm": 25.07,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.25,
+       "force_nm": -0.253,
+       "forcerange_nm": 2.94,
+       "sat_pct": 8.6,
+       "qvel_mrad_s": 1.04,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 33.94,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.42,
+       "gravity_nm": 0.48
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 2.57,
+       "force_nm": 2.564,
+       "forcerange_nm": 2.94,
+       "sat_pct": 87.2,
+       "qvel_mrad_s": 0.42,
+       "gravity_nm": 0.382
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 1.46,
+       "force_nm": 1.453,
+       "forcerange_nm": 2.94,
+       "sat_pct": 49.4,
+       "qvel_mrad_s": 0.24,
+       "gravity_nm": 0.102
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.04,
+       "force_nm": -0.043,
+       "forcerange_nm": 2.94,
+       "sat_pct": 1.5,
+       "qvel_mrad_s": 0.04,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": [
+      "fork_handle"
+     ]
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "t": 33.752,
+     "ik_err_mm": 0.36,
+     "tip_err_mm": 10.92,
+     "dz_mm": 10.89,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": 2.62,
+       "force_nm": 2.619,
+       "forcerange_nm": 2.94,
+       "sat_pct": 89.1,
+       "qvel_mrad_s": 0.3,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 46.92,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 27.2,
+       "gravity_nm": 0.4
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -2.43,
+       "force_nm": -2.427,
+       "forcerange_nm": 2.94,
+       "sat_pct": 82.6,
+       "qvel_mrad_s": 0.36,
+       "gravity_nm": 0.437
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -8.25,
+       "force_nm": -2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 81.6,
+       "gravity_nm": 0.115
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 0.26,
+       "force_nm": 0.262,
+       "forcerange_nm": 2.94,
+       "sat_pct": 8.9,
+       "qvel_mrad_s": 0.02,
+       "gravity_nm": 0.006
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.002,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.002
+      }
+     ],
+     "arm_contacts": [
+      "drawer_front"
+     ]
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "t": 35.3,
+     "ik_err_mm": 3.68,
+     "tip_err_mm": 82.77,
+     "dz_mm": 61.05,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -202.65,
+       "force_nm": -2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 1.46,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 535.89,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 7.07,
+       "gravity_nm": 0.391
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -401.56,
+       "force_nm": -2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 10.87,
+       "gravity_nm": 0.408
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -1.94,
+       "force_nm": -1.935,
+       "forcerange_nm": 2.94,
+       "sat_pct": 65.8,
+       "qvel_mrad_s": 0.02,
+       "gravity_nm": 0.113
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.92,
+       "force_nm": -0.915,
+       "forcerange_nm": 2.94,
+       "sat_pct": 31.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.006
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": [
+      "drawer_front"
+     ]
+    }
+   }
+  },
+  {
+   "seed": 4,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "t": 12.88,
+     "ik_err_mm": 3.24,
+     "tip_err_mm": 3.13,
+     "dz_mm": 1.01,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.0,
+       "force_nm": -0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.38,
+       "force_nm": -0.381,
+       "forcerange_nm": 2.94,
+       "sat_pct": 13.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.381
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.43,
+       "force_nm": -0.432,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.7,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.432
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.11,
+       "force_nm": -0.113,
+       "forcerange_nm": 2.94,
+       "sat_pct": 3.8,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.113
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.0,
+       "force_nm": -0.005,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.2,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": []
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "t": 14.428,
+     "ik_err_mm": 1.86,
+     "tip_err_mm": 28.19,
+     "dz_mm": 21.17,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.14,
+       "force_nm": -0.142,
+       "forcerange_nm": 2.94,
+       "sat_pct": 4.8,
+       "qvel_mrad_s": 0.88,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 30.1,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.28,
+       "gravity_nm": 0.484
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 2.58,
+       "force_nm": 2.574,
+       "forcerange_nm": 2.94,
+       "sat_pct": 87.6,
+       "qvel_mrad_s": 0.34,
+       "gravity_nm": 0.383
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 1.46,
+       "force_nm": 1.461,
+       "forcerange_nm": 2.94,
+       "sat_pct": 49.7,
+       "qvel_mrad_s": 0.19,
+       "gravity_nm": 0.104
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 0.04,
+       "force_nm": 0.045,
+       "forcerange_nm": 2.94,
+       "sat_pct": 1.5,
+       "qvel_mrad_s": 0.03,
+       "gravity_nm": 0.002
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": [
+      "fork_handle"
+     ]
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "t": 33.752,
+     "ik_err_mm": 3.31,
+     "tip_err_mm": 3.1,
+     "dz_mm": 2.19,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": 0.0,
+       "force_nm": 0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.38,
+       "force_nm": -0.382,
+       "forcerange_nm": 2.94,
+       "sat_pct": 13.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.382
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.44,
+       "force_nm": -0.437,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.9,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.437
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.12,
+       "force_nm": -0.117,
+       "forcerange_nm": 2.94,
+       "sat_pct": 4.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.117
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 0.0,
+       "force_nm": 0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.002,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.002
+      }
+     ],
+     "arm_contacts": []
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "t": 35.3,
+     "ik_err_mm": 6.76,
+     "tip_err_mm": 39.47,
+     "dz_mm": 35.44,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": 0.59,
+       "force_nm": 0.59,
+       "forcerange_nm": 2.94,
+       "sat_pct": 20.1,
+       "qvel_mrad_s": 2.17,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 72.75,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 6.4,
+       "gravity_nm": 0.466
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 2.25,
+       "force_nm": 2.245,
+       "forcerange_nm": 2.94,
+       "sat_pct": 76.3,
+       "qvel_mrad_s": 1.2,
+       "gravity_nm": 0.393
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 0.52,
+       "force_nm": 0.518,
+       "forcerange_nm": 2.94,
+       "sat_pct": 17.6,
+       "qvel_mrad_s": 0.63,
+       "gravity_nm": 0.107
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 0.04,
+       "force_nm": 0.036,
+       "forcerange_nm": 2.94,
+       "sat_pct": 1.2,
+       "qvel_mrad_s": 0.47,
+       "gravity_nm": 0.004
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": [
+      "drawer_front"
+     ]
+    }
+   }
+  },
+  {
+   "seed": 5,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "t": 12.88,
+     "ik_err_mm": 2.34,
+     "tip_err_mm": 2.19,
+     "dz_mm": 1.08,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.0,
+       "force_nm": -0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.35,
+       "force_nm": -0.354,
+       "forcerange_nm": 2.94,
+       "sat_pct": 12.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.354
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.44,
+       "force_nm": -0.434,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.8,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.434
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.11,
+       "force_nm": -0.112,
+       "forcerange_nm": 2.94,
+       "sat_pct": 3.8,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.112
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.0,
+       "force_nm": -0.005,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.2,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": []
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "t": 14.428,
+     "ik_err_mm": 1.48,
+     "tip_err_mm": 37.47,
+     "dz_mm": 33.3,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -24.62,
+       "force_nm": -2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 2.01,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 124.05,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.39,
+       "gravity_nm": 0.437
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 8.77,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 15.59,
+       "gravity_nm": 0.397
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 1.84,
+       "force_nm": 1.835,
+       "forcerange_nm": 2.94,
+       "sat_pct": 62.4,
+       "qvel_mrad_s": 0.07,
+       "gravity_nm": 0.102
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 755.44,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 72.88,
+       "gravity_nm": 0.004
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 1.64,
+       "force_nm": 1.633,
+       "forcerange_nm": 2.94,
+       "sat_pct": 55.5,
+       "qvel_mrad_s": 0.06,
+       "gravity_nm": 0.001
+      }
+     ],
+     "arm_contacts": [
+      "drawer_front"
+     ]
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "t": 33.752,
+     "ik_err_mm": 1.89,
+     "tip_err_mm": 1.75,
+     "dz_mm": 0.47,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": 0.0,
+       "force_nm": 0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.46,
+       "force_nm": -0.457,
+       "forcerange_nm": 2.94,
+       "sat_pct": 15.6,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.457
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.43,
+       "force_nm": -0.434,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.8,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.434
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.11,
+       "force_nm": -0.109,
+       "forcerange_nm": 2.94,
+       "sat_pct": 3.7,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.109
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.01,
+       "force_nm": -0.006,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.2,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.006
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": []
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "t": 35.3,
+     "ik_err_mm": 2.5,
+     "tip_err_mm": 47.01,
+     "dz_mm": 40.29,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.16,
+       "force_nm": -0.156,
+       "forcerange_nm": 2.94,
+       "sat_pct": 5.3,
+       "qvel_mrad_s": 0.87,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 111.29,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.42,
+       "gravity_nm": 0.546
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 46.14,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.48,
+       "gravity_nm": 0.422
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 1.59,
+       "force_nm": 1.591,
+       "forcerange_nm": 2.94,
+       "sat_pct": 54.1,
+       "qvel_mrad_s": 0.02,
+       "gravity_nm": 0.111
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.56,
+       "force_nm": -0.563,
+       "forcerange_nm": 2.94,
+       "sat_pct": 19.2,
+       "qvel_mrad_s": 0.03,
+       "gravity_nm": 0.003
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": -0.13,
+       "force_nm": -0.131,
+       "forcerange_nm": 2.94,
+       "sat_pct": 4.4,
+       "qvel_mrad_s": 0.16,
+       "gravity_nm": 0.001
+      }
+     ],
+     "arm_contacts": [
+      "drawer_front"
+     ]
+    }
+   }
+  },
+  {
+   "seed": 6,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "t": 12.88,
+     "ik_err_mm": 1.37,
+     "tip_err_mm": 1.12,
+     "dz_mm": 0.76,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.0,
+       "force_nm": -0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.58,
+       "force_nm": -0.58,
+       "forcerange_nm": 2.94,
+       "sat_pct": 19.7,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.58
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.43,
+       "force_nm": -0.427,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.5,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.427
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.12,
+       "force_nm": -0.121,
+       "forcerange_nm": 2.94,
+       "sat_pct": 4.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.121
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.0,
+       "force_nm": -0.002,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.002
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": []
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "t": 14.428,
+     "ik_err_mm": 5.59,
+     "tip_err_mm": 59.35,
+     "dz_mm": 57.39,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -26.94,
+       "force_nm": -2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 4.72,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 172.12,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.74,
+       "gravity_nm": 0.626
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 2.22,
+       "force_nm": 2.215,
+       "forcerange_nm": 2.94,
+       "sat_pct": 75.3,
+       "qvel_mrad_s": 0.87,
+       "gravity_nm": 0.42
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 0.84,
+       "force_nm": 0.836,
+       "forcerange_nm": 2.94,
+       "sat_pct": 28.4,
+       "qvel_mrad_s": 0.6,
+       "gravity_nm": 0.117
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.77,
+       "force_nm": -0.771,
+       "forcerange_nm": 2.94,
+       "sat_pct": 26.2,
+       "qvel_mrad_s": 0.02,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.002,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.002
+      }
+     ],
+     "arm_contacts": [
+      "drawer_floor"
+     ]
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "t": 33.752,
+     "ik_err_mm": 1.77,
+     "tip_err_mm": 5.31,
+     "dz_mm": 1.46,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -14.7,
+       "force_nm": -2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.11,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 0.24,
+       "force_nm": 0.237,
+       "forcerange_nm": 2.94,
+       "sat_pct": 8.1,
+       "qvel_mrad_s": 0.94,
+       "gravity_nm": 0.479
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 0.08,
+       "force_nm": 0.079,
+       "forcerange_nm": 2.94,
+       "sat_pct": 2.7,
+       "qvel_mrad_s": 0.05,
+       "gravity_nm": 0.443
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 0.02,
+       "force_nm": 0.02,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.7,
+       "qvel_mrad_s": 0.04,
+       "gravity_nm": 0.117
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.001,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.001
+      }
+     ],
+     "arm_contacts": [
+      "cab_left"
+     ]
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "t": 35.3,
+     "ik_err_mm": 2.27,
+     "tip_err_mm": 60.1,
+     "dz_mm": 54.55,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": 18.55,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 6.28,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 121.09,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 9.15,
+       "gravity_nm": 0.548
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 16.52,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 11.02,
+       "gravity_nm": 0.417
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 1.28,
+       "force_nm": 1.276,
+       "forcerange_nm": 2.94,
+       "sat_pct": 43.4,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.111
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 1.44,
+       "force_nm": 1.433,
+       "forcerange_nm": 2.94,
+       "sat_pct": 48.7,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.006
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": [
+      "drawer_side_l"
+     ]
+    }
+   }
+  },
+  {
+   "seed": 7,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "t": 12.88,
+     "ik_err_mm": 3.22,
+     "tip_err_mm": 3.12,
+     "dz_mm": 1.02,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.0,
+       "force_nm": -0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.38,
+       "force_nm": -0.375,
+       "forcerange_nm": 2.94,
+       "sat_pct": 12.7,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.375
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.43,
+       "force_nm": -0.432,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.7,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.432
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.11,
+       "force_nm": -0.112,
+       "forcerange_nm": 2.94,
+       "sat_pct": 3.8,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.112
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.01,
+       "force_nm": -0.005,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.2,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.004,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.004
+      }
+     ],
+     "arm_contacts": []
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "t": 14.428,
+     "ik_err_mm": 6.45,
+     "tip_err_mm": 30.17,
+     "dz_mm": 25.0,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.22,
+       "force_nm": -0.22,
+       "forcerange_nm": 2.94,
+       "sat_pct": 7.5,
+       "qvel_mrad_s": 0.98,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 33.9,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.4,
+       "gravity_nm": 0.477
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 2.59,
+       "force_nm": 2.581,
+       "forcerange_nm": 2.94,
+       "sat_pct": 87.8,
+       "qvel_mrad_s": 0.39,
+       "gravity_nm": 0.382
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 1.46,
+       "force_nm": 1.461,
+       "forcerange_nm": 2.94,
+       "sat_pct": 49.7,
+       "qvel_mrad_s": 0.22,
+       "gravity_nm": 0.102
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.04,
+       "force_nm": -0.043,
+       "forcerange_nm": 2.94,
+       "sat_pct": 1.5,
+       "qvel_mrad_s": 0.04,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": [
+      "fork_handle"
+     ]
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "t": 33.752,
+     "ik_err_mm": 5.29,
+     "tip_err_mm": 5.17,
+     "dz_mm": 2.95,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": 0.0,
+       "force_nm": 0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.35,
+       "force_nm": -0.351,
+       "forcerange_nm": 2.94,
+       "sat_pct": 11.9,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.351
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.44,
+       "force_nm": -0.439,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.9,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.439
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.12,
+       "force_nm": -0.117,
+       "forcerange_nm": 2.94,
+       "sat_pct": 4.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.117
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.0,
+       "force_nm": -0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.002,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.002
+      }
+     ],
+     "arm_contacts": []
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "t": 35.3,
+     "ik_err_mm": 6.67,
+     "tip_err_mm": 24.63,
+     "dz_mm": 13.96,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": 1.06,
+       "force_nm": 1.057,
+       "forcerange_nm": 2.94,
+       "sat_pct": 36.0,
+       "qvel_mrad_s": 1.68,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 30.66,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.83,
+       "gravity_nm": 0.452
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 2.23,
+       "force_nm": 2.229,
+       "forcerange_nm": 2.94,
+       "sat_pct": 75.8,
+       "qvel_mrad_s": 0.74,
+       "gravity_nm": 0.374
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 1.25,
+       "force_nm": 1.247,
+       "forcerange_nm": 2.94,
+       "sat_pct": 42.4,
+       "qvel_mrad_s": 0.44,
+       "gravity_nm": 0.103
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 0.12,
+       "force_nm": 0.123,
+       "forcerange_nm": 2.94,
+       "sat_pct": 4.2,
+       "qvel_mrad_s": 0.05,
+       "gravity_nm": 0.001
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": [
+      "drawer_floor",
+      "spoon_handle"
+     ]
+    }
+   }
+  },
+  {
+   "seed": 8,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "t": 12.88,
+     "ik_err_mm": 2.68,
+     "tip_err_mm": 2.56,
+     "dz_mm": 1.03,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.0,
+       "force_nm": -0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.37,
+       "force_nm": -0.373,
+       "forcerange_nm": 2.94,
+       "sat_pct": 12.7,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.373
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.43,
+       "force_nm": -0.433,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.7,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.433
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.11,
+       "force_nm": -0.112,
+       "forcerange_nm": 2.94,
+       "sat_pct": 3.8,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.112
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.0,
+       "force_nm": -0.005,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.2,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": []
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "t": 14.428,
+     "ik_err_mm": 2.54,
+     "tip_err_mm": 102.55,
+     "dz_mm": 70.95,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": 169.03,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 4.23,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 145.44,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.02,
+       "gravity_nm": 0.487
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 163.07,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.38,
+       "gravity_nm": 0.44
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 1.27,
+       "force_nm": 1.266,
+       "forcerange_nm": 2.94,
+       "sat_pct": 43.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.114
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 0.05,
+       "force_nm": 0.052,
+       "forcerange_nm": 2.94,
+       "sat_pct": 1.8,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": -0.0,
+       "force_nm": -0.001,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.001
+      }
+     ],
+     "arm_contacts": [
+      "drawer_front"
+     ]
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "t": 33.752,
+     "ik_err_mm": 0.63,
+     "tip_err_mm": 1.26,
+     "dz_mm": 0.77,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -1.1,
+       "force_nm": -1.101,
+       "forcerange_nm": 2.94,
+       "sat_pct": 37.5,
+       "qvel_mrad_s": 0.94,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 1.06,
+       "force_nm": 1.06,
+       "forcerange_nm": 2.94,
+       "sat_pct": 36.0,
+       "qvel_mrad_s": 0.83,
+       "gravity_nm": 0.512
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 1.43,
+       "force_nm": 1.427,
+       "forcerange_nm": 2.94,
+       "sat_pct": 48.5,
+       "qvel_mrad_s": 0.67,
+       "gravity_nm": 0.421
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 0.75,
+       "force_nm": 0.744,
+       "forcerange_nm": 2.94,
+       "sat_pct": 25.3,
+       "qvel_mrad_s": 0.25,
+       "gravity_nm": 0.117
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 0.17,
+       "force_nm": 0.174,
+       "forcerange_nm": 2.94,
+       "sat_pct": 5.9,
+       "qvel_mrad_s": 0.38,
+       "gravity_nm": 0.007
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": [
+      "drawer_side_l"
+     ]
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "t": 35.3,
+     "ik_err_mm": 4.99,
+     "tip_err_mm": 59.3,
+     "dz_mm": 56.5,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -26.68,
+       "force_nm": -2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.66,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 130.72,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 2.32,
+       "gravity_nm": 0.583
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 2.21,
+       "force_nm": 2.207,
+       "forcerange_nm": 2.94,
+       "sat_pct": 75.1,
+       "qvel_mrad_s": 0.7,
+       "gravity_nm": 0.41
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 0.71,
+       "force_nm": 0.712,
+       "forcerange_nm": 2.94,
+       "sat_pct": 24.2,
+       "qvel_mrad_s": 0.57,
+       "gravity_nm": 0.117
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.19,
+       "force_nm": -0.186,
+       "forcerange_nm": 2.94,
+       "sat_pct": 6.3,
+       "qvel_mrad_s": 0.06,
+       "gravity_nm": 0.006
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.004,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.004
+      }
+     ],
+     "arm_contacts": [
+      "cab_left",
+      "drawer_front"
+     ]
+    }
+   }
+  },
+  {
+   "seed": 9,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "t": 12.88,
+     "ik_err_mm": 3.41,
+     "tip_err_mm": 3.31,
+     "dz_mm": 0.97,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.0,
+       "force_nm": -0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.39,
+       "force_nm": -0.389,
+       "forcerange_nm": 2.94,
+       "sat_pct": 13.2,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.389
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.43,
+       "force_nm": -0.43,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.6,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.43
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.11,
+       "force_nm": -0.113,
+       "forcerange_nm": 2.94,
+       "sat_pct": 3.9,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.113
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": -0.0,
+       "force_nm": -0.005,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.2,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.005
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.004,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.004
+      }
+     ],
+     "arm_contacts": []
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "t": 14.428,
+     "ik_err_mm": 3.07,
+     "tip_err_mm": 29.94,
+     "dz_mm": 24.31,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": -0.02,
+       "force_nm": -0.019,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.6,
+       "qvel_mrad_s": 0.2,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 33.54,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.488
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 2.61,
+       "force_nm": 2.61,
+       "forcerange_nm": 2.94,
+       "sat_pct": 88.8,
+       "qvel_mrad_s": 0.05,
+       "gravity_nm": 0.381
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 1.49,
+       "force_nm": 1.49,
+       "forcerange_nm": 2.94,
+       "sat_pct": 50.7,
+       "qvel_mrad_s": 0.03,
+       "gravity_nm": 0.104
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 0.02,
+       "force_nm": 0.019,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.6,
+       "qvel_mrad_s": 0.01,
+       "gravity_nm": 0.004
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": [
+      "fork_handle"
+     ]
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "t": 33.752,
+     "ik_err_mm": 2.81,
+     "tip_err_mm": 2.57,
+     "dz_mm": 2.43,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": 0.0,
+       "force_nm": 0.0,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": -0.38,
+       "force_nm": -0.379,
+       "forcerange_nm": 2.94,
+       "sat_pct": 12.9,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.379
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": -0.43,
+       "force_nm": -0.43,
+       "forcerange_nm": 2.94,
+       "sat_pct": 14.6,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.43
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": -0.12,
+       "force_nm": -0.12,
+       "forcerange_nm": 2.94,
+       "sat_pct": 4.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.12
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 0.0,
+       "force_nm": 0.001,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.001
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.002,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.002
+      }
+     ],
+     "arm_contacts": []
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "t": 35.3,
+     "ik_err_mm": 2.89,
+     "tip_err_mm": 57.36,
+     "dz_mm": 52.98,
+     "joints": [
+      {
+       "joint": "shoulder_pan",
+       "err_mrad": 16.39,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 5.6,
+       "gravity_nm": 0.0
+      },
+      {
+       "joint": "shoulder_lift",
+       "err_mrad": 137.13,
+       "force_nm": 2.94,
+       "forcerange_nm": 2.94,
+       "sat_pct": 100.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.453
+      },
+      {
+       "joint": "elbow_flex",
+       "err_mrad": 1.76,
+       "force_nm": 1.759,
+       "forcerange_nm": 2.94,
+       "sat_pct": 59.8,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.4
+      },
+      {
+       "joint": "wrist_flex",
+       "err_mrad": 0.64,
+       "force_nm": 0.638,
+       "forcerange_nm": 2.94,
+       "sat_pct": 21.7,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.113
+      },
+      {
+       "joint": "wrist_roll",
+       "err_mrad": 1.21,
+       "force_nm": 1.205,
+       "forcerange_nm": 2.94,
+       "sat_pct": 41.0,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.006
+      },
+      {
+       "joint": "gripper",
+       "err_mrad": 0.0,
+       "force_nm": 0.003,
+       "forcerange_nm": 2.94,
+       "sat_pct": 0.1,
+       "qvel_mrad_s": 0.0,
+       "gravity_nm": 0.003
+      }
+     ],
+     "arm_contacts": [
+      "drawer_side_l"
+     ]
+    }
+   }
+  }
+ ]
+}

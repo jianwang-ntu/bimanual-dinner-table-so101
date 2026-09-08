@@ -16,6 +16,18 @@
   "fork",
   "spoon"
  ],
+ "scene_switches": {
+  "CUTLERY_PLACE_SPREAD": 0.0,
+  "CUTLERY_SEAT_XY": [
+   0.0,
+   0.0
+  ],
+  "CUTLERY_SPLAY_X": 0.0
+ },
+ "cutlery_randomizer": [
+  "fork",
+  "spoon"
+ ],
  "seeds": 10,
  "controls": [
   {
@@ -27,6 +39,21 @@
    "control": "reject_a_table_that_covered_four",
    "pass": true,
    "detail": "with the spoon added the same reader sees ['bottle', 'mug', 'plate', 'spoon'], so the control fails -- it is reading the table, not a constant"
+  },
+  {
+   "control": "cutlery_randomizer_exists_and_ships_off",
+   "pass": true,
+   "detail": "randomize_cutlery covers ['fork', 'spoon'] and every switch is off: {'CUTLERY_PLACE_SPREAD': 0.0, 'CUTLERY_SEAT_XY': (0.0, 0.0), 'CUTLERY_SPLAY_X': 0.0} -- which is WHY the claim above still holds"
+  },
+  {
+   "control": "reject_a_randomizer_left_switched_on",
+   "pass": true,
+   "detail": "with CUTLERY_PLACE_SPREAD = 1.0 the same reader sees {'CUTLERY_PLACE_SPREAD': 1.0, 'CUTLERY_SEAT_XY': (0.0, 0.0), 'CUTLERY_SPLAY_X': 0.0} and the control fails -- so it is reading the constant, not asserting a constant"
+  },
+  {
+   "control": "reject_a_scene_seated_somewhere_else",
+   "pass": true,
+   "detail": "a -20 mm seat offset is caught by the same reader ({'CUTLERY_PLACE_SPREAD': 0.0, 'CUTLERY_SEAT_XY': (0.0, -0.02), 'CUTLERY_SPLAY_X': 0.0}) -- the seat moves the scene without touching NOMINAL_XY, so the table alone cannot see it"
   },
   {
    "control": "cutlery_distance_is_identical_on_every_seed",

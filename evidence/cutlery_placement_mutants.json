@@ -1,0 +1,271 @@
+{
+ "campaign": "mutate_cutlery_placement.py",
+ "suite": "scripts/test_cutlery_placement.py",
+ "baseline_green_in_copied_tree": true,
+ "isolation": "each mutant runs in its own fresh mkdtemp tree, copied not hard-linked, so a mutant cannot write the real evidence files",
+ "n": 23,
+ "killed": 23,
+ "killed_by_the_control_that_names_them": 22,
+ "not_claimed": "A mutation score measures how sensitive this suite is to these twenty-three edits. It is not evidence that the randomizer is correct, that the seat sweep's refutation is right, or that anything was placed.",
+ "results": [
+  {
+   "mutant": "spread_on",
+   "breaks": "CUTLERY_PLACE_SPREAD ships at 1.0",
+   "expected_control": "switches_ship_off",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "switches_ship_off"
+   ]
+  },
+  {
+   "mutant": "seat_moved",
+   "breaks": "CUTLERY_SEAT_XY ships 20 mm forward",
+   "expected_control": "switches_ship_off",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "switches_ship_off"
+   ]
+  },
+  {
+   "mutant": "splay_on",
+   "breaks": "CUTLERY_SPLAY_X ships at 18 mm",
+   "expected_control": "switches_ship_off",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "switches_ship_off",
+    "reject_a_switch_left_on"
+   ]
+  },
+  {
+   "mutant": "no_penetration_test",
+   "breaks": "the accept stops being guarded by the contact pass",
+   "expected_control": "draws_are_rejected_by_the_contact_pass",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "draws_are_rejected_by_the_contact_pass"
+   ]
+  },
+  {
+   "mutant": "penetration_never_computed",
+   "breaks": "the guard reads a constant instead of the contact pass",
+   "expected_control": "draws_are_rejected_by_the_contact_pass",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "draws_are_rejected_by_the_contact_pass"
+   ]
+  },
+  {
+   "mutant": "baseline_drift",
+   "breaks": "the spread-0 baseline no longer scores the published plate 4/10",
+   "expected_control": "default_reproduces_the_published_tally",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "default_reproduces_the_published_tally"
+   ]
+  },
+  {
+   "mutant": "zero_arm_moved",
+   "breaks": "the spread-0 arm reports a non-zero spread",
+   "expected_control": "spread_zero_really_is_zero",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "spread_zero_really_is_zero"
+   ]
+  },
+  {
+   "mutant": "spread_arms_flat",
+   "breaks": "the jittered arms report no spread at all",
+   "expected_control": "spread_one_really_moves",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "spread_one_really_moves"
+   ]
+  },
+  {
+   "mutant": "upstream_reshuffled",
+   "breaks": "one seed's drawer draw differs between arms",
+   "expected_control": "plate_mug_bottle_drawer_are_untouched",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "plate_mug_bottle_drawer_are_untouched"
+   ]
+  },
+  {
+   "mutant": "cost_misquoted",
+   "breaks": "full spread is recorded as costing nothing",
+   "expected_control": "the_cost_of_switching_on_is_measured",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "the_cost_of_switching_on_is_measured"
+   ]
+  },
+  {
+   "mutant": "placement_claimed",
+   "breaks": "a jittered arm places the fork 3/10",
+   "expected_control": "cutlery_is_still_never_placed",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "cutlery_is_still_never_placed"
+   ]
+  },
+  {
+   "mutant": "probe_control_false",
+   "breaks": "the probe's own control is False and ignored",
+   "expected_control": "probe_controls_all_pass",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "probe_controls_all_pass"
+   ]
+  },
+  {
+   "mutant": "run_dropped",
+   "breaks": "a rollout is silently lost from the sweep",
+   "expected_control": "no_run_was_silently_dropped",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": false,
+   "failed_controls": [
+    "plate_mug_bottle_drawer_are_untouched"
+   ]
+  },
+  {
+   "mutant": "seat_baseline_drift",
+   "breaks": "the shipped seat cell no longer reproduces",
+   "expected_control": "seat_baseline_reproduces_the_published_tally",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "seat_baseline_reproduces_the_published_tally"
+   ]
+  },
+  {
+   "mutant": "feasible_success",
+   "breaks": "a legal seat places the fork 2/10",
+   "expected_control": "every_feasible_cell_places_no_cutlery",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "every_feasible_cell_places_no_cutlery",
+    "the_only_placement_in_the_grid_is_in_an_infeasible_cell"
+   ]
+  },
+  {
+   "mutant": "infeasible_relabelled",
+   "breaks": "the buried cell that placed a spoon is called legal",
+   "expected_control": "every_feasible_cell_places_no_cutlery",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "every_feasible_cell_places_no_cutlery",
+    "the_only_placement_in_the_grid_is_in_an_infeasible_cell",
+    "wider_seats_were_tried_and_are_infeasible"
+   ]
+  },
+  {
+   "mutant": "reach_flattened",
+   "breaks": "every cell has the baseline's reach",
+   "expected_control": "the_sweep_actually_moved_the_reach",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "the_sweep_actually_moved_the_reach",
+    "wider_seats_were_tried_and_are_infeasible"
+   ]
+  },
+  {
+   "mutant": "stall_tracks_reach",
+   "breaks": "the stall is made proportional to the reach",
+   "expected_control": "the_stall_does_not_track_the_reach",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "the_stall_does_not_track_the_reach",
+    "squaring_lowers_the_stall_and_still_places_nothing"
+   ]
+  },
+  {
+   "mutant": "squaring_no_better",
+   "breaks": "squaring stops lowering the stall",
+   "expected_control": "squaring_lowers_the_stall_and_still_places_nothing",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "squaring_lowers_the_stall_and_still_places_nothing"
+   ]
+  },
+  {
+   "mutant": "no_infeasible_cells",
+   "breaks": "the rejected wider seats are dropped from the grid",
+   "expected_control": "wider_seats_were_tried_and_are_infeasible",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "wider_seats_were_tried_and_are_infeasible"
+   ]
+  },
+  {
+   "mutant": "solver_blamed",
+   "breaks": "the IK residual is as large as the miss",
+   "expected_control": "the_solver_is_not_the_failure",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "the_solver_is_not_the_failure"
+   ]
+  },
+  {
+   "mutant": "control_saturates_too",
+   "breaks": "the free via-points saturate as well",
+   "expected_control": "only_the_waypoints_in_contact_saturate",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "only_the_waypoints_in_contact_saturate"
+   ]
+  },
+  {
+   "mutant": "control_deleted",
+   "breaks": "one control is removed from the suite",
+   "expected_control": "control_count_is_pinned",
+   "rc": 1,
+   "killed": true,
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "control_count_is_pinned"
+   ]
+  }
+ ]
+}

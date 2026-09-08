@@ -1,0 +1,2917 @@
+{
+ "probe": "measure_cutlery_placement.py",
+ "question": "Does placement-randomizing the fork and the spoon inside the drawer -- T4's first named axis, previously covering three of five graspables -- change what the entry scores?",
+ "finding_id": "F-T4-CUTLERY-PLACEMENT-001",
+ "seeds": 10,
+ "spreads": [
+  0.0,
+  0.5,
+  1.0
+ ],
+ "ranges": {
+  "cutlery_xy_m": [
+   -0.016,
+   0.016
+  ],
+  "cutlery_yaw_rad": [
+   -0.2,
+   0.2
+  ]
+ },
+ "controls": {
+  "spread_0_is_fixed": true,
+  "spread_1_moves": true,
+  "upstream_untouched": true,
+  "upstream_mismatches": [],
+  "baseline_reproduces": true,
+  "baseline_per_goal": {
+   "drawer_open": 10,
+   "fork_placed": 0,
+   "spoon_placed": 0,
+   "plate_placed": 4,
+   "mug_placed": 1
+  },
+  "published_per_goal": {
+   "drawer_open": 10,
+   "fork_placed": 0,
+   "spoon_placed": 0,
+   "plate_placed": 4,
+   "mug_placed": 1
+  },
+  "all_runs_ok": true
+ },
+ "variants": [
+  {
+   "spread": 0.0,
+   "shipped_before": true,
+   "n": 10,
+   "subgoals_met_total": 15,
+   "subgoals_possible": 50,
+   "per_goal": {
+    "drawer_open": 10,
+    "fork_placed": 0,
+    "spoon_placed": 0,
+    "plate_placed": 4,
+    "mug_placed": 1
+   },
+   "task_success": 0,
+   "fork_start_spread_mm": {
+    "x": 0.0,
+    "y": 0.0
+   },
+   "spoon_start_spread_mm": {
+    "x": 0.0,
+    "y": 0.0
+   },
+   "draws_rejected_to_authored": 0,
+   "fork_lifted_mm_median": 0.0,
+   "spoon_lifted_mm_median": 1.1
+  },
+  {
+   "spread": 0.5,
+   "shipped_before": false,
+   "n": 10,
+   "subgoals_met_total": 15,
+   "subgoals_possible": 50,
+   "per_goal": {
+    "drawer_open": 9,
+    "fork_placed": 0,
+    "spoon_placed": 0,
+    "plate_placed": 4,
+    "mug_placed": 2
+   },
+   "task_success": 0,
+   "fork_start_spread_mm": {
+    "x": 8.1,
+    "y": 14.9
+   },
+   "spoon_start_spread_mm": {
+    "x": 11.3,
+    "y": 14.5
+   },
+   "draws_rejected_to_authored": 0,
+   "fork_lifted_mm_median": 0.2,
+   "spoon_lifted_mm_median": 0.6
+  },
+  {
+   "spread": 1.0,
+   "shipped_before": false,
+   "n": 10,
+   "subgoals_met_total": 13,
+   "subgoals_possible": 50,
+   "per_goal": {
+    "drawer_open": 9,
+    "fork_placed": 0,
+    "spoon_placed": 0,
+    "plate_placed": 3,
+    "mug_placed": 1
+   },
+   "task_success": 0,
+   "fork_start_spread_mm": {
+    "x": 15.5,
+    "y": 26.9
+   },
+   "spoon_start_spread_mm": {
+    "x": 22.5,
+    "y": 29.1
+   },
+   "draws_rejected_to_authored": 0,
+   "fork_lifted_mm_median": 0.0,
+   "spoon_lifted_mm_median": 0.0
+  }
+ ],
+ "runs": [
+  {
+   "seed": 0,
+   "spread": 0.0,
+   "shipped_before": true,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "subgoals_met": 2,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2537,
+      0.097
+     ],
+     "yaw": -0.486
+    },
+    "mug": {
+     "xy": [
+      -0.2925,
+      0.0812
+     ],
+     "yaw": 1.072
+    },
+    "bottle": {
+     "xy": [
+      0.3632,
+      -0.0096
+     ],
+     "yaw": -0.731
+    },
+    "drawer_slide": 0.0199,
+    "dims": {
+     "plate_r": 0.0536,
+     "mug_r": 0.0262,
+     "mug_h": 0.0285,
+     "bottle_r": 0.0221,
+     "bottle_h": 0.0572,
+     "cutlery_l": 0.043
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0,
+      0.178
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 73.3,
+     "final_to_target_mm": 172.0,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.178
+      ],
+      "dxy_mm": [
+       0.0,
+       -0.0
+      ],
+      "dyaw_rad": -0.0,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0,
+      0.128
+     ],
+     "lifted_mm": 1.3,
+     "planar_move_mm": 72.6,
+     "final_to_target_mm": 130.7,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.128
+      ],
+      "dxy_mm": [
+       0.0,
+       0.0
+      ],
+      "dyaw_rad": 0.0,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "spread": 0.0,
+   "shipped_before": true,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2413,
+      0.0883
+     ],
+     "yaw": -1.493
+    },
+    "mug": {
+     "xy": [
+      -0.2275,
+      0.0952
+     ],
+     "yaw": -0.093
+    },
+    "bottle": {
+     "xy": [
+      0.3933,
+      0.0215
+     ],
+     "yaw": 1.412
+    },
+    "drawer_slide": 0.0108,
+    "dims": {
+     "plate_r": 0.0521,
+     "mug_r": 0.0316,
+     "mug_h": 0.0297,
+     "bottle_r": 0.0296,
+     "bottle_h": 0.0497,
+     "cutlery_l": 0.0371
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0,
+      0.178
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.0,
+     "final_to_target_mm": 167.2,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.178
+      ],
+      "dxy_mm": [
+       0.0,
+       -0.0
+      ],
+      "dyaw_rad": 0.0,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0,
+      0.128
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.0,
+     "final_to_target_mm": 126.7,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.128
+      ],
+      "dxy_mm": [
+       -0.0,
+       -0.0
+      ],
+      "dyaw_rad": 0.0,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "spread": 0.0,
+   "shipped_before": true,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2665,
+      0.1052
+     ],
+     "yaw": -1.965
+    },
+    "mug": {
+     "xy": [
+      -0.2639,
+      0.116
+     ],
+     "yaw": 2.458
+    },
+    "bottle": {
+     "xy": [
+      0.3748,
+      -0.0364
+     ],
+     "yaw": 2.665
+    },
+    "drawer_slide": 0.0094,
+    "dims": {
+     "plate_r": 0.0491,
+     "mug_r": 0.0264,
+     "mug_h": 0.0378,
+     "bottle_r": 0.0227,
+     "bottle_h": 0.054,
+     "cutlery_l": 0.0407
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0,
+      0.178
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 76.2,
+     "final_to_target_mm": 169.6,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.178
+      ],
+      "dxy_mm": [
+       -0.0,
+       0.0
+      ],
+      "dyaw_rad": 0.0,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0,
+      0.128
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 76.2,
+     "final_to_target_mm": 128.8,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.128
+      ],
+      "dxy_mm": [
+       0.0,
+       -0.0
+      ],
+      "dyaw_rad": -0.0,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 3,
+   "spread": 0.0,
+   "shipped_before": true,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "subgoals_met": 2,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2634,
+      0.1327
+     ],
+     "yaw": -1.302
+    },
+    "mug": {
+     "xy": [
+      -0.2949,
+      0.1576
+     ],
+     "yaw": -1.267
+    },
+    "bottle": {
+     "xy": [
+      0.3333,
+      0.0153
+     ],
+     "yaw": 0.535
+    },
+    "drawer_slide": 0.0094,
+    "dims": {
+     "plate_r": 0.047,
+     "mug_r": 0.0259,
+     "mug_h": 0.0376,
+     "bottle_r": 0.0267,
+     "bottle_h": 0.0464,
+     "cutlery_l": 0.0372
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0,
+      0.178
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.5,
+     "final_to_target_mm": 166.7,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.178
+      ],
+      "dxy_mm": [
+       -0.0,
+       -0.0
+      ],
+      "dyaw_rad": 0.0,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0,
+      0.128
+     ],
+     "lifted_mm": 4.8,
+     "planar_move_mm": 85.6,
+     "final_to_target_mm": 111.0,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.128
+      ],
+      "dxy_mm": [
+       0.0,
+       -0.0
+      ],
+      "dyaw_rad": 0.0,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 4,
+   "spread": 0.0,
+   "shipped_before": true,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "subgoals_met": 2,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2886,
+      0.086
+     ],
+     "yaw": 0.684
+    },
+    "mug": {
+     "xy": [
+      -0.2316,
+      0.1549
+     ],
+     "yaw": 1.041
+    },
+    "bottle": {
+     "xy": [
+      0.3913,
+      -0.0335
+     ],
+     "yaw": -1.736
+    },
+    "drawer_slide": 0.0104,
+    "dims": {
+     "plate_r": 0.0573,
+     "mug_r": 0.0281,
+     "mug_h": 0.0397,
+     "bottle_r": 0.0226,
+     "bottle_h": 0.0541,
+     "cutlery_l": 0.0365
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0,
+      0.178
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 81.1,
+     "final_to_target_mm": 165.3,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.178
+      ],
+      "dxy_mm": [
+       -0.0,
+       0.0
+      ],
+      "dyaw_rad": -0.0,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0,
+      0.128
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 81.6,
+     "final_to_target_mm": 125.2,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.128
+      ],
+      "dxy_mm": [
+       0.0,
+       0.0
+      ],
+      "dyaw_rad": 0.0,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 5,
+   "spread": 0.0,
+   "shipped_before": true,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2494,
+      0.1309
+     ],
+     "yaw": -2.76
+    },
+    "mug": {
+     "xy": [
+      -0.245,
+      0.0944
+     ],
+     "yaw": 2.385
+    },
+    "bottle": {
+     "xy": [
+      0.3108,
+      -0.0039
+     ],
+     "yaw": 2.325
+    },
+    "drawer_slide": 0.0045,
+    "dims": {
+     "plate_r": 0.0557,
+     "mug_r": 0.0305,
+     "mug_h": 0.0342,
+     "bottle_r": 0.0243,
+     "bottle_h": 0.0458,
+     "cutlery_l": 0.0366
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0,
+      0.178
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 88.6,
+     "final_to_target_mm": 159.1,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.178
+      ],
+      "dxy_mm": [
+       0.0,
+       -0.0
+      ],
+      "dyaw_rad": 0.0,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0,
+      0.128
+     ],
+     "lifted_mm": 1.0,
+     "planar_move_mm": 93.0,
+     "final_to_target_mm": 112.4,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.128
+      ],
+      "dxy_mm": [
+       0.0,
+       0.0
+      ],
+      "dyaw_rad": -0.0,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 6,
+   "spread": 0.0,
+   "shipped_before": true,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2237,
+      0.1465
+     ],
+     "yaw": -0.424
+    },
+    "mug": {
+     "xy": [
+      -0.2385,
+      0.081
+     ],
+     "yaw": -1.971
+    },
+    "bottle": {
+     "xy": [
+      0.3498,
+      0.0034
+     ],
+     "yaw": 0.25
+    },
+    "drawer_slide": 0.0021,
+    "dims": {
+     "plate_r": 0.0525,
+     "mug_r": 0.0267,
+     "mug_h": 0.0324,
+     "bottle_r": 0.025,
+     "bottle_h": 0.0598,
+     "cutlery_l": 0.0396
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0,
+      0.178
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 87.3,
+     "final_to_target_mm": 160.1,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.178
+      ],
+      "dxy_mm": [
+       0.0,
+       -0.0
+      ],
+      "dyaw_rad": -0.0,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0,
+      0.128
+     ],
+     "lifted_mm": 14.4,
+     "planar_move_mm": 82.4,
+     "final_to_target_mm": 127.1,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.128
+      ],
+      "dxy_mm": [
+       0.0,
+       -0.0
+      ],
+      "dyaw_rad": -0.0,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 7,
+   "spread": 0.0,
+   "shipped_before": true,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2763,
+      0.126
+     ],
+     "yaw": 3.072
+    },
+    "mug": {
+     "xy": [
+      -0.2756,
+      0.0844
+     ],
+     "yaw": 0.707
+    },
+    "bottle": {
+     "xy": [
+      0.309,
+      -0.0618
+     ],
+     "yaw": 0.094
+    },
+    "drawer_slide": 0.0093,
+    "dims": {
+     "plate_r": 0.0535,
+     "mug_r": 0.0312,
+     "mug_h": 0.0373,
+     "bottle_r": 0.0238,
+     "bottle_h": 0.0495,
+     "cutlery_l": 0.0425
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0,
+      0.178
+     ],
+     "lifted_mm": 0.3,
+     "planar_move_mm": 94.7,
+     "final_to_target_mm": 153.8,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.178
+      ],
+      "dxy_mm": [
+       -0.0,
+       -0.0
+      ],
+      "dyaw_rad": -0.0,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0,
+      0.128
+     ],
+     "lifted_mm": 1.2,
+     "planar_move_mm": 96.0,
+     "final_to_target_mm": 113.3,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.128
+      ],
+      "dxy_mm": [
+       0.0,
+       0.0
+      ],
+      "dyaw_rad": 0.0,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 8,
+   "spread": 0.0,
+   "shipped_before": true,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": true
+   },
+   "subgoals_met": 2,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2582,
+      0.1244
+     ],
+     "yaw": 0.923
+    },
+    "mug": {
+     "xy": [
+      -0.213,
+      0.0835
+     ],
+     "yaw": -0.808
+    },
+    "bottle": {
+     "xy": [
+      0.3306,
+      -0.0635
+     ],
+     "yaw": -2.001
+    },
+    "drawer_slide": 0.0079,
+    "dims": {
+     "plate_r": 0.0499,
+     "mug_r": 0.0319,
+     "mug_h": 0.0318,
+     "bottle_r": 0.0283,
+     "bottle_h": 0.058,
+     "cutlery_l": 0.0367
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0,
+      0.178
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.1,
+     "final_to_target_mm": 166.2,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.178
+      ],
+      "dxy_mm": [
+       0.0,
+       -0.0
+      ],
+      "dyaw_rad": -0.0,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0,
+      0.128
+     ],
+     "lifted_mm": 2.2,
+     "planar_move_mm": 60.4,
+     "final_to_target_mm": 146.6,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.128
+      ],
+      "dxy_mm": [
+       -0.0,
+       0.0
+      ],
+      "dyaw_rad": -0.0,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 9,
+   "spread": 0.0,
+   "shipped_before": true,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "subgoals_met": 2,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2685,
+      0.0969
+     ],
+     "yaw": 1.513
+    },
+    "mug": {
+     "xy": [
+      -0.2698,
+      0.1404
+     ],
+     "yaw": 3.065
+    },
+    "bottle": {
+     "xy": [
+      0.3938,
+      0.0145
+     ],
+     "yaw": 2.594
+    },
+    "drawer_slide": 0.0142,
+    "dims": {
+     "plate_r": 0.0564,
+     "mug_r": 0.0263,
+     "mug_h": 0.0352,
+     "bottle_r": 0.0282,
+     "bottle_h": 0.0557,
+     "cutlery_l": 0.043
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0,
+      0.178
+     ],
+     "lifted_mm": 0.1,
+     "planar_move_mm": 87.3,
+     "final_to_target_mm": 160.1,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.178
+      ],
+      "dxy_mm": [
+       -0.0,
+       0.0
+      ],
+      "dyaw_rad": -0.0,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0,
+      0.128
+     ],
+     "lifted_mm": 0.7,
+     "planar_move_mm": 87.4,
+     "final_to_target_mm": 119.4,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0,
+       0.128
+      ],
+      "dxy_mm": [
+       0.0,
+       0.0
+      ],
+      "dyaw_rad": -0.0,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 0,
+   "spread": 0.5,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": false,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 0,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2537,
+      0.097
+     ],
+     "yaw": -0.486
+    },
+    "mug": {
+     "xy": [
+      -0.2925,
+      0.0812
+     ],
+     "yaw": 1.072
+    },
+    "bottle": {
+     "xy": [
+      0.3632,
+      -0.0096
+     ],
+     "yaw": -0.731
+    },
+    "drawer_slide": 0.0199,
+    "dims": {
+     "plate_r": 0.0536,
+     "mug_r": 0.0262,
+     "mug_h": 0.0285,
+     "bottle_r": 0.0221,
+     "bottle_h": 0.0572,
+     "cutlery_l": 0.043
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.003,
+      0.1762
+     ],
+     "lifted_mm": 1.3,
+     "planar_move_mm": 12.7,
+     "final_to_target_mm": 249.7,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.003,
+       0.1762
+      ],
+      "dxy_mm": [
+       3.02,
+       -1.78
+      ],
+      "dyaw_rad": -0.073,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0077,
+      0.131
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 12.8,
+     "final_to_target_mm": 204.0,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0077,
+       0.131
+      ],
+      "dxy_mm": [
+       7.69,
+       2.97
+      ],
+      "dyaw_rad": 0.0301,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "spread": 0.5,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "subgoals_met": 2,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2413,
+      0.0883
+     ],
+     "yaw": -1.493
+    },
+    "mug": {
+     "xy": [
+      -0.2275,
+      0.0952
+     ],
+     "yaw": -0.093
+    },
+    "bottle": {
+     "xy": [
+      0.3933,
+      0.0215
+     ],
+     "yaw": 1.412
+    },
+    "drawer_slide": 0.0108,
+    "dims": {
+     "plate_r": 0.0521,
+     "mug_r": 0.0316,
+     "mug_h": 0.0297,
+     "bottle_r": 0.0296,
+     "bottle_h": 0.0497,
+     "cutlery_l": 0.0371
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0003,
+      0.1719
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.8,
+     "final_to_target_mm": 161.7,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0003,
+       0.1719
+      ],
+      "dxy_mm": [
+       0.26,
+       -6.15
+      ],
+      "dyaw_rad": 0.0247,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      -0.0036,
+      0.1226
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.7,
+     "final_to_target_mm": 124.8,
+     "placed": false,
+     "draw": {
+      "xy": [
+       -0.0036,
+       0.1226
+      ],
+      "dxy_mm": [
+       -3.57,
+       -5.43
+      ],
+      "dyaw_rad": 0.094,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "spread": 0.5,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": true
+   },
+   "subgoals_met": 3,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2665,
+      0.1052
+     ],
+     "yaw": -1.965
+    },
+    "mug": {
+     "xy": [
+      -0.2639,
+      0.116
+     ],
+     "yaw": 2.458
+    },
+    "bottle": {
+     "xy": [
+      0.3748,
+      -0.0364
+     ],
+     "yaw": 2.665
+    },
+    "drawer_slide": 0.0094,
+    "dims": {
+     "plate_r": 0.0491,
+     "mug_r": 0.0264,
+     "mug_h": 0.0378,
+     "bottle_r": 0.0227,
+     "bottle_h": 0.054,
+     "cutlery_l": 0.0407
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      -0.0048,
+      0.1842
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 76.7,
+     "final_to_target_mm": 172.1,
+     "placed": false,
+     "draw": {
+      "xy": [
+       -0.0048,
+       0.1842
+      ],
+      "dxy_mm": [
+       -4.77,
+       6.15
+      ],
+      "dyaw_rad": 0.036,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0031,
+      0.1217
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 77.0,
+     "final_to_target_mm": 121.4,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0031,
+       0.1217
+      ],
+      "dxy_mm": [
+       3.1,
+       -6.28
+      ],
+      "dyaw_rad": -0.0791,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 3,
+   "spread": 0.5,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2634,
+      0.1327
+     ],
+     "yaw": -1.302
+    },
+    "mug": {
+     "xy": [
+      -0.2949,
+      0.1576
+     ],
+     "yaw": -1.267
+    },
+    "bottle": {
+     "xy": [
+      0.3333,
+      0.0153
+     ],
+     "yaw": 0.535
+    },
+    "drawer_slide": 0.0094,
+    "dims": {
+     "plate_r": 0.047,
+     "mug_r": 0.0259,
+     "mug_h": 0.0376,
+     "bottle_r": 0.0267,
+     "bottle_h": 0.0464,
+     "cutlery_l": 0.0372
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      -0.002,
+      0.1715
+     ],
+     "lifted_mm": 0.2,
+     "planar_move_mm": 82.9,
+     "final_to_target_mm": 157.3,
+     "placed": false,
+     "draw": {
+      "xy": [
+       -0.002,
+       0.1715
+      ],
+      "dxy_mm": [
+       -2.01,
+       -6.55
+      ],
+      "dyaw_rad": 0.0321,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0044,
+      0.1205
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 82.9,
+     "final_to_target_mm": 115.4,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0044,
+       0.1205
+      ],
+      "dxy_mm": [
+       4.37,
+       -7.51
+      ],
+      "dyaw_rad": 0.0414,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 4,
+   "spread": 0.5,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2886,
+      0.086
+     ],
+     "yaw": 0.684
+    },
+    "mug": {
+     "xy": [
+      -0.2316,
+      0.1549
+     ],
+     "yaw": 1.041
+    },
+    "bottle": {
+     "xy": [
+      0.3913,
+      -0.0335
+     ],
+     "yaw": -1.736
+    },
+    "drawer_slide": 0.0104,
+    "dims": {
+     "plate_r": 0.0573,
+     "mug_r": 0.0281,
+     "mug_h": 0.0397,
+     "bottle_r": 0.0226,
+     "bottle_h": 0.0541,
+     "cutlery_l": 0.0365
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      -0.0037,
+      0.1849
+     ],
+     "lifted_mm": 2.1,
+     "planar_move_mm": 96.8,
+     "final_to_target_mm": 155.8,
+     "placed": false,
+     "draw": {
+      "xy": [
+       -0.0037,
+       0.1849
+      ],
+      "dxy_mm": [
+       -3.71,
+       6.88
+      ],
+      "dyaw_rad": -0.0017,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0023,
+      0.135
+     ],
+     "lifted_mm": 2.1,
+     "planar_move_mm": 94.9,
+     "final_to_target_mm": 118.7,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0023,
+       0.135
+      ],
+      "dxy_mm": [
+       2.26,
+       7.03
+      ],
+      "dyaw_rad": 0.0164,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 5,
+   "spread": 0.5,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2494,
+      0.1309
+     ],
+     "yaw": -2.76
+    },
+    "mug": {
+     "xy": [
+      -0.245,
+      0.0944
+     ],
+     "yaw": 2.385
+    },
+    "bottle": {
+     "xy": [
+      0.3108,
+      -0.0039
+     ],
+     "yaw": 2.325
+    },
+    "drawer_slide": 0.0045,
+    "dims": {
+     "plate_r": 0.0557,
+     "mug_r": 0.0305,
+     "mug_h": 0.0342,
+     "bottle_r": 0.0243,
+     "bottle_h": 0.0458,
+     "cutlery_l": 0.0366
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0033,
+      0.17
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 88.9,
+     "final_to_target_mm": 153.9,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0033,
+       0.17
+      ],
+      "dxy_mm": [
+       3.32,
+       -7.98
+      ],
+      "dyaw_rad": 0.0007,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0063,
+      0.134
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 91.6,
+     "final_to_target_mm": 116.3,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0063,
+       0.134
+      ],
+      "dxy_mm": [
+       6.33,
+       5.96
+      ],
+      "dyaw_rad": -0.0963,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 6,
+   "spread": 0.5,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2237,
+      0.1465
+     ],
+     "yaw": -0.424
+    },
+    "mug": {
+     "xy": [
+      -0.2385,
+      0.081
+     ],
+     "yaw": -1.971
+    },
+    "bottle": {
+     "xy": [
+      0.3498,
+      0.0034
+     ],
+     "yaw": 0.25
+    },
+    "drawer_slide": 0.0021,
+    "dims": {
+     "plate_r": 0.0525,
+     "mug_r": 0.0267,
+     "mug_h": 0.0324,
+     "bottle_r": 0.025,
+     "bottle_h": 0.0598,
+     "cutlery_l": 0.0396
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0014,
+      0.1751
+     ],
+     "lifted_mm": 3.7,
+     "planar_move_mm": 136.0,
+     "final_to_target_mm": 120.6,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0014,
+       0.1751
+      ],
+      "dxy_mm": [
+       1.39,
+       -2.89
+      ],
+      "dyaw_rad": -0.0164,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0059,
+      0.1222
+     ],
+     "lifted_mm": 4.0,
+     "planar_move_mm": 107.3,
+     "final_to_target_mm": 126.0,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0059,
+       0.1222
+      ],
+      "dxy_mm": [
+       5.86,
+       -5.77
+      ],
+      "dyaw_rad": -0.0121,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 7,
+   "spread": 0.5,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2763,
+      0.126
+     ],
+     "yaw": 3.072
+    },
+    "mug": {
+     "xy": [
+      -0.2756,
+      0.0844
+     ],
+     "yaw": 0.707
+    },
+    "bottle": {
+     "xy": [
+      0.309,
+      -0.0618
+     ],
+     "yaw": 0.094
+    },
+    "drawer_slide": 0.0093,
+    "dims": {
+     "plate_r": 0.0535,
+     "mug_r": 0.0312,
+     "mug_h": 0.0373,
+     "bottle_r": 0.0238,
+     "bottle_h": 0.0495,
+     "cutlery_l": 0.0425
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      -0.0001,
+      0.174
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 77.4,
+     "final_to_target_mm": 165.2,
+     "placed": false,
+     "draw": {
+      "xy": [
+       -0.0001,
+       0.174
+      ],
+      "dxy_mm": [
+       -0.05,
+       -4.04
+      ],
+      "dyaw_rad": -0.0976,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0067,
+      0.1301
+     ],
+     "lifted_mm": 1.7,
+     "planar_move_mm": 77.5,
+     "final_to_target_mm": 126.3,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0067,
+       0.1301
+      ],
+      "dxy_mm": [
+       6.67,
+       2.07
+      ],
+      "dyaw_rad": 0.0028,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 8,
+   "spread": 0.5,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": true
+   },
+   "subgoals_met": 3,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2582,
+      0.1244
+     ],
+     "yaw": 0.923
+    },
+    "mug": {
+     "xy": [
+      -0.213,
+      0.0835
+     ],
+     "yaw": -0.808
+    },
+    "bottle": {
+     "xy": [
+      0.3306,
+      -0.0635
+     ],
+     "yaw": -2.001
+    },
+    "drawer_slide": 0.0079,
+    "dims": {
+     "plate_r": 0.0499,
+     "mug_r": 0.0319,
+     "mug_h": 0.0318,
+     "bottle_r": 0.0283,
+     "bottle_h": 0.058,
+     "cutlery_l": 0.0367
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0017,
+      0.1736
+     ],
+     "lifted_mm": 0.3,
+     "planar_move_mm": 76.3,
+     "final_to_target_mm": 165.3,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0017,
+       0.1736
+      ],
+      "dxy_mm": [
+       1.72,
+       -4.43
+      ],
+      "dyaw_rad": -0.0732,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      -0.0017,
+      0.1299
+     ],
+     "lifted_mm": 1.1,
+     "planar_move_mm": 53.6,
+     "final_to_target_mm": 154.7,
+     "placed": false,
+     "draw": {
+      "xy": [
+       -0.0017,
+       0.1299
+      ],
+      "dxy_mm": [
+       -1.71,
+       1.87
+      ],
+      "dyaw_rad": -0.0095,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 9,
+   "spread": 0.5,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "subgoals_met": 2,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2685,
+      0.0969
+     ],
+     "yaw": 1.513
+    },
+    "mug": {
+     "xy": [
+      -0.2698,
+      0.1404
+     ],
+     "yaw": 3.065
+    },
+    "bottle": {
+     "xy": [
+      0.3938,
+      0.0145
+     ],
+     "yaw": 2.594
+    },
+    "drawer_slide": 0.0142,
+    "dims": {
+     "plate_r": 0.0564,
+     "mug_r": 0.0263,
+     "mug_h": 0.0352,
+     "bottle_r": 0.0282,
+     "bottle_h": 0.0557,
+     "cutlery_l": 0.043
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      -0.0021,
+      0.1797
+     ],
+     "lifted_mm": 1.6,
+     "planar_move_mm": 64.9,
+     "final_to_target_mm": 179.9,
+     "placed": false,
+     "draw": {
+      "xy": [
+       -0.0021,
+       0.1797
+      ],
+      "dxy_mm": [
+       -2.08,
+       1.7
+      ],
+      "dyaw_rad": -0.0045,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0009,
+      0.1348
+     ],
+     "lifted_mm": 1.6,
+     "planar_move_mm": 64.9,
+     "final_to_target_mm": 142.2,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0009,
+       0.1348
+      ],
+      "dxy_mm": [
+       0.87,
+       6.77
+      ],
+      "dyaw_rad": -0.0821,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 0,
+   "spread": 1.0,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": false,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 0,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2537,
+      0.097
+     ],
+     "yaw": -0.486
+    },
+    "mug": {
+     "xy": [
+      -0.2925,
+      0.0812
+     ],
+     "yaw": 1.072
+    },
+    "bottle": {
+     "xy": [
+      0.3632,
+      -0.0096
+     ],
+     "yaw": -0.731
+    },
+    "drawer_slide": 0.0199,
+    "dims": {
+     "plate_r": 0.0536,
+     "mug_r": 0.0262,
+     "mug_h": 0.0285,
+     "bottle_r": 0.0221,
+     "bottle_h": 0.0572,
+     "cutlery_l": 0.043
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.006,
+      0.1744
+     ],
+     "lifted_mm": 6.5,
+     "planar_move_mm": 31.7,
+     "final_to_target_mm": 262.1,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.006,
+       0.1744
+      ],
+      "dxy_mm": [
+       6.03,
+       -3.55
+      ],
+      "dyaw_rad": -0.146,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0154,
+      0.1339
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 8.6,
+     "final_to_target_mm": 200.4,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0154,
+       0.1339
+      ],
+      "dxy_mm": [
+       15.39,
+       5.94
+      ],
+      "dyaw_rad": 0.0602,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "spread": 1.0,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2413,
+      0.0883
+     ],
+     "yaw": -1.493
+    },
+    "mug": {
+     "xy": [
+      -0.2275,
+      0.0952
+     ],
+     "yaw": -0.093
+    },
+    "bottle": {
+     "xy": [
+      0.3933,
+      0.0215
+     ],
+     "yaw": 1.412
+    },
+    "drawer_slide": 0.0108,
+    "dims": {
+     "plate_r": 0.0521,
+     "mug_r": 0.0316,
+     "mug_h": 0.0297,
+     "bottle_r": 0.0296,
+     "bottle_h": 0.0497,
+     "cutlery_l": 0.0371
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0005,
+      0.1657
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.1,
+     "final_to_target_mm": 156.9,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0005,
+       0.1657
+      ],
+      "dxy_mm": [
+       0.51,
+       -12.29
+      ],
+      "dyaw_rad": 0.0494,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      -0.0071,
+      0.1171
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.1,
+     "final_to_target_mm": 124.0,
+     "placed": false,
+     "draw": {
+      "xy": [
+       -0.0071,
+       0.1171
+      ],
+      "dxy_mm": [
+       -7.14,
+       -10.86
+      ],
+      "dyaw_rad": 0.188,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "spread": 1.0,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "subgoals_met": 2,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2665,
+      0.1052
+     ],
+     "yaw": -1.965
+    },
+    "mug": {
+     "xy": [
+      -0.2639,
+      0.116
+     ],
+     "yaw": 2.458
+    },
+    "bottle": {
+     "xy": [
+      0.3748,
+      -0.0364
+     ],
+     "yaw": 2.665
+    },
+    "drawer_slide": 0.0094,
+    "dims": {
+     "plate_r": 0.0491,
+     "mug_r": 0.0264,
+     "mug_h": 0.0378,
+     "bottle_r": 0.0227,
+     "bottle_h": 0.054,
+     "cutlery_l": 0.0407
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      -0.0095,
+      0.1903
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.1,
+     "final_to_target_mm": 172.6,
+     "placed": false,
+     "draw": {
+      "xy": [
+       -0.0095,
+       0.1903
+      ],
+      "dxy_mm": [
+       -9.54,
+       12.3
+      ],
+      "dyaw_rad": 0.0719,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0062,
+      0.1154
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.1,
+     "final_to_target_mm": 112.5,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0062,
+       0.1154
+      ],
+      "dxy_mm": [
+       6.2,
+       -12.57
+      ],
+      "dyaw_rad": -0.1582,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 3,
+   "spread": 1.0,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "subgoals_met": 2,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2634,
+      0.1327
+     ],
+     "yaw": -1.302
+    },
+    "mug": {
+     "xy": [
+      -0.2949,
+      0.1576
+     ],
+     "yaw": -1.267
+    },
+    "bottle": {
+     "xy": [
+      0.3333,
+      0.0153
+     ],
+     "yaw": 0.535
+    },
+    "drawer_slide": 0.0094,
+    "dims": {
+     "plate_r": 0.047,
+     "mug_r": 0.0259,
+     "mug_h": 0.0376,
+     "bottle_r": 0.0267,
+     "bottle_h": 0.0464,
+     "cutlery_l": 0.0372
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      -0.004,
+      0.1649
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.1,
+     "final_to_target_mm": 153.0,
+     "placed": false,
+     "draw": {
+      "xy": [
+       -0.004,
+       0.1649
+      ],
+      "dxy_mm": [
+       -4.02,
+       -13.09
+      ],
+      "dyaw_rad": 0.0642,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0087,
+      0.113
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.3,
+     "final_to_target_mm": 108.8,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0087,
+       0.113
+      ],
+      "dxy_mm": [
+       8.74,
+       -15.03
+      ],
+      "dyaw_rad": 0.0828,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 4,
+   "spread": 1.0,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2886,
+      0.086
+     ],
+     "yaw": 0.684
+    },
+    "mug": {
+     "xy": [
+      -0.2316,
+      0.1549
+     ],
+     "yaw": 1.041
+    },
+    "bottle": {
+     "xy": [
+      0.3913,
+      -0.0335
+     ],
+     "yaw": -1.736
+    },
+    "drawer_slide": 0.0104,
+    "dims": {
+     "plate_r": 0.0573,
+     "mug_r": 0.0281,
+     "mug_h": 0.0397,
+     "bottle_r": 0.0226,
+     "bottle_h": 0.0541,
+     "cutlery_l": 0.0365
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      -0.0074,
+      0.1918
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 82.1,
+     "final_to_target_mm": 172.9,
+     "placed": false,
+     "draw": {
+      "xy": [
+       -0.0074,
+       0.1918
+      ],
+      "dxy_mm": [
+       -7.43,
+       13.75
+      ],
+      "dyaw_rad": -0.0033,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0045,
+      0.1421
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 82.9,
+     "final_to_target_mm": 131.2,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0045,
+       0.1421
+      ],
+      "dxy_mm": [
+       4.52,
+       14.05
+      ],
+      "dyaw_rad": 0.0328,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 5,
+   "spread": 1.0,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2494,
+      0.1309
+     ],
+     "yaw": -2.76
+    },
+    "mug": {
+     "xy": [
+      -0.245,
+      0.0944
+     ],
+     "yaw": 2.385
+    },
+    "bottle": {
+     "xy": [
+      0.3108,
+      -0.0039
+     ],
+     "yaw": 2.325
+    },
+    "drawer_slide": 0.0045,
+    "dims": {
+     "plate_r": 0.0557,
+     "mug_r": 0.0305,
+     "mug_h": 0.0342,
+     "bottle_r": 0.0243,
+     "bottle_h": 0.0458,
+     "cutlery_l": 0.0366
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      -0.002,
+      0.1685
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 90.1,
+     "final_to_target_mm": 148.7,
+     "placed": false,
+     "draw": {
+      "xy": [
+       -0.002,
+       0.1685
+      ],
+      "dxy_mm": [
+       -2.03,
+       -9.5
+      ],
+      "dyaw_rad": -0.07,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0127,
+      0.1399
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 90.2,
+     "final_to_target_mm": 119.1,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0127,
+       0.1399
+      ],
+      "dxy_mm": [
+       12.65,
+       11.91
+      ],
+      "dyaw_rad": -0.1926,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 6,
+   "spread": 1.0,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2237,
+      0.1465
+     ],
+     "yaw": -0.424
+    },
+    "mug": {
+     "xy": [
+      -0.2385,
+      0.081
+     ],
+     "yaw": -1.971
+    },
+    "bottle": {
+     "xy": [
+      0.3498,
+      0.0034
+     ],
+     "yaw": 0.25
+    },
+    "drawer_slide": 0.0021,
+    "dims": {
+     "plate_r": 0.0525,
+     "mug_r": 0.0267,
+     "mug_h": 0.0324,
+     "bottle_r": 0.025,
+     "bottle_h": 0.0598,
+     "cutlery_l": 0.0396
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0028,
+      0.1722
+     ],
+     "lifted_mm": 0.3,
+     "planar_move_mm": 84.7,
+     "final_to_target_mm": 159.0,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0028,
+       0.1722
+      ],
+      "dxy_mm": [
+       2.78,
+       -5.79
+      ],
+      "dyaw_rad": -0.0328,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0117,
+      0.1165
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 85.4,
+     "final_to_target_mm": 105.7,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0117,
+       0.1165
+      ],
+      "dxy_mm": [
+       11.72,
+       -11.53
+      ],
+      "dyaw_rad": -0.0241,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 7,
+   "spread": 1.0,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [
+    "mug"
+   ],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2763,
+      0.126
+     ],
+     "yaw": 3.072
+    },
+    "mug": {
+     "xy": [
+      -0.2756,
+      0.0844
+     ],
+     "yaw": 0.707
+    },
+    "bottle": {
+     "xy": [
+      0.309,
+      -0.0618
+     ],
+     "yaw": 0.094
+    },
+    "drawer_slide": 0.0093,
+    "dims": {
+     "plate_r": 0.0535,
+     "mug_r": 0.0312,
+     "mug_h": 0.0373,
+     "bottle_r": 0.0238,
+     "bottle_h": 0.0495,
+     "cutlery_l": 0.0425
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      -0.0001,
+      0.1699
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 77.0,
+     "final_to_target_mm": 162.1,
+     "placed": false,
+     "draw": {
+      "xy": [
+       -0.0001,
+       0.1699
+      ],
+      "dxy_mm": [
+       -0.1,
+       -8.08
+      ],
+      "dyaw_rad": -0.1953,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0133,
+      0.1321
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 77.7,
+     "final_to_target_mm": 122.5,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0133,
+       0.1321
+      ],
+      "dxy_mm": [
+       13.35,
+       4.14
+      ],
+      "dyaw_rad": 0.0056,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 8,
+   "spread": 1.0,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": true
+   },
+   "subgoals_met": 3,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2582,
+      0.1244
+     ],
+     "yaw": 0.923
+    },
+    "mug": {
+     "xy": [
+      -0.213,
+      0.0835
+     ],
+     "yaw": -0.808
+    },
+    "bottle": {
+     "xy": [
+      0.3306,
+      -0.0635
+     ],
+     "yaw": -2.001
+    },
+    "drawer_slide": 0.0079,
+    "dims": {
+     "plate_r": 0.0499,
+     "mug_r": 0.0319,
+     "mug_h": 0.0318,
+     "bottle_r": 0.0283,
+     "bottle_h": 0.058,
+     "cutlery_l": 0.0367
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      0.0034,
+      0.1691
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 83.9,
+     "final_to_target_mm": 157.4,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0034,
+       0.1691
+      ],
+      "dxy_mm": [
+       3.43,
+       -8.86
+      ],
+      "dyaw_rad": -0.1464,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      -0.0034,
+      0.1317
+     ],
+     "lifted_mm": 0.0,
+     "planar_move_mm": 83.9,
+     "final_to_target_mm": 128.2,
+     "placed": false,
+     "draw": {
+      "xy": [
+       -0.0034,
+       0.1317
+      ],
+      "dxy_mm": [
+       -3.41,
+       3.74
+      ],
+      "dyaw_rad": -0.0191,
+      "accepted": true
+     }
+    }
+   }
+  },
+  {
+   "seed": 9,
+   "spread": 1.0,
+   "shipped_before": false,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "subgoals_met": 1,
+   "task_success": false,
+   "objects_dropped": [],
+   "upstream": {
+    "plate": {
+     "xy": [
+      0.2685,
+      0.0969
+     ],
+     "yaw": 1.513
+    },
+    "mug": {
+     "xy": [
+      -0.2698,
+      0.1404
+     ],
+     "yaw": 3.065
+    },
+    "bottle": {
+     "xy": [
+      0.3938,
+      0.0145
+     ],
+     "yaw": 2.594
+    },
+    "drawer_slide": 0.0142,
+    "dims": {
+     "plate_r": 0.0564,
+     "mug_r": 0.0263,
+     "mug_h": 0.0352,
+     "bottle_r": 0.0282,
+     "bottle_h": 0.0557,
+     "cutlery_l": 0.043
+    }
+   },
+   "objects": {
+    "fork": {
+     "start_xy": [
+      -0.0042,
+      0.1814
+     ],
+     "lifted_mm": 3.9,
+     "planar_move_mm": 93.3,
+     "final_to_target_mm": 155.7,
+     "placed": false,
+     "draw": {
+      "xy": [
+       -0.0042,
+       0.1814
+      ],
+      "dxy_mm": [
+       -4.16,
+       3.39
+      ],
+      "dyaw_rad": -0.0089,
+      "accepted": true
+     }
+    },
+    "spoon": {
+     "start_xy": [
+      0.0017,
+      0.1415
+     ],
+     "lifted_mm": 3.9,
+     "planar_move_mm": 93.4,
+     "final_to_target_mm": 124.9,
+     "placed": false,
+     "draw": {
+      "xy": [
+       0.0017,
+       0.1415
+      ],
+      "dxy_mm": [
+       1.74,
+       13.54
+      ],
+      "dyaw_rad": -0.1641,
+      "accepted": true
+     }
+    }
+   }
+  }
+ ]
+}
