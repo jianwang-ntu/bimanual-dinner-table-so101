@@ -1,0 +1,6794 @@
+{
+ "probe": "measure_gripper_envelope.py",
+ "question": "Is the cutlery stall the open-jaw envelope -- the descent being executed at a gripper width the pose was not solved at?",
+ "hypothesis_id": "H-GRIPPER-ENVELOPE-001",
+ "seeds": 10,
+ "grid": {
+  "openings": [
+   null,
+   0.3,
+   0.15,
+   0.0
+  ],
+  "plan_at_open": [
+   false,
+   true
+  ],
+  "cells": 8,
+  "rollouts": 80
+ },
+ "verdict": "REFUTED",
+ "verdict_basis": "SUPPORTED iff some cell places a fork or a spoon that the shipped cell does not; sub-goal totals on the plate, mug or drawer are not this hypothesis.",
+ "controls": {
+  "all_offset_seeds_ok": true,
+  "all_sweep_cells_ran": true,
+  "descend_waypoints_carry_a_plan_at": true,
+  "approach_waypoints_do_not": true,
+  "solved_and_executed_widths_differ_at_the_descent": true,
+  "offset_is_larger_than_the_solver_residual": true,
+  "no_offset_where_the_widths_are_equal": true,
+  "shipped_cell_present": true,
+  "shipped_cell_reproduces_zero_placements": true,
+  "every_cell_ran_all_seeds": true
+ },
+ "offset_by_waypoint": {
+  "fork_descend": {
+   "n": 10,
+   "has_plan_at": true,
+   "solved_sep_mm_median": 7.0,
+   "executed_sep_mm_median": 50.44,
+   "offset_mm_median": 21.83,
+   "offset_mm_max": 21.83,
+   "along_approach_mm_median": -0.08,
+   "along_jaw_mm_median": 21.14,
+   "solved_tip_to_target_mm_median": 3.93,
+   "executed_tip_to_target_mm_median": 20.72
+  },
+  "spoon_descend": {
+   "n": 10,
+   "has_plan_at": true,
+   "solved_sep_mm_median": 7.0,
+   "executed_sep_mm_median": 50.44,
+   "offset_mm_median": 21.83,
+   "offset_mm_max": 21.83,
+   "along_approach_mm_median": -0.08,
+   "along_jaw_mm_median": 21.14,
+   "solved_tip_to_target_mm_median": 2.93,
+   "executed_tip_to_target_mm_median": 20.41
+  },
+  "fork_above": {
+   "n": 10,
+   "has_plan_at": false,
+   "solved_sep_mm_median": 50.44,
+   "executed_sep_mm_median": 50.44,
+   "offset_mm_median": 0.0,
+   "offset_mm_max": 0.0,
+   "along_approach_mm_median": 0.0,
+   "along_jaw_mm_median": 0.0,
+   "solved_tip_to_target_mm_median": 3.22,
+   "executed_tip_to_target_mm_median": 3.22
+  },
+  "spoon_above": {
+   "n": 10,
+   "has_plan_at": false,
+   "solved_sep_mm_median": 50.44,
+   "executed_sep_mm_median": 50.44,
+   "offset_mm_median": 0.0,
+   "offset_mm_max": 0.0,
+   "along_approach_mm_median": 0.0,
+   "along_jaw_mm_median": 0.0,
+   "solved_tip_to_target_mm_median": 1.73,
+   "executed_tip_to_target_mm_median": 1.73
+  }
+ },
+ "cells": [
+  {
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "executed_sep_mm": null,
+   "plan_at_open": false,
+   "shipped": true,
+   "n": 10,
+   "fork_placed": 0,
+   "spoon_placed": 0,
+   "subgoals_met_total": 15,
+   "fork_lifted_mm_median": 0.0,
+   "spoon_lifted_mm_median": 1.1,
+   "fork_stall_mm_median": 24.5,
+   "spoon_stall_mm_median": 36.4,
+   "top_contact_pairs": [
+    {
+     "pair": "right_gripper/geom115 | fork/fork_handle",
+     "steps": 3720
+    },
+    {
+     "pair": "left_moving_jaw_so101_v1/geom78 | drawer/drawer_front",
+     "steps": 1446
+    },
+    {
+     "pair": "left_wrist/geom56 | cabinet/cab_left",
+     "steps": 1444
+    },
+    {
+     "pair": "left_gripper/geom67 | drawer/drawer_front",
+     "steps": 1341
+    }
+   ],
+   "first_contact_pairs": [
+    {
+     "pair": "right_gripper/geom115 | fork/fork_handle",
+     "episodes": 7
+    },
+    {
+     "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+     "episodes": 4
+    },
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+     "episodes": 3
+    },
+    {
+     "pair": "left_gripper/geom67 | drawer/drawer_front",
+     "episodes": 2
+    }
+   ]
+  },
+  {
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "executed_sep_mm": null,
+   "plan_at_open": true,
+   "shipped": false,
+   "n": 10,
+   "fork_placed": 0,
+   "spoon_placed": 0,
+   "subgoals_met_total": 16,
+   "fork_lifted_mm_median": 0.0,
+   "spoon_lifted_mm_median": 0.7,
+   "fork_stall_mm_median": 23.2,
+   "spoon_stall_mm_median": 43.8,
+   "top_contact_pairs": [
+    {
+     "pair": "left_gripper/geom67 | drawer/drawer_front",
+     "steps": 4428
+    },
+    {
+     "pair": "right_gripper/geom115 | drawer/drawer_floor",
+     "steps": 3291
+    },
+    {
+     "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+     "steps": 2773
+    },
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+     "steps": 1883
+    }
+   ],
+   "first_contact_pairs": [
+    {
+     "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+     "episodes": 4
+    },
+    {
+     "pair": "right_gripper/geom115 | drawer/drawer_floor",
+     "episodes": 4
+    },
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+     "episodes": 4
+    },
+    {
+     "pair": "right_gripper/geom115 | fork/fork_handle",
+     "episodes": 1
+    }
+   ]
+  },
+  {
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "executed_sep_mm": null,
+   "plan_at_open": false,
+   "shipped": false,
+   "n": 10,
+   "fork_placed": 0,
+   "spoon_placed": 0,
+   "subgoals_met_total": 18,
+   "fork_lifted_mm_median": 0.0,
+   "spoon_lifted_mm_median": 1.15,
+   "fork_stall_mm_median": 32.2,
+   "spoon_stall_mm_median": 48.6,
+   "top_contact_pairs": [
+    {
+     "pair": "left_wrist/geom56 | cabinet/cab_left",
+     "steps": 3366
+    },
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+     "steps": 3218
+    },
+    {
+     "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+     "steps": 2768
+    },
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+     "steps": 1866
+    }
+   ],
+   "first_contact_pairs": [
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+     "episodes": 8
+    },
+    {
+     "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+     "episodes": 2
+    },
+    {
+     "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+     "episodes": 2
+    },
+    {
+     "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+     "episodes": 2
+    }
+   ]
+  },
+  {
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "executed_sep_mm": null,
+   "plan_at_open": true,
+   "shipped": false,
+   "n": 10,
+   "fork_placed": 0,
+   "spoon_placed": 0,
+   "subgoals_met_total": 14,
+   "fork_lifted_mm_median": 0.0,
+   "spoon_lifted_mm_median": 2.0,
+   "fork_stall_mm_median": 15.5,
+   "spoon_stall_mm_median": 42.45,
+   "top_contact_pairs": [
+    {
+     "pair": "left_gripper/geom67 | drawer/drawer_front",
+     "steps": 3566
+    },
+    {
+     "pair": "right_gripper/geom115 | drawer/drawer_floor",
+     "steps": 3173
+    },
+    {
+     "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+     "steps": 2963
+    },
+    {
+     "pair": "left_gripper/geom67 | drawer/drawer_floor",
+     "steps": 958
+    }
+   ],
+   "first_contact_pairs": [
+    {
+     "pair": "right_gripper/geom115 | drawer/drawer_floor",
+     "episodes": 8
+    },
+    {
+     "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+     "episodes": 5
+    },
+    {
+     "pair": "left_gripper/geom67 | drawer/drawer_front",
+     "episodes": 2
+    },
+    {
+     "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+     "episodes": 2
+    }
+   ]
+  },
+  {
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "executed_sep_mm": null,
+   "plan_at_open": false,
+   "shipped": false,
+   "n": 10,
+   "fork_placed": 0,
+   "spoon_placed": 0,
+   "subgoals_met_total": 12,
+   "fork_lifted_mm_median": 0.0,
+   "spoon_lifted_mm_median": 1.3,
+   "fork_stall_mm_median": 28.2,
+   "spoon_stall_mm_median": 29.0,
+   "top_contact_pairs": [
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+     "steps": 2336
+    },
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+     "steps": 2315
+    },
+    {
+     "pair": "left_gripper/geom67 | drawer/drawer_front",
+     "steps": 2147
+    },
+    {
+     "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+     "steps": 1841
+    }
+   ],
+   "first_contact_pairs": [
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+     "episodes": 6
+    },
+    {
+     "pair": "left_gripper/geom67 | drawer/drawer_front",
+     "episodes": 3
+    },
+    {
+     "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+     "episodes": 2
+    },
+    {
+     "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+     "episodes": 2
+    }
+   ]
+  },
+  {
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "executed_sep_mm": null,
+   "plan_at_open": true,
+   "shipped": false,
+   "n": 10,
+   "fork_placed": 0,
+   "spoon_placed": 0,
+   "subgoals_met_total": 11,
+   "fork_lifted_mm_median": 0.0,
+   "spoon_lifted_mm_median": 2.3,
+   "fork_stall_mm_median": 14.75,
+   "spoon_stall_mm_median": 18.6,
+   "top_contact_pairs": [
+    {
+     "pair": "right_gripper/geom115 | fork/fork_handle",
+     "steps": 2339
+    },
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+     "steps": 2234
+    },
+    {
+     "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+     "steps": 1928
+    },
+    {
+     "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+     "steps": 1765
+    }
+   ],
+   "first_contact_pairs": [
+    {
+     "pair": "right_gripper/geom115 | fork/fork_handle",
+     "episodes": 4
+    },
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+     "episodes": 3
+    },
+    {
+     "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+     "episodes": 3
+    },
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+     "episodes": 3
+    }
+   ]
+  },
+  {
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "executed_sep_mm": null,
+   "plan_at_open": false,
+   "shipped": false,
+   "n": 10,
+   "fork_placed": 0,
+   "spoon_placed": 0,
+   "subgoals_met_total": 16,
+   "fork_lifted_mm_median": 0.0,
+   "spoon_lifted_mm_median": 0.75,
+   "fork_stall_mm_median": 11.0,
+   "spoon_stall_mm_median": 32.75,
+   "top_contact_pairs": [
+    {
+     "pair": "right_gripper/geom115 | fork/fork_handle",
+     "steps": 3249
+    },
+    {
+     "pair": "left_gripper/geom67 | drawer/drawer_front",
+     "steps": 2820
+    },
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+     "steps": 1106
+    },
+    {
+     "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+     "steps": 1076
+    }
+   ],
+   "first_contact_pairs": [
+    {
+     "pair": "right_gripper/geom115 | fork/fork_handle",
+     "episodes": 6
+    },
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+     "episodes": 3
+    },
+    {
+     "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+     "episodes": 2
+    },
+    {
+     "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+     "episodes": 2
+    }
+   ]
+  },
+  {
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "executed_sep_mm": null,
+   "plan_at_open": true,
+   "shipped": false,
+   "n": 10,
+   "fork_placed": 0,
+   "spoon_placed": 0,
+   "subgoals_met_total": 16,
+   "fork_lifted_mm_median": 0.0,
+   "spoon_lifted_mm_median": 2.15,
+   "fork_stall_mm_median": 14.15,
+   "spoon_stall_mm_median": 28.0,
+   "top_contact_pairs": [
+    {
+     "pair": "right_gripper/geom115 | fork/fork_handle",
+     "steps": 3017
+    },
+    {
+     "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+     "steps": 2076
+    },
+    {
+     "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+     "steps": 1902
+    },
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+     "steps": 1225
+    }
+   ],
+   "first_contact_pairs": [
+    {
+     "pair": "right_gripper/geom115 | fork/fork_handle",
+     "episodes": 5
+    },
+    {
+     "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+     "episodes": 3
+    },
+    {
+     "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+     "episodes": 2
+    },
+    {
+     "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+     "episodes": 2
+    }
+   ]
+  }
+ ],
+ "shipped_cell": {
+  "opening": null,
+  "opening_rad_effective": 0.45,
+  "executed_sep_mm": null,
+  "plan_at_open": false,
+  "shipped": true,
+  "n": 10,
+  "fork_placed": 0,
+  "spoon_placed": 0,
+  "subgoals_met_total": 15,
+  "fork_lifted_mm_median": 0.0,
+  "spoon_lifted_mm_median": 1.1,
+  "fork_stall_mm_median": 24.5,
+  "spoon_stall_mm_median": 36.4,
+  "top_contact_pairs": [
+   {
+    "pair": "right_gripper/geom115 | fork/fork_handle",
+    "steps": 3720
+   },
+   {
+    "pair": "left_moving_jaw_so101_v1/geom78 | drawer/drawer_front",
+    "steps": 1446
+   },
+   {
+    "pair": "left_wrist/geom56 | cabinet/cab_left",
+    "steps": 1444
+   },
+   {
+    "pair": "left_gripper/geom67 | drawer/drawer_front",
+    "steps": 1341
+   }
+  ],
+  "first_contact_pairs": [
+   {
+    "pair": "right_gripper/geom115 | fork/fork_handle",
+    "episodes": 7
+   },
+   {
+    "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+    "episodes": 4
+   },
+   {
+    "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+    "episodes": 3
+   },
+   {
+    "pair": "left_gripper/geom67 | drawer/drawer_front",
+    "episodes": 2
+   }
+  ]
+ },
+ "best_cell": {
+  "opening": 0.3,
+  "opening_rad_effective": 0.3,
+  "executed_sep_mm": null,
+  "plan_at_open": false,
+  "shipped": false,
+  "n": 10,
+  "fork_placed": 0,
+  "spoon_placed": 0,
+  "subgoals_met_total": 18,
+  "fork_lifted_mm_median": 0.0,
+  "spoon_lifted_mm_median": 1.15,
+  "fork_stall_mm_median": 32.2,
+  "spoon_stall_mm_median": 48.6,
+  "top_contact_pairs": [
+   {
+    "pair": "left_wrist/geom56 | cabinet/cab_left",
+    "steps": 3366
+   },
+   {
+    "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+    "steps": 3218
+   },
+   {
+    "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+    "steps": 2768
+   },
+   {
+    "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+    "steps": 1866
+   }
+  ],
+  "first_contact_pairs": [
+   {
+    "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+    "episodes": 8
+   },
+   {
+    "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+    "episodes": 2
+   },
+   {
+    "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+    "episodes": 2
+   },
+   {
+    "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+    "episodes": 2
+   }
+  ]
+ },
+ "offset_runs": [
+  {
+   "seed": 0,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 3.48,
+     "executed_tip_to_target_mm": 3.48
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      -10.5,
+      10.1,
+      16.26
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 4.8,
+     "executed_tip_to_target_mm": 20.79
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 1.7,
+     "executed_tip_to_target_mm": 1.7
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      12.0,
+      -17.35,
+      -5.6
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 2.64,
+     "executed_tip_to_target_mm": 20.64
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 3.25,
+     "executed_tip_to_target_mm": 3.25
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      1.57,
+      16.86,
+      13.78
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 1.85,
+     "executed_tip_to_target_mm": 20.69
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 1.02,
+     "executed_tip_to_target_mm": 1.02
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      2.34,
+      14.59,
+      16.07
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 2.97,
+     "executed_tip_to_target_mm": 20.31
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 3.17,
+     "executed_tip_to_target_mm": 3.17
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      -11.36,
+      8.72,
+      16.48
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 5.47,
+     "executed_tip_to_target_mm": 20.77
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 1.48,
+     "executed_tip_to_target_mm": 1.48
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      9.74,
+      -18.34,
+      -6.73
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 1.36,
+     "executed_tip_to_target_mm": 22.34
+    }
+   }
+  },
+  {
+   "seed": 3,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 3.22,
+     "executed_tip_to_target_mm": 3.22
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      -13.1,
+      6.76,
+      16.1
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 6.39,
+     "executed_tip_to_target_mm": 20.72
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 0.36,
+     "executed_tip_to_target_mm": 0.36
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      -2.24,
+      15.69,
+      15.01
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 3.68,
+     "executed_tip_to_target_mm": 20.59
+    }
+   }
+  },
+  {
+   "seed": 4,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 3.24,
+     "executed_tip_to_target_mm": 3.24
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      1.57,
+      16.88,
+      13.76
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 1.86,
+     "executed_tip_to_target_mm": 20.69
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 3.31,
+     "executed_tip_to_target_mm": 3.31
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      13.2,
+      6.51,
+      16.13
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 6.76,
+     "executed_tip_to_target_mm": 19.98
+    }
+   }
+  },
+  {
+   "seed": 5,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 2.34,
+     "executed_tip_to_target_mm": 2.34
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      -8.21,
+      -18.46,
+      -8.26
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 1.48,
+     "executed_tip_to_target_mm": 22.19
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 1.89,
+     "executed_tip_to_target_mm": 1.89
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      16.15,
+      -14.67,
+      -0.83
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 2.5,
+     "executed_tip_to_target_mm": 20.08
+    }
+   }
+  },
+  {
+   "seed": 6,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 1.37,
+     "executed_tip_to_target_mm": 1.37
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      -19.21,
+      -8.14,
+      6.43
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 5.59,
+     "executed_tip_to_target_mm": 20.07
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 1.77,
+     "executed_tip_to_target_mm": 1.77
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      2.45,
+      14.43,
+      16.2
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 2.27,
+     "executed_tip_to_target_mm": 20.77
+    }
+   }
+  },
+  {
+   "seed": 7,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 3.22,
+     "executed_tip_to_target_mm": 3.22
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      -13.25,
+      6.63,
+      16.04
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 6.45,
+     "executed_tip_to_target_mm": 20.72
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 5.29,
+     "executed_tip_to_target_mm": 5.29
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      18.5,
+      -4.67,
+      10.61
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 6.67,
+     "executed_tip_to_target_mm": 20.35
+    }
+   }
+  },
+  {
+   "seed": 8,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 2.68,
+     "executed_tip_to_target_mm": 2.68
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      -8.38,
+      -18.2,
+      -8.67
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 2.54,
+     "executed_tip_to_target_mm": 20.65
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 0.63,
+     "executed_tip_to_target_mm": 0.63
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      4.3,
+      11.31,
+      18.17
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 4.99,
+     "executed_tip_to_target_mm": 20.21
+    }
+   }
+  },
+  {
+   "seed": 9,
+   "waypoints": {
+    "fork_above": {
+     "waypoint": "fork_above",
+     "arm": "right",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 3.41,
+     "executed_tip_to_target_mm": 3.41
+    },
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      -5.35,
+      13.34,
+      16.43
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 3.07,
+     "executed_tip_to_target_mm": 20.8
+    },
+    "spoon_above": {
+     "waypoint": "spoon_above",
+     "arm": "left",
+     "has_plan_at": false,
+     "solved_at_rad": 0.45,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 50.44,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 0.0,
+     "offset_xyz_mm": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "along_approach_mm": 0.0,
+     "along_jaw_mm": 0.0,
+     "solved_tip_to_target_mm": 2.81,
+     "executed_tip_to_target_mm": 2.81
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "has_plan_at": true,
+     "solved_at_rad": -0.1279,
+     "executed_at_rad": 0.45,
+     "solved_sep_mm": 7.0,
+     "executed_sep_mm": 50.44,
+     "offset_mm": 21.83,
+     "offset_xyz_mm": [
+      4.51,
+      13.13,
+      16.84
+     ],
+     "along_approach_mm": -0.08,
+     "along_jaw_mm": 21.14,
+     "solved_tip_to_target_mm": 2.89,
+     "executed_tip_to_target_mm": 20.47
+    }
+   }
+  }
+ ],
+ "sweep_runs": [
+  {
+   "seed": 0,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": false,
+   "shipped": true,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 73.3,
+     "final_to_target_mm": 172.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8104,
+     "stalled_above_target_mm": 23.9,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 344
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box3 | fork/fork_handle",
+       "steps": 33
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.746,
+      "step_into_hold": 433,
+      "tip_z_m": 0.8129
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.3,
+     "planar_move_mm": 72.6,
+     "final_to_target_mm": 130.7,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8133,
+     "stalled_above_target_mm": 26.8,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+       "steps": 856
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 576
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+      "t": 34.428,
+      "step_into_hold": 338,
+      "tip_z_m": 0.8135
+     }
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": false,
+   "shipped": true,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.0,
+     "final_to_target_mm": 167.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8076,
+     "stalled_above_target_mm": 21.1,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 338
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box3 | fork/fork_handle",
+       "steps": 309
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box4 | fork/fork_handle",
+       "steps": 306
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.754,
+      "step_into_hold": 437,
+      "tip_z_m": 0.8107
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.0,
+     "final_to_target_mm": 126.7,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.823,
+     "stalled_above_target_mm": 36.5,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_side_l",
+       "steps": 325
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 83
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.384,
+      "step_into_hold": 316,
+      "tip_z_m": 0.8336
+     }
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": false,
+   "shipped": true,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 76.2,
+     "final_to_target_mm": 169.6,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8106,
+     "stalled_above_target_mm": 24.1,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 341
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box3 | fork/fork_handle",
+       "steps": 168
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.748,
+      "step_into_hold": 434,
+      "tip_z_m": 0.8132
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 76.2,
+     "final_to_target_mm": 128.8,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8228,
+     "stalled_above_target_mm": 36.3,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom78 | drawer/drawer_front",
+       "steps": 765
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 275
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box2 | drawer/drawer_front",
+       "steps": 58
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/geom67 | drawer/drawer_front",
+      "t": 34.172,
+      "step_into_hold": 210,
+      "tip_z_m": 0.8445
+     }
+    }
+   }
+  },
+  {
+   "seed": 3,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": false,
+   "shipped": true,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.5,
+     "final_to_target_mm": 166.7,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8115,
+     "stalled_above_target_mm": 25.0,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 1007
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.756,
+      "step_into_hold": 438,
+      "tip_z_m": 0.8128
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 4.8,
+     "planar_move_mm": 85.6,
+     "final_to_target_mm": 111.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.843,
+     "stalled_above_target_mm": 56.5,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+       "steps": 774
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8694
+     }
+    }
+   }
+  },
+  {
+   "seed": 4,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": false,
+   "shipped": true,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 81.1,
+     "final_to_target_mm": 165.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8076,
+     "stalled_above_target_mm": 21.1,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 338
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box3 | fork/fork_handle",
+       "steps": 309
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box4 | fork/fork_handle",
+       "steps": 306
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.754,
+      "step_into_hold": 437,
+      "tip_z_m": 0.8107
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 81.6,
+     "final_to_target_mm": 125.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8219,
+     "stalled_above_target_mm": 35.4,
+     "contacts": [
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 415
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.384,
+      "step_into_hold": 316,
+      "tip_z_m": 0.8309
+     }
+    }
+   }
+  },
+  {
+   "seed": 5,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": false,
+   "shipped": true,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 88.6,
+     "final_to_target_mm": 159.1,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8142,
+     "stalled_above_target_mm": 27.7,
+     "contacts": [
+      {
+       "pair": "right_moving_jaw_so101_v1/geom126 | drawer/drawer_front",
+       "steps": 870
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box1 | drawer/drawer_front",
+       "steps": 462
+      },
+      {
+       "pair": "right_moving_jaw_so101_v1/geom125 | drawer/drawer_front",
+       "steps": 114
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 18
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.204,
+      "step_into_hold": 162,
+      "tip_z_m": 0.8489
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.0,
+     "planar_move_mm": 93.0,
+     "final_to_target_mm": 112.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8166,
+     "stalled_above_target_mm": 30.1,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom78 | drawer/drawer_front",
+       "steps": 681
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 328
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+       "steps": 30
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+       "steps": 28
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/geom67 | drawer/drawer_front",
+      "t": 34.088,
+      "step_into_hold": 168,
+      "tip_z_m": 0.849
+     }
+    }
+   }
+  },
+  {
+   "seed": 6,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": false,
+   "shipped": true,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 87.3,
+     "final_to_target_mm": 160.1,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.841,
+     "stalled_above_target_mm": 54.5,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 306
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 165
+      },
+      {
+       "pair": "right_moving_jaw_so101_v1/geom126 | cabinet/cab_left",
+       "steps": 49
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | spoon/spoon_handle",
+       "steps": 43
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.352,
+      "step_into_hold": 236,
+      "tip_z_m": 0.841
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 14.4,
+     "planar_move_mm": 82.4,
+     "final_to_target_mm": 127.1,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8365,
+     "stalled_above_target_mm": 50.0,
+     "contacts": [
+      {
+       "pair": "left_wrist/geom56 | cabinet/cab_left",
+       "steps": 778
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 452
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+       "steps": 222
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_side_l",
+       "steps": 198
+      }
+     ],
+     "first_contact": {
+      "pair": "left_wrist/geom56 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.86
+     }
+    }
+   }
+  },
+  {
+   "seed": 7,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": false,
+   "shipped": true,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.3,
+     "planar_move_mm": 94.7,
+     "final_to_target_mm": 153.8,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8114,
+     "stalled_above_target_mm": 24.9,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 1006
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.758,
+      "step_into_hold": 439,
+      "tip_z_m": 0.8126
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.2,
+     "planar_move_mm": 96.0,
+     "final_to_target_mm": 113.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8004,
+     "stalled_above_target_mm": 13.9,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | spoon/spoon_handle",
+       "steps": 644
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_floor",
+       "steps": 281
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 30
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.46,
+      "step_into_hold": 354,
+      "tip_z_m": 0.8186
+     }
+    }
+   }
+  },
+  {
+   "seed": 8,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": false,
+   "shipped": true,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": true
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.1,
+     "final_to_target_mm": 166.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.851,
+     "stalled_above_target_mm": 64.5,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 592
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.168,
+      "step_into_hold": 144,
+      "tip_z_m": 0.851
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 2.2,
+     "planar_move_mm": 60.4,
+     "final_to_target_mm": 146.6,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8428,
+     "stalled_above_target_mm": 56.3,
+     "contacts": [
+      {
+       "pair": "left_wrist/geom56 | cabinet/cab_left",
+       "steps": 666
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 358
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_side_l",
+       "steps": 319
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 286
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_side_l",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8593
+     }
+    }
+   }
+  },
+  {
+   "seed": 9,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": false,
+   "shipped": true,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.1,
+     "planar_move_mm": 87.3,
+     "final_to_target_mm": 160.1,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8106,
+     "stalled_above_target_mm": 24.1,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 346
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box3 | fork/fork_handle",
+       "steps": 137
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.738,
+      "step_into_hold": 429,
+      "tip_z_m": 0.8132
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.7,
+     "planar_move_mm": 87.4,
+     "final_to_target_mm": 119.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8276,
+     "stalled_above_target_mm": 41.1,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_side_l",
+       "steps": 300
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 145
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 3
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.298,
+      "step_into_hold": 273,
+      "tip_z_m": 0.8395
+     }
+    }
+   }
+  },
+  {
+   "seed": 0,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 70.6,
+     "final_to_target_mm": 174.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8059,
+     "stalled_above_target_mm": 19.4,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | drawer/drawer_floor",
+       "steps": 996
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box3 | fork/fork_handle",
+       "steps": 113
+      },
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 68
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.622,
+      "step_into_hold": 371,
+      "tip_z_m": 0.8105
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.1,
+     "planar_move_mm": 66.0,
+     "final_to_target_mm": 138.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8482,
+     "stalled_above_target_mm": 61.7,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+       "steps": 771
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 380
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8686
+     }
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 83.8,
+     "final_to_target_mm": 163.1,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8056,
+     "stalled_above_target_mm": 19.1,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | drawer/drawer_floor",
+       "steps": 756
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | drawer/drawer_floor",
+      "t": 13.674,
+      "step_into_hold": 397,
+      "tip_z_m": 0.8064
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 89.5,
+     "final_to_target_mm": 119.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7967,
+     "stalled_above_target_mm": 10.2,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+       "steps": 385
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 278
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+      "t": 34.718,
+      "step_into_hold": 483,
+      "tip_z_m": 0.7969
+     }
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 54.9,
+     "final_to_target_mm": 188.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8365,
+     "stalled_above_target_mm": 50.0,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 547
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.336,
+      "step_into_hold": 228,
+      "tip_z_m": 0.8367
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.2,
+     "planar_move_mm": 58.5,
+     "final_to_target_mm": 139.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8458,
+     "stalled_above_target_mm": 59.3,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 1208
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/geom67 | drawer/drawer_front",
+      "t": 34.094,
+      "step_into_hold": 171,
+      "tip_z_m": 0.8459
+     }
+    }
+   }
+  },
+  {
+   "seed": 3,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.3,
+     "planar_move_mm": 80.8,
+     "final_to_target_mm": 165.7,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8135,
+     "stalled_above_target_mm": 27.0,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 465
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 397
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.228,
+      "step_into_hold": 174,
+      "tip_z_m": 0.8471
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.3,
+     "planar_move_mm": 80.8,
+     "final_to_target_mm": 125.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8301,
+     "stalled_above_target_mm": 43.6,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+       "steps": 690
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+      "t": 33.774,
+      "step_into_hold": 11,
+      "tip_z_m": 0.8584
+     }
+    }
+   }
+  },
+  {
+   "seed": 4,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.8,
+     "final_to_target_mm": 165.7,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8056,
+     "stalled_above_target_mm": 19.1,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | drawer/drawer_floor",
+       "steps": 754
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | drawer/drawer_floor",
+      "t": 13.674,
+      "step_into_hold": 397,
+      "tip_z_m": 0.8064
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.3,
+     "planar_move_mm": 80.9,
+     "final_to_target_mm": 125.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8305,
+     "stalled_above_target_mm": 44.0,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 1038
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+       "steps": 538
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+      "t": 33.792,
+      "step_into_hold": 20,
+      "tip_z_m": 0.8571
+     }
+    }
+   }
+  },
+  {
+   "seed": 5,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 90.3,
+     "final_to_target_mm": 157.6,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8016,
+     "stalled_above_target_mm": 15.1,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | drawer/drawer_floor",
+       "steps": 360
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | drawer/drawer_floor",
+      "t": 13.71,
+      "step_into_hold": 415,
+      "tip_z_m": 0.8036
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.6,
+     "planar_move_mm": 87.6,
+     "final_to_target_mm": 121.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8484,
+     "stalled_above_target_mm": 61.9,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 1210
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 171
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8591
+     }
+    }
+   }
+  },
+  {
+   "seed": 6,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 6.2,
+     "planar_move_mm": 121.4,
+     "final_to_target_mm": 132.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8329,
+     "stalled_above_target_mm": 46.4,
+     "contacts": [
+      {
+       "pair": "right_gripper/right_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 547
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/right_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 13.334,
+      "step_into_hold": 227,
+      "tip_z_m": 0.8364
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 6.1,
+     "planar_move_mm": 117.4,
+     "final_to_target_mm": 99.8,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8418,
+     "stalled_above_target_mm": 55.3,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom78 | drawer/drawer_front",
+       "steps": 838
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box2 | drawer/drawer_front",
+       "steps": 584
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box2 | drawer/drawer_front",
+      "t": 34.134,
+      "step_into_hold": 191,
+      "tip_z_m": 0.8419
+     }
+    }
+   }
+  },
+  {
+   "seed": 7,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 81.1,
+     "final_to_target_mm": 165.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8163,
+     "stalled_above_target_mm": 29.8,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 401
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 363
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.222,
+      "step_into_hold": 171,
+      "tip_z_m": 0.8475
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.7,
+     "planar_move_mm": 54.4,
+     "final_to_target_mm": 147.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8076,
+     "stalled_above_target_mm": 21.1,
+     "contacts": [
+      {
+       "pair": "left_wrist/geom56 | cabinet/cab_left",
+       "steps": 1469
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 368
+      }
+     ],
+     "first_contact": {
+      "pair": "left_wrist/geom56 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8622
+     }
+    }
+   }
+  },
+  {
+   "seed": 8,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 3,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": true
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 84.1,
+     "final_to_target_mm": 162.8,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8297,
+     "stalled_above_target_mm": 43.2,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 508
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.414,
+      "step_into_hold": 267,
+      "tip_z_m": 0.8298
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 6.4,
+     "planar_move_mm": 83.8,
+     "final_to_target_mm": 117.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8151,
+     "stalled_above_target_mm": 28.6,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+       "steps": 774
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box2 | drawer/drawer_front",
+       "steps": 79
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/geom78 | drawer/drawer_front",
+       "steps": 70
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8632
+     }
+    }
+   }
+  },
+  {
+   "seed": 9,
+   "opening": null,
+   "opening_rad_effective": 0.45,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 75.9,
+     "final_to_target_mm": 169.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8048,
+     "stalled_above_target_mm": 18.3,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | drawer/drawer_floor",
+       "steps": 425
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | drawer/drawer_floor",
+      "t": 13.688,
+      "step_into_hold": 404,
+      "tip_z_m": 0.806
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.8,
+     "planar_move_mm": 75.8,
+     "final_to_target_mm": 129.1,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8214,
+     "stalled_above_target_mm": 34.9,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 592
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+       "steps": 447
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+      "t": 34.326,
+      "step_into_hold": 287,
+      "tip_z_m": 0.8316
+     }
+    }
+   }
+  },
+  {
+   "seed": 0,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 3,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": true
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.8,
+     "planar_move_mm": 70.0,
+     "final_to_target_mm": 176.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8049,
+     "stalled_above_target_mm": 18.4,
+     "contacts": [
+      {
+       "pair": "right_moving_jaw_so101_v1/right_moving_jaw_box2 | drawer/drawer_back",
+       "steps": 328
+      }
+     ],
+     "first_contact": {
+      "pair": "right_moving_jaw_so101_v1/right_moving_jaw_box2 | drawer/drawer_back",
+      "t": 13.774,
+      "step_into_hold": 447,
+      "tip_z_m": 0.8052
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.2,
+     "planar_move_mm": 51.2,
+     "final_to_target_mm": 158.6,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8666,
+     "stalled_above_target_mm": 80.1,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | cabinet/cab_left",
+       "steps": 974
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 774
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.9155
+     }
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 83.1,
+     "final_to_target_mm": 163.7,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8381,
+     "stalled_above_target_mm": 51.6,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 522
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.346,
+      "step_into_hold": 233,
+      "tip_z_m": 0.8381
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.0,
+     "planar_move_mm": 75.6,
+     "final_to_target_mm": 123.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8351,
+     "stalled_above_target_mm": 48.6,
+     "contacts": [
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 506
+      },
+      {
+       "pair": "left_wrist/geom56 | cabinet/cab_left",
+       "steps": 154
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.242,
+      "step_into_hold": 245,
+      "tip_z_m": 0.8373
+     }
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 77.6,
+     "final_to_target_mm": 168.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8157,
+     "stalled_above_target_mm": 29.2,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 570
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 338
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.35,
+      "step_into_hold": 235,
+      "tip_z_m": 0.8378
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 3.3,
+     "planar_move_mm": 78.1,
+     "final_to_target_mm": 123.8,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8046,
+     "stalled_above_target_mm": 18.1,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_side_l",
+       "steps": 300
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 260
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 233
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_floor",
+       "steps": 155
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+      "t": 34.224,
+      "step_into_hold": 236,
+      "tip_z_m": 0.8386
+     }
+    }
+   }
+  },
+  {
+   "seed": 3,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.5,
+     "final_to_target_mm": 166.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8192,
+     "stalled_above_target_mm": 32.7,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 535
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 360
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.348,
+      "step_into_hold": 234,
+      "tip_z_m": 0.838
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.1,
+     "planar_move_mm": 59.5,
+     "final_to_target_mm": 146.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8393,
+     "stalled_above_target_mm": 52.8,
+     "contacts": [
+      {
+       "pair": "left_wrist/geom56 | cabinet/cab_left",
+       "steps": 758
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 442
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 322
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 100
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8581
+     }
+    }
+   }
+  },
+  {
+   "seed": 4,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.3,
+     "planar_move_mm": 86.1,
+     "final_to_target_mm": 161.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8381,
+     "stalled_above_target_mm": 51.6,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 519
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.346,
+      "step_into_hold": 233,
+      "tip_z_m": 0.8381
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.2,
+     "planar_move_mm": 79.0,
+     "final_to_target_mm": 120.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8099,
+     "stalled_above_target_mm": 23.4,
+     "contacts": [
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 531
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 24
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+       "steps": 21
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+      "t": 34.06,
+      "step_into_hold": 154,
+      "tip_z_m": 0.8466
+     }
+    }
+   }
+  },
+  {
+   "seed": 5,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 90.4,
+     "final_to_target_mm": 157.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8362,
+     "stalled_above_target_mm": 49.7,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 506
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.372,
+      "step_into_hold": 246,
+      "tip_z_m": 0.8362
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.4,
+     "planar_move_mm": 105.5,
+     "final_to_target_mm": 95.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8437,
+     "stalled_above_target_mm": 57.2,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+       "steps": 412
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 275
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/geom67 | drawer/drawer_front",
+      "t": 34.108,
+      "step_into_hold": 178,
+      "tip_z_m": 0.8457
+     }
+    }
+   }
+  },
+  {
+   "seed": 6,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 1.6,
+     "planar_move_mm": 114.5,
+     "final_to_target_mm": 139.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8072,
+     "stalled_above_target_mm": 20.7,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 739
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 162
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/right_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 13.548,
+      "step_into_hold": 334,
+      "tip_z_m": 0.8233
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 2.6,
+     "planar_move_mm": 114.3,
+     "final_to_target_mm": 102.7,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8441,
+     "stalled_above_target_mm": 57.6,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 1060
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/geom67 | drawer/drawer_front",
+      "t": 34.158,
+      "step_into_hold": 203,
+      "tip_z_m": 0.8442
+     }
+    }
+   }
+  },
+  {
+   "seed": 7,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 90.0,
+     "final_to_target_mm": 157.8,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8178,
+     "stalled_above_target_mm": 31.3,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 558
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 354
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.346,
+      "step_into_hold": 233,
+      "tip_z_m": 0.8381
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.7,
+     "planar_move_mm": 72.6,
+     "final_to_target_mm": 129.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8317,
+     "stalled_above_target_mm": 45.2,
+     "contacts": [
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 427
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_side_l",
+       "steps": 278
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 15
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.212,
+      "step_into_hold": 230,
+      "tip_z_m": 0.8397
+     }
+    }
+   }
+  },
+  {
+   "seed": 8,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 85.2,
+     "final_to_target_mm": 162.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8376,
+     "stalled_above_target_mm": 51.1,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 515
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.352,
+      "step_into_hold": 236,
+      "tip_z_m": 0.8376
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.5,
+     "planar_move_mm": 74.1,
+     "final_to_target_mm": 134.6,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8197,
+     "stalled_above_target_mm": 33.2,
+     "contacts": [
+      {
+       "pair": "left_wrist/geom56 | cabinet/cab_left",
+       "steps": 994
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 408
+      }
+     ],
+     "first_contact": {
+      "pair": "left_wrist/geom56 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8589
+     }
+    }
+   }
+  },
+  {
+   "seed": 9,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.2,
+     "planar_move_mm": 73.2,
+     "final_to_target_mm": 172.7,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8182,
+     "stalled_above_target_mm": 31.7,
+     "contacts": [
+      {
+       "pair": "right_moving_jaw_so101_v1/right_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 373
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 203
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 104
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.314,
+      "step_into_hold": 217,
+      "tip_z_m": 0.8409
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.9,
+     "planar_move_mm": 60.1,
+     "final_to_target_mm": 142.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8351,
+     "stalled_above_target_mm": 48.6,
+     "contacts": [
+      {
+       "pair": "left_wrist/geom56 | cabinet/cab_left",
+       "steps": 1460
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_side_l",
+       "steps": 270
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 221
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 51
+      }
+     ],
+     "first_contact": {
+      "pair": "left_wrist/geom56 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8585
+     }
+    }
+   }
+  },
+  {
+   "seed": 0,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 0,
+   "subgoals": {
+    "drawer_open": false,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 6.8,
+     "final_to_target_mm": 245.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.802,
+     "stalled_above_target_mm": 15.5,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | drawer/drawer_floor",
+       "steps": 704
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | drawer/drawer_floor",
+      "t": 13.724,
+      "step_into_hold": 422,
+      "tip_z_m": 0.8022
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 6.6,
+     "planar_move_mm": 6.8,
+     "final_to_target_mm": 197.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8419,
+     "stalled_above_target_mm": 55.4,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 1111
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+       "steps": 323
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/geom67 | drawer/drawer_front",
+      "t": 34.134,
+      "step_into_hold": 191,
+      "tip_z_m": 0.842
+     }
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 75.8,
+     "final_to_target_mm": 170.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.802,
+     "stalled_above_target_mm": 15.5,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | drawer/drawer_floor",
+       "steps": 353
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | drawer/drawer_floor",
+      "t": 13.724,
+      "step_into_hold": 422,
+      "tip_z_m": 0.8023
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 75.8,
+     "final_to_target_mm": 129.1,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8417,
+     "stalled_above_target_mm": 55.2,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 896
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 826
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.9069
+     }
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 3,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": true
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.5,
+     "final_to_target_mm": 165.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8019,
+     "stalled_above_target_mm": 15.4,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | drawer/drawer_floor",
+       "steps": 352
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | drawer/drawer_floor",
+      "t": 13.726,
+      "step_into_hold": 423,
+      "tip_z_m": 0.8021
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 2.6,
+     "planar_move_mm": 80.6,
+     "final_to_target_mm": 125.6,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8302,
+     "stalled_above_target_mm": 43.7,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 775
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 142
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8587
+     }
+    }
+   }
+  },
+  {
+   "seed": 3,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.9,
+     "final_to_target_mm": 165.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.802,
+     "stalled_above_target_mm": 15.5,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | drawer/drawer_floor",
+       "steps": 353
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | drawer/drawer_floor",
+      "t": 13.724,
+      "step_into_hold": 422,
+      "tip_z_m": 0.8023
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.8,
+     "planar_move_mm": 86.7,
+     "final_to_target_mm": 109.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8007,
+     "stalled_above_target_mm": 14.2,
+     "contacts": [
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 430
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_floor",
+       "steps": 408
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.292,
+      "step_into_hold": 270,
+      "tip_z_m": 0.8291
+     }
+    }
+   }
+  },
+  {
+   "seed": 4,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.1,
+     "planar_move_mm": 90.3,
+     "final_to_target_mm": 157.6,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.802,
+     "stalled_above_target_mm": 15.5,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | drawer/drawer_floor",
+       "steps": 353
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | drawer/drawer_floor",
+      "t": 13.724,
+      "step_into_hold": 422,
+      "tip_z_m": 0.8023
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.1,
+     "planar_move_mm": 90.3,
+     "final_to_target_mm": 118.6,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8014,
+     "stalled_above_target_mm": 14.9,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_floor",
+       "steps": 550
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 412
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 10
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.346,
+      "step_into_hold": 297,
+      "tip_z_m": 0.8245
+     }
+    }
+   }
+  },
+  {
+   "seed": 5,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 21.1,
+     "planar_move_mm": 113.7,
+     "final_to_target_mm": 138.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8043,
+     "stalled_above_target_mm": 17.8,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 366
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.698,
+      "step_into_hold": 409,
+      "tip_z_m": 0.8044
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 9.1,
+     "planar_move_mm": 115.5,
+     "final_to_target_mm": 93.8,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8277,
+     "stalled_above_target_mm": 41.2,
+     "contacts": [
+      {
+       "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+       "steps": 348
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 346
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+       "steps": 97
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/geom67 | drawer/drawer_front",
+      "t": 34.162,
+      "step_into_hold": 205,
+      "tip_z_m": 0.8414
+     }
+    }
+   }
+  },
+  {
+   "seed": 6,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 89.5,
+     "final_to_target_mm": 158.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8246,
+     "stalled_above_target_mm": 38.1,
+     "contacts": [
+      {
+       "pair": "right_gripper/right_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 492
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/right_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 13.408,
+      "step_into_hold": 264,
+      "tip_z_m": 0.8294
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.4,
+     "planar_move_mm": 85.0,
+     "final_to_target_mm": 122.8,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8629,
+     "stalled_above_target_mm": 76.4,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 910
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.905
+     }
+    }
+   }
+  },
+  {
+   "seed": 7,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 76.0,
+     "final_to_target_mm": 169.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8019,
+     "stalled_above_target_mm": 15.4,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | drawer/drawer_floor",
+       "steps": 352
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 245
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | drawer/drawer_floor",
+      "t": 13.726,
+      "step_into_hold": 423,
+      "tip_z_m": 0.8021
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 2.2,
+     "planar_move_mm": 75.9,
+     "final_to_target_mm": 127.8,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8021,
+     "stalled_above_target_mm": 15.6,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 347
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+      "t": 34.608,
+      "step_into_hold": 428,
+      "tip_z_m": 0.8023
+     }
+    }
+   }
+  },
+  {
+   "seed": 8,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 83.1,
+     "final_to_target_mm": 163.7,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8019,
+     "stalled_above_target_mm": 15.4,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | drawer/drawer_floor",
+       "steps": 351
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 263
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | drawer/drawer_floor",
+      "t": 13.726,
+      "step_into_hold": 423,
+      "tip_z_m": 0.8021
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 4.9,
+     "planar_move_mm": 84.5,
+     "final_to_target_mm": 115.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8472,
+     "stalled_above_target_mm": 60.7,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 779
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 428
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.9071
+     }
+    }
+   }
+  },
+  {
+   "seed": 9,
+   "opening": 0.3,
+   "opening_rad_effective": 0.3,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 77.0,
+     "final_to_target_mm": 169.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8024,
+     "stalled_above_target_mm": 15.9,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | drawer/drawer_floor",
+       "steps": 355
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | drawer/drawer_floor",
+      "t": 13.72,
+      "step_into_hold": 420,
+      "tip_z_m": 0.8026
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.7,
+     "planar_move_mm": 76.9,
+     "final_to_target_mm": 127.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8227,
+     "stalled_above_target_mm": 36.2,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 306
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+       "steps": 233
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+       "steps": 225
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_side_l",
+       "steps": 173
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8898
+     }
+    }
+   }
+  },
+  {
+   "seed": 0,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 75.9,
+     "final_to_target_mm": 169.8,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7981,
+     "stalled_above_target_mm": 11.6,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 328
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box3 | fork/fork_handle",
+       "steps": 268
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box4 | fork/fork_handle",
+       "steps": 258
+      },
+      {
+       "pair": "right_moving_jaw_so101_v1/geom126 | drawer/drawer_back",
+       "steps": 111
+      }
+     ],
+     "first_contact": {
+      "pair": "right_moving_jaw_so101_v1/geom126 | drawer/drawer_back",
+      "t": 13.746,
+      "step_into_hold": 433,
+      "tip_z_m": 0.8037
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 75.7,
+     "final_to_target_mm": 129.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8203,
+     "stalled_above_target_mm": 33.8,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+       "steps": 682
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+      "t": 34.384,
+      "step_into_hold": 316,
+      "tip_z_m": 0.8204
+     }
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.1,
+     "planar_move_mm": 85.1,
+     "final_to_target_mm": 162.1,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8163,
+     "stalled_above_target_mm": 29.8,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 360
+      },
+      {
+       "pair": "right_moving_jaw_so101_v1/right_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 219
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 98
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+      "t": 13.488,
+      "step_into_hold": 304,
+      "tip_z_m": 0.8199
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.4,
+     "planar_move_mm": 72.1,
+     "final_to_target_mm": 131.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8994,
+     "stalled_above_target_mm": 112.9,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 822
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.9205
+     }
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 82.6,
+     "final_to_target_mm": 164.1,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8068,
+     "stalled_above_target_mm": 20.3,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 435
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 372
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.29,
+      "step_into_hold": 205,
+      "tip_z_m": 0.8391
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.8,
+     "planar_move_mm": 82.2,
+     "final_to_target_mm": 124.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.797,
+     "stalled_above_target_mm": 10.5,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | spoon/spoon_handle",
+       "steps": 336
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box4 | spoon/spoon_handle",
+       "steps": 320
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box3 | spoon/spoon_handle",
+       "steps": 320
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 167
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.592,
+      "step_into_hold": 420,
+      "tip_z_m": 0.8011
+     }
+    }
+   }
+  },
+  {
+   "seed": 3,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 87.8,
+     "final_to_target_mm": 159.7,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8147,
+     "stalled_above_target_mm": 28.2,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 603
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 167
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.234,
+      "step_into_hold": 177,
+      "tip_z_m": 0.8435
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 2.2,
+     "planar_move_mm": 73.5,
+     "final_to_target_mm": 130.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8052,
+     "stalled_above_target_mm": 18.7,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 599
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 87
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 20
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+       "steps": 16
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+      "t": 34.138,
+      "step_into_hold": 193,
+      "tip_z_m": 0.8411
+     }
+    }
+   }
+  },
+  {
+   "seed": 4,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 3.1,
+     "planar_move_mm": 108.9,
+     "final_to_target_mm": 142.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8178,
+     "stalled_above_target_mm": 31.3,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 400
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 135
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.184,
+      "step_into_hold": 152,
+      "tip_z_m": 0.8466
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 3.1,
+     "planar_move_mm": 97.2,
+     "final_to_target_mm": 113.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8107,
+     "stalled_above_target_mm": 24.2,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+       "steps": 712
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 142
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+       "steps": 31
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/geom67 | drawer/drawer_front",
+      "t": 34.424,
+      "step_into_hold": 336,
+      "tip_z_m": 0.8141
+     }
+    }
+   }
+  },
+  {
+   "seed": 5,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.1,
+     "planar_move_mm": 104.9,
+     "final_to_target_mm": 145.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8438,
+     "stalled_above_target_mm": 57.3,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 557
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.228,
+      "step_into_hold": 174,
+      "tip_z_m": 0.8438
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.2,
+     "planar_move_mm": 107.1,
+     "final_to_target_mm": 96.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8342,
+     "stalled_above_target_mm": 47.7,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 654
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 286
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+       "steps": 85
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+       "steps": 4
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8954
+     }
+    }
+   }
+  },
+  {
+   "seed": 6,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 84.8,
+     "final_to_target_mm": 162.7,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8386,
+     "stalled_above_target_mm": 52.1,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 537
+      },
+      {
+       "pair": "right_moving_jaw_so101_v1/geom126 | cabinet/cab_left",
+       "steps": 75
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.314,
+      "step_into_hold": 217,
+      "tip_z_m": 0.8386
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 5.7,
+     "planar_move_mm": 115.9,
+     "final_to_target_mm": 101.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8329,
+     "stalled_above_target_mm": 46.4,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 1143
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box4 | drawer/drawer_front",
+       "steps": 246
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/geom67 | drawer/drawer_front",
+      "t": 34.11,
+      "step_into_hold": 179,
+      "tip_z_m": 0.8437
+     }
+    }
+   }
+  },
+  {
+   "seed": 7,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 0,
+   "subgoals": {
+    "drawer_open": false,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 1.5,
+     "final_to_target_mm": 237.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8147,
+     "stalled_above_target_mm": 28.2,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 601
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 386
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.232,
+      "step_into_hold": 176,
+      "tip_z_m": 0.8436
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.6,
+     "planar_move_mm": 1.5,
+     "final_to_target_mm": 191.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8024,
+     "stalled_above_target_mm": 15.9,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+       "steps": 447
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 362
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+      "t": 34.564,
+      "step_into_hold": 406,
+      "tip_z_m": 0.8025
+     }
+    }
+   }
+  },
+  {
+   "seed": 8,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.6,
+     "planar_move_mm": 100.2,
+     "final_to_target_mm": 149.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8009,
+     "stalled_above_target_mm": 14.4,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 332
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.766,
+      "step_into_hold": 443,
+      "tip_z_m": 0.8035
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 17.5,
+     "planar_move_mm": 101.6,
+     "final_to_target_mm": 102.6,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8005,
+     "stalled_above_target_mm": 14.0,
+     "contacts": [
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 368
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_side_l",
+       "steps": 69
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.416,
+      "step_into_hold": 332,
+      "tip_z_m": 0.8207
+     }
+    }
+   }
+  },
+  {
+   "seed": 9,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 74.3,
+     "final_to_target_mm": 171.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8008,
+     "stalled_above_target_mm": 14.3,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 623
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box3 | fork/fork_handle",
+       "steps": 8
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.77,
+      "step_into_hold": 445,
+      "tip_z_m": 0.8035
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.8,
+     "planar_move_mm": 75.2,
+     "final_to_target_mm": 129.6,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8256,
+     "stalled_above_target_mm": 39.1,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_side_l",
+       "steps": 374
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 188
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 115
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/geom67 | drawer/drawer_front",
+      "t": 34.308,
+      "step_into_hold": 278,
+      "tip_z_m": 0.8287
+     }
+    }
+   }
+  },
+  {
+   "seed": 0,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 76.5,
+     "final_to_target_mm": 169.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7952,
+     "stalled_above_target_mm": 8.7,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | drawer/drawer_floor",
+       "steps": 317
+      },
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 41
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box3 | fork/fork_handle",
+       "steps": 31
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box4 | fork/fork_handle",
+       "steps": 5
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.738,
+      "step_into_hold": 429,
+      "tip_z_m": 0.8006
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 3.6,
+     "planar_move_mm": 75.3,
+     "final_to_target_mm": 129.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7897,
+     "stalled_above_target_mm": 3.2,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box2 | spoon/spoon_handle",
+       "steps": 461
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/geom78 | spoon/spoon_handle",
+       "steps": 437
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 323
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+      "t": 34.612,
+      "step_into_hold": 430,
+      "tip_z_m": 0.8005
+     }
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.5,
+     "final_to_target_mm": 165.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8047,
+     "stalled_above_target_mm": 18.2,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 365
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 260
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+      "t": 13.694,
+      "step_into_hold": 407,
+      "tip_z_m": 0.8048
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.5,
+     "final_to_target_mm": 125.6,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8023,
+     "stalled_above_target_mm": 15.8,
+     "contacts": [
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 340
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 306
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.586,
+      "step_into_hold": 417,
+      "tip_z_m": 0.8043
+     }
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 0,
+   "subgoals": {
+    "drawer_open": false,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 9.1,
+     "final_to_target_mm": 247.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8005,
+     "stalled_above_target_mm": 14.0,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 986
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.72,
+      "step_into_hold": 420,
+      "tip_z_m": 0.8022
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 12.5,
+     "planar_move_mm": 9.2,
+     "final_to_target_mm": 200.7,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8078,
+     "stalled_above_target_mm": 21.3,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+       "steps": 454
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 371
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+      "t": 34.524,
+      "step_into_hold": 386,
+      "tip_z_m": 0.8078
+     }
+    }
+   }
+  },
+  {
+   "seed": 3,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 78.1,
+     "final_to_target_mm": 168.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8004,
+     "stalled_above_target_mm": 13.9,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 327
+      },
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 111
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.73,
+      "step_into_hold": 425,
+      "tip_z_m": 0.8016
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 78.9,
+     "final_to_target_mm": 126.1,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7994,
+     "stalled_above_target_mm": 12.9,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | spoon/spoon_handle",
+       "steps": 1026
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 325
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/geom67 | spoon/spoon_handle",
+      "t": 34.618,
+      "step_into_hold": 433,
+      "tip_z_m": 0.8002
+     }
+    }
+   }
+  },
+  {
+   "seed": 4,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 83.8,
+     "final_to_target_mm": 163.1,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8045,
+     "stalled_above_target_mm": 18.0,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 364
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 266
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+      "t": 13.696,
+      "step_into_hold": 408,
+      "tip_z_m": 0.8047
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.9,
+     "planar_move_mm": 83.4,
+     "final_to_target_mm": 122.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8024,
+     "stalled_above_target_mm": 15.9,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+       "steps": 698
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 366
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+      "t": 34.59,
+      "step_into_hold": 419,
+      "tip_z_m": 0.8025
+     }
+    }
+   }
+  },
+  {
+   "seed": 5,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.2,
+     "planar_move_mm": 84.8,
+     "final_to_target_mm": 161.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7963,
+     "stalled_above_target_mm": 9.8,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | drawer/drawer_floor",
+       "steps": 346
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box3 | fork/fork_handle",
+       "steps": 25
+      },
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 17
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box4 | fork/fork_handle",
+       "steps": 12
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.742,
+      "step_into_hold": 431,
+      "tip_z_m": 0.8003
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 88.1,
+     "final_to_target_mm": 120.1,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8222,
+     "stalled_above_target_mm": 35.7,
+     "contacts": [
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 257
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 213
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+       "steps": 170
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 30
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8576
+     }
+    }
+   }
+  },
+  {
+   "seed": 6,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.7,
+     "planar_move_mm": 87.7,
+     "final_to_target_mm": 159.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8295,
+     "stalled_above_target_mm": 43.0,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 382
+      },
+      {
+       "pair": "right_moving_jaw_so101_v1/geom126 | cabinet/cab_left",
+       "steps": 114
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 105
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | spoon/spoon_handle",
+       "steps": 92
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.294,
+      "step_into_hold": 207,
+      "tip_z_m": 0.842
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 3.3,
+     "planar_move_mm": 73.4,
+     "final_to_target_mm": 142.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8134,
+     "stalled_above_target_mm": 26.9,
+     "contacts": [
+      {
+       "pair": "left_wrist/geom56 | cabinet/cab_left",
+       "steps": 1398
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 399
+      }
+     ],
+     "first_contact": {
+      "pair": "left_wrist/geom56 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8593
+     }
+    }
+   }
+  },
+  {
+   "seed": 7,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 0,
+   "subgoals": {
+    "drawer_open": false,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 10.9,
+     "final_to_target_mm": 248.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8004,
+     "stalled_above_target_mm": 13.9,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 324
+      },
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 124
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 4
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.334,
+      "step_into_hold": 227,
+      "tip_z_m": 0.8357
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 2.6,
+     "planar_move_mm": 26.8,
+     "final_to_target_mm": 188.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7961,
+     "stalled_above_target_mm": 9.6,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_floor",
+       "steps": 323
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 238
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.35,
+      "step_into_hold": 299,
+      "tip_z_m": 0.8222
+     }
+    }
+   }
+  },
+  {
+   "seed": 8,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 63.0,
+     "final_to_target_mm": 180.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.802,
+     "stalled_above_target_mm": 15.5,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 1060
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 407
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.45,
+      "step_into_hold": 285,
+      "tip_z_m": 0.8252
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 16.4,
+     "planar_move_mm": 66.7,
+     "final_to_target_mm": 130.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8085,
+     "stalled_above_target_mm": 22.0,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+       "steps": 776
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+      "t": 34.516,
+      "step_into_hold": 382,
+      "tip_z_m": 0.8092
+     }
+    }
+   }
+  },
+  {
+   "seed": 9,
+   "opening": 0.15,
+   "opening_rad_effective": 0.15,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.9,
+     "final_to_target_mm": 166.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8213,
+     "stalled_above_target_mm": 34.8,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 749
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 254
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+      "t": 13.494,
+      "step_into_hold": 307,
+      "tip_z_m": 0.8215
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 2.0,
+     "planar_move_mm": 78.4,
+     "final_to_target_mm": 124.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8365,
+     "stalled_above_target_mm": 50.0,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 1064
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 98
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.9125
+     }
+    }
+   }
+  },
+  {
+   "seed": 0,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": false,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": true
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 9.3,
+     "final_to_target_mm": 247.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8156,
+     "stalled_above_target_mm": 29.1,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 400
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 145
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+      "t": 13.536,
+      "step_into_hold": 328,
+      "tip_z_m": 0.8158
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.8,
+     "planar_move_mm": 14.2,
+     "final_to_target_mm": 198.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8172,
+     "stalled_above_target_mm": 30.7,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 451
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+      "t": 34.4,
+      "step_into_hold": 324,
+      "tip_z_m": 0.8174
+     }
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.8,
+     "planar_move_mm": 89.7,
+     "final_to_target_mm": 158.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7975,
+     "stalled_above_target_mm": 11.0,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 657
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.772,
+      "step_into_hold": 446,
+      "tip_z_m": 0.799
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.7,
+     "planar_move_mm": 93.1,
+     "final_to_target_mm": 117.6,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.809,
+     "stalled_above_target_mm": 22.5,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+       "steps": 807
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+      "t": 34.474,
+      "step_into_hold": 361,
+      "tip_z_m": 0.8091
+     }
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 3,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": true
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.0,
+     "final_to_target_mm": 166.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7959,
+     "stalled_above_target_mm": 9.4,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 323
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box3 | fork/fork_handle",
+       "steps": 296
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box4 | fork/fork_handle",
+       "steps": 294
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.784,
+      "step_into_hold": 452,
+      "tip_z_m": 0.7983
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.5,
+     "planar_move_mm": 80.0,
+     "final_to_target_mm": 126.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8306,
+     "stalled_above_target_mm": 44.1,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 907
+      },
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_side_l",
+       "steps": 167
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_side_l",
+      "t": 34.088,
+      "step_into_hold": 168,
+      "tip_z_m": 0.8445
+     }
+    }
+   }
+  },
+  {
+   "seed": 3,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.1,
+     "planar_move_mm": 78.8,
+     "final_to_target_mm": 167.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7964,
+     "stalled_above_target_mm": 9.9,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 527
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box3 | fork/fork_handle",
+       "steps": 77
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.778,
+      "step_into_hold": 449,
+      "tip_z_m": 0.7986
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.9,
+     "planar_move_mm": 83.9,
+     "final_to_target_mm": 115.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7941,
+     "stalled_above_target_mm": 7.6,
+     "contacts": [
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 317
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_floor",
+       "steps": 290
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.396,
+      "step_into_hold": 322,
+      "tip_z_m": 0.8198
+     }
+    }
+   }
+  },
+  {
+   "seed": 4,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 85.5,
+     "final_to_target_mm": 161.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7975,
+     "stalled_above_target_mm": 11.0,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 657
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.772,
+      "step_into_hold": 446,
+      "tip_z_m": 0.799
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 85.5,
+     "final_to_target_mm": 122.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8213,
+     "stalled_above_target_mm": 34.8,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 475
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+      "t": 34.352,
+      "step_into_hold": 300,
+      "tip_z_m": 0.8216
+     }
+    }
+   }
+  },
+  {
+   "seed": 5,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 5.3,
+     "planar_move_mm": 115.5,
+     "final_to_target_mm": 137.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8317,
+     "stalled_above_target_mm": 45.2,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 550
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.352,
+      "step_into_hold": 236,
+      "tip_z_m": 0.8317
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 4.0,
+     "planar_move_mm": 112.2,
+     "final_to_target_mm": 101.7,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.826,
+     "stalled_above_target_mm": 39.5,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom78 | drawer/drawer_front",
+       "steps": 977
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/geom78 | drawer/drawer_front",
+      "t": 34.28,
+      "step_into_hold": 264,
+      "tip_z_m": 0.8261
+     }
+    }
+   }
+  },
+  {
+   "seed": 6,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 87.7,
+     "final_to_target_mm": 159.8,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8326,
+     "stalled_above_target_mm": 46.1,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 323
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | spoon/spoon_handle",
+       "steps": 289
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 229
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.35,
+      "step_into_hold": 235,
+      "tip_z_m": 0.8326
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.3,
+     "planar_move_mm": 83.1,
+     "final_to_target_mm": 122.6,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.812,
+     "stalled_above_target_mm": 25.5,
+     "contacts": [
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 428
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 150
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+       "steps": 13
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.444,
+      "step_into_hold": 346,
+      "tip_z_m": 0.813
+     }
+    }
+   }
+  },
+  {
+   "seed": 7,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 85.1,
+     "final_to_target_mm": 161.8,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7962,
+     "stalled_above_target_mm": 9.7,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 427
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box3 | fork/fork_handle",
+       "steps": 215
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box4 | fork/fork_handle",
+       "steps": 211
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.778,
+      "step_into_hold": 449,
+      "tip_z_m": 0.7986
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.6,
+     "planar_move_mm": 85.0,
+     "final_to_target_mm": 122.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8235,
+     "stalled_above_target_mm": 37.0,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 944
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/geom67 | drawer/drawer_front",
+      "t": 34.356,
+      "step_into_hold": 302,
+      "tip_z_m": 0.8236
+     }
+    }
+   }
+  },
+  {
+   "seed": 8,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 3,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": true
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 82.4,
+     "final_to_target_mm": 164.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8175,
+     "stalled_above_target_mm": 31.0,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 383
+      },
+      {
+       "pair": "right_moving_jaw_so101_v1/right_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 201
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 105
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.424,
+      "step_into_hold": 272,
+      "tip_z_m": 0.8255
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.8,
+     "planar_move_mm": 72.5,
+     "final_to_target_mm": 132.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8389,
+     "stalled_above_target_mm": 52.4,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 774
+      },
+      {
+       "pair": "left_gripper/geom67 | cabinet/cab_left",
+       "steps": 494
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 102
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8848
+     }
+    }
+   }
+  },
+  {
+   "seed": 9,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": false,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 76.9,
+     "final_to_target_mm": 168.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7973,
+     "stalled_above_target_mm": 10.8,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 658
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.772,
+      "step_into_hold": 446,
+      "tip_z_m": 0.7988
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.8,
+     "planar_move_mm": 76.8,
+     "final_to_target_mm": 128.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8133,
+     "stalled_above_target_mm": 26.8,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 867
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+       "steps": 316
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+      "t": 34.314,
+      "step_into_hold": 281,
+      "tip_z_m": 0.8243
+     }
+    }
+   }
+  },
+  {
+   "seed": 0,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 70.3,
+     "final_to_target_mm": 174.7,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7966,
+     "stalled_above_target_mm": 10.1,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 359
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box3 | fork/fork_handle",
+       "steps": 13
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.744,
+      "step_into_hold": 432,
+      "tip_z_m": 0.7991
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 10.4,
+     "planar_move_mm": 67.8,
+     "final_to_target_mm": 135.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.795,
+     "stalled_above_target_mm": 8.5,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | spoon/spoon_handle",
+       "steps": 618
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 151
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.604,
+      "step_into_hold": 426,
+      "tip_z_m": 0.8016
+     }
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 79.0,
+     "final_to_target_mm": 167.2,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.818,
+     "stalled_above_target_mm": 31.6,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 401
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 117
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+      "t": 13.53,
+      "step_into_hold": 325,
+      "tip_z_m": 0.8181
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.5,
+     "planar_move_mm": 66.2,
+     "final_to_target_mm": 136.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8468,
+     "stalled_above_target_mm": 60.3,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 951
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8599
+     }
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 69.1,
+     "final_to_target_mm": 175.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.797,
+     "stalled_above_target_mm": 10.5,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 678
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.752,
+      "step_into_hold": 436,
+      "tip_z_m": 0.7986
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.8,
+     "planar_move_mm": 68.9,
+     "final_to_target_mm": 134.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.803,
+     "stalled_above_target_mm": 16.5,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 378
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+      "t": 34.572,
+      "step_into_hold": 410,
+      "tip_z_m": 0.8031
+     }
+    }
+   }
+  },
+  {
+   "seed": 3,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.6,
+     "planar_move_mm": 87.0,
+     "final_to_target_mm": 160.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7973,
+     "stalled_above_target_mm": 10.8,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 683
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.746,
+      "step_into_hold": 433,
+      "tip_z_m": 0.7989
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 7.1,
+     "planar_move_mm": 90.9,
+     "final_to_target_mm": 109.1,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8513,
+     "stalled_above_target_mm": 64.8,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+       "steps": 1125
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | cabinet/cab_left",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.9047
+     }
+    }
+   }
+  },
+  {
+   "seed": 4,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 3.9,
+     "planar_move_mm": 113.5,
+     "final_to_target_mm": 138.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8173,
+     "stalled_above_target_mm": 30.8,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 560
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 111
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+      "t": 13.536,
+      "step_into_hold": 328,
+      "tip_z_m": 0.8174
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 3.9,
+     "planar_move_mm": 96.8,
+     "final_to_target_mm": 116.1,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.828,
+     "stalled_above_target_mm": 41.5,
+     "contacts": [
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 296
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 213
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+      "t": 34.276,
+      "step_into_hold": 262,
+      "tip_z_m": 0.829
+     }
+    }
+   }
+  },
+  {
+   "seed": 5,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 3.0,
+     "planar_move_mm": 109.4,
+     "final_to_target_mm": 141.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8333,
+     "stalled_above_target_mm": 46.8,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+       "steps": 538
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_front",
+      "t": 13.338,
+      "step_into_hold": 229,
+      "tip_z_m": 0.8334
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 3.0,
+     "planar_move_mm": 110.1,
+     "final_to_target_mm": 104.0,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8121,
+     "stalled_above_target_mm": 25.6,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+       "steps": 767
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 56
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+      "t": 34.468,
+      "step_into_hold": 358,
+      "tip_z_m": 0.8121
+     }
+    }
+   }
+  },
+  {
+   "seed": 6,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 2.8,
+     "planar_move_mm": 112.2,
+     "final_to_target_mm": 139.7,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8095,
+     "stalled_above_target_mm": 23.0,
+     "contacts": [
+      {
+       "pair": "right_gripper/right_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 416
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/right_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 13.584,
+      "step_into_hold": 352,
+      "tip_z_m": 0.8123
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 2.8,
+     "planar_move_mm": 110.5,
+     "final_to_target_mm": 105.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8483,
+     "stalled_above_target_mm": 61.8,
+     "contacts": [
+      {
+       "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+       "steps": 771
+      }
+     ],
+     "first_contact": {
+      "pair": "left_camera_mount/left_camera_box2 | drawer/drawer_front",
+      "t": 33.754,
+      "step_into_hold": 1,
+      "tip_z_m": 0.8567
+     }
+    }
+   }
+  },
+  {
+   "seed": 7,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 81.0,
+     "final_to_target_mm": 165.4,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7974,
+     "stalled_above_target_mm": 10.9,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 683
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.746,
+      "step_into_hold": 433,
+      "tip_z_m": 0.799
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.7,
+     "planar_move_mm": 81.1,
+     "final_to_target_mm": 124.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8169,
+     "stalled_above_target_mm": 30.4,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+       "steps": 598
+      },
+      {
+       "pair": "left_gripper/geom67 | drawer/drawer_front",
+       "steps": 177
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box2 | drawer/drawer_front",
+       "steps": 148
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/geom67 | drawer/drawer_front",
+      "t": 34.282,
+      "step_into_hold": 265,
+      "tip_z_m": 0.8282
+     }
+    }
+   }
+  },
+  {
+   "seed": 8,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 80.1,
+     "final_to_target_mm": 166.3,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8039,
+     "stalled_above_target_mm": 17.4,
+     "contacts": [
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+       "steps": 264
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 206
+      },
+      {
+       "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_side_r",
+       "steps": 166
+      },
+      {
+       "pair": "right_moving_jaw_so101_v1/right_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 66
+      }
+     ],
+     "first_contact": {
+      "pair": "right_camera_mount/right_camera_box2 | drawer/drawer_floor",
+      "t": 13.508,
+      "step_into_hold": 314,
+      "tip_z_m": 0.8198
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 0.2,
+     "planar_move_mm": 80.1,
+     "final_to_target_mm": 125.9,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.8115,
+     "stalled_above_target_mm": 25.0,
+     "contacts": [
+      {
+       "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+       "steps": 537
+      },
+      {
+       "pair": "left_moving_jaw_so101_v1/left_moving_jaw_box1 | drawer/drawer_front",
+       "steps": 337
+      }
+     ],
+     "first_contact": {
+      "pair": "left_moving_jaw_so101_v1/geom77 | drawer/drawer_front",
+      "t": 34.422,
+      "step_into_hold": 335,
+      "tip_z_m": 0.8162
+     }
+    }
+   }
+  },
+  {
+   "seed": 9,
+   "opening": 0.0,
+   "opening_rad_effective": 0.0,
+   "plan_at_open": true,
+   "shipped": false,
+   "subgoals_met": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "fork": {
+     "placed": false,
+     "lifted_mm": 0.0,
+     "planar_move_mm": 78.5,
+     "final_to_target_mm": 167.5,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7966,
+     "stalled_above_target_mm": 10.1,
+     "contacts": [
+      {
+       "pair": "right_gripper/geom115 | fork/fork_handle",
+       "steps": 614
+      },
+      {
+       "pair": "right_gripper/right_fixed_jaw_box3 | fork/fork_handle",
+       "steps": 48
+      }
+     ],
+     "first_contact": {
+      "pair": "right_gripper/geom115 | fork/fork_handle",
+      "t": 13.74,
+      "step_into_hold": 430,
+      "tip_z_m": 0.7992
+     }
+    },
+    "spoon": {
+     "placed": false,
+     "lifted_mm": 1.5,
+     "planar_move_mm": 78.6,
+     "final_to_target_mm": 127.1,
+     "asked_tip_z_m": 0.7865,
+     "lowest_tip_z_m": 0.7963,
+     "stalled_above_target_mm": 9.8,
+     "contacts": [
+      {
+       "pair": "left_gripper/geom67 | spoon/spoon_handle",
+       "steps": 594
+      },
+      {
+       "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+       "steps": 334
+      }
+     ],
+     "first_contact": {
+      "pair": "left_gripper/left_fixed_jaw_box1 | drawer/drawer_front",
+      "t": 34.608,
+      "step_into_hold": 428,
+      "tip_z_m": 0.8009
+     }
+    }
+   }
+  }
+ ]
+}

@@ -519,8 +519,9 @@ What that leaves is stated rather than hidden: the arm arrives roughly 7 mm
 above a 5 mm handle it has to close around, and no change to *how the arm gets
 there* has closed that gap in six attempts. The remaining candidates were
 changes to the scene or to the gripper rather than to the trajectory. **The
-scene one has now been made, and it is refuted too — section 8a.** The gripper
-one has not been made.
+scene one has now been made, and it is refuted too — section 8a. The gripper
+one has now been made as well, and it is refuted too — section 8b.** Both were
+named in this section before they were tried, and both were tried.
 
 This paragraph used to end "the servos are force-limited at 2.94 Nm with three
 joints saturated at this reach (section 5)". That attribution is withdrawn: it
@@ -573,6 +574,83 @@ the drawer, with `shoulder_lift` at 100% of ±2.94 N·m, its own gravity term at
 wedge, not a droop, and it is why seven routes that moved *where* the arm goes
 all changed nothing.
 
+## 8b. The gripper route: a real defect that explains nothing
+
+The eighth and last named candidate. It is not about the gripper's shape. It is
+that `_pick` emits a descend move carrying **two different gripper widths**:
+
+```python
+Move(..., opening=open_to,     # GRIPPER_NARROW, 50.44 mm: what DESCENDS
+         plan_at=close_to)     # pinch(fork handle), 7.00 mm: what is SOLVED
+```
+
+`Rollout._plan` hands `plan_at` to the solver as the gripper opening and then
+overwrites the gripper command with `opening`. `plan_pose` puts the jaw
+**meeting point** on the target — and that point is the midpoint of a *fixed*
+jaw and a *moving* one, so it slides when the jaws open. The pose is placed for
+a hand that is not the hand that goes down.
+
+`scripts/measure_gripper_envelope.py` measures the displacement kinematically:
+freeze the arm at the joint vector `plan_pose` actually returned, then read
+`tip_mid` at the planning width and at the executed width. No dynamics, no
+contact, no controller.
+
+| waypoint | solved at | executed at | displacement | along jaw | along wrist | solved→target | executed→target |
+|---|---|---|---|---|---|---|---|
+| `fork_descend` | 7.00 mm | 50.44 mm | **21.83 mm** | 21.14 mm | −0.08 mm | 3.93 mm | **20.72 mm** |
+| `spoon_descend` | 7.00 mm | 50.44 mm | **21.83 mm** | 21.14 mm | −0.08 mm | 2.93 mm | **20.41 mm** |
+| `fork_above` | 50.44 mm | 50.44 mm | **0.00 mm** | 0.00 mm | 0.00 mm | 3.22 mm | 3.22 mm |
+| `spoon_above` | 50.44 mm | 50.44 mm | **0.00 mm** | 0.00 mm | 0.00 mm | 1.73 mm | 1.73 mm |
+
+The two approach via-points are the **built-in negative control**: they carry no
+`plan_at`, so their two widths are equal, and their displacement is exactly
+zero. Same hand, same seeds, same arithmetic — so the 21.83 mm is the mismatch
+and not the probe's algebra. And 21.83 mm is half of (50.44 − 7.00), which is
+what a gripper with one fixed jaw must do; the residual against that prediction
+is 0.11 mm.
+
+**This corrects a sentence the repository shipped.** `Move.__init__` justified
+`plan_at` with *"the jaws meet ~41 mm nearer the wrist closed than open"* — a
+displacement along the approach axis. `scripts/measure_jaw_midpoint_shift.py`
+sweeps the whole calibration range from the same 7.00 mm closed reference: the
+approach-axis component is **−0.26 mm** at the width the cutlery descent
+executes at, reaches at most **37.4 mm** and only at 129.9 mm of separation near
+the joint limit, and never reaches 41 mm anywhere. So on the cutlery, `plan_at`
+displaces the executed hand 21.8 mm **sideways** to correct a fore-aft error
+that is not there. The superseded sentence is kept in the source beside the
+correction.
+
+**And it explains nothing.** `CUTLERY_DESCEND_OPENING` × `CUTLERY_PLAN_AT_OPEN`,
+8 cells × 10 seeds, same scorer, shipped controller carried as one of the cells:
+
+| executed opening | solved at same width | fork | spoon | sub-goals | fork stall |
+|---|---|---|---|---|---|
+| GRIPPER_NARROW (shipped) | no (shipped) | **0/10** | **0/10** | 15/50 | 24.5 mm |
+| GRIPPER_NARROW | yes | 0/10 | 0/10 | 16/50 | 23.2 mm |
+| 0.30 rad | no | 0/10 | 0/10 | 18/50 | 32.2 mm |
+| 0.30 rad | yes | 0/10 | 0/10 | 14/50 | 15.5 mm |
+| 0.15 rad | no | 0/10 | 0/10 | 12/50 | 28.2 mm |
+| 0.15 rad | yes | 0/10 | 0/10 | 11/50 | 14.75 mm |
+| 0.00 rad | no | 0/10 | 0/10 | 16/50 | **11.0 mm** |
+| 0.00 rad | yes | 0/10 | 0/10 | 16/50 | 14.15 mm |
+
+Closing the mismatch **more than halves the arrival gap** — 24.5 mm down to
+11.0 mm, the second-closest arrival this project has recorded — and places
+nothing. The largest median lift in any of the eight cells is 2.3 mm against
+the 85 mm the `fork_lift` move asks for, so no cell is a near miss either.
+
+**Stated against us:** one cell scores **18/50** against the shipped 15/50. It
+is *not* adopted and *not* claimed as a gain. Its whole advantage is
+`plate_placed` 4→7; cutlery is 0/10 in every cell, and the plate count across
+the eight cells spans 3–7 for a knob that edits only the two cutlery descend
+moves, so 7 sits inside the spread of an incidental effect on a 10-seed sample
+with no repeats. The shipped defaults are unchanged and a clean 10-seed run
+still scores **15/50, task_success 0/10**.
+
+The defect is also **not cutlery-only**: the plate and mug descents carry the
+same `plan_at=hold` pattern. Only the cutlery was swept, so nothing is claimed
+about them.
+
 ## 9. Reproducing every number in this document
 
 ```bash
@@ -602,6 +680,12 @@ python3 scripts/eval_seeds.py --seeds 10 --policy scripted --scene blind
 python3 scripts/test_scene_source.py                        # 15/15
 
 python3 scripts/test_technical_summary.py                   # this document vs the evidence
+
+# the eighth candidate, section 8b
+python3 scripts/measure_jaw_midpoint_shift.py               # evidence/jaw_midpoint_shift.json
+python3 scripts/measure_gripper_envelope.py --seeds 10      # evidence/gripper_envelope.json
+python3 scripts/test_gripper_envelope.py                    # 30/30, 13 negative controls
+python3 scripts/mutate_gripper_envelope.py                  # evidence/gripper_envelope_mutants.json
 ```
 
 The last line is the one that keeps this document honest. It re-derives every

@@ -362,10 +362,33 @@ class Move:
         # the placement -- measured, 2 of 3 seeds lost when it was switched on
         # everywhere.
         self.square = square
-        # The jaws meet ~41 mm nearer the wrist closed than open, so a pose
-        # solved with them open puts the object in front of the closing point
-        # and the grasp brushes past it.  ``plan_at`` solves the arm at the
-        # opening the jaws will HOLD at, and commands them open to get there.
+        # ``plan_at`` solves the arm at the opening the jaws will HOLD at, and
+        # commands them open to get there.
+        #
+        # SUPERSEDED 2026-09-08, kept because it is what this code was written
+        # against: "The jaws meet ~41 mm nearer the wrist closed than open, so
+        # a pose solved with them open puts the object in front of the closing
+        # point and the grasp brushes past it."
+        #
+        # Measured over the whole calibration range from a 7.0 mm closed
+        # reference (``scripts/measure_jaw_midpoint_shift.py``): the meeting
+        # point moves by HALF the change in jaw separation -- it is the
+        # midpoint of a fixed jaw and a moving one -- and at the two widths the
+        # cutlery descent actually uses, 7.0 mm solved and 50.44 mm executed,
+        # that is 21.7 mm ALONG THE JAW AXIS and -0.26 mm along the approach
+        # (wrist) axis.  The fore-aft component the superseded sentence
+        # describes only grows near the joint limit, 37.4 mm at 129.9 mm of
+        # separation, and never reaches 41 mm anywhere in the range.  So on the
+        # cutlery this mechanism displaces the executed hand ~21.8 mm SIDEWAYS
+        # to correct a fore-aft error that is not there, and the executed jaws
+        # land 20.7 mm from the target the solved jaws were 3.9 mm from.
+        #
+        # That is a real defect and it is NOT why the cutlery is 0/10.  Closing
+        # it was swept in both directions -- ``CUTLERY_PLAN_AT_OPEN`` and
+        # ``CUTLERY_DESCEND_OPENING``, 8 cells x 10 seeds,
+        # ``scripts/measure_gripper_envelope.py`` -- and it more than halves
+        # the descent stall (24.5 mm -> 11.0 mm) while placing no fork and no
+        # spoon in any cell.  The shipped defaults are therefore unchanged.
         self.plan_at = plan_at
 
 
@@ -688,6 +711,17 @@ CUTLERY_DESCEND_SQUARE = False   # square the descent only, never the carry
 # wall.  See ``scripts/measure_cutlery_approach.py``.  The shipped value is the
 # pure +z every published figure was measured at.
 CUTLERY_APPROACH = (0.0, 0.0, 0.075)
+# The opening the cutlery descent is EXECUTED at, and whether the arm is
+# SOLVED at that same opening.  Shipped, those two are different numbers:
+# ``_pick`` passes ``plan_at=close_to`` on the descend move, so the solver
+# places the arm for jaws ~7 mm apart while ``Rollout._plan`` then commands
+# the gripper to ``open_to`` -- 51 mm apart -- for the descent itself.
+# ``plan_pose`` puts the jaw MEETING POINT on the target and that point moves
+# along the hand when the jaws open, so the jaws that go down are not the jaws
+# the solver placed.  See ``scripts/measure_gripper_envelope.py``.  The shipped
+# values emit exactly the moves they always did.
+CUTLERY_DESCEND_OPENING = GRIPPER_NARROW
+CUTLERY_PLAN_AT_OPEN = False
 
 
 def dinner_table_script() -> list[tuple[dict, float]]:
@@ -709,9 +743,10 @@ def dinner_table_script() -> list[tuple[dict, float]]:
     # --- 2. fork: right picks it out of the drawer, hands it to the left ------
     fork_grip = pinch(geom_width("fork_handle", 0))
     S.extend(_pick(("right", "fork", "fork_grasp", fork_grip, across("fork")),
-                   open_to=GRIPPER_NARROW, descend_z=CUTLERY_DESCEND_Z,
+                   open_to=CUTLERY_DESCEND_OPENING, descend_z=CUTLERY_DESCEND_Z,
                    descend_steps=CUTLERY_DESCEND_STEPS,
                    descend_square=CUTLERY_DESCEND_SQUARE,
+                   plan_at_open=CUTLERY_PLAN_AT_OPEN,
                    approach=CUTLERY_APPROACH, lift=(0.0, 0.0, 0.085)))
     S.extend(_handoff("right", "left", "fork", "target_fork", across("fork"),
                       hold=fork_grip))
@@ -719,9 +754,10 @@ def dinner_table_script() -> list[tuple[dict, float]]:
     # --- 3. spoon: the mirror image, left to right ----------------------------
     spoon_grip = pinch(geom_width("spoon_handle", 0))
     S.extend(_pick(("left", "spoon", "spoon_grasp", spoon_grip, across("spoon")),
-                   open_to=GRIPPER_NARROW, descend_z=CUTLERY_DESCEND_Z,
+                   open_to=CUTLERY_DESCEND_OPENING, descend_z=CUTLERY_DESCEND_Z,
                    descend_steps=CUTLERY_DESCEND_STEPS,
                    descend_square=CUTLERY_DESCEND_SQUARE,
+                   plan_at_open=CUTLERY_PLAN_AT_OPEN,
                    approach=CUTLERY_APPROACH, lift=(0.0, 0.0, 0.085)))
     S.extend(_handoff("left", "right", "spoon", "target_spoon", across("spoon"),
                       hold=spoon_grip))
@@ -828,7 +864,7 @@ def _open_drawer(suffix: str = "", from_home: bool = False):
 
 def _pick(spec, *, lift=(0.0, 0.0, 0.070), approach=(0.0, 0.0, 0.070),
           open_to=GRIPPER_OPEN, descend_z=0.002, square=False,
-          descend_steps=1, descend_square=None):
+          descend_steps=1, descend_square=None, plan_at_open=False):
     """Approach, descend, close, lift.
 
     ``approach`` and ``lift`` are vectors, not heights, because the cutlery
@@ -843,6 +879,10 @@ def _pick(spec, *, lift=(0.0, 0.0, 0.070), approach=(0.0, 0.0, 0.070),
     intermediate heights keeps the ramp short enough that the joint-space chord
     stays near the Cartesian line.  1 is the shipped behaviour and emits
     exactly the moves it always did.
+
+    ``plan_at_open`` drops the descend move's ``plan_at``, so the arm is solved
+    at the SAME opening the jaws will descend at rather than at ``close_to``.
+    False is the shipped behaviour and emits exactly the move it always did.
     """
     arm, body, site, close_to, jaw = spec
     at = site if callable(site) else None
@@ -869,7 +909,8 @@ def _pick(spec, *, lift=(0.0, 0.0, 0.070), approach=(0.0, 0.0, 0.070),
         # every evidence file in the tree keys the grasp on that string.
         label = f"{body}_descend" if i == n_desc else f"{body}_descend{i}"
         out.append(({arm: Move(arm, point(a_vec * (1.0 - frac) + end * frac),
-                               jaw=jaw, opening=open_to, plan_at=close_to,
+                               jaw=jaw, opening=open_to,
+                               plan_at=None if plan_at_open else close_to,
                                square=sq_desc, label=label)},
                     max(0.4, 1.2 / n_desc)))
     out.append(({arm: Grip(arm, close_to, label=f"{body}_close")}, 0.8))

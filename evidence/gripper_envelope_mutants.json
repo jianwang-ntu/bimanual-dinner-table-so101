@@ -1,0 +1,304 @@
+{
+ "campaign": "mutate_gripper_envelope.py",
+ "suite": "scripts/test_gripper_envelope.py",
+ "baseline_green_before": true,
+ "baseline_green_after": true,
+ "isolation": "each mutant runs in its own fresh mkdtemp tree, copied not hard-linked, so a mutant cannot write the real evidence files",
+ "no_op_guard": "a mutation whose output is byte-identical to its input raises and is reported BROKEN, never SURVIVED",
+ "n": 23,
+ "scored": 23,
+ "broken": 0,
+ "killed": 23,
+ "survived": 0,
+ "killed_by_the_control_that_names_them": 23,
+ "not_claimed": "A mutation score measures how sensitive this suite is to these edits. It is not evidence that the controller is correct, that the refutation is right, or that any cutlery was placed -- none was.",
+ "results": [
+  {
+   "mutant": "opening_knob_drifted",
+   "breaks": "CUTLERY_DESCEND_OPENING ships at 0.30",
+   "expected_control": "defaults",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "defaults"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "plan_knob_drifted",
+   "breaks": "CUTLERY_PLAN_AT_OPEN ships True",
+   "expected_control": "defaults",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "defaults",
+    "mismatch_is_real"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "plan_wiring_inert",
+   "breaks": "the descend move ignores the plan_at knob",
+   "expected_control": "knob_live",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "knob_live"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "opening_wiring_inert",
+   "breaks": "the fork pick ignores the opening knob",
+   "expected_control": "knob_live",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "knob_live",
+    "reader_reads_the_move"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "reader_reads_the_constant",
+   "breaks": "the suite reads the constant instead of the emitted move",
+   "expected_control": "reader_reads_the_move",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "reader_reads_the_move",
+    "reader_reads_the_move/reject"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "rebind_removed",
+   "breaks": "the rebind that arms reader_reads_the_move is removed",
+   "expected_control": "reader_reads_the_move",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "reader_reads_the_move"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "taut_guard_blinded",
+   "breaks": "the tautology guard always reports nothing",
+   "expected_control": "no_tautological_checks/reject",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "no_tautological_checks/reject"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "offset_zero",
+   "breaks": "the mismatch introduces no displacement",
+   "expected_control": "offset_is_half",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "offset_is_half"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "offset_doubled",
+   "breaks": "the displacement stops being half the width change",
+   "expected_control": "offset_is_half",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "offset_is_half"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "control_offsets_too",
+   "breaks": "the no-plan_at control shows the same offset",
+   "expected_control": "offset_control",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "offset_control"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "control_has_plan_at",
+   "breaks": "the approach waypoints are recorded with a plan_at",
+   "expected_control": "offset_control",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "offset_control"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "offset_is_fore_aft",
+   "breaks": "the displacement is recorded along the wrist axis",
+   "expected_control": "offset_sideways",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "offset_sideways",
+    "offset_sideways/reject"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "midpoint_disagrees",
+   "breaks": "the independent sweep disagrees at the same opening",
+   "expected_control": "offset_sideways",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "offset_sideways"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "shipped_baseline_drift",
+   "breaks": "the shipped cell's stall drifts 9 mm off the independently published one",
+   "expected_control": "reproduces",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "reproduces"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "shipped_total_drift",
+   "breaks": "the shipped cell stops reproducing 15/50",
+   "expected_control": "reproduces",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "reproduces"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "placement_claimed",
+   "breaks": "a cell places the fork 3/10",
+   "expected_control": "verdict",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "verdict",
+    "verdict/reject",
+    "placement_lift",
+    "gain_not_cutlery"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "verdict_flipped",
+   "breaks": "the stored verdict stops following its own table",
+   "expected_control": "verdict",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "verdict"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "placement_without_lift",
+   "breaks": "a placement is claimed with no lift",
+   "expected_control": "placement_lift",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "verdict",
+    "verdict/reject",
+    "placement_lift",
+    "gain_not_cutlery"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "run_dropped",
+   "breaks": "a rollout is silently lost from one cell",
+   "expected_control": "identity",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "identity"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "probe_control_false",
+   "breaks": "the probe's own control is False",
+   "expected_control": "probe_controls_envelope",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "probe_controls_envelope"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "contact_one_sided",
+   "breaks": "first contacts stop naming the hand side",
+   "expected_control": "contact_named",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "contact_named"
+   ],
+   "tail": "nual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nTraceback (most recent call last):\n  File \"/tmp/grenv_contact_one_sided_ue2a4uvz/tree/scripts/test_gripper_envelope.py\", line 542, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/tmp/grenv_contact_one_sided_ue2a4uvz/tree/scripts/test_gripper_envelope.py\", line 424, in main\n    one_sided = got[0][\"pair\"].split(\" | \")[1]\n                ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\nIndexError: list index out of range\n"
+  },
+  {
+   "mutant": "control_neutered",
+   "breaks": "one control is turned into a tautology in place, keeping the count",
+   "expected_control": "no_tautological_checks",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "no_tautological_checks"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  },
+  {
+   "mutant": "reject_deleted",
+   "breaks": "one control's negative half is removed",
+   "expected_control": "reject_count_pinned",
+   "rc": 1,
+   "status": "KILLED",
+   "killed_by_expected_control": true,
+   "failed_controls": [
+    "control_count_pinned",
+    "reject_count_pinned"
+   ],
+   "tail": ", child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\nWARNING: Attach conflict when attaching 'so101' to 'dinner_table_bimanual_so101', policy is 'warning'\ntimestep: parent has 0.002 (default), child has 0.005, keeping parent value\niterations: parent has 100 (default), child has 10, keeping parent value\nls_iterations: parent has 50 (default), child has 20, keeping parent value\n\n"
+  }
+ ]
+}
