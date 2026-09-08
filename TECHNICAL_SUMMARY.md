@@ -517,7 +517,16 @@ there is no withheld gain here — the shipped setting is the best of the 40.
 
 What that leaves is stated rather than hidden: the arm arrives roughly 7 mm
 above a 5 mm handle it has to close around, and no change to *how the arm gets
-there* has closed that gap in six attempts. The remaining candidates were
+there* has closed that gap in six attempts.
+
+> **Superseded 2026-09-08 — see section 8c.** The clause "no change to *how
+> the arm gets there*" turned out to be the whole answer, and this section
+> could not see it because it reads the gap *relative to the target*. The
+> arm stops at an **absolute** height: asking 12.0 mm higher moves the
+> achieved height 1.9 mm. The hand hangs 26.2 mm below the point it pinches
+> with, and the handle stands 2.5 mm above the drawer floor. The sentence
+> above is kept because it was the honest reading of what had been measured
+> at the time. The remaining candidates were
 changes to the scene or to the gripper rather than to the trajectory. **The
 scene one has now been made, and it is refuted too — section 8a. The gripper
 one has now been made as well, and it is refuted too — section 8b.** Both were
@@ -651,9 +660,106 @@ The defect is also **not cutlery-only**: the plate and mug descents carry the
 same `plan_at=hold` pattern. Only the cutlery was swept, so nothing is claimed
 about them.
 
+## 8c. The ninth explanation, and this one is measured: the hand bottoms out
+
+Sections 8, 8a and 8b end with the cutlery stall **unexplained** after eight
+refuted routes. That is no longer the state of this repository, and the
+sentence "no named candidate remains" is withdrawn. The cause is measured, on
+two independent probes that agree to 1.22 mm, and it predicts the outcome of
+all four graspables in this scene — including the one that works.
+
+**What the eight probes could not see.** Every one of them read the residual as
+*stall above the asked target*, and swept one knob with the target moving under
+it. `scripts/measure_cutlery_zcross.py` crosses the descent height with the two
+knobs that had each halved that gap — `CUTLERY_DESCEND_Z` {3, 6, 10, 15 mm} ×
+`CUTLERY_PLAN_AT_OPEN` {False, True} × `CUTLERY_DESCEND_OPENING` {NARROW, 0.30,
+0.15 rad}, 24 cells × 10 seeds, 240 rollouts, the shipped cell carried *in* the
+grid. `fork_placed` and `spoon_placed` are **0/10 in all 24**. But the absolute
+heights fall out of it:
+
+| | asked tip z | achieved lowest tip z |
+|---|---|---|
+| `descend_z` = 3 mm | 0.7865 m | 0.8013 m |
+| `descend_z` = 15 mm | 0.7985 m | 0.8032 m |
+| **change** | **+12.0 mm** | **+1.9 mm** |
+
+The arm does not stop a *distance above the target*. It stops at an **absolute
+height**, and the "arrival gap" shrank only because the target rose toward it.
+A constant cannot be moved by changing where the arm goes — which is what all
+seven trajectory routes did — or by changing the hand's width, which is what
+the eighth did. That is why they all changed nothing.
+
+**What the constant is.** `scripts/measure_hand_floor.py` runs `mj_kinematics`
+only — no dynamics, no servos, no contact solver, so saturation cannot be the
+explanation — on the joint vector `plan_pose` actually returns, and takes the
+lowest world z of any *mesh vertex* of the three hand bodies (`*_gripper`,
+`*_camera_mount`, `*_moving_jaw_so101_v1`). The hand **hangs below the point it
+pinches with**:
+
+| grasp pose | hand drop below the pinch point | lowest geom |
+|---|---|---|
+| `fork_descend` | **26.2 mm** | `geom115`, `geom121` |
+| `spoon_descend` | **26.2 mm** | `geom67`, `left_moving_jaw_box2` |
+| `plate_descend` | **50.4 mm** | `geom115` |
+| `mug_descend` | **35.4 mm** | `geom67`, `left_fixed_jaw_box3` |
+
+Those are the same geoms the dynamic contact tallies name. And the two probes
+agree: the dynamic floor sits **20.25 mm** above the drawer floor, against a
+kinematic minimum drop over the same ten seeds of **19.03 mm**.
+
+**The rule, and the test that could have refuted it.**
+
+> A pinch grasp is possible only where the object's graspable feature stands at
+> least as far above the surface under it as the hand hangs below its own pinch
+> point.
+
+| object | feature above its support | hand drop | predicted | observed |
+|---|---|---|---|---|
+| fork | 2.5 mm | 26.2 mm | not pinchable | **0/10**, never lifted |
+| spoon | 2.5 mm | 26.2 mm | not pinchable | **0/10**, never lifted |
+| plate | 5.0 mm | 50.4 mm | not pinchable | never pinched — **hooked by the rim and dragged**, exactly as section 8 item 6 reports |
+| mug | 90.0 mm | 35.4 mm | **pinchable** | **gripped 8/10**, placed 1/10 |
+
+Four of four. The mug is the point: a rule that only ever predicts failure is
+not a rule. Its drop is the *largest* of the four, so it does not succeed
+because the hand hangs less there — it succeeds because its grasp point stands
+90 mm above the table. `scripts/test_hand_floor.py` checks all of this, 17/17.
+
+**Stated against us, twice.**
+
+* `measure_hand_floor`'s own control — *"drop is a property of the hand, not the
+  waypoint"* — came back **False** (26.2 / 26.2 / 50.4 / 35.4 mm). The simpler
+  claim, that this hand has one drop, is refuted by the probe's own control.
+  The finding is stated per grasp pose because of that, and the checker asserts
+  the control's verdict rather than the convenient one.
+* The best of the 24 cells scores **19/50** against the shipped 15/50. It is
+  **not** adopted and **not** a gain: across the 24 cells the total runs 10–19,
+  sd 2.0 about a mean of 14.8, so 19 is inside the sweep's own spread. This also
+  exposes something no artifact here has stated: the headline **15/50 carries
+  about ±2 sub-goals of run-to-run sensitivity**. Across cells differing *only*
+  in cutlery knobs, `plate_placed` ranges 2–7 and `mug_placed` 0–2 — the arms
+  share one timeline, so a wedged arm perturbs the scene the other works in.
+
+**What this does and does not license.** It is not a fix and no fix was
+attempted: `envs/` is untouched and every published figure — fork 0/10, spoon
+0/10, task_success 0/10, 15/50 — still stands and is still true. The gripper is
+the real SO-101 and its geometry is `third_party/`; reshaping it to win would
+misrepresent the hardware this track is about. The 2.5 mm is **ours**:
+`envs/dinner_table.py` lays the cutlery flat on a bare drawer floor, and a real
+kitchen drawer has a caddy that stands the handles clear. That change would put
+the feature above the hand's drop — and it would invalidate the 15/50 headline,
+every cutlery figure, the demo video, the cover image and the slides, all of
+which would have to be re-measured and re-recorded. It is a rebuild, not a fix,
+and it is not this agent's call to make by default.
+
 ## 9. Reproducing every number in this document
 
 ```bash
+# section 8c -- why the cutlery is 0/10, and the rule that predicts all four objects
+python3 scripts/measure_cutlery_zcross.py --seeds 10 --workers 48   # 24 cells, 240 rollouts
+python3 scripts/measure_hand_floor.py     --seeds 10                # kinematic, no dynamics
+python3 scripts/test_hand_floor.py                                  # 17/17, incl. the control that fired against us
+
 pip install -r requirements.txt
 python3 scripts/build_scene.py                              # envs/dinner_table.xml
 python3 scripts/verify_scene.py                             # 16/16

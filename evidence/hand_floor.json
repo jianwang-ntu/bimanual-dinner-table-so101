@@ -1,0 +1,711 @@
+{
+ "probe": "measure_hand_floor.py",
+ "question": "Is the cutlery stall a property of the HAND -- how far it hangs below the point it pinches with -- rather than of the trajectory, the opening or the solver?",
+ "finding_id": "F-HAND-FLOOR-001",
+ "method": "kinematic only: mj_kinematics on the joint vector plan_pose returned. No dynamics, no servos, no contact solver.",
+ "seeds": 10,
+ "controls": {
+  "all_seeds_ok": true,
+  "cutlery_waypoints_present": true,
+  "control_waypoint_present": true,
+  "drop_is_a_property_of_the_hand_not_the_waypoint": false,
+  "why_that_control_matters": "mug_placed scores and fork_placed does not. If drop_mm differed between them this probe would be measuring posture, not the hand, and the finding would be void."
+ },
+ "waypoints": {
+  "fork_descend": {
+   "n": 10,
+   "drop_mm_median": 26.2,
+   "drop_mm_min": 19.03,
+   "drop_mm_max": 49.33,
+   "tip_mid_z_m_median": 0.8,
+   "gripper_cmd_rad_median": 0.45,
+   "lowest_geom_counts": {
+    "geom115": 7,
+    "geom121": 3
+   }
+  },
+  "spoon_descend": {
+   "n": 10,
+   "drop_mm_median": 26.18,
+   "drop_mm_min": 5.98,
+   "drop_mm_max": 34.74,
+   "tip_mid_z_m_median": 0.8,
+   "gripper_cmd_rad_median": 0.45,
+   "lowest_geom_counts": {
+    "geom67": 6,
+    "left_moving_jaw_box2": 3,
+    "left_camera_box2": 1
+   }
+  },
+  "plate_descend": {
+   "n": 10,
+   "drop_mm_median": 50.37,
+   "drop_mm_min": 9.82,
+   "drop_mm_max": 53.85,
+   "tip_mid_z_m_median": 0.8,
+   "gripper_cmd_rad_median": 1.2,
+   "lowest_geom_counts": {
+    "geom115": 8,
+    "right_fixed_jaw_box3": 1,
+    "right_moving_jaw_box2": 1
+   }
+  },
+  "mug_descend": {
+   "n": 10,
+   "drop_mm_median": 35.39,
+   "drop_mm_min": 31.32,
+   "drop_mm_max": 38.37,
+   "tip_mid_z_m_median": 0.84,
+   "gripper_cmd_rad_median": 1.45,
+   "lowest_geom_counts": {
+    "geom67": 5,
+    "left_fixed_jaw_box3": 3,
+    "geom73": 2
+   }
+  }
+ },
+ "surfaces_seed0": {
+  "drawer_floor": {
+   "top_z_m": 0.781,
+   "centre_z_m": 0.777
+  },
+  "table_top": {
+   "top_z_m": 0.75,
+   "centre_z_m": 0.73
+  },
+  "tabletop": null,
+  "table": null
+ },
+ "runs": [
+  {
+   "seed": 0,
+   "waypoints": {
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.80114,
+     "lowest_hand_z_m": 0.77464,
+     "drop_mm": 26.5,
+     "lowest_geom": "geom115",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.78072,
+     "lowest_hand_z_m": 0.76904,
+     "drop_mm": 11.68,
+     "lowest_geom": "left_moving_jaw_box2",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "plate_descend": {
+     "waypoint": "plate_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.80081,
+     "lowest_hand_z_m": 0.74962,
+     "drop_mm": 51.19,
+     "lowest_geom": "geom115",
+     "gripper_cmd_rad": 1.2,
+     "asked_tip_z_m": 0.765
+    },
+    "mug_descend": {
+     "waypoint": "mug_left1_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.82759,
+     "lowest_hand_z_m": 0.79233,
+     "drop_mm": 35.26,
+     "lowest_geom": "geom67",
+     "gripper_cmd_rad": 1.45,
+     "asked_tip_z_m": 0.79798
+    }
+   },
+   "surfaces": {
+    "drawer_floor": {
+     "top_z_m": 0.781,
+     "centre_z_m": 0.777
+    },
+    "table_top": {
+     "top_z_m": 0.75,
+     "centre_z_m": 0.73
+    },
+    "tabletop": null,
+    "table": null
+   },
+   "objects": {
+    "fork": 0.7834990367648021,
+    "spoon": 0.7834977373477633,
+    "mug": 0.7761569393320061,
+    "plate": 0.7549983591549511
+   }
+  },
+  {
+   "seed": 1,
+   "waypoints": {
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.79877,
+     "lowest_hand_z_m": 0.77539,
+     "drop_mm": 23.37,
+     "lowest_geom": "geom115",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.80049,
+     "lowest_hand_z_m": 0.7744,
+     "drop_mm": 26.08,
+     "lowest_geom": "geom67",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "plate_descend": {
+     "waypoint": "plate_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.76685,
+     "lowest_hand_z_m": 0.75335,
+     "drop_mm": 13.5,
+     "lowest_geom": "right_fixed_jaw_box3",
+     "gripper_cmd_rad": 1.2,
+     "asked_tip_z_m": 0.765
+    },
+    "mug_descend": {
+     "waypoint": "mug_left1_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.82419,
+     "lowest_hand_z_m": 0.79287,
+     "drop_mm": 31.32,
+     "lowest_geom": "left_fixed_jaw_box3",
+     "gripper_cmd_rad": 1.45,
+     "asked_tip_z_m": 0.80046
+    }
+   },
+   "surfaces": {
+    "drawer_floor": {
+     "top_z_m": 0.781,
+     "centre_z_m": 0.777
+    },
+    "table_top": {
+     "top_z_m": 0.75,
+     "centre_z_m": 0.73
+    },
+    "tabletop": null,
+    "table": null
+   },
+   "objects": {
+    "fork": 0.783498181143568,
+    "spoon": 0.7834978369708478,
+    "mug": 0.7797286430581767,
+    "plate": 0.7549987984403718
+   }
+  },
+  {
+   "seed": 2,
+   "waypoints": {
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.80145,
+     "lowest_hand_z_m": 0.77473,
+     "drop_mm": 26.72,
+     "lowest_geom": "geom115",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.77842,
+     "lowest_hand_z_m": 0.76546,
+     "drop_mm": 12.96,
+     "lowest_geom": "left_moving_jaw_box2",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "plate_descend": {
+     "waypoint": "plate_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.80077,
+     "lowest_hand_z_m": 0.75052,
+     "drop_mm": 50.26,
+     "lowest_geom": "geom115",
+     "gripper_cmd_rad": 1.2,
+     "asked_tip_z_m": 0.765
+    },
+    "mug_descend": {
+     "waypoint": "mug_left1_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.84457,
+     "lowest_hand_z_m": 0.80884,
+     "drop_mm": 35.73,
+     "lowest_geom": "geom67",
+     "gripper_cmd_rad": 1.45,
+     "asked_tip_z_m": 0.81654
+    }
+   },
+   "surfaces": {
+    "drawer_floor": {
+     "top_z_m": 0.781,
+     "centre_z_m": 0.777
+    },
+    "table_top": {
+     "top_z_m": 0.75,
+     "centre_z_m": 0.73
+    },
+    "tabletop": null,
+    "table": null
+   },
+   "objects": {
+    "fork": 0.7834988013244232,
+    "spoon": 0.7834981425944398,
+    "mug": 0.776424730117103,
+    "plate": 0.754999244105884
+   }
+  },
+  {
+   "seed": 3,
+   "waypoints": {
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.80154,
+     "lowest_hand_z_m": 0.77531,
+     "drop_mm": 26.23,
+     "lowest_geom": "geom115",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.79836,
+     "lowest_hand_z_m": 0.76362,
+     "drop_mm": 34.74,
+     "lowest_geom": "left_camera_box2",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "plate_descend": {
+     "waypoint": "plate_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.8009,
+     "lowest_hand_z_m": 0.75028,
+     "drop_mm": 50.62,
+     "lowest_geom": "geom115",
+     "gripper_cmd_rad": 1.2,
+     "asked_tip_z_m": 0.765
+    },
+    "mug_descend": {
+     "waypoint": "mug_left1_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.84484,
+     "lowest_hand_z_m": 0.80785,
+     "drop_mm": 36.99,
+     "lowest_geom": "geom67",
+     "gripper_cmd_rad": 1.45,
+     "asked_tip_z_m": 0.81623
+    }
+   },
+   "surfaces": {
+    "drawer_floor": {
+     "top_z_m": 0.781,
+     "centre_z_m": 0.777
+    },
+    "table_top": {
+     "top_z_m": 0.75,
+     "centre_z_m": 0.73
+    },
+    "tabletop": null,
+    "table": null
+   },
+   "objects": {
+    "fork": 0.7834982153471357,
+    "spoon": 0.7834984159239676,
+    "mug": 0.7876138621875368,
+    "plate": 0.7549990549674439
+   }
+  },
+  {
+   "seed": 4,
+   "waypoints": {
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.79875,
+     "lowest_hand_z_m": 0.7754,
+     "drop_mm": 23.36,
+     "lowest_geom": "geom115",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.8017,
+     "lowest_hand_z_m": 0.77541,
+     "drop_mm": 26.28,
+     "lowest_geom": "geom67",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "plate_descend": {
+     "waypoint": "plate_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.80306,
+     "lowest_hand_z_m": 0.74921,
+     "drop_mm": 53.85,
+     "lowest_geom": "geom115",
+     "gripper_cmd_rad": 1.2,
+     "asked_tip_z_m": 0.765
+    },
+    "mug_descend": {
+     "waypoint": "mug_left1_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.84282,
+     "lowest_hand_z_m": 0.80445,
+     "drop_mm": 38.37,
+     "lowest_geom": "geom73",
+     "gripper_cmd_rad": 1.45,
+     "asked_tip_z_m": 0.82043
+    }
+   },
+   "surfaces": {
+    "drawer_floor": {
+     "top_z_m": 0.781,
+     "centre_z_m": 0.777
+    },
+    "table_top": {
+     "top_z_m": 0.75,
+     "centre_z_m": 0.73
+    },
+    "tabletop": null,
+    "table": null
+   },
+   "objects": {
+    "fork": 0.7834982786092497,
+    "spoon": 0.7834975993393392,
+    "mug": 0.7780889274227517,
+    "plate": 0.7549990652844637
+   }
+  },
+  {
+   "seed": 5,
+   "waypoints": {
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.77678,
+     "lowest_hand_z_m": 0.75775,
+     "drop_mm": 19.03,
+     "lowest_geom": "geom121",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.78405,
+     "lowest_hand_z_m": 0.77808,
+     "drop_mm": 5.98,
+     "lowest_geom": "left_moving_jaw_box2",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "plate_descend": {
+     "waypoint": "plate_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.76029,
+     "lowest_hand_z_m": 0.75046,
+     "drop_mm": 9.82,
+     "lowest_geom": "right_moving_jaw_box2",
+     "gripper_cmd_rad": 1.2,
+     "asked_tip_z_m": 0.765
+    },
+    "mug_descend": {
+     "waypoint": "mug_left1_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.83522,
+     "lowest_hand_z_m": 0.80124,
+     "drop_mm": 33.98,
+     "lowest_geom": "left_fixed_jaw_box3",
+     "gripper_cmd_rad": 1.45,
+     "asked_tip_z_m": 0.80937
+    }
+   },
+   "surfaces": {
+    "drawer_floor": {
+     "top_z_m": 0.781,
+     "centre_z_m": 0.777
+    },
+    "table_top": {
+     "top_z_m": 0.75,
+     "centre_z_m": 0.73
+    },
+    "tabletop": null,
+    "table": null
+   },
+   "objects": {
+    "fork": 0.7834986663718759,
+    "spoon": 0.7834979986040456,
+    "mug": 0.7841832937156455,
+    "plate": 0.7549991830579023
+   }
+  },
+  {
+   "seed": 6,
+   "waypoints": {
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.78788,
+     "lowest_hand_z_m": 0.73855,
+     "drop_mm": 49.33,
+     "lowest_geom": "geom121",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.80066,
+     "lowest_hand_z_m": 0.77436,
+     "drop_mm": 26.29,
+     "lowest_geom": "geom67",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "plate_descend": {
+     "waypoint": "plate_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.79981,
+     "lowest_hand_z_m": 0.75031,
+     "drop_mm": 49.5,
+     "lowest_geom": "geom115",
+     "gripper_cmd_rad": 1.2,
+     "asked_tip_z_m": 0.765
+    },
+    "mug_descend": {
+     "waypoint": "mug_left1_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.83236,
+     "lowest_hand_z_m": 0.79867,
+     "drop_mm": 33.69,
+     "lowest_geom": "left_fixed_jaw_box3",
+     "gripper_cmd_rad": 1.45,
+     "asked_tip_z_m": 0.80586
+    }
+   },
+   "surfaces": {
+    "drawer_floor": {
+     "top_z_m": 0.781,
+     "centre_z_m": 0.777
+    },
+    "table_top": {
+     "top_z_m": 0.75,
+     "centre_z_m": 0.73
+    },
+    "tabletop": null,
+    "table": null
+   },
+   "objects": {
+    "fork": 0.7834976824748311,
+    "spoon": 0.7834989584703868,
+    "mug": 0.7824275075578807,
+    "plate": 0.754998843686115
+   }
+  },
+  {
+   "seed": 7,
+   "waypoints": {
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.80151,
+     "lowest_hand_z_m": 0.77535,
+     "drop_mm": 26.16,
+     "lowest_geom": "geom115",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.79192,
+     "lowest_hand_z_m": 0.7725,
+     "drop_mm": 19.42,
+     "lowest_geom": "geom67",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "plate_descend": {
+     "waypoint": "plate_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.80028,
+     "lowest_hand_z_m": 0.75003,
+     "drop_mm": 50.25,
+     "lowest_geom": "geom115",
+     "gripper_cmd_rad": 1.2,
+     "asked_tip_z_m": 0.765
+    },
+    "mug_descend": {
+     "waypoint": "mug_left1_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.84302,
+     "lowest_hand_z_m": 0.80747,
+     "drop_mm": 35.55,
+     "lowest_geom": "geom67",
+     "gripper_cmd_rad": 1.45,
+     "asked_tip_z_m": 0.81561
+    }
+   },
+   "surfaces": {
+    "drawer_floor": {
+     "top_z_m": 0.781,
+     "centre_z_m": 0.777
+    },
+    "table_top": {
+     "top_z_m": 0.75,
+     "centre_z_m": 0.73
+    },
+    "tabletop": null,
+    "table": null
+   },
+   "objects": {
+    "fork": 0.7834985961894569,
+    "spoon": 0.7834985568674152,
+    "mug": 0.7873066869321397,
+    "plate": 0.7549981471743306
+   }
+  },
+  {
+   "seed": 8,
+   "waypoints": {
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.77864,
+     "lowest_hand_z_m": 0.75834,
+     "drop_mm": 20.3,
+     "lowest_geom": "geom121",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.80165,
+     "lowest_hand_z_m": 0.77311,
+     "drop_mm": 28.54,
+     "lowest_geom": "geom67",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "plate_descend": {
+     "waypoint": "plate_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.80085,
+     "lowest_hand_z_m": 0.75037,
+     "drop_mm": 50.48,
+     "lowest_geom": "geom115",
+     "gripper_cmd_rad": 1.2,
+     "asked_tip_z_m": 0.765
+    },
+    "mug_descend": {
+     "waypoint": "mug_left1_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.82636,
+     "lowest_hand_z_m": 0.79462,
+     "drop_mm": 31.74,
+     "lowest_geom": "geom73",
+     "gripper_cmd_rad": 1.45,
+     "asked_tip_z_m": 0.80465
+    }
+   },
+   "surfaces": {
+    "drawer_floor": {
+     "top_z_m": 0.781,
+     "centre_z_m": 0.777
+    },
+    "table_top": {
+     "top_z_m": 0.75,
+     "centre_z_m": 0.73
+    },
+    "tabletop": null,
+    "table": null
+   },
+   "objects": {
+    "fork": 0.7834986301988814,
+    "spoon": 0.7834986554372297,
+    "mug": 0.7818238901271111,
+    "plate": 0.7549988226533519
+   }
+  },
+  {
+   "seed": 9,
+   "waypoints": {
+    "fork_descend": {
+     "waypoint": "fork_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.80081,
+     "lowest_hand_z_m": 0.77416,
+     "drop_mm": 26.64,
+     "lowest_geom": "geom115",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "spoon_descend": {
+     "waypoint": "spoon_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.80165,
+     "lowest_hand_z_m": 0.77459,
+     "drop_mm": 27.05,
+     "lowest_geom": "geom67",
+     "gripper_cmd_rad": 0.45,
+     "asked_tip_z_m": 0.7865
+    },
+    "plate_descend": {
+     "waypoint": "plate_descend",
+     "arm": "right",
+     "tip_mid_z_m": 0.80071,
+     "lowest_hand_z_m": 0.7499,
+     "drop_mm": 50.81,
+     "lowest_geom": "geom115",
+     "gripper_cmd_rad": 1.2,
+     "asked_tip_z_m": 0.765
+    },
+    "mug_descend": {
+     "waypoint": "mug_left1_descend",
+     "arm": "left",
+     "tip_mid_z_m": 0.83922,
+     "lowest_hand_z_m": 0.80369,
+     "drop_mm": 35.53,
+     "lowest_geom": "geom67",
+     "gripper_cmd_rad": 1.45,
+     "asked_tip_z_m": 0.81148
+    }
+   },
+   "surfaces": {
+    "drawer_floor": {
+     "top_z_m": 0.781,
+     "centre_z_m": 0.777
+    },
+    "table_top": {
+     "top_z_m": 0.75,
+     "centre_z_m": 0.73
+    },
+    "tabletop": null,
+    "table": null
+   },
+   "objects": {
+    "fork": 0.7834989370195177,
+    "spoon": 0.7834982661588764,
+    "mug": 0.7762934087116892,
+    "plate": 0.7549980915219622
+   }
+  }
+ ]
+}

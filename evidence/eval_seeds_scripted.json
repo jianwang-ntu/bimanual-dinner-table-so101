@@ -2,7 +2,13 @@
  "seeds": 10,
  "seconds_per_episode": 4.0,
  "policy": "scripted",
- "policy_note": "envs/controller.py, a scripted IK waypoint state machine. It holds no learned parameters and reads no camera; it reads the world pose of the object it is about to touch, which is what a perception stack would supply. Scored by the same predicates as the no-policy control.",
+ "policy_detail": null,
+ "policy_note": "envs/controller.py, a scripted IK waypoint state machine. It holds no learned parameters. Scored by the same predicates as the no-policy control, and by a scorer that always reads the simulator whatever --scene is set to. The controller read the world pose of the object it was about to touch straight out of MjData. This is the privileged control.",
+ "scene_source": "privileged",
+ "scene_source_detail": "privileged",
+ "scene_source_note": "The controller read the world pose of the object it was about to touch straight out of MjData. This is the privileged control.",
+ "scorer_reads": "MjData -- envs/task.py is never routed through the scene source",
+ "estimate_error_mm": null,
  "all_episodes_valid_and_stable": true,
  "subgoals_met_per_seed": [
   2,
@@ -93,7 +99,35 @@
       ],
       "yaw": -0.731
      },
-     "drawer_slide": 0.0199
+     "drawer_slide": 0.0199,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "initial_state": {
@@ -133,6 +167,11 @@
     0,
     0
    ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
     "subgoals": {
@@ -243,7 +282,35 @@
       ],
       "yaw": 1.412
      },
-     "drawer_slide": 0.0108
+     "drawer_slide": 0.0108,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        -0.0,
+        -0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "initial_state": {
@@ -283,6 +350,11 @@
     0,
     0
    ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
     "subgoals": {
@@ -386,7 +458,35 @@
       ],
       "yaw": 2.665
      },
-     "drawer_slide": 0.0094
+     "drawer_slide": 0.0094,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        -0.0,
+        0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "initial_state": {
@@ -426,6 +526,11 @@
     0,
     0
    ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
     "subgoals": {
@@ -536,7 +641,35 @@
       ],
       "yaw": 0.535
      },
-     "drawer_slide": 0.0094
+     "drawer_slide": 0.0094,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        -0.0,
+        -0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "initial_state": {
@@ -576,6 +709,11 @@
     0,
     0
    ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
     "subgoals": {
@@ -692,7 +830,35 @@
       ],
       "yaw": -1.736
      },
-     "drawer_slide": 0.0104
+     "drawer_slide": 0.0104,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        -0.0,
+        0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "initial_state": {
@@ -732,6 +898,11 @@
     0,
     0
    ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
     "subgoals": {
@@ -836,7 +1007,35 @@
       ],
       "yaw": 2.325
      },
-     "drawer_slide": 0.0045
+     "drawer_slide": 0.0045,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "initial_state": {
@@ -876,6 +1075,11 @@
     0,
     0
    ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
     "subgoals": {
@@ -979,7 +1183,35 @@
       ],
       "yaw": 0.25
      },
-     "drawer_slide": 0.0021
+     "drawer_slide": 0.0021,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "initial_state": {
@@ -1019,6 +1251,11 @@
     0,
     0
    ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
     "subgoals": {
@@ -1140,7 +1377,35 @@
       ],
       "yaw": 0.094
      },
-     "drawer_slide": 0.0093
+     "drawer_slide": 0.0093,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        -0.0,
+        -0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "initial_state": {
@@ -1180,6 +1445,11 @@
     0,
     0
    ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
     "subgoals": {
@@ -1283,7 +1553,35 @@
       ],
       "yaw": -2.001
      },
-     "drawer_slide": 0.0079
+     "drawer_slide": 0.0079,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        -0.0,
+        0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "initial_state": {
@@ -1323,6 +1621,11 @@
     0,
     0
    ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
     "subgoals": {
@@ -1434,7 +1737,35 @@
       ],
       "yaw": 2.594
      },
-     "drawer_slide": 0.0142
+     "drawer_slide": 0.0142,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        -0.0,
+        0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "initial_state": {
@@ -1474,6 +1805,11 @@
     0,
     0
    ],
+   "scene_source": {
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
+   },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
     "subgoals": {
