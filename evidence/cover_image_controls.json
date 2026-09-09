@@ -1,6 +1,6 @@
 {
  "image": "evidence/cover_image.png",
- "sha256": "a1b8964448598a6ae02ce902161b97eb32439a32e922b3ef919ff74991c41646",
+ "sha256": "68e24b47b7c1e820759926a95a32ee41647aa446f64ca85ec53838d56d55c4eb",
  "ihdr": {
   "width": 1920,
   "height": 1080,
@@ -12,15 +12,15 @@
  },
  "pixel_stats": {
   "render_region": {
-   "mean": 123.15,
-   "std": 67.72,
-   "distinct_colours": 508,
+   "mean": 123.22,
+   "std": 67.97,
+   "distinct_colours": 488,
    "samples": 28050
   },
   "caption_band": {
-   "mean": 39.08,
-   "std": 57.86,
-   "distinct_colours": 187,
+   "mean": 38.96,
+   "std": 57.8,
+   "distinct_colours": 185,
    "samples": 9900
   }
  },
@@ -38,27 +38,27 @@
   {
    "control": "integrity.accept",
    "pass": true,
-   "detail": "sha256 a1b8964448598a6a over 530547 bytes matches the record"
+   "detail": "sha256 68e24b47b7c1e820 over 528080 bytes matches the record"
   },
   {
    "control": "integrity.reject_flipped_byte",
    "pass": true,
-   "detail": "one flipped byte at offset 265273 is caught"
+   "detail": "one flipped byte at offset 264040 is caught"
   },
   {
    "control": "figures.accept",
    "pass": true,
-   "detail": "15/50 sub-goals and the 0/50 control re-derived verbatim"
+   "detail": "18/50 sub-goals and the 0/50 control re-derived verbatim"
   },
   {
    "control": "figures.reject_stale_after_evidence_moves",
    "pass": true,
-   "detail": "flipping drawer_open on seed 0 in the evaluation is caught: measured line is 'Measured over 10 randomized seeds: drawer_open 10/10  fork_placed 0/10', evidence derives 'Measured over 10 randomized seeds: drawer_open 9/10  fork_placed 0/10 '"
+   "detail": "flipping drawer_open on seed 0 in the evaluation is caught: measured line is 'Measured over 10 randomized seeds: drawer_open 10/10  fork_placed 3/10', evidence derives 'Measured over 10 randomized seeds: drawer_open 9/10  fork_placed 3/10 '"
   },
   {
    "control": "honesty.accept",
    "pass": true,
-   "detail": "states task_success 0/10, names all 2 never-earned sub-goals, discloses the scripted controller"
+   "detail": "states task_success 0/10, names all 1 never-earned sub-goals, discloses the scripted controller"
   },
   {
    "control": "honesty.reject_inflated_success",
@@ -68,7 +68,7 @@
   {
    "control": "honesty.reject_deleted_absence_clause",
    "pass": true,
-   "detail": "deleting the never-earned list is caught: never-earned sub-goals not named on the cover: ['fork_placed', 'spoon_placed']"
+   "detail": "deleting the never-earned list is caught: never-earned sub-goals not named on the cover: ['spoon_placed']"
   },
   {
    "control": "provenance.accept",
@@ -83,7 +83,7 @@
   {
    "control": "pixels.accept_real_render",
    "pass": true,
-   "detail": "render region std 67.7 over 508 distinct colours; caption band mean luma 39.1"
+   "detail": "render region std 68.0 over 488 distinct colours; caption band mean luma 39.0"
   },
   {
    "control": "pixels.reject_flat_placeholder",

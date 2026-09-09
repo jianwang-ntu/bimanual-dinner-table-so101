@@ -30705,44 +30705,58 @@
   }
  ],
  "per_seed_best_cell": {
-  "cell": "square_mode=all, descend_z=0.006, steps=1, plan_at_open=True, opening=0.60, aim_body=False",
+  "cell": "square_mode=all, descend_z=0.003, steps=1, plan_at_open=True, opening=0.60, aim_body=False",
+  "derived_from": "the 10 rows in this file's own runs[] that match best_cell, re-derived 2026-09-09T03:00Z. No rollout was re-run.",
   "fork_lifted_mm": [
-   104.6,
-   123.3,
-   118.9,
+   2.8,
+   5.8,
+   118.8,
    123.4,
-   123.1,
-   122.1,
+   123.2,
+   120.3,
    0.0,
-   118.9,
-   122.1,
-   118.2
+   118.8,
+   120.5,
+   118.1
   ],
   "fork_final_to_target_mm": [
-   71.8,
-   62.7,
-   86.8,
-   80.5,
-   78.0,
-   26.5,
-   158.1,
-   13.9,
-   113.8,
-   95.1
+   158.9,
+   149.4,
+   14.0,
+   54.6,
+   70.2,
+   83.0,
+   159.8,
+   35.9,
+   143.6,
+   20.3
   ],
   "fork_placed": [
    false,
    false,
+   true,
+   false,
    false,
    false,
    false,
    true,
    false,
-   true,
-   false,
-   false
+   true
   ],
-  "reading": "9 of 10 seeds LIFT the fork, 104.6-123.4 mm. Seed 6 does not lift it at all (0.0 mm) and ends 158.1 mm away. Of the 9 that lift, 2 place inside the 45 mm tolerance (26.5 and 13.9 mm) and 7 miss by 62.7-113.8 mm.",
+  "fork_placed_count": 3,
+  "subgoals_met_per_seed": [
+   3,
+   2,
+   3,
+   1,
+   1,
+   1,
+   1,
+   2,
+   2,
+   2
+  ],
+  "subgoals_met_total": 18,
   "shipped_cell_for_comparison": {
    "fork_lifted_mm": [
     0.0,
@@ -30758,6 +30772,66 @@
    ],
    "reading": "every seed 0.0 except one at 6.6 mm and one at 0.1 mm -- no lift"
   },
-  "correction": "An in-flight reading of this column said '8 of 10'. It is 9 of 10, i.e. the count was wrong IN OUR FAVOUR's direction when corrected. The figure here is taken from the committed rows, not from the working note."
+  "correction_20260909T0300Z": {
+   "what_was_wrong": "This block was HAND-AUTHORED into a machine-generated evidence file and described a DIFFERENT cell from the one best_cell selects. Its 'cell' string read descend_z=0.006 while best_cell is descend_z_mm=3.0, and its fork_placed column carried 2 placements while best_cell reports 3.",
+   "how_it_survived": "The key per_seed_best_cell appears in NO script -- grep -rn over scripts/ and envs/ returns nothing -- so scripts/measure_cutlery_square.py never wrote it and scripts/test_cutlery_square.py never read it. The checker passed 22/22 across the inconsistency.",
+   "consequence_that_was_shipped": "H-CUTLERY-SQUARE-001's prose quoted this column's '9 of 10 seeds lift the fork' and '2 place inside the 45 mm tolerance' alongside the dz=3.0 headline of 3/10, as though one result.",
+   "superseded_block_kept_verbatim": {
+    "cell": "square_mode=all, descend_z=0.006, steps=1, plan_at_open=True, opening=0.60, aim_body=False",
+    "fork_lifted_mm": [
+     104.6,
+     123.3,
+     118.9,
+     123.4,
+     123.1,
+     122.1,
+     0.0,
+     118.9,
+     122.1,
+     118.2
+    ],
+    "fork_final_to_target_mm": [
+     71.8,
+     62.7,
+     86.8,
+     80.5,
+     78.0,
+     26.5,
+     158.1,
+     13.9,
+     113.8,
+     95.1
+    ],
+    "fork_placed": [
+     false,
+     false,
+     false,
+     false,
+     false,
+     true,
+     false,
+     true,
+     false,
+     false
+    ],
+    "reading": "9 of 10 seeds LIFT the fork, 104.6-123.4 mm. Seed 6 does not lift it at all (0.0 mm) and ends 158.1 mm away. Of the 9 that lift, 2 place inside the 45 mm tolerance (26.5 and 13.9 mm) and 7 miss by 62.7-113.8 mm.",
+    "shipped_cell_for_comparison": {
+     "fork_lifted_mm": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.3,
+      0.0,
+      0.1
+     ],
+     "reading": "every seed 0.0 except one at 6.6 mm and one at 0.1 mm -- no lift"
+    },
+    "correction": "An in-flight reading of this column said '8 of 10'. It is 9 of 10, i.e. the count was wrong IN OUR FAVOUR's direction when corrected. The figure here is taken from the committed rows, not from the working note."
+   }
+  }
  }
 }

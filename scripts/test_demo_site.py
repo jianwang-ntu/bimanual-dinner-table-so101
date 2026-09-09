@@ -34,19 +34,34 @@ def load(name: str) -> dict:
         return json.load(fh)
 
 
-def corrupt(text: str) -> str:
-    """Change every digit run in ``text`` so the result states something false."""
-    return re.sub(r"\d+", lambda m: str(int(m.group()) + 7), text, count=1)
+def corrupt(text: str, delta: int = 7) -> str:
+    """Change the first digit run in ``text`` so the result states something false."""
+    return re.sub(r"\d+", lambda m: str(int(m.group()) + delta), text, count=1)
 
 
 def present(page: str, needle: str, name: str) -> None:
-    """Presence check plus the negative control that makes it able to fail."""
-    bad = corrupt(needle)
-    if bad == needle:
-        check(False, name, "negative control is VOID: %r has no digit to corrupt" % needle)
-        return
+    """Presence check plus the negative control that makes it able to fail.
+
+    The corruption has to land on a string the page does NOT otherwise contain,
+    or the control fires on a true sentence somewhere else and reports the page
+    as wrong when it is right.  That is not hypothetical: on 2026-09-09
+    ``fork_placed`` moved 0/10 -> 3/10, "3 / 10 seeds" corrupted at the fixed
+    +7 to "10 / 10 seeds", and the page says "10 / 10 seeds" about
+    ``drawer_open`` -- truthfully.  So the offset is searched rather than
+    pinned, and if no offset can miss the page the control declares itself VOID
+    instead of quietly passing on a collision.
+    """
     check(needle in page, name, "expected %r" % needle)
-    check(bad not in page, name + " [negative control]", "corrupted %r must be absent" % bad)
+    for delta in (7, 13, 29, 41, 57, 83, 111, 149):
+        bad = corrupt(needle, delta)
+        if bad != needle and bad not in page:
+            check(True, name + " [negative control]",
+                  "corrupted %r (+%d) is absent, so the presence check above "
+                  "can fail" % (bad, delta))
+            return
+    check(False, name + " [negative control]",
+          "VOID: no offset in the sweep produces a string the page lacks, so "
+          "the presence check above cannot be shown able to fail")
 
 
 def main() -> int:

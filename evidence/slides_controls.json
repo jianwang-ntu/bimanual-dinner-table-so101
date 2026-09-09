@@ -1,7 +1,7 @@
 {
  "schema": "slides_controls/v1",
  "artifact": "evidence/slides_presentation.pdf",
- "sha256": "a286fb97a3fa054383776ad6df9aa3a42fa8f16b1d25d86fa381bf5f1e4d6767",
+ "sha256": "cbdf3d7ff744907737ef82810a13920c8af40ab214fc731dd0e2664afaa26fa0",
  "claims_checked": 37,
  "absences_checked": 7,
  "all_pass": true,
@@ -19,7 +19,7 @@
   {
    "control": "reject_the_pdf_when_the_evidence_moves",
    "pass": true,
-   "detail": "one extra mug placement in the evidence makes 2 claim(s) stop matching the shipped PDF: ['headline', 'subgoal_mug_placed']"
+   "detail": "one extra mug placement in the evidence makes 1 claim(s) stop matching the shipped PDF: ['headline']"
   },
   {
    "control": "accept_every_absence_is_stated",
@@ -39,7 +39,7 @@
   {
    "control": "accept_sidecar_matches_the_file",
    "pass": true,
-   "detail": "sha256 a286fb97a3fa0543\u2026 == sidecar a286fb97a3fa0543\u2026"
+   "detail": "sha256 cbdf3d7ff7449077\u2026 == sidecar cbdf3d7ff7449077\u2026"
   },
   {
    "control": "reject_a_sidecar_sha_that_does_not_match",

@@ -73,7 +73,7 @@
   {
    "control": "no_state_log_names_the_fork_or_the_spoon",
    "pass": true,
-   "detail": "state keys logged across all 10 episodes: ['bottle', 'drawer_slide', 'mug', 'plate']"
+   "detail": "state keys logged across all 10 episodes: ['bottle', 'cutlery', 'drawer_slide', 'mug', 'plate']"
   },
   {
    "control": "reject_a_log_that_names_the_fork",

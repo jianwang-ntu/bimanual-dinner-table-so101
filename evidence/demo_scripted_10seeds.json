@@ -1,6 +1,6 @@
 {
  "video": "evidence/demo_scripted_10seeds.mp4",
- "sha256": "eea237a0b41a80cc3a4374a4d960abf2fa067538c40da310a9de8298f6e5c86e",
+ "sha256": "6216284e7ba88f522a79eca9d90f5bc9432206525d1df8aa6b535e4aef7bb1c0",
  "seeds": 10,
  "fps": 25,
  "speed": 8.0,
@@ -8,23 +8,23 @@
   960,
   540
  ],
- "frames": 7290,
+ "frames": 6763,
  "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
  "subgoals_met_per_seed": [
+  3,
   2,
+  3,
+  1,
+  1,
   1,
   1,
   2,
-  2,
-  1,
-  1,
-  1,
   2,
   2
  ],
- "subgoals_met_total": "15/50",
+ "subgoals_met_total": "18/50",
  "task_success_count": 0,
- "not_claimed": "This video does NOT show the task being completed: task_success is 0/10. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is drawer_open 10/10, plate_placed 4/10, mug_placed 1/10. Never earned on any seed: fork_placed, spoon_placed.",
+ "not_claimed": "This video does NOT show the task being completed: task_success is 0/10. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is drawer_open 10/10, fork_placed 3/10, plate_placed 4/10, mug_placed 1/10. Never earned on any seed: spoon_placed.",
  "episodes": [
   {
    "seed": 0,
@@ -82,13 +82,41 @@
       ],
       "yaw": -0.731
      },
-     "drawer_slide": 0.0199
+     "drawer_slide": 0.0199,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "rollout": {
-    "moves": 152,
-    "sim_time_s": 206.23,
-    "max_ik_err_mm": 12.9
+    "moves": 130,
+    "sim_time_s": 178.478,
+    "max_ik_err_mm": 17.87
    },
    "task": {
     "subgoals": {
@@ -96,30 +124,36 @@
      "fork_placed": false,
      "spoon_placed": false,
      "plate_placed": true,
-     "mug_placed": false
+     "mug_placed": true
     },
-    "subgoals_met": 2,
+    "subgoals_met": 3,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
     "handoffs": [
      {
+      "object": "fork",
+      "from": "right",
+      "to": "left",
+      "t": 21.55
+     },
+     {
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 34.428
+      "t": 21.614
      },
      {
       "object": "mug",
       "from": "left",
       "to": "right",
-      "t": 135.114
+      "t": 107.36
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 198.67
+      "t": 170.918
      }
     ],
     "handoff_occurred": true,
@@ -132,9 +166,10 @@
     "max_drawer_travel_m": 0.0923,
     "first_completion_times_s": {
      "drawer_open": 5.61,
-     "plate_placed": 70.002
+     "plate_placed": 64.84,
+     "mug_placed": 131.806
     },
-    "sim_time_s": 206.23
+    "sim_time_s": 178.478
    }
   },
   {
@@ -193,23 +228,51 @@
       ],
       "yaw": 1.412
      },
-     "drawer_slide": 0.0108
+     "drawer_slide": 0.0108,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        -0.0,
+        -0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "rollout": {
-    "moves": 177,
-    "sim_time_s": 229.542,
-    "max_ik_err_mm": 21.7
+    "moves": 181,
+    "sim_time_s": 232.238,
+    "max_ik_err_mm": 26.88
    },
    "task": {
     "subgoals": {
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": false,
+     "plate_placed": true,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 2,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
@@ -218,13 +281,19 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 21.616
+      "t": 29.75
+     },
+     {
+      "object": "fork",
+      "from": "right",
+      "to": "left",
+      "t": 35.522
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 75.37
+      "t": 48.008
      }
     ],
     "handoff_occurred": true,
@@ -234,11 +303,12 @@
     ],
     "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.092,
+    "max_drawer_travel_m": 0.0922,
     "first_completion_times_s": {
-     "drawer_open": 5.87
+     "drawer_open": 5.87,
+     "plate_placed": 218.11
     },
-    "sim_time_s": 229.542
+    "sim_time_s": 232.238
    }
   },
   {
@@ -297,44 +367,60 @@
       ],
       "yaw": 2.665
      },
-     "drawer_slide": 0.0094
+     "drawer_slide": 0.0094,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        -0.0,
+        0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "rollout": {
-    "moves": 162,
-    "sim_time_s": 214.018,
-    "max_ik_err_mm": 361.93
+    "moves": 133,
+    "sim_time_s": 180.722,
+    "max_ik_err_mm": 16.1
    },
    "task": {
     "subgoals": {
      "drawer_open": true,
-     "fork_placed": false,
+     "fork_placed": true,
      "spoon_placed": false,
-     "plate_placed": false,
+     "plate_placed": true,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 3,
     "subgoals_total": 5,
-    "in_order_prefix": 1,
+    "in_order_prefix": 2,
     "task_success": false,
     "handoffs": [
      {
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 21.492
-     },
-     {
-      "object": "drawer",
-      "from": "left",
-      "to": "right",
-      "t": 42.312
-     },
-     {
-      "object": "mug",
-      "from": "left",
-      "to": "right",
-      "t": 122.47
+      "t": 34.798
      }
     ],
     "handoff_occurred": true,
@@ -347,9 +433,10 @@
     "max_drawer_travel_m": 0.0914,
     "first_completion_times_s": {
      "drawer_open": 5.932,
-     "plate_placed": 71.058
+     "plate_placed": 71.028,
+     "fork_placed": 71.076
     },
-    "sim_time_s": 214.018
+    "sim_time_s": 180.722
    }
   },
   {
@@ -408,23 +495,51 @@
       ],
       "yaw": 0.535
      },
-     "drawer_slide": 0.0094
+     "drawer_slide": 0.0094,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        -0.0,
+        -0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "rollout": {
-    "moves": 170,
-    "sim_time_s": 224.602,
-    "max_ik_err_mm": 25.8
+    "moves": 169,
+    "sim_time_s": 224.15,
+    "max_ik_err_mm": 18.91
    },
    "task": {
     "subgoals": {
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": true,
+     "plate_placed": false,
      "mug_placed": false
     },
-    "subgoals_met": 2,
+    "subgoals_met": 1,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
@@ -433,25 +548,13 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 22.282
+      "t": 34.842
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 45.958
-     },
-     {
-      "object": "drawer",
-      "from": "right",
-      "to": "left",
-      "t": 133.876
-     },
-     {
-      "object": "drawer",
-      "from": "left",
-      "to": "right",
-      "t": 204.106
+      "t": 42.478
      }
     ],
     "handoff_occurred": true,
@@ -461,12 +564,12 @@
     ],
     "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0918,
+    "max_drawer_travel_m": 0.0937,
     "first_completion_times_s": {
      "drawer_open": 5.926,
-     "plate_placed": 70.876
+     "plate_placed": 99.176
     },
-    "sim_time_s": 224.602
+    "sim_time_s": 224.15
    }
   },
   {
@@ -525,23 +628,51 @@
       ],
       "yaw": -1.736
      },
-     "drawer_slide": 0.0104
+     "drawer_slide": 0.0104,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        -0.0,
+        0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "rollout": {
-    "moves": 189,
-    "sim_time_s": 239.726,
-    "max_ik_err_mm": 200.43
+    "moves": 185,
+    "sim_time_s": 235.982,
+    "max_ik_err_mm": 91.63
    },
    "task": {
     "subgoals": {
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": true,
+     "plate_placed": false,
      "mug_placed": false
     },
-    "subgoals_met": 2,
+    "subgoals_met": 1,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
@@ -550,13 +681,13 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 21.092
+      "t": 29.74
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 41.266
+      "t": 47.626
      }
     ],
     "handoff_occurred": true,
@@ -566,12 +697,11 @@
     ],
     "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0919,
+    "max_drawer_travel_m": 0.0923,
     "first_completion_times_s": {
-     "drawer_open": 5.884,
-     "plate_placed": 114.67
+     "drawer_open": 5.884
     },
-    "sim_time_s": 239.726
+    "sim_time_s": 235.982
    }
   },
   {
@@ -630,13 +760,41 @@
       ],
       "yaw": 2.325
      },
-     "drawer_slide": 0.0045
+     "drawer_slide": 0.0045,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "rollout": {
-    "moves": 201,
-    "sim_time_s": 255.102,
-    "max_ik_err_mm": 290.63
+    "moves": 193,
+    "sim_time_s": 243.47,
+    "max_ik_err_mm": 213.82
    },
    "task": {
     "subgoals": {
@@ -655,13 +813,19 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 34.088
+      "t": 29.812
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 41.258
+      "t": 42.532
+     },
+     {
+      "object": "mug",
+      "from": "left",
+      "to": "right",
+      "t": 151.802
      }
     ],
     "handoff_occurred": true,
@@ -675,7 +839,7 @@
     "first_completion_times_s": {
      "drawer_open": 6.532
     },
-    "sim_time_s": 255.102
+    "sim_time_s": 243.47
    }
   },
   {
@@ -734,13 +898,41 @@
       ],
       "yaw": 0.25
      },
-     "drawer_slide": 0.0021
+     "drawer_slide": 0.0021,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "rollout": {
-    "moves": 209,
-    "sim_time_s": 260.494,
-    "max_ik_err_mm": 294.95
+    "moves": 199,
+    "sim_time_s": 247.514,
+    "max_ik_err_mm": 294.81
    },
    "task": {
     "subgoals": {
@@ -759,31 +951,19 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 24.64
-     },
-     {
-      "object": "drawer",
-      "from": "left",
-      "to": "right",
-      "t": 41.214
-     },
-     {
-      "object": "drawer",
-      "from": "right",
-      "to": "left",
-      "t": 149.002
+      "t": 138.124
      },
      {
       "object": "mug",
       "from": "left",
       "to": "right",
-      "t": 155.88
+      "t": 155.882
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 215.798
+      "t": 215.842
      }
     ],
     "handoff_occurred": true,
@@ -795,9 +975,9 @@
     "objects_dropped": [],
     "max_drawer_travel_m": 0.0918,
     "first_completion_times_s": {
-     "drawer_open": 255.328
+     "drawer_open": 242.334
     },
-    "sim_time_s": 260.494
+    "sim_time_s": 247.514
    }
   },
   {
@@ -856,38 +1036,72 @@
       ],
       "yaw": 0.094
      },
-     "drawer_slide": 0.0093
+     "drawer_slide": 0.0093,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        0.0
+       ],
+       "dyaw_rad": 0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        -0.0,
+        -0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "rollout": {
-    "moves": 195,
-    "sim_time_s": 244.818,
-    "max_ik_err_mm": 161.48
+    "moves": 183,
+    "sim_time_s": 234.634,
+    "max_ik_err_mm": 15.01
    },
    "task": {
     "subgoals": {
      "drawer_open": true,
-     "fork_placed": false,
+     "fork_placed": true,
      "spoon_placed": false,
      "plate_placed": false,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 2,
     "subgoals_total": 5,
-    "in_order_prefix": 1,
+    "in_order_prefix": 2,
     "task_success": false,
     "handoffs": [
      {
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 21.42
+      "t": 34.816
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 42.05
+      "t": 42.518
+     },
+     {
+      "object": "mug",
+      "from": "left",
+      "to": "right",
+      "t": 145.23
      }
     ],
     "handoff_occurred": true,
@@ -897,11 +1111,12 @@
     ],
     "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0918,
+    "max_drawer_travel_m": 0.0913,
     "first_completion_times_s": {
-     "drawer_open": 5.93
+     "drawer_open": 5.93,
+     "fork_placed": 107.164
     },
-    "sim_time_s": 244.818
+    "sim_time_s": 234.634
    }
   },
   {
@@ -960,21 +1175,49 @@
       ],
       "yaw": -2.001
      },
-     "drawer_slide": 0.0079
+     "drawer_slide": 0.0079,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        -0.0,
+        0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        0.0,
+        -0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "rollout": {
-    "moves": 174,
-    "sim_time_s": 227.298,
-    "max_ik_err_mm": 27.77
+    "moves": 131,
+    "sim_time_s": 179.374,
+    "max_ik_err_mm": 12.55
    },
    "task": {
     "subgoals": {
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": false,
-     "mug_placed": true
+     "plate_placed": true,
+     "mug_placed": false
     },
     "subgoals_met": 2,
     "subgoals_total": 5,
@@ -985,19 +1228,19 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 24.932
-     },
-     {
-      "object": "mug",
-      "from": "left",
-      "to": "right",
-      "t": 125.234
+      "t": 34.86
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 206.76
+      "t": 120.04
+     },
+     {
+      "object": "mug",
+      "from": "left",
+      "to": "right",
+      "t": 120.898
      }
     ],
     "handoff_occurred": true,
@@ -1010,10 +1253,9 @@
     "max_drawer_travel_m": 0.0916,
     "first_completion_times_s": {
      "drawer_open": 5.99,
-     "plate_placed": 65.734,
-     "mug_placed": 159.916
+     "plate_placed": 66.008
     },
-    "sim_time_s": 227.298
+    "sim_time_s": 179.374
    }
   },
   {
@@ -1072,44 +1314,66 @@
       ],
       "yaw": 2.594
      },
-     "drawer_slide": 0.0142
+     "drawer_slide": 0.0142,
+     "cutlery": {
+      "spoon": {
+       "xy": [
+        0.0,
+        0.128
+       ],
+       "dxy_mm": [
+        0.0,
+        0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      },
+      "fork": {
+       "xy": [
+        0.0,
+        0.178
+       ],
+       "dxy_mm": [
+        -0.0,
+        0.0
+       ],
+       "dyaw_rad": -0.0,
+       "penetration_mm": 0.0,
+       "accepted": true
+      }
+     }
     }
    },
    "rollout": {
-    "moves": 181,
-    "sim_time_s": 232.238,
-    "max_ik_err_mm": 21.33
+    "moves": 157,
+    "sim_time_s": 209.378,
+    "max_ik_err_mm": 29.36
    },
    "task": {
     "subgoals": {
      "drawer_open": true,
-     "fork_placed": false,
+     "fork_placed": true,
      "spoon_placed": false,
-     "plate_placed": true,
+     "plate_placed": false,
      "mug_placed": false
     },
     "subgoals_met": 2,
     "subgoals_total": 5,
-    "in_order_prefix": 1,
+    "in_order_prefix": 2,
     "task_success": false,
     "handoffs": [
      {
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 29.746
-     },
-     {
-      "object": "mug",
-      "from": "left",
-      "to": "right",
-      "t": 143.164
+      "t": 34.612
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 224.694
+      "t": 52.118
      }
     ],
     "handoff_occurred": true,
@@ -1122,9 +1386,10 @@
     "max_drawer_travel_m": 0.0921,
     "first_completion_times_s": {
      "drawer_open": 5.668,
-     "plate_placed": 96.182
+     "plate_placed": 70.94,
+     "fork_placed": 109.46
     },
-    "sim_time_s": 232.238
+    "sim_time_s": 209.378
    }
   }
  ]

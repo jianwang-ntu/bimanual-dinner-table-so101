@@ -8,17 +8,17 @@
   {
    "control": "committed_defaults_emit_the_shipped_descent",
    "pass": true,
-   "detail": "dinner_table_script() at the committed defaults emits [('fork_descend', False)] -- one solved pose, unsquared, exactly as every published figure was measured"
+   "detail": "dinner_table_script() at the committed defaults emits [('fork_descend', True)] -- one solved pose, SQUARED. Adopted 2026-09-09T03:00Z: CUTLERY_DESCEND_SQUARE and CUTLERY_SQUARE both ship True, and that is the pair every published figure is now measured at"
   },
   {
    "control": "reject_a_default_that_had_stepped_the_descent",
    "pass": true,
-   "detail": "with CUTLERY_DESCEND_STEPS=2 the same reader sees [('fork_descend1', False), ('fork_descend', False)], so the control is reading the script, not a constant"
+   "detail": "with CUTLERY_DESCEND_STEPS=2 the same reader sees [('fork_descend1', True), ('fork_descend', True)], so the control is reading the script, not a constant"
   },
   {
-   "control": "reject_a_default_that_had_squared_the_descent",
+   "control": "reject_a_default_that_had_unsquared_the_descent",
    "pass": true,
-   "detail": "with CUTLERY_DESCEND_SQUARE=True the same reader sees [('fork_descend', True)]"
+   "detail": "with both square knobs held off the same reader sees [('fork_descend', False)], so the control is reading the script and a default that silently reverted would be caught"
   },
   {
    "control": "squaring_the_descent_never_squares_the_carry",
@@ -28,7 +28,12 @@
   {
    "control": "reject_a_reader_that_cannot_see_the_carry",
    "pass": true,
-   "detail": "the same reader sees all 12 unsquared fork moves at the committed defaults, so the control above is looking at the carry rather than at a filtered-out label"
+   "detail": "with CUTLERY_SQUARE off the same reader sees all 11 unsquared fork moves, so the control above is looking at the carry rather than at a filtered-out label"
+  },
+  {
+   "control": "the_adopted_pair_squares_the_carry_too",
+   "pass": true,
+   "detail": "at the committed defaults the squared fork moves are ['fork_above', 'fork_descend', 'fork_lift'] -- CUTLERY_SQUARE reaches the approach and the lift, which is exactly what CUTLERY_DESCEND_SQUARE alone does not do"
   },
   {
    "control": "the_baseline_is_the_shipped_setting",

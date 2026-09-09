@@ -2,10 +2,10 @@
   "schema": "demo_site/v1",
   "requirement": "req_application_url / req_demo_platform -- lablab Rule Book 'Application Components': Demo Application Platform, Application URL",
   "built_by": "scripts/make_demo_site.py",
-  "built_at_head": "f71b52a",
+  "built_at_head": "5d2bd97",
   "page": "index.html",
-  "bytes": 13296,
-  "sha256": "93c5f78fe2db21af7b805b5e77fd049110a83360a655a5862f5780cadf901747",
+  "bytes": 13128,
+  "sha256": "3a15954065ddda23e408e1c1ee73865d5b07adaa209ace91edbe962346fe8f91",
   "figures_derived_from": [
     "evidence/eval_seeds_scripted.json",
     "evidence/eval_seeds_scripted_perceived.json",
@@ -20,24 +20,24 @@
     "subgoals_per_seed": 5,
     "conditions": {
       "privileged": {
-        "total": 15,
+        "total": 18,
         "denominator": 50,
         "task_success": 0
       },
       "perceived": {
-        "total": 12,
+        "total": 9,
         "denominator": 50,
         "task_success": 0
       },
       "blind": {
-        "total": 9,
+        "total": 5,
         "denominator": 50,
         "task_success": 0
       }
     },
     "placed": {
       "drawer_open": 10,
-      "fork_placed": 0,
+      "fork_placed": 3,
       "spoon_placed": 0,
       "plate_placed": 4,
       "mug_placed": 1
@@ -45,12 +45,12 @@
     "bimanual_seeds": 10,
     "mug_handoff_seeds": [
       0,
-      2,
+      5,
       6,
-      8,
-      9
+      7,
+      8
     ],
-    "demo_video_seconds": 291.6,
+    "demo_video_seconds": 270.5,
     "presentation_mmss": "4:36",
     "slides_pages": 13
   },

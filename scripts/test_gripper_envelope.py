@@ -90,7 +90,7 @@ DESC = ("fork_descend", "spoon_descend")
 ABOVE = ("fork_above", "spoon_above")
 
 # Pinned counts, excluding the two pinned-count checks themselves.
-EXPECT_CHECKS = 32
+EXPECT_CHECKS = 33
 EXPECT_REJECTS = 15
 
 FAILED: list[str] = []
@@ -248,28 +248,38 @@ def main() -> int:
     # --- defaults ---------------------------------------------------------
     w = descend_widths()
     narrow = shipped_narrow()
+    # ADOPTED 2026-09-09T03:00Z.  Both of this probe's knobs moved: opening
+    # GRIPPER_NARROW (0.45) -> 0.60 and plan_at_open False -> True, as two of
+    # the four constants in measure_cutlery_square's best cell.  The pair below
+    # is the pair every published figure is NOW measured at; the pre-adoption
+    # pair is asserted separately under mismatch_is_real, so the finding this
+    # file exists for is kept rather than deleted along with the defect.
     ok = (set(w) == set(DESC)
-          and all(o == narrow for o, _ in w.values())
-          and all(p is not None for _, p in w.values()))
+          and all(abs(o - 0.60) < 1e-9 for o, _ in w.values())
+          and all(p is None for _, p in w.values()))
     check("defaults", ok,
-          f"committed defaults emit {w}: opening is GRIPPER_NARROW ({narrow}) "
-          "and plan_at is present on both, the pair every published figure "
-          "was measured at")
-    w_pa = descend_widths(plan_knob=True)
+          f"committed defaults emit {w}: opening is 0.60 and plan_at is ABSENT "
+          "on both -- CUTLERY_PLAN_AT_OPEN=True solves the descent at the same "
+          "opening it executes at, which is the pair every published figure "
+          "is now measured at")
+    w_pa = descend_widths(plan_knob=False)
     w_op = descend_widths(opening_knob=0.15)
     check("defaults/reject",
-          not (all(p is not None for _, p in w_pa.values())
-               and all(o == narrow for o, _ in w_op.values())),
-          "the same reader with either knob moved does NOT see the committed "
-          "pair, so a default that had silently drifted would be caught")
+          not (all(p is None for _, p in w_pa.values())
+               and all(abs(o - 0.60) < 1e-9 for o, _ in w_op.values())),
+          "the same reader with either knob moved back does NOT see the "
+          "committed pair, so a default that had silently drifted would be "
+          "caught")
 
     # --- knob_live --------------------------------------------------------
     moved_op = all(abs(o - 0.15) < 1e-9 for o, _ in w_op.values())
-    moved_pa = all(p is None for _, p in w_pa.values())
+    # w_pa is now built with plan_knob=False, i.e. the knob moved AWAY from the
+    # adopted default, so liveness is plan_at coming BACK rather than dropping.
+    moved_pa = all(p is not None for _, p in w_pa.values())
     check("knob_live", moved_op and moved_pa,
           f"CUTLERY_DESCEND_OPENING=0.15 moves the emitted opening to "
-          f"{sorted({o for o, _ in w_op.values()})} and CUTLERY_PLAN_AT_OPEN=True "
-          "drops plan_at on both moves -- neither knob is inert")
+          f"{sorted({o for o, _ in w_op.values()})} and CUTLERY_PLAN_AT_OPEN=False "
+          "puts plan_at back on both moves -- neither knob is inert")
     check("knob_live/reject", not w_op == w,
           "a reader that ignored the opening knob would return the committed "
           "widths unchanged and is caught")
@@ -293,16 +303,29 @@ def main() -> int:
           "would coincide and this control would report unarmed")
 
     # --- mismatch_is_real -------------------------------------------------
-    gaps = {k: (o, p) for k, (o, p) in w.items()
-            if p is not None and abs(o - p) > 1e-9}
-    check("mismatch_is_real", len(gaps) == 2,
-          f"both shipped descend moves carry two DIFFERENT widths {gaps} -- "
-          "the pose is solved at one and executed at the other")
+    # The mismatch this probe was written to expose is REAL and is now CLOSED.
+    # Both halves are asserted, because a fix that deleted the measurement of
+    # the defect along with the defect would leave nothing to show the knob was
+    # ever worth moving.
+    w_pre = descend_widths(opening_knob=narrow, plan_knob=False)
+    gaps_pre = {k: (o, p) for k, (o, p) in w_pre.items()
+                if p is not None and abs(o - p) > 1e-9}
+    check("mismatch_is_real", len(gaps_pre) == 2,
+          f"at the PRE-ADOPTION pair (opening=GRIPPER_NARROW {narrow}, "
+          f"plan_at_open=False) both descend moves still carry two DIFFERENT "
+          f"widths {gaps_pre} -- the pose solved at one and executed at the "
+          "other. The finding stands; it is reproduced here, not recited.")
     check("mismatch_is_real/reject",
-          not len({k for k, (o, p) in w.items()
+          not len({k for k, (o, p) in w_pre.items()
                    if p is not None and abs(o - p) > 1.0}) == 2,
           "a reader whose tolerance (1.0 rad) is too wide to see this gap "
           "reports no mismatch and is caught")
+    gaps_now = {k: (o, p) for k, (o, p) in w.items()
+                if p is not None and abs(o - p) > 1e-9}
+    check("mismatch_is_closed_by_the_adopted_defaults", not gaps_now,
+          f"at the committed defaults there is no solved/executed gap left "
+          f"({gaps_now or 'none'}): plan_at is dropped, so the jaws that "
+          "descend are the jaws the solver placed")
 
     # --- identity ---------------------------------------------------------
     shipped_cells = [c for c in d["cells"] if c["shipped"]]

@@ -1,8 +1,8 @@
 {
  "schema": "video_presentation/v1",
  "video": "evidence/video_presentation.mp4",
- "sha256": "b829010752f8381d395bedf8022e7f30ef3af0148a6d5e4f60fa779b52606ad2",
- "bytes": 5180908,
+ "sha256": "897cfaefed903bea6e48672d390b0f88aa57a4723994c690e7b24157774ab3dc",
+ "bytes": 5115276,
  "duration_s": 275.56,
  "duration_mmss": "4:36",
  "fps": 25,
@@ -22,14 +22,14 @@
   "min_seconds": 180.0,
   "max_bytes": 300000000,
   "measured_seconds": 275.56,
-  "measured_bytes": 5180908
+  "measured_bytes": 5115276
  },
  "distinct_from": {
   "file": "evidence/demo_scripted_10seeds.mp4",
   "why": "that is the track's Required Deliverable 4, the full 10-seed rollout at 340.88 s; it is over the platform's 5-minute limit for this slot and does not state the problem, the solution or the value proposition."
  },
  "built_by": "scripts/make_video.py",
- "built_at_head": "596ff50d76fd6c32a90d1015f45a368150647f2b",
+ "built_at_head": "a7ecf78e4525f4179026710448c14791b4adc7f9",
  "source_date_epoch": "1757000000",
  "deterministic": "frames are generated, SOURCE_DATE_EPOCH is pinned and ffmpeg is invoked bitexact with a pinned thread count, so two builds from the same evidence produce byte-identical MP4s. scripts/test_video.py rebuilds and compares.",
  "audio": "none. The presentation is silent and reads from the screen; no narration is claimed and none is present.",
@@ -39,24 +39,53 @@
  "figures_derived_from": [
   "act_policy_controls.json",
   "act_train.json",
+  "adoption_ab_20260909T0300Z.json",
+  "application_url_controls.json",
   "cover_image.json",
   "cover_image_controls.json",
+  "cutlery_approach.json",
+  "cutlery_approach_mutants.json",
+  "cutlery_block.json",
+  "cutlery_placement.json",
+  "cutlery_placement_controls.json",
+  "cutlery_placement_mutants.json",
+  "cutlery_seat.json",
+  "cutlery_square.json",
+  "cutlery_standoff.json",
+  "cutlery_zcross.json",
   "demo_scripted_10seeds.json",
   "demo_site.json",
   "demo_site_controls.json",
+  "descent_tracking.json",
+  "eval_A_baseline_20260909T0300Z.json",
+  "eval_B_squared_20260909T0300Z.json",
+  "eval_C_blind_20260909T0300Z.json",
+  "eval_C_perceived_20260909T0300Z.json",
+  "eval_C_squareall_20260909T0300Z.json",
   "eval_seeds.json",
   "eval_seeds_act.json",
   "eval_seeds_scripted.json",
   "eval_seeds_scripted_blind.json",
   "eval_seeds_scripted_perceived.json",
+  "fork_descent.json",
+  "fork_descent_controls.json",
+  "grasp_feasibility.json",
+  "grasp_feasibility_controls.json",
+  "gripper_envelope.json",
+  "gripper_envelope_mutants.json",
+  "hand_floor.json",
+  "jaw_midpoint_shift.json",
   "openvino_bench_amd_epyc_9654_96_core_processor.json",
   "openvino_export.json",
   "perception_pipeline_controls.json",
   "perception_train.json",
+  "randomization_coverage_controls.json",
+  "reach_envelope.json",
   "scene_source_controls.json",
   "scene_verification.json",
   "slides_controls.json",
   "slides_presentation.json",
+  "spoon_depth.json",
   "squared_ik_controls.json",
   "task_predicate_controls.json",
   "technical_summary_controls.json",
@@ -92,7 +121,7 @@
     },
     {
      "role": "bullet",
-     "text": "\u2014  A scripted bimanual controller that earns 15/50 of them, and no more"
+     "text": "\u2014  A scripted bimanual controller that earns 18/50 of them, and no more"
     },
     {
      "role": "body",
@@ -149,7 +178,7 @@
      "style": "normal"
     },
     {
-     "text": "\u2014 A scripted bimanual controller that earns 15/50 of them, and no more",
+     "text": "\u2014 A scripted bimanual controller that earns 18/50 of them, and no more",
      "size": 17,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -743,7 +772,7 @@
     },
     {
      "role": "bullet",
-     "text": "\u2014  Recorded by scripts/record_demo.py: 10 seeds, 7290 frames at 25 fps, 8\u00d7 real time."
+     "text": "\u2014  Recorded by scripts/record_demo.py: 10 seeds, 6763 frames at 25 fps, 8\u00d7 real time."
     },
     {
      "role": "bullet",
@@ -755,7 +784,7 @@
     },
     {
      "role": "body",
-     "text": "evidence/demo_scripted_10seeds.mp4   sha256 eea237a0b41a80cc3a4374a4d960abf2\u2026"
+     "text": "evidence/demo_scripted_10seeds.mp4   sha256 6216284e7ba88f522a79eca9d90f5bc9\u2026"
     },
     {
      "role": "body",
@@ -796,7 +825,7 @@
      "style": "normal"
     },
     {
-     "text": "\u2014 Recorded by scripts/record_demo.py: 10 seeds, 7290 frames at 25 fps, 8\u00d7 real time.",
+     "text": "\u2014 Recorded by scripts/record_demo.py: 10 seeds, 6763 frames at 25 fps, 8\u00d7 real time.",
      "size": 18,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -844,7 +873,7 @@
      "style": "normal"
     },
     {
-     "text": "evidence/demo_scripted_10seeds.mp4   sha256 eea237a0b41a80cc3a4374a4d960abf2\u2026",
+     "text": "evidence/demo_scripted_10seeds.mp4   sha256 6216284e7ba88f522a79eca9d90f5bc9\u2026",
      "size": 14,
      "color": "#94A3B1",
      "weight": "normal",
@@ -874,7 +903,7 @@
     },
     {
      "role": "body",
-     "text": "drawer_open at 5.6s  \u00b7  plate_placed at 70.0s"
+     "text": "drawer_open at 5.6s  \u00b7  plate_placed at 64.8s"
     },
     {
      "role": "title",
@@ -882,7 +911,7 @@
     },
     {
      "role": "caption",
-     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed"
+     "text": "live predicate state: drawer_open, plate_placed, mug_placed  \u00b7  3/5 sub-goals on this seed"
     },
     {
      "role": "caption",
@@ -899,7 +928,7 @@
      "style": "normal"
     },
     {
-     "text": "drawer_open at 5.6s  \u00b7  plate_placed at 70.0s",
+     "text": "drawer_open at 5.6s  \u00b7  plate_placed at 64.8s",
      "size": 13,
      "color": "#94A3B1",
      "weight": "normal",
@@ -915,7 +944,7 @@
      "style": "normal"
     },
     {
-     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed",
+     "text": "live predicate state: drawer_open, plate_placed, mug_placed  \u00b7  3/5 sub-goals on this seed",
      "size": 14,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -934,11 +963,11 @@
    "clip": {
     "seed": 0,
     "source": "evidence/demo_scripted_10seeds.mp4",
-    "source_sha256": "eea237a0b41a80cc3a4374a4d960abf2fa067538c40da310a9de8298f6e5c86e",
+    "source_sha256": "6216284e7ba88f522a79eca9d90f5bc9432206525d1df8aa6b535e4aef7bb1c0",
     "source_start_frame": 0,
     "source_end_frame": 470,
     "episode_start_frame": 0,
-    "episode_frames": 644,
+    "episode_frames": 557,
     "pasted_unscaled_at": [
      160,
      96,
@@ -968,7 +997,7 @@
     },
     {
      "role": "caption",
-     "text": "live predicate state: drawer_open  \u00b7  1/5 sub-goals on this seed"
+     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed"
     },
     {
      "role": "caption",
@@ -1001,7 +1030,7 @@
      "style": "normal"
     },
     {
-     "text": "live predicate state: drawer_open  \u00b7  1/5 sub-goals on this seed",
+     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed",
      "size": 14,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -1020,11 +1049,11 @@
    "clip": {
     "seed": 1,
     "source": "evidence/demo_scripted_10seeds.mp4",
-    "source_sha256": "eea237a0b41a80cc3a4374a4d960abf2fa067538c40da310a9de8298f6e5c86e",
-    "source_start_frame": 984,
-    "source_end_frame": 1114,
-    "episode_start_frame": 644,
-    "episode_frames": 717,
+    "source_sha256": "6216284e7ba88f522a79eca9d90f5bc9432206525d1df8aa6b535e4aef7bb1c0",
+    "source_start_frame": 897,
+    "source_end_frame": 1027,
+    "episode_start_frame": 557,
+    "episode_frames": 725,
     "pasted_unscaled_at": [
      160,
      96,
@@ -1046,7 +1075,7 @@
     },
     {
      "role": "body",
-     "text": "plate_placed at 70.9s"
+     "text": "plate_placed at 99.2s"
     },
     {
      "role": "title",
@@ -1054,7 +1083,7 @@
     },
     {
      "role": "caption",
-     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed"
+     "text": "live predicate state: drawer_open  \u00b7  1/5 sub-goals on this seed"
     },
     {
      "role": "caption",
@@ -1071,7 +1100,7 @@
      "style": "normal"
     },
     {
-     "text": "plate_placed at 70.9s",
+     "text": "plate_placed at 99.2s",
      "size": 13,
      "color": "#94A3B1",
      "weight": "normal",
@@ -1087,7 +1116,7 @@
      "style": "normal"
     },
     {
-     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed",
+     "text": "live predicate state: drawer_open  \u00b7  1/5 sub-goals on this seed",
      "size": 14,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -1106,11 +1135,11 @@
    "clip": {
     "seed": 3,
     "source": "evidence/demo_scripted_10seeds.mp4",
-    "source_sha256": "eea237a0b41a80cc3a4374a4d960abf2fa067538c40da310a9de8298f6e5c86e",
-    "source_start_frame": 2216,
-    "source_end_frame": 2516,
-    "episode_start_frame": 2029,
-    "episode_frames": 701,
+    "source_sha256": "6216284e7ba88f522a79eca9d90f5bc9432206525d1df8aa6b535e4aef7bb1c0",
+    "source_start_frame": 2033,
+    "source_end_frame": 2333,
+    "episode_start_frame": 1846,
+    "episode_frames": 700,
     "pasted_unscaled_at": [
      160,
      96,
@@ -1132,7 +1161,7 @@
     },
     {
      "role": "body",
-     "text": "drawer_open at 255.3s of 260s"
+     "text": "drawer_open at 242.3s of 248s"
     },
     {
      "role": "title",
@@ -1157,7 +1186,7 @@
      "style": "normal"
     },
     {
-     "text": "drawer_open at 255.3s of 260s",
+     "text": "drawer_open at 242.3s of 248s",
      "size": 13,
      "color": "#94A3B1",
      "weight": "normal",
@@ -1192,11 +1221,11 @@
    "clip": {
     "seed": 6,
     "source": "evidence/demo_scripted_10seeds.mp4",
-    "source_sha256": "eea237a0b41a80cc3a4374a4d960abf2fa067538c40da310a9de8298f6e5c86e",
-    "source_start_frame": 4704,
-    "source_end_frame": 4828,
-    "episode_start_frame": 4276,
-    "episode_frames": 814,
+    "source_sha256": "6216284e7ba88f522a79eca9d90f5bc9432206525d1df8aa6b535e4aef7bb1c0",
+    "source_start_frame": 4471,
+    "source_end_frame": 4595,
+    "episode_start_frame": 4043,
+    "episode_frames": 773,
     "pasted_unscaled_at": [
      160,
      96,
@@ -1218,7 +1247,7 @@
     },
     {
      "role": "body",
-     "text": "plate_placed at 65.7s"
+     "text": "plate_placed at 66.0s"
     },
     {
      "role": "title",
@@ -1226,7 +1255,7 @@
     },
     {
      "role": "caption",
-     "text": "live predicate state: drawer_open, mug_placed  \u00b7  2/5 sub-goals on this seed"
+     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed"
     },
     {
      "role": "caption",
@@ -1243,7 +1272,7 @@
      "style": "normal"
     },
     {
-     "text": "plate_placed at 65.7s",
+     "text": "plate_placed at 66.0s",
      "size": 13,
      "color": "#94A3B1",
      "weight": "normal",
@@ -1259,7 +1288,7 @@
      "style": "normal"
     },
     {
-     "text": "live predicate state: drawer_open, mug_placed  \u00b7  2/5 sub-goals on this seed",
+     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed",
      "size": 14,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -1278,11 +1307,11 @@
    "clip": {
     "seed": 8,
     "source": "evidence/demo_scripted_10seeds.mp4",
-    "source_sha256": "eea237a0b41a80cc3a4374a4d960abf2fa067538c40da310a9de8298f6e5c86e",
-    "source_start_frame": 6023,
-    "source_end_frame": 6213,
-    "episode_start_frame": 5855,
-    "episode_frames": 710,
+    "source_sha256": "6216284e7ba88f522a79eca9d90f5bc9432206525d1df8aa6b535e4aef7bb1c0",
+    "source_start_frame": 5717,
+    "source_end_frame": 5907,
+    "episode_start_frame": 5549,
+    "episode_frames": 560,
     "pasted_unscaled_at": [
      160,
      96,
@@ -1312,7 +1341,7 @@
     },
     {
      "role": "headline",
-     "text": "15/50"
+     "text": "18/50"
     },
     {
      "role": "body",
@@ -1348,7 +1377,7 @@
     },
     {
      "role": "body",
-     "text": "0/10"
+     "text": "3/10"
     },
     {
      "role": "body",
@@ -1380,7 +1409,7 @@
     },
     {
      "role": "body",
-     "text": "Both arms touched an object on 10 of 10 seeds. The longest in-order prefix reached on any seed is 1 of 5. Objects dropped: 0."
+     "text": "Both arms touched an object on 10 of 10 seeds. The longest in-order prefix reached on any seed is 2 of 5. Objects dropped: 0."
     }
    ],
    "lines": [
@@ -1425,7 +1454,7 @@
      "style": "normal"
     },
     {
-     "text": "15/50",
+     "text": "18/50",
      "size": 46,
      "color": "#E9EEF3",
      "weight": "bold",
@@ -1491,15 +1520,15 @@
     {
      "text": "fork_placed",
      "size": 17,
-     "color": "#D9534F",
+     "color": "#E9EEF3",
      "weight": "normal",
      "family": "DejaVu Sans",
      "style": "normal"
     },
     {
-     "text": "0/10",
+     "text": "3/10",
      "size": 17,
-     "color": "#D9534F",
+     "color": "#E9EEF3",
      "weight": "bold",
      "family": "DejaVu Sans",
      "style": "normal"
@@ -1577,7 +1606,7 @@
      "style": "normal"
     },
     {
-     "text": "1 of 5. Objects dropped: 0.",
+     "text": "2 of 5. Objects dropped: 0.",
      "size": 15,
      "color": "#94A3B1",
      "weight": "normal",
@@ -1611,11 +1640,11 @@
     },
     {
      "role": "bullet",
-     "text": "\u2014  Object hand-offs: 5, every one of them the mug. The monitor also records a hand-off on 10 seeds for the drawer handle, which is the two arms taking it in turn and is not an object hand-off."
+     "text": "\u2014  Object hand-offs: 7, every one of them the mug. The monitor also records a hand-off on 10 seeds for the drawer handle, which is the two arms taking it in turn and is not an object hand-off."
     },
     {
      "role": "bullet",
-     "text": "\u2014  The learned ACT policy loses to the script: 3/50 against 15/50. No VLA and no language conditioning: the task instruction is a fixed string that nothing parses."
+     "text": "\u2014  The learned ACT policy loses to the script: 3/50 against 18/50. No VLA and no language conditioning: the task instruction is a fixed string that nothing parses."
     },
     {
      "role": "body",
@@ -1680,7 +1709,7 @@
      "style": "normal"
     },
     {
-     "text": "\u2014 Object hand-offs: 5, every one of them the mug. The monitor also records a hand-off on 10",
+     "text": "\u2014 Object hand-offs: 7, every one of them the mug. The monitor also records a hand-off on 10",
      "size": 17,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -1704,7 +1733,7 @@
      "style": "normal"
     },
     {
-     "text": "\u2014 The learned ACT policy loses to the script: 3/50 against 15/50. No VLA and no language",
+     "text": "\u2014 The learned ACT policy loses to the script: 3/50 against 18/50. No VLA and no language",
      "size": 17,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -1762,7 +1791,7 @@
     },
     {
      "role": "body",
-     "text": "The perception model IS in the control loop, and putting it there costs 3 sub-goals: 12/50 perceived against 15/50 privileged."
+     "text": "The perception model IS in the control loop, and putting it there costs 9 sub-goals: 9/50 perceived against 18/50 privileged."
     }
    ],
    "lines": [
@@ -1863,7 +1892,7 @@
      "style": "normal"
     },
     {
-     "text": "The perception model IS in the control loop, and putting it there costs 3 sub-goals: 12/50 perceived",
+     "text": "The perception model IS in the control loop, and putting it there costs 9 sub-goals: 9/50 perceived",
      "size": 16,
      "color": "#E2A24A",
      "weight": "normal",
@@ -1871,7 +1900,7 @@
      "style": "normal"
     },
     {
-     "text": "against 15/50 privileged.",
+     "text": "against 18/50 privileged.",
      "size": 16,
      "color": "#E2A24A",
      "weight": "normal",
@@ -2187,7 +2216,7 @@
     },
     {
      "role": "bullet",
-     "text": "\u2014  The benchmark ships its own falsifier: a no-policy control on identical seeds and an unchanged scorer, so the headline 15/50 cannot be an artefact of the measurement."
+     "text": "\u2014  The benchmark ships its own falsifier: a no-policy control on identical seeds and an unchanged scorer, so the headline 18/50 cannot be an artefact of the measurement."
     },
     {
      "role": "bullet",
@@ -2244,7 +2273,7 @@
      "style": "normal"
     },
     {
-     "text": "scorer, so the headline 15/50 cannot be an artefact of the measurement.",
+     "text": "scorer, so the headline 18/50 cannot be an artefact of the measurement.",
      "size": 16,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -2334,7 +2363,7 @@
     },
     {
      "role": "ledger",
-     "text": "Task success 0/10. Object hand-offs 5, all mug. fork_placed 0/10, spoon_placed 0/10. Learned ACT policy 3/50 against the script's 15/50. Perception in the control loop costs 3. No Intel Core Ultra measurement. No hosted demo application."
+     "text": "Task success 0/10. Object hand-offs 7, all mug. spoon_placed 0/10. Learned ACT policy 3/50 against the script's 18/50. Perception in the control loop costs 9. No Intel Core Ultra measurement. No hosted demo application."
     },
     {
      "role": "bullet",
@@ -2391,7 +2420,7 @@
      "style": "normal"
     },
     {
-     "text": "Task success 0/10. Object hand-offs 5, all mug. fork_placed 0/10, spoon_placed 0/10.",
+     "text": "Task success 0/10. Object hand-offs 7, all mug. spoon_placed 0/10. Learned ACT policy",
      "size": 17,
      "color": "#E2A24A",
      "weight": "normal",
@@ -2399,7 +2428,7 @@
      "style": "normal"
     },
     {
-     "text": "Learned ACT policy 3/50 against the script's 15/50. Perception in the control loop costs 3.",
+     "text": "3/50 against the script's 18/50. Perception in the control loop costs 9. No Intel Core Ultra",
      "size": 17,
      "color": "#E2A24A",
      "weight": "normal",
@@ -2407,7 +2436,7 @@
      "style": "normal"
     },
     {
-     "text": "No Intel Core Ultra measurement. No hosted demo application.",
+     "text": "measurement. No hosted demo application.",
      "size": 17,
      "color": "#E2A24A",
      "weight": "normal",
@@ -2477,15 +2506,15 @@
   "seeds": 10,
   "denom": 50,
   "act_total": 3,
-  "perceived_total": 12,
-  "total": 15,
+  "perceived_total": 9,
+  "total": 18,
   "control_total": 0,
   "task_success": 0,
   "bimanual": 10,
-  "in_order": 1,
+  "in_order": 2,
   "subgoals_total": 5,
   "dropped": 0,
-  "object_handoffs": 5,
+  "object_handoffs": 7,
   "drawer_handoff_seeds": 10,
   "plate_d_lo": 94.0,
   "plate_d_hi": 114.6,
@@ -2525,20 +2554,20 @@
   "light_lo": 0.602,
   "light_hi": 0.942,
   "demo_seeds": 10,
-  "demo_frames": 7290,
+  "demo_frames": 6763,
   "demo_fps": 25,
   "demo_speed": 8.0,
-  "demo_sha": "eea237a0b41a80cc3a4374a4d960abf2fa067538c40da310a9de8298f6e5c86e",
-  "demo_not_claimed": "This video does NOT show the task being completed: task_success is 0/10. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is drawer_open 10/10, plate_placed 4/10, mug_placed 1/10. Never earned on any seed: fork_placed, spoon_placed.",
-  "moves": 209,
+  "demo_sha": "6216284e7ba88f522a79eca9d90f5bc9432206525d1df8aa6b535e4aef7bb1c0",
+  "demo_not_claimed": "This video does NOT show the task being completed: task_success is 0/10. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is drawer_open 10/10, fork_placed 3/10, plate_placed 4/10, mug_placed 1/10. Never earned on any seed: spoon_placed.",
+  "moves": 199,
   "slides_pages": 13
  },
  "per_goal": {
   "drawer_open": 10,
-  "fork_placed": 0,
+  "fork_placed": 3,
   "spoon_placed": 0,
   "plate_placed": 4,
   "mug_placed": 1
  },
- "not_claimed": "Task success 0/10. Object hand-offs 5. fork_placed 0/10, spoon_placed 0/10. Learned ACT policy 3/50 against the script's 15/50. Perception in the control loop costs 3. No Intel Core Ultra measurement. No hosted demo application. The video claims none of these and says so on screen."
+ "not_claimed": "Task success 0/10. Object hand-offs 7. spoon_placed 0/10. Learned ACT policy 3/50 against the script's 18/50. Perception in the control loop costs 9. No Intel Core Ultra measurement. No hosted demo application. The video claims none of these and says so on screen."
 }

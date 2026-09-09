@@ -1,7 +1,7 @@
 {
  "schema": "video_controls/v1",
  "artifact": "evidence/video_presentation.mp4",
- "sha256": "b829010752f8381d395bedf8022e7f30ef3af0148a6d5e4f60fa779b52606ad2",
+ "sha256": "897cfaefed903bea6e48672d390b0f88aa57a4723994c690e7b24157774ab3dc",
  "duration_s": 275.56,
  "all_pass": true,
  "controls": [
@@ -18,7 +18,7 @@
   {
    "control": "accept_size_under_the_published_cap",
    "pass": true,
-   "detail": "5.2 MB against the published 300 MB"
+   "detail": "5.1 MB against the published 300 MB"
   },
   {
    "control": "reject_a_duration_over_five_minutes",
@@ -43,17 +43,17 @@
   {
    "control": "accept_card_segments_hold_still",
    "pass": true,
-   "detail": "13 card segments, worst first-to-last mean pixel change 0.482 (< 1.0). It is not zero because H.264 requantises a static picture; what matters is that it is far below a clip."
+   "detail": "13 card segments, worst first-to-last mean pixel change 0.642 (< 1.0). It is not zero because H.264 requantises a static picture; what matters is that it is far below a clip."
   },
   {
    "control": "reject_a_clip_segment_that_does_not_move",
    "pass": true,
-   "detail": "5 clip segments, smallest change 3.124 (> 1.5); every card is quieter than every clip by 2.642 -- a clip that held still would be a card mislabelled as footage"
+   "detail": "5 clip segments, smallest change 3.033 (> 1.5); every card is quieter than every clip by 2.391 -- a clip that held still would be a card mislabelled as footage"
   },
   {
    "control": "accept_headline_subgoals_is_on_screen",
    "pass": true,
-   "detail": "segment 0 card 1: the line carrying '15/50' matches the decoded frame at 0.9994; the same line with '15/50' corrupted to '25/50' matches at 0.9905"
+   "detail": "segment 0 card 1: the line carrying '18/50' matches the decoded frame at 0.9994; the same line with '18/50' corrupted to '28/50' matches at 0.9906"
   },
   {
    "control": "accept_no_policy_control_is_on_screen",
@@ -68,7 +68,7 @@
   {
    "control": "accept_plate_placed_is_on_screen",
    "pass": true,
-   "detail": "segment 11 card 12: the line carrying '4/10' matches the decoded frame at 0.9997; the same line with '4/10' corrupted to '5/10' matches at 0.8938"
+   "detail": "segment 11 card 12: the line carrying '4/10' matches the decoded frame at 0.9997; the same line with '4/10' corrupted to '5/10' matches at 0.9386"
   },
   {
    "control": "accept_scene_checks_is_on_screen",
@@ -108,17 +108,17 @@
   {
    "control": "accept_bench_rows_is_on_screen",
    "pass": true,
-   "detail": "segment 14 card 15: the line carrying '9 device/precision rows' matches the decoded frame at 0.9997; the same line with '9 device/precision rows' corrupted to '0 device/precision rows' matches at 0.9918"
+   "detail": "segment 14 card 15: the line carrying '9 device/precision rows' matches the decoded frame at 0.9997; the same line with '9 device/precision rows' corrupted to '0 device/precision rows' matches at 0.9917"
   },
   {
    "control": "accept_bench_verdict_is_on_screen",
    "pass": true,
-   "detail": "segment 14 card 15: the line carrying 'NOT_THE_REQUIRED_MEASUREMENT' matches the decoded frame at 0.9997; the same line with 'NOT_THE_REQUIRED_MEASUREMENT' corrupted to 'TNEMERUSAEM_DERIUQER_EHT_TON' matches at 0.5846"
+   "detail": "segment 14 card 15: the line carrying 'NOT_THE_REQUIRED_MEASUREMENT' matches the decoded frame at 0.9994; the same line with 'NOT_THE_REQUIRED_MEASUREMENT' corrupted to 'TNEMERUSAEM_DERIUQER_EHT_TON' matches at 0.5848"
   },
   {
    "control": "accept_bench_host_is_on_screen",
    "pass": true,
-   "detail": "segment 14 card 15: the line carrying 'AMD EPYC 9654 96-Core Processor' matches the decoded frame at 0.9996; the same line with 'AMD EPYC 9654 96-Core Processor' corrupted to 'AMD EPYC 0654 96-Core Processor' matches at 0.9955"
+   "detail": "segment 14 card 15: the line carrying 'AMD EPYC 9654 96-Core Processor' matches the decoded frame at 0.9994; the same line with 'AMD EPYC 9654 96-Core Processor' corrupted to 'AMD EPYC 0654 96-Core Processor' matches at 0.9953"
   },
   {
    "control": "accept_plate_span_is_on_screen",
@@ -128,12 +128,12 @@
   {
    "control": "accept_object_handoffs_is_on_screen",
    "pass": true,
-   "detail": "segment 12 card 13: the line carrying 'Object hand-offs: 5' matches the decoded frame at 0.9997; the same line with 'Object hand-offs: 5' corrupted to 'Object hand-offs: 6' matches at 0.9941"
+   "detail": "segment 12 card 13: the line carrying 'Object hand-offs: 7' matches the decoded frame at 0.9997; the same line with 'Object hand-offs: 7' corrupted to 'Object hand-offs: 8' matches at 0.9879"
   },
   {
    "control": "accept_demo_frames_is_on_screen",
    "pass": true,
-   "detail": "segment 5 card 6: the line carrying '7290 frames' matches the decoded frame at 0.9996; the same line with '7290 frames' corrupted to '8290 frames' matches at 0.9874"
+   "detail": "segment 5 card 6: the line carrying '6763 frames' matches the decoded frame at 0.9996; the same line with '6763 frames' corrupted to '7763 frames' matches at 0.9859"
   },
   {
    "control": "reject_every_corrupted_figure",
@@ -163,12 +163,12 @@
   {
    "control": "reject_a_clip_matched_against_a_different_seed",
    "pass": true,
-   "detail": "caption band, where two seeds differ: true 0:0.9994  1:0.9993  3:0.9995  6:0.9992  8:0.9992  |  decoy 0:0.7648  1:0.8181  3:0.8953  6:0.7698  8:0.8384  (< 0.9). Whole-window decoy scores 0:0.9027  1:0.9273  3:0.9389  6:0.9517  8:0.9365 -- too close to use, because every episode films the same table."
+   "detail": "caption band, where two seeds differ: true 0:0.9994  1:0.9995  3:0.9995  6:0.9992  8:0.9993  |  decoy 0:0.7636  1:0.8147  3:0.8931  6:0.7697  8:0.8841  (< 0.9). Whole-window decoy scores 0:0.9330  1:0.9315  3:0.9409  6:0.9498  8:0.9372 -- too close to use, because every episode films the same table."
   },
   {
    "control": "accept_sidecar_sha256_matches_the_file",
    "pass": true,
-   "detail": "b829010752f8381d\u2026 and 5180908 bytes"
+   "detail": "897cfaefed903bea\u2026 and 5115276 bytes"
   },
   {
    "control": "reject_a_one_character_change_to_the_sha256",

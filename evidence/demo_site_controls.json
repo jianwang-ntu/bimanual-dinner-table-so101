@@ -5,14 +5,14 @@
   "all_pass": true,
   "controls": [
     {
-      "name": "condition privileged scores 15/50",
+      "name": "condition privileged scores 18/50",
       "ok": true,
-      "detail": "expected '15 / 50'"
+      "detail": "expected '18 / 50'"
     },
     {
-      "name": "condition privileged scores 15/50 [negative control]",
+      "name": "condition privileged scores 18/50 [negative control]",
       "ok": true,
-      "detail": "corrupted '22 / 50' must be absent"
+      "detail": "corrupted '25 / 50' (+7) is absent, so the presence check above can fail"
     },
     {
       "name": "condition privileged is named on the page",
@@ -20,14 +20,14 @@
       "detail": ""
     },
     {
-      "name": "condition perceived scores 12/50",
+      "name": "condition perceived scores 9/50",
       "ok": true,
-      "detail": "expected '12 / 50'"
+      "detail": "expected '9 / 50'"
     },
     {
-      "name": "condition perceived scores 12/50 [negative control]",
+      "name": "condition perceived scores 9/50 [negative control]",
       "ok": true,
-      "detail": "corrupted '19 / 50' must be absent"
+      "detail": "corrupted '16 / 50' (+7) is absent, so the presence check above can fail"
     },
     {
       "name": "condition perceived is named on the page",
@@ -35,14 +35,14 @@
       "detail": ""
     },
     {
-      "name": "condition blind scores 9/50",
+      "name": "condition blind scores 5/50",
       "ok": true,
-      "detail": "expected '9 / 50'"
+      "detail": "expected '5 / 50'"
     },
     {
-      "name": "condition blind scores 9/50 [negative control]",
+      "name": "condition blind scores 5/50 [negative control]",
       "ok": true,
-      "detail": "corrupted '16 / 50' must be absent"
+      "detail": "corrupted '12 / 50' (+7) is absent, so the presence check above can fail"
     },
     {
       "name": "condition blind is named on the page",
@@ -52,7 +52,7 @@
     {
       "name": "blind < perceived < privileged holds in the evidence",
       "ok": true,
-      "detail": "9 < 12 < 15"
+      "detail": "5 < 9 < 18"
     },
     {
       "name": "placement drawer_open = 10/10",
@@ -62,17 +62,17 @@
     {
       "name": "placement drawer_open = 10/10 [negative control]",
       "ok": true,
-      "detail": "corrupted '17 / 10 seeds' must be absent"
+      "detail": "corrupted '17 / 10 seeds' (+7) is absent, so the presence check above can fail"
     },
     {
-      "name": "placement fork_placed = 0/10",
+      "name": "placement fork_placed = 3/10",
       "ok": true,
-      "detail": "expected '0 / 10 seeds'"
+      "detail": "expected '3 / 10 seeds'"
     },
     {
-      "name": "placement fork_placed = 0/10 [negative control]",
+      "name": "placement fork_placed = 3/10 [negative control]",
       "ok": true,
-      "detail": "corrupted '7 / 10 seeds' must be absent"
+      "detail": "corrupted '16 / 10 seeds' (+13) is absent, so the presence check above can fail"
     },
     {
       "name": "placement spoon_placed = 0/10",
@@ -82,7 +82,7 @@
     {
       "name": "placement spoon_placed = 0/10 [negative control]",
       "ok": true,
-      "detail": "corrupted '7 / 10 seeds' must be absent"
+      "detail": "corrupted '7 / 10 seeds' (+7) is absent, so the presence check above can fail"
     },
     {
       "name": "placement plate_placed = 4/10",
@@ -92,7 +92,7 @@
     {
       "name": "placement plate_placed = 4/10 [negative control]",
       "ok": true,
-      "detail": "corrupted '11 / 10 seeds' must be absent"
+      "detail": "corrupted '11 / 10 seeds' (+7) is absent, so the presence check above can fail"
     },
     {
       "name": "placement mug_placed = 1/10",
@@ -102,7 +102,7 @@
     {
       "name": "placement mug_placed = 1/10 [negative control]",
       "ok": true,
-      "detail": "corrupted '8 / 10 seeds' must be absent"
+      "detail": "corrupted '8 / 10 seeds' (+7) is absent, so the presence check above can fail"
     },
     {
       "name": "page carries an embedded run-data block",
@@ -127,22 +127,22 @@
     {
       "name": "demo video frame count and fps",
       "ok": true,
-      "detail": "expected '7290 frames at 25 fps'"
+      "detail": "expected '6763 frames at 25 fps'"
     },
     {
       "name": "demo video frame count and fps [negative control]",
       "ok": true,
-      "detail": "corrupted '7297 frames at 25 fps' must be absent"
+      "detail": "corrupted '6770 frames at 25 fps' (+7) is absent, so the presence check above can fail"
     },
     {
       "name": "demo video duration",
       "ok": true,
-      "detail": "expected '291.6 s at'"
+      "detail": "expected '270.5 s at'"
     },
     {
       "name": "demo video duration [negative control]",
       "ok": true,
-      "detail": "corrupted '298.6 s at' must be absent"
+      "detail": "corrupted '277.5 s at' (+7) is absent, so the presence check above can fail"
     },
     {
       "name": "video presentation duration",
@@ -152,7 +152,7 @@
     {
       "name": "video presentation duration [negative control]",
       "ok": true,
-      "detail": "corrupted '11:36' must be absent"
+      "detail": "corrupted '11:36' (+7) is absent, so the presence check above can fail"
     },
     {
       "name": "slide deck page count",
@@ -162,7 +162,7 @@
     {
       "name": "slide deck page count [negative control]",
       "ok": true,
-      "detail": "corrupted '20 pages' must be absent"
+      "detail": "corrupted '20 pages' (+7) is absent, so the presence check above can fail"
     },
     {
       "name": "every local asset referenced by the page exists",
@@ -192,7 +192,7 @@
     {
       "name": "the learned policy really is worse than the script in the evidence",
       "ok": true,
-      "detail": "ACT 3 of 50 against scripted 15 of 50"
+      "detail": "ACT 3 of 50 against scripted 18 of 50"
     },
     {
       "name": "the page states the learned policy's score and that it is the lower of the two",
@@ -232,12 +232,12 @@
     {
       "name": "a fresh build is byte-identical to the shipped page",
       "ok": true,
-      "detail": "93c5f78fe2db vs 93c5f78fe2db"
+      "detail": "3a15954065dd vs 3a15954065dd"
     },
     {
       "name": "evidence/demo_site.json pins the shipped bytes",
       "ok": true,
-      "detail": "93c5f78fe2db vs 93c5f78fe2db"
+      "detail": "3a15954065dd vs 3a15954065dd"
     }
   ]
 }

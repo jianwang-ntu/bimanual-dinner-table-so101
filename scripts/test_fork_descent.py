@@ -72,22 +72,32 @@ def variant(steps, z, sq, doc=None):
     raise KeyError((steps, z, sq))
 
 
-def fork_descend_moves(steps=None, square=None):
+def fork_descend_moves(steps=None, square=None, square_all=None):
     """The ``fork_*_descend*`` moves ``dinner_table_script()`` emits, as
     (label, squared) pairs.  Driven through the real script rather than by
-    reading the source, because the claim is about behaviour."""
+    reading the source, because the claim is about behaviour.
+
+    ``square_all`` reaches ``CUTLERY_SQUARE``, which squares the whole cutlery
+    pick -- approach, descent and lift.  It was adopted True on 2026-09-09, so
+    the controls below that are about ``CUTLERY_DESCEND_SQUARE`` ALONE have to
+    hold it off explicitly; otherwise they are reading the two knobs together
+    and cannot say which one squared the carry.
+    """
     os.environ.setdefault("MUJOCO_GL", "egl")
     sys.path.insert(0, str(ROOT))
     from envs import controller as C
-    keep = (C.CUTLERY_DESCEND_STEPS, C.CUTLERY_DESCEND_SQUARE)
+    keep = (C.CUTLERY_DESCEND_STEPS, C.CUTLERY_DESCEND_SQUARE, C.CUTLERY_SQUARE)
     try:
         if steps is not None:
             C.CUTLERY_DESCEND_STEPS = steps
         if square is not None:
             C.CUTLERY_DESCEND_SQUARE = square
+        if square_all is not None:
+            C.CUTLERY_SQUARE = square_all
         script = C.dinner_table_script()
     finally:
-        C.CUTLERY_DESCEND_STEPS, C.CUTLERY_DESCEND_SQUARE = keep
+        (C.CUTLERY_DESCEND_STEPS, C.CUTLERY_DESCEND_SQUARE,
+         C.CUTLERY_SQUARE) = keep
     out = []
     for e in script:
         if isinstance(e, tuple) and e and e[0] == "if":
@@ -132,25 +142,31 @@ def main() -> int:
     print("defaults")
     got = descents(fork_descend_moves())
     ok &= check("committed_defaults_emit_the_shipped_descent",
-                got == [("fork_descend", False)],
+                got == [("fork_descend", True)],
                 f"dinner_table_script() at the committed defaults emits {got} "
-                "-- one solved pose, unsquared, exactly as every published "
-                "figure was measured")
+                "-- one solved pose, SQUARED. Adopted 2026-09-09T03:00Z: "
+                "CUTLERY_DESCEND_SQUARE and CUTLERY_SQUARE both ship True, and "
+                "that is the pair every published figure is now measured at")
     stepped = descents(fork_descend_moves(steps=2))
     ok &= check("reject_a_default_that_had_stepped_the_descent",
                 stepped != [("fork_descend", False)],
                 f"with CUTLERY_DESCEND_STEPS=2 the same reader sees {stepped}, "
                 "so the control is reading the script, not a constant")
-    squared = descents(fork_descend_moves(square=True))
-    ok &= check("reject_a_default_that_had_squared_the_descent",
-                squared != [("fork_descend", False)],
-                f"with CUTLERY_DESCEND_SQUARE=True the same reader sees "
-                f"{squared}")
+    unsquared = descents(fork_descend_moves(square=False, square_all=False))
+    ok &= check("reject_a_default_that_had_unsquared_the_descent",
+                unsquared != [("fork_descend", True)],
+                f"with both square knobs held off the same reader sees "
+                f"{unsquared}, so the control is reading the script and a "
+                "default that silently reverted would be caught")
     # Over EVERY fork_* move, not just the descents: a reader that filtered
     # to descents first could only ever report descents, and the control
     # would have been unable to fail.
-    on = [lb for lb, sq in fork_descend_moves(steps=4, square=True) if sq]
-    off = [lb for lb, sq in fork_descend_moves(steps=4, square=True) if not sq]
+    # CUTLERY_SQUARE held OFF so this reads the DESCEND knob alone. With both
+    # on -- the adopted pair -- fork_above and fork_lift are squared too, which
+    # is what CUTLERY_SQUARE is for and is asserted separately below.
+    _iso = fork_descend_moves(steps=4, square=True, square_all=False)
+    on = [lb for lb, sq in _iso if sq]
+    off = [lb for lb, sq in _iso if not sq]
     ok &= check("squaring_the_descent_never_squares_the_carry",
                 on and all(lb.startswith("fork_descend") for lb in on)
                 and "fork_lift" in off and "fork_above" in off,
@@ -158,13 +174,21 @@ def main() -> int:
                 f"{on} and the unsquared ones include fork_above and "
                 "fork_lift -- _handoff already measured that squaring a "
                 "loaded carry asks for a wrist the arm cannot hold")
-    off_default = [lb for lb, sq in fork_descend_moves() if not sq]
+    off_iso = [lb for lb, sq in fork_descend_moves(square_all=False) if not sq]
     ok &= check("reject_a_reader_that_cannot_see_the_carry",
-                "fork_lift" in off_default and "fork_above" in off_default
-                and len(off_default) > 2,
-                f"the same reader sees all {len(off_default)} unsquared fork "
-                "moves at the committed defaults, so the control above is "
+                "fork_lift" in off_iso and "fork_above" in off_iso
+                and len(off_iso) > 2,
+                f"with CUTLERY_SQUARE off the same reader sees all "
+                f"{len(off_iso)} unsquared fork moves, so the control above is "
                 "looking at the carry rather than at a filtered-out label")
+    # And what the ADOPTED pair actually does to the carry, stated rather than
+    # left implicit: CUTLERY_SQUARE squares the approach and the lift as well.
+    now_on = [lb for lb, sq in fork_descend_moves() if sq]
+    ok &= check("the_adopted_pair_squares_the_carry_too",
+                "fork_above" in now_on and "fork_lift" in now_on,
+                f"at the committed defaults the squared fork moves are "
+                f"{now_on} -- CUTLERY_SQUARE reaches the approach and the lift, "
+                "which is exactly what CUTLERY_DESCEND_SQUARE alone does not do")
 
     print("\nidentity")
     ok &= check("the_baseline_is_the_shipped_setting",

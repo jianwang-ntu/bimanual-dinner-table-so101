@@ -14,7 +14,7 @@ that scripted controller.** Read that before reading anything else.
 The learned policy is real and it is not the headline. A LeRobot ACT
 (action-chunking transformer) trained by behaviour cloning on 35 rollouts of the
 scripted controller scores **3 sub-goals of 50** over the same ten evaluation
-seeds, against the scripted controller's **15 of 50** — with *more* simulator
+seeds, against the scripted controller's **18 of 50** — with *more* simulator
 time per episode, not less. Every number this README quotes is the scripted
 controller's unless the row says `ACT`.
 
@@ -38,8 +38,8 @@ number is what this README quotes unless a row says otherwise.
 | Submission cover image, 1920×1080 PNG rendered from the simulator | rendered, **captioned from `evidence/`, not typed** | `evidence/cover_image.png` + `.json`, `evidence/cover_image_controls.json` (14/14) |
 | Slide presentation, 13 slides, 16:9 PDF | generated from `evidence/`, **no figure typed by hand** | `evidence/slides_presentation.pdf` + `.json`, `evidence/slides_controls.json` (12/12) |
 | Video presentation, 4:36, 1280×720 MP4 | generated from `evidence/`, **real footage pasted unscaled from the demo MP4** | `evidence/video_presentation.mp4` + `.json`, `evidence/video_controls.json` (38/38) |
-| Perception in the control loop | built, **12 / 50 perceived vs 15 / 50 privileged vs 9 / 50 blind** | `evidence/eval_seeds_scripted_perceived.json`, `evidence/scene_source_controls.json` (15/15) |
-| VLA / imitation policy — LeRobot ACT, behaviour-cloned | built, **3 / 50 sub-goals — five times worse than its own demonstrator** | `evidence/act_train.json`, `evidence/eval_seeds_act.json`, `evidence/act_policy_controls.json` (19/19) |
+| Perception in the control loop | built, **9 / 50 perceived vs 18 / 50 privileged vs 5 / 50 blind** — the ratio got *worse* on 2026-09-09, see below | `evidence/eval_seeds_scripted_perceived.json`, `evidence/scene_source_controls.json` (15/15) |
+| VLA / imitation policy — LeRobot ACT, behaviour-cloned | built, **3 / 50 sub-goals — six times worse than its own demonstrator** | `evidence/act_train.json`, `evidence/eval_seeds_act.json`, `evidence/act_policy_controls.json` (19/19) |
 | Demonstrations the policy was trained on, 40 episodes on seeds 3000–3039 | recorded and committed, 8.4 MB | `data/demos/`, `scripts/collect_demos.py` |
 | Language conditioning, multi-step task context, re-planning | **not started** — three of T2's four demands | — |
 | Intel Core Ultra Series 2/3 benchmark numbers | **not measured, and cannot be measured here** | see *Hardware* below |
@@ -84,10 +84,32 @@ Same environment, same scorer, 10 seeds, the only difference the controller:
 | Run | Sub-goals | Task success | Evidence |
 |---|---|---|---|
 | `--policy none` (arms hold the home pose) | **0 / 50** | 0 / 10 | `evidence/eval_seeds.json` |
-| `--policy scripted` | **15 / 50** | 0 / 10 | `evidence/eval_seeds_scripted.json` |
+| `--policy scripted` | **18 / 50** | 0 / 10 | `evidence/eval_seeds_scripted.json` |
 
 Broken out: `drawer_open` **10/10**, `plate_placed` **4/10**,
-`mug_placed` **1/10**, and `fork_placed`, `spoon_placed` **0/10 each**. Read the
+`fork_placed` **3/10**, `mug_placed` **1/10**, and `spoon_placed` **0/10**.
+
+### Adopted 2026-09-09 — squaring the cutlery pick
+
+Four constants in `envs/controller.py` moved together — `CUTLERY_SQUARE`,
+`CUTLERY_DESCEND_SQUARE`, `CUTLERY_PLAN_AT_OPEN` True and
+`CUTLERY_DESCEND_OPENING` 0.45 → 0.60 — and the cutlery is picked by the solver
+that puts the jaw closing axis where it was asked. Sub-goals **15 / 50 → 18 / 50**
+and `fork_placed` **0 / 10 → 3 / 10**, the first cutlery this entry has ever
+placed. `task_success` is still **0 / 10** and `spoon_placed` still **0 / 10**:
+the task is not completed on any seed.
+
+Two things are recorded against it. The perceived scene source regressed
+(12 / 50 → 9 / 50) and the perceived path now places nothing. And the adoption
+recipe this repository was handed named only *three* of the four constants — the
+sweep's `square_mode="all"` also sets `CUTLERY_DESCEND_SQUARE`, and running the
+three-constant version scores 15 / 50 with fork 0 / 10 while *dropping* hand-off
+seeds from 10 to 8. All three configurations were A/B'd through
+`scripts/eval_seeds.py` before anything was adopted;
+`evidence/adoption_ab_20260909T0300Z.json` carries the runs and
+`TECHNICAL_SUMMARY.md` section 8d the reasoning.
+
+ Read the
 rest of the row before reading anything into it:
 
 - **The task has never been completed.** `task_success` is 0/10 and
@@ -122,7 +144,9 @@ rest of the row before reading anything into it:
   is already down and nudge it outside its 50 mm tolerance. Sub-goals went
   **16/50 to 15/50**, mean 1.6 to **1.5**. The trade is stated in both
   directions because it is a trade: the first object hand-off and the first
-  non-plate placement, bought with two plates.
+  non-plate placement, bought with two plates. *(Both figures are that
+  revision's; the total is 18/50 since the 2026-09-09 squared-cutlery adoption.
+  The plate is still 4/10 and the two seeds are still lost.)*
 - **The mug that is placed is lying on its side.** On seed 8 it finishes 9.8 mm
   from its mat — well inside tolerance — with an upright cosine of 0.000
   against the 0.906 bar the scorer wants, so it scores the placement and not
@@ -392,9 +416,16 @@ goes through it, and three sources can be installed:
 
 | `--scene` | what the controller reads | sub-goals |
 |---|---|---|
-| `privileged` | `MjData`, as it always did | **15 / 50** |
-| `perceived` | one `top_cam` frame per planning instant → OpenVINO IR → seven numbers | **12 / 50** |
-| `blind` | the nominal, un-randomized layout from `envs/randomize.py` | **9 / 50** |
+| `privileged` | `MjData`, as it always did | **18 / 50** |
+| `perceived` | one `top_cam` frame per planning instant → OpenVINO IR → seven numbers | **9 / 50** |
+| `blind` | the nominal, un-randomized layout from `envs/randomize.py` | **5 / 50** |
+
+Re-measured 2026-09-09 against the adopted squared-cutlery controller, and the
+trade is against us here: privileged went 15 → 18 while perceived went 12 → 9
+and blind 9 → 5. The perceived path now places nothing at all — it scores
+`drawer_open` 9/10 and no placements, where it previously placed the plate on
+3 seeds. The ordering the control needs still holds and the gap is wider, but
+less of the privileged score survives perception than before.
 
 ```bash
 python3 scripts/eval_seeds.py --seeds 10 --policy scripted --scene perceived
@@ -476,10 +507,10 @@ How it does, closed-loop, on the same ten seeds and the same untouched scorer:
 
 | | scripted controller | ACT policy |
 |---|---|---|
-| sub-goals over 10 seeds | **15 / 50** | **3 / 50** |
+| sub-goals over 10 seeds | **18 / 50** | **3 / 50** |
 | task success | 0 / 10 | 0 / 10 |
 | simulator seconds per episode | 206.2 | **242.8** |
-| what it ever achieves | drawer 10/10, plate 4/10, mug 1/10 | drawer 2/10 (seeds 5, 7), plate 1/10 (seed 4) |
+| what it ever achieves | drawer 10/10, plate 4/10, fork 3/10, mug 1/10 | drawer 2/10 (seeds 5, 7), plate 1/10 (seed 4) |
 
 The policy was given **more** simulator time than its demonstrator, not less —
 its horizon is the median demonstration length — so the gap is not a clipped

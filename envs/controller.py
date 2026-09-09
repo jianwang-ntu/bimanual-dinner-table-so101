@@ -724,7 +724,14 @@ Y_AXIS = np.array([0.0, 1.0, 0.0])
 # ``scripts/measure_fork_descent.py`` for what moved them.
 CUTLERY_DESCEND_STEPS = 1     # solved poses between ``_above`` and the grasp
 CUTLERY_DESCEND_Z = 0.003     # m above the cutlery grasp site
-CUTLERY_DESCEND_SQUARE = False   # square the descent only, never the carry
+# ADOPTED 2026-09-09T03:00Z.  A/B'd through scripts/eval_seeds.py -- the
+# evaluator every published figure comes from -- against the shipped cell on the
+# same 10 seeds: 15/50 -> 18/50 sub-goals, fork_placed 0/10 -> 3/10, hand-off
+# seeds 10/10 unchanged, task_success 0/10 unchanged.  These FOUR knobs are one
+# cell (measure_cutlery_square.py SQUARE_MODES['all'] = (True, True, False)) and
+# must move together: with CUTLERY_DESCEND_SQUARE left at False the other three
+# score 15/50, fork 0/10 and drop hand-offs to 8/10 -- measured, run B.
+CUTLERY_DESCEND_SQUARE = True    # square the descent; the carry stays unsquared
 # The approach VECTOR for the cutlery, in world metres, offset from the grasp
 # site.  ``_pick``'s own docstring says this argument is a vector "because the
 # cutlery starts under the cabinet's own top panel: straight down onto it is a
@@ -743,9 +750,10 @@ CUTLERY_APPROACH = (0.0, 0.0, 0.075)
 # ``plan_pose`` puts the jaw MEETING POINT on the target and that point moves
 # along the hand when the jaws open, so the jaws that go down are not the jaws
 # the solver placed.  See ``scripts/measure_gripper_envelope.py``.  The shipped
-# values emit exactly the moves they always did.
-CUTLERY_DESCEND_OPENING = GRIPPER_NARROW
-CUTLERY_PLAN_AT_OPEN = False
+# values were BOTH moved on 2026-09-09: opening 0.45 -> 0.60 and plan_at_open
+# False -> True, as two of the four knobs in the adopted cell.
+CUTLERY_DESCEND_OPENING = 0.60
+CUTLERY_PLAN_AT_OPEN = True
 
 # Whether the cutlery pick is solved by ``plan_pose_squared`` -- the solver that
 # puts the jaw CLOSING AXIS where it was asked -- rather than by ``plan_pose``,
@@ -758,9 +766,9 @@ CUTLERY_PLAN_AT_OPEN = False
 # ``measure_fork_descent`` swept it at the shipped opening and the shipped
 # ``plan_at``, and ``measure_cutlery_zcross``'s 24 cells are descent height x
 # ``plan_at_open`` x opening with the squared solver OFF in every one of them.
-# ``scripts/measure_cutlery_square.py`` crosses it.  False is the shipped
-# behaviour and emits exactly the moves it always did.
-CUTLERY_SQUARE = False
+# ``scripts/measure_cutlery_square.py`` crosses it.  ADOPTED True 2026-09-09;
+# see the block above CUTLERY_DESCEND_SQUARE for the A/B that moved it.
+CUTLERY_SQUARE = True
 
 # The same solver, at the OTHER end of the cutlery pipeline.  ``_handoff``'s
 # ``square`` reaches the taker's ``_take_above`` and ``_take`` -- the moves that

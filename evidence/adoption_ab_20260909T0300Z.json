@@ -1,0 +1,316 @@
+{
+ "probe": "A/B of the squared-cutlery adoption through scripts/eval_seeds.py",
+ "measured_at": "2026-09-09T03:00Z",
+ "measured_by": "unattended cron tick 2026-09-09T03:00Z",
+ "repo_head_at_measurement": "a7ecf78e4525f4179026710448c14791b4adc7f9",
+ "question": "manifest.next_step (tick 2026-09-09T02:00Z) instructs: 'ADOPT THE SQUARED CUTLERY PICK ... CUTLERY_SQUARE True, CUTLERY_PLAN_AT_OPEN True, CUTLERY_DESCEND_OPENING 0.60. Three constants'. Does that recipe reproduce the 18/50 the sweep measured, in the evaluator every published figure comes from?",
+ "answer": "NO. The recipe as written scores 15/50 with fork 0/10 -- identical to the shipped total and WORSE on hand-offs (8/10 against the shipped 10/10). The sweep's winning cell has square_mode='all', and scripts/measure_cutlery_square.py:79 defines SQUARE_MODES['all'] = (True, True, False), so it also sets CUTLERY_DESCEND_SQUARE=True. With that FOURTH constant included the cell reproduces exactly: 18/50, fork 3/10, and the same three seeds.",
+ "conditions_held_equal": "Same evaluator (scripts/eval_seeds.py), same 10 seeds, same scorer (envs/task.py, never routed through the scene source), same episode length, same privileged scene source. Only the controller constants differ. Run A reproduces evidence/eval_seeds_scripted.json as it stood at a7ecf78 seed-for-seed, which is what makes the other two attributable.",
+ "runs": {
+  "A_shipped_control": {
+   "evidence_file": "eval_A_baseline_20260909T0300Z.json",
+   "sha256": "f849f89d0f0f2fa9870dcd6501915ea8155765c0b62e014651793320cfc41009",
+   "scene_source": "privileged",
+   "seeds": 10,
+   "all_episodes_valid_and_stable": true,
+   "subgoals_total": 15,
+   "subgoals_per_seed": [
+    2,
+    1,
+    1,
+    2,
+    2,
+    1,
+    1,
+    1,
+    2,
+    2
+   ],
+   "by_subgoal": {
+    "drawer_open": 10,
+    "fork_placed": 0,
+    "spoon_placed": 0,
+    "plate_placed": 4,
+    "mug_placed": 1
+   },
+   "fork_placed_per_seed": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "task_success_count": 0,
+   "n_handoff_seeds": 10,
+   "handoff_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "B_recipe_as_written": {
+   "evidence_file": "eval_B_squared_20260909T0300Z.json",
+   "sha256": "f81d26cdf6f03a65c0d59e9527480dd406fa8616ebe03843d85eb7df916ea6aa",
+   "scene_source": "privileged",
+   "seeds": 10,
+   "all_episodes_valid_and_stable": true,
+   "subgoals_total": 15,
+   "subgoals_per_seed": [
+    2,
+    1,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3,
+    2
+   ],
+   "by_subgoal": {
+    "drawer_open": 10,
+    "fork_placed": 0,
+    "spoon_placed": 0,
+    "plate_placed": 4,
+    "mug_placed": 1
+   },
+   "fork_placed_per_seed": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "task_success_count": 0,
+   "n_handoff_seeds": 8,
+   "handoff_seeds": [
+    0,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "C_square_mode_all": {
+   "evidence_file": "eval_C_squareall_20260909T0300Z.json",
+   "sha256": "ff63787f6839249812c4d6b37ff81119ce21996d205b302a1c1e765cb88cbc1c",
+   "scene_source": "privileged",
+   "seeds": 10,
+   "all_episodes_valid_and_stable": true,
+   "subgoals_total": 18,
+   "subgoals_per_seed": [
+    3,
+    2,
+    3,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2
+   ],
+   "by_subgoal": {
+    "drawer_open": 10,
+    "fork_placed": 3,
+    "spoon_placed": 0,
+    "plate_placed": 4,
+    "mug_placed": 1
+   },
+   "fork_placed_per_seed": [
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    true
+   ],
+   "task_success_count": 0,
+   "n_handoff_seeds": 10,
+   "handoff_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "C_perceived": {
+   "evidence_file": "eval_C_perceived_20260909T0300Z.json",
+   "sha256": "ab1c3fabc26a119673993dbf74125e5fe0d3c44ea37b267713e849c2c3759e19",
+   "scene_source": "perceived",
+   "seeds": 10,
+   "all_episodes_valid_and_stable": true,
+   "subgoals_total": 9,
+   "subgoals_per_seed": [
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "by_subgoal": {
+    "drawer_open": 9,
+    "fork_placed": 0,
+    "spoon_placed": 0,
+    "plate_placed": 0,
+    "mug_placed": 0
+   },
+   "fork_placed_per_seed": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "task_success_count": 0,
+   "n_handoff_seeds": 10,
+   "handoff_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "C_blind": {
+   "evidence_file": "eval_C_blind_20260909T0300Z.json",
+   "sha256": "500cd4bf5f14df24cb0d706ea58fca2db28d010abcc4b2dd2020eba3748aee60",
+   "scene_source": "blind",
+   "seeds": 10,
+   "all_episodes_valid_and_stable": true,
+   "subgoals_total": 5,
+   "subgoals_per_seed": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1
+   ],
+   "by_subgoal": {
+    "drawer_open": 5,
+    "fork_placed": 0,
+    "spoon_placed": 0,
+    "plate_placed": 0,
+    "mug_placed": 0
+   },
+   "fork_placed_per_seed": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "task_success_count": 0,
+   "n_handoff_seeds": 5,
+   "handoff_seeds": [
+    1,
+    3,
+    4,
+    7,
+    8
+   ]
+  }
+ },
+ "cross_harness": {
+  "sweep_best_cell": {
+   "square_mode": "all",
+   "descend_z_mm": 3.0,
+   "steps": 1,
+   "aim_body": false,
+   "plan_at_open": true,
+   "opening": 0.6,
+   "opening_rad_effective": 0.6,
+   "shipped": false,
+   "n": 10,
+   "fork_placed": 3,
+   "spoon_placed": 0,
+   "plate_placed": 4,
+   "mug_placed": 1,
+   "task_success": 0,
+   "subgoals_met_total": 18,
+   "fork_jaw_axis_abs_z_median": 0.17,
+   "spoon_jaw_axis_abs_z_median": 0.1,
+   "fork_stall_mm_median": 6.1,
+   "spoon_stall_mm_median": 5.3,
+   "fork_lift_mm_median": 118.8,
+   "spoon_lift_mm_median": 0.15,
+   "fork_top_contact": "geom115 | drawer_floor"
+  },
+  "sweep_fork_placed_per_seed": [
+   false,
+   false,
+   true,
+   false,
+   false,
+   false,
+   false,
+   true,
+   false,
+   true
+  ],
+  "fork_placed_per_seed_agree": true,
+  "subgoal_total_agree": true,
+  "reading": "The sweep and the repository's own evaluator agree seed-for-seed on the adopted cell. The sweep was right; the three-constant transcription of it was not."
+ },
+ "against_us": [
+  "The perceived scene source REGRESSES. privileged 15->18 but perceived 12->9 and blind 9->5, so the share of the privileged score that survives putting perception in the loop falls from 12/15 to 9/18. The ordering the repository needs -- privileged > perceived > blind -- still holds and the gap widens, but the retention story is worse, and criterion T2 (VLA / Multi-Modal Reasoning, 20 points) leans on it. Reported, not buried.",
+  "The subgoal total moves 15 -> 18, which is inside the sweep's own 24-cell spread (12-19, sd 1.5). The TOTAL is reported, not claimed. The categorical result is the claim: fork_placed is 0 in all 24 unsquared cells and is 3/10 here, on the same three seeds in both harnesses.",
+  "task_success is still 0/10 and spoon_placed is still 0/10. The required row req_demo_video asks for successful task execution across 10 seeds and this is not that. The row does not reach READY.",
+  "Of the 10 seeds the fork is lifted clear on 7 (118-123 mm); seeds 0, 1 and 6 do not lift it (2.8, 5.8, 0.0 mm). Of the 7 that lift, 3 place inside the 45 mm tolerance and 4 miss."
+ ]
+}

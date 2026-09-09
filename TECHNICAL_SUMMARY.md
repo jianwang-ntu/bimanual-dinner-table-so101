@@ -14,7 +14,7 @@ disagree, so a stale figure here is a red suite rather than a reader's problem.
 
 | The rubric asks for | This entry has |
 |---|---|
-| End-to-end dinner-table task, two arms | **15 / 50** sub-goals over 10 seeds; task success **0 / 10** |
+| End-to-end dinner-table task, two arms | **18 / 50** sub-goals over 10 seeds; task success **0 / 10** |
 | A VLA / multi-modal policy | **nothing.** No VLA, no VLM, no learned policy, no language input |
 | OpenVINO on Intel Core Ultra Series 2/3 | OpenVINO yes, measured; **Core Ultra silicon: none, and none claimed** |
 
@@ -104,10 +104,16 @@ What exists instead, and what it is worth:
 - **`envs/scene_source.py` — the seam that puts it in the loop.** This is what
   changed: the CNN is no longer beside the controller, it can be inside it.
   Running the same scripted controller and the same scorer over the same ten
-  seeds with `--scene perceived` gives **12 / 50** sub-goals with perception in
-  the loop, against 15 / 50 privileged and **9 / 50** for the blind negative
-  control. It took **1,067** inferences to do it, and the view it planned from
-  was wrong by **2.94 mm** at t=0 and **60.48 mm** averaged over every planning
+  seeds with `--scene perceived` gives **9 / 50** sub-goals with perception in
+  the loop, against 18 / 50 privileged and **5 / 50** for the blind negative
+  control. Stated against us: that ratio got WORSE on 2026-09-09, not better —
+  before the squared-cutlery adoption it was 12 / 50 against 15 / 50, and the
+  perceived path placed the plate on 3 seeds. It now places nothing at all and
+  scores only `drawer_open`, 9 / 10. The ordering the control needs — privileged
+  above perceived above blind — still holds and the gap is wider, but the honest
+  reading is that squaring the jaw axis buys privileged accuracy and spends
+  tolerance to pose error, and the perceived path is where that is paid. It took **1,059** inferences to do it, and the view it planned from
+  was wrong by **2.94 mm** at t=0 and **80.14 mm** averaged over every planning
   instant.
 - So T2's *visual observation* is now on the scored path and can be priced.
   Its other three demands — natural-language instructions, multi-step task
@@ -121,7 +127,7 @@ What exists instead, and what it is worth:
   50, 25 actions per query — behaviour-cloned on 35 rollouts of the scripted
   controller on seeds 3000–3034 and validated on 3035–3039. Closed-loop over the
   same ten evaluation seeds and the same untouched scorer it reaches **3 / 50
-  sub-goals against the scripted controller's 15 / 50**, with 242.8 simulator
+  sub-goals against the scripted controller's 18 / 50**, with 242.8 simulator
   seconds per episode against the script's 206.2 — more time, not less. It opens
   the drawer on seeds 5 and 7 and places the plate on seed 4, and does nothing
   else on any seed. Section 4 has the training detail and section 8 keeps the
@@ -166,10 +172,10 @@ measurement:
 |---|---|---|
 | `drawer_open` | **10 / 10** | 0 |
 | `plate_placed` | **4 / 10** | 0 |
-| `fork_placed` | **0 / 10** | 0 |
+| `fork_placed` | **3 / 10** | 0 |
 | `spoon_placed` | **0 / 10** | 0 |
 | `mug_placed` | **1 / 10** | 0 |
-| total | **15 / 50** | **0 / 50** |
+| total | **18 / 50** | **0 / 50** |
 | task success | **0 / 10** | 0 / 10 |
 
 Both arms touch a manipulable object on **10 / 10** seeds. `handoff_occurred`
@@ -219,7 +225,7 @@ than the script it was cloned from.**
 | Schedule | **6,000** steps, batch 128, AdamW at lr 1e-4, L1 + KL(β=10) as LeRobot's ACT defines it, seed 0 |
 | Cost | **286.5 s** on one NVIDIA L40S |
 | Held-out L1 | **0.167** normalized action units, against **0.810** for the same architecture with random weights |
-| Closed-loop | **3 / 50** sub-goals over the ten evaluation seeds against the scripted controller's **15 / 50**; task success **0 / 10** |
+| Closed-loop | **3 / 50** sub-goals over the ten evaluation seeds against the scripted controller's **18 / 50**; task success **0 / 10** |
 | Controls | `scripts/test_act_policy.py`, **19/19**, every accept paired with a reject |
 
 The demonstrator is the scripted controller, which itself scores 54 sub-goals of
@@ -320,23 +326,30 @@ controller, same seeds, same scorer — only `--scene` changes:
 
 | what the controller reads | total | `drawer_open` | `plate_placed` | `mug_placed` |
 |---|---|---|---|---|
-| `privileged` — MjData | **15 / 50** | 10 / 10 | 4 / 10 | 1 / 10 |
-| `perceived` — one `top_cam` frame per planning instant, through the IR | **12 / 50** sub-goals with perception in the loop | 9 / 10 | 3 / 10 | 0 / 10 |
-| `blind` — the nominal, un-randomized layout | **9 / 50** for the blind negative control | 9 / 10 | 0 / 10 | 0 / 10 |
+| `privileged` — MjData | **18 / 50** | 10 / 10 | 4 / 10 | 1 / 10 |
+| `perceived` — one `top_cam` frame per planning instant, through the IR | **9 / 50** sub-goals with perception in the loop | 9 / 10 | 0 / 10 | 0 / 10 |
+| `blind` — the nominal, un-randomized layout | **5 / 50** for the blind negative control | 5 / 10 | 0 / 10 | 0 / 10 |
+
+Re-measured 2026-09-09T03:00Z against the adopted squared-cutlery controller.
+The privileged column also carries `fork_placed` **3 / 10**, the first cutlery
+this entry has ever placed; the perceived and blind columns carry 0 / 10 for it.
+Both non-privileged columns fell (12 → 9 and 9 → 5) while privileged rose
+15 → 18. That is a real cost and it is not netted off anywhere in this
+document.
 
 The blind row is why the other two mean anything: if the controller ignored
 what the scene source handed it, all three rows would be identical. They are
 not, so the seam is load-bearing.
 
 The failure is legible rather than diffuse. The perceived view was wrong by
-**2.94 mm** at t=0 and **60.48 mm** averaged over every planning instant — and that average is not spread evenly.
+**2.94 mm** at t=0 and **80.14 mm** averaged over every planning instant — and that average is not spread evenly.
 The drawer, which nothing occludes, is estimated to 1.8 mm and `drawer_open`
 survives almost intact. The plate, which spends most of the episode underneath
 the arm that is dragging it, is estimated to 53 mm, and `plate_placed` is the
 sub-goal that falls. The model is being asked about an object it cannot see,
 and the cost lands exactly where that is true.
 
-Both perception runs use FP32. **1,067** inferences were made across the ten
+Both perception runs use FP32. **1,059** inferences were made across the ten
 episodes, one per planning instant, not one per physics step.
 
 **Verification.** `scripts/verify_scene.py` **16 / 16** structural and physical
@@ -424,7 +437,7 @@ Stated here in one place so no reader has to infer it:
 1. **No VLA, no VLM, no language conditioning.** There *is* a learned policy
    since 2026-09-05 — an imitation-learning ACT, section 4a — but it consumes
    no language and no image, and it is **five times worse than the scripted
-   controller** (3 / 50 against 15 / 50), so nothing this document quotes as a
+   controller** (3 / 50 against 18 / 50), so nothing this document quotes as a
    headline comes from it. Of T2's four demands, only *visual observation* is on
    the scored path; natural language, multi-step task context and plan
    adaptation score zero.
@@ -512,8 +525,11 @@ limits it.
 
 **None of this is a near miss.** Across all eight approach variants the fork's
 median peak lift off the drawer floor is 0.0–0.2 mm: it is never picked up at
-all. And no variant of any of the four sweeps beats the shipped 15 / 50, so
-there is no withheld gain here — the shipped setting is the best of the 40.
+all. And no variant of any of the FOUR sweeps this section covers beats the
+15 / 50 those sweeps were run against — there was no withheld gain in them.
+That sentence is scoped to those four deliberately: a FIFTH sweep,
+`measure_cutlery_square.py`, later found a cell that does beat it, and that cell
+is what the controller now ships. See "Adopted 2026-09-09" below.
 
 What that leaves is stated rather than hidden: the arm arrives roughly 7 mm
 above a 5 mm handle it has to close around, and no change to *how the arm gets
@@ -649,7 +665,9 @@ nothing. The largest median lift in any of the eight cells is 2.3 mm against
 the 85 mm the `fork_lift` move asks for, so no cell is a near miss either.
 
 **Stated against us:** one cell scores **18/50** against the shipped 15/50. It
-is *not* adopted and *not* claimed as a gain. Its whole advantage is
+is *not* adopted and *not* claimed as a gain — *as of this section's own date;
+a later and different cell was adopted on 2026-09-09, see section 8d, and it is
+not this one: every cell in the table above places 0/10 cutlery.* Its whole advantage is
 `plate_placed` 4→7; cutlery is 0/10 in every cell, and the plate count across
 the eight cells spans 3–7 for a knob that edits only the two cutlery descend
 moves, so 7 sits inside the spread of an incidental effect on a 10-seed sample
@@ -742,7 +760,9 @@ because the hand hangs less there — it succeeds because its grasp point stands
 
 **What this does and does not license.** It is not a fix and no fix was
 attempted: `envs/` is untouched and every published figure — fork 0/10, spoon
-0/10, task_success 0/10, 15/50 — still stands and is still true. The gripper is
+0/10, task_success 0/10, 15/50 — still stands and is still true *as of this
+section's date.* Section 8d supersedes the fork and total figures on
+2026-09-09; the spoon and task_success figures are unchanged by it. The gripper is
 the real SO-101 and its geometry is `third_party/`; reshaping it to win would
 misrepresent the hardware this track is about. The 2.5 mm is **ours**:
 `envs/dinner_table.py` lays the cutlery flat on a bare drawer floor, and a real
@@ -751,6 +771,116 @@ the feature above the hand's drop — and it would invalidate the 15/50 headline
 every cutlery figure, the demo video, the cover image and the slides, all of
 which would have to be re-measured and re-recorded. It is a rebuild, not a fix,
 and it is not this agent's call to make by default.
+
+## 8d. Adopted 2026-09-09: squaring the cutlery pick, and the recipe that was wrong
+
+Section 8c named a cause and did not fix it. `measure_cutlery_square.py` crossed
+the axis the nine earlier probes never did — whether the cutlery pick is solved
+by `plan_pose_squared`, which puts the jaw CLOSING AXIS where it was asked,
+rather than by `plan_pose`, which constrains three numbers on a five-joint arm
+and lets the orientation fall out of the damped-least-squares step. 48 cells,
+10 seeds, 480 rollouts, the shipped cell carried inside the grid.
+
+The separation is on that one axis and it is categorical, not marginal:
+
+| | cells | cells that place cutlery | fork jaw axis \|z\| | best arrival |
+|---|---|---|---|---|
+| unsquared | 24 | **0** | 0.66–0.80 | 21.1 mm |
+| squared | 24 | **10** | 0.14–0.22 | **1.4 mm** |
+
+**What ships now.** Four constants, one cell, and they move together:
+
+```python
+CUTLERY_SQUARE          = True     # was False
+CUTLERY_DESCEND_SQUARE  = True     # was False
+CUTLERY_PLAN_AT_OPEN    = True     # was False
+CUTLERY_DESCEND_OPENING = 0.60     # was GRIPPER_NARROW (0.45)
+```
+
+`CUTLERY_DESCEND_Z` stays 0.003, `CUTLERY_DESCEND_STEPS` stays 1,
+`CUTLERY_HANDOFF_SQUARE` and `CUTLERY_PLACE_AIM_BODY` stay False — this file
+measured the last two as losses.
+
+| | shipped before | adopted | delta |
+|---|---|---|---|
+| sub-goals, privileged | 15 / 50 | **18 / 50** | +3 |
+| `fork_placed` | 0 / 10 | **3 / 10** | first cutlery this entry has ever placed |
+| `spoon_placed` | 0 / 10 | 0 / 10 | — |
+| `plate_placed` | 4 / 10 | 4 / 10 | — |
+| `mug_placed` | 1 / 10 | 1 / 10 | — |
+| `task_success` | 0 / 10 | **0 / 10** | unchanged, and still the honest headline |
+| hand-off seeds | 10 / 10 | 10 / 10 | — |
+| sub-goals, perceived | 12 / 50 | **9 / 50** | **−3, against us** |
+| sub-goals, blind | 9 / 50 | **5 / 50** | −4 |
+
+**The recipe that was wrong, kept because it is the more useful half.** The
+adoption instruction carried into this tick named **three** constants —
+`CUTLERY_SQUARE`, `CUTLERY_PLAN_AT_OPEN`, `CUTLERY_DESCEND_OPENING` — and
+explicitly listed what should stay put, omitting `CUTLERY_DESCEND_SQUARE`. But
+the winning cell's `square_mode` is `"all"`, and
+`measure_cutlery_square.py:79` defines `SQUARE_MODES["all"] = (True, True,
+False)`. The recipe was a hand transcription of a machine result and it dropped
+one of the four knobs.
+
+That was measured before it was adopted, not after:
+
+| run | knobs | sub-goals | fork | hand-off seeds |
+|---|---|---|---|---|
+| A — shipped control | as at `a7ecf78` | 15 / 50 | 0 / 10 | 10 / 10 |
+| B — **the recipe as written** | three knobs | 15 / 50 | 0 / 10 | **8 / 10** |
+| C — `square_mode="all"` | four knobs | **18 / 50** | **3 / 10** | 10 / 10 |
+
+Run B is not merely no gain — it is a **regression**, dropping two hand-off
+seeds below the shipped control while reporting the same total. Run A
+reproduces `evidence/eval_seeds_scripted.json` as it stood at `a7ecf78`
+seed-for-seed, which is what makes B and C attributable to the knobs.
+
+All three ran through `scripts/eval_seeds.py` — the evaluator every published
+figure in this document comes from — and not through the sweep's own harness.
+That boundary is where the defect hid: the sweep was right, and the sentence
+written about it was not. On the adopted cell the two harnesses agree
+seed-for-seed on which seeds place the fork (2, 7 and 9).
+`evidence/adoption_ab_20260909T0300Z.json` carries all five runs.
+
+**Stated against us, four ways.**
+
+* The perceived scene source **regressed**. Privileged rose 15 → 18 while
+  perceived fell 12 → 9 and blind 9 → 5, so the share of the privileged score
+  that survives putting perception in the loop fell from 12/15 to 9/18. The
+  perceived path now places **nothing** — it scores `drawer_open` 9/10 and
+  nothing else, where it used to place the plate on 3 seeds. Squaring the jaw
+  axis constrains more of the arm and is therefore less tolerant of a wrong
+  pose estimate; the perceived path is where that is paid. Criterion T2 leans
+  on this number and it got worse.
+* The total 15 → 18 is inside the sweep's own 24-cell spread (12–19, sd 1.5),
+  and section 8c already recorded that this headline carries about ±2 sub-goals
+  of run-to-run sensitivity. **The total is reported, not claimed.** The claim
+  is the categorical one: `fork_placed` is 0 in all 24 unsquared cells and 3/10
+  here, on the same three seeds in both harnesses.
+* `task_success` is still **0 / 10** and `spoon_placed` is still **0 / 10**. The
+  task is not completed on any seed. Nothing in this section changes that, and
+  the demo video shows the failures on screen.
+* Of the 10 seeds the fork is lifted clear on 7 (118–123 mm); seeds 0, 1 and 6
+  do not lift it at all (2.8, 5.8, 0.0 mm). Of the 7 that lift, 3 place inside
+  the 45 mm tolerance and 4 miss by more. **The grasp is no longer the blocker;
+  the release is.**
+
+**Two corrections to the evidence this section rests on**, both found while
+A/B-ing it rather than by reading it back:
+
+1. `evidence/cutlery_square.json` carried a hand-authored `per_seed_best_cell`
+   block describing a *different* cell (`descend_z=0.006`, fork 2/10) from the
+   one `best_cell` selects (`descend_z=3.0 mm`, fork 3/10). The key appears in
+   no script — `grep -rn per_seed_best_cell scripts/ envs/` returns nothing —
+   so nothing wrote it and nothing read it. It has been re-derived from the 480
+   run rows already in the file; no rollout was re-run, and the superseded
+   block is kept verbatim beside the correction.
+2. `scripts/test_cutlery_square.py` passed **22/22** across both that
+   inconsistency and the three-knob recipe, because every one of its checks was
+   internal to the sweep's own grid. It now carries eight more that cross the
+   boundary the defect hid behind, and both failure modes were reproduced as
+   negative controls before the fix was accepted: the pre-fix evidence file
+   scores 27/30 and reverting either paired knob scores 28/30.
 
 ## 9. Reproducing every number in this document
 
