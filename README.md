@@ -131,10 +131,20 @@ is the table top.
 Two explanations were raised by this measurement and then refuted by it, kept
 here because they were raised:
 
-- The taker does **not** knock the fork out of the giver's jaws. Its jaw meeting
-  point never comes within **62.3 mm** of the fork anywhere in the hand-off.
-  (Its *links* are not instrumented, so a link collision is not excluded — only
-  the jaw one. That residual is open.)
+- ~~The taker does **not** knock the fork out of the giver's jaws. Its jaw
+  meeting point never comes within **62.3 mm** of the fork anywhere in the
+  hand-off.~~ **WITHDRAWN 2026-09-09 — this was measured at waypoint ENDS
+  only, and it is wrong at step resolution.** With every geom of both arms
+  instrumented (`scripts/measure_fork_knockout.py`, 18/18 checks, 15/15
+  mutants), the taker's jaw meeting point comes within **18.6 mm** of the fork
+  and taker bodies — `left_gripper`, `left_camera_mount` — are in contact with
+  it on **7 of 10** seeds. The residual this sentence flagged as open was the
+  thing that made it false.
+
+  A knock is still not the *mechanism*, for a different reason and one that
+  runs against the tidier story: seeds **4 and 8** carry the fork and lose it
+  with **no taker contact anywhere in the episode**. What actually happens is
+  in the next section.
 - The solver is **not** failing. The IK residual for the taker's two hand-off
   waypoints is **1.58–7.67 mm** on every seed. The pose is found; the arm does
   not get to it. At `fork_take_above`, with the fork still held aloft and
@@ -161,15 +171,27 @@ rest of the row before reading anything into it:
 - **The task has never been completed.** `task_success` is 0/10 and
   `in_order_prefix` is 1 on every seed — the drawer, and then the first gap.
   The plate is scored out of order, so it adds a point and no sequencing.
-- **Two of the four placements have never fired.** The fork and the spoon are
-  never picked out of the drawer — never even lifted off its floor, median peak
-  lift 0.0–0.2 mm. They fail for two *different* measured reasons: the fork has
-  a grasp pose that is collision-free and grips, and the arm never arrives at
-  it; the spoon has no such pose at all where the scene parks it. Six
-  explanations have been tested and falsified across 40 swept variants —
-  reach, jaw squaring, standoff, descent interpolation, approach direction and
-  moving the spoon — and the shipped setting is still the best of the 40. The
-  table is in `TECHNICAL_SUMMARY.md` §8a.
+- **One of the four placements has never fired, and the fork's 3/10 is not a
+  placement.** `spoon_placed` is 0/10 on every run this project has recorded.
+  `fork_placed` is 3/10: the picking arm does lift the fork clear of the drawer
+  on 7 of 10 seeds (`evidence/fork_knockout.json`,
+  `seeds_where_giver_lifted` = [2,3,4,5,7,8,9], reaching 887–900 mm against a
+  752.5 mm table), but the *placing* arm never holds it on any seed
+  (`evidence/fork_release.json`, `seeds_where_placer_ever_holds_the_fork` = []),
+  so what the scorer records on those three seeds is where a dropped fork came
+  to rest. They fail for two *different* measured reasons: the fork has a grasp
+  pose that is collision-free and grips, and the hand-off loses it; the spoon
+  has no such pose at all where the scene parks it. Six explanations have been
+  tested and falsified across 40 swept variants — reach, jaw squaring,
+  standoff, descent interpolation, approach direction and moving the spoon.
+  The table is in `TECHNICAL_SUMMARY.md` §8a.
+
+  > Corrected 2026-09-09T10:30Z. This bullet read "Two of the four placements
+  > have never fired … never even lifted off its floor, median peak lift
+  > 0.0–0.2 mm". Both halves were true at 15/50 and neither survived the
+  > `824e5ed` adoption. The correction makes the entry look *better* than the
+  > text it replaces, which is why it is dated and kept rather than quietly
+  > applied.
   The mug is gripped and lifted on 8 seeds of
   10 and reaches its mat on **1** — the only object other than the plate this
   entry has ever placed, and it arrives lying on its side (see below).
@@ -324,8 +346,8 @@ base on all ten. Its *length* and its *mass* are randomized — 6.5 mm and 0.85�
 of spread across the run — so this is a gap in placement only, and it is a gap
 against the track's own wording ("randomized object placement"). Closing it
 means jittering the cutlery inside the drawer and re-scoring; that has not been
-done, and until it is, `fork_placed` and `spoon_placed` are 0/10 against one
-fixed layout rather than ten. `scripts/test_randomization_coverage.py` reads
+done, and until it is, `fork_placed` 3/10 and `spoon_placed` 0/10 are scored
+against one fixed cutlery layout rather than ten. `scripts/test_randomization_coverage.py` reads
 both tables out of the randomizer and pins this.
 
 Placements are rejection-sampled against three conditions — inside an arm's

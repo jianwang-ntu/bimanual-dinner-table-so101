@@ -4,8 +4,8 @@
   "built_by": "scripts/make_demo_site.py",
   "built_at_head": "824e5ed",
   "page": "index.html",
-  "bytes": 13128,
-  "sha256": "3a57dcea7cff57ae6108a0662f3ba8511ff370ca1d95aa52b12dd774eff3de45",
+  "bytes": 13309,
+  "sha256": "083c8a37cc85ef00d317eae7eb65f6e0cf377db7de81d6be92341ac6efcd4b53",
   "figures_derived_from": [
     "evidence/eval_seeds_scripted.json",
     "evidence/eval_seeds_scripted_perceived.json",

@@ -152,6 +152,42 @@ def main() -> int:
     check(success == 0, "task success is still 0 in the evidence", str(success))
     check("Task success is %d of %d seeds" % (success, n) in page,
           "the page states the task-success count in its ledger")
+
+    # --- 6a. the ledger PROSE carries each object's own figure --------------
+    # Until 2026-09-09T10:30Z the page's table said `spoon_placed  0 / 10
+    # seeds` while the ledger two sections below said "The fork and the spoon
+    # are placed on 3 of 10 seeds".  Both shipped together and all 47 controls
+    # passed, because section 2 reads the TABLE and nothing read this prose.
+    # A control that only ever reads the surface which happens to be right
+    # cannot catch a claim made on the surface beside it.
+    placed = {g: sum(1 for ep in priv["episodes"] if ep["task"]["subgoals"][g])
+              for g in goals}
+    prose = ("The fork is placed on %d of %d seeds and the spoon on %d of %d"
+             % (placed["fork_placed"], n, placed["spoon_placed"], n))
+    check(prose in page,
+          "the ledger states the fork and the spoon figures separately",
+          "expected %r" % prose)
+    for label, (df, ds) in (("fork", (3, 0)), ("spoon", (0, 3))):
+        bad = ("The fork is placed on %d of %d seeds and the spoon on %d of %d"
+               % (placed["fork_placed"] + df, n, placed["spoon_placed"] + ds, n))
+        check(bad not in page,
+              "an inflated %s figure is not in the ledger [negative control]"
+              % label, "corrupted %r is absent" % bad)
+    check("fork and the spoon are placed on" not in page,
+          "the conflating fork/spoon sentence is gone",
+          "the exact defect string must not come back")
+
+    # The ledger's mechanism claim is checked against the probe that measured
+    # it, not quoted from the prose that states it.
+    rel = load("fork_release.json")
+    held = rel["summary"]["seeds_where_placer_ever_holds_the_fork"]
+    check(held == [], "the placing arm never holds the fork, in the evidence",
+          "seeds where it does: %s" % held)
+    check(bool(rel["controls"]["detector_can_say_yes"]["pass"]),
+          "that detector can return True at all [positive control]",
+          "the picker's own grasp is registered by the same test")
+    check("the placing arm never holds the fork on any seed" in page,
+          "the page states that the fork is not carried to where it scores")
     # This read `check("no learned policy" in page, ...)` until 2026-09-05,
     # when a LeRobot ACT policy was trained and the sentence it pinned became
     # false. A control that keeps a false sentence on the page is a control

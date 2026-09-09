@@ -18,9 +18,18 @@ disagree, so a stale figure here is a red suite rather than a reader's problem.
 | A VLA / multi-modal policy | **nothing.** No VLA, no VLM, no learned policy, no language input |
 | OpenVINO on Intel Core Ultra Series 2/3 | OpenVINO yes, measured; **Core Ultra silicon: none, and none claimed** |
 
-Three of the five sub-goals have never fired on any seed. The entry is a
-verified environment, a verified scorer, a scripted controller that earns two of
-five steps, and a perception model that is not yet in the loop.
+One of the five sub-goals — `spoon_placed` — has never fired on any seed, and
+the task has never been completed end to end: `task_success` is 0 / 10. The
+entry is a verified environment, a verified scorer, a scripted controller that
+scores 18 of 50 sub-goals over ten seeds (best 3 of 5 on a seed, mean 1.8), and
+a perception model that is not yet in the loop.
+
+> Corrected 2026-09-09T10:30Z. This paragraph read "Three of the five sub-goals
+> have never fired on any seed … a scripted controller that earns two of five
+> steps". That was written when the run scored 15 / 50 with `fork_placed`,
+> `spoon_placed` and `mug_placed` all at zero. The adoption at `824e5ed` moved
+> the headline figures and did not sweep the prose explaining them; the count
+> is now one, not three.
 
 ---
 
@@ -284,8 +293,8 @@ first needs a recompile; every draw is logged per episode):
 three bodies and `GRASPABLES` names five, so the cutlery starts in the drawer at
 the same x, y and yaw on every seed — 0.347 m and 0.387 m from the nearest arm
 base on all ten. Its length and mass are randomized; its pose is not. That is a
-gap against the criterion's own wording, and it means `fork_placed` and
-`spoon_placed` are 0/10 against one fixed layout rather than ten.
+gap against the criterion's own wording, and it means `fork_placed` 3/10 and
+`spoon_placed` 0/10 are scored against one fixed cutlery layout rather than ten.
 
 Placements are rejection-sampled against three conditions — inside an arm's
 reach, not overlapping another object, not blocking the drawer — so a failed
@@ -458,8 +467,8 @@ Stated here in one place so no reader has to infer it:
    for them. `envs/scene_source.py` lists every one of these.
 4. **No Intel Core Ultra measurement.** The benchmark script exists and runs;
    the required silicon does not exist here.
-5. **The task has never been completed.** Task success **0 / 10**; two of five
-   sub-goals have never fired; the one mug that reaches its mat arrives on its
+5. **The task has never been completed.** Task success **0 / 10**; one of five
+   sub-goals (`spoon_placed`) has never fired; the one mug that reaches its mat arrives on its
    side (upright cosine 0.000 against a 0.906 bar).
 6. The plate is dragged, not carried.
 7. **Mid-rollout perception is weak, and it is measured rather than hidden.**
@@ -467,17 +476,30 @@ Stated here in one place so no reader has to infer it:
    vision where the unoccluded splits are 19x. An object held in a gripper or
    hidden under an arm is not recoverable from a top-down frame by this model.
 
-### 8a. Why the fork and the spoon are 0 / 10
+### 8a. Why the spoon is 0 / 10 and the fork reaches only 3 / 10
 
-Item 5 above says two of five sub-goals have never fired. This is what has been
-measured about them, because "the manipulation is hard" is not a finding.
+Item 5 above says one of five sub-goals has never fired. This is what has been
+measured about the cutlery, because "the manipulation is hard" is not a finding.
 
-`fork_placed` and `spoon_placed` are **0 / 10 on every run this project has
-recorded** — 20 of the 50 sub-goals, and the reason `in_order_prefix` stops at 1
-on every seed, since `fork_placed` is second in `SUBGOAL_ORDER`. Both objects
-start on the floor of the drawer, whose own walls stand above them: front
-+40.5 mm, left side +26.5 mm, back +26.5 mm, swept out of the compiled model.
-Every route to either object is over that lip.
+`spoon_placed` is **0 / 10 on every run this project has recorded**.
+`fork_placed` is **3 / 10** in the shipped run and was 0 / 10 until the
+squared-cutlery cell was adopted at `824e5ed`. Together they are the reason
+`in_order_prefix` stops at 1 on every seed, since `fork_placed` is second in
+`SUBGOAL_ORDER` and is unmet on seven of ten. Both objects start on the floor
+of the drawer, whose own walls stand above them: front +40.5 mm, left side
++26.5 mm, back +26.5 mm, swept out of the compiled model. Every route to either
+object is over that lip.
+
+> Corrected 2026-09-09T10:30Z, and the correction is not in our favour twice
+> over. This section was headed "Why the fork and the spoon are 0 / 10" and
+> asserted both were "0 / 10 on every run this project has recorded — 20 of the
+> 50 sub-goals". The fork has scored 3 / 10 since `824e5ed`, so the sentence
+> understated the entry. It is corrected here because a document that
+> contradicts its own results table is wrong whichever way the error points.
+> What the 3 / 10 is *not* is a placement: `scripts/measure_fork_release.py`
+> records `seeds_where_placer_ever_holds_the_fork` as empty on all ten seeds,
+> so the scorer is recording where a dropped fork came to rest. See
+> "F-FORK-HANDOFF-001 — the fork is never carried to its target" below.
 
 **It is two different faults, not one.** `scripts/measure_grasp_feasibility.py`
 solves the grasp, teleports the arm onto the solved pose and runs MuJoCo's own
@@ -735,7 +757,7 @@ kinematic minimum drop over the same ten seeds of **19.03 mm**.
 
 | object | feature above its support | hand drop | predicted | observed |
 |---|---|---|---|---|
-| fork | 2.5 mm | 26.2 mm | not pinchable | **0/10**, never lifted |
+| fork | 2.5 mm | 26.2 mm | not pinchable | **0/10** and never lifted *when this rule was measured, 2026-09-08T23:30Z*; **3/10** and lifted on 7 of 10 seeds after the `824e5ed` adoption |
 | spoon | 2.5 mm | 26.2 mm | not pinchable | **0/10**, never lifted |
 | plate | 5.0 mm | 50.4 mm | not pinchable | never pinched — **hooked by the rim and dragged**, exactly as section 8 item 6 reports |
 | mug | 90.0 mm | 35.4 mm | **pinchable** | **gripped 8/10**, placed 1/10 |
@@ -963,7 +985,7 @@ sweep.
 | fork height from `fork_take` onward | **752.5 mm** on every seed that left the drawer — the table top |
 | `_place(target_fork)` gripper state | **empty, 10 / 10 seeds, every waypoint** |
 | jaw-meeting-point error at `target_fork_down` | **0.9–4.4 mm on 6 of 10** — the empty jaws arrive |
-| taker's closest approach to the fork, whole hand-off | **62.3 mm** |
+| taker's closest approach to the fork, hand-off **waypoint ends** | 62.3 mm — *superseded; 18.6 mm at step resolution, §8.x* |
 | taker IK residual at its two hand-off waypoints | **1.58–7.67 mm** |
 
 The right arm picks the fork out of the drawer and holds it 4.5–5.0 mm from its
@@ -984,10 +1006,20 @@ the mechanism behind it is.
 Two hypotheses this tick raised and its own data refuted, kept because they
 were raised:
 
-1. **The taker knocks it out.** Refuted for the jaws: the taker's meeting point
-   never comes within 62.3 mm of the fork at any hand-off waypoint on any seed.
-   Its *links* are not instrumented, so a link collision remains open — stated
-   as a residual, not resolved in our favour.
+1. **The taker knocks it out.** ~~Refuted for the jaws: the taker's meeting
+   point never comes within 62.3 mm of the fork at any hand-off waypoint on any
+   seed.~~ **THIS REFUTATION IS WITHDRAWN, 2026-09-09.** 62.3 mm is the minimum
+   over hand-off *waypoint ends*, which is every twelfth of a second at best;
+   the taker crosses the intervening distance between samples. Measured at every
+   simulator step with all 48 geoms per arm instrumented rather than the 23 that
+   carry "gripper" or "jaw" in a body name, the taker's meeting point reaches
+   **18.6 mm** and taker bodies touch the fork on **7 of 10 seeds**. The residual
+   that sentence recorded — "its links are not instrumented" — is exactly what
+   made it wrong, and it is corrected here rather than quietly dropped.
+
+   A knock is nonetheless **not** the mechanism, and the reason is a fact that
+   would have been easier to leave out: seeds 4 and 8 carry the fork and lose it
+   with no taker contact anywhere in the episode.
 2. **The solver cannot find the pose.** Refuted: the residual is 1.58–7.67 mm at
    both `fork_take_above` and `fork_take`, on all ten seeds. The pose is solved
    and the arm does not reach it — at `fork_take_above`, with the fork still

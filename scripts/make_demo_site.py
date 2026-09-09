@@ -159,8 +159,22 @@ def collect() -> dict:
         "not_working": [
             "Task success is 0 of %d seeds. No episode completes the whole instruction."
             % len(episodes),
-            "The fork and the spoon are placed on %d of %d seeds -- the perception "
-            "network has no output for either object." % (placed["fork_placed"], len(episodes)),
+            # Until 2026-09-09T10:30Z this read "The fork and the spoon are
+            # placed on %d of %d seeds" and substituted ONLY
+            # placed["fork_placed"].  The spoon is placed on 0 of 10 and the
+            # sentence therefore said 3 -- an over-claim sitting inside the
+            # ledger whose entire job is to state what is NOT built.  It
+            # shipped under 47/47 passing controls because every placement
+            # control read the TABLE row and nothing read this prose.  Each
+            # object now carries its own figure, and test_demo_site.py checks
+            # the prose against the evidence, both directions.
+            "The fork is placed on %d of %d seeds and the spoon on %d of %d -- "
+            "the perception network has no output for either object. On the "
+            "seeds the fork scores, it is not carried there: the placing arm "
+            "never holds the fork on any seed, and what the scorer records is "
+            "where a dropped fork came to rest."
+            % (placed["fork_placed"], len(episodes),
+               placed["spoon_placed"], len(episodes)),
             "The mug reaches its mat on %d of %d seeds, and on the seed it does it "
             "arrives lying on its side." % (placed["mug_placed"], len(episodes)),
             "The learned policy loses to the script. A LeRobot ACT policy "

@@ -343,8 +343,22 @@ def main() -> int:
                     inflated_task_success(inflated, successes, seeds)),
                 f"'{successes} / {seeds}' -> '{seeds} / {seeds}' is caught")
 
-    idx = text.lower().find("never been completed")
-    stripped = text[:idx] + text[idx + len("never been completed"):]
+    # Every occurrence must go, not just the first.  On 2026-09-09 a correction
+    # to the opening summary added a second "never been completed" and this
+    # control went red -- not because the document lost the statement, but
+    # because deleting one of two copies is no longer a mutation.  A mutation
+    # control that a later true edit can silently defuse is asserting its own
+    # convenience, so the removal is now total.
+    lowered, stripped, cursor = text.lower(), [], 0
+    while True:
+        idx = lowered.find("never been completed", cursor)
+        if idx < 0:
+            break
+        stripped.append(text[cursor:idx])
+        cursor = idx + len("never been completed")
+    stripped.append(text[cursor:])
+    stripped = "".join(stripped)
+    assert "never been completed" not in stripped.lower()
     ok &= check("reject_a_deleted_absence_passes",
                 bool(missing_absences(stripped, e)),
                 f"deleting the completion statement is caught: "

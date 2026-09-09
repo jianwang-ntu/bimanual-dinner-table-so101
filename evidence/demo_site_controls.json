@@ -1,7 +1,7 @@
 {
   "schema": "demo_site_controls/v1",
-  "passed": 47,
-  "total": 47,
+  "passed": 54,
+  "total": 54,
   "all_pass": true,
   "controls": [
     {
@@ -190,6 +190,41 @@
       "detail": ""
     },
     {
+      "name": "the ledger states the fork and the spoon figures separately",
+      "ok": true,
+      "detail": "expected 'The fork is placed on 3 of 10 seeds and the spoon on 0 of 10'"
+    },
+    {
+      "name": "an inflated fork figure is not in the ledger [negative control]",
+      "ok": true,
+      "detail": "corrupted 'The fork is placed on 6 of 10 seeds and the spoon on 0 of 10' is absent"
+    },
+    {
+      "name": "an inflated spoon figure is not in the ledger [negative control]",
+      "ok": true,
+      "detail": "corrupted 'The fork is placed on 3 of 10 seeds and the spoon on 3 of 10' is absent"
+    },
+    {
+      "name": "the conflating fork/spoon sentence is gone",
+      "ok": true,
+      "detail": "the exact defect string must not come back"
+    },
+    {
+      "name": "the placing arm never holds the fork, in the evidence",
+      "ok": true,
+      "detail": "seeds where it does: []"
+    },
+    {
+      "name": "that detector can return True at all [positive control]",
+      "ok": true,
+      "detail": "the picker's own grasp is registered by the same test"
+    },
+    {
+      "name": "the page states that the fork is not carried to where it scores",
+      "ok": true,
+      "detail": ""
+    },
+    {
       "name": "the learned policy really is worse than the script in the evidence",
       "ok": true,
       "detail": "ACT 3 of 50 against scripted 18 of 50"
@@ -232,12 +267,12 @@
     {
       "name": "a fresh build is byte-identical to the shipped page",
       "ok": true,
-      "detail": "3a57dcea7cff vs 3a57dcea7cff"
+      "detail": "083c8a37cc85 vs 083c8a37cc85"
     },
     {
       "name": "evidence/demo_site.json pins the shipped bytes",
       "ok": true,
-      "detail": "3a57dcea7cff vs 3a57dcea7cff"
+      "detail": "083c8a37cc85 vs 083c8a37cc85"
     }
   ]
 }

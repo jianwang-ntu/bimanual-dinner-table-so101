@@ -14,3 +14,6 @@ data/*.npz
 # demonstrations it was trained on ARE committed (data/demos/), so
 # `python3 scripts/train_act.py` rebuilds it from a clean clone.
 models/act_policy.pt
+
+# dated workspace backups -- local only, never part of the entry
+*.bak.*
