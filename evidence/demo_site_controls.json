@@ -267,12 +267,12 @@
     {
       "name": "a fresh build is byte-identical to the shipped page",
       "ok": true,
-      "detail": "9d140d17f858 vs 9d140d17f858"
+      "detail": "ce6a6d38a592 vs ce6a6d38a592"
     },
     {
       "name": "evidence/demo_site.json pins the shipped bytes",
       "ok": true,
-      "detail": "9d140d17f858 vs 9d140d17f858"
+      "detail": "ce6a6d38a592 vs ce6a6d38a592"
     }
   ]
 }

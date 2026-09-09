@@ -996,6 +996,21 @@ seed 3's plate.** Seed 3 is fragile to any perturbation of the late episode, so
 "seed 3 gained" is on its own worth nothing. What distinguishes this change is
 that the block it removes can be watched not running.
 
+**Suite state at this change, stated in full.** 21 of the 23 `scripts/test_*.py`
+suites are green: `test_technical_summary` 11/11, `test_demo_site` 54/54,
+`test_video` 38/38, `test_cover_image` 14/14, `test_slides` 12/12,
+`test_task_predicates` 11/11, `test_application_url` 12/12,
+`test_plate_lookback` 12/12, and the rest. Two are red and **neither is caused
+by this change**: `test_act_policy` fails at import with
+`ModuleNotFoundError: av` — a missing dependency in this environment, not a
+result — and `test_take_waypoint` scores 24/25 on a check that wants two
+`_handoff` call sites threaded and finds one, reproduced identically against a
+clean `HEAD` checkout before this change was made. `test_application_url` was
+briefly red immediately after the push and cleared on its own once GitHub Pages
+finished building the commit: that suite compares the *hosted* bytes against the
+*committed* bytes, so it is expected to fail for the minute between `git push`
+and `status=built`.
+
 `scripts/test_plate_lookback.py` pins all of it, 12/12, and goes red at the old
 value: `PLATE_FINAL_TOL=0.028` fails `thresholds_are_distinct` and
 `reject_scoring_plate_does_not_trigger_final_lookback` and exits 1. It exercises
