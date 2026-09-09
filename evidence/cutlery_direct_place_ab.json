@@ -1,0 +1,394 @@
+{
+ "probe": "cutlery direct-place A/B, unattended cron tick 2026-09-09T21:00Z",
+ "finding_id": "F-AIS-CUTLERY-HANDOFF-PREMISE-001",
+ "question": "The cutlery hand-off exists because the script says each item 'starts on the far side of the table from its target'. Is that true, and does removing the transfer place the cutlery?",
+ "job": "lablab:ai-infra-summit-hackathon",
+ "row_under_test": "req_demo_video (DRAFT) -- its stated blocker is task_success 0/10, whose largest missing component is cutlery placement",
+ "the_premise_is_false_on_reach": {
+  "basis": "envs/dinner_table.xml site and body positions, read from the shipped scene; distances are planar base-to-target",
+  "right_base_to_fork_start_m": 0.387,
+  "right_base_to_target_fork_m": 0.319,
+  "left_base_to_spoon_start_m": 0.347,
+  "left_base_to_target_spoon_m": 0.319,
+  "reading": "Each picking arm is asked to reach a point 27-67 mm INSIDE the radius at which it already performs the pick on the same episode. Nothing about reach requires the transfer.",
+  "note": "This refutes the stated PREMISE. It does not by itself say the transfer is harmful; the arms below measure that."
+ },
+ "why_the_transfer_fails_prior_evidence_not_remeasured_here": {
+  "taker_reach.json": "ik residual 1.6-7.7 mm at fork_take on all ten seeds; tracking error 61-303 mm",
+  "taker_servo.json": "plan_err 43.9-46.5 mm on 10/10 (half the jaw opening); verdict BLOCKED_BY_GIVER on 6/10",
+  "fork_release.json": "seeds_where_placer_ever_holds_the_fork EMPTY on all ten, against a positive control that sees the PICKER grasp on 9/10"
+ },
+ "method": "Four arms, same 20 seeds, same scorer, same policy, privileged scene, --no-render. Paired per seed. Nothing in envs/task.py or the randomizer was touched.",
+ "arms": {
+  "A_shipped": {
+   "knob": "CUTLERY_DIRECT_PLACE unset",
+   "result": {
+    "per_subgoal": {
+     "drawer_open": 20,
+     "fork_placed": 3,
+     "spoon_placed": 0,
+     "plate_placed": 8,
+     "mug_placed": 1
+    },
+    "per_seed": {
+     "0": 3,
+     "1": 2,
+     "2": 3,
+     "3": 1,
+     "4": 1,
+     "5": 1,
+     "6": 1,
+     "7": 2,
+     "8": 2,
+     "9": 2,
+     "10": 1,
+     "11": 2,
+     "12": 1,
+     "13": 1,
+     "14": 1,
+     "15": 1,
+     "16": 1,
+     "17": 2,
+     "18": 2,
+     "19": 2
+    },
+    "subgoals_total": 32,
+    "subgoals_possible": 100,
+    "task_success": 0,
+    "n": 20,
+    "bimanual_episodes": 19,
+    "in_order_prefix_sum": 23,
+    "handoff_events_by_object": {
+     "fork": 3,
+     "drawer": 41,
+     "mug": 12,
+     "spoon": 1
+    }
+   }
+  },
+  "B_both_direct": {
+   "knob": "CUTLERY_DIRECT_PLACE=1",
+   "result": {
+    "per_subgoal": {
+     "drawer_open": 18,
+     "fork_placed": 8,
+     "spoon_placed": 0,
+     "plate_placed": 9,
+     "mug_placed": 0
+    },
+    "per_seed": {
+     "0": 2,
+     "1": 1,
+     "2": 3,
+     "3": 3,
+     "4": 1,
+     "5": 3,
+     "6": 0,
+     "7": 3,
+     "8": 3,
+     "9": 2,
+     "10": 1,
+     "11": 2,
+     "12": 1,
+     "13": 1,
+     "14": 2,
+     "15": 2,
+     "16": 1,
+     "17": 1,
+     "18": 2,
+     "19": 1
+    },
+    "subgoals_total": 35,
+    "subgoals_possible": 100,
+    "task_success": 0,
+    "n": 20,
+    "bimanual_episodes": 19,
+    "in_order_prefix_sum": 25,
+    "handoff_events_by_object": {
+     "drawer": 26,
+     "mug": 5
+    }
+   }
+  },
+  "C_fork_only": {
+   "knob": "CUTLERY_DIRECT_PLACE=fork",
+   "result": {
+    "per_subgoal": {
+     "drawer_open": 19,
+     "fork_placed": 8,
+     "spoon_placed": 0,
+     "plate_placed": 7,
+     "mug_placed": 1
+    },
+    "per_seed": {
+     "0": 2,
+     "1": 0,
+     "2": 3,
+     "3": 2,
+     "4": 1,
+     "5": 2,
+     "6": 1,
+     "7": 3,
+     "8": 3,
+     "9": 2,
+     "10": 1,
+     "11": 3,
+     "12": 2,
+     "13": 1,
+     "14": 1,
+     "15": 2,
+     "16": 1,
+     "17": 3,
+     "18": 1,
+     "19": 1
+    },
+    "subgoals_total": 35,
+    "subgoals_possible": 100,
+    "task_success": 0,
+    "n": 20,
+    "bimanual_episodes": 20,
+    "in_order_prefix_sum": 27,
+    "handoff_events_by_object": {
+     "drawer": 10,
+     "mug": 6
+    }
+   }
+  }
+ },
+ "paired_tests_vs_A": {
+  "B_both_direct": {
+   "aggregate_sign_test": {
+    "per_seed_delta": [
+     -1,
+     -1,
+     0,
+     2,
+     0,
+     2,
+     -1,
+     1,
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     1,
+     0,
+     -1,
+     0,
+     -1
+    ],
+    "better": 6,
+    "worse": 5,
+    "tied": 9,
+    "exact_two_sided_p": 1.0
+   },
+   "per_subgoal_mcnemar": {
+    "drawer_open": {
+     "gained": 0,
+     "lost": 2,
+     "gained_seeds": [],
+     "lost_seeds": [
+      6,
+      17
+     ],
+     "discordant": 2,
+     "exact_two_sided_p": 0.5
+    },
+    "fork_placed": {
+     "gained": 6,
+     "lost": 1,
+     "gained_seeds": [
+      3,
+      5,
+      8,
+      11,
+      15,
+      17
+     ],
+     "lost_seeds": [
+      9
+     ],
+     "discordant": 7,
+     "exact_two_sided_p": 0.125
+    },
+    "spoon_placed": {
+     "gained": 0,
+     "lost": 0,
+     "gained_seeds": [],
+     "lost_seeds": [],
+     "discordant": 0,
+     "exact_two_sided_p": 1.0
+    },
+    "plate_placed": {
+     "gained": 5,
+     "lost": 4,
+     "gained_seeds": [
+      3,
+      5,
+      7,
+      9,
+      14
+     ],
+     "lost_seeds": [
+      1,
+      11,
+      17,
+      19
+     ],
+     "discordant": 9,
+     "exact_two_sided_p": 1.0
+    },
+    "mug_placed": {
+     "gained": 0,
+     "lost": 1,
+     "gained_seeds": [],
+     "lost_seeds": [
+      0
+     ],
+     "discordant": 1,
+     "exact_two_sided_p": 1.0
+    }
+   }
+  },
+  "C_fork_only": {
+   "aggregate_sign_test": {
+    "per_seed_delta": [
+     -1,
+     -2,
+     0,
+     1,
+     0,
+     1,
+     0,
+     1,
+     1,
+     0,
+     0,
+     1,
+     1,
+     0,
+     0,
+     1,
+     0,
+     1,
+     -1,
+     -1
+    ],
+    "better": 8,
+    "worse": 4,
+    "tied": 8,
+    "exact_two_sided_p": 0.3877
+   },
+   "per_subgoal_mcnemar": {
+    "drawer_open": {
+     "gained": 0,
+     "lost": 1,
+     "gained_seeds": [],
+     "lost_seeds": [
+      1
+     ],
+     "discordant": 1,
+     "exact_two_sided_p": 1.0
+    },
+    "fork_placed": {
+     "gained": 6,
+     "lost": 1,
+     "gained_seeds": [
+      3,
+      5,
+      8,
+      11,
+      15,
+      17
+     ],
+     "lost_seeds": [
+      9
+     ],
+     "discordant": 7,
+     "exact_two_sided_p": 0.125
+    },
+    "spoon_placed": {
+     "gained": 0,
+     "lost": 0,
+     "gained_seeds": [],
+     "lost_seeds": [],
+     "discordant": 0,
+     "exact_two_sided_p": 1.0
+    },
+    "plate_placed": {
+     "gained": 2,
+     "lost": 3,
+     "gained_seeds": [
+      9,
+      12
+     ],
+     "lost_seeds": [
+      1,
+      18,
+      19
+     ],
+     "discordant": 5,
+     "exact_two_sided_p": 1.0
+    },
+    "mug_placed": {
+     "gained": 1,
+     "lost": 1,
+     "gained_seeds": [
+      7
+     ],
+     "lost_seeds": [
+      0
+     ],
+     "discordant": 2,
+     "exact_two_sided_p": 1.0
+    }
+   }
+  }
+ },
+ "controls": {
+  "knob_default_is_inert": {
+   "pass": true,
+   "how": "With the knob unset, seeds 0 and 1 scored 3 and 2 -- identical to the pinned shipped column [3,2,3,1,1,1,1,2,2,2] -- both BEFORE the refactor and AFTER the knob was generalised to a set of body names. Run twice, /tmp/ctl_off.json and /tmp/ctl_off2.json.",
+   "why_it_matters": "a knob whose OFF path has drifted is measuring a different robot"
+  },
+  "scorer_untouched": {
+   "pass": true,
+   "how": "envs/task.py has no edit this tick; the same predicates score every arm"
+  },
+  "effect_is_localised": {
+   "pass": true,
+   "how": "spoon_placed has ZERO discordant seeds between A and B even though B moves the spoon to direct place. An intervention that changed the score by disturbing the scorer would not leave a subgoal exactly invariant.",
+   "why_it_matters": "NEGATIVE CONTROL -- it shows the gain is not a global shift"
+  }
+ },
+ "what_it_shows": [
+  "The fork's failure was the TRANSFER. Direct place gains 6 seeds and loses 1 (exact p=0.125), 3/20 -> 8/20.",
+  "The spoon's failure is NOT the transfer. ZERO discordant seeds. evidence/spoon_depth.json already measured why: the spoon is never lifted more than 2.7-14.4 mm, so it is never in the giver's jaws for a transfer to fail.",
+  "Moving BOTH costs more than it collects: arm B loses drawer_open on 2 seeds to the crossing arm and scores the same 35/100 as arm C, which loses 1.",
+  "Arm C is the first controller change in this workspace to beat the shipped column on the aggregate: 35/100 vs 32/100, better on 8 seeds and worse on 4."
+ ],
+ "what_it_does_NOT_show": [
+  "It does not show a significant aggregate gain. The paired sign test on arm C is p=0.388 and on arm B is p=1.000. At n=20 neither clears any conventional bar.",
+  "It does not show task success. task_success is 0/20 in every arm, so req_demo_video does NOT become READY on this measurement.",
+  "The fork target metric itself is p=0.125, which is a direction, not a proof.",
+  "It does not measure the RUBRIC cost. T1 names 'object hand-off' among what it scores, and arm C stops producing fork hand-off events (A recorded 3 fork + 1 spoon over 20 seeds; C records 0 cutlery hand-offs). Whether 5 extra fork placements outweigh that on a 30-point criterion is a judging question this measurement cannot answer."
+ ],
+ "adoption": "NOT ADOPTED. CUTLERY_DIRECT_PLACE ships at none. Arm C was adopted mid-tick and REVERTED inside the same tick; the tree is byte-restored.",
+ "adoption_reasoning": "Arm C is the better arm and this file's own numbers say so. It is not shipped because adopting it restates far more than the two artifacts I had planned to regenerate, and I found that by trying it rather than by reasoning about it. The controller is the shared denominator of three OTHER published arms -- eval_seeds_scripted_perceived.json, the blind negative control, and eval_seeds_act.json, which quotes the ACT policy as '3/50 against the scripted controller's 18/50' -- and of four artifacts generated out of evidence/ (cover image, slides, video presentation, demo site), each with a controls file that machine-checks its claims against evidence and would correctly go red on a partial adoption. A half-reconciled tree publishes claims its own code no longer produces, which is worse than an unadopted improvement.",
+ "adoption_attempt_and_revert": {
+  "what_was_done": "Default flipped to 'fork'; the canonical 10-seed eval and the 10-seed demo recorder were launched to regenerate the two artifacts the flip invalidates.",
+  "what_stopped_it": "A grep of README.md and TECHNICAL_SUMMARY.md for the affected numbers returned ~50 lines across both, including the perceived/blind/ACT comparison denominators, which are separate simulation arms needing their own re-runs.",
+  "what_was_restored": {
+   "envs/controller.py": "default back to '0'; code-only diff against the pre-tick backup is the knob, the dispatcher, and the two call sites -- the default branch calls _handoff with the identical six keyword arguments",
+   "evidence/eval_seeds_scripted.json": "never overwritten -- the eval process was killed before its write",
+   "evidence/demo_scripted_10seeds.mp4": "WAS truncated to 1,973,315 bytes by the killed recorder and was restored from the pre-run backup; sha256 re-derived after restore is 6216284e7ba88f522a79eca9d90f5bc9432206525d1df8aa6b535e4aef7bb1c0, byte-identical to the value manifest.json pins"
+  },
+  "post_revert_control": "With the knob back at its default, seeds 0 and 1 score 3 and 2 -- the pinned shipped column. Run after the revert, /tmp/postrevert.json.",
+  "stated_against_us": "The demo video, a REQUIRED artifact, was briefly left truncated on disk by this tick. It is restored and verified by hash, but the window existed and a tick that died between the kill and the restore would have left it broken."
+ },
+ "next_step": "Adoption is one scoped job, not a flip: set the default to 'fork', re-run the privileged / perceived / blind / ACT arms, re-record the demo, regenerate the four derived artifacts, and reconcile README.md and TECHNICAL_SUMMARY.md -- all in the same tick, with the controls files green at the end.",
+ "row_state_after_this_tick": "req_demo_video is STILL DRAFT. task_success is 0/20 in every arm measured here, and the row's bar is successful task execution across the seeds. Nothing in this file moves it to READY."
+}

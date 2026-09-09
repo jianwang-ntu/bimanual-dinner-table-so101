@@ -1,0 +1,447 @@
+{
+ "probe": "measure_spoon_hold.py",
+ "question": "Is the spoon ever held by either gripper, on any seed?",
+ "finding_id": "F-AIS-SPOON-NEVER-GRASPED-001",
+ "job": "lablab:ai-infra-summit-hackathon",
+ "row_under_test": "req_demo_video (DRAFT) -- spoon_placed is the sub-goal that caps task_success at 0",
+ "seeds": 10,
+ "method": "one scripted rollout per seed, privileged scene, nothing in envs/task.py or the controller changed; per-step contact between each body's geoms and each arm's jaw geoms",
+ "positive_control": {
+  "body": "fork",
+  "pass": true,
+  "expectation": "evidence/fork_release.json reports this detector seeing the picking arm's grasp on 9 of 10 seeds",
+  "why_it_matters": "if the fork also came back never-lifted, the detector would be broken and the spoon's zero would carry no information"
+ },
+ "aggregate": {
+  "spoon": {
+   "seeds_ever_touched": [
+    1,
+    2,
+    3,
+    5,
+    7,
+    8,
+    9
+   ],
+   "n_seeds_ever_touched": 7,
+   "seeds_lifted": [
+    1,
+    9
+   ],
+   "n_seeds_lifted": 2,
+   "lift_threshold_mm": 20.0,
+   "max_steps_held_any_seed": 4257,
+   "lift_mm_min": 0.0,
+   "lift_mm_max": 120.07
+  },
+  "fork": {
+   "seeds_ever_touched": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    7,
+    8,
+    9
+   ],
+   "n_seeds_ever_touched": 9,
+   "seeds_lifted": [
+    2,
+    3,
+    4,
+    5,
+    7,
+    8,
+    9
+   ],
+   "n_seeds_lifted": 7,
+   "lift_threshold_mm": 20.0,
+   "max_steps_held_any_seed": 3712,
+   "lift_mm_min": 0.0,
+   "lift_mm_max": 123.38
+  }
+ },
+ "runs": [
+  {
+   "seed": 0,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": true
+   },
+   "bodies": {
+    "spoon": {
+     "ever_touched": false,
+     "lifted": false,
+     "held_by": [],
+     "steps_held_by_arm": {
+      "left": 0,
+      "right": 0
+     },
+     "lift_mm": 0.0,
+     "lift_while_held_mm": null
+    },
+    "fork": {
+     "ever_touched": true,
+     "lifted": false,
+     "held_by": [
+      "left",
+      "right"
+     ],
+     "steps_held_by_arm": {
+      "left": 21,
+      "right": 495
+     },
+     "lift_mm": 2.84,
+     "lift_while_held_mm": 2.79
+    }
+   }
+  },
+  {
+   "seed": 1,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "spoon": {
+     "ever_touched": true,
+     "lifted": true,
+     "held_by": [
+      "left"
+     ],
+     "steps_held_by_arm": {
+      "left": 4257,
+      "right": 0
+     },
+     "lift_mm": 120.07,
+     "lift_while_held_mm": 120.07
+    },
+    "fork": {
+     "ever_touched": true,
+     "lifted": false,
+     "held_by": [
+      "left",
+      "right"
+     ],
+     "steps_held_by_arm": {
+      "left": 163,
+      "right": 529
+     },
+     "lift_mm": 5.76,
+     "lift_while_held_mm": 5.76
+    }
+   }
+  },
+  {
+   "seed": 2,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": true,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "spoon": {
+     "ever_touched": true,
+     "lifted": false,
+     "held_by": [
+      "left"
+     ],
+     "steps_held_by_arm": {
+      "left": 356,
+      "right": 0
+     },
+     "lift_mm": 0.06,
+     "lift_while_held_mm": 0.06
+    },
+    "fork": {
+     "ever_touched": true,
+     "lifted": true,
+     "held_by": [
+      "left",
+      "right"
+     ],
+     "steps_held_by_arm": {
+      "left": 88,
+      "right": 2691
+     },
+     "lift_mm": 118.77,
+     "lift_while_held_mm": 118.77
+    }
+   }
+  },
+  {
+   "seed": 3,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "spoon": {
+     "ever_touched": true,
+     "lifted": false,
+     "held_by": [
+      "left"
+     ],
+     "steps_held_by_arm": {
+      "left": 386,
+      "right": 0
+     },
+     "lift_mm": 0.31,
+     "lift_while_held_mm": -0.51
+    },
+    "fork": {
+     "ever_touched": true,
+     "lifted": true,
+     "held_by": [
+      "left",
+      "right"
+     ],
+     "steps_held_by_arm": {
+      "left": 25,
+      "right": 3712
+     },
+     "lift_mm": 123.38,
+     "lift_while_held_mm": 123.38
+    }
+   }
+  },
+  {
+   "seed": 4,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "spoon": {
+     "ever_touched": false,
+     "lifted": false,
+     "held_by": [],
+     "steps_held_by_arm": {
+      "left": 0,
+      "right": 0
+     },
+     "lift_mm": 0.0,
+     "lift_while_held_mm": null
+    },
+    "fork": {
+     "ever_touched": true,
+     "lifted": true,
+     "held_by": [
+      "right"
+     ],
+     "steps_held_by_arm": {
+      "left": 0,
+      "right": 3313
+     },
+     "lift_mm": 123.21,
+     "lift_while_held_mm": 123.21
+    }
+   }
+  },
+  {
+   "seed": 5,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "spoon": {
+     "ever_touched": true,
+     "lifted": false,
+     "held_by": [
+      "left"
+     ],
+     "steps_held_by_arm": {
+      "left": 418,
+      "right": 0
+     },
+     "lift_mm": 0.2,
+     "lift_while_held_mm": 0.2
+    },
+    "fork": {
+     "ever_touched": true,
+     "lifted": true,
+     "held_by": [
+      "left",
+      "right"
+     ],
+     "steps_held_by_arm": {
+      "left": 48,
+      "right": 2890
+     },
+     "lift_mm": 120.32,
+     "lift_while_held_mm": 120.32
+    }
+   }
+  },
+  {
+   "seed": 6,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "spoon": {
+     "ever_touched": false,
+     "lifted": false,
+     "held_by": [],
+     "steps_held_by_arm": {
+      "left": 0,
+      "right": 0
+     },
+     "lift_mm": 0.0,
+     "lift_while_held_mm": null
+    },
+    "fork": {
+     "ever_touched": false,
+     "lifted": false,
+     "held_by": [],
+     "steps_held_by_arm": {
+      "left": 0,
+      "right": 0
+     },
+     "lift_mm": 0.0,
+     "lift_while_held_mm": null
+    }
+   }
+  },
+  {
+   "seed": 7,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": true,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "spoon": {
+     "ever_touched": true,
+     "lifted": false,
+     "held_by": [
+      "left"
+     ],
+     "steps_held_by_arm": {
+      "left": 367,
+      "right": 0
+     },
+     "lift_mm": 0.89,
+     "lift_while_held_mm": -0.5
+    },
+    "fork": {
+     "ever_touched": true,
+     "lifted": true,
+     "held_by": [
+      "left",
+      "right"
+     ],
+     "steps_held_by_arm": {
+      "left": 79,
+      "right": 3049
+     },
+     "lift_mm": 118.8,
+     "lift_while_held_mm": 118.8
+    }
+   }
+  },
+  {
+   "seed": 8,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "bodies": {
+    "spoon": {
+     "ever_touched": true,
+     "lifted": false,
+     "held_by": [
+      "left"
+     ],
+     "steps_held_by_arm": {
+      "left": 368,
+      "right": 0
+     },
+     "lift_mm": 0.0,
+     "lift_while_held_mm": -0.5
+    },
+    "fork": {
+     "ever_touched": true,
+     "lifted": true,
+     "held_by": [
+      "right"
+     ],
+     "steps_held_by_arm": {
+      "left": 0,
+      "right": 3506
+     },
+     "lift_mm": 120.47,
+     "lift_while_held_mm": 120.47
+    }
+   }
+  },
+  {
+   "seed": 9,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": true,
+    "spoon_placed": false,
+    "plate_placed": false,
+    "mug_placed": false
+   },
+   "bodies": {
+    "spoon": {
+     "ever_touched": true,
+     "lifted": true,
+     "held_by": [
+      "left"
+     ],
+     "steps_held_by_arm": {
+      "left": 2793,
+      "right": 0
+     },
+     "lift_mm": 119.19,
+     "lift_while_held_mm": 119.19
+    },
+    "fork": {
+     "ever_touched": true,
+     "lifted": true,
+     "held_by": [
+      "right"
+     ],
+     "steps_held_by_arm": {
+      "left": 0,
+      "right": 2057
+     },
+     "lift_mm": 118.13,
+     "lift_while_held_mm": 118.13
+    }
+   }
+  }
+ ],
+ "verdict": "SPLIT. The spoon is touched on 7/10 seeds but LIFTED on only 2 [1, 9], against a fork lifted on 7 [2, 3, 4, 5, 7, 8, 9] in the SAME rollouts. So spoon_placed=0 is TWO failures, not one: a grasp that does not close on most seeds, and -- on the seeds where it does carry the spoon ~120 mm -- a place that still misses. Any fix aimed at only one of them can move at most a few seeds."
+}

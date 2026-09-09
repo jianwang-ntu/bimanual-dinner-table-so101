@@ -758,14 +758,29 @@ kinematic minimum drop over the same ten seeds of **19.03 mm**.
 | object | feature above its support | hand drop | predicted | observed |
 |---|---|---|---|---|
 | fork | 2.5 mm | 26.2 mm | not pinchable | **0/10** and never lifted *when this rule was measured, 2026-09-08T23:30Z*; **3/10** and lifted on 7 of 10 seeds after the `824e5ed` adoption |
-| spoon | 2.5 mm | 26.2 mm | not pinchable | **0/10**, never lifted |
+| spoon | 2.5 mm | 26.2 mm | not pinchable | **0/10** placed, and never lifted *when this rule was measured, 2026-09-08T23:30Z*; re-measured 2026-09-09T17:40Z it is **lifted ~120 mm on 2 of 10 seeds** (1 and 9) and still placed 0/10 |
 | plate | 5.0 mm | 50.4 mm | not pinchable | never pinched — **hooked by the rim and dragged**, exactly as section 8 item 6 reports |
 | mug | 90.0 mm | 35.4 mm | **pinchable** | **gripped 8/10**, placed 1/10 |
 
-Four of four. The mug is the point: a rule that only ever predicts failure is
-not a rule. Its drop is the *largest* of the four, so it does not succeed
-because the hand hangs less there — it succeeds because its grasp point stands
-90 mm above the table. `scripts/test_hand_floor.py` checks all of this, 17/17.
+Four of four **when it was measured**, and two of those four have since been
+overtaken by the controller. The rule predicted "not pinchable" for the fork and
+the spoon; the fork is now lifted on 7 of 10 seeds and the spoon on 2 of 10
+(`evidence/spoon_hold.json`, 2026-09-09T17:40Z). So the rule no longer stands as
+a hard predictor of what *cannot* be lifted — squaring the grasp moved both
+objects across the line it drew. What survives is the ordering: the two objects
+whose feature stands 2.5 mm above its support are still the two the controller
+struggles with, and neither is *placed* on any seed.
+
+`scripts/test_hand_floor.py` still scores this prediction as matching, because
+the outcome it reads is whether the object is **placed** — and no cutlery is
+placed on any seed, in any cell. That is a different quantity from whether the
+object is *lifted*, and the two came apart once the pick was squared. The rule
+holds on placement and is overtaken on lift.
+
+The mug remains the point: a rule that only ever predicts failure is not a rule.
+Its drop is the *largest* of the four, so it does not succeed because the hand
+hangs less there — it succeeds because its grasp point stands 90 mm above the
+table. `scripts/test_hand_floor.py` checks all of this, 17/17.
 
 **Stated against us, twice.**
 

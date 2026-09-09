@@ -792,6 +792,205 @@ CUTLERY_HANDOFF_SQUARE = False
 CUTLERY_PLACE_AIM_BODY = False
 
 
+# Let the arm that PICKED a cutlery item also place it, instead of handing it
+# across.  The hand-off's own premise is that it has to exist:
+#
+#   ``dinner_table_script`` docstring: "Each cutlery item starts on the far side
+#   of the table from its target, so each is handed between the arms rather than
+#   carried around."
+#
+# That premise is FALSE ON REACH, and the scene's own numbers say so.  Bases sit
+# at (-0.22, -0.14) and (0.22, -0.14); the fork starts at (0, 0.178) and
+# ``target_fork`` is at (-0.085, -0.045); the spoon starts at (0, 0.128) and
+# ``target_spoon`` at (0.085, -0.045).  So:
+#
+#   right_base -> fork start      0.387 m   <- the pick that ALREADY SUCCEEDS
+#   right_base -> target_fork     0.319 m   <- 67 mm CLOSER than that pick
+#   left_base  -> spoon start     0.347 m   <- the pick that ALREADY SUCCEEDS
+#   left_base  -> target_spoon    0.319 m   <- 27 mm CLOSER than that pick
+#
+# Each picker is asked to reach a point INSIDE the radius it demonstrably works
+# at on the very same episode.  Nothing about reach requires the transfer.
+#
+# What the transfer does require is two SO-101 wrists closing on one 86 mm
+# handle at the same moment, and that is the failure every probe in this
+# workspace has landed on:
+#
+#   * ``evidence/taker_reach.json``  -- at ``fork_take`` the taker's IK residual
+#     is 1.6-7.7 mm on all ten seeds while its TRACKING error is 61-303 mm.  The
+#     planner is fine; the arm never arrives.
+#   * ``evidence/taker_servo.json``  -- ``plan_err_mm_fork_take`` is 43.9-46.5 mm
+#     on ten of ten seeds (half the jaw opening, the ``plan_at`` displacement),
+#     and the verdict is BLOCKED_BY_GIVER on 6 of 10, in contact with
+#     ``right_gripper`` / ``right_camera_mount`` / ``right_moving_jaw`` /
+#     ``right_wrist``.
+#   * ``evidence/fork_release.json`` -- ``seeds_where_placer_ever_holds_the_fork``
+#     is EMPTY on all ten seeds, against a positive control in which the same
+#     detector registers the PICKING arm's grasp on 9 of 10.
+#
+# The two are coupled, which is why the two knobs above each failed alone:
+# CUTLERY_TAKE_PLAN_AT_OPEN removes the 45 mm command error and the taker then
+# drives HARDER into the arm holding the same point (seed 0 exec_err
+# 23.5 -> 325.2 mm, BLOCKED_BY_GIVER 6 -> 7); CUTLERY_TAKE_OFFSET moves the
+# taker along the handle, but the handle is 86 mm end to end and two wrist
+# assemblies do not fit on it.
+#
+# This knob composes the two operations that are MEASURED TO WORK -- ``_pick``,
+# which grasps and carries the fork on 8 of 10 seeds, and ``_place``, which is
+# what puts the plate and the mug down -- and deletes the one that is measured
+# to fail.  The other arm is parked home first, because the placer crosses the
+# midline into its neighbour's workspace.
+#
+# COST, STATED UP FRONT: the cutlery transfer is what ``TaskMonitor`` records as
+# a hand-off, and T1 names "object hand-off" among the things it scores.  This
+# trades a transfer that never transfers the object for a placement that might
+# actually place it.  Whether that is a net gain is for the measurement below
+# and the rubric, not for this comment.
+#
+# The knob names WHICH items go direct, because the two do not fail the same
+# way and the n=20 A/B says so.  Measured against the shipped arm on the same 20
+# seeds, same scorer, paired (evidence/cutlery_direct_place_ab.json):
+#
+#   fork_placed    3/20 -> 8/20   gained 6 seeds, lost 1, exact p=0.125
+#   spoon_placed   0/20 -> 0/20   ZERO discordant seeds -- untouched
+#   drawer_open   20/20 -> 18/20  lost seeds 6 and 17 to the crossing arm
+#   subgoals      32/100 -> 35/100, paired sign test p=1.000
+#
+# So the fork's failure was the transfer and the spoon's is NOT.  A knob that
+# moves both items pays the hand-off cost twice and collects once.
+#
+# CORRECTED 2026-09-09T17:40Z -- the OUTCOME above stands and the REASON given
+# for it was wrong.  This comment said the spoon "is never lifted more than
+# 2.7-14.4 mm (``evidence/spoon_depth.json``), so it is never in the giver's
+# jaws and no change to the hand-off can reach it".  Both halves are false on
+# the shipped controller:
+#
+#   * ``evidence/spoon_depth.json`` is STALE.  Its baseline column is
+#     15/50 with fork_placed 0/10 -- the pre-``824e5ed`` controller, before the
+#     cutlery pick was squared.  It does not describe the arm that ships.
+#   * ``evidence/spoon_hold.json`` re-measures it on the SHIPPED arm with a
+#     contact detector whose fork positive control registers 9/10, matching
+#     ``evidence/fork_release.json``: the spoon is touched by the left arm on
+#     7 of 10 seeds and LIFTED ~120 mm on seeds 1 and 9.  It is in the giver's
+#     jaws, and a hand-off change can reach it.
+#
+# The spoon's 0/20 under direct place is therefore a MEASURED result whose
+# mechanism is still open, not a foregone one.  It is not evidence that the
+# spoon is unreachable by the transfer.
+#
+# NOT ADOPTED -- default is none, and the emitted moves are the shipped ones.
+#
+# "fork" (arm C) is the better arm and the measurement says so on four axes:
+# subgoals 35/100 vs 32/100, fork_placed 8/20 vs 3/20, in_order_prefix 27 vs 23,
+# bimanual 20/20 vs 19/20, against one lost drawer_open seed.  It was ADOPTED
+# for part of this tick and then REVERTED, on a cost that was found by trying
+# it rather than by reasoning about it:
+#
+#   The controller is the shared denominator of three OTHER published arms.
+#   `evidence/eval_seeds_scripted_perceived.json` (perception in the loop),
+#   the blind negative control, and `evidence/eval_seeds_act.json` (the ACT
+#   policy, quoted as "3/50 against the scripted controller's 18/50") all run
+#   THIS controller.  Changing it restates all three, plus every artifact
+#   generated out of evidence/ -- cover image, slides, video presentation, demo
+#   site -- each of which has a controls file that machine-checks its claims
+#   against evidence and would correctly go red on a partial adoption.
+#
+# So adoption is not a one-line flip; it is one scoped job: flip this default,
+# re-run the privileged / perceived / blind / ACT arms, re-record the demo,
+# regenerate the four derived artifacts, and reconcile README.md and
+# TECHNICAL_SUMMARY.md in the same tick.  Doing half of it publishes claims the
+# code no longer produces.
+#
+# Accepted values: "" / "0" for none (shipped), "1" / "all" / "both" for both,
+# or a comma list of body names, e.g. "fork".
+_DIRECT = os.environ.get("CUTLERY_DIRECT_PLACE", "0").strip()
+if _DIRECT in ("", "0", "false", "False"):
+    CUTLERY_DIRECT_PLACE: set[str] = set()
+elif _DIRECT in ("1", "all", "both", "true", "True"):
+    CUTLERY_DIRECT_PLACE = {"fork", "spoon"}
+else:
+    CUTLERY_DIRECT_PLACE = {s.strip() for s in _DIRECT.split(",") if s.strip()}
+
+
+# Solve the hand-off's two TAKE waypoints at the opening they will EXECUTE at,
+# instead of at the pinch width they will only reach afterwards.
+#
+# ``Gripper.tip_mid`` is "the world point midway between the two jaw faces", so
+# it MOVES when the jaws open: half of the separation change.  ``_plan`` solves
+# the arm pose at ``plan_at`` and then overwrites the gripper command with
+# ``opening``, so a waypoint solved at the pinch and executed open puts the jaw
+# midpoint half an opening away from the point it was solved onto.
+#
+# ``_pick`` already has this fix -- it is what ``CUTLERY_PLAN_AT_OPEN`` does for
+# the giver's descend -- and ``_handoff``'s ``_take_above``/``_take`` never got
+# it.  MEASURED, evidence/taker_servo.json, ten seeds, six controls PASS
+# including a forward-kinematics check against the simulator's own jaws and a
+# positive control on the grasp that works:
+#
+#   plan_err_mm, giver fork_descend (plan_at dropped)   1.5 - 1.9
+#   plan_err_mm, taker fork_take    (plan_at=hold)     43.9 - 46.5
+#   plan_err_mm, taker fork_take_above                 44.6 - 45.9
+#
+# 43.9-46.5 mm on ten out of ten seeds is not scatter; it is a constant, and it
+# is spent before the arm has moved.  The fork's placement tolerance is 45 mm.
+#
+# MEASURED AND NOT ADOPTED.  The defect above is real and the knob removes it --
+# plan_err_mm falls to 3.0-9.5 on all ten seeds (evidence/taker_servo_planatopen
+# .json) -- and the SCORE DOES NOT FOLLOW.  Four arms, ten seeds each, same
+# scorer, evidence/take_waypoint_ab.json:
+#
+#   A  shipped                        18/50 subgoals, task_success 0/10
+#   B  plan_at_open                   15/50                        0/10
+#   C  plan_at_open + 30 mm offset    15/50                        0/10
+#   D  30 mm offset                   16/50                        0/10
+#
+# No arm beats shipped, so none is adopted.  Nor is harm claimed: 15-18 of 50 is
+# inside the scatter this workspace already measured for this quantity -- the
+# CUTLERY_SQUEEZE sweep put six cells at 15-18/50 and recorded "at n=10 this is
+# noise".  The honest verdict is NO MEASURED IMPROVEMENT, not "worse".
+#
+# Why removing a proven 45 mm command error buys nothing: it is not the binding
+# constraint.  With the knob ON, exec_err_mm RISES (seed 0: 23.5 -> 325.2) and
+# the fork_take verdict count moves BLOCKED_BY_GIVER 6 -> 7.  A taker that is
+# finally commanded to the right point drives harder into the arm already
+# holding that point.  See CUTLERY_TAKE_OFFSET for the other half.
+#
+# False is the shipped behaviour and emits exactly the moves it always did;
+# proven, not asserted -- at the default, measure_taker_servo.py reproduces the
+# pinned ten-number shipped column to 0.0 mm on every seed AFTER these edits.
+CUTLERY_TAKE_PLAN_AT_OPEN = os.environ.get(
+    "CUTLERY_TAKE_PLAN_AT_OPEN", "0") not in ("0", "", "false", "False")
+
+# How far along the handle, AWAY from the head, the taker aims -- in metres.
+#
+# Both arms currently aim at ``<body>_grasp``, which sits at the cutlery body
+# origin: the MIDDLE of an 86 mm handle (fork_handle half-extent 0.043 along its
+# own +y, head at +0.053).  So the taker is sent to the exact point the giver's
+# jaws already occupy.  ``_handoff``'s own docstring names this failure --
+# "a taker aimed at the same line closes on the giver's fingers" -- and offers
+# ``taker_jaw``, the perpendicular, as the remedy.  That remedy is for the MUG
+# and cannot be used here: the perpendicular of ``across(body)`` is the handle's
+# long axis, and a 86 mm handle plus a 24 mm head does not fit inside a 101 mm
+# jaw opening end-to-end.  ``taker_jaw`` is passed at ZERO of _handoff's two
+# call sites.
+#
+# The cutlery form of the same idea is to keep the grip line and move along it:
+# the giver holds the centre, the taker takes a clear stretch of the same
+# handle.
+#
+# MEASURED AND NOT ADOPTED, on the same four arms as CUTLERY_TAKE_PLAN_AT_OPEN:
+# 30 mm alone scores 16/50 and 30 mm with the plan fix scores 15/50, against a
+# shipped 18/50, and task_success is 0/10 in every arm.  So the taker/giver
+# collision is REAL and MEASURED -- 6 of 10 seeds end fork_take in contact with
+# right_gripper / right_moving_jaw / right_camera_mount / right_wrist -- but
+# moving the taker 30 mm down the handle does not convert it into a grasp.
+# Only one offset was tried; this refutes THIS offset, not the axis.
+#
+# 0.0 is the shipped behaviour and emits exactly the moves it always did.
+CUTLERY_TAKE_OFFSET = float(os.environ.get("CUTLERY_TAKE_OFFSET", "0.0"))
+
+
+
 # How much narrower than the object the cutlery pinch closes, in metres.
 #
 # This name exists because of a hypothesis that was then MEASURED AND REFUTED,
@@ -822,6 +1021,69 @@ CUTLERY_PLACE_AIM_BODY = False
 CUTLERY_SQUEEZE = 0.005
 
 
+# Swap WHICH ARM picks which cutlery item: right:fork + left:spoon (shipped)
+# becomes left:fork + right:spoon.
+#
+# The shipped pairing is the WORSE of the two available assignments on both
+# items, and ``evidence/grasp_feasibility.json`` measured it before this knob
+# existed.  That probe sweeps, per (arm, object) pair, the lowest height above
+# the grasp site at which the solved pose is collision-free -- so a LARGER
+# number means the arm has to stop FURTHER from the object:
+#
+#   pair          scripted   median min_clear_dz   blocker at the grasp
+#   right:fork      yes           18 mm            drawer_floor
+#   left:spoon      yes           40 mm            drawer_front
+#   left:fork       no             8 mm            drawer_side_l
+#   right:spoon     no            30 mm            drawer_front
+#
+# Both scripted pairs are beaten by their alternative: 18 -> 8 for the fork and
+# 40 -> 30 for the spoon.  ``CUTLERY_DESCEND_Z`` is 0.003, so every one of these
+# descents is commanded to 3 mm above the grasp site and all four are inside
+# their own collision at that height -- but the spoon's scripted arm is the
+# deepest into it by 22 mm, which is the largest single asymmetry in the pick.
+#
+# The geometry behind it: the spoon sits at y=0.128 and the fork at y=0.178, so
+# the spoon is the item nearer the drawer FRONT rail, and ``drawer_front`` is
+# what blocks it.  The two objects are otherwise byte-identical in the scene --
+# same handle box (0.006 0.038 0.0025), same head, same mass, same friction --
+# so the spoon's 0/20 cannot be a property of the spoon.
+#
+# WHY THIS ROW: ``envs/task.py`` scores ``task_success`` as ``all(sg.values())``,
+# so spoon_placed 0/20 caps task_success at 0 BY ITSELF, and req_demo_video's
+# bar is successful task execution.  No fork, plate or mug gain can move that
+# row while this subgoal is a hard zero; this is the only subgoal that can.
+#
+# NOT ADOPTED BY DEFAULT -- at "0" the emitted moves are the shipped ones.
+CUTLERY_ARM_SWAP = os.environ.get("CUTLERY_ARM_SWAP", "0").strip() not in (
+    "", "0", "false", "False")
+
+
+def _cutlery_deliver(picker, other, body, target, jaw, hold):
+    """Get one cutlery item from the picker's jaws onto ``target``.
+
+    Two routes, selected by ``CUTLERY_DIRECT_PLACE``.  At the default the
+    emitted moves are byte-for-byte the ones this script has always emitted --
+    the same ``_handoff`` call with the same six keyword arguments -- so the
+    shipped column reproduces exactly.
+    """
+    if body not in CUTLERY_DIRECT_PLACE:
+        return _handoff(picker, other, body, target, jaw,
+                        hold=hold, square=CUTLERY_HANDOFF_SQUARE,
+                        square_carry=False,
+                        plan_at_open=CUTLERY_TAKE_PLAN_AT_OPEN,
+                        take_offset=CUTLERY_TAKE_OFFSET,
+                        aim_body=body if CUTLERY_PLACE_AIM_BODY else None)
+    # The picker carries it round itself.  The other arm is parked first: the
+    # placer crosses the midline into its neighbour's half of the table
+    # (``target_fork`` is 166 mm from the LEFT base and is placed by the RIGHT
+    # arm, and the spoon mirrors it), and the pose the neighbour is left in by
+    # the drawer step or by its own pick sits in that space.
+    return [({other: Home(other, label=f"{body}_place_clear")}, 1.2)] + \
+        _place(picker, target, hold, jaw,
+               square=CUTLERY_HANDOFF_SQUARE,
+               aim_body=body if CUTLERY_PLACE_AIM_BODY else None)
+
+
 def dinner_table_script() -> list[tuple[dict, float]]:
     """The rollout, as (moves-for-this-step, seconds) pairs.
 
@@ -838,33 +1100,32 @@ def dinner_table_script() -> list[tuple[dict, float]]:
     # --- 1. the right arm opens the drawer -----------------------------------
     S.extend(_open_drawer())
 
+    # Which arm takes which item.  At the default this is the shipped pairing.
+    fork_arm, spoon_arm = ("left", "right") if CUTLERY_ARM_SWAP else ("right", "left")
+
     # --- 2. fork: right picks it out of the drawer, hands it to the left ------
     fork_grip = pinch(geom_width("fork_handle", 0), squeeze=CUTLERY_SQUEEZE)
-    S.extend(_pick(("right", "fork", "fork_grasp", fork_grip, across("fork")),
+    S.extend(_pick((fork_arm, "fork", "fork_grasp", fork_grip, across("fork")),
                    open_to=CUTLERY_DESCEND_OPENING, descend_z=CUTLERY_DESCEND_Z,
                    descend_steps=CUTLERY_DESCEND_STEPS,
                    square=CUTLERY_SQUARE,
                    descend_square=CUTLERY_DESCEND_SQUARE,
                    plan_at_open=CUTLERY_PLAN_AT_OPEN,
                    approach=CUTLERY_APPROACH, lift=(0.0, 0.0, 0.085)))
-    S.extend(_handoff("right", "left", "fork", "target_fork", across("fork"),
-                      hold=fork_grip, square=CUTLERY_HANDOFF_SQUARE,
-                      square_carry=False,
-                      aim_body="fork" if CUTLERY_PLACE_AIM_BODY else None))
+    S.extend(_cutlery_deliver(fork_arm, spoon_arm, "fork", "target_fork",
+                              across("fork"), fork_grip))
 
     # --- 3. spoon: the mirror image, left to right ----------------------------
     spoon_grip = pinch(geom_width("spoon_handle", 0), squeeze=CUTLERY_SQUEEZE)
-    S.extend(_pick(("left", "spoon", "spoon_grasp", spoon_grip, across("spoon")),
+    S.extend(_pick((spoon_arm, "spoon", "spoon_grasp", spoon_grip, across("spoon")),
                    open_to=CUTLERY_DESCEND_OPENING, descend_z=CUTLERY_DESCEND_Z,
                    descend_steps=CUTLERY_DESCEND_STEPS,
                    square=CUTLERY_SQUARE,
                    descend_square=CUTLERY_DESCEND_SQUARE,
                    plan_at_open=CUTLERY_PLAN_AT_OPEN,
                    approach=CUTLERY_APPROACH, lift=(0.0, 0.0, 0.085)))
-    S.extend(_handoff("left", "right", "spoon", "target_spoon", across("spoon"),
-                      hold=spoon_grip, square=CUTLERY_HANDOFF_SQUARE,
-                      square_carry=False,
-                      aim_body="spoon" if CUTLERY_PLACE_AIM_BODY else None))
+    S.extend(_cutlery_deliver(spoon_arm, fork_arm, "spoon", "target_spoon",
+                              across("spoon"), spoon_grip))
 
     # --- 4. plate: hooked by the rim and dragged flat onto the mat ------------
     # Both arms go home first.  The cutlery hand-off leaves the right arm in a
@@ -1099,7 +1360,8 @@ def _shunt(arm, body, hold, fracs, *, target="target_mug", jaw=None,
 
 def _handoff(giver, taker, body, target, jaw, *, hold=GRIP_PINCH,
              open_to=GRIPPER_OPEN, square=False, drop_z=0.030, over_z=0.090,
-             taker_jaw=None, square_carry=None, aim_body=None):
+             taker_jaw=None, square_carry=None, aim_body=None,
+             plan_at_open=False, take_offset=0.0):
     """Giver holds the object over the shared zone; taker grasps and places it.
 
     The taker closes before the giver opens, so the object is held by both arms
@@ -1115,23 +1377,39 @@ def _handoff(giver, taker, body, target, jaw, *, hold=GRIP_PINCH,
     # planned the hand-off site to 5.3 mm and arrived 191.8 mm away, and the
     # mug fell.  Squaring is kept for the moves that pinch.
     carry = square if square_carry is None else square_carry
+    # Solving the TAKE waypoints at the pinch and executing them open
+    # displaces the jaw midpoint by half the opening; see
+    # CUTLERY_TAKE_PLAN_AT_OPEN.  None means "solve where you execute".
+    take_plan_at = None if plan_at_open else hold
+
+    # Where the TAKER aims.  At offset 0.0 this is ``site_xyz(grasp, dz=...)``
+    # unchanged -- the same callable shape, the same point.
+    def take_at(dz):
+        if not take_offset:
+            return site_xyz(grasp, dz=dz)
+
+        def f(model, data):
+            base = _scene.active().site_xpos(model, data, grasp)
+            v = long_axis(body)(model, data)
+            return base - v * float(take_offset) + np.array([0.0, 0.0, dz])
+        return f
     return [
         # giver presents it; taker comes in from above at the same time
         ({giver: Move(giver, site_xyz("handoff", dz=0.030), jaw=jaw,
                       square=carry, label=f"{body}_present"),
           taker: Move(taker, site_xyz("handoff", dz=0.115), jaw=tjaw,
                       opening=open_to, label=f"{body}_meet")}, 1.8),
-        ({taker: Move(taker, site_xyz(grasp, dz=0.040), jaw=tjaw,
-                      opening=open_to, plan_at=hold, square=square,
+        ({taker: Move(taker, take_at(0.040), jaw=tjaw,
+                      opening=open_to, plan_at=take_plan_at, square=square,
                       label=f"{body}_take_above")}, 1.2),
-        ({taker: Move(taker, site_xyz(grasp, dz=0.004), jaw=tjaw,
-                      opening=open_to, plan_at=hold, square=square,
+        ({taker: Move(taker, take_at(0.004), jaw=tjaw,
+                      opening=open_to, plan_at=take_plan_at, square=square,
                       label=f"{body}_take")}, 1.0),
         ({taker: Grip(taker, hold, label=f"{body}_taker_close")}, 0.8),
         ({giver: Grip(giver, open_to, label=f"{body}_giver_release")}, 0.6),
         ({giver: Move(giver, tip_up(giver, 0.085), opening=open_to,
                       label=f"{body}_giver_clear"),
-          taker: Move(taker, site_xyz(grasp, dz=0.075), jaw=tjaw, square=carry,
+          taker: Move(taker, take_at(0.075), jaw=tjaw, square=carry,
                       label=f"{body}_taker_lift")}, 1.5),
     ] + _place(taker, target, hold, tjaw, open_to=open_to, square=square,
                drop_z=drop_z, over_z=over_z, aim_body=aim_body)

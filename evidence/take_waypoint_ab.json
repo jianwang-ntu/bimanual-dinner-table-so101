@@ -1,0 +1,119 @@
+{
+ "probe": "scripts/eval_seeds.py --seeds 10 --policy scripted",
+ "measured_at": "2026-09-09T11:00Z/11:45Z",
+ "question": "does removing the measured 45 mm take-waypoint command error improve the score the demo video is held on?",
+ "answer": "NO. No arm beats shipped. Neither knob is adopted; both stay at the shipped default and both are proven inert there.",
+ "not_claimed": "harm. 15-18/50 sits inside the scatter the CUTLERY_SQUEEZE sweep already recorded for this quantity at n=10 ('fork_placed is 1-3 of 10 across the entire sweep, which at n=10 is noise'). The verdict is NO MEASURED IMPROVEMENT, not 'worse'.",
+ "arms": {
+  "A_shipped": {
+   "config": {
+    "CUTLERY_TAKE_PLAN_AT_OPEN": false,
+    "CUTLERY_TAKE_OFFSET": 0.0
+   },
+   "subgoals_total": 18,
+   "subgoals_per_seed": [
+    3,
+    2,
+    3,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2
+   ],
+   "task_success_count": 0,
+   "seeds": 10,
+   "all_episodes_valid_and_stable": true
+  },
+  "B_plan_at_open": {
+   "config": {
+    "CUTLERY_TAKE_PLAN_AT_OPEN": true,
+    "CUTLERY_TAKE_OFFSET": 0.0
+   },
+   "subgoals_total": 15,
+   "subgoals_per_seed": [
+    2,
+    1,
+    3,
+    1,
+    3,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "task_success_count": 0,
+   "seeds": 10,
+   "all_episodes_valid_and_stable": true
+  },
+  "C_plan_at_open_plus_offset30": {
+   "config": {
+    "CUTLERY_TAKE_PLAN_AT_OPEN": true,
+    "CUTLERY_TAKE_OFFSET": 0.03
+   },
+   "subgoals_total": 15,
+   "subgoals_per_seed": [
+    2,
+    1,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    2,
+    3
+   ],
+   "task_success_count": 0,
+   "seeds": 10,
+   "all_episodes_valid_and_stable": true
+  },
+  "D_offset30": {
+   "config": {
+    "CUTLERY_TAKE_PLAN_AT_OPEN": false,
+    "CUTLERY_TAKE_OFFSET": 0.03
+   },
+   "subgoals_total": 16,
+   "subgoals_per_seed": [
+    2,
+    1,
+    2,
+    1,
+    2,
+    1,
+    1,
+    1,
+    2,
+    3
+   ],
+   "task_success_count": 0,
+   "seeds": 10,
+   "all_episodes_valid_and_stable": true
+  }
+ },
+ "best_arm": "A_shipped",
+ "shipped_is_best_or_tied": true,
+ "task_success_in_every_arm": [
+  0
+ ],
+ "controls": {
+  "knobs_inert_at_default": {
+   "pass": true,
+   "basis": "evidence/taker_servo.json, run at both defaults AFTER the two structural edits to _handoff: reproduces_published PASS, abs_delta_mm 0.0 on all ten seeds against the pinned shipped column [158.9,149.4,14.0,54.6,70.2,83.0,159.8,35.9,143.6,20.3]",
+   "why_it_matters": "an edit that changes the shipped robot cannot be called off-by-default"
+  },
+  "knobs_are_live_when_on": {
+   "pass": true,
+   "basis": "evidence/taker_servo_planatopen.json: plan_err_mm 43.9-46.5 -> 3.0-9.5 on all ten seeds, and reproduces_published FAILS in that arm -- which is the CORRECT outcome, because the arm changed the robot",
+   "why_it_matters": "a knob whose ON arm still reproduces the shipped column is not connected to anything"
+  },
+  "arms_differ": {
+   "pass": true,
+   "distinct_per_seed_columns": 4,
+   "why_it_matters": "arms that produce an identical per-seed column are the same experiment run four times"
+  }
+ }
+}
