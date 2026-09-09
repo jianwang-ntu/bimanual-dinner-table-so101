@@ -1,0 +1,5515 @@
+{
+  "probe": "measure_fork_knockout.py",
+  "question": "at the step the fork leaves the giver's jaws, what else is touching it -- and is it the taker's arm?",
+  "shipped_controller": true,
+  "knobs_touched": [],
+  "seeds": 10,
+  "window_steps": 25,
+  "controls": {
+    "reproduces_published": {
+      "pass": true,
+      "pinned_literal": [
+        158.9,
+        149.4,
+        14.0,
+        54.6,
+        70.2,
+        83.0,
+        159.8,
+        35.9,
+        143.6,
+        20.3
+      ],
+      "measured": [
+        158.9,
+        149.4,
+        14.0,
+        54.6,
+        70.2,
+        83.0,
+        159.8,
+        35.9,
+        143.6,
+        20.3
+      ],
+      "abs_delta_mm": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tol_mm": 1.0
+    },
+    "link_geoms_are_new": {
+      "pass": true,
+      "jaw_geoms_per_arm": {
+        "right": 23,
+        "left": 23
+      },
+      "all_arm_geoms_per_arm": {
+        "right": 48,
+        "left": 48
+      },
+      "bodies_never_watched_before": {
+        "right": [
+          "right_base",
+          "right_camera_mount",
+          "right_lower_arm",
+          "right_shoulder",
+          "right_upper_arm",
+          "right_wrist"
+        ],
+        "left": [
+          "left_base",
+          "left_camera_mount",
+          "left_lower_arm",
+          "left_shoulder",
+          "left_upper_arm",
+          "left_wrist"
+        ]
+      },
+      "why_it_matters": "if this fails, the probe watches exactly what the previous instrument watched and adds nothing"
+    },
+    "detector_can_say_yes": {
+      "pass": true,
+      "detector_fires_on_seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "giver_jaw_contact_steps": {
+        "0": 495,
+        "1": 529,
+        "2": 2691,
+        "3": 3712,
+        "4": 3313,
+        "5": 2890,
+        "6": 0,
+        "7": 3049,
+        "8": 3506,
+        "9": 2057
+      },
+      "silent_seeds": [
+        6
+      ],
+      "silent_seed_min_giver_tip_mm": {
+        "6": 77.1
+      },
+      "corroboration_threshold_mm": 20.0,
+      "seeds_silent_AND_within_reach": [],
+      "why_it_matters": "a contact test that never returns True cannot support any 'was not touching' conclusion; and a seed where it stays silent must be shown, without contact data, to be a seed with nothing to detect"
+    },
+    "unrelated_body_absent": {
+      "pass": true,
+      "unrelated_bodies_seen": [],
+      "all_bodies_seen": [
+        "drawer",
+        "left_camera_mount",
+        "left_gripper",
+        "left_moving_jaw_so101_v1",
+        "plate",
+        "right_camera_mount",
+        "right_gripper",
+        "right_moving_jaw_so101_v1",
+        "spoon",
+        "table"
+      ],
+      "why_it_matters": "the bottle is never handled by the script; if the attribution names it, the names are not trustworthy"
+    },
+    "loss_is_after_lift": {
+      "pass": true,
+      "seeds_with_loss_before_lift": [],
+      "why_it_matters": "a loss found before the lift is the pick failing, not the hand-off"
+    }
+  },
+  "summary": {
+    "verdicts": {
+      "NEVER_LIFTED": 3,
+      "SLIPPED": 5,
+      "KNOCKED_OUT_BY_TAKER": 2
+    },
+    "seeds_where_giver_lifted": [
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9
+    ],
+    "taker_bodies_in_window": {
+      "0": [],
+      "1": [],
+      "2": [],
+      "3": [
+        "left_gripper"
+      ],
+      "4": [],
+      "5": [],
+      "6": [],
+      "7": [],
+      "8": [],
+      "9": [
+        "left_camera_mount"
+      ]
+    },
+    "touching_at_loss": {
+      "0": [],
+      "1": [],
+      "2": [
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ],
+      "3": [
+        "left_gripper",
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ],
+      "4": [
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ],
+      "5": [
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ],
+      "6": [],
+      "7": [
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ],
+      "8": [
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ],
+      "9": [
+        "left_camera_mount",
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ]
+    },
+    "loss_labels": {
+      "0": [],
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+      "6": [],
+      "7": [],
+      "8": [],
+      "9": []
+    },
+    "loss_fork_z_mm": {
+      "0": null,
+      "1": null,
+      "2": 887.5,
+      "3": 900.4,
+      "4": 899.9,
+      "5": 898.8,
+      "6": null,
+      "7": 897.4,
+      "8": 897.5,
+      "9": 900.4
+    },
+    "first_taker_contact_bodies": {
+      "0": [
+        "left_gripper"
+      ],
+      "1": [
+        "left_moving_jaw_so101_v1"
+      ],
+      "2": [
+        "left_gripper"
+      ],
+      "3": [
+        "left_gripper"
+      ],
+      "4": [],
+      "5": [
+        "left_gripper"
+      ],
+      "6": [],
+      "7": [
+        "left_gripper"
+      ],
+      "8": [],
+      "9": [
+        "left_camera_mount"
+      ]
+    },
+    "carry_grip_force_N": {
+      "0": null,
+      "1": null,
+      "2": {
+        "min": 0.0,
+        "max": 89.074,
+        "at_loss": 0.0,
+        "last_20_steps": [
+          89.074,
+          59.786,
+          68.644,
+          69.778,
+          70.743,
+          71.643,
+          72.462,
+          73.16,
+          74.494,
+          73.852,
+          74.115,
+          74.183,
+          74.436,
+          74.327,
+          5.883,
+          3.108,
+          1.15,
+          0.56,
+          0.041,
+          0.0
+        ]
+      },
+      "3": {
+        "min": 0.0,
+        "max": 86.751,
+        "at_loss": 0.0,
+        "last_20_steps": [
+          62.963,
+          62.559,
+          62.18,
+          61.871,
+          61.647,
+          61.506,
+          61.304,
+          61.102,
+          61.032,
+          61.093,
+          61.282,
+          61.548,
+          61.882,
+          62.273,
+          62.971,
+          5.822,
+          2.439,
+          1.126,
+          0.134,
+          0.0
+        ]
+      },
+      "4": {
+        "min": 0.0,
+        "max": 83.564,
+        "at_loss": 0.0,
+        "last_20_steps": [
+          70.573,
+          70.625,
+          70.714,
+          70.833,
+          71.054,
+          71.229,
+          71.378,
+          71.497,
+          71.503,
+          71.502,
+          71.532,
+          71.596,
+          3.911,
+          2.089,
+          1.698,
+          1.646,
+          1.089,
+          0.002,
+          0.0,
+          0.0
+        ]
+      },
+      "5": {
+        "min": 0.0,
+        "max": 92.464,
+        "at_loss": 0.0,
+        "last_20_steps": [
+          92.464,
+          81.179,
+          81.518,
+          81.808,
+          82.048,
+          82.301,
+          82.548,
+          82.792,
+          83.033,
+          83.273,
+          83.512,
+          83.748,
+          2.321,
+          1.576,
+          0.8,
+          0.569,
+          0.583,
+          0.341,
+          0.0,
+          0.0
+        ]
+      },
+      "6": null,
+      "7": {
+        "min": 0.0,
+        "max": 92.167,
+        "at_loss": 0.0,
+        "last_20_steps": [
+          66.975,
+          68.049,
+          68.827,
+          69.705,
+          70.559,
+          71.416,
+          72.272,
+          73.139,
+          74.169,
+          75.141,
+          76.002,
+          76.842,
+          4.485,
+          2.451,
+          0.928,
+          0.122,
+          0.037,
+          0.012,
+          0.0,
+          0.0
+        ]
+      },
+      "8": {
+        "min": 0.0,
+        "max": 84.88,
+        "at_loss": 0.0,
+        "last_20_steps": [
+          61.252,
+          61.393,
+          61.509,
+          61.625,
+          61.734,
+          61.844,
+          61.95,
+          62.05,
+          62.147,
+          62.238,
+          62.319,
+          1.58,
+          1.175,
+          0.478,
+          0.234,
+          0.115,
+          0.088,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "9": {
+        "min": 0.0,
+        "max": 86.358,
+        "at_loss": 0.0,
+        "last_20_steps": [
+          71.946,
+          72.096,
+          72.242,
+          72.387,
+          72.528,
+          72.66,
+          72.806,
+          72.951,
+          72.755,
+          72.896,
+          2.996,
+          19.644,
+          19.315,
+          16.58,
+          2.562,
+          2.002,
+          0.018,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "carry_jaw_sep_mm": {
+      "0": null,
+      "1": null,
+      "2": {
+        "min": 8.2,
+        "max": 13.8,
+        "at_loss": 8.2
+      },
+      "3": {
+        "min": 8.2,
+        "max": 40.5,
+        "at_loss": 8.2
+      },
+      "4": {
+        "min": 7.5,
+        "max": 39.8,
+        "at_loss": 7.5
+      },
+      "5": {
+        "min": 7.0,
+        "max": 16.1,
+        "at_loss": 7.0
+      },
+      "6": null,
+      "7": {
+        "min": 6.8,
+        "max": 13.5,
+        "at_loss": 6.8
+      },
+      "8": {
+        "min": 7.8,
+        "max": 13.7,
+        "at_loss": 7.8
+      },
+      "9": {
+        "min": 7.1,
+        "max": 35.1,
+        "at_loss": 7.1
+      }
+    },
+    "min_taker_tip_mm": {
+      "0": 41.7,
+      "1": 18.6,
+      "2": 29.6,
+      "3": 56.1,
+      "4": 54.8,
+      "5": 44.5,
+      "6": 118.8,
+      "7": 43.3,
+      "8": 63.2,
+      "9": 72.0
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 0,
+      "final_to_target_mm": 158.9,
+      "subgoals_met": 3,
+      "fork_start_z_mm": 784.0,
+      "first_lift_step": null,
+      "first_lift_t": null,
+      "max_fork_z_mm": 786.8,
+      "carry_run_steps": null,
+      "loss_step": null,
+      "loss_t": null,
+      "loss_fork_z_mm": null,
+      "loss_labels": [],
+      "touching_at_loss": [],
+      "taker_bodies_in_window": [],
+      "taker_jaw_in_window": false,
+      "first_taker_contact_step": 10774,
+      "first_taker_contact_t": 21.55,
+      "first_taker_contact_bodies": [
+        "left_gripper"
+      ],
+      "verdict": "NEVER_LIFTED",
+      "giver_jaw_steps": 495,
+      "min_giver_tip_mm": 4.0,
+      "min_taker_tip_mm": 41.7,
+      "carry_grip_force_N": null,
+      "carry_jaw_sep_mm": null,
+      "all_bodies_ever_touching_fork": [
+        "drawer",
+        "left_gripper",
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ],
+      "window": [],
+      "n_jaw_geoms": {
+        "right": 23,
+        "left": 23
+      },
+      "n_arm_geoms": {
+        "right": 48,
+        "left": 48
+      },
+      "link_geoms": {
+        "right": [
+          "right_base",
+          "right_camera_mount",
+          "right_lower_arm",
+          "right_shoulder",
+          "right_upper_arm",
+          "right_wrist"
+        ],
+        "left": [
+          "left_base",
+          "left_camera_mount",
+          "left_lower_arm",
+          "left_shoulder",
+          "left_upper_arm",
+          "left_wrist"
+        ]
+      }
+    },
+    {
+      "seed": 1,
+      "final_to_target_mm": 149.4,
+      "subgoals_met": 2,
+      "fork_start_z_mm": 784.0,
+      "first_lift_step": null,
+      "first_lift_t": null,
+      "max_fork_z_mm": 789.8,
+      "carry_run_steps": null,
+      "loss_step": null,
+      "loss_t": null,
+      "loss_fork_z_mm": null,
+      "loss_labels": [],
+      "touching_at_loss": [],
+      "taker_bodies_in_window": [],
+      "taker_jaw_in_window": false,
+      "first_taker_contact_step": 17760,
+      "first_taker_contact_t": 35.522,
+      "first_taker_contact_bodies": [
+        "left_moving_jaw_so101_v1"
+      ],
+      "verdict": "NEVER_LIFTED",
+      "giver_jaw_steps": 529,
+      "min_giver_tip_mm": 5.9,
+      "min_taker_tip_mm": 18.6,
+      "carry_grip_force_N": null,
+      "carry_jaw_sep_mm": null,
+      "all_bodies_ever_touching_fork": [
+        "drawer",
+        "left_moving_jaw_so101_v1",
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ],
+      "window": [],
+      "n_jaw_geoms": {
+        "right": 23,
+        "left": 23
+      },
+      "n_arm_geoms": {
+        "right": 48,
+        "left": 48
+      },
+      "link_geoms": {
+        "right": [
+          "right_base",
+          "right_camera_mount",
+          "right_lower_arm",
+          "right_shoulder",
+          "right_upper_arm",
+          "right_wrist"
+        ],
+        "left": [
+          "left_base",
+          "left_camera_mount",
+          "left_lower_arm",
+          "left_shoulder",
+          "left_upper_arm",
+          "left_wrist"
+        ]
+      }
+    },
+    {
+      "seed": 2,
+      "final_to_target_mm": 14.0,
+      "subgoals_met": 3,
+      "fork_start_z_mm": 784.0,
+      "first_lift_step": 7986,
+      "first_lift_t": 15.974,
+      "max_fork_z_mm": 902.8,
+      "carry_run_steps": [
+        7524,
+        10103
+      ],
+      "loss_step": 10103,
+      "loss_t": 20.208,
+      "loss_fork_z_mm": 887.5,
+      "loss_labels": [],
+      "touching_at_loss": [
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ],
+      "taker_bodies_in_window": [],
+      "taker_jaw_in_window": false,
+      "first_taker_contact_step": 8876,
+      "first_taker_contact_t": 17.754,
+      "first_taker_contact_bodies": [
+        "left_gripper"
+      ],
+      "verdict": "SLIPPED",
+      "giver_jaw_steps": 2691,
+      "min_giver_tip_mm": 3.9,
+      "min_taker_tip_mm": 29.6,
+      "carry_grip_force_N": {
+        "min": 0.0,
+        "max": 89.074,
+        "at_loss": 0.0,
+        "last_20_steps": [
+          89.074,
+          59.786,
+          68.644,
+          69.778,
+          70.743,
+          71.643,
+          72.462,
+          73.16,
+          74.494,
+          73.852,
+          74.115,
+          74.183,
+          74.436,
+          74.327,
+          5.883,
+          3.108,
+          1.15,
+          0.56,
+          0.041,
+          0.0
+        ]
+      },
+      "carry_jaw_sep_mm": {
+        "min": 8.2,
+        "max": 13.8,
+        "at_loss": 8.2
+      },
+      "all_bodies_ever_touching_fork": [
+        "drawer",
+        "left_gripper",
+        "plate",
+        "right_gripper",
+        "right_moving_jaw_so101_v1",
+        "table"
+      ],
+      "window": [
+        {
+          "i": 10078,
+          "t": 20.158,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.5,
+          "giver_force_N": 88.28097050541857,
+          "giver_sep_mm": 10.0,
+          "giver_tip_mm": 5.0,
+          "taker_tip_mm": 77.3
+        },
+        {
+          "i": 10079,
+          "t": 20.16,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.5,
+          "giver_force_N": 88.41682238980485,
+          "giver_sep_mm": 10.0,
+          "giver_tip_mm": 5.0,
+          "taker_tip_mm": 77.2
+        },
+        {
+          "i": 10080,
+          "t": 20.162,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.4,
+          "giver_force_N": 88.55619331185895,
+          "giver_sep_mm": 10.0,
+          "giver_tip_mm": 5.0,
+          "taker_tip_mm": 77.2
+        },
+        {
+          "i": 10081,
+          "t": 20.164,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.4,
+          "giver_force_N": 88.70475229099844,
+          "giver_sep_mm": 10.0,
+          "giver_tip_mm": 5.0,
+          "taker_tip_mm": 77.2
+        },
+        {
+          "i": 10082,
+          "t": 20.166,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.4,
+          "giver_force_N": 88.8404156039498,
+          "giver_sep_mm": 10.0,
+          "giver_tip_mm": 5.0,
+          "taker_tip_mm": 77.2
+        },
+        {
+          "i": 10083,
+          "t": 20.168,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.4,
+          "giver_force_N": 88.96344008262926,
+          "giver_sep_mm": 10.0,
+          "giver_tip_mm": 5.0,
+          "taker_tip_mm": 77.1
+        },
+        {
+          "i": 10084,
+          "t": 20.17,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.3,
+          "giver_force_N": 89.07437231077297,
+          "giver_sep_mm": 10.0,
+          "giver_tip_mm": 5.0,
+          "taker_tip_mm": 77.1
+        },
+        {
+          "i": 10085,
+          "t": 20.172,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.3,
+          "giver_force_N": 59.786377960520866,
+          "giver_sep_mm": 10.0,
+          "giver_tip_mm": 5.0,
+          "taker_tip_mm": 77.0
+        },
+        {
+          "i": 10086,
+          "t": 20.174,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.3,
+          "giver_force_N": 68.64420237440164,
+          "giver_sep_mm": 9.9,
+          "giver_tip_mm": 5.0,
+          "taker_tip_mm": 77.0
+        },
+        {
+          "i": 10087,
+          "t": 20.176,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.3,
+          "giver_force_N": 69.77750547170112,
+          "giver_sep_mm": 9.9,
+          "giver_tip_mm": 5.0,
+          "taker_tip_mm": 77.0
+        },
+        {
+          "i": 10088,
+          "t": 20.178,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.2,
+          "giver_force_N": 70.74269206635613,
+          "giver_sep_mm": 9.9,
+          "giver_tip_mm": 5.1,
+          "taker_tip_mm": 77.0
+        },
+        {
+          "i": 10089,
+          "t": 20.18,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.2,
+          "giver_force_N": 71.64305239951761,
+          "giver_sep_mm": 9.8,
+          "giver_tip_mm": 5.1,
+          "taker_tip_mm": 77.0
+        },
+        {
+          "i": 10090,
+          "t": 20.182,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.1,
+          "giver_force_N": 72.46175806636741,
+          "giver_sep_mm": 9.8,
+          "giver_tip_mm": 5.2,
+          "taker_tip_mm": 77.0
+        },
+        {
+          "i": 10091,
+          "t": 20.184,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.1,
+          "giver_force_N": 73.15960594846187,
+          "giver_sep_mm": 9.7,
+          "giver_tip_mm": 5.2,
+          "taker_tip_mm": 77.0
+        },
+        {
+          "i": 10092,
+          "t": 20.186,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.0,
+          "giver_force_N": 74.49409439740926,
+          "giver_sep_mm": 9.6,
+          "giver_tip_mm": 5.3,
+          "taker_tip_mm": 77.0
+        },
+        {
+          "i": 10093,
+          "t": 20.188,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 889.0,
+          "giver_force_N": 73.8523729717944,
+          "giver_sep_mm": 9.6,
+          "giver_tip_mm": 5.4,
+          "taker_tip_mm": 77.0
+        },
+        {
+          "i": 10094,
+          "t": 20.19,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 888.9,
+          "giver_force_N": 74.11544735885504,
+          "giver_sep_mm": 9.5,
+          "giver_tip_mm": 5.4,
+          "taker_tip_mm": 77.0
+        },
+        {
+          "i": 10095,
+          "t": 20.192,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 888.9,
+          "giver_force_N": 74.18330501704179,
+          "giver_sep_mm": 9.4,
+          "giver_tip_mm": 5.5,
+          "taker_tip_mm": 77.0
+        },
+        {
+          "i": 10096,
+          "t": 20.194,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 888.9,
+          "giver_force_N": 74.43563509864099,
+          "giver_sep_mm": 9.3,
+          "giver_tip_mm": 5.5,
+          "taker_tip_mm": 77.0
+        },
+        {
+          "i": 10097,
+          "t": 20.196,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 888.9,
+          "giver_force_N": 74.32717446175197,
+          "giver_sep_mm": 9.2,
+          "giver_tip_mm": 5.5,
+          "taker_tip_mm": 77.0
+        },
+        {
+          "i": 10098,
+          "t": 20.198,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 888.8,
+          "giver_force_N": 5.88269069113133,
+          "giver_sep_mm": 9.1,
+          "giver_tip_mm": 5.6,
+          "taker_tip_mm": 76.9
+        },
+        {
+          "i": 10099,
+          "t": 20.2,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 888.7,
+          "giver_force_N": 3.108188918905607,
+          "giver_sep_mm": 9.0,
+          "giver_tip_mm": 5.8,
+          "taker_tip_mm": 77.0
+        },
+        {
+          "i": 10100,
+          "t": 20.202,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 888.4,
+          "giver_force_N": 1.1504600187892788,
+          "giver_sep_mm": 8.8,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 77.2
+        },
+        {
+          "i": 10101,
+          "t": 20.204,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 888.1,
+          "giver_force_N": 0.5595044623337366,
+          "giver_sep_mm": 8.7,
+          "giver_tip_mm": 6.7,
+          "taker_tip_mm": 77.5
+        },
+        {
+          "i": 10102,
+          "t": 20.206,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 887.9,
+          "giver_force_N": 0.04084376613488098,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 7.3,
+          "taker_tip_mm": 77.7
+        },
+        {
+          "i": 10103,
+          "t": 20.208,
+          "bodies": [
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 887.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 8.2,
+          "giver_tip_mm": 7.9,
+          "taker_tip_mm": 77.9
+        },
+        {
+          "i": 10104,
+          "t": 20.21,
+          "bodies": [],
+          "fork_z_mm": 887.2,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 8.5,
+          "taker_tip_mm": 78.2
+        },
+        {
+          "i": 10105,
+          "t": 20.212,
+          "bodies": [],
+          "fork_z_mm": 886.7,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.7,
+          "giver_tip_mm": 9.2,
+          "taker_tip_mm": 78.6
+        },
+        {
+          "i": 10106,
+          "t": 20.214,
+          "bodies": [],
+          "fork_z_mm": 886.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.5,
+          "giver_tip_mm": 10.0,
+          "taker_tip_mm": 78.9
+        },
+        {
+          "i": 10107,
+          "t": 20.216,
+          "bodies": [],
+          "fork_z_mm": 885.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.2,
+          "giver_tip_mm": 10.8,
+          "taker_tip_mm": 79.4
+        },
+        {
+          "i": 10108,
+          "t": 20.218,
+          "bodies": [],
+          "fork_z_mm": 885.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 11.6,
+          "taker_tip_mm": 79.8
+        },
+        {
+          "i": 10109,
+          "t": 20.22,
+          "bodies": [],
+          "fork_z_mm": 884.7,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 12.4,
+          "taker_tip_mm": 80.2
+        },
+        {
+          "i": 10110,
+          "t": 20.222,
+          "bodies": [],
+          "fork_z_mm": 884.1,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.5,
+          "giver_tip_mm": 13.3,
+          "taker_tip_mm": 80.6
+        },
+        {
+          "i": 10111,
+          "t": 20.224,
+          "bodies": [],
+          "fork_z_mm": 883.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.4,
+          "giver_tip_mm": 14.3,
+          "taker_tip_mm": 81.0
+        },
+        {
+          "i": 10112,
+          "t": 20.226,
+          "bodies": [],
+          "fork_z_mm": 882.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.3,
+          "giver_tip_mm": 15.2,
+          "taker_tip_mm": 81.5
+        },
+        {
+          "i": 10113,
+          "t": 20.228,
+          "bodies": [],
+          "fork_z_mm": 882.1,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.2,
+          "giver_tip_mm": 16.2,
+          "taker_tip_mm": 82.1
+        },
+        {
+          "i": 10114,
+          "t": 20.23,
+          "bodies": [],
+          "fork_z_mm": 881.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.2,
+          "giver_tip_mm": 17.3,
+          "taker_tip_mm": 82.8
+        },
+        {
+          "i": 10115,
+          "t": 20.232,
+          "bodies": [],
+          "fork_z_mm": 880.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.2,
+          "giver_tip_mm": 18.4,
+          "taker_tip_mm": 83.6
+        },
+        {
+          "i": 10116,
+          "t": 20.234,
+          "bodies": [],
+          "fork_z_mm": 879.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.1,
+          "giver_tip_mm": 19.5,
+          "taker_tip_mm": 84.6
+        },
+        {
+          "i": 10117,
+          "t": 20.236,
+          "bodies": [],
+          "fork_z_mm": 878.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.2,
+          "giver_tip_mm": 20.7,
+          "taker_tip_mm": 85.6
+        },
+        {
+          "i": 10118,
+          "t": 20.238,
+          "bodies": [],
+          "fork_z_mm": 877.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.2,
+          "giver_tip_mm": 22.0,
+          "taker_tip_mm": 86.7
+        },
+        {
+          "i": 10119,
+          "t": 20.24,
+          "bodies": [],
+          "fork_z_mm": 876.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.2,
+          "giver_tip_mm": 23.2,
+          "taker_tip_mm": 87.9
+        },
+        {
+          "i": 10120,
+          "t": 20.242,
+          "bodies": [],
+          "fork_z_mm": 875.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.3,
+          "giver_tip_mm": 24.5,
+          "taker_tip_mm": 89.0
+        },
+        {
+          "i": 10121,
+          "t": 20.244,
+          "bodies": [],
+          "fork_z_mm": 874.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.4,
+          "giver_tip_mm": 25.9,
+          "taker_tip_mm": 90.2
+        },
+        {
+          "i": 10122,
+          "t": 20.246,
+          "bodies": [],
+          "fork_z_mm": 873.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.5,
+          "giver_tip_mm": 27.2,
+          "taker_tip_mm": 91.5
+        },
+        {
+          "i": 10123,
+          "t": 20.248,
+          "bodies": [],
+          "fork_z_mm": 872.7,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.6,
+          "giver_tip_mm": 28.6,
+          "taker_tip_mm": 92.7
+        },
+        {
+          "i": 10124,
+          "t": 20.25,
+          "bodies": [],
+          "fork_z_mm": 871.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 29.9,
+          "taker_tip_mm": 93.9
+        },
+        {
+          "i": 10125,
+          "t": 20.252,
+          "bodies": [],
+          "fork_z_mm": 870.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 31.3,
+          "taker_tip_mm": 95.2
+        },
+        {
+          "i": 10126,
+          "t": 20.254,
+          "bodies": [],
+          "fork_z_mm": 869.1,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 32.7,
+          "taker_tip_mm": 96.5
+        },
+        {
+          "i": 10127,
+          "t": 20.256,
+          "bodies": [],
+          "fork_z_mm": 867.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 34.2,
+          "taker_tip_mm": 97.8
+        },
+        {
+          "i": 10128,
+          "t": 20.258,
+          "bodies": [],
+          "fork_z_mm": 866.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 35.6,
+          "taker_tip_mm": 99.1
+        }
+      ],
+      "n_jaw_geoms": {
+        "right": 23,
+        "left": 23
+      },
+      "n_arm_geoms": {
+        "right": 48,
+        "left": 48
+      },
+      "link_geoms": {
+        "right": [
+          "right_base",
+          "right_camera_mount",
+          "right_lower_arm",
+          "right_shoulder",
+          "right_upper_arm",
+          "right_wrist"
+        ],
+        "left": [
+          "left_base",
+          "left_camera_mount",
+          "left_lower_arm",
+          "left_shoulder",
+          "left_upper_arm",
+          "left_wrist"
+        ]
+      }
+    },
+    {
+      "seed": 3,
+      "final_to_target_mm": 54.6,
+      "subgoals_met": 1,
+      "fork_start_z_mm": 784.0,
+      "first_lift_step": 7987,
+      "first_lift_t": 15.976,
+      "max_fork_z_mm": 907.4,
+      "carry_run_steps": [
+        7385,
+        10756
+      ],
+      "loss_step": 10756,
+      "loss_t": 21.514,
+      "loss_fork_z_mm": 900.4,
+      "loss_labels": [],
+      "touching_at_loss": [
+        "left_gripper",
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ],
+      "taker_bodies_in_window": [
+        "left_gripper"
+      ],
+      "taker_jaw_in_window": true,
+      "first_taker_contact_step": 10730,
+      "first_taker_contact_t": 21.462,
+      "first_taker_contact_bodies": [
+        "left_gripper"
+      ],
+      "verdict": "KNOCKED_OUT_BY_TAKER",
+      "giver_jaw_steps": 3712,
+      "min_giver_tip_mm": 4.3,
+      "min_taker_tip_mm": 56.1,
+      "carry_grip_force_N": {
+        "min": 0.0,
+        "max": 86.751,
+        "at_loss": 0.0,
+        "last_20_steps": [
+          62.963,
+          62.559,
+          62.18,
+          61.871,
+          61.647,
+          61.506,
+          61.304,
+          61.102,
+          61.032,
+          61.093,
+          61.282,
+          61.548,
+          61.882,
+          62.273,
+          62.971,
+          5.822,
+          2.439,
+          1.126,
+          0.134,
+          0.0
+        ]
+      },
+      "carry_jaw_sep_mm": {
+        "min": 8.2,
+        "max": 40.5,
+        "at_loss": 8.2
+      },
+      "all_bodies_ever_touching_fork": [
+        "drawer",
+        "left_gripper",
+        "plate",
+        "right_gripper",
+        "right_moving_jaw_so101_v1",
+        "table"
+      ],
+      "window": [
+        {
+          "i": 10731,
+          "t": 21.464,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 903.1,
+          "giver_force_N": 65.71035649930299,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 61.5
+        },
+        {
+          "i": 10732,
+          "t": 21.466,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 903.1,
+          "giver_force_N": 65.2593521383614,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 61.4
+        },
+        {
+          "i": 10733,
+          "t": 21.468,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 903.1,
+          "giver_force_N": 64.84486972843585,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 61.3
+        },
+        {
+          "i": 10734,
+          "t": 21.47,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 903.1,
+          "giver_force_N": 64.45029144439765,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 61.2
+        },
+        {
+          "i": 10735,
+          "t": 21.472,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 903.1,
+          "giver_force_N": 63.919126889476225,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 61.2
+        },
+        {
+          "i": 10736,
+          "t": 21.474,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 903.1,
+          "giver_force_N": 63.365727884588395,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 61.2
+        },
+        {
+          "i": 10737,
+          "t": 21.476,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 903.1,
+          "giver_force_N": 62.963102738496595,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 61.2
+        },
+        {
+          "i": 10738,
+          "t": 21.478,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 903.0,
+          "giver_force_N": 62.558820672897674,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 61.2
+        },
+        {
+          "i": 10739,
+          "t": 21.48,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 903.0,
+          "giver_force_N": 62.18007626914084,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 61.2
+        },
+        {
+          "i": 10740,
+          "t": 21.482,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 903.0,
+          "giver_force_N": 61.870902311251555,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 61.1
+        },
+        {
+          "i": 10741,
+          "t": 21.484,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.9,
+          "giver_force_N": 61.64688272986555,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 61.1
+        },
+        {
+          "i": 10742,
+          "t": 21.486,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.9,
+          "giver_force_N": 61.505510092429255,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 61.1
+        },
+        {
+          "i": 10743,
+          "t": 21.488,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.8,
+          "giver_force_N": 61.30355022384293,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 61.1
+        },
+        {
+          "i": 10744,
+          "t": 21.49,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.8,
+          "giver_force_N": 61.10197751516823,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 61.1
+        },
+        {
+          "i": 10745,
+          "t": 21.492,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.7,
+          "giver_force_N": 61.03170011782212,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 61.0
+        },
+        {
+          "i": 10746,
+          "t": 21.494,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.7,
+          "giver_force_N": 61.09271546381345,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 61.0
+        },
+        {
+          "i": 10747,
+          "t": 21.496,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.7,
+          "giver_force_N": 61.282364859228,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 61.0
+        },
+        {
+          "i": 10748,
+          "t": 21.498,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.6,
+          "giver_force_N": 61.54822280751833,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 60.9
+        },
+        {
+          "i": 10749,
+          "t": 21.5,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.6,
+          "giver_force_N": 61.882481426847626,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.3,
+          "taker_tip_mm": 60.9
+        },
+        {
+          "i": 10750,
+          "t": 21.502,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.5,
+          "giver_force_N": 62.27319728107676,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.3,
+          "taker_tip_mm": 60.8
+        },
+        {
+          "i": 10751,
+          "t": 21.504,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.5,
+          "giver_force_N": 62.971144230647134,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.3,
+          "taker_tip_mm": 60.8
+        },
+        {
+          "i": 10752,
+          "t": 21.506,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.5,
+          "giver_force_N": 5.82203978019634,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.3,
+          "taker_tip_mm": 60.8
+        },
+        {
+          "i": 10753,
+          "t": 21.508,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.1,
+          "giver_force_N": 2.4385002465324677,
+          "giver_sep_mm": 8.4,
+          "giver_tip_mm": 6.6,
+          "taker_tip_mm": 61.0
+        },
+        {
+          "i": 10754,
+          "t": 21.51,
+          "bodies": [
+            "left_gripper",
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 1.1261443633934032,
+          "giver_sep_mm": 8.4,
+          "giver_tip_mm": 7.1,
+          "taker_tip_mm": 61.3
+        },
+        {
+          "i": 10755,
+          "t": 21.512,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.0,
+          "giver_force_N": 0.1337724493503688,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 7.7,
+          "taker_tip_mm": 61.7
+        },
+        {
+          "i": 10756,
+          "t": 21.514,
+          "bodies": [
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 8.2,
+          "giver_tip_mm": 8.4,
+          "taker_tip_mm": 62.0
+        },
+        {
+          "i": 10757,
+          "t": 21.516,
+          "bodies": [],
+          "fork_z_mm": 899.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 8.1,
+          "giver_tip_mm": 9.1,
+          "taker_tip_mm": 62.4
+        },
+        {
+          "i": 10758,
+          "t": 21.518,
+          "bodies": [],
+          "fork_z_mm": 899.1,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.9,
+          "giver_tip_mm": 9.9,
+          "taker_tip_mm": 62.8
+        },
+        {
+          "i": 10759,
+          "t": 21.52,
+          "bodies": [],
+          "fork_z_mm": 898.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.8,
+          "giver_tip_mm": 10.7,
+          "taker_tip_mm": 63.2
+        },
+        {
+          "i": 10760,
+          "t": 21.522,
+          "bodies": [],
+          "fork_z_mm": 897.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.6,
+          "giver_tip_mm": 11.5,
+          "taker_tip_mm": 63.6
+        },
+        {
+          "i": 10761,
+          "t": 21.524,
+          "bodies": [],
+          "fork_z_mm": 896.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.4,
+          "giver_tip_mm": 12.4,
+          "taker_tip_mm": 64.1
+        },
+        {
+          "i": 10762,
+          "t": 21.526,
+          "bodies": [],
+          "fork_z_mm": 895.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.2,
+          "giver_tip_mm": 13.2,
+          "taker_tip_mm": 64.7
+        },
+        {
+          "i": 10763,
+          "t": 21.528,
+          "bodies": [],
+          "fork_z_mm": 895.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 14.1,
+          "taker_tip_mm": 65.5
+        },
+        {
+          "i": 10764,
+          "t": 21.53,
+          "bodies": [],
+          "fork_z_mm": 894.1,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 15.1,
+          "taker_tip_mm": 66.3
+        },
+        {
+          "i": 10765,
+          "t": 21.532,
+          "bodies": [],
+          "fork_z_mm": 893.2,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 16.0,
+          "taker_tip_mm": 67.2
+        },
+        {
+          "i": 10766,
+          "t": 21.534,
+          "bodies": [],
+          "fork_z_mm": 892.2,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 17.0,
+          "taker_tip_mm": 68.2
+        },
+        {
+          "i": 10767,
+          "t": 21.536,
+          "bodies": [],
+          "fork_z_mm": 891.1,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 18.0,
+          "taker_tip_mm": 69.2
+        },
+        {
+          "i": 10768,
+          "t": 21.538,
+          "bodies": [],
+          "fork_z_mm": 890.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 19.1,
+          "taker_tip_mm": 70.2
+        },
+        {
+          "i": 10769,
+          "t": 21.54,
+          "bodies": [],
+          "fork_z_mm": 888.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 20.1,
+          "taker_tip_mm": 71.3
+        },
+        {
+          "i": 10770,
+          "t": 21.542,
+          "bodies": [],
+          "fork_z_mm": 887.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 21.2,
+          "taker_tip_mm": 72.4
+        },
+        {
+          "i": 10771,
+          "t": 21.544,
+          "bodies": [],
+          "fork_z_mm": 886.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 22.4,
+          "taker_tip_mm": 73.5
+        },
+        {
+          "i": 10772,
+          "t": 21.546,
+          "bodies": [],
+          "fork_z_mm": 885.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 23.5,
+          "taker_tip_mm": 74.7
+        },
+        {
+          "i": 10773,
+          "t": 21.548,
+          "bodies": [],
+          "fork_z_mm": 884.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 24.8,
+          "taker_tip_mm": 75.9
+        },
+        {
+          "i": 10774,
+          "t": 21.55,
+          "bodies": [],
+          "fork_z_mm": 882.7,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 26.0,
+          "taker_tip_mm": 77.2
+        },
+        {
+          "i": 10775,
+          "t": 21.552,
+          "bodies": [],
+          "fork_z_mm": 881.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 27.3,
+          "taker_tip_mm": 78.5
+        },
+        {
+          "i": 10776,
+          "t": 21.554,
+          "bodies": [],
+          "fork_z_mm": 880.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 28.7,
+          "taker_tip_mm": 79.8
+        },
+        {
+          "i": 10777,
+          "t": 21.556,
+          "bodies": [],
+          "fork_z_mm": 878.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 30.1,
+          "taker_tip_mm": 81.2
+        },
+        {
+          "i": 10778,
+          "t": 21.558,
+          "bodies": [],
+          "fork_z_mm": 877.1,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 31.5,
+          "taker_tip_mm": 82.7
+        },
+        {
+          "i": 10779,
+          "t": 21.56,
+          "bodies": [],
+          "fork_z_mm": 875.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 33.0,
+          "taker_tip_mm": 84.2
+        },
+        {
+          "i": 10780,
+          "t": 21.562,
+          "bodies": [],
+          "fork_z_mm": 874.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 34.6,
+          "taker_tip_mm": 85.7
+        },
+        {
+          "i": 10781,
+          "t": 21.564,
+          "bodies": [],
+          "fork_z_mm": 872.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 36.2,
+          "taker_tip_mm": 87.3
+        }
+      ],
+      "n_jaw_geoms": {
+        "right": 23,
+        "left": 23
+      },
+      "n_arm_geoms": {
+        "right": 48,
+        "left": 48
+      },
+      "link_geoms": {
+        "right": [
+          "right_base",
+          "right_camera_mount",
+          "right_lower_arm",
+          "right_shoulder",
+          "right_upper_arm",
+          "right_wrist"
+        ],
+        "left": [
+          "left_base",
+          "left_camera_mount",
+          "left_lower_arm",
+          "left_shoulder",
+          "left_upper_arm",
+          "left_wrist"
+        ]
+      }
+    },
+    {
+      "seed": 4,
+      "final_to_target_mm": 70.2,
+      "subgoals_met": 1,
+      "fork_start_z_mm": 784.0,
+      "first_lift_step": 7987,
+      "first_lift_t": 15.976,
+      "max_fork_z_mm": 907.2,
+      "carry_run_steps": [
+        7388,
+        10700
+      ],
+      "loss_step": 10700,
+      "loss_t": 21.402,
+      "loss_fork_z_mm": 899.9,
+      "loss_labels": [],
+      "touching_at_loss": [
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ],
+      "taker_bodies_in_window": [],
+      "taker_jaw_in_window": false,
+      "first_taker_contact_step": null,
+      "first_taker_contact_t": null,
+      "first_taker_contact_bodies": [],
+      "verdict": "SLIPPED",
+      "giver_jaw_steps": 3313,
+      "min_giver_tip_mm": 4.3,
+      "min_taker_tip_mm": 54.8,
+      "carry_grip_force_N": {
+        "min": 0.0,
+        "max": 83.564,
+        "at_loss": 0.0,
+        "last_20_steps": [
+          70.573,
+          70.625,
+          70.714,
+          70.833,
+          71.054,
+          71.229,
+          71.378,
+          71.497,
+          71.503,
+          71.502,
+          71.532,
+          71.596,
+          3.911,
+          2.089,
+          1.698,
+          1.646,
+          1.089,
+          0.002,
+          0.0,
+          0.0
+        ]
+      },
+      "carry_jaw_sep_mm": {
+        "min": 7.5,
+        "max": 39.8,
+        "at_loss": 7.5
+      },
+      "all_bodies_ever_touching_fork": [
+        "drawer",
+        "right_gripper",
+        "right_moving_jaw_so101_v1",
+        "table"
+      ],
+      "window": [
+        {
+          "i": 10675,
+          "t": 21.352,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.5,
+          "giver_force_N": 80.11925803610718,
+          "giver_sep_mm": 8.4,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 73.0
+        },
+        {
+          "i": 10676,
+          "t": 21.354,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.5,
+          "giver_force_N": 69.95914152419682,
+          "giver_sep_mm": 8.4,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 72.9
+        },
+        {
+          "i": 10677,
+          "t": 21.356,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.4,
+          "giver_force_N": 70.19683944949902,
+          "giver_sep_mm": 8.4,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 72.9
+        },
+        {
+          "i": 10678,
+          "t": 21.358,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.4,
+          "giver_force_N": 70.21511062194205,
+          "giver_sep_mm": 8.4,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 72.8
+        },
+        {
+          "i": 10679,
+          "t": 21.36,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.5,
+          "giver_force_N": 70.46365378950625,
+          "giver_sep_mm": 8.4,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 72.5
+        },
+        {
+          "i": 10680,
+          "t": 21.362,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.5,
+          "giver_force_N": 70.56088458299888,
+          "giver_sep_mm": 8.4,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 72.4
+        },
+        {
+          "i": 10681,
+          "t": 21.364,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.5,
+          "giver_force_N": 70.5731350285325,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 72.2
+        },
+        {
+          "i": 10682,
+          "t": 21.366,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.5,
+          "giver_force_N": 70.6248702295021,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 72.1
+        },
+        {
+          "i": 10683,
+          "t": 21.368,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.4,
+          "giver_force_N": 70.71394983204551,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 72.1
+        },
+        {
+          "i": 10684,
+          "t": 21.37,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.4,
+          "giver_force_N": 70.83313535161727,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 72.0
+        },
+        {
+          "i": 10685,
+          "t": 21.372,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.4,
+          "giver_force_N": 71.05435646260007,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 72.0
+        },
+        {
+          "i": 10686,
+          "t": 21.374,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.4,
+          "giver_force_N": 71.22896042265326,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.9
+        },
+        {
+          "i": 10687,
+          "t": 21.376,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.4,
+          "giver_force_N": 71.37764350664446,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.9
+        },
+        {
+          "i": 10688,
+          "t": 21.378,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.4,
+          "giver_force_N": 71.49715538542124,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.6
+        },
+        {
+          "i": 10689,
+          "t": 21.38,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.4,
+          "giver_force_N": 71.50258416974786,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.4
+        },
+        {
+          "i": 10690,
+          "t": 21.382,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.4,
+          "giver_force_N": 71.50161564457102,
+          "giver_sep_mm": 8.2,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.2
+        },
+        {
+          "i": 10691,
+          "t": 21.384,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.4,
+          "giver_force_N": 71.53248552299223,
+          "giver_sep_mm": 8.2,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.1
+        },
+        {
+          "i": 10692,
+          "t": 21.386,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.4,
+          "giver_force_N": 71.5956178144551,
+          "giver_sep_mm": 8.2,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.1
+        },
+        {
+          "i": 10693,
+          "t": 21.388,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.4,
+          "giver_force_N": 3.9113515198294593,
+          "giver_sep_mm": 8.2,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.0
+        },
+        {
+          "i": 10694,
+          "t": 21.39,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.2,
+          "giver_force_N": 2.088661086794698,
+          "giver_sep_mm": 8.2,
+          "giver_tip_mm": 6.4,
+          "taker_tip_mm": 71.1
+        },
+        {
+          "i": 10695,
+          "t": 21.392,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.0,
+          "giver_force_N": 1.6978082229831117,
+          "giver_sep_mm": 8.1,
+          "giver_tip_mm": 6.7,
+          "taker_tip_mm": 71.1
+        },
+        {
+          "i": 10696,
+          "t": 21.394,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.7,
+          "giver_force_N": 1.6456760469135494,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 7.0,
+          "taker_tip_mm": 71.3
+        },
+        {
+          "i": 10697,
+          "t": 21.396,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.3,
+          "giver_force_N": 1.088688670255065,
+          "giver_sep_mm": 7.9,
+          "giver_tip_mm": 7.5,
+          "taker_tip_mm": 71.5
+        },
+        {
+          "i": 10698,
+          "t": 21.398,
+          "bodies": [
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.9,
+          "giver_force_N": 0.001855945806289438,
+          "giver_sep_mm": 7.8,
+          "giver_tip_mm": 7.9,
+          "taker_tip_mm": 71.8
+        },
+        {
+          "i": 10699,
+          "t": 21.4,
+          "bodies": [
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.7,
+          "giver_tip_mm": 8.5,
+          "taker_tip_mm": 72.1
+        },
+        {
+          "i": 10700,
+          "t": 21.402,
+          "bodies": [
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 899.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.5,
+          "giver_tip_mm": 9.1,
+          "taker_tip_mm": 72.4
+        },
+        {
+          "i": 10701,
+          "t": 21.404,
+          "bodies": [],
+          "fork_z_mm": 899.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.4,
+          "giver_tip_mm": 9.7,
+          "taker_tip_mm": 72.6
+        },
+        {
+          "i": 10702,
+          "t": 21.406,
+          "bodies": [],
+          "fork_z_mm": 898.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.2,
+          "giver_tip_mm": 10.4,
+          "taker_tip_mm": 73.0
+        },
+        {
+          "i": 10703,
+          "t": 21.408,
+          "bodies": [],
+          "fork_z_mm": 898.2,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 11.0,
+          "taker_tip_mm": 73.5
+        },
+        {
+          "i": 10704,
+          "t": 21.41,
+          "bodies": [],
+          "fork_z_mm": 897.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 11.7,
+          "taker_tip_mm": 73.9
+        },
+        {
+          "i": 10705,
+          "t": 21.412,
+          "bodies": [],
+          "fork_z_mm": 896.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 12.5,
+          "taker_tip_mm": 74.4
+        },
+        {
+          "i": 10706,
+          "t": 21.414,
+          "bodies": [],
+          "fork_z_mm": 896.2,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 13.2,
+          "taker_tip_mm": 75.0
+        },
+        {
+          "i": 10707,
+          "t": 21.416,
+          "bodies": [],
+          "fork_z_mm": 895.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 14.0,
+          "taker_tip_mm": 75.7
+        },
+        {
+          "i": 10708,
+          "t": 21.418,
+          "bodies": [],
+          "fork_z_mm": 894.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 14.8,
+          "taker_tip_mm": 76.4
+        },
+        {
+          "i": 10709,
+          "t": 21.42,
+          "bodies": [],
+          "fork_z_mm": 893.7,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 15.6,
+          "taker_tip_mm": 77.1
+        },
+        {
+          "i": 10710,
+          "t": 21.422,
+          "bodies": [],
+          "fork_z_mm": 892.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 16.4,
+          "taker_tip_mm": 77.9
+        },
+        {
+          "i": 10711,
+          "t": 21.424,
+          "bodies": [],
+          "fork_z_mm": 891.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 17.3,
+          "taker_tip_mm": 78.8
+        },
+        {
+          "i": 10712,
+          "t": 21.426,
+          "bodies": [],
+          "fork_z_mm": 891.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 18.2,
+          "taker_tip_mm": 79.7
+        },
+        {
+          "i": 10713,
+          "t": 21.428,
+          "bodies": [],
+          "fork_z_mm": 890.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 19.2,
+          "taker_tip_mm": 80.6
+        },
+        {
+          "i": 10714,
+          "t": 21.43,
+          "bodies": [],
+          "fork_z_mm": 888.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 20.2,
+          "taker_tip_mm": 81.6
+        },
+        {
+          "i": 10715,
+          "t": 21.432,
+          "bodies": [],
+          "fork_z_mm": 887.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 21.2,
+          "taker_tip_mm": 82.6
+        },
+        {
+          "i": 10716,
+          "t": 21.434,
+          "bodies": [],
+          "fork_z_mm": 886.7,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 22.3,
+          "taker_tip_mm": 83.7
+        },
+        {
+          "i": 10717,
+          "t": 21.436,
+          "bodies": [],
+          "fork_z_mm": 885.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 23.4,
+          "taker_tip_mm": 84.8
+        },
+        {
+          "i": 10718,
+          "t": 21.438,
+          "bodies": [],
+          "fork_z_mm": 884.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 24.6,
+          "taker_tip_mm": 85.9
+        },
+        {
+          "i": 10719,
+          "t": 21.44,
+          "bodies": [],
+          "fork_z_mm": 883.2,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 25.8,
+          "taker_tip_mm": 87.1
+        },
+        {
+          "i": 10720,
+          "t": 21.442,
+          "bodies": [],
+          "fork_z_mm": 881.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 27.1,
+          "taker_tip_mm": 88.3
+        },
+        {
+          "i": 10721,
+          "t": 21.444,
+          "bodies": [],
+          "fork_z_mm": 880.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 28.4,
+          "taker_tip_mm": 89.5
+        },
+        {
+          "i": 10722,
+          "t": 21.446,
+          "bodies": [],
+          "fork_z_mm": 879.2,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 29.7,
+          "taker_tip_mm": 90.8
+        },
+        {
+          "i": 10723,
+          "t": 21.448,
+          "bodies": [],
+          "fork_z_mm": 877.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 31.1,
+          "taker_tip_mm": 92.1
+        },
+        {
+          "i": 10724,
+          "t": 21.45,
+          "bodies": [],
+          "fork_z_mm": 876.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 32.5,
+          "taker_tip_mm": 93.5
+        },
+        {
+          "i": 10725,
+          "t": 21.452,
+          "bodies": [],
+          "fork_z_mm": 874.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 34.0,
+          "taker_tip_mm": 94.7
+        }
+      ],
+      "n_jaw_geoms": {
+        "right": 23,
+        "left": 23
+      },
+      "n_arm_geoms": {
+        "right": 48,
+        "left": 48
+      },
+      "link_geoms": {
+        "right": [
+          "right_base",
+          "right_camera_mount",
+          "right_lower_arm",
+          "right_shoulder",
+          "right_upper_arm",
+          "right_wrist"
+        ],
+        "left": [
+          "left_base",
+          "left_camera_mount",
+          "left_lower_arm",
+          "left_shoulder",
+          "left_upper_arm",
+          "left_wrist"
+        ]
+      }
+    },
+    {
+      "seed": 5,
+      "final_to_target_mm": 83.0,
+      "subgoals_met": 1,
+      "fork_start_z_mm": 784.0,
+      "first_lift_step": 7984,
+      "first_lift_t": 15.97,
+      "max_fork_z_mm": 904.3,
+      "carry_run_steps": [
+        7509,
+        10337
+      ],
+      "loss_step": 10337,
+      "loss_t": 20.676,
+      "loss_fork_z_mm": 898.8,
+      "loss_labels": [],
+      "touching_at_loss": [
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ],
+      "taker_bodies_in_window": [],
+      "taker_jaw_in_window": false,
+      "first_taker_contact_step": 8887,
+      "first_taker_contact_t": 17.776,
+      "first_taker_contact_bodies": [
+        "left_gripper"
+      ],
+      "verdict": "SLIPPED",
+      "giver_jaw_steps": 2890,
+      "min_giver_tip_mm": 3.8,
+      "min_taker_tip_mm": 44.5,
+      "carry_grip_force_N": {
+        "min": 0.0,
+        "max": 92.464,
+        "at_loss": 0.0,
+        "last_20_steps": [
+          92.464,
+          81.179,
+          81.518,
+          81.808,
+          82.048,
+          82.301,
+          82.548,
+          82.792,
+          83.033,
+          83.273,
+          83.512,
+          83.748,
+          2.321,
+          1.576,
+          0.8,
+          0.569,
+          0.583,
+          0.341,
+          0.0,
+          0.0
+        ]
+      },
+      "carry_jaw_sep_mm": {
+        "min": 7.0,
+        "max": 16.1,
+        "at_loss": 7.0
+      },
+      "all_bodies_ever_touching_fork": [
+        "drawer",
+        "left_gripper",
+        "right_gripper",
+        "right_moving_jaw_so101_v1",
+        "table"
+      ],
+      "window": [
+        {
+          "i": 10312,
+          "t": 20.626,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 92.05788923895884,
+          "giver_sep_mm": 8.1,
+          "giver_tip_mm": 5.9,
+          "taker_tip_mm": 83.2
+        },
+        {
+          "i": 10313,
+          "t": 20.628,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 92.12850167514758,
+          "giver_sep_mm": 8.1,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 83.2
+        },
+        {
+          "i": 10314,
+          "t": 20.63,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 92.19806370567002,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 83.2
+        },
+        {
+          "i": 10315,
+          "t": 20.632,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 92.26652416728545,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 83.2
+        },
+        {
+          "i": 10316,
+          "t": 20.634,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 92.33301678312763,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 83.2
+        },
+        {
+          "i": 10317,
+          "t": 20.636,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 92.39885809233196,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 83.2
+        },
+        {
+          "i": 10318,
+          "t": 20.638,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 92.46403988654231,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 83.2
+        },
+        {
+          "i": 10319,
+          "t": 20.64,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 81.17866104281771,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 83.2
+        },
+        {
+          "i": 10320,
+          "t": 20.642,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 81.51816748053177,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 83.2
+        },
+        {
+          "i": 10321,
+          "t": 20.644,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 81.80777532765094,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 83.2
+        },
+        {
+          "i": 10322,
+          "t": 20.646,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 82.04824305397956,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 83.1
+        },
+        {
+          "i": 10323,
+          "t": 20.648,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.5,
+          "giver_force_N": 82.30102385087841,
+          "giver_sep_mm": 7.9,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 83.1
+        },
+        {
+          "i": 10324,
+          "t": 20.65,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.5,
+          "giver_force_N": 82.54818496911436,
+          "giver_sep_mm": 7.9,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 83.1
+        },
+        {
+          "i": 10325,
+          "t": 20.652,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.5,
+          "giver_force_N": 82.79164053245174,
+          "giver_sep_mm": 7.9,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 83.1
+        },
+        {
+          "i": 10326,
+          "t": 20.654,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.5,
+          "giver_force_N": 83.03311323757633,
+          "giver_sep_mm": 7.9,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 83.1
+        },
+        {
+          "i": 10327,
+          "t": 20.656,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.5,
+          "giver_force_N": 83.27313507840583,
+          "giver_sep_mm": 7.9,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 83.1
+        },
+        {
+          "i": 10328,
+          "t": 20.658,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.5,
+          "giver_force_N": 83.51158134360936,
+          "giver_sep_mm": 7.9,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 83.1
+        },
+        {
+          "i": 10329,
+          "t": 20.66,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.5,
+          "giver_force_N": 83.74790867914828,
+          "giver_sep_mm": 7.8,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 83.1
+        },
+        {
+          "i": 10330,
+          "t": 20.662,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.5,
+          "giver_force_N": 2.3211934968286734,
+          "giver_sep_mm": 7.8,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 83.1
+        },
+        {
+          "i": 10331,
+          "t": 20.664,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.3,
+          "giver_force_N": 1.5759967771852006,
+          "giver_sep_mm": 7.8,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 83.2
+        },
+        {
+          "i": 10332,
+          "t": 20.666,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.0,
+          "giver_force_N": 0.8003210897943065,
+          "giver_sep_mm": 7.7,
+          "giver_tip_mm": 6.5,
+          "taker_tip_mm": 83.4
+        },
+        {
+          "i": 10333,
+          "t": 20.668,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.7,
+          "giver_force_N": 0.5691987238899161,
+          "giver_sep_mm": 7.6,
+          "giver_tip_mm": 6.9,
+          "taker_tip_mm": 83.7
+        },
+        {
+          "i": 10334,
+          "t": 20.67,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.3,
+          "giver_force_N": 0.5829430241529912,
+          "giver_sep_mm": 7.5,
+          "giver_tip_mm": 7.3,
+          "taker_tip_mm": 84.0
+        },
+        {
+          "i": 10335,
+          "t": 20.672,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 899.8,
+          "giver_force_N": 0.3407408562567581,
+          "giver_sep_mm": 7.3,
+          "giver_tip_mm": 7.9,
+          "taker_tip_mm": 84.3
+        },
+        {
+          "i": 10336,
+          "t": 20.674,
+          "bodies": [
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 899.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.2,
+          "giver_tip_mm": 8.4,
+          "taker_tip_mm": 84.6
+        },
+        {
+          "i": 10337,
+          "t": 20.676,
+          "bodies": [
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 9.0,
+          "taker_tip_mm": 85.0
+        },
+        {
+          "i": 10338,
+          "t": 20.678,
+          "bodies": [],
+          "fork_z_mm": 898.2,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 9.6,
+          "taker_tip_mm": 85.4
+        },
+        {
+          "i": 10339,
+          "t": 20.68,
+          "bodies": [],
+          "fork_z_mm": 897.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 10.3,
+          "taker_tip_mm": 85.8
+        },
+        {
+          "i": 10340,
+          "t": 20.682,
+          "bodies": [],
+          "fork_z_mm": 897.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 11.0,
+          "taker_tip_mm": 86.2
+        },
+        {
+          "i": 10341,
+          "t": 20.684,
+          "bodies": [],
+          "fork_z_mm": 896.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 11.7,
+          "taker_tip_mm": 86.7
+        },
+        {
+          "i": 10342,
+          "t": 20.686,
+          "bodies": [],
+          "fork_z_mm": 895.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.6,
+          "giver_tip_mm": 12.3,
+          "taker_tip_mm": 87.3
+        },
+        {
+          "i": 10343,
+          "t": 20.688,
+          "bodies": [],
+          "fork_z_mm": 894.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.6,
+          "giver_tip_mm": 13.1,
+          "taker_tip_mm": 87.9
+        },
+        {
+          "i": 10344,
+          "t": 20.69,
+          "bodies": [],
+          "fork_z_mm": 894.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 13.8,
+          "taker_tip_mm": 88.6
+        },
+        {
+          "i": 10345,
+          "t": 20.692,
+          "bodies": [],
+          "fork_z_mm": 893.2,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 14.6,
+          "taker_tip_mm": 89.4
+        },
+        {
+          "i": 10346,
+          "t": 20.694,
+          "bodies": [],
+          "fork_z_mm": 892.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 15.4,
+          "taker_tip_mm": 90.1
+        },
+        {
+          "i": 10347,
+          "t": 20.696,
+          "bodies": [],
+          "fork_z_mm": 891.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 16.2,
+          "taker_tip_mm": 91.0
+        },
+        {
+          "i": 10348,
+          "t": 20.698,
+          "bodies": [],
+          "fork_z_mm": 890.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 17.1,
+          "taker_tip_mm": 91.8
+        },
+        {
+          "i": 10349,
+          "t": 20.7,
+          "bodies": [],
+          "fork_z_mm": 889.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 18.0,
+          "taker_tip_mm": 92.7
+        },
+        {
+          "i": 10350,
+          "t": 20.702,
+          "bodies": [],
+          "fork_z_mm": 888.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 19.0,
+          "taker_tip_mm": 93.7
+        },
+        {
+          "i": 10351,
+          "t": 20.704,
+          "bodies": [],
+          "fork_z_mm": 887.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 20.0,
+          "taker_tip_mm": 94.7
+        },
+        {
+          "i": 10352,
+          "t": 20.706,
+          "bodies": [],
+          "fork_z_mm": 886.2,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 21.0,
+          "taker_tip_mm": 95.7
+        },
+        {
+          "i": 10353,
+          "t": 20.708,
+          "bodies": [],
+          "fork_z_mm": 885.1,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 22.1,
+          "taker_tip_mm": 96.8
+        },
+        {
+          "i": 10354,
+          "t": 20.71,
+          "bodies": [],
+          "fork_z_mm": 883.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 23.2,
+          "taker_tip_mm": 97.9
+        },
+        {
+          "i": 10355,
+          "t": 20.712,
+          "bodies": [],
+          "fork_z_mm": 882.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 24.4,
+          "taker_tip_mm": 99.1
+        },
+        {
+          "i": 10356,
+          "t": 20.714,
+          "bodies": [],
+          "fork_z_mm": 881.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 25.6,
+          "taker_tip_mm": 100.2
+        },
+        {
+          "i": 10357,
+          "t": 20.716,
+          "bodies": [],
+          "fork_z_mm": 880.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 26.9,
+          "taker_tip_mm": 101.5
+        },
+        {
+          "i": 10358,
+          "t": 20.718,
+          "bodies": [],
+          "fork_z_mm": 878.7,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 28.2,
+          "taker_tip_mm": 102.7
+        },
+        {
+          "i": 10359,
+          "t": 20.72,
+          "bodies": [],
+          "fork_z_mm": 877.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 29.5,
+          "taker_tip_mm": 104.1
+        },
+        {
+          "i": 10360,
+          "t": 20.722,
+          "bodies": [],
+          "fork_z_mm": 875.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 30.9,
+          "taker_tip_mm": 105.4
+        },
+        {
+          "i": 10361,
+          "t": 20.724,
+          "bodies": [],
+          "fork_z_mm": 874.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 32.4,
+          "taker_tip_mm": 106.8
+        },
+        {
+          "i": 10362,
+          "t": 20.726,
+          "bodies": [],
+          "fork_z_mm": 872.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 33.8,
+          "taker_tip_mm": 108.3
+        }
+      ],
+      "n_jaw_geoms": {
+        "right": 23,
+        "left": 23
+      },
+      "n_arm_geoms": {
+        "right": 48,
+        "left": 48
+      },
+      "link_geoms": {
+        "right": [
+          "right_base",
+          "right_camera_mount",
+          "right_lower_arm",
+          "right_shoulder",
+          "right_upper_arm",
+          "right_wrist"
+        ],
+        "left": [
+          "left_base",
+          "left_camera_mount",
+          "left_lower_arm",
+          "left_shoulder",
+          "left_upper_arm",
+          "left_wrist"
+        ]
+      }
+    },
+    {
+      "seed": 6,
+      "final_to_target_mm": 159.8,
+      "subgoals_met": 1,
+      "fork_start_z_mm": 784.0,
+      "first_lift_step": null,
+      "first_lift_t": null,
+      "max_fork_z_mm": 784.0,
+      "carry_run_steps": null,
+      "loss_step": null,
+      "loss_t": null,
+      "loss_fork_z_mm": null,
+      "loss_labels": [],
+      "touching_at_loss": [],
+      "taker_bodies_in_window": [],
+      "taker_jaw_in_window": false,
+      "first_taker_contact_step": null,
+      "first_taker_contact_t": null,
+      "first_taker_contact_bodies": [],
+      "verdict": "NEVER_LIFTED",
+      "giver_jaw_steps": 0,
+      "min_giver_tip_mm": 77.1,
+      "min_taker_tip_mm": 118.8,
+      "carry_grip_force_N": null,
+      "carry_jaw_sep_mm": null,
+      "all_bodies_ever_touching_fork": [
+        "drawer"
+      ],
+      "window": [],
+      "n_jaw_geoms": {
+        "right": 23,
+        "left": 23
+      },
+      "n_arm_geoms": {
+        "right": 48,
+        "left": 48
+      },
+      "link_geoms": {
+        "right": [
+          "right_base",
+          "right_camera_mount",
+          "right_lower_arm",
+          "right_shoulder",
+          "right_upper_arm",
+          "right_wrist"
+        ],
+        "left": [
+          "left_base",
+          "left_camera_mount",
+          "left_lower_arm",
+          "left_shoulder",
+          "left_upper_arm",
+          "left_wrist"
+        ]
+      }
+    },
+    {
+      "seed": 7,
+      "final_to_target_mm": 35.9,
+      "subgoals_met": 2,
+      "fork_start_z_mm": 784.0,
+      "first_lift_step": 7986,
+      "first_lift_t": 15.974,
+      "max_fork_z_mm": 902.8,
+      "carry_run_steps": [
+        7526,
+        10205
+      ],
+      "loss_step": 10205,
+      "loss_t": 20.412,
+      "loss_fork_z_mm": 897.4,
+      "loss_labels": [],
+      "touching_at_loss": [
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ],
+      "taker_bodies_in_window": [],
+      "taker_jaw_in_window": false,
+      "first_taker_contact_step": 8866,
+      "first_taker_contact_t": 17.734,
+      "first_taker_contact_bodies": [
+        "left_gripper"
+      ],
+      "verdict": "SLIPPED",
+      "giver_jaw_steps": 3049,
+      "min_giver_tip_mm": 4.0,
+      "min_taker_tip_mm": 43.3,
+      "carry_grip_force_N": {
+        "min": 0.0,
+        "max": 92.167,
+        "at_loss": 0.0,
+        "last_20_steps": [
+          66.975,
+          68.049,
+          68.827,
+          69.705,
+          70.559,
+          71.416,
+          72.272,
+          73.139,
+          74.169,
+          75.141,
+          76.002,
+          76.842,
+          4.485,
+          2.451,
+          0.928,
+          0.122,
+          0.037,
+          0.012,
+          0.0,
+          0.0
+        ]
+      },
+      "carry_jaw_sep_mm": {
+        "min": 6.8,
+        "max": 13.5,
+        "at_loss": 6.8
+      },
+      "all_bodies_ever_touching_fork": [
+        "drawer",
+        "left_gripper",
+        "right_camera_mount",
+        "right_gripper",
+        "right_moving_jaw_so101_v1",
+        "table"
+      ],
+      "window": [
+        {
+          "i": 10180,
+          "t": 20.362,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 897.8,
+          "giver_force_N": 91.75404387401058,
+          "giver_sep_mm": 8.1,
+          "giver_tip_mm": 5.9,
+          "taker_tip_mm": 69.4
+        },
+        {
+          "i": 10181,
+          "t": 20.364,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 897.9,
+          "giver_force_N": 91.8138392369009,
+          "giver_sep_mm": 8.1,
+          "giver_tip_mm": 5.9,
+          "taker_tip_mm": 69.4
+        },
+        {
+          "i": 10182,
+          "t": 20.366,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 897.9,
+          "giver_force_N": 92.01348175369604,
+          "giver_sep_mm": 8.1,
+          "giver_tip_mm": 5.9,
+          "taker_tip_mm": 69.4
+        },
+        {
+          "i": 10183,
+          "t": 20.368,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.0,
+          "giver_force_N": 92.06508300073122,
+          "giver_sep_mm": 8.1,
+          "giver_tip_mm": 5.9,
+          "taker_tip_mm": 69.4
+        },
+        {
+          "i": 10184,
+          "t": 20.37,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.0,
+          "giver_force_N": 92.11634347744544,
+          "giver_sep_mm": 8.1,
+          "giver_tip_mm": 5.9,
+          "taker_tip_mm": 69.3
+        },
+        {
+          "i": 10185,
+          "t": 20.372,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.0,
+          "giver_force_N": 92.16729475549742,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 5.9,
+          "taker_tip_mm": 69.3
+        },
+        {
+          "i": 10186,
+          "t": 20.374,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.1,
+          "giver_force_N": 66.97526525931103,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 5.9,
+          "taker_tip_mm": 69.3
+        },
+        {
+          "i": 10187,
+          "t": 20.376,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.1,
+          "giver_force_N": 68.0487152417878,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 69.3
+        },
+        {
+          "i": 10188,
+          "t": 20.378,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.2,
+          "giver_force_N": 68.8265433939448,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 69.3
+        },
+        {
+          "i": 10189,
+          "t": 20.38,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.2,
+          "giver_force_N": 69.70454309602772,
+          "giver_sep_mm": 7.9,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 69.3
+        },
+        {
+          "i": 10190,
+          "t": 20.382,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.2,
+          "giver_force_N": 70.55910894146959,
+          "giver_sep_mm": 7.9,
+          "giver_tip_mm": 6.0,
+          "taker_tip_mm": 69.3
+        },
+        {
+          "i": 10191,
+          "t": 20.384,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.3,
+          "giver_force_N": 71.41567534779821,
+          "giver_sep_mm": 7.8,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 69.3
+        },
+        {
+          "i": 10192,
+          "t": 20.386,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.3,
+          "giver_force_N": 72.27238935527028,
+          "giver_sep_mm": 7.7,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 69.3
+        },
+        {
+          "i": 10193,
+          "t": 20.388,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.4,
+          "giver_force_N": 73.13918552703758,
+          "giver_sep_mm": 7.7,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 69.2
+        },
+        {
+          "i": 10194,
+          "t": 20.39,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.4,
+          "giver_force_N": 74.16937283017978,
+          "giver_sep_mm": 7.6,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 69.2
+        },
+        {
+          "i": 10195,
+          "t": 20.392,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.5,
+          "giver_force_N": 75.14133261711007,
+          "giver_sep_mm": 7.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 69.2
+        },
+        {
+          "i": 10196,
+          "t": 20.394,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.5,
+          "giver_force_N": 76.00199298578777,
+          "giver_sep_mm": 7.4,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 69.2
+        },
+        {
+          "i": 10197,
+          "t": 20.396,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.6,
+          "giver_force_N": 76.84240925331628,
+          "giver_sep_mm": 7.3,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 69.1
+        },
+        {
+          "i": 10198,
+          "t": 20.398,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.6,
+          "giver_force_N": 4.484622341825243,
+          "giver_sep_mm": 7.2,
+          "giver_tip_mm": 6.3,
+          "taker_tip_mm": 69.1
+        },
+        {
+          "i": 10199,
+          "t": 20.4,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.6,
+          "giver_force_N": 2.4513126042606044,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 6.5,
+          "taker_tip_mm": 69.2
+        },
+        {
+          "i": 10200,
+          "t": 20.402,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.4,
+          "giver_force_N": 0.9278746663568811,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 6.8,
+          "taker_tip_mm": 69.4
+        },
+        {
+          "i": 10201,
+          "t": 20.404,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.3,
+          "giver_force_N": 0.12230545502305339,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 7.2,
+          "taker_tip_mm": 69.5
+        },
+        {
+          "i": 10202,
+          "t": 20.406,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.1,
+          "giver_force_N": 0.0372341338863364,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 7.6,
+          "taker_tip_mm": 69.7
+        },
+        {
+          "i": 10203,
+          "t": 20.408,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 897.9,
+          "giver_force_N": 0.012205344315803826,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 8.1,
+          "taker_tip_mm": 70.0
+        },
+        {
+          "i": 10204,
+          "t": 20.41,
+          "bodies": [
+            "right_gripper"
+          ],
+          "fork_z_mm": 897.7,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 8.6,
+          "taker_tip_mm": 70.3
+        },
+        {
+          "i": 10205,
+          "t": 20.412,
+          "bodies": [
+            "right_gripper"
+          ],
+          "fork_z_mm": 897.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 9.1,
+          "taker_tip_mm": 70.6
+        },
+        {
+          "i": 10206,
+          "t": 20.414,
+          "bodies": [],
+          "fork_z_mm": 897.1,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 9.6,
+          "taker_tip_mm": 70.9
+        },
+        {
+          "i": 10207,
+          "t": 20.416,
+          "bodies": [],
+          "fork_z_mm": 896.7,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 10.2,
+          "taker_tip_mm": 71.3
+        },
+        {
+          "i": 10208,
+          "t": 20.418,
+          "bodies": [],
+          "fork_z_mm": 896.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 10.8,
+          "taker_tip_mm": 71.8
+        },
+        {
+          "i": 10209,
+          "t": 20.42,
+          "bodies": [],
+          "fork_z_mm": 895.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 11.5,
+          "taker_tip_mm": 72.2
+        },
+        {
+          "i": 10210,
+          "t": 20.422,
+          "bodies": [],
+          "fork_z_mm": 895.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 12.1,
+          "taker_tip_mm": 72.7
+        },
+        {
+          "i": 10211,
+          "t": 20.424,
+          "bodies": [],
+          "fork_z_mm": 894.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 12.8,
+          "taker_tip_mm": 73.3
+        },
+        {
+          "i": 10212,
+          "t": 20.426,
+          "bodies": [],
+          "fork_z_mm": 894.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 13.6,
+          "taker_tip_mm": 73.8
+        },
+        {
+          "i": 10213,
+          "t": 20.428,
+          "bodies": [],
+          "fork_z_mm": 893.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 14.4,
+          "taker_tip_mm": 74.4
+        },
+        {
+          "i": 10214,
+          "t": 20.43,
+          "bodies": [],
+          "fork_z_mm": 893.1,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 15.2,
+          "taker_tip_mm": 75.1
+        },
+        {
+          "i": 10215,
+          "t": 20.432,
+          "bodies": [],
+          "fork_z_mm": 892.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 16.0,
+          "taker_tip_mm": 75.7
+        },
+        {
+          "i": 10216,
+          "t": 20.434,
+          "bodies": [],
+          "fork_z_mm": 891.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 16.9,
+          "taker_tip_mm": 76.5
+        },
+        {
+          "i": 10217,
+          "t": 20.436,
+          "bodies": [],
+          "fork_z_mm": 891.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 17.8,
+          "taker_tip_mm": 77.2
+        },
+        {
+          "i": 10218,
+          "t": 20.438,
+          "bodies": [],
+          "fork_z_mm": 890.2,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 18.7,
+          "taker_tip_mm": 78.0
+        },
+        {
+          "i": 10219,
+          "t": 20.44,
+          "bodies": [],
+          "fork_z_mm": 889.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 19.7,
+          "taker_tip_mm": 78.8
+        },
+        {
+          "i": 10220,
+          "t": 20.442,
+          "bodies": [],
+          "fork_z_mm": 888.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 20.7,
+          "taker_tip_mm": 79.7
+        },
+        {
+          "i": 10221,
+          "t": 20.444,
+          "bodies": [],
+          "fork_z_mm": 887.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 21.8,
+          "taker_tip_mm": 80.6
+        },
+        {
+          "i": 10222,
+          "t": 20.446,
+          "bodies": [],
+          "fork_z_mm": 886.7,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 22.8,
+          "taker_tip_mm": 81.5
+        },
+        {
+          "i": 10223,
+          "t": 20.448,
+          "bodies": [],
+          "fork_z_mm": 885.7,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 24.0,
+          "taker_tip_mm": 82.5
+        },
+        {
+          "i": 10224,
+          "t": 20.45,
+          "bodies": [],
+          "fork_z_mm": 884.7,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 25.1,
+          "taker_tip_mm": 83.5
+        },
+        {
+          "i": 10225,
+          "t": 20.452,
+          "bodies": [],
+          "fork_z_mm": 883.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 26.3,
+          "taker_tip_mm": 84.5
+        },
+        {
+          "i": 10226,
+          "t": 20.454,
+          "bodies": [],
+          "fork_z_mm": 882.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 27.5,
+          "taker_tip_mm": 85.6
+        },
+        {
+          "i": 10227,
+          "t": 20.456,
+          "bodies": [],
+          "fork_z_mm": 881.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 28.7,
+          "taker_tip_mm": 86.7
+        },
+        {
+          "i": 10228,
+          "t": 20.458,
+          "bodies": [],
+          "fork_z_mm": 880.2,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 30.0,
+          "taker_tip_mm": 87.9
+        },
+        {
+          "i": 10229,
+          "t": 20.46,
+          "bodies": [],
+          "fork_z_mm": 879.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 31.3,
+          "taker_tip_mm": 89.0
+        },
+        {
+          "i": 10230,
+          "t": 20.462,
+          "bodies": [],
+          "fork_z_mm": 877.7,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 32.6,
+          "taker_tip_mm": 90.2
+        }
+      ],
+      "n_jaw_geoms": {
+        "right": 23,
+        "left": 23
+      },
+      "n_arm_geoms": {
+        "right": 48,
+        "left": 48
+      },
+      "link_geoms": {
+        "right": [
+          "right_base",
+          "right_camera_mount",
+          "right_lower_arm",
+          "right_shoulder",
+          "right_upper_arm",
+          "right_wrist"
+        ],
+        "left": [
+          "left_base",
+          "left_camera_mount",
+          "left_lower_arm",
+          "left_shoulder",
+          "left_upper_arm",
+          "left_wrist"
+        ]
+      }
+    },
+    {
+      "seed": 8,
+      "final_to_target_mm": 143.6,
+      "subgoals_met": 2,
+      "fork_start_z_mm": 784.0,
+      "first_lift_step": 7986,
+      "first_lift_t": 15.974,
+      "max_fork_z_mm": 904.5,
+      "carry_run_steps": [
+        7525,
+        10925
+      ],
+      "loss_step": 10925,
+      "loss_t": 21.852,
+      "loss_fork_z_mm": 897.5,
+      "loss_labels": [],
+      "touching_at_loss": [
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ],
+      "taker_bodies_in_window": [],
+      "taker_jaw_in_window": false,
+      "first_taker_contact_step": null,
+      "first_taker_contact_t": null,
+      "first_taker_contact_bodies": [],
+      "verdict": "SLIPPED",
+      "giver_jaw_steps": 3506,
+      "min_giver_tip_mm": 3.7,
+      "min_taker_tip_mm": 63.2,
+      "carry_grip_force_N": {
+        "min": 0.0,
+        "max": 84.88,
+        "at_loss": 0.0,
+        "last_20_steps": [
+          61.252,
+          61.393,
+          61.509,
+          61.625,
+          61.734,
+          61.844,
+          61.95,
+          62.05,
+          62.147,
+          62.238,
+          62.319,
+          1.58,
+          1.175,
+          0.478,
+          0.234,
+          0.115,
+          0.088,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "carry_jaw_sep_mm": {
+        "min": 7.8,
+        "max": 13.7,
+        "at_loss": 7.8
+      },
+      "all_bodies_ever_touching_fork": [
+        "drawer",
+        "plate",
+        "right_gripper",
+        "right_moving_jaw_so101_v1",
+        "table"
+      ],
+      "window": [
+        {
+          "i": 10900,
+          "t": 21.802,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 60.397926386686564,
+          "giver_sep_mm": 8.7,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.8
+        },
+        {
+          "i": 10901,
+          "t": 21.804,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 60.55782572670081,
+          "giver_sep_mm": 8.7,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.8
+        },
+        {
+          "i": 10902,
+          "t": 21.806,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 60.703555185249506,
+          "giver_sep_mm": 8.7,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.8
+        },
+        {
+          "i": 10903,
+          "t": 21.808,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 60.84251819008445,
+          "giver_sep_mm": 8.6,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.8
+        },
+        {
+          "i": 10904,
+          "t": 21.81,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 60.979020188891475,
+          "giver_sep_mm": 8.6,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.8
+        },
+        {
+          "i": 10905,
+          "t": 21.812,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 61.1153166710753,
+          "giver_sep_mm": 8.6,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.8
+        },
+        {
+          "i": 10906,
+          "t": 21.814,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 61.251826969679236,
+          "giver_sep_mm": 8.6,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.8
+        },
+        {
+          "i": 10907,
+          "t": 21.816,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 61.39302289620085,
+          "giver_sep_mm": 8.6,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.8
+        },
+        {
+          "i": 10908,
+          "t": 21.818,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 61.50906945062064,
+          "giver_sep_mm": 8.6,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.8
+        },
+        {
+          "i": 10909,
+          "t": 21.82,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 61.625188917161935,
+          "giver_sep_mm": 8.6,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.8
+        },
+        {
+          "i": 10910,
+          "t": 21.822,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 61.733885833367225,
+          "giver_sep_mm": 8.6,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.8
+        },
+        {
+          "i": 10911,
+          "t": 21.824,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 61.84384877939442,
+          "giver_sep_mm": 8.6,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.8
+        },
+        {
+          "i": 10912,
+          "t": 21.826,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 61.95007489002672,
+          "giver_sep_mm": 8.6,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.8
+        },
+        {
+          "i": 10913,
+          "t": 21.828,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 62.04964975659644,
+          "giver_sep_mm": 8.6,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.9
+        },
+        {
+          "i": 10914,
+          "t": 21.83,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 62.1466701056559,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.2,
+          "taker_tip_mm": 71.9
+        },
+        {
+          "i": 10915,
+          "t": 21.832,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 62.23787821067334,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.3,
+          "taker_tip_mm": 71.9
+        },
+        {
+          "i": 10916,
+          "t": 21.834,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 62.31860173089152,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.3,
+          "taker_tip_mm": 71.9
+        },
+        {
+          "i": 10917,
+          "t": 21.836,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.1,
+          "giver_force_N": 1.5801738212110705,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.3,
+          "taker_tip_mm": 71.9
+        },
+        {
+          "i": 10918,
+          "t": 21.838,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 899.9,
+          "giver_force_N": 1.1750213091240376,
+          "giver_sep_mm": 8.5,
+          "giver_tip_mm": 6.4,
+          "taker_tip_mm": 72.0
+        },
+        {
+          "i": 10919,
+          "t": 21.84,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 899.7,
+          "giver_force_N": 0.4784095527577013,
+          "giver_sep_mm": 8.4,
+          "giver_tip_mm": 6.6,
+          "taker_tip_mm": 72.2
+        },
+        {
+          "i": 10920,
+          "t": 21.842,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 899.4,
+          "giver_force_N": 0.2337319654508096,
+          "giver_sep_mm": 8.4,
+          "giver_tip_mm": 6.9,
+          "taker_tip_mm": 72.5
+        },
+        {
+          "i": 10921,
+          "t": 21.844,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 899.1,
+          "giver_force_N": 0.11518675879234835,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 7.2,
+          "taker_tip_mm": 72.8
+        },
+        {
+          "i": 10922,
+          "t": 21.846,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.8,
+          "giver_force_N": 0.08789986336808793,
+          "giver_sep_mm": 8.2,
+          "giver_tip_mm": 7.6,
+          "taker_tip_mm": 73.1
+        },
+        {
+          "i": 10923,
+          "t": 21.848,
+          "bodies": [
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 8.1,
+          "giver_tip_mm": 8.0,
+          "taker_tip_mm": 73.5
+        },
+        {
+          "i": 10924,
+          "t": 21.85,
+          "bodies": [
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 898.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.9,
+          "giver_tip_mm": 8.5,
+          "taker_tip_mm": 73.9
+        },
+        {
+          "i": 10925,
+          "t": 21.852,
+          "bodies": [
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 897.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.8,
+          "giver_tip_mm": 8.9,
+          "taker_tip_mm": 74.3
+        },
+        {
+          "i": 10926,
+          "t": 21.854,
+          "bodies": [],
+          "fork_z_mm": 897.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.6,
+          "giver_tip_mm": 9.5,
+          "taker_tip_mm": 74.8
+        },
+        {
+          "i": 10927,
+          "t": 21.856,
+          "bodies": [],
+          "fork_z_mm": 896.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.5,
+          "giver_tip_mm": 10.0,
+          "taker_tip_mm": 75.3
+        },
+        {
+          "i": 10928,
+          "t": 21.858,
+          "bodies": [],
+          "fork_z_mm": 895.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.3,
+          "giver_tip_mm": 10.6,
+          "taker_tip_mm": 75.8
+        },
+        {
+          "i": 10929,
+          "t": 21.86,
+          "bodies": [],
+          "fork_z_mm": 895.2,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 11.3,
+          "taker_tip_mm": 76.4
+        },
+        {
+          "i": 10930,
+          "t": 21.862,
+          "bodies": [],
+          "fork_z_mm": 894.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 12.0,
+          "taker_tip_mm": 77.0
+        },
+        {
+          "i": 10931,
+          "t": 21.864,
+          "bodies": [],
+          "fork_z_mm": 893.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 12.7,
+          "taker_tip_mm": 77.6
+        },
+        {
+          "i": 10932,
+          "t": 21.866,
+          "bodies": [],
+          "fork_z_mm": 893.1,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 13.4,
+          "taker_tip_mm": 78.3
+        },
+        {
+          "i": 10933,
+          "t": 21.868,
+          "bodies": [],
+          "fork_z_mm": 892.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 14.2,
+          "taker_tip_mm": 79.0
+        },
+        {
+          "i": 10934,
+          "t": 21.87,
+          "bodies": [],
+          "fork_z_mm": 891.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 15.0,
+          "taker_tip_mm": 79.7
+        },
+        {
+          "i": 10935,
+          "t": 21.872,
+          "bodies": [],
+          "fork_z_mm": 890.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 15.8,
+          "taker_tip_mm": 80.5
+        },
+        {
+          "i": 10936,
+          "t": 21.874,
+          "bodies": [],
+          "fork_z_mm": 889.7,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 16.7,
+          "taker_tip_mm": 81.3
+        },
+        {
+          "i": 10937,
+          "t": 21.876,
+          "bodies": [],
+          "fork_z_mm": 888.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 17.6,
+          "taker_tip_mm": 82.2
+        },
+        {
+          "i": 10938,
+          "t": 21.878,
+          "bodies": [],
+          "fork_z_mm": 887.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 18.5,
+          "taker_tip_mm": 83.1
+        },
+        {
+          "i": 10939,
+          "t": 21.88,
+          "bodies": [],
+          "fork_z_mm": 886.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 19.5,
+          "taker_tip_mm": 84.1
+        },
+        {
+          "i": 10940,
+          "t": 21.882,
+          "bodies": [],
+          "fork_z_mm": 885.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 20.5,
+          "taker_tip_mm": 85.1
+        },
+        {
+          "i": 10941,
+          "t": 21.884,
+          "bodies": [],
+          "fork_z_mm": 884.7,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 21.5,
+          "taker_tip_mm": 86.1
+        },
+        {
+          "i": 10942,
+          "t": 21.886,
+          "bodies": [],
+          "fork_z_mm": 883.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 22.7,
+          "taker_tip_mm": 87.2
+        },
+        {
+          "i": 10943,
+          "t": 21.888,
+          "bodies": [],
+          "fork_z_mm": 882.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 23.8,
+          "taker_tip_mm": 88.3
+        },
+        {
+          "i": 10944,
+          "t": 21.89,
+          "bodies": [],
+          "fork_z_mm": 881.1,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 25.0,
+          "taker_tip_mm": 89.5
+        },
+        {
+          "i": 10945,
+          "t": 21.892,
+          "bodies": [],
+          "fork_z_mm": 879.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 26.2,
+          "taker_tip_mm": 90.7
+        },
+        {
+          "i": 10946,
+          "t": 21.894,
+          "bodies": [],
+          "fork_z_mm": 878.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 27.5,
+          "taker_tip_mm": 92.0
+        },
+        {
+          "i": 10947,
+          "t": 21.896,
+          "bodies": [],
+          "fork_z_mm": 877.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 28.8,
+          "taker_tip_mm": 93.3
+        },
+        {
+          "i": 10948,
+          "t": 21.898,
+          "bodies": [],
+          "fork_z_mm": 875.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 30.2,
+          "taker_tip_mm": 94.6
+        },
+        {
+          "i": 10949,
+          "t": 21.9,
+          "bodies": [],
+          "fork_z_mm": 874.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 31.6,
+          "taker_tip_mm": 96.0
+        },
+        {
+          "i": 10950,
+          "t": 21.902,
+          "bodies": [],
+          "fork_z_mm": 873.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 33.0,
+          "taker_tip_mm": 97.4
+        }
+      ],
+      "n_jaw_geoms": {
+        "right": 23,
+        "left": 23
+      },
+      "n_arm_geoms": {
+        "right": 48,
+        "left": 48
+      },
+      "link_geoms": {
+        "right": [
+          "right_base",
+          "right_camera_mount",
+          "right_lower_arm",
+          "right_shoulder",
+          "right_upper_arm",
+          "right_wrist"
+        ],
+        "left": [
+          "left_base",
+          "left_camera_mount",
+          "left_lower_arm",
+          "left_shoulder",
+          "left_upper_arm",
+          "left_wrist"
+        ]
+      }
+    },
+    {
+      "seed": 9,
+      "final_to_target_mm": 20.3,
+      "subgoals_met": 2,
+      "fork_start_z_mm": 784.0,
+      "first_lift_step": 7988,
+      "first_lift_t": 15.978,
+      "max_fork_z_mm": 902.1,
+      "carry_run_steps": [
+        7411,
+        9467
+      ],
+      "loss_step": 9467,
+      "loss_t": 18.936,
+      "loss_fork_z_mm": 900.4,
+      "loss_labels": [],
+      "touching_at_loss": [
+        "left_camera_mount",
+        "right_gripper",
+        "right_moving_jaw_so101_v1"
+      ],
+      "taker_bodies_in_window": [
+        "left_camera_mount"
+      ],
+      "taker_jaw_in_window": false,
+      "first_taker_contact_step": 9474,
+      "first_taker_contact_t": 18.95,
+      "first_taker_contact_bodies": [
+        "left_camera_mount"
+      ],
+      "verdict": "KNOCKED_OUT_BY_TAKER",
+      "giver_jaw_steps": 2057,
+      "min_giver_tip_mm": 4.3,
+      "min_taker_tip_mm": 72.0,
+      "carry_grip_force_N": {
+        "min": 0.0,
+        "max": 86.358,
+        "at_loss": 0.0,
+        "last_20_steps": [
+          71.946,
+          72.096,
+          72.242,
+          72.387,
+          72.528,
+          72.66,
+          72.806,
+          72.951,
+          72.755,
+          72.896,
+          2.996,
+          19.644,
+          19.315,
+          16.58,
+          2.562,
+          2.002,
+          0.018,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "carry_jaw_sep_mm": {
+        "min": 7.1,
+        "max": 35.1,
+        "at_loss": 7.1
+      },
+      "all_bodies_ever_touching_fork": [
+        "drawer",
+        "left_camera_mount",
+        "plate",
+        "right_gripper",
+        "right_moving_jaw_so101_v1",
+        "spoon",
+        "table"
+      ],
+      "window": [
+        {
+          "i": 9442,
+          "t": 18.886,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 70.99880002359379,
+          "giver_sep_mm": 8.4,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.6
+        },
+        {
+          "i": 9443,
+          "t": 18.888,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 71.16092190783733,
+          "giver_sep_mm": 8.4,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.6
+        },
+        {
+          "i": 9444,
+          "t": 18.89,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 71.32207404708377,
+          "giver_sep_mm": 8.4,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.6
+        },
+        {
+          "i": 9445,
+          "t": 18.892,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 71.48175302435547,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.6
+        },
+        {
+          "i": 9446,
+          "t": 18.894,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.6,
+          "giver_force_N": 71.6393851078418,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.6
+        },
+        {
+          "i": 9447,
+          "t": 18.896,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.7,
+          "giver_force_N": 71.79450915140718,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.5
+        },
+        {
+          "i": 9448,
+          "t": 18.898,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.7,
+          "giver_force_N": 71.9462933922521,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.5
+        },
+        {
+          "i": 9449,
+          "t": 18.9,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.7,
+          "giver_force_N": 72.09559107661786,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.5
+        },
+        {
+          "i": 9450,
+          "t": 18.902,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.7,
+          "giver_force_N": 72.24244385705586,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.5
+        },
+        {
+          "i": 9451,
+          "t": 18.904,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.8,
+          "giver_force_N": 72.38692962027689,
+          "giver_sep_mm": 8.3,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.5
+        },
+        {
+          "i": 9452,
+          "t": 18.906,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.8,
+          "giver_force_N": 72.52815341966283,
+          "giver_sep_mm": 8.2,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.5
+        },
+        {
+          "i": 9453,
+          "t": 18.908,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.8,
+          "giver_force_N": 72.66048318343749,
+          "giver_sep_mm": 8.2,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.5
+        },
+        {
+          "i": 9454,
+          "t": 18.91,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.9,
+          "giver_force_N": 72.80633378048468,
+          "giver_sep_mm": 8.2,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.5
+        },
+        {
+          "i": 9455,
+          "t": 18.912,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.9,
+          "giver_force_N": 72.95082793364064,
+          "giver_sep_mm": 8.2,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.5
+        },
+        {
+          "i": 9456,
+          "t": 18.914,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.0,
+          "giver_force_N": 72.75502436897524,
+          "giver_sep_mm": 8.2,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.5
+        },
+        {
+          "i": 9457,
+          "t": 18.916,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.0,
+          "giver_force_N": 72.89615094744094,
+          "giver_sep_mm": 8.2,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.5
+        },
+        {
+          "i": 9458,
+          "t": 18.918,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.1,
+          "giver_force_N": 2.9964751250008264,
+          "giver_sep_mm": 8.2,
+          "giver_tip_mm": 6.1,
+          "taker_tip_mm": 74.6
+        },
+        {
+          "i": 9459,
+          "t": 18.92,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.1,
+          "giver_force_N": 19.644223765221597,
+          "giver_sep_mm": 8.1,
+          "giver_tip_mm": 6.4,
+          "taker_tip_mm": 74.9
+        },
+        {
+          "i": 9460,
+          "t": 18.922,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.0,
+          "giver_force_N": 19.314523396321285,
+          "giver_sep_mm": 8.1,
+          "giver_tip_mm": 6.6,
+          "taker_tip_mm": 75.2
+        },
+        {
+          "i": 9461,
+          "t": 18.924,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 902.0,
+          "giver_force_N": 16.5802631602178,
+          "giver_sep_mm": 8.0,
+          "giver_tip_mm": 6.8,
+          "taker_tip_mm": 75.5
+        },
+        {
+          "i": 9462,
+          "t": 18.926,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.9,
+          "giver_force_N": 2.5621364071477664,
+          "giver_sep_mm": 7.9,
+          "giver_tip_mm": 7.1,
+          "taker_tip_mm": 75.8
+        },
+        {
+          "i": 9463,
+          "t": 18.928,
+          "bodies": [
+            "right_gripper",
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.7,
+          "giver_force_N": 2.0017187921400144,
+          "giver_sep_mm": 7.8,
+          "giver_tip_mm": 7.5,
+          "taker_tip_mm": 76.3
+        },
+        {
+          "i": 9464,
+          "t": 18.93,
+          "bodies": [
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.4,
+          "giver_force_N": 0.018105081774906905,
+          "giver_sep_mm": 7.6,
+          "giver_tip_mm": 8.0,
+          "taker_tip_mm": 76.9
+        },
+        {
+          "i": 9465,
+          "t": 18.932,
+          "bodies": [
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 901.1,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.4,
+          "giver_tip_mm": 8.6,
+          "taker_tip_mm": 77.4
+        },
+        {
+          "i": 9466,
+          "t": 18.934,
+          "bodies": [
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.3,
+          "giver_tip_mm": 9.1,
+          "taker_tip_mm": 78.1
+        },
+        {
+          "i": 9467,
+          "t": 18.936,
+          "bodies": [
+            "right_moving_jaw_so101_v1"
+          ],
+          "fork_z_mm": 900.4,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 9.8,
+          "taker_tip_mm": 78.7
+        },
+        {
+          "i": 9468,
+          "t": 18.938,
+          "bodies": [],
+          "fork_z_mm": 900.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 10.4,
+          "taker_tip_mm": 79.5
+        },
+        {
+          "i": 9469,
+          "t": 18.94,
+          "bodies": [],
+          "fork_z_mm": 899.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 11.1,
+          "taker_tip_mm": 80.2
+        },
+        {
+          "i": 9470,
+          "t": 18.942,
+          "bodies": [],
+          "fork_z_mm": 899.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 11.8,
+          "taker_tip_mm": 81.0
+        },
+        {
+          "i": 9471,
+          "t": 18.944,
+          "bodies": [],
+          "fork_z_mm": 898.5,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 12.5,
+          "taker_tip_mm": 81.9
+        },
+        {
+          "i": 9472,
+          "t": 18.946,
+          "bodies": [],
+          "fork_z_mm": 897.9,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.6,
+          "giver_tip_mm": 13.3,
+          "taker_tip_mm": 82.9
+        },
+        {
+          "i": 9473,
+          "t": 18.948,
+          "bodies": [],
+          "fork_z_mm": 897.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.6,
+          "giver_tip_mm": 14.0,
+          "taker_tip_mm": 83.9
+        },
+        {
+          "i": 9474,
+          "t": 18.95,
+          "bodies": [
+            "left_camera_mount"
+          ],
+          "fork_z_mm": 896.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.6,
+          "giver_tip_mm": 14.7,
+          "taker_tip_mm": 85.1
+        },
+        {
+          "i": 9475,
+          "t": 18.952,
+          "bodies": [
+            "left_camera_mount"
+          ],
+          "fork_z_mm": 896.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.7,
+          "giver_tip_mm": 15.3,
+          "taker_tip_mm": 86.4
+        },
+        {
+          "i": 9476,
+          "t": 18.954,
+          "bodies": [
+            "left_camera_mount"
+          ],
+          "fork_z_mm": 895.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 15.9,
+          "taker_tip_mm": 87.7
+        },
+        {
+          "i": 9477,
+          "t": 18.956,
+          "bodies": [
+            "left_camera_mount"
+          ],
+          "fork_z_mm": 894.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.8,
+          "giver_tip_mm": 16.6,
+          "taker_tip_mm": 88.8
+        },
+        {
+          "i": 9478,
+          "t": 18.958,
+          "bodies": [
+            "left_camera_mount"
+          ],
+          "fork_z_mm": 893.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 17.4,
+          "taker_tip_mm": 89.7
+        },
+        {
+          "i": 9479,
+          "t": 18.96,
+          "bodies": [
+            "left_camera_mount"
+          ],
+          "fork_z_mm": 893.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 18.2,
+          "taker_tip_mm": 90.6
+        },
+        {
+          "i": 9480,
+          "t": 18.962,
+          "bodies": [],
+          "fork_z_mm": 892.1,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 19.1,
+          "taker_tip_mm": 91.4
+        },
+        {
+          "i": 9481,
+          "t": 18.964,
+          "bodies": [],
+          "fork_z_mm": 891.2,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 20.1,
+          "taker_tip_mm": 92.2
+        },
+        {
+          "i": 9482,
+          "t": 18.966,
+          "bodies": [],
+          "fork_z_mm": 890.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 21.0,
+          "taker_tip_mm": 93.0
+        },
+        {
+          "i": 9483,
+          "t": 18.968,
+          "bodies": [],
+          "fork_z_mm": 889.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 21.9,
+          "taker_tip_mm": 93.7
+        },
+        {
+          "i": 9484,
+          "t": 18.97,
+          "bodies": [],
+          "fork_z_mm": 888.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 22.9,
+          "taker_tip_mm": 94.6
+        },
+        {
+          "i": 9485,
+          "t": 18.972,
+          "bodies": [],
+          "fork_z_mm": 887.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.1,
+          "giver_tip_mm": 23.9,
+          "taker_tip_mm": 95.5
+        },
+        {
+          "i": 9486,
+          "t": 18.974,
+          "bodies": [],
+          "fork_z_mm": 886.2,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 24.9,
+          "taker_tip_mm": 96.6
+        },
+        {
+          "i": 9487,
+          "t": 18.976,
+          "bodies": [],
+          "fork_z_mm": 885.1,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 26.0,
+          "taker_tip_mm": 97.7
+        },
+        {
+          "i": 9488,
+          "t": 18.978,
+          "bodies": [],
+          "fork_z_mm": 884.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 27.1,
+          "taker_tip_mm": 98.9
+        },
+        {
+          "i": 9489,
+          "t": 18.98,
+          "bodies": [],
+          "fork_z_mm": 882.8,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 7.0,
+          "giver_tip_mm": 28.2,
+          "taker_tip_mm": 100.2
+        },
+        {
+          "i": 9490,
+          "t": 18.982,
+          "bodies": [],
+          "fork_z_mm": 881.6,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 29.2,
+          "taker_tip_mm": 101.6
+        },
+        {
+          "i": 9491,
+          "t": 18.984,
+          "bodies": [],
+          "fork_z_mm": 880.3,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 30.1,
+          "taker_tip_mm": 103.1
+        },
+        {
+          "i": 9492,
+          "t": 18.986,
+          "bodies": [],
+          "fork_z_mm": 879.0,
+          "giver_force_N": 0.0,
+          "giver_sep_mm": 6.9,
+          "giver_tip_mm": 31.0,
+          "taker_tip_mm": 104.6
+        }
+      ],
+      "n_jaw_geoms": {
+        "right": 23,
+        "left": 23
+      },
+      "n_arm_geoms": {
+        "right": 48,
+        "left": 48
+      },
+      "link_geoms": {
+        "right": [
+          "right_base",
+          "right_camera_mount",
+          "right_lower_arm",
+          "right_shoulder",
+          "right_upper_arm",
+          "right_wrist"
+        ],
+        "left": [
+          "left_base",
+          "left_camera_mount",
+          "left_lower_arm",
+          "left_shoulder",
+          "left_upper_arm",
+          "left_wrist"
+        ]
+      }
+    }
+  ]
+}

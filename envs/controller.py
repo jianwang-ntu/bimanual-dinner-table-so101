@@ -792,6 +792,36 @@ CUTLERY_HANDOFF_SQUARE = False
 CUTLERY_PLACE_AIM_BODY = False
 
 
+# How much narrower than the object the cutlery pinch closes, in metres.
+#
+# This name exists because of a hypothesis that was then MEASURED AND REFUTED,
+# and it is kept at the shipped value with the refutation attached rather than
+# removed, so the axis is not re-proposed by the next reader.
+#
+# The hypothesis: ``pinch``'s own default is 0.005 and it was set on the MUG,
+# where 5 mm of interference on a 60 mm wall is 8 percent.  The same absolute
+# constant is applied to a cutlery handle whose ``fork_handle`` box is 12 mm
+# across the jaw axis, where 5 mm is 42 percent -- and F-FORK-EJECT-001 measured
+# the giver carrying the fork at 84-92 N and losing it in 6-14 ms with the jaw
+# separation UNCHANGED at 6.8-8.2 mm, its tightest of the whole carry.  A flat
+# box held at 42 percent interference squeezing out from between the faces fits
+# that signature exactly.
+#
+# It is still wrong.  ``scripts/measure_cutlery_squeeze.py`` swept six cells on
+# both sides over 60 scored episodes: at squeeze=0.0005 the jaws command 11.5 mm
+# across a 12.0 mm handle -- a twentieth of the shipped interference -- and the
+# peak force is STILL 74.1 N and the score STILL 18/50, indistinguishable from
+# the shipped cell.  The force is not interference-driven and the outcome does
+# not respond to this knob at all.  fork_placed is 1-3 of 10 across the entire
+# sweep, which at n=10 is noise, and no cell is adoptable.
+#
+# 0.005 is the shipped behaviour and reproduces it exactly -- it is ``pinch``'s
+# own default, so introducing this name changed nothing.  Proven, not asserted:
+# the sweep's shipped cell reproduces the pinned ten-number per-seed column to
+# 0.0 mm on every seed.
+CUTLERY_SQUEEZE = 0.005
+
+
 def dinner_table_script() -> list[tuple[dict, float]]:
     """The rollout, as (moves-for-this-step, seconds) pairs.
 
@@ -809,7 +839,7 @@ def dinner_table_script() -> list[tuple[dict, float]]:
     S.extend(_open_drawer())
 
     # --- 2. fork: right picks it out of the drawer, hands it to the left ------
-    fork_grip = pinch(geom_width("fork_handle", 0))
+    fork_grip = pinch(geom_width("fork_handle", 0), squeeze=CUTLERY_SQUEEZE)
     S.extend(_pick(("right", "fork", "fork_grasp", fork_grip, across("fork")),
                    open_to=CUTLERY_DESCEND_OPENING, descend_z=CUTLERY_DESCEND_Z,
                    descend_steps=CUTLERY_DESCEND_STEPS,
@@ -823,7 +853,7 @@ def dinner_table_script() -> list[tuple[dict, float]]:
                       aim_body="fork" if CUTLERY_PLACE_AIM_BODY else None))
 
     # --- 3. spoon: the mirror image, left to right ----------------------------
-    spoon_grip = pinch(geom_width("spoon_handle", 0))
+    spoon_grip = pinch(geom_width("spoon_handle", 0), squeeze=CUTLERY_SQUEEZE)
     S.extend(_pick(("left", "spoon", "spoon_grasp", spoon_grip, across("spoon")),
                    open_to=CUTLERY_DESCEND_OPENING, descend_z=CUTLERY_DESCEND_Z,
                    descend_steps=CUTLERY_DESCEND_STEPS,

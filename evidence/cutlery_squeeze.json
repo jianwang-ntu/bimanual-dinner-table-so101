@@ -1,0 +1,1389 @@
+{
+  "probe": "measure_cutlery_squeeze.py",
+  "question": "does the cutlery pinch's absolute 5 mm squeeze eject the fork from the jaws carrying it?",
+  "knob": "envs.controller.CUTLERY_SQUEEZE",
+  "shipped_value": 0.005,
+  "cells": [
+    0.0005,
+    0.001,
+    0.002,
+    0.003,
+    0.005,
+    0.012
+  ],
+  "seeds": 10,
+  "controls": {
+    "shipped_cell_reproduces": {
+      "pass": true,
+      "pinned_literal": [
+        158.9,
+        149.4,
+        14.0,
+        54.6,
+        70.2,
+        83.0,
+        159.8,
+        35.9,
+        143.6,
+        20.3
+      ],
+      "measured": [
+        158.9,
+        149.4,
+        14.0,
+        54.6,
+        70.2,
+        83.0,
+        159.8,
+        35.9,
+        143.6,
+        20.3
+      ],
+      "abs_delta_mm": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tol_mm": 1.0,
+      "also_proves": "naming CUTLERY_SQUEEZE and threading it through the two cutlery pinches changed nothing at its default value"
+    },
+    "knob_is_live": {
+      "pass": true,
+      "commanded_sep_mm_per_cell": {
+        "0.0005": 11.5,
+        "0.001": 11.0,
+        "0.002": 10.0,
+        "0.003": 9.0,
+        "0.005": 7.0,
+        "0.012": 4.4
+      },
+      "why_it_matters": "cells that command the same jaw separation are the same experiment run twice"
+    },
+    "sweep_is_sensitive": {
+      "pass": true,
+      "destructive_cell": 0.012,
+      "destructive_subgoals": 16,
+      "best_candidate_subgoals": 18,
+      "why_it_matters": "if maximum interference scores as well as the best cell, this sweep cannot see the quantity it sweeps"
+    },
+    "every_cell_ran": {
+      "pass": true,
+      "expected": 60,
+      "ok": 60,
+      "errors": []
+    }
+  },
+  "per_cell": {
+    "0.0005": {
+      "n": 10,
+      "commanded_sep_mm": 11.5,
+      "subgoals_total": 18,
+      "task_success": 0,
+      "fork_placed": 2,
+      "spoon_placed": 0,
+      "plate_placed": 6,
+      "mug_placed": 0,
+      "drawer_open": 10,
+      "peak_force_N": [
+        37.7,
+        39.38,
+        54.96,
+        40.88,
+        35.92,
+        74.12,
+        0.0,
+        54.5,
+        50.92,
+        44.29
+      ],
+      "max_peak_force_N": 74.12,
+      "final_to_target_mm": [
+        62.5,
+        110.7,
+        18.5,
+        56.9,
+        58.5,
+        112.5,
+        159.7,
+        101.5,
+        32.1,
+        57.0
+      ],
+      "handoffs": 31
+    },
+    "0.001": {
+      "n": 10,
+      "commanded_sep_mm": 11.0,
+      "subgoals_total": 16,
+      "task_success": 0,
+      "fork_placed": 3,
+      "spoon_placed": 0,
+      "plate_placed": 3,
+      "mug_placed": 0,
+      "drawer_open": 10,
+      "peak_force_N": [
+        65.57,
+        74.42,
+        69.79,
+        53.99,
+        38.66,
+        72.7,
+        0.0,
+        73.8,
+        57.31,
+        63.43
+      ],
+      "max_peak_force_N": 74.42,
+      "final_to_target_mm": [
+        74.1,
+        23.5,
+        53.7,
+        74.4,
+        122.9,
+        47.6,
+        159.4,
+        19.4,
+        32.3,
+        112.3
+      ],
+      "handoffs": 38
+    },
+    "0.002": {
+      "n": 10,
+      "commanded_sep_mm": 10.0,
+      "subgoals_total": 15,
+      "task_success": 0,
+      "fork_placed": 1,
+      "spoon_placed": 0,
+      "plate_placed": 5,
+      "mug_placed": 0,
+      "drawer_open": 9,
+      "peak_force_N": [
+        95.87,
+        39.92,
+        80.75,
+        80.56,
+        80.94,
+        88.67,
+        0.0,
+        84.51,
+        81.57,
+        81.23
+      ],
+      "max_peak_force_N": 95.87,
+      "final_to_target_mm": [
+        51.5,
+        146.3,
+        131.5,
+        23.6,
+        94.8,
+        118.5,
+        159.8,
+        105.0,
+        70.9,
+        95.0
+      ],
+      "handoffs": 20
+    },
+    "0.003": {
+      "n": 10,
+      "commanded_sep_mm": 9.0,
+      "subgoals_total": 17,
+      "task_success": 0,
+      "fork_placed": 2,
+      "spoon_placed": 0,
+      "plate_placed": 5,
+      "mug_placed": 0,
+      "drawer_open": 10,
+      "peak_force_N": [
+        84.47,
+        42.04,
+        95.28,
+        94.8,
+        44.34,
+        82.86,
+        0.0,
+        103.43,
+        79.59,
+        84.17
+      ],
+      "max_peak_force_N": 103.43,
+      "final_to_target_mm": [
+        22.4,
+        145.8,
+        96.3,
+        133.7,
+        142.1,
+        95.6,
+        149.1,
+        73.1,
+        56.5,
+        32.6
+      ],
+      "handoffs": 26
+    },
+    "0.005": {
+      "n": 10,
+      "commanded_sep_mm": 7.0,
+      "subgoals_total": 18,
+      "task_success": 0,
+      "fork_placed": 3,
+      "spoon_placed": 0,
+      "plate_placed": 4,
+      "mug_placed": 1,
+      "drawer_open": 10,
+      "peak_force_N": [
+        96.36,
+        51.92,
+        89.07,
+        86.75,
+        83.56,
+        92.46,
+        0.0,
+        92.17,
+        84.88,
+        86.36
+      ],
+      "max_peak_force_N": 96.36,
+      "final_to_target_mm": [
+        158.9,
+        149.4,
+        14.0,
+        54.6,
+        70.2,
+        83.0,
+        159.8,
+        35.9,
+        143.6,
+        20.3
+      ],
+      "handoffs": 26
+    },
+    "0.012": {
+      "n": 10,
+      "commanded_sep_mm": 4.4,
+      "subgoals_total": 16,
+      "task_success": 0,
+      "fork_placed": 2,
+      "spoon_placed": 0,
+      "plate_placed": 4,
+      "mug_placed": 0,
+      "drawer_open": 10,
+      "peak_force_N": [
+        98.88,
+        50.9,
+        89.72,
+        90.59,
+        55.72,
+        100.96,
+        0.0,
+        92.17,
+        95.93,
+        93.99
+      ],
+      "max_peak_force_N": 100.96,
+      "final_to_target_mm": [
+        159.6,
+        149.2,
+        23.4,
+        74.5,
+        140.3,
+        80.4,
+        159.2,
+        72.3,
+        175.8,
+        13.3
+      ],
+      "handoffs": 30
+    }
+  },
+  "per_run": [
+    {
+      "squeeze": 0.0005,
+      "seed": 0,
+      "commanded_sep_mm": 11.5,
+      "peak_giver_force_N": 37.7,
+      "final_to_target_mm": 62.5,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.0005,
+      "seed": 1,
+      "commanded_sep_mm": 11.5,
+      "peak_giver_force_N": 39.38,
+      "final_to_target_mm": 110.7,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.0005,
+      "seed": 2,
+      "commanded_sep_mm": 11.5,
+      "peak_giver_force_N": 54.96,
+      "final_to_target_mm": 18.5,
+      "subgoals_met": 3,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": true,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.0005,
+      "seed": 3,
+      "commanded_sep_mm": 11.5,
+      "peak_giver_force_N": 40.88,
+      "final_to_target_mm": 56.9,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.0005,
+      "seed": 4,
+      "commanded_sep_mm": 11.5,
+      "peak_giver_force_N": 35.92,
+      "final_to_target_mm": 58.5,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.0005,
+      "seed": 5,
+      "commanded_sep_mm": 11.5,
+      "peak_giver_force_N": 74.12,
+      "final_to_target_mm": 112.5,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 4,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.0005,
+      "seed": 6,
+      "commanded_sep_mm": 11.5,
+      "peak_giver_force_N": 0.0,
+      "final_to_target_mm": 159.7,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.0005,
+      "seed": 7,
+      "commanded_sep_mm": 11.5,
+      "peak_giver_force_N": 54.5,
+      "final_to_target_mm": 101.5,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 5,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.0005,
+      "seed": 8,
+      "commanded_sep_mm": 11.5,
+      "peak_giver_force_N": 50.92,
+      "final_to_target_mm": 32.1,
+      "subgoals_met": 3,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": true,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 7,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.0005,
+      "seed": 9,
+      "commanded_sep_mm": 11.5,
+      "peak_giver_force_N": 44.29,
+      "final_to_target_mm": 57.0,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 0,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.001,
+      "seed": 0,
+      "commanded_sep_mm": 11.0,
+      "peak_giver_force_N": 65.57,
+      "final_to_target_mm": 74.1,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.001,
+      "seed": 1,
+      "commanded_sep_mm": 11.0,
+      "peak_giver_force_N": 74.42,
+      "final_to_target_mm": 23.5,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": true,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.001,
+      "seed": 2,
+      "commanded_sep_mm": 11.0,
+      "peak_giver_force_N": 69.79,
+      "final_to_target_mm": 53.7,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 7,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.001,
+      "seed": 3,
+      "commanded_sep_mm": 11.0,
+      "peak_giver_force_N": 53.99,
+      "final_to_target_mm": 74.4,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 0,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.001,
+      "seed": 4,
+      "commanded_sep_mm": 11.0,
+      "peak_giver_force_N": 38.66,
+      "final_to_target_mm": 122.9,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.001,
+      "seed": 5,
+      "commanded_sep_mm": 11.0,
+      "peak_giver_force_N": 72.7,
+      "final_to_target_mm": 47.6,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 7,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.001,
+      "seed": 6,
+      "commanded_sep_mm": 11.0,
+      "peak_giver_force_N": 0.0,
+      "final_to_target_mm": 159.4,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 5,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.001,
+      "seed": 7,
+      "commanded_sep_mm": 11.0,
+      "peak_giver_force_N": 73.8,
+      "final_to_target_mm": 19.4,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": true,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 4,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.001,
+      "seed": 8,
+      "commanded_sep_mm": 11.0,
+      "peak_giver_force_N": 57.31,
+      "final_to_target_mm": 32.3,
+      "subgoals_met": 3,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": true,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.001,
+      "seed": 9,
+      "commanded_sep_mm": 11.0,
+      "peak_giver_force_N": 63.43,
+      "final_to_target_mm": 112.3,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 4,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.002,
+      "seed": 0,
+      "commanded_sep_mm": 10.0,
+      "peak_giver_force_N": 95.87,
+      "final_to_target_mm": 51.5,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.002,
+      "seed": 1,
+      "commanded_sep_mm": 10.0,
+      "peak_giver_force_N": 39.92,
+      "final_to_target_mm": 146.3,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.002,
+      "seed": 2,
+      "commanded_sep_mm": 10.0,
+      "peak_giver_force_N": 80.75,
+      "final_to_target_mm": 131.5,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 1,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.002,
+      "seed": 3,
+      "commanded_sep_mm": 10.0,
+      "peak_giver_force_N": 80.56,
+      "final_to_target_mm": 23.6,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": true,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.002,
+      "seed": 4,
+      "commanded_sep_mm": 10.0,
+      "peak_giver_force_N": 80.94,
+      "final_to_target_mm": 94.8,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.002,
+      "seed": 5,
+      "commanded_sep_mm": 10.0,
+      "peak_giver_force_N": 88.67,
+      "final_to_target_mm": 118.5,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.002,
+      "seed": 6,
+      "commanded_sep_mm": 10.0,
+      "peak_giver_force_N": 0.0,
+      "final_to_target_mm": 159.8,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 1,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.002,
+      "seed": 7,
+      "commanded_sep_mm": 10.0,
+      "peak_giver_force_N": 84.51,
+      "final_to_target_mm": 105.0,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 1,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.002,
+      "seed": 8,
+      "commanded_sep_mm": 10.0,
+      "peak_giver_force_N": 81.57,
+      "final_to_target_mm": 70.9,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.002,
+      "seed": 9,
+      "commanded_sep_mm": 10.0,
+      "peak_giver_force_N": 81.23,
+      "final_to_target_mm": 95.0,
+      "subgoals_met": 0,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": false,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.003,
+      "seed": 0,
+      "commanded_sep_mm": 9.0,
+      "peak_giver_force_N": 84.47,
+      "final_to_target_mm": 22.4,
+      "subgoals_met": 3,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": true,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.003,
+      "seed": 1,
+      "commanded_sep_mm": 9.0,
+      "peak_giver_force_N": 42.04,
+      "final_to_target_mm": 145.8,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.003,
+      "seed": 2,
+      "commanded_sep_mm": 9.0,
+      "peak_giver_force_N": 95.28,
+      "final_to_target_mm": 96.3,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.003,
+      "seed": 3,
+      "commanded_sep_mm": 9.0,
+      "peak_giver_force_N": 94.8,
+      "final_to_target_mm": 133.7,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 0,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.003,
+      "seed": 4,
+      "commanded_sep_mm": 9.0,
+      "peak_giver_force_N": 44.34,
+      "final_to_target_mm": 142.1,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 0,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.003,
+      "seed": 5,
+      "commanded_sep_mm": 9.0,
+      "peak_giver_force_N": 82.86,
+      "final_to_target_mm": 95.6,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 4,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.003,
+      "seed": 6,
+      "commanded_sep_mm": 9.0,
+      "peak_giver_force_N": 0.0,
+      "final_to_target_mm": 149.1,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 1,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.003,
+      "seed": 7,
+      "commanded_sep_mm": 9.0,
+      "peak_giver_force_N": 103.43,
+      "final_to_target_mm": 73.1,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 5,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.003,
+      "seed": 8,
+      "commanded_sep_mm": 9.0,
+      "peak_giver_force_N": 79.59,
+      "final_to_target_mm": 56.5,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 5,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.003,
+      "seed": 9,
+      "commanded_sep_mm": 9.0,
+      "peak_giver_force_N": 84.17,
+      "final_to_target_mm": 32.6,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": true,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.005,
+      "seed": 0,
+      "commanded_sep_mm": 7.0,
+      "peak_giver_force_N": 96.36,
+      "final_to_target_mm": 158.9,
+      "subgoals_met": 3,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": true
+      },
+      "handoffs": 4,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.005,
+      "seed": 1,
+      "commanded_sep_mm": 7.0,
+      "peak_giver_force_N": 51.92,
+      "final_to_target_mm": 149.4,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.005,
+      "seed": 2,
+      "commanded_sep_mm": 7.0,
+      "peak_giver_force_N": 89.07,
+      "final_to_target_mm": 14.0,
+      "subgoals_met": 3,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": true,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 1,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.005,
+      "seed": 3,
+      "commanded_sep_mm": 7.0,
+      "peak_giver_force_N": 86.75,
+      "final_to_target_mm": 54.6,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.005,
+      "seed": 4,
+      "commanded_sep_mm": 7.0,
+      "peak_giver_force_N": 83.56,
+      "final_to_target_mm": 70.2,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.005,
+      "seed": 5,
+      "commanded_sep_mm": 7.0,
+      "peak_giver_force_N": 92.46,
+      "final_to_target_mm": 83.0,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.005,
+      "seed": 6,
+      "commanded_sep_mm": 7.0,
+      "peak_giver_force_N": 0.0,
+      "final_to_target_mm": 159.8,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.005,
+      "seed": 7,
+      "commanded_sep_mm": 7.0,
+      "peak_giver_force_N": 92.17,
+      "final_to_target_mm": 35.9,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": true,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.005,
+      "seed": 8,
+      "commanded_sep_mm": 7.0,
+      "peak_giver_force_N": 84.88,
+      "final_to_target_mm": 143.6,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.005,
+      "seed": 9,
+      "commanded_sep_mm": 7.0,
+      "peak_giver_force_N": 86.36,
+      "final_to_target_mm": 20.3,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": true,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.012,
+      "seed": 0,
+      "commanded_sep_mm": 4.4,
+      "peak_giver_force_N": 98.88,
+      "final_to_target_mm": 159.6,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 7,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.012,
+      "seed": 1,
+      "commanded_sep_mm": 4.4,
+      "peak_giver_force_N": 50.9,
+      "final_to_target_mm": 149.2,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.012,
+      "seed": 2,
+      "commanded_sep_mm": 4.4,
+      "peak_giver_force_N": 89.72,
+      "final_to_target_mm": 23.4,
+      "subgoals_met": 3,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": true,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.012,
+      "seed": 3,
+      "commanded_sep_mm": 4.4,
+      "peak_giver_force_N": 90.59,
+      "final_to_target_mm": 74.5,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.012,
+      "seed": 4,
+      "commanded_sep_mm": 4.4,
+      "peak_giver_force_N": 55.72,
+      "final_to_target_mm": 140.3,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.012,
+      "seed": 5,
+      "commanded_sep_mm": 4.4,
+      "peak_giver_force_N": 100.96,
+      "final_to_target_mm": 80.4,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 5,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.012,
+      "seed": 6,
+      "commanded_sep_mm": 4.4,
+      "peak_giver_force_N": 0.0,
+      "final_to_target_mm": 159.2,
+      "subgoals_met": 1,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.012,
+      "seed": 7,
+      "commanded_sep_mm": 4.4,
+      "peak_giver_force_N": 92.17,
+      "final_to_target_mm": 72.3,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.012,
+      "seed": 8,
+      "commanded_sep_mm": 4.4,
+      "peak_giver_force_N": 95.93,
+      "final_to_target_mm": 175.8,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": false,
+        "spoon_placed": false,
+        "plate_placed": true,
+        "mug_placed": false
+      },
+      "handoffs": 3,
+      "objects_dropped": []
+    },
+    {
+      "squeeze": 0.012,
+      "seed": 9,
+      "commanded_sep_mm": 4.4,
+      "peak_giver_force_N": 93.99,
+      "final_to_target_mm": 13.3,
+      "subgoals_met": 2,
+      "task_success": false,
+      "subgoals": {
+        "drawer_open": true,
+        "fork_placed": true,
+        "spoon_placed": false,
+        "plate_placed": false,
+        "mug_placed": false
+      },
+      "handoffs": 2,
+      "objects_dropped": []
+    }
+  ]
+}

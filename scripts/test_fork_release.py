@@ -135,12 +135,29 @@ def main() -> int:
           sorted(carries)[len(carries) // 2] < 45.0,
           f"carry_mm {sorted(carries)}")
 
-    # ---- AGAINST US, 1: this tick's own first hypothesis is refuted --------
+    # ---- AGAINST US, 1: this tick's own first hypothesis, and its limit ----
+    # WITHDRAWN 2026-09-09 by F-FORK-EJECT-001.  This check used to read
+    # "REFUTED, and kept: the taker does not knock the fork out -- its jaws
+    # never come within a jaw half-span of it".  The NUMBER is still true and
+    # is still asserted; the CONCLUSION drawn from it was not, because 62.3 mm
+    # is a minimum over waypoint ENDS and the taker crosses the gap between
+    # samples.  At every simulator step it reaches 18.6 mm
+    # (evidence/fork_knockout.json).  The check now asserts only what its own
+    # data supports, and asserts that the correction exists rather than letting
+    # the reader infer the old reading from the old number.
     closest = summ["taker_closest_approach_mm"]
-    check("REFUTED, and kept: the taker does not knock the fork out -- its "
-          "jaws never come within a jaw half-span of it",
+    check("the taker's jaws stay clear of the fork AT EVERY WAYPOINT END -- "
+          "which is all this sampling can see, and NOT a refutation of a knock",
           closest is not None and closest > 45.0,
-          f"closest taker approach over all seeds and waypoints: {closest} mm")
+          f"closest taker approach over all seeds and waypoint ends: "
+          f"{closest} mm; at step resolution it is 18.6 mm, see "
+          f"scripts/measure_fork_knockout.py")
+    ko = EVID / "fork_knockout.json"
+    check("and the step-resolution measurement that withdraws that reading is "
+          "actually present, so the correction cannot be lost",
+          ko.exists() and json.loads(ko.read_text())["controls"][
+              "link_geoms_are_new"]["pass"],
+          str(ko))
 
     # ---- AGAINST US, 2: the published number is untouched ------------------
     check("fork_placed is UNCHANGED at 3/10 -- the correction is to the "
