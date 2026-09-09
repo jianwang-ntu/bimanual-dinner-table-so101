@@ -208,10 +208,16 @@ def run(seed: int, mode: str, z: float, plan_at_open: bool, opening,
             "plan_at_open": bool(plan_at_open),
             "opening": None if opening is None else float(opening),
             "opening_rad_effective": float(C.CUTLERY_DESCEND_OPENING),
+            # every axis this probe can move must appear here, or a cell that
+            # is NOT the shipped script gets flagged as one.  ``aim_body`` and
+            # ``steps`` were missing and two cells carried the flag; caught by
+            # reading the run rows back rather than the summary.
             "shipped": (mode == SHIPPED_SQUARE
                         and abs(float(z) - SHIPPED_Z) < 1e-12
                         and bool(plan_at_open) == SHIPPED_PLAN_AT
-                        and opening is SHIPPED_OPENING),
+                        and opening is SHIPPED_OPENING
+                        and int(steps) == 1
+                        and not bool(aim)),
             "subgoals_met": int(sum(rep["subgoals"].values())),
             "subgoals": rep["subgoals"],
             "task_success": bool(rep["task_success"]),
