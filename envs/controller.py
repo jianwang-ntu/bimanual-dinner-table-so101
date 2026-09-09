@@ -639,6 +639,30 @@ def drag_toward(arm: str, aim, frac: float, body: str = "plate"):
     return f
 
 
+def carry_to(arm: str, target: str, body: str, dz: float = 0.0):
+    """Tip waypoint putting ``body`` -- not the jaws -- on ``target`` in xy.
+
+    ``_place`` aims ``site_xyz(target)``, which lands the jaw MEETING POINT on
+    the target site and leaves the carried object wherever it happens to sit in
+    the jaws.  For a mug pinched across its own centre those are the same point.
+    For a fork they are not: the jaws take it by the handle and the body origin
+    is most of a handle-length away, against a 45 mm placement tolerance.
+
+    Read live at the moment the move starts, exactly as ``drag_toward`` does, so
+    a fork that slipped in the jaws is corrected by however far it slipped.  The
+    z is untouched -- it is the same height ``_place`` always asked for -- so
+    this changes where the object lands and not how high it is dropped from.
+    """
+    def f(model, data):
+        g = _grip(model, arm)
+        tip = g.tip_mid(model, data)
+        c = _scene.active().body_xpos(model, data, body)
+        t = _scene.active().site_xpos(model, data, target)
+        return np.array([tip[0] + (t[0] - c[0]), tip[1] + (t[1] - c[1]),
+                         t[2] + dz])
+    return f
+
+
 def _rim_at(dz: float, up: float = 0.0):
     f = rim_toward("plate", "right", dz=dz)
     if not up:
@@ -723,6 +747,42 @@ CUTLERY_APPROACH = (0.0, 0.0, 0.075)
 CUTLERY_DESCEND_OPENING = GRIPPER_NARROW
 CUTLERY_PLAN_AT_OPEN = False
 
+# Whether the cutlery pick is solved by ``plan_pose_squared`` -- the solver that
+# puts the jaw CLOSING AXIS where it was asked -- rather than by ``plan_pose``,
+# which constrains three numbers on a five-joint arm and lets the orientation
+# fall out of the damped-least-squares step.  ``CUTLERY_DESCEND_SQUARE`` already
+# squared the descend move alone; this one squares the approach and the lift
+# with it, and it is a separate knob because ``_pick`` reads them separately.
+#
+# It is the axis the nine probes in TECHNICAL_SUMMARY section 8 never crossed:
+# ``measure_fork_descent`` swept it at the shipped opening and the shipped
+# ``plan_at``, and ``measure_cutlery_zcross``'s 24 cells are descent height x
+# ``plan_at_open`` x opening with the squared solver OFF in every one of them.
+# ``scripts/measure_cutlery_square.py`` crosses it.  False is the shipped
+# behaviour and emits exactly the moves it always did.
+CUTLERY_SQUARE = False
+
+# The same solver, at the OTHER end of the cutlery pipeline.  ``_handoff``'s
+# ``square`` reaches the taker's ``_take_above`` and ``_take`` -- the moves that
+# pinch the fork out of the giver's jaws -- and the ``_place`` that follows,
+# which is what decides where the fork lands.  Both cutlery hand-offs take the
+# default False.  ``square_carry`` is pinned False beside it, because the
+# ``_handoff`` docstring records a measured failure from squaring the CARRY
+# waypoints: the giver planned the hand-off site to 5.3 mm and arrived 191.8 mm
+# away, and the mug fell.  Squaring is for the moves that pinch, not the moves
+# that hold.  False is the shipped behaviour and emits exactly the moves it
+# always did.
+CUTLERY_HANDOFF_SQUARE = False
+
+# Whether the cutlery ``_place`` aims the FORK (or the spoon) at its target
+# rather than the jaw meeting point.  Measured on the cell that first lifted the
+# fork: it is grasped and carried on 8 of 10 seeds and lands 62.7, 86.8, 80.5,
+# 78.0, 113.8, 95.1, 71.8 and 20.0 mm from ``target_fork`` against a 45 mm
+# tolerance -- a carry that works and a release that misses.  See
+# ``scripts/measure_cutlery_square.py``.  False is the shipped behaviour and
+# emits exactly the moves it always did.
+CUTLERY_PLACE_AIM_BODY = False
+
 
 def dinner_table_script() -> list[tuple[dict, float]]:
     """The rollout, as (moves-for-this-step, seconds) pairs.
@@ -745,22 +805,28 @@ def dinner_table_script() -> list[tuple[dict, float]]:
     S.extend(_pick(("right", "fork", "fork_grasp", fork_grip, across("fork")),
                    open_to=CUTLERY_DESCEND_OPENING, descend_z=CUTLERY_DESCEND_Z,
                    descend_steps=CUTLERY_DESCEND_STEPS,
+                   square=CUTLERY_SQUARE,
                    descend_square=CUTLERY_DESCEND_SQUARE,
                    plan_at_open=CUTLERY_PLAN_AT_OPEN,
                    approach=CUTLERY_APPROACH, lift=(0.0, 0.0, 0.085)))
     S.extend(_handoff("right", "left", "fork", "target_fork", across("fork"),
-                      hold=fork_grip))
+                      hold=fork_grip, square=CUTLERY_HANDOFF_SQUARE,
+                      square_carry=False,
+                      aim_body="fork" if CUTLERY_PLACE_AIM_BODY else None))
 
     # --- 3. spoon: the mirror image, left to right ----------------------------
     spoon_grip = pinch(geom_width("spoon_handle", 0))
     S.extend(_pick(("left", "spoon", "spoon_grasp", spoon_grip, across("spoon")),
                    open_to=CUTLERY_DESCEND_OPENING, descend_z=CUTLERY_DESCEND_Z,
                    descend_steps=CUTLERY_DESCEND_STEPS,
+                   square=CUTLERY_SQUARE,
                    descend_square=CUTLERY_DESCEND_SQUARE,
                    plan_at_open=CUTLERY_PLAN_AT_OPEN,
                    approach=CUTLERY_APPROACH, lift=(0.0, 0.0, 0.085)))
     S.extend(_handoff("left", "right", "spoon", "target_spoon", across("spoon"),
-                      hold=spoon_grip))
+                      hold=spoon_grip, square=CUTLERY_HANDOFF_SQUARE,
+                      square_carry=False,
+                      aim_body="spoon" if CUTLERY_PLACE_AIM_BODY else None))
 
     # --- 4. plate: hooked by the rim and dragged flat onto the mat ------------
     # Both arms go home first.  The cutlery hand-off leaves the right arm in a
@@ -920,11 +986,20 @@ def _pick(spec, *, lift=(0.0, 0.0, 0.070), approach=(0.0, 0.0, 0.070),
 
 
 def _place(arm, target, hold, jaw, *, drop_z=0.030, over_z=0.090,
-           open_to=GRIPPER_OPEN, square=False):
+           open_to=GRIPPER_OPEN, square=False, aim_body=None):
+    """``aim_body`` puts THAT body on the target instead of the jaw meeting
+    point; None is the shipped behaviour and emits exactly the moves it always
+    did.  Only the two approach waypoints are re-aimed -- the release and the
+    retreat are unchanged, because after the jaws open there is nothing to aim.
+    """
+    def at(dz):
+        if aim_body is None:
+            return site_xyz(target, dz=dz)
+        return carry_to(arm, target, aim_body, dz=dz)
     return [
-        ({arm: Move(arm, site_xyz(target, dz=over_z), jaw=jaw, square=square,
+        ({arm: Move(arm, at(over_z), jaw=jaw, square=square,
                     label=f"{target}_over")}, 1.5),
-        ({arm: Move(arm, site_xyz(target, dz=drop_z), jaw=jaw, square=square,
+        ({arm: Move(arm, at(drop_z), jaw=jaw, square=square,
                     label=f"{target}_down")}, 1.2),
         ({arm: Grip(arm, open_to, label=f"{target}_release")}, 0.6),
         ({arm: Move(arm, site_xyz(target, dz=0.110), opening=open_to,
@@ -986,7 +1061,7 @@ def _shunt(arm, body, hold, fracs, *, target="target_mug", jaw=None,
 
 def _handoff(giver, taker, body, target, jaw, *, hold=GRIP_PINCH,
              open_to=GRIPPER_OPEN, square=False, drop_z=0.030, over_z=0.090,
-             taker_jaw=None, square_carry=None):
+             taker_jaw=None, square_carry=None, aim_body=None):
     """Giver holds the object over the shared zone; taker grasps and places it.
 
     The taker closes before the giver opens, so the object is held by both arms
@@ -1021,7 +1096,7 @@ def _handoff(giver, taker, body, target, jaw, *, hold=GRIP_PINCH,
           taker: Move(taker, site_xyz(grasp, dz=0.075), jaw=tjaw, square=carry,
                       label=f"{body}_taker_lift")}, 1.5),
     ] + _place(taker, target, hold, tjaw, open_to=open_to, square=square,
-               drop_z=drop_z, over_z=over_z)
+               drop_z=drop_z, over_z=over_z, aim_body=aim_body)
 
 
 # -------------------------------------------------------------------- execution
