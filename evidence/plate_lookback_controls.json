@@ -1,0 +1,65 @@
+{
+ "all_pass": true,
+ "controls": [
+  {
+   "control": "thresholds_are_distinct",
+   "pass": true,
+   "detail": "PLATE_TOL=0.028, PLATE_FINAL_TOL=0.045"
+  },
+  {
+   "control": "final_threshold_is_inside_the_scorer_bar",
+   "pass": true,
+   "detail": "PLATE_FINAL_TOL=0.045 < scorer 0.05; margin 5.0 mm"
+  },
+  {
+   "control": "reject_scoring_plate_does_not_trigger_final_lookback",
+   "pass": true,
+   "detail": "plate 35.0 mm out: final look-back fires=False (want False)"
+  },
+  {
+   "control": "build_predicate_still_fires_at_the_same_distance",
+   "pass": true,
+   "detail": "plate 35.0 mm out: _plate_short fires=True (want True) -- this is the difference the split creates"
+  },
+  {
+   "control": "accept_failing_plate_still_triggers_final_lookback",
+   "pass": true,
+   "detail": "plate 60.0 mm out: final look-back fires=True (want True)"
+  },
+  {
+   "control": "threshold_edge_is_where_it_says_it_is",
+   "pass": true,
+   "detail": "2 mm inside fires=False (want False), 2 mm outside fires=True (want True)"
+  },
+  {
+   "control": "script_uses_final_predicate_exactly_once",
+   "pass": true,
+   "detail": "conditional predicates in order: ['_plate_untouched', '_plate_untouched', '_plate_untouched', '_plate_east', '_plate_short', '_plate_short', '_plate_short_final', '_drawer_shut', '_drawer_shut']"
+  },
+  {
+   "control": "earlier_retries_still_use_the_build_predicate",
+   "pass": true,
+   "detail": "_plate_short appears 2 times (want 2: the two mid-episode retries)"
+  },
+  {
+   "control": "final_predicate_comes_after_both_retries",
+   "pass": true,
+   "detail": "index 6 vs last _plate_short at 5"
+  },
+  {
+   "control": "threshold_is_env_overridable",
+   "pass": true,
+   "detail": "PLATE_FINAL_TOL reads the environment"
+  },
+  {
+   "control": "adoption_evidence_records_no_losses",
+   "pass": true,
+   "detail": "lost=[], gained=[[3, 'plate_placed']]"
+  },
+  {
+   "control": "adoption_evidence_shows_the_block_absent",
+   "pass": true,
+   "detail": "'_final' waypoints in seed 3's trace: none"
+  }
+ ]
+}

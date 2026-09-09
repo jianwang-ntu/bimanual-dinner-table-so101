@@ -1,8 +1,8 @@
 {
  "schema": "slides_presentation/v1",
  "pdf": "evidence/slides_presentation.pdf",
- "sha256": "cbdf3d7ff744907737ef82810a13920c8af40ab214fc731dd0e2664afaa26fa0",
- "bytes": 164158,
+ "sha256": "69b86c28e3f6193d2255a7f288a3234ea2d5cb7c12058be4f9f2f445cac0fd5d",
+ "bytes": 164171,
  "pages": 13,
  "page_size_inches": [
   13.333,
@@ -13,26 +13,34 @@
  "title": "SO-101 Dinner Table: a scored bimanual benchmark",
  "track": "Bimanual VLA Manipulation with Multi-Modal Reasoning \u2014 Setting Up a Dinner Table",
  "built_by": "scripts/make_slides.py",
- "built_at_head": "a7ecf78e4525f4179026710448c14791b4adc7f9",
+ "built_at_head": "7f66ebe984c715662bb40f95ffa6f146f69c56c1",
  "source_date_epoch": "1757000000",
  "deterministic": "SOURCE_DATE_EPOCH is pinned, so two builds from the same evidence produce byte-identical PDFs.",
  "layout_violations": [],
  "layout_check": "every string is measured with the real font metrics; off-page, text-on-text, text-straddling-a-panel and text-on-chart all fail the build",
  "figures_derived_from": [
+  "ab_mug_control_shipped.json",
+  "ab_mug_frac155.json",
+  "ab_mug_frac175.json",
+  "ab_mug_hop0.json",
+  "ab_plate_final045.json",
   "act_policy_controls.json",
   "act_train.json",
   "adoption_ab_20260909T0300Z.json",
   "application_url_controls.json",
+  "arm_swap_ab.json",
   "cover_image.json",
   "cover_image_controls.json",
   "cutlery_approach.json",
   "cutlery_approach_mutants.json",
   "cutlery_block.json",
+  "cutlery_direct_place_ab.json",
   "cutlery_placement.json",
   "cutlery_placement_controls.json",
   "cutlery_placement_mutants.json",
   "cutlery_seat.json",
   "cutlery_square.json",
+  "cutlery_squeeze.json",
   "cutlery_standoff.json",
   "cutlery_zcross.json",
   "demo_scripted_10seeds.json",
@@ -51,23 +59,38 @@
   "eval_seeds_scripted_perceived.json",
   "fork_descent.json",
   "fork_descent_controls.json",
+  "fork_knockout.json",
+  "fork_release.json",
   "grasp_feasibility.json",
   "grasp_feasibility_controls.json",
   "gripper_envelope.json",
   "gripper_envelope_mutants.json",
   "hand_floor.json",
   "jaw_midpoint_shift.json",
+  "mug_inversion.json",
+  "mug_shunt.json",
+  "mug_upright_prereg.json",
+  "mug_upright_result.json",
   "openvino_bench_amd_epyc_9654_96_core_processor.json",
   "openvino_export.json",
   "perception_pipeline_controls.json",
   "perception_train.json",
+  "plate_lookback_controls.json",
+  "plate_lookback_prereg.json",
+  "plate_lookback_result.json",
+  "plate_seed3_with_knob.json",
   "randomization_coverage_controls.json",
   "reach_envelope.json",
   "scene_source_controls.json",
   "scene_verification.json",
   "slides_controls.json",
   "spoon_depth.json",
+  "spoon_hold.json",
   "squared_ik_controls.json",
+  "take_waypoint_ab.json",
+  "taker_reach.json",
+  "taker_servo.json",
+  "taker_servo_planatopen.json",
   "task_predicate_controls.json",
   "technical_summary_controls.json",
   "video_controls.json",
@@ -122,7 +145,7 @@
   {
    "slide": 1,
    "role": "headline",
-   "text": "18 / 50 sub-goals over 10 seeds"
+   "text": "19 / 50 sub-goals over 10 seeds"
   },
   {
    "slide": 1,
@@ -277,7 +300,7 @@
   {
    "slide": 4,
    "role": "body",
-   "text": "18 / 50"
+   "text": "19 / 50"
   },
   {
    "slide": 4,
@@ -362,7 +385,7 @@
   {
    "slide": 5,
    "role": "body",
-   "text": "plate_placed 4 / 10"
+   "text": "plate_placed 5 / 10"
   },
   {
    "slide": 5,
@@ -412,7 +435,7 @@
   {
    "slide": 5,
    "role": "body",
-   "text": "Worst IK residual over the ten rollouts: 294.8 mm across 1,661 planned moves \u2014 waypoints the arm never reaches are the open defect this entry has not fixed."
+   "text": "Worst IK residual over the ten rollouts: 294.8 mm across 1,648 planned moves \u2014 waypoints the arm never reaches are the open defect this entry has not fixed."
   },
   {
    "slide": 6,
@@ -462,12 +485,12 @@
   {
    "slide": 6,
    "role": "body",
-   "text": "Robustness is evidenced for the two steps that fire and for nothing else: the drawer on 10 / 10 seeds and the plate on 4 / 10. There is still no performance on the other three sub-goals to be robust about. Placement randomization is rejection-sampled, so a failed episode is a controller failure and never an impossible scene."
+   "text": "Robustness is evidenced for the two steps that fire and for nothing else: the drawer on 10 / 10 seeds and the plate on 5 / 10. There is still no performance on the other three sub-goals to be robust about. Placement randomization is rejection-sampled, so a failed episode is a controller failure and never an impossible scene."
   },
   {
    "slide": 6,
    "role": "body",
-   "text": "The demo video covers the same 10 seeds and is captioned frame by frame from the live predicate state, so it cannot claim more than the evaluation reports \u00b7 sha256 6216284e7ba8\u2026"
+   "text": "The demo video covers the same 10 seeds and is captioned frame by frame from the live predicate state, so it cannot claim more than the evaluation reports \u00b7 sha256 19bcc5bf4cd3\u2026"
   },
   {
    "slide": 7,
@@ -537,7 +560,7 @@
   {
    "slide": 7,
    "role": "body",
-   "text": "Stated plainly: this is perception, not a policy. It outputs scene state, not actions. It IS in the control loop, and it costs 9 sub-goals to put it there: 9 / 50 against 18 / 50."
+   "text": "Stated plainly: this is perception, not a policy. It outputs scene state, not actions. It IS in the control loop, and it costs 10 sub-goals to put it there: 9 / 50 against 19 / 50."
   },
   {
    "slide": 7,
@@ -712,7 +735,7 @@
   {
    "slide": 10,
    "role": "bullet",
-   "text": "\u2014  The learned ACT policy loses to the script: 3 / 50 against 18 / 50."
+   "text": "\u2014  The learned ACT policy loses to the script: 3 / 50 against 19 / 50."
   },
   {
    "slide": 10,
@@ -737,7 +760,7 @@
   {
    "slide": 10,
    "role": "bullet",
-   "text": "\u2014  Perception in the loop costs 9 sub-goals (9 / 50 against 18 / 50) and estimates no height, yaw, dimensions, fork or spoon."
+   "text": "\u2014  Perception in the loop costs 10 sub-goals (9 / 50 against 19 / 50) and estimates no height, yaw, dimensions, fork or spoon."
   },
   {
    "slide": 10,
@@ -922,7 +945,7 @@
   {
    "slide": 13,
    "role": "body",
-   "text": "regenerates the 18 / 50 and the 0 / 50 no-policy control"
+   "text": "regenerates the 19 / 50 and the 0 / 50 no-policy control"
   },
   {
    "slide": 13,
@@ -945,7 +968,7 @@
   "denom": 50,
   "act_total": 3,
   "perceived_total": 9,
-  "total": 18,
+  "total": 19,
   "control_total": 0,
   "task_success": 0,
   "bimanual": 10,
@@ -992,9 +1015,9 @@
   "ultra_accept": 3,
   "ultra_reject": 4,
   "demo_seeds": 10,
-  "demo_sha": "6216284e7ba8",
+  "demo_sha": "19bcc5bf4cd3",
   "moves": 130,
-  "moves_total": 1661,
+  "moves_total": 1648,
   "ik_err_mm": 294.81
  },
  "not_claimed": "The deck reports task success 0/10, object hand-offs 7/10, fork_placed 3/10, spoon_placed 0/10, mug_placed 1/10, perception in the control loop at a measured cost, and no Intel Core Ultra measurement. It claims no completed dinner table, and it states that the learned policy scores less than the scripted controller."

@@ -1,7 +1,7 @@
 {
  "schema": "video_controls/v1",
  "artifact": "evidence/video_presentation.mp4",
- "sha256": "897cfaefed903bea6e48672d390b0f88aa57a4723994c690e7b24157774ab3dc",
+ "sha256": "dc979cc10eb3df0778e68c444de31299afcbfc73002f96f76f076106f34f288b",
  "duration_s": 275.56,
  "all_pass": true,
  "controls": [
@@ -43,17 +43,17 @@
   {
    "control": "accept_card_segments_hold_still",
    "pass": true,
-   "detail": "13 card segments, worst first-to-last mean pixel change 0.642 (< 1.0). It is not zero because H.264 requantises a static picture; what matters is that it is far below a clip."
+   "detail": "13 card segments, worst first-to-last mean pixel change 0.648 (< 1.0). It is not zero because H.264 requantises a static picture; what matters is that it is far below a clip."
   },
   {
    "control": "reject_a_clip_segment_that_does_not_move",
    "pass": true,
-   "detail": "5 clip segments, smallest change 3.033 (> 1.5); every card is quieter than every clip by 2.391 -- a clip that held still would be a card mislabelled as footage"
+   "detail": "5 clip segments, smallest change 3.016 (> 1.5); every card is quieter than every clip by 2.368 -- a clip that held still would be a card mislabelled as footage"
   },
   {
    "control": "accept_headline_subgoals_is_on_screen",
    "pass": true,
-   "detail": "segment 0 card 1: the line carrying '18/50' matches the decoded frame at 0.9994; the same line with '18/50' corrupted to '28/50' matches at 0.9906"
+   "detail": "segment 0 card 1: the line carrying '19/50' matches the decoded frame at 0.9994; the same line with '19/50' corrupted to '29/50' matches at 0.9906"
   },
   {
    "control": "accept_no_policy_control_is_on_screen",
@@ -68,7 +68,7 @@
   {
    "control": "accept_plate_placed_is_on_screen",
    "pass": true,
-   "detail": "segment 11 card 12: the line carrying '4/10' matches the decoded frame at 0.9997; the same line with '4/10' corrupted to '5/10' matches at 0.9386"
+   "detail": "segment 11 card 12: the line carrying '5/10' matches the decoded frame at 0.9997; the same line with '5/10' corrupted to '6/10' matches at 0.9449"
   },
   {
    "control": "accept_scene_checks_is_on_screen",
@@ -133,7 +133,7 @@
   {
    "control": "accept_demo_frames_is_on_screen",
    "pass": true,
-   "detail": "segment 5 card 6: the line carrying '6763 frames' matches the decoded frame at 0.9996; the same line with '6763 frames' corrupted to '7763 frames' matches at 0.9859"
+   "detail": "segment 5 card 6: the line carrying '6715 frames' matches the decoded frame at 0.9997; the same line with '6715 frames' corrupted to '7715 frames' matches at 0.9859"
   },
   {
    "control": "reject_every_corrupted_figure",
@@ -163,12 +163,12 @@
   {
    "control": "reject_a_clip_matched_against_a_different_seed",
    "pass": true,
-   "detail": "caption band, where two seeds differ: true 0:0.9994  1:0.9995  3:0.9995  6:0.9992  8:0.9993  |  decoy 0:0.7636  1:0.8147  3:0.8931  6:0.7697  8:0.8841  (< 0.9). Whole-window decoy scores 0:0.9330  1:0.9315  3:0.9409  6:0.9498  8:0.9372 -- too close to use, because every episode films the same table."
+   "detail": "caption band, where two seeds differ: true 0:0.9994  1:0.9995  3:0.9995  6:0.9992  8:0.9992  |  decoy 0:0.7636  1:0.8147  3:0.8928  6:0.7693  8:0.8840  (< 0.9). Whole-window decoy scores 0:0.9330  1:0.9315  3:0.9409  6:0.9498  8:0.9372 -- too close to use, because every episode films the same table."
   },
   {
    "control": "accept_sidecar_sha256_matches_the_file",
    "pass": true,
-   "detail": "897cfaefed903bea\u2026 and 5115276 bytes"
+   "detail": "dc979cc10eb3df07\u2026 and 5111506 bytes"
   },
   {
    "control": "reject_a_one_character_change_to_the_sha256",

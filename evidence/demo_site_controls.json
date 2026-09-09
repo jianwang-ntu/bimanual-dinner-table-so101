@@ -5,14 +5,14 @@
   "all_pass": true,
   "controls": [
     {
-      "name": "condition privileged scores 18/50",
+      "name": "condition privileged scores 19/50",
       "ok": true,
-      "detail": "expected '18 / 50'"
+      "detail": "expected '19 / 50'"
     },
     {
-      "name": "condition privileged scores 18/50 [negative control]",
+      "name": "condition privileged scores 19/50 [negative control]",
       "ok": true,
-      "detail": "corrupted '25 / 50' (+7) is absent, so the presence check above can fail"
+      "detail": "corrupted '26 / 50' (+7) is absent, so the presence check above can fail"
     },
     {
       "name": "condition privileged is named on the page",
@@ -52,7 +52,7 @@
     {
       "name": "blind < perceived < privileged holds in the evidence",
       "ok": true,
-      "detail": "5 < 9 < 18"
+      "detail": "5 < 9 < 19"
     },
     {
       "name": "placement drawer_open = 10/10",
@@ -85,14 +85,14 @@
       "detail": "corrupted '7 / 10 seeds' (+7) is absent, so the presence check above can fail"
     },
     {
-      "name": "placement plate_placed = 4/10",
+      "name": "placement plate_placed = 5/10",
       "ok": true,
-      "detail": "expected '4 / 10 seeds'"
+      "detail": "expected '5 / 10 seeds'"
     },
     {
-      "name": "placement plate_placed = 4/10 [negative control]",
+      "name": "placement plate_placed = 5/10 [negative control]",
       "ok": true,
-      "detail": "corrupted '11 / 10 seeds' (+7) is absent, so the presence check above can fail"
+      "detail": "corrupted '12 / 10 seeds' (+7) is absent, so the presence check above can fail"
     },
     {
       "name": "placement mug_placed = 1/10",
@@ -127,22 +127,22 @@
     {
       "name": "demo video frame count and fps",
       "ok": true,
-      "detail": "expected '6763 frames at 25 fps'"
+      "detail": "expected '6715 frames at 25 fps'"
     },
     {
       "name": "demo video frame count and fps [negative control]",
       "ok": true,
-      "detail": "corrupted '6770 frames at 25 fps' (+7) is absent, so the presence check above can fail"
+      "detail": "corrupted '6722 frames at 25 fps' (+7) is absent, so the presence check above can fail"
     },
     {
       "name": "demo video duration",
       "ok": true,
-      "detail": "expected '270.5 s at'"
+      "detail": "expected '268.6 s at'"
     },
     {
       "name": "demo video duration [negative control]",
       "ok": true,
-      "detail": "corrupted '277.5 s at' (+7) is absent, so the presence check above can fail"
+      "detail": "corrupted '275.6 s at' (+7) is absent, so the presence check above can fail"
     },
     {
       "name": "video presentation duration",
@@ -227,7 +227,7 @@
     {
       "name": "the learned policy really is worse than the script in the evidence",
       "ok": true,
-      "detail": "ACT 3 of 50 against scripted 18 of 50"
+      "detail": "ACT 3 of 50 against scripted 19 of 50"
     },
     {
       "name": "the page states the learned policy's score and that it is the lower of the two",
@@ -267,12 +267,12 @@
     {
       "name": "a fresh build is byte-identical to the shipped page",
       "ok": true,
-      "detail": "083c8a37cc85 vs 083c8a37cc85"
+      "detail": "9d140d17f858 vs 9d140d17f858"
     },
     {
       "name": "evidence/demo_site.json pins the shipped bytes",
       "ok": true,
-      "detail": "083c8a37cc85 vs 083c8a37cc85"
+      "detail": "9d140d17f858 vs 9d140d17f858"
     }
   ]
 }

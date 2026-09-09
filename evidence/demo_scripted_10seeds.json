@@ -1,6 +1,6 @@
 {
  "video": "evidence/demo_scripted_10seeds.mp4",
- "sha256": "6216284e7ba88f522a79eca9d90f5bc9432206525d1df8aa6b535e4aef7bb1c0",
+ "sha256": "19bcc5bf4cd35e56633420b8d0fc60324247a29e56fb548611700fa4f4c155ab",
  "seeds": 10,
  "fps": 25,
  "speed": 8.0,
@@ -8,13 +8,13 @@
   960,
   540
  ],
- "frames": 6763,
+ "frames": 6715,
  "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
  "subgoals_met_per_seed": [
   3,
   2,
   3,
-  1,
+  2,
   1,
   1,
   1,
@@ -22,9 +22,9 @@
   2,
   2
  ],
- "subgoals_met_total": "18/50",
+ "subgoals_met_total": "19/50",
  "task_success_count": 0,
- "not_claimed": "This video does NOT show the task being completed: task_success is 0/10. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is drawer_open 10/10, fork_placed 3/10, plate_placed 4/10, mug_placed 1/10. Never earned on any seed: spoon_placed.",
+ "not_claimed": "This video does NOT show the task being completed: task_success is 0/10. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is drawer_open 10/10, fork_placed 3/10, plate_placed 5/10, mug_placed 1/10. Never earned on any seed: spoon_placed.",
  "episodes": [
   {
    "seed": 0,
@@ -527,8 +527,8 @@
     }
    },
    "rollout": {
-    "moves": 169,
-    "sim_time_s": 224.15,
+    "moves": 156,
+    "sim_time_s": 208.926,
     "max_ik_err_mm": 18.91
    },
    "task": {
@@ -536,10 +536,10 @@
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": false,
+     "plate_placed": true,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 2,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
@@ -569,7 +569,7 @@
      "drawer_open": 5.926,
      "plate_placed": 99.176
     },
-    "sim_time_s": 224.15
+    "sim_time_s": 208.926
    }
   },
   {

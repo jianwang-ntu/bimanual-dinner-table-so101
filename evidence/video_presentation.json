@@ -1,8 +1,8 @@
 {
  "schema": "video_presentation/v1",
  "video": "evidence/video_presentation.mp4",
- "sha256": "897cfaefed903bea6e48672d390b0f88aa57a4723994c690e7b24157774ab3dc",
- "bytes": 5115276,
+ "sha256": "dc979cc10eb3df0778e68c444de31299afcbfc73002f96f76f076106f34f288b",
+ "bytes": 5111506,
  "duration_s": 275.56,
  "duration_mmss": "4:36",
  "fps": 25,
@@ -22,14 +22,14 @@
   "min_seconds": 180.0,
   "max_bytes": 300000000,
   "measured_seconds": 275.56,
-  "measured_bytes": 5115276
+  "measured_bytes": 5111506
  },
  "distinct_from": {
   "file": "evidence/demo_scripted_10seeds.mp4",
   "why": "that is the track's Required Deliverable 4, the full 10-seed rollout at 340.88 s; it is over the platform's 5-minute limit for this slot and does not state the problem, the solution or the value proposition."
  },
  "built_by": "scripts/make_video.py",
- "built_at_head": "a7ecf78e4525f4179026710448c14791b4adc7f9",
+ "built_at_head": "7f66ebe984c715662bb40f95ffa6f146f69c56c1",
  "source_date_epoch": "1757000000",
  "deterministic": "frames are generated, SOURCE_DATE_EPOCH is pinned and ffmpeg is invoked bitexact with a pinned thread count, so two builds from the same evidence produce byte-identical MP4s. scripts/test_video.py rebuilds and compares.",
  "audio": "none. The presentation is silent and reads from the screen; no narration is claimed and none is present.",
@@ -37,20 +37,28 @@
  "layout_violations": [],
  "layout_check": "every string is measured with the real font metrics; off-frame, text-on-text, text-straddling-a-panel and text-over-the-footage-window all fail the build",
  "figures_derived_from": [
+  "ab_mug_control_shipped.json",
+  "ab_mug_frac155.json",
+  "ab_mug_frac175.json",
+  "ab_mug_hop0.json",
+  "ab_plate_final045.json",
   "act_policy_controls.json",
   "act_train.json",
   "adoption_ab_20260909T0300Z.json",
   "application_url_controls.json",
+  "arm_swap_ab.json",
   "cover_image.json",
   "cover_image_controls.json",
   "cutlery_approach.json",
   "cutlery_approach_mutants.json",
   "cutlery_block.json",
+  "cutlery_direct_place_ab.json",
   "cutlery_placement.json",
   "cutlery_placement_controls.json",
   "cutlery_placement_mutants.json",
   "cutlery_seat.json",
   "cutlery_square.json",
+  "cutlery_squeeze.json",
   "cutlery_standoff.json",
   "cutlery_zcross.json",
   "demo_scripted_10seeds.json",
@@ -69,16 +77,26 @@
   "eval_seeds_scripted_perceived.json",
   "fork_descent.json",
   "fork_descent_controls.json",
+  "fork_knockout.json",
+  "fork_release.json",
   "grasp_feasibility.json",
   "grasp_feasibility_controls.json",
   "gripper_envelope.json",
   "gripper_envelope_mutants.json",
   "hand_floor.json",
   "jaw_midpoint_shift.json",
+  "mug_inversion.json",
+  "mug_shunt.json",
+  "mug_upright_prereg.json",
+  "mug_upright_result.json",
   "openvino_bench_amd_epyc_9654_96_core_processor.json",
   "openvino_export.json",
   "perception_pipeline_controls.json",
   "perception_train.json",
+  "plate_lookback_controls.json",
+  "plate_lookback_prereg.json",
+  "plate_lookback_result.json",
+  "plate_seed3_with_knob.json",
   "randomization_coverage_controls.json",
   "reach_envelope.json",
   "scene_source_controls.json",
@@ -86,7 +104,12 @@
   "slides_controls.json",
   "slides_presentation.json",
   "spoon_depth.json",
+  "spoon_hold.json",
   "squared_ik_controls.json",
+  "take_waypoint_ab.json",
+  "taker_reach.json",
+  "taker_servo.json",
+  "taker_servo_planatopen.json",
   "task_predicate_controls.json",
   "technical_summary_controls.json",
   "video_controls.json"
@@ -121,7 +144,7 @@
     },
     {
      "role": "bullet",
-     "text": "\u2014  A scripted bimanual controller that earns 18/50 of them, and no more"
+     "text": "\u2014  A scripted bimanual controller that earns 19/50 of them, and no more"
     },
     {
      "role": "body",
@@ -178,7 +201,7 @@
      "style": "normal"
     },
     {
-     "text": "\u2014 A scripted bimanual controller that earns 18/50 of them, and no more",
+     "text": "\u2014 A scripted bimanual controller that earns 19/50 of them, and no more",
      "size": 17,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -772,7 +795,7 @@
     },
     {
      "role": "bullet",
-     "text": "\u2014  Recorded by scripts/record_demo.py: 10 seeds, 6763 frames at 25 fps, 8\u00d7 real time."
+     "text": "\u2014  Recorded by scripts/record_demo.py: 10 seeds, 6715 frames at 25 fps, 8\u00d7 real time."
     },
     {
      "role": "bullet",
@@ -784,7 +807,7 @@
     },
     {
      "role": "body",
-     "text": "evidence/demo_scripted_10seeds.mp4   sha256 6216284e7ba88f522a79eca9d90f5bc9\u2026"
+     "text": "evidence/demo_scripted_10seeds.mp4   sha256 19bcc5bf4cd35e56633420b8d0fc6032\u2026"
     },
     {
      "role": "body",
@@ -825,7 +848,7 @@
      "style": "normal"
     },
     {
-     "text": "\u2014 Recorded by scripts/record_demo.py: 10 seeds, 6763 frames at 25 fps, 8\u00d7 real time.",
+     "text": "\u2014 Recorded by scripts/record_demo.py: 10 seeds, 6715 frames at 25 fps, 8\u00d7 real time.",
      "size": 18,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -873,7 +896,7 @@
      "style": "normal"
     },
     {
-     "text": "evidence/demo_scripted_10seeds.mp4   sha256 6216284e7ba88f522a79eca9d90f5bc9\u2026",
+     "text": "evidence/demo_scripted_10seeds.mp4   sha256 19bcc5bf4cd35e56633420b8d0fc6032\u2026",
      "size": 14,
      "color": "#94A3B1",
      "weight": "normal",
@@ -963,7 +986,7 @@
    "clip": {
     "seed": 0,
     "source": "evidence/demo_scripted_10seeds.mp4",
-    "source_sha256": "6216284e7ba88f522a79eca9d90f5bc9432206525d1df8aa6b535e4aef7bb1c0",
+    "source_sha256": "19bcc5bf4cd35e56633420b8d0fc60324247a29e56fb548611700fa4f4c155ab",
     "source_start_frame": 0,
     "source_end_frame": 470,
     "episode_start_frame": 0,
@@ -1049,7 +1072,7 @@
    "clip": {
     "seed": 1,
     "source": "evidence/demo_scripted_10seeds.mp4",
-    "source_sha256": "6216284e7ba88f522a79eca9d90f5bc9432206525d1df8aa6b535e4aef7bb1c0",
+    "source_sha256": "19bcc5bf4cd35e56633420b8d0fc60324247a29e56fb548611700fa4f4c155ab",
     "source_start_frame": 897,
     "source_end_frame": 1027,
     "episode_start_frame": 557,
@@ -1083,7 +1106,7 @@
     },
     {
      "role": "caption",
-     "text": "live predicate state: drawer_open  \u00b7  1/5 sub-goals on this seed"
+     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed"
     },
     {
      "role": "caption",
@@ -1116,7 +1139,7 @@
      "style": "normal"
     },
     {
-     "text": "live predicate state: drawer_open  \u00b7  1/5 sub-goals on this seed",
+     "text": "live predicate state: drawer_open, plate_placed  \u00b7  2/5 sub-goals on this seed",
      "size": 14,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -1135,11 +1158,11 @@
    "clip": {
     "seed": 3,
     "source": "evidence/demo_scripted_10seeds.mp4",
-    "source_sha256": "6216284e7ba88f522a79eca9d90f5bc9432206525d1df8aa6b535e4aef7bb1c0",
+    "source_sha256": "19bcc5bf4cd35e56633420b8d0fc60324247a29e56fb548611700fa4f4c155ab",
     "source_start_frame": 2033,
     "source_end_frame": 2333,
     "episode_start_frame": 1846,
-    "episode_frames": 700,
+    "episode_frames": 652,
     "pasted_unscaled_at": [
      160,
      96,
@@ -1221,10 +1244,10 @@
    "clip": {
     "seed": 6,
     "source": "evidence/demo_scripted_10seeds.mp4",
-    "source_sha256": "6216284e7ba88f522a79eca9d90f5bc9432206525d1df8aa6b535e4aef7bb1c0",
-    "source_start_frame": 4471,
-    "source_end_frame": 4595,
-    "episode_start_frame": 4043,
+    "source_sha256": "19bcc5bf4cd35e56633420b8d0fc60324247a29e56fb548611700fa4f4c155ab",
+    "source_start_frame": 4423,
+    "source_end_frame": 4547,
+    "episode_start_frame": 3995,
     "episode_frames": 773,
     "pasted_unscaled_at": [
      160,
@@ -1307,10 +1330,10 @@
    "clip": {
     "seed": 8,
     "source": "evidence/demo_scripted_10seeds.mp4",
-    "source_sha256": "6216284e7ba88f522a79eca9d90f5bc9432206525d1df8aa6b535e4aef7bb1c0",
-    "source_start_frame": 5717,
-    "source_end_frame": 5907,
-    "episode_start_frame": 5549,
+    "source_sha256": "19bcc5bf4cd35e56633420b8d0fc60324247a29e56fb548611700fa4f4c155ab",
+    "source_start_frame": 5669,
+    "source_end_frame": 5859,
+    "episode_start_frame": 5501,
     "episode_frames": 560,
     "pasted_unscaled_at": [
      160,
@@ -1341,7 +1364,7 @@
     },
     {
      "role": "headline",
-     "text": "18/50"
+     "text": "19/50"
     },
     {
      "role": "body",
@@ -1393,7 +1416,7 @@
     },
     {
      "role": "body",
-     "text": "4/10"
+     "text": "5/10"
     },
     {
      "role": "body",
@@ -1454,7 +1477,7 @@
      "style": "normal"
     },
     {
-     "text": "18/50",
+     "text": "19/50",
      "size": 46,
      "color": "#E9EEF3",
      "weight": "bold",
@@ -1558,7 +1581,7 @@
      "style": "normal"
     },
     {
-     "text": "4/10",
+     "text": "5/10",
      "size": 17,
      "color": "#E9EEF3",
      "weight": "bold",
@@ -1644,7 +1667,7 @@
     },
     {
      "role": "bullet",
-     "text": "\u2014  The learned ACT policy loses to the script: 3/50 against 18/50. No VLA and no language conditioning: the task instruction is a fixed string that nothing parses."
+     "text": "\u2014  The learned ACT policy loses to the script: 3/50 against 19/50. No VLA and no language conditioning: the task instruction is a fixed string that nothing parses."
     },
     {
      "role": "body",
@@ -1733,7 +1756,7 @@
      "style": "normal"
     },
     {
-     "text": "\u2014 The learned ACT policy loses to the script: 3/50 against 18/50. No VLA and no language",
+     "text": "\u2014 The learned ACT policy loses to the script: 3/50 against 19/50. No VLA and no language",
      "size": 17,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -1791,7 +1814,7 @@
     },
     {
      "role": "body",
-     "text": "The perception model IS in the control loop, and putting it there costs 9 sub-goals: 9/50 perceived against 18/50 privileged."
+     "text": "The perception model IS in the control loop, and putting it there costs 10 sub-goals: 9/50 perceived against 19/50 privileged."
     }
    ],
    "lines": [
@@ -1892,7 +1915,7 @@
      "style": "normal"
     },
     {
-     "text": "The perception model IS in the control loop, and putting it there costs 9 sub-goals: 9/50 perceived",
+     "text": "The perception model IS in the control loop, and putting it there costs 10 sub-goals: 9/50 perceived",
      "size": 16,
      "color": "#E2A24A",
      "weight": "normal",
@@ -1900,7 +1923,7 @@
      "style": "normal"
     },
     {
-     "text": "against 18/50 privileged.",
+     "text": "against 19/50 privileged.",
      "size": 16,
      "color": "#E2A24A",
      "weight": "normal",
@@ -2216,7 +2239,7 @@
     },
     {
      "role": "bullet",
-     "text": "\u2014  The benchmark ships its own falsifier: a no-policy control on identical seeds and an unchanged scorer, so the headline 18/50 cannot be an artefact of the measurement."
+     "text": "\u2014  The benchmark ships its own falsifier: a no-policy control on identical seeds and an unchanged scorer, so the headline 19/50 cannot be an artefact of the measurement."
     },
     {
      "role": "bullet",
@@ -2273,7 +2296,7 @@
      "style": "normal"
     },
     {
-     "text": "scorer, so the headline 18/50 cannot be an artefact of the measurement.",
+     "text": "scorer, so the headline 19/50 cannot be an artefact of the measurement.",
      "size": 16,
      "color": "#E9EEF3",
      "weight": "normal",
@@ -2363,7 +2386,7 @@
     },
     {
      "role": "ledger",
-     "text": "Task success 0/10. Object hand-offs 7, all mug. spoon_placed 0/10. Learned ACT policy 3/50 against the script's 18/50. Perception in the control loop costs 9. No Intel Core Ultra measurement. No hosted demo application."
+     "text": "Task success 0/10. Object hand-offs 7, all mug. spoon_placed 0/10. Learned ACT policy 3/50 against the script's 19/50. Perception in the control loop costs 10. No Intel Core Ultra measurement. No hosted demo application."
     },
     {
      "role": "bullet",
@@ -2428,7 +2451,7 @@
      "style": "normal"
     },
     {
-     "text": "3/50 against the script's 18/50. Perception in the control loop costs 9. No Intel Core Ultra",
+     "text": "3/50 against the script's 19/50. Perception in the control loop costs 10. No Intel Core",
      "size": 17,
      "color": "#E2A24A",
      "weight": "normal",
@@ -2436,7 +2459,7 @@
      "style": "normal"
     },
     {
-     "text": "measurement. No hosted demo application.",
+     "text": "Ultra measurement. No hosted demo application.",
      "size": 17,
      "color": "#E2A24A",
      "weight": "normal",
@@ -2507,7 +2530,7 @@
   "denom": 50,
   "act_total": 3,
   "perceived_total": 9,
-  "total": 18,
+  "total": 19,
   "control_total": 0,
   "task_success": 0,
   "bimanual": 10,
@@ -2554,11 +2577,11 @@
   "light_lo": 0.602,
   "light_hi": 0.942,
   "demo_seeds": 10,
-  "demo_frames": 6763,
+  "demo_frames": 6715,
   "demo_fps": 25,
   "demo_speed": 8.0,
-  "demo_sha": "6216284e7ba88f522a79eca9d90f5bc9432206525d1df8aa6b535e4aef7bb1c0",
-  "demo_not_claimed": "This video does NOT show the task being completed: task_success is 0/10. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is drawer_open 10/10, fork_placed 3/10, plate_placed 4/10, mug_placed 1/10. Never earned on any seed: spoon_placed.",
+  "demo_sha": "19bcc5bf4cd35e56633420b8d0fc60324247a29e56fb548611700fa4f4c155ab",
+  "demo_not_claimed": "This video does NOT show the task being completed: task_success is 0/10. It shows the scripted controller running on 10 randomized seeds and the live sub-goal state it earns, which is drawer_open 10/10, fork_placed 3/10, plate_placed 5/10, mug_placed 1/10. Never earned on any seed: spoon_placed.",
   "moves": 199,
   "slides_pages": 13
  },
@@ -2566,8 +2589,8 @@
   "drawer_open": 10,
   "fork_placed": 3,
   "spoon_placed": 0,
-  "plate_placed": 4,
+  "plate_placed": 5,
   "mug_placed": 1
  },
- "not_claimed": "Task success 0/10. Object hand-offs 7. spoon_placed 0/10. Learned ACT policy 3/50 against the script's 18/50. Perception in the control loop costs 9. No Intel Core Ultra measurement. No hosted demo application. The video claims none of these and says so on screen."
+ "not_claimed": "Task success 0/10. Object hand-offs 7. spoon_placed 0/10. Learned ACT policy 3/50 against the script's 19/50. Perception in the control loop costs 10. No Intel Core Ultra measurement. No hosted demo application. The video claims none of these and says so on screen."
 }

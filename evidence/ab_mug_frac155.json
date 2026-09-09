@@ -3,32 +3,26 @@
  "seconds_per_episode": 4.0,
  "policy": "scripted",
  "policy_detail": null,
- "policy_note": "envs/controller.py, a scripted IK waypoint state machine. It holds no learned parameters. Scored by the same predicates as the no-policy control, and by a scorer that always reads the simulator whatever --scene is set to. The controller read NO true object pose. The planar centres of plate, mug and bottle and the drawer opening came from one top_cam frame per planning instant through the exported OpenVINO IR. Object height, yaw and dimensions, and the spoon and fork, are still privileged -- envs/scene_source.py lists exactly which.",
- "scene_source": "perceived",
- "scene_source_detail": "perceived[openvino:FP32@CPU]",
- "scene_source_note": "The controller read NO true object pose. The planar centres of plate, mug and bottle and the drawer opening came from one top_cam frame per planning instant through the exported OpenVINO IR. Object height, yaw and dimensions, and the spoon and fork, are still privileged -- envs/scene_source.py lists exactly which.",
+ "policy_note": "envs/controller.py, a scripted IK waypoint state machine. It holds no learned parameters. Scored by the same predicates as the no-policy control, and by a scorer that always reads the simulator whatever --scene is set to. The controller read the world pose of the object it was about to touch straight out of MjData. This is the privileged control.",
+ "scene_source": "privileged",
+ "scene_source_detail": "privileged",
+ "scene_source_note": "The controller read the world pose of the object it was about to touch straight out of MjData. This is the privileged control.",
  "scorer_reads": "MjData -- envs/task.py is never routed through the scene source",
- "estimate_error_mm": {
-  "worst_object_mean_over_seeds": 76.056,
-  "worst_object_max_over_seeds": 650.845,
-  "at_t0_worst_object_mean": 2.945,
-  "inferences_total": 1066,
-  "note": "distance from the true planar centre, in millimetres, at every planning instant -- how wrong the controller's view of the table was when it planned each waypoint. t0 is an unoccluded table; later instants have two arms over it."
- },
+ "estimate_error_mm": null,
  "all_episodes_valid_and_stable": true,
  "subgoals_met_per_seed": [
+  2,
+  2,
+  4,
+  2,
   1,
   1,
   1,
-  1,
-  0,
-  1,
-  1,
-  1,
-  1,
-  1
+  2,
+  2,
+  2
  ],
- "subgoals_met_mean": 0.9,
+ "subgoals_met_mean": 1.9,
  "task_success_count": 0,
  "handoff_seeds": [
   0,
@@ -47,9 +41,9 @@
    "seed": 0,
    "policy": "scripted",
    "rollout": {
-    "moves": 181,
-    "sim_time_s": 232.238,
-    "max_ik_err_mm": 20.57
+    "moves": 120,
+    "sim_time_s": 165.498,
+    "max_ik_err_mm": 19.79
    },
    "randomization": {
     "seed": 0,
@@ -174,30 +168,9 @@
     0
    ],
    "scene_source": {
-    "source": "perceived[openvino:FP32@CPU]",
-    "inferences": 104,
-    "planning_instants": 104,
-    "plate_mm": {
-     "mean": 120.095,
-     "max": 221.323,
-     "first": 0.916
-    },
-    "mug_mm": {
-     "mean": 7.013,
-     "max": 42.341,
-     "first": 1.48
-    },
-    "bottle_mm": {
-     "mean": 6.275,
-     "max": 10.618,
-     "first": 0.932
-    },
-    "drawer_mm": {
-     "mean": 1.331,
-     "max": 8.109,
-     "first": 0.395
-    },
-    "worst_object_mean_mm": 120.095
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
    },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
@@ -205,25 +178,37 @@
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": false,
+     "plate_placed": true,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 2,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
     "handoffs": [
      {
+      "object": "fork",
+      "from": "right",
+      "to": "left",
+      "t": 21.55
+     },
+     {
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 29.762
+      "t": 21.614
+     },
+     {
+      "object": "mug",
+      "from": "left",
+      "to": "right",
+      "t": 107.106
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 50.808
+      "t": 121.576
      }
     ],
     "handoff_occurred": true,
@@ -235,20 +220,19 @@
     "objects_dropped": [],
     "max_drawer_travel_m": 0.0923,
     "first_completion_times_s": {
-     "drawer_open": 5.576,
-     "spoon_placed": 44.66,
-     "plate_placed": 65.582
+     "drawer_open": 5.61,
+     "plate_placed": 64.84
     },
-    "sim_time_s": 232.238
+    "sim_time_s": 165.498
    }
   },
   {
    "seed": 1,
    "policy": "scripted",
    "rollout": {
-    "moves": 159,
-    "sim_time_s": 211.17,
-    "max_ik_err_mm": 22.12
+    "moves": 181,
+    "sim_time_s": 232.238,
+    "max_ik_err_mm": 26.88
    },
    "randomization": {
     "seed": 1,
@@ -373,30 +357,9 @@
     0
    ],
    "scene_source": {
-    "source": "perceived[openvino:FP32@CPU]",
-    "inferences": 94,
-    "planning_instants": 94,
-    "plate_mm": {
-     "mean": 15.558,
-     "max": 64.487,
-     "first": 0.795
-    },
-    "mug_mm": {
-     "mean": 8.72,
-     "max": 25.484,
-     "first": 1.33
-    },
-    "bottle_mm": {
-     "mean": 5.702,
-     "max": 28.756,
-     "first": 1.962
-    },
-    "drawer_mm": {
-     "mean": 1.747,
-     "max": 36.922,
-     "first": 0.602
-    },
-    "worst_object_mean_mm": 15.558
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
    },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
@@ -404,10 +367,10 @@
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": false,
+     "plate_placed": true,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 2,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
@@ -416,13 +379,19 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 32.416
+      "t": 29.75
+     },
+     {
+      "object": "fork",
+      "from": "right",
+      "to": "left",
+      "t": 35.522
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 47.788
+      "t": 48.008
      }
     ],
     "handoff_occurred": true,
@@ -432,20 +401,21 @@
     ],
     "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.092,
+    "max_drawer_travel_m": 0.0922,
     "first_completion_times_s": {
-     "drawer_open": 5.88
+     "drawer_open": 5.87,
+     "plate_placed": 217.98
     },
-    "sim_time_s": 211.17
+    "sim_time_s": 232.238
    }
   },
   {
    "seed": 2,
    "policy": "scripted",
    "rollout": {
-    "moves": 183,
-    "sim_time_s": 233.586,
-    "max_ik_err_mm": 20.05
+    "moves": 143,
+    "sim_time_s": 193.702,
+    "max_ik_err_mm": 17.54
    },
    "randomization": {
     "seed": 2,
@@ -570,68 +540,41 @@
     0
    ],
    "scene_source": {
-    "source": "perceived[openvino:FP32@CPU]",
-    "inferences": 105,
-    "planning_instants": 105,
-    "plate_mm": {
-     "mean": 139.472,
-     "max": 251.927,
-     "first": 0.838
-    },
-    "mug_mm": {
-     "mean": 131.418,
-     "max": 296.529,
-     "first": 3.526
-    },
-    "bottle_mm": {
-     "mean": 13.836,
-     "max": 31.312,
-     "first": 1.072
-    },
-    "drawer_mm": {
-     "mean": 1.713,
-     "max": 14.629,
-     "first": 0.295
-    },
-    "worst_object_mean_mm": 139.472
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
    },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
     "subgoals": {
      "drawer_open": true,
-     "fork_placed": false,
+     "fork_placed": true,
      "spoon_placed": false,
-     "plate_placed": false,
-     "mug_placed": false
+     "plate_placed": true,
+     "mug_placed": true
     },
-    "subgoals_met": 1,
+    "subgoals_met": 4,
     "subgoals_total": 5,
-    "in_order_prefix": 1,
+    "in_order_prefix": 2,
     "task_success": false,
     "handoffs": [
      {
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 34.468
+      "t": 34.798
+     },
+     {
+      "object": "mug",
+      "from": "left",
+      "to": "right",
+      "t": 122.498
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 51.864
-     },
-     {
-      "object": "drawer",
-      "from": "right",
-      "to": "left",
-      "t": 126.098
-     },
-     {
-      "object": "drawer",
-      "from": "left",
-      "to": "right",
-      "t": 144.14
+      "t": 186.142
      }
     ],
     "handoff_occurred": true,
@@ -641,21 +584,23 @@
     ],
     "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0922,
+    "max_drawer_travel_m": 0.0914,
     "first_completion_times_s": {
-     "drawer_open": 5.936,
-     "plate_placed": 67.642
+     "drawer_open": 5.932,
+     "plate_placed": 71.028,
+     "fork_placed": 71.076,
+     "mug_placed": 146.618
     },
-    "sim_time_s": 233.586
+    "sim_time_s": 193.702
    }
   },
   {
    "seed": 3,
    "policy": "scripted",
    "rollout": {
-    "moves": 183,
-    "sim_time_s": 233.586,
-    "max_ik_err_mm": 142.25
+    "moves": 173,
+    "sim_time_s": 226.846,
+    "max_ik_err_mm": 38.22
    },
    "randomization": {
     "seed": 3,
@@ -780,30 +725,9 @@
     0
    ],
    "scene_source": {
-    "source": "perceived[openvino:FP32@CPU]",
-    "inferences": 105,
-    "planning_instants": 105,
-    "plate_mm": {
-     "mean": 43.455,
-     "max": 85.942,
-     "first": 3.599
-    },
-    "mug_mm": {
-     "mean": 10.083,
-     "max": 62.92,
-     "first": 1.762
-    },
-    "bottle_mm": {
-     "mean": 95.298,
-     "max": 477.749,
-     "first": 1.31
-    },
-    "drawer_mm": {
-     "mean": 1.648,
-     "max": 10.921,
-     "first": 0.144
-    },
-    "worst_object_mean_mm": 95.298
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
    },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
@@ -811,43 +735,25 @@
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": false,
+     "plate_placed": true,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 2,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
     "handoffs": [
      {
-      "object": "fork",
-      "from": "right",
-      "to": "left",
-      "t": 21.724
-     },
-     {
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 29.716
-     },
-     {
-      "object": "spoon",
-      "from": "left",
-      "to": "right",
-      "t": 42.588
+      "t": 34.842
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 50.898
-     },
-     {
-      "object": "fork",
-      "from": "left",
-      "to": "right",
-      "t": 87.016
+      "t": 42.478
      }
     ],
     "handoff_occurred": true,
@@ -857,21 +763,21 @@
     ],
     "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.093,
+    "max_drawer_travel_m": 0.0937,
     "first_completion_times_s": {
-     "drawer_open": 5.892,
-     "spoon_placed": 42.772
+     "drawer_open": 5.926,
+     "plate_placed": 99.176
     },
-    "sim_time_s": 233.586
+    "sim_time_s": 226.846
    }
   },
   {
    "seed": 4,
    "policy": "scripted",
    "rollout": {
-    "moves": 203,
-    "sim_time_s": 256.45,
-    "max_ik_err_mm": 301.26
+    "moves": 185,
+    "sim_time_s": 235.982,
+    "max_ik_err_mm": 91.63
    },
    "randomization": {
     "seed": 4,
@@ -996,62 +902,35 @@
     0
    ],
    "scene_source": {
-    "source": "perceived[openvino:FP32@CPU]",
-    "inferences": 116,
-    "planning_instants": 116,
-    "plate_mm": {
-     "mean": 21.165,
-     "max": 208.386,
-     "first": 4.226
-    },
-    "mug_mm": {
-     "mean": 6.594,
-     "max": 19.786,
-     "first": 3.516
-    },
-    "bottle_mm": {
-     "mean": 3.731,
-     "max": 20.975,
-     "first": 2.157
-    },
-    "drawer_mm": {
-     "mean": 1.369,
-     "max": 26.361,
-     "first": 0.906
-    },
-    "worst_object_mean_mm": 21.165
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
    },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
     "subgoals": {
-     "drawer_open": false,
+     "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
      "plate_placed": false,
      "mug_placed": false
     },
-    "subgoals_met": 0,
+    "subgoals_met": 1,
     "subgoals_total": 5,
-    "in_order_prefix": 0,
+    "in_order_prefix": 1,
     "task_success": false,
     "handoffs": [
      {
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 29.866
-     },
-     {
-      "object": "fork",
-      "from": "right",
-      "to": "left",
-      "t": 34.804
+      "t": 29.74
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 77.64
+      "t": 47.626
      }
     ],
     "handoff_occurred": true,
@@ -1061,21 +940,20 @@
     ],
     "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0919,
+    "max_drawer_travel_m": 0.0923,
     "first_completion_times_s": {
-     "drawer_open": 5.904,
-     "plate_placed": 220.982
+     "drawer_open": 5.884
     },
-    "sim_time_s": 256.45
+    "sim_time_s": 235.982
    }
   },
   {
    "seed": 5,
    "policy": "scripted",
    "rollout": {
-    "moves": 181,
-    "sim_time_s": 232.238,
-    "max_ik_err_mm": 18.55
+    "moves": 201,
+    "sim_time_s": 255.102,
+    "max_ik_err_mm": 213.82
    },
    "randomization": {
     "seed": 5,
@@ -1200,30 +1078,9 @@
     0
    ],
    "scene_source": {
-    "source": "perceived[openvino:FP32@CPU]",
-    "inferences": 104,
-    "planning_instants": 104,
-    "plate_mm": {
-     "mean": 162.931,
-     "max": 263.035,
-     "first": 1.924
-    },
-    "mug_mm": {
-     "mean": 11.187,
-     "max": 37.234,
-     "first": 4.36
-    },
-    "bottle_mm": {
-     "mean": 79.865,
-     "max": 650.845,
-     "first": 3.836
-    },
-    "drawer_mm": {
-     "mean": 3.986,
-     "max": 18.232,
-     "first": 0.158
-    },
-    "worst_object_mean_mm": 162.931
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
    },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
@@ -1243,25 +1100,13 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 29.496
+      "t": 29.812
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 50.8
-     },
-     {
-      "object": "drawer",
-      "from": "right",
-      "to": "left",
-      "t": 116.346
-     },
-     {
-      "object": "drawer",
-      "from": "left",
-      "to": "right",
-      "t": 224.666
+      "t": 42.532
      }
     ],
     "handoff_occurred": true,
@@ -1271,21 +1116,20 @@
     ],
     "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0924,
+    "max_drawer_travel_m": 0.0916,
     "first_completion_times_s": {
-     "drawer_open": 6.528,
-     "plate_placed": 68.87
+     "drawer_open": 6.532
     },
-    "sim_time_s": 232.238
+    "sim_time_s": 255.102
    }
   },
   {
    "seed": 6,
    "policy": "scripted",
    "rollout": {
-    "moves": 199,
-    "sim_time_s": 247.514,
-    "max_ik_err_mm": 297.54
+    "moves": 197,
+    "sim_time_s": 246.166,
+    "max_ik_err_mm": 294.81
    },
    "randomization": {
     "seed": 6,
@@ -1410,30 +1254,9 @@
     0
    ],
    "scene_source": {
-    "source": "perceived[openvino:FP32@CPU]",
-    "inferences": 116,
-    "planning_instants": 116,
-    "plate_mm": {
-     "mean": 1.799,
-     "max": 6.041,
-     "first": 2.696
-    },
-    "mug_mm": {
-     "mean": 17.092,
-     "max": 60.118,
-     "first": 1.16
-    },
-    "bottle_mm": {
-     "mean": 4.401,
-     "max": 24.463,
-     "first": 3.02
-    },
-    "drawer_mm": {
-     "mean": 0.432,
-     "max": 3.803,
-     "first": 0.086
-    },
-    "worst_object_mean_mm": 17.092
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
    },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
@@ -1450,22 +1273,10 @@
     "task_success": false,
     "handoffs": [
      {
-      "object": "drawer",
-      "from": "right",
-      "to": "left",
-      "t": 132.36
-     },
-     {
       "object": "mug",
       "from": "left",
       "to": "right",
-      "t": 155.512
-     },
-     {
-      "object": "drawer",
-      "from": "left",
-      "to": "right",
-      "t": 239.956
+      "t": 154.322
      }
     ],
     "handoff_occurred": true,
@@ -1475,20 +1286,20 @@
     ],
     "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0916,
+    "max_drawer_travel_m": 0.092,
     "first_completion_times_s": {
-     "drawer_open": 243.036
+     "drawer_open": 240.01
     },
-    "sim_time_s": 247.514
+    "sim_time_s": 246.166
    }
   },
   {
    "seed": 7,
    "policy": "scripted",
    "rollout": {
-    "moves": 203,
-    "sim_time_s": 256.45,
-    "max_ik_err_mm": 303.36
+    "moves": 183,
+    "sim_time_s": 234.634,
+    "max_ik_err_mm": 15.01
    },
    "randomization": {
     "seed": 7,
@@ -1613,68 +1424,53 @@
     0
    ],
    "scene_source": {
-    "source": "perceived[openvino:FP32@CPU]",
-    "inferences": 116,
-    "planning_instants": 116,
-    "plate_mm": {
-     "mean": 8.513,
-     "max": 73.402,
-     "first": 1.37
-    },
-    "mug_mm": {
-     "mean": 11.602,
-     "max": 93.11,
-     "first": 2.848
-    },
-    "bottle_mm": {
-     "mean": 4.081,
-     "max": 25.07,
-     "first": 1.903
-    },
-    "drawer_mm": {
-     "mean": 1.183,
-     "max": 11.731,
-     "first": 0.343
-    },
-    "worst_object_mean_mm": 11.602
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
    },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
     "subgoals": {
      "drawer_open": true,
-     "fork_placed": false,
+     "fork_placed": true,
      "spoon_placed": false,
      "plate_placed": false,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 2,
     "subgoals_total": 5,
-    "in_order_prefix": 1,
+    "in_order_prefix": 2,
     "task_success": false,
     "handoffs": [
      {
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 29.702
+      "t": 34.816
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 77.636
+      "t": 42.518
      },
      {
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 178.902
+      "t": 128.836
+     },
+     {
+      "object": "mug",
+      "from": "left",
+      "to": "right",
+      "t": 145.262
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 224.508
+      "t": 169.686
      }
     ],
     "handoff_occurred": true,
@@ -1684,20 +1480,21 @@
     ],
     "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0917,
+    "max_drawer_travel_m": 0.0913,
     "first_completion_times_s": {
-     "drawer_open": 5.936
+     "drawer_open": 5.93,
+     "fork_placed": 107.164
     },
-    "sim_time_s": 256.45
+    "sim_time_s": 234.634
    }
   },
   {
    "seed": 8,
    "policy": "scripted",
    "rollout": {
-    "moves": 183,
-    "sim_time_s": 233.586,
-    "max_ik_err_mm": 21.96
+    "moves": 131,
+    "sim_time_s": 179.374,
+    "max_ik_err_mm": 17.87
    },
    "randomization": {
     "seed": 8,
@@ -1822,30 +1619,9 @@
     0
    ],
    "scene_source": {
-    "source": "perceived[openvino:FP32@CPU]",
-    "inferences": 105,
-    "planning_instants": 105,
-    "plate_mm": {
-     "mean": 110.82,
-     "max": 202.37,
-     "first": 1.376
-    },
-    "mug_mm": {
-     "mean": 29.92,
-     "max": 86.087,
-     "first": 2.413
-    },
-    "bottle_mm": {
-     "mean": 9.492,
-     "max": 160.136,
-     "first": 0.958
-    },
-    "drawer_mm": {
-     "mean": 3.404,
-     "max": 31.256,
-     "first": 0.302
-    },
-    "worst_object_mean_mm": 110.82
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
    },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
@@ -1853,10 +1629,10 @@
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": false,
+     "plate_placed": true,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 2,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
@@ -1865,13 +1641,7 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 34.46
-     },
-     {
-      "object": "drawer",
-      "from": "left",
-      "to": "right",
-      "t": 72.63
+      "t": 34.86
      }
     ],
     "handoff_occurred": true,
@@ -1883,19 +1653,19 @@
     "objects_dropped": [],
     "max_drawer_travel_m": 0.0916,
     "first_completion_times_s": {
-     "drawer_open": 5.95,
-     "plate_placed": 72.378
+     "drawer_open": 5.99,
+     "plate_placed": 66.008
     },
-    "sim_time_s": 233.586
+    "sim_time_s": 179.374
    }
   },
   {
    "seed": 9,
    "policy": "scripted",
    "rollout": {
-    "moves": 175,
-    "sim_time_s": 228.194,
-    "max_ik_err_mm": 19.46
+    "moves": 130,
+    "sim_time_s": 178.478,
+    "max_ik_err_mm": 13.18
    },
    "randomization": {
     "seed": 9,
@@ -2020,30 +1790,9 @@
     0
    ],
    "scene_source": {
-    "source": "perceived[openvino:FP32@CPU]",
-    "inferences": 101,
-    "planning_instants": 101,
-    "plate_mm": {
-     "mean": 66.525,
-     "max": 138.599,
-     "first": 1.075
-    },
-    "mug_mm": {
-     "mean": 16.465,
-     "max": 40.231,
-     "first": 2.012
-    },
-    "bottle_mm": {
-     "mean": 13.508,
-     "max": 157.469,
-     "first": 1.086
-    },
-    "drawer_mm": {
-     "mean": 4.172,
-     "max": 61.946,
-     "first": 0.416
-    },
-    "worst_object_mean_mm": 66.525
+    "source": "privileged",
+    "inferences": 0,
+    "note": "no estimate was made; the controller read MjData"
    },
    "task": {
     "instruction": "Open the top drawer, pick up the fork and the spoon and lay them either side of the place setting, put the plate on the mat, then set the mug down to the right of the plate.",
@@ -2051,10 +1800,10 @@
      "drawer_open": true,
      "fork_placed": false,
      "spoon_placed": false,
-     "plate_placed": false,
+     "plate_placed": true,
      "mug_placed": false
     },
-    "subgoals_met": 1,
+    "subgoals_met": 2,
     "subgoals_total": 5,
     "in_order_prefix": 1,
     "task_success": false,
@@ -2063,19 +1812,13 @@
       "object": "drawer",
       "from": "right",
       "to": "left",
-      "t": 34.83
-     },
-     {
-      "object": "spoon",
-      "from": "left",
-      "to": "right",
-      "t": 45.18
+      "t": 34.612
      },
      {
       "object": "drawer",
       "from": "left",
       "to": "right",
-      "t": 45.188
+      "t": 52.118
      }
     ],
     "handoff_occurred": true,
@@ -2085,11 +1828,12 @@
     ],
     "bimanual": true,
     "objects_dropped": [],
-    "max_drawer_travel_m": 0.0922,
+    "max_drawer_travel_m": 0.0944,
     "first_completion_times_s": {
-     "drawer_open": 5.666
+     "drawer_open": 5.668,
+     "plate_placed": 70.94
     },
-    "sim_time_s": 228.194
+    "sim_time_s": 178.478
    }
   }
  ]

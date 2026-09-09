@@ -1,0 +1,252 @@
+{
+ "probe": "measure_mug_shunt",
+ "what": "distance of each body to its target through the shipped rollout, and the scorer's three clauses at the end",
+ "policy": "scripted, unmodified",
+ "scene": "privileged",
+ "seeds": [
+  3
+ ],
+ "summary": {
+  "plate": {
+   "gripped_seeds": 1,
+   "near_at_end": 1,
+   "near_at_some_point": 1,
+   "upright_at_end": 1,
+   "median_final_mm": 37.3,
+   "median_start_mm": 317.7,
+   "median_closest_mm": 28.9
+  }
+ },
+ "episodes": [
+  {
+   "seed": 3,
+   "subgoals": {
+    "drawer_open": true,
+    "fork_placed": false,
+    "spoon_placed": false,
+    "plate_placed": true,
+    "mug_placed": false
+   },
+   "subgoals_met": 2,
+   "bodies": {
+    "plate": {
+     "upright_lost_at_t": 67.714,
+     "upright_cos_when_lost": 0.906,
+     "upright_lost_during_move": {
+      "label": "plate_drag3",
+      "arm": "right",
+      "t": 67.254
+     },
+     "tol_mm": 50.0,
+     "start": {
+      "dist_mm": 317.7,
+      "z": 0.76,
+      "rest_err_mm": 10.0,
+      "upright_cos": 1.0
+     },
+     "closest_mm": 28.9,
+     "closest_t": 101.612,
+     "final": {
+      "dist_mm": 37.3,
+      "z": 0.758,
+      "rest_err_mm": 8.0,
+      "upright_cos": 0.998
+     },
+     "scorer_clauses": {
+      "near": true,
+      "resting": true,
+      "upright": true,
+      "dropped": false
+     },
+     "held_by_arms": [
+      "right"
+     ],
+     "was_gripped": true,
+     "moved_mm": 280.4,
+     "block_marks": {
+      "plate_ready": {
+       "t": 52.776,
+       "dist_mm_after": 317.7,
+       "upright_cos_after": 1.0
+      },
+      "plate_above": {
+       "t": 54.724,
+       "dist_mm_after": 317.7,
+       "upright_cos_after": 1.0
+      },
+      "plate_descend": {
+       "t": 56.672,
+       "dist_mm_after": 318.1,
+       "upright_cos_after": 1.0
+      },
+      "plate_seek1": {
+       "t": 58.418,
+       "dist_mm_after": 319.6,
+       "upright_cos_after": 1.0
+      },
+      "plate_pinch": {
+       "t": 59.766,
+       "dist_mm_after": 319.1,
+       "upright_cos_after": 1.0
+      },
+      "plate_bow1": {
+       "t": 61.014,
+       "dist_mm_after": 247.1,
+       "upright_cos_after": 1.0
+      },
+      "plate_bow2": {
+       "t": 62.262,
+       "dist_mm_after": 208.5,
+       "upright_cos_after": 1.0
+      },
+      "plate_bow3": {
+       "t": 63.51,
+       "dist_mm_after": 208.4,
+       "upright_cos_after": 1.0
+      },
+      "plate_drag1": {
+       "t": 64.758,
+       "dist_mm_after": 208.7,
+       "upright_cos_after": 1.0
+      },
+      "plate_drag2": {
+       "t": 66.006,
+       "dist_mm_after": 213.9,
+       "upright_cos_after": 0.986
+      },
+      "plate_drag3": {
+       "t": 67.254,
+       "dist_mm_after": 215.8,
+       "upright_cos_after": 0.844
+      },
+      "plate_drag4": {
+       "t": 68.502,
+       "dist_mm_after": 170.7,
+       "upright_cos_after": 0.888
+      },
+      "plate_drag5": {
+       "t": 69.75,
+       "dist_mm_after": 170.3,
+       "upright_cos_after": 0.916
+      },
+      "plate_release": {
+       "t": 70.998,
+       "dist_mm_after": 173.0,
+       "upright_cos_after": 0.916
+      },
+      "plate_retreat": {
+       "t": 72.044,
+       "dist_mm_after": 182.6,
+       "upright_cos_after": 1.0
+      },
+      "plate_above_again": {
+       "t": 73.692,
+       "dist_mm_after": 182.6,
+       "upright_cos_after": 1.0
+      },
+      "plate_descend_again": {
+       "t": 75.64,
+       "dist_mm_after": 182.8,
+       "upright_cos_after": 1.0
+      },
+      "plate_pinch_again": {
+       "t": 77.386,
+       "dist_mm_after": 182.8,
+       "upright_cos_after": 1.0
+      },
+      "plate_drag1_again": {
+       "t": 78.634,
+       "dist_mm_after": 162.5,
+       "upright_cos_after": 0.909
+      },
+      "plate_drag2_again": {
+       "t": 79.882,
+       "dist_mm_after": 168.9,
+       "upright_cos_after": 1.0
+      },
+      "plate_drag3_again": {
+       "t": 81.13,
+       "dist_mm_after": 168.9,
+       "upright_cos_after": 1.0
+      },
+      "plate_drag4_again": {
+       "t": 82.378,
+       "dist_mm_after": 168.9,
+       "upright_cos_after": 1.0
+      },
+      "plate_drag5_again": {
+       "t": 83.626,
+       "dist_mm_after": 168.9,
+       "upright_cos_after": 1.0
+      },
+      "plate_release_again": {
+       "t": 84.874,
+       "dist_mm_after": 168.9,
+       "upright_cos_after": 1.0
+      },
+      "plate_retreat_again": {
+       "t": 85.92,
+       "dist_mm_after": 168.9,
+       "upright_cos_after": 1.0
+      },
+      "plate_above_again2": {
+       "t": 87.568,
+       "dist_mm_after": 168.9,
+       "upright_cos_after": 1.0
+      },
+      "plate_descend_again2": {
+       "t": 89.516,
+       "dist_mm_after": 169.3,
+       "upright_cos_after": 1.0
+      },
+      "plate_seek1_again2": {
+       "t": 91.262,
+       "dist_mm_after": 170.6,
+       "upright_cos_after": 1.0
+      },
+      "plate_pinch_again2": {
+       "t": 92.61,
+       "dist_mm_after": 170.4,
+       "upright_cos_after": 0.998
+      },
+      "plate_drag1_again2": {
+       "t": 93.858,
+       "dist_mm_after": 131.5,
+       "upright_cos_after": 1.0
+      },
+      "plate_drag2_again2": {
+       "t": 95.106,
+       "dist_mm_after": 86.3,
+       "upright_cos_after": 1.0
+      },
+      "plate_drag3_again2": {
+       "t": 96.354,
+       "dist_mm_after": 53.7,
+       "upright_cos_after": 1.0
+      },
+      "plate_drag4_again2": {
+       "t": 97.602,
+       "dist_mm_after": 53.1,
+       "upright_cos_after": 1.0
+      },
+      "plate_drag5_again2": {
+       "t": 98.85,
+       "dist_mm_after": 37.9,
+       "upright_cos_after": 1.0
+      },
+      "plate_release_again2": {
+       "t": 100.098,
+       "dist_mm_after": 37.7,
+       "upright_cos_after": 1.0
+      },
+      "plate_retreat_again2": {
+       "t": 101.144,
+       "dist_mm_after": 34.9,
+       "upright_cos_after": 0.998
+      }
+     }
+    }
+   }
+  }
+ ]
+}

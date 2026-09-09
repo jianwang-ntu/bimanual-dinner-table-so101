@@ -1,0 +1,54 @@
+{
+ "prereg": "mug_upright_grip_height",
+ "written_at_utc": "2026-09-09T21:45:00Z",
+ "written_before": "any cell of the A/B below was run",
+ "job": "lablab:ai-infra-summit-hackathon",
+ "criterion": "T1 (weight 30) -- End-to-End Task Completion & Bimanual Manipulation",
+ "the_finding_this_tests": {
+  "measured_by": "scripts/measure_mug_shunt.py, shipped controller, unmodified, privileged scene, seeds 0-9",
+  "what": "The mug reaches its mat on 3 of 10 seeds and is SCORED on 1. Seeds 5 and 6 finish 49.9 mm and 23.9 mm from target_mug -- both inside the scorer's 50 mm tolerance -- and score nothing because they arrive on their side.",
+  "which_clause_fails": "envs/task.py subgoals(): near=True, resting=True, upright=False. One clause of three.",
+  "why_it_is_not_a_tolerance_problem": "seed 6 is 23.9 mm out, less than half the tolerance. Tightening or loosening distance changes nothing for it."
+ },
+ "the_mechanism": {
+  "claim": "The mug is dragged by a grip point near its rim, and dragging a free-standing cylinder above its centre of mass torques it over.",
+  "the_controller_already_says_so": "envs/controller.py hold_above_base() docstring: 'The scene puts mug_grasp 5 mm below the rim, which is the worst place on a 57 mm mug to pull from: dragging it from the top rim tipped it over on every seed that reached the mat.'",
+  "the_defect": "That helper is switched OFF by its own default. MUG_HOLD_FRAC defaults to 2.0 and dinner_table_script() reads `mug_at = None if MUG_HOLD_FRAC >= 1.95 else hold_above_base(...)`, so the shipped rollout grips the fixed `mug_grasp` site and hold_above_base is never called. The fix for this failure is in the tree and disabled.",
+  "geometry": "mug_wall is a cylinder, size = (radius, half_height). randomize.py draws mug_h in (0.028, 0.040) m, so the mug stands 56-80 mm. The mug_grasp site is a FIXED +0.028 m above the body origin and does not track mug_h; hold_above_base(frac) instead returns table_top + frac * mug_h, which does."
+ },
+ "why_frac_cannot_simply_go_to_the_base": {
+  "constraint": "evidence/hand_floor.json, waypoints.mug_descend: the jaws' lowest geom hangs below the commanded pinch point by drop_mm_median 35.39, drop_mm_min 31.32, drop_mm_max 38.37 over n=10. A grip commanded lower than that drives the hand into the table.",
+  "derivation": "Use the WORST observed drop, not the median: 38.37 mm + 5 mm clearance = 43.4 mm minimum grip height. randomize.py draws mug_h in (0.028, 0.040), so the shortest mug in the range is 28 mm half-height and the smallest frac that clears the table for EVERY mug is 43.4 / 28 = 1.55.",
+  "cells_chosen_from_that_and_not_from_a_sweep": [
+   1.55,
+   1.75
+  ]
+ },
+ "predictions_registered_now": {
+  "P1_primary": "At MUG_HOLD_FRAC=1.55, seeds 5 and 6 keep near=True and gain upright=True, so mug_placed goes 1/10 -> 3/10.",
+  "P2_directional": "MUG_HOLD_FRAC=1.75 sits between the two and should move upright in the same direction, by less, or not at all.",
+  "P3_falsifier": "If mug_placed rises WITHOUT seeds 5 and 6 being the seeds that gained, the mechanism is NOT what moved it and this is a knob lottery. Do not adopt on that evidence.",
+  "P4_control": "The shipped-config re-run must reproduce 18/50 and mug_placed 1/10 exactly. If it does not, the harness is not deterministic and no cell below means anything."
+ },
+ "adoption_rule_fixed_in_advance": {
+  "adopt_only_if": "P4 reproduces AND P1 holds seed-for-seed (5 and 6 specifically) AND the 10-seed total does not fall.",
+  "do_not_adopt_if": "only the total moves. The record already caught this project adopting a sweep winner inside its own noise: TECHNICAL_SUMMARY 8a records 24 cells running 10-19 sub-goals, sd 2.0 about a mean of 14.8, and a 19/50 cell correctly NOT adopted. A 2-3 sub-goal total change is inside that spread and is not evidence on its own. The per-seed, per-clause prediction is what carries the weight here, because it is falsifiable in a way a total is not.",
+  "reporting": "Whatever the outcome, both cells are written to evidence and reported, including a null or negative result."
+ },
+ "not_claimed": [
+  "This does not make task_success non-zero. spoon_placed is 0/10 and untouched by anything here, so all-five-on-one-seed remains out of reach and req_demo_video stays DRAFT.",
+  "This does not touch the plate, whose own losses (seeds 3 and 9 place it and then lose it) are a separate finding recorded alongside this one."
+ ],
+ "amendment_before_any_result": {
+  "at_utc": "2026-09-09T21:58:00Z",
+  "state_when_amended": "no cell had produced output; eval_seeds.py block-buffers its stdout to a file, so 0 of 4 cells had reported a single seed.",
+  "why": "Re-reading _shunt found a SECOND named mechanism for the same tip, and testing only one of two would have let an adopted cell claim the wrong cause.",
+  "second_mechanism": "_shunt passes lift=(0,0,MUG_HOP) with MUG_HOP defaulting to 0.004, so the mug is lifted 4 mm OFF the table and dragged in the air. `if hop > 0.006` also skips the set_down move at that value, so the jaws open with the mug still 4 mm up and it is dropped, not set down. Both are opportunities to topple, and both contradict the design intent stated in dinner_table_script()'s own comment: 'it is gripped and shunted along the table, which lets the table carry the weight and keeps the mug upright and resting'.",
+  "cell_added": {
+   "MUG_HOP": 0.0,
+   "out": "evidence/ab_mug_hop0.json"
+  },
+  "P5_registered_now": "At MUG_HOP=0.0 the mug is never airborne. If the tip is caused by carrying it 4 mm up and dropping it, seeds 5 and 6 gain upright at unchanged MUG_HOLD_FRAC. If they gain upright in BOTH the hop cell and the frac cells, the two mechanisms are not separated by this design and neither may be reported as the cause on its own.",
+  "P6_falsifier_for_the_pair": "If neither MUG_HOLD_FRAC nor MUG_HOP moves seeds 5 and 6 to upright, the grip-height explanation of the tip is refuted and must be written up as refuted -- not quietly replaced with a third guess."
+ }
+}

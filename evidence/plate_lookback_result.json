@@ -1,0 +1,59 @@
+{
+ "result_for": "evidence/plate_lookback_prereg.json",
+ "run_at_utc": "2026-09-09T21:55:00Z",
+ "job": "lablab:ai-infra-summit-hackathon",
+ "criterion": "T1 (weight 30)",
+ "verdict": "ADOPTED. PLATE_FINAL_TOL default changed from PLATE_TOL (0.028) to 0.045.",
+
+ "control": {
+  "file": "evidence/ab_mug_control_shipped.json",
+  "measured": "18/50, per-seed [3,2,3,1,1,1,1,2,2,2], plate_placed 4/10, task_success 0/10",
+  "reproduces_the_shipped_evidence": "seed for seed, identical to evidence/eval_seeds_scripted.json as it stood before this tick",
+  "why_it_matters": "without a reproducing control, a one-sub-goal move means nothing"
+ },
+
+ "Q1_primary_HELD": {
+  "predicted_before_the_run": "seed 3's final look-back does not fire, the plate stays inside the bar, and seed 3 GAINS plate_placed; plate_placed 4/10 -> 5/10, total 18/50 -> 19/50",
+  "measured": "plate_placed 4/10 -> 5/10, total 18/50 -> 19/50, task_success 0/10 -> 0/10",
+  "gained": [[3, "plate_placed"]],
+  "lost": [],
+  "every_other_seed": "byte-identical sub-goal vector to the control on all nine other seeds",
+  "verdict": "HELD, seed for seed"
+ },
+ "Q2_null_HELD": {
+  "predicted": "seed 9 unchanged -- its plate is at 53.3 mm when the predicate is evaluated, so the look-back still fires, and it is already measured to move the plate 0.0 mm",
+  "measured": "seed 9 unchanged, 2/5, plate_placed still False",
+  "verdict": "HELD"
+ },
+ "Q3_side_effect_HELD": {
+  "predicted": "not firing removes ~14 s of simulation and changes the arm pose entering the drawer re-check; other seeds' drawer_open could move -- stated as a real risk before the run",
+  "measured": "drawer_open 10/10 in both cells. The declared risk did not materialise on this seed set. It is still a real risk on seeds not in this set.",
+  "verdict": "HELD"
+ },
+
+ "the_discriminating_check": {
+  "why_it_was_needed": "'seed 3 gains plate_placed' is NOT on its own evidence for this mechanism. Three unrelated cells run the same tick -- MUG_HOLD_FRAC=1.55, MUG_HOLD_FRAC=1.75 and MUG_HOP=0.0, none of which touches the plate look-back -- ALSO gained seed 3's plate. Seed 3's plate is fragile to any perturbation of the late episode, so the score alone cannot tell this fix from a coincidence.",
+  "what_was_checked_instead": "whether the look-back block actually stops being emitted. _drag_plate('_final') labels every waypoint with a '_final' suffix, so its firing is directly observable in the trace.",
+  "measured": {
+   "file": "evidence/plate_seed3_with_knob.json",
+   "run": "PLATE_FINAL_TOL=0.045, seed 3, plate only",
+   "final_block_labels_present": "NONE. Not one '_final' waypoint was emitted.",
+   "last_waypoint_of_the_episode_for_the_plate": "plate_retreat_again2 at t=101.1, leaving the plate at 34.9 mm",
+   "final_pose": {"dist_mm": 37.3, "rest_err_mm": 8.0, "upright_cos": 0.998},
+   "plate_placed": true,
+   "drift_after_the_last_plate_waypoint": "34.9 mm -> 37.3 mm across the remaining ~120 s, including the drawer re-check. 2.4 mm, against a 50 mm bar."
+  },
+  "conclusion": "The gain is caused by the look-back NOT RUNNING, observed directly, not inferred from a score."
+ },
+
+ "what_the_shipped_behaviour_did_wrong": "PLATE_TOL = 0.028 is a BUILD tolerance -- it drives the drag loop toward the middle of the mat with margin, and firing it early is free because there is more episode left to fix a miss. It was also being used as the trigger for the END-OF-EPISODE look-back, where there is no episode left. On seed 3 that fired on a plate at 34.9 mm, already inside the scorer's 50 mm bar, and the look-back's own descent and pinch pushed it to 52.9 mm -- outside -- after which all five drag waypoints left it at 52.9 mm, unmoved, because the hook had missed the rim. evidence/mug_shunt.json, seed 3 block_marks, has the waypoint-by-waypoint record.",
+
+ "measured_value_of_the_look_back_before_this_change": "0 for 2 on the seeds where it mattered. Seed 9: fired, moved the plate 0.0 mm across twelve waypoints. Seed 3: fired, destroyed a placement that was already scoring.",
+
+ "not_claimed": [
+  "This does not make task_success non-zero. spoon_placed is 0/10 and is untouched, so no seed has all five.",
+  "This does not fix seed 9's plate, which is lost during the mug section between t=70.7 and t=165.5. That loss is measured and unfixed.",
+  "This is +1 sub-goal on a ten-seed set whose run-to-run spread across controller-knob cells is about +/-2. The total on its own would not justify adoption; the seed-for-seed prediction and the absent-block observation are what do.",
+  "Nothing about the Intel Core Ultra requirement, the lablab session or any other blocker changes."
+ ]
+}

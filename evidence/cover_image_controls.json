@@ -1,6 +1,6 @@
 {
  "image": "evidence/cover_image.png",
- "sha256": "68e24b47b7c1e820759926a95a32ee41647aa446f64ca85ec53838d56d55c4eb",
+ "sha256": "ea6e1a1d96f615d45eb1123d7b1a891432cf8c99ad61913568f4fc5fddf86d7a",
  "ihdr": {
   "width": 1920,
   "height": 1080,
@@ -18,8 +18,8 @@
    "samples": 28050
   },
   "caption_band": {
-   "mean": 38.96,
-   "std": 57.8,
+   "mean": 38.98,
+   "std": 57.83,
    "distinct_colours": 185,
    "samples": 9900
   }
@@ -38,17 +38,17 @@
   {
    "control": "integrity.accept",
    "pass": true,
-   "detail": "sha256 68e24b47b7c1e820 over 528080 bytes matches the record"
+   "detail": "sha256 ea6e1a1d96f615d4 over 528125 bytes matches the record"
   },
   {
    "control": "integrity.reject_flipped_byte",
    "pass": true,
-   "detail": "one flipped byte at offset 264040 is caught"
+   "detail": "one flipped byte at offset 264062 is caught"
   },
   {
    "control": "figures.accept",
    "pass": true,
-   "detail": "18/50 sub-goals and the 0/50 control re-derived verbatim"
+   "detail": "19/50 sub-goals and the 0/50 control re-derived verbatim"
   },
   {
    "control": "figures.reject_stale_after_evidence_moves",

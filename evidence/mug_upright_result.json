@@ -1,0 +1,67 @@
+{
+ "result_for": "evidence/mug_upright_prereg.json",
+ "run_at_utc": "2026-09-09T21:35:00Z",
+ "job": "lablab:ai-infra-summit-hackathon",
+ "criterion": "T1 (weight 30)",
+ "verdict": "THE PREREGISTERED MECHANISM IS REFUTED. Nothing is adopted.",
+
+ "P4_control_reproduces": {
+  "asked": "the shipped configuration must reproduce 18/50 and mug_placed 1/10, or no cell means anything",
+  "measured": "18/50, per-seed [3,2,3,1,1,1,1,2,2,2], mug_placed 1/10 -- identical to evidence/eval_seeds_scripted.json seed for seed",
+  "verdict": "PASS",
+  "second_thing_it_establishes": "this control run imported the controller AFTER the PLATE_FINAL_TOL edit landed, so it also proves that edit is behaviour-neutral at its default. The shipped rollout emits exactly the moves it always did."
+ },
+
+ "P1_primary_REFUTED": {
+  "predicted": "at MUG_HOLD_FRAC=1.55, seeds 5 and 6 keep near=True and gain upright=True; mug_placed 1/10 -> 3/10",
+  "measured": "mug_placed 1/10 -> 1/10. Seeds 5 and 6 did NOT gain. The cell gained mug_placed on seed 2 and LOST it on seed 0 -- neither seed is one the prediction named.",
+  "verdict": "REFUTED"
+ },
+ "P2_directional_REFUTED": {
+  "predicted": "MUG_HOLD_FRAC=1.75 moves upright in the same direction, by less or not at all",
+  "measured": "mug_placed 1/10 -> 2/10, and the gaining seed is 6 -- but the same cell LOST drawer_open on seed 8, fork_placed on seed 7 and plate_placed on seed 1, for a total of 17/50 against the shipped 18/50.",
+  "verdict": "the total went DOWN. A cell that scores worse overall is not a directional confirmation of anything."
+ },
+ "P5_hop_REFUTED": {
+  "predicted": "at MUG_HOP=0.0 the mug is never airborne; if the tip is caused by carrying it 4 mm up and dropping it, seeds 5 and 6 gain upright",
+  "measured": "mug_placed 1/10 -> 0/10. Seed 0, the one seed that scored the mug in the shipped configuration, LOST it. Total 16/50.",
+  "verdict": "REFUTED, and worse than shipped"
+ },
+ "P3_falsifier_FIRED": {
+  "asked": "if mug_placed rises WITHOUT seeds 5 and 6 being the seeds that gained, this is a knob lottery and must not be adopted",
+  "measured": "every cell moved sub-goals on seeds the mechanism does not touch: fork_placed on 7 and 9, drawer_open on 4 and 8, plate_placed on 1, 3 and 9. Those are two arms sharing one timeline, not a grip-height effect.",
+  "verdict": "FIRED. Adoption rule says do not adopt. Nothing is adopted."
+ },
+
+ "cells": {
+  "shipped_control": {"file": "evidence/ab_mug_control_shipped.json", "total": "18/50", "mug_placed": "1/10", "task_success": "0/10"},
+  "MUG_HOLD_FRAC=1.55": {"file": "evidence/ab_mug_frac155.json", "total": "19/50", "mug_placed": "1/10", "task_success": "0/10",
+                          "gained": [[2, "mug_placed"], [3, "plate_placed"], [9, "plate_placed"]],
+                          "lost": [[0, "mug_placed"], [9, "fork_placed"]]},
+  "MUG_HOLD_FRAC=1.75": {"file": "evidence/ab_mug_frac175.json", "total": "17/50", "mug_placed": "2/10", "task_success": "0/10",
+                          "gained": [[3, "plate_placed"], [6, "mug_placed"]],
+                          "lost": [[1, "plate_placed"], [7, "fork_placed"], [8, "drawer_open"]]},
+  "MUG_HOP=0.0": {"file": "evidence/ab_mug_hop0.json", "total": "16/50", "mug_placed": "0/10", "task_success": "0/10",
+                   "gained": [[3, "plate_placed"], [9, "plate_placed"]],
+                   "lost": [[0, "mug_placed"], [1, "plate_placed"], [4, "drawer_open"], [8, "drawer_open"]]}
+ },
+ "spread_note": "Four cells run 16, 17, 18, 19 over 50. That is the same +/-2 band TECHNICAL_SUMMARY 8a already measured across 24 cutlery cells (10-19, sd 2.0). The best cell here is +1 on the shipped configuration and is inside its own noise, which is precisely why the adoption rule was written seed-for-seed and in advance.",
+
+ "what_the_probe_found_instead": {
+  "headline": "The two mugs that cost a sub-goal are UPSIDE DOWN, not tipped. Final upright_cos is -1.000 on seeds 5 and 6, and 0.001 on seed 2, against a 0.906 bar.",
+  "why_that_matters": "The recorded explanation -- hold_above_base()'s own docstring, 'dragging it from the top rim tipped it over' -- predicts a mug lying on its side, cos ~= 0. That is seed 2, which is 359 mm from its mat and was never going to score. It does NOT predict cos = -1.000, and -1.000 is what the two seeds that reached the mat show. The remedy in the tree was aimed at a failure that is not the one costing sub-goals, which is why turning it on does not help.",
+  "when_it_happens_measured": {
+   "source": "evidence/mug_inversion.json, per-move upright_cos through the shunt",
+   "seed_2": "cos 0.995 at mug_left2_drag -> 0.519 at mug_left2_release -> 0.000 at mug_left2_clear. The RELEASE knocks it over, and the same move throws it from 273 mm to 358 mm -- backwards, away from the mat.",
+   "seed_5": "cos 0.982 at mug_left2_lift -> 0.712 at mug_left2_drag -> 0.521 at mug_left3_drag -> 0.001 at mug_left3_clear. A progressive topple across successive drags.",
+   "the_structural_defect": "_shunt has no notion of which way up the mug is. Once it is over, the remaining grasp-drag-release cycles keep gripping and dragging a lying mug and roll it, which is how seeds 5 and 6 arrive at cos = -1.000: the shunt delivers the mug to its mat successfully and upside down. Seed 6 finishes 23.9 mm from target -- less than half the tolerance -- and scores nothing."
+  },
+  "why_this_kills_the_grip_height_theory_directly": "On seed 2 the topple happens at a RELEASE, when the jaws are opening and no grip height is being applied at all. Grip height cannot explain a topple that happens after the grip ends."
+ },
+
+ "not_claimed": [
+  "No cause for the release-topple is claimed. The probe measures WHEN the mug goes over and WHICH move was commanded; it does not establish why that release knocks it.",
+  "No fix is proposed or adopted for the mug this tick. Three were tested and all three are refuted.",
+  "Nothing in the repository's published numbers changes: the shipped configuration is untouched and still measures 18/50, mug_placed 1/10, task_success 0/10."
+ ]
+}

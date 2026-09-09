@@ -4,8 +4,8 @@
   "built_by": "scripts/make_demo_site.py",
   "built_at_head": "824e5ed",
   "page": "index.html",
-  "bytes": 13309,
-  "sha256": "083c8a37cc85ef00d317eae7eb65f6e0cf377db7de81d6be92341ac6efcd4b53",
+  "bytes": 13308,
+  "sha256": "9d140d17f858b482e56647563a750d3fa2e4e8c87866f152ca8ebb3bcf9cc7b2",
   "figures_derived_from": [
     "evidence/eval_seeds_scripted.json",
     "evidence/eval_seeds_scripted_perceived.json",
@@ -20,7 +20,7 @@
     "subgoals_per_seed": 5,
     "conditions": {
       "privileged": {
-        "total": 18,
+        "total": 19,
         "denominator": 50,
         "task_success": 0
       },
@@ -39,7 +39,7 @@
       "drawer_open": 10,
       "fork_placed": 3,
       "spoon_placed": 0,
-      "plate_placed": 4,
+      "plate_placed": 5,
       "mug_placed": 1
     },
     "bimanual_seeds": 10,
@@ -50,7 +50,7 @@
       7,
       8
     ],
-    "demo_video_seconds": 270.5,
+    "demo_video_seconds": 268.6,
     "presentation_mmss": "4:36",
     "slides_pages": 13
   },

@@ -565,6 +565,28 @@ PLATE_SEEK = 0.004          # m per contact-seeking step downward
 PLATE_SEEKS = 3             # extra descents if the first found no contact
 PLATE_STANDOFF = 0.005      # clearance + squeeze/2 for the 12 mm rim wall
 PLATE_TOL = 0.028           # m; re-grasp and correct while further out than this
+# The END-OF-EPISODE look-back gets its own threshold.  PLATE_TOL is a
+# BUILD tolerance -- it drives the drag loop toward the middle of the mat
+# with margin, and firing it early is free because there is more episode
+# left to fix a miss.  The final look-back has no episode left, so firing
+# it on a plate that already satisfies the scorer can only be neutral or
+# harmful, and measured on seed 3 it is harmful: the plate sat at 34.9 mm,
+# inside the scorer's 50 mm bar, the look-back fired because 34.9 > 28,
+# and its descent and pinch pushed the plate to 52.9 mm -- outside -- after
+# which all five drag waypoints left it there, unmoved, because the hook
+# had missed the rim.  evidence/mug_shunt.json, seed 3 block_marks.
+# Default is PLATE_TOL, so the shipped rollout emits exactly the moves it
+# always did until the knob is set.
+# 0.045 is the scorer's own 50 mm bar with 5 mm of margin, written as a
+# literal rather than imported, for the same reason DRAWER_OPEN_M below is:
+# the controller must not be able to drift into the scorer.  Adopted
+# 2026-09-09T22:00Z on a pre-registered, seed-for-seed A/B --
+# evidence/plate_lookback_prereg.json wrote the prediction before the run,
+# evidence/plate_lookback_result.json holds the outcome: seed 3 gains
+# plate_placed, no seed loses anything, 18/50 -> 19/50, and the look-back
+# block is measurably ABSENT from seed 3's trace rather than merely
+# harmless (evidence/plate_seed3_with_knob.json).
+PLATE_FINAL_TOL = float(os.environ.get('PLATE_FINAL_TOL', 0.045))
 PLATE_BOW = np.array([0.13, -0.02])   # keeps the plate off the cabinet's SE corner
 PLATE_EAST = 0.19           # m; east of this the bow is worth taking
 
@@ -605,6 +627,17 @@ def _plate_short(model, data) -> bool:
     c = s.body_xpos(model, data, "plate")[:2]
     t = s.site_xpos(model, data, "target_plate")[:2]
     return float(np.linalg.norm(c - t)) > PLATE_TOL
+
+
+def _plate_short_final(model, data) -> bool:
+    """``_plate_short`` for the end-of-episode look-back, at its own threshold.
+
+    Same measurement, different bar -- see ``PLATE_FINAL_TOL``.
+    """
+    s = _scene.active()
+    c = s.body_xpos(model, data, "plate")[:2]
+    t = s.site_xpos(model, data, "target_plate")[:2]
+    return float(np.linalg.norm(c - t)) > PLATE_FINAL_TOL
 
 
 def _plate_east(model, data) -> bool:
@@ -1177,7 +1210,7 @@ def dinner_table_script() -> list[tuple[dict, float]]:
     # section existed and outside the 50 mm tolerance after it.  Same pattern
     # as the drawer below -- an action the controller really performed, undone
     # by a later one, is worth re-checking rather than assuming.
-    S.append(("if", _plate_short, _drag_plate("_final")))
+    S.append(("if", _plate_short_final, _drag_plate("_final")))
 
     # --- 7. look back at the drawer ------------------------------------------
     # Twice, because once is measurably not enough: the drawer is opened on

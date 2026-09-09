@@ -38,7 +38,7 @@ number is what this README quotes unless a row says otherwise.
 | Submission cover image, 1920×1080 PNG rendered from the simulator | rendered, **captioned from `evidence/`, not typed** | `evidence/cover_image.png` + `.json`, `evidence/cover_image_controls.json` (14/14) |
 | Slide presentation, 13 slides, 16:9 PDF | generated from `evidence/`, **no figure typed by hand** | `evidence/slides_presentation.pdf` + `.json`, `evidence/slides_controls.json` (12/12) |
 | Video presentation, 4:36, 1280×720 MP4 | generated from `evidence/`, **real footage pasted unscaled from the demo MP4** | `evidence/video_presentation.mp4` + `.json`, `evidence/video_controls.json` (38/38) |
-| Perception in the control loop | built, **9 / 50 perceived vs 18 / 50 privileged vs 5 / 50 blind** — the ratio got *worse* on 2026-09-09, see below | `evidence/eval_seeds_scripted_perceived.json`, `evidence/scene_source_controls.json` (15/15) |
+| Perception in the control loop | built, **9 / 50 perceived vs 19 / 50 privileged vs 5 / 50 blind** — the ratio got *worse* on 2026-09-09, see below | `evidence/eval_seeds_scripted_perceived.json`, `evidence/scene_source_controls.json` (15/15) |
 | VLA / imitation policy — LeRobot ACT, behaviour-cloned | built, **3 / 50 sub-goals — six times worse than its own demonstrator** | `evidence/act_train.json`, `evidence/eval_seeds_act.json`, `evidence/act_policy_controls.json` (19/19) |
 | Demonstrations the policy was trained on, 40 episodes on seeds 3000–3039 | recorded and committed, 8.4 MB | `data/demos/`, `scripts/collect_demos.py` |
 | Language conditioning, multi-step task context, re-planning | **not started** — three of T2's four demands | — |
@@ -84,10 +84,41 @@ Same environment, same scorer, 10 seeds, the only difference the controller:
 | Run | Sub-goals | Task success | Evidence |
 |---|---|---|---|
 | `--policy none` (arms hold the home pose) | **0 / 50** | 0 / 10 | `evidence/eval_seeds.json` |
-| `--policy scripted` | **18 / 50** | 0 / 10 | `evidence/eval_seeds_scripted.json` |
+| `--policy scripted` | **19 / 50** | 0 / 10 | `evidence/eval_seeds_scripted.json` |
 
-Broken out: `drawer_open` **10/10**, `plate_placed` **4/10**,
+Broken out: `drawer_open` **10/10**, `plate_placed` **5/10**,
 `fork_placed` **3/10**, `mug_placed` **1/10**, and `spoon_placed` **0/10**.
+
+### Adopted 2026-09-09T22:00Z — the plate look-back was firing on plates that were already scoring
+
+`plate_placed` was **4 / 10** while the plate *reached* its mat on **6 / 10**.
+Both seeds it lost were lost to the end-of-episode look-back that exists to
+prevent exactly that loss. On seed 3 that look-back fired on a plate sitting
+**34.9 mm** from its mat — well inside the scorer's 50 mm bar — and its own
+descent and pinch pushed it to **52.9 mm**, outside; the five drag waypoints
+after that moved it **0.0 mm**, because the hook had missed the rim. On seed 9
+it fired and moved the plate 0.0 mm across all twelve of its waypoints. On the
+only two seeds where it mattered it was 0 for 2: once inert, once destructive.
+
+`PLATE_TOL = 0.028` is a *build* tolerance — firing it early mid-episode is free
+because there is more episode left to fix a miss. `PLATE_FINAL_TOL` splits the
+end-of-episode trigger off at **0.045**, the scorer's own bar with 5 mm of
+margin. Sub-goals **18 / 50 → 19 / 50** and `plate_placed` **4 / 10 → 5 / 10**,
+with **nothing lost on any seed** and nine of ten seeds byte-identical to the
+control.
+
+**+1 on ten seeds is inside this project's own noise** (24 knob cells at 10–19,
+sd 2.0), so the total is deliberately *not* the evidence. Two other things are:
+the prediction in `evidence/plate_lookback_prereg.json` named seed 3 and
+`plate_placed` **before** the run and only that seed moved; and
+`evidence/plate_seed3_with_knob.json` shows the look-back block is **not emitted
+at all** — the gain is the block not running, watched directly rather than
+inferred from a score. That check is load-bearing: three unrelated cells run the
+same day, none of which touches the plate look-back, *also* gained seed 3's
+plate, so "seed 3 gained" on its own proves nothing.
+
+`scripts/test_plate_lookback.py` pins it 12 / 12 and exits 1 at the old value.
+`task_success` is still **0 / 10** and `spoon_placed` still **0 / 10**.
 
 ### Adopted 2026-09-09 — squaring the cutlery pick
 
@@ -213,14 +244,34 @@ rest of the row before reading anything into it:
   **16/50 to 15/50**, mean 1.6 to **1.5**. The trade is stated in both
   directions because it is a trade: the first object hand-off and the first
   non-plate placement, bought with two plates. *(Both figures are that
-  revision's; the total is 18/50 since the 2026-09-09 squared-cutlery adoption.
-  The plate is still 4/10 and the two seeds are still lost.)*
-- **The mug that is placed is lying on its side.** On seed 8 it finishes 9.8 mm
-  from its mat — well inside tolerance — with an upright cosine of 0.000
-  against the 0.906 bar the scorer wants, so it scores the placement and not
-  the pose. It is gripped 5 mm below the rim because that is where the scene
-  puts `mug_grasp`, and a 57 mm mug dragged from its top rim tips. Gripping at
-  the base, at mid-height, and lifting clear were all measured and all worse.
+  revision's. The total is **19/50** since the 2026-09-09T22:00Z plate
+  look-back adoption, and the plate is **5/10**: seed 3 is recovered, seed 9 is
+  still lost.)*
+- **The mug reaches its mat on 3 seeds of 10 and is scored on 1, because two of
+  the three arrive upside down.** Re-measured 2026-09-09T21:30Z
+  (`evidence/mug_shunt.json`), and it replaces an earlier bullet that is stale
+  in two ways. That bullet named seed 8 — accurate for the revision it was
+  written against, but on the current controller the seed that scores the mug is
+  seed 0 and seed 8's mug finishes 295 mm out. It also described the failure as
+  the mug *lying on its side*, which is no longer what the pose shows. Two of
+  the three mugs that reach the
+  mat — seeds 5 and 6, finishing 49.9 mm and 23.9 mm out, both inside the 50 mm
+  tolerance — have a final upright cosine of **-1.000** against the 0.906 bar.
+  That is inverted, not tipped. Only seed 2, which is 359 mm from its mat and
+  was never going to score, is on its side at 0.001.
+- **The published explanation of that failure is refuted, and no replacement is
+  claimed.** `hold_above_base()`'s docstring says a mug dragged from its top rim
+  tips over, and the helper written to fix it is switched off by its own default
+  (`MUG_HOLD_FRAC = 2.0`). Turning it on does not help: three cells were run
+  against a reproducing control on the same ten seeds —
+  `MUG_HOLD_FRAC` 1.55 and 1.75 and `MUG_HOP` 0.0 — and `mug_placed` came back
+  1/10, 2/10 and 0/10 against the shipped 1/10, with totals 19, 17 and 16 over
+  50. Not one of them moved seeds 5 or 6, the two the mechanism named. Nothing
+  was adopted. `evidence/mug_upright_prereg.json` holds the prediction, written
+  before the runs; `evidence/mug_upright_result.json` holds the outcome.
+  `evidence/mug_inversion.json` times the topple to a specific waypoint — on
+  seed 2 the mug goes over at `mug_left2_release`, *after* the grip has ended,
+  which is a failure grip height cannot explain.
 - Nothing is dropped on any seed, and every episode is numerically stable.
 - The worst single planning residual across the ten episodes is 295 mm: one
   waypoint in a plate correction cycle that the IK could not reach at all.
@@ -484,7 +535,7 @@ goes through it, and three sources can be installed:
 
 | `--scene` | what the controller reads | sub-goals |
 |---|---|---|
-| `privileged` | `MjData`, as it always did | **18 / 50** |
+| `privileged` | `MjData`, as it always did | **19 / 50** |
 | `perceived` | one `top_cam` frame per planning instant → OpenVINO IR → seven numbers | **9 / 50** |
 | `blind` | the nominal, un-randomized layout from `envs/randomize.py` | **5 / 50** |
 
@@ -575,10 +626,10 @@ How it does, closed-loop, on the same ten seeds and the same untouched scorer:
 
 | | scripted controller | ACT policy |
 |---|---|---|
-| sub-goals over 10 seeds | **18 / 50** | **3 / 50** |
+| sub-goals over 10 seeds | **19 / 50** | **3 / 50** |
 | task success | 0 / 10 | 0 / 10 |
 | simulator seconds per episode | 206.2 | **242.8** |
-| what it ever achieves | drawer 10/10, plate 4/10, fork 3/10, mug 1/10 | drawer 2/10 (seeds 5, 7), plate 1/10 (seed 4) |
+| what it ever achieves | drawer 10/10, plate 5/10, fork 3/10, mug 1/10 | drawer 2/10 (seeds 5, 7), plate 1/10 (seed 4) |
 
 The policy was given **more** simulator time than its demonstrator, not less —
 its horizon is the median demonstration length — so the gap is not a clipped

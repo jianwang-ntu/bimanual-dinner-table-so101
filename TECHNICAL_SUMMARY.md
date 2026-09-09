@@ -14,7 +14,7 @@ disagree, so a stale figure here is a red suite rather than a reader's problem.
 
 | The rubric asks for | This entry has |
 |---|---|
-| End-to-end dinner-table task, two arms | **18 / 50** sub-goals over 10 seeds; task success **0 / 10** |
+| End-to-end dinner-table task, two arms | **19 / 50** sub-goals over 10 seeds; task success **0 / 10** |
 | A VLA / multi-modal policy | **nothing.** No VLA, no VLM, no learned policy, no language input |
 | OpenVINO on Intel Core Ultra Series 2/3 | OpenVINO yes, measured; **Core Ultra silicon: none, and none claimed** |
 
@@ -114,15 +114,15 @@ What exists instead, and what it is worth:
   changed: the CNN is no longer beside the controller, it can be inside it.
   Running the same scripted controller and the same scorer over the same ten
   seeds with `--scene perceived` gives **9 / 50** sub-goals with perception in
-  the loop, against 18 / 50 privileged and **5 / 50** for the blind negative
+  the loop, against 19 / 50 privileged and **5 / 50** for the blind negative
   control. Stated against us: that ratio got WORSE on 2026-09-09, not better —
   before the squared-cutlery adoption it was 12 / 50 against 15 / 50, and the
   perceived path placed the plate on 3 seeds. It now places nothing at all and
   scores only `drawer_open`, 9 / 10. The ordering the control needs — privileged
   above perceived above blind — still holds and the gap is wider, but the honest
   reading is that squaring the jaw axis buys privileged accuracy and spends
-  tolerance to pose error, and the perceived path is where that is paid. It took **1,059** inferences to do it, and the view it planned from
-  was wrong by **2.94 mm** at t=0 and **80.14 mm** averaged over every planning
+  tolerance to pose error, and the perceived path is where that is paid. It took **1,066** inferences to do it, and the view it planned from
+  was wrong by **2.94 mm** at t=0 and **76.06 mm** averaged over every planning
   instant.
 - So T2's *visual observation* is now on the scored path and can be priced.
   Its other three demands — natural-language instructions, multi-step task
@@ -136,7 +136,7 @@ What exists instead, and what it is worth:
   50, 25 actions per query — behaviour-cloned on 35 rollouts of the scripted
   controller on seeds 3000–3034 and validated on 3035–3039. Closed-loop over the
   same ten evaluation seeds and the same untouched scorer it reaches **3 / 50
-  sub-goals against the scripted controller's 18 / 50**, with 242.8 simulator
+  sub-goals against the scripted controller's 19 / 50**, with 242.8 simulator
   seconds per episode against the script's 206.2 — more time, not less. It opens
   the drawer on seeds 5 and 7 and places the plate on seed 4, and does nothing
   else on any seed. Section 4 has the training detail and section 8 keeps the
@@ -180,11 +180,11 @@ measurement:
 | Sub-goal | Scripted | No-policy control |
 |---|---|---|
 | `drawer_open` | **10 / 10** | 0 |
-| `plate_placed` | **4 / 10** | 0 |
+| `plate_placed` | **5 / 10** | 0 |
 | `fork_placed` | **3 / 10** | 0 |
 | `spoon_placed` | **0 / 10** | 0 |
 | `mug_placed` | **1 / 10** | 0 |
-| total | **18 / 50** | **0 / 50** |
+| total | **19 / 50** | **0 / 50** |
 | task success | **0 / 10** | 0 / 10 |
 
 Both arms touch a manipulable object on **10 / 10** seeds. `handoff_occurred`
@@ -234,7 +234,7 @@ than the script it was cloned from.**
 | Schedule | **6,000** steps, batch 128, AdamW at lr 1e-4, L1 + KL(β=10) as LeRobot's ACT defines it, seed 0 |
 | Cost | **286.5 s** on one NVIDIA L40S |
 | Held-out L1 | **0.167** normalized action units, against **0.810** for the same architecture with random weights |
-| Closed-loop | **3 / 50** sub-goals over the ten evaluation seeds against the scripted controller's **18 / 50**; task success **0 / 10** |
+| Closed-loop | **3 / 50** sub-goals over the ten evaluation seeds against the scripted controller's **19 / 50**; task success **0 / 10** |
 | Controls | `scripts/test_act_policy.py`, **19/19**, every accept paired with a reject |
 
 The demonstrator is the scripted controller, which itself scores 54 sub-goals of
@@ -335,7 +335,7 @@ controller, same seeds, same scorer — only `--scene` changes:
 
 | what the controller reads | total | `drawer_open` | `plate_placed` | `mug_placed` |
 |---|---|---|---|---|
-| `privileged` — MjData | **18 / 50** | 10 / 10 | 4 / 10 | 1 / 10 |
+| `privileged` — MjData | **19 / 50** | 10 / 10 | 5 / 10 | 1 / 10 |
 | `perceived` — one `top_cam` frame per planning instant, through the IR | **9 / 50** sub-goals with perception in the loop | 9 / 10 | 0 / 10 | 0 / 10 |
 | `blind` — the nominal, un-randomized layout | **5 / 50** for the blind negative control | 5 / 10 | 0 / 10 | 0 / 10 |
 
@@ -353,14 +353,14 @@ what the scene source handed it, all three rows would be identical. They are
 not, so the seam is load-bearing.
 
 The failure is legible rather than diffuse. The perceived view was wrong by
-**2.94 mm** at t=0 and **80.14 mm** averaged over every planning instant — and that average is not spread evenly.
+**2.94 mm** at t=0 and **76.06 mm** averaged over every planning instant — and that average is not spread evenly.
 The drawer, which nothing occludes, is estimated to 1.8 mm and `drawer_open`
 survives almost intact. The plate, which spends most of the episode underneath
 the arm that is dragging it, is estimated to 53 mm, and `plate_placed` is the
 sub-goal that falls. The model is being asked about an object it cannot see,
 and the cost lands exactly where that is true.
 
-Both perception runs use FP32. **1,059** inferences were made across the ten
+Both perception runs use FP32. **1,066** inferences were made across the ten
 episodes, one per planning instant, not one per physics step.
 
 **Verification.** `scripts/verify_scene.py` **16 / 16** structural and physical
@@ -448,7 +448,7 @@ Stated here in one place so no reader has to infer it:
 1. **No VLA, no VLM, no language conditioning.** There *is* a learned policy
    since 2026-09-05 — an imitation-learning ACT, section 4a — but it consumes
    no language and no image, and it is **five times worse than the scripted
-   controller** (3 / 50 against 18 / 50), so nothing this document quotes as a
+   controller** (3 / 50 against 19 / 50), so nothing this document quotes as a
    headline comes from it. Of T2's four demands, only *visual observation* is on
    the scored path; natural language, multi-step task context and plan
    adaptation score zero.
@@ -920,6 +920,148 @@ A/B-ing it rather than by reading it back:
    boundary the defect hid behind, and both failure modes were reproduced as
    negative controls before the fix was accepted: the pre-fix evidence file
    scores 27/30 and reverting either paired knob scores 28/30.
+
+## 8e. Adopted 2026-09-09T22:00Z: the plate look-back was firing on plates that were already scoring
+
+`plate_placed` was 4 / 10 while the plate **reached** its mat on 6 / 10. Both
+seeds it lost were lost to the end-of-episode look-back that exists to prevent
+exactly that loss.
+
+### What the trace says, waypoint by waypoint
+
+`scripts/measure_mug_shunt.py` samples each body's distance to its target for
+the whole rollout and cuts the series at the boundary of every labelled block,
+so a placement that is made and then unmade is visible rather than inferred.
+`evidence/mug_shunt.json`, seed 3:
+
+| waypoint | t (s) | plate → `target_plate` |
+|---|---|---|
+| `plate_retreat_again2` | 101.1 | **34.9 mm** — inside the scorer's 50 mm bar; this plate was scoring |
+| `plate_above_final` | 195.9 | 34.9 mm — untouched through the whole mug section |
+| `plate_descend_final` | 197.9 | 37.8 mm |
+| `plate_seek1_final` | 199.6 | 42.9 mm |
+| `plate_pinch_final` | 201.0 | **52.9 mm** — now outside the bar, pushed there by the look-back's own descent and pinch |
+| `plate_drag1..5_final` | 202.2–207.2 | 52.9, 52.9, 52.9, 52.9, 52.9 — five drag waypoints, zero movement: the hook missed the rim, so there was nothing holding the plate to drag |
+
+Seed 9 is the other half of the picture: the look-back fired there too and moved
+the plate **0.0 mm** across all twelve of its waypoints. On the only two seeds
+where it mattered, the look-back was 0 for 2 — once inert, once destructive.
+
+### The defect
+
+`PLATE_TOL = 0.028` is a **build** tolerance. It drives the drag loop toward the
+middle of the mat with margin, and firing it early is free because there is more
+episode left to fix a miss. It was also the trigger for the **end-of-episode**
+look-back, where there is no episode left, so firing it on a plate between 28 mm
+and the scorer's 50 mm risks a good placement against a re-hook that measurably
+misses. One threshold was doing two jobs with opposite risk profiles.
+
+`PLATE_FINAL_TOL` splits them. It defaults to 0.045 — the scorer's own 50 mm bar
+with 5 mm of margin, written as a literal rather than imported, for the same
+reason `DRAWER_OPEN_M` is: the controller must not be able to drift into the
+scorer. The two mid-episode retries still use `PLATE_TOL` and are untouched.
+
+### The A/B, and why the score alone would not have justified it
+
+The prediction was written to `evidence/plate_lookback_prereg.json` **before**
+the run, naming the seed and the sub-goal.
+
+| | control (shipped) | `PLATE_FINAL_TOL=0.045` |
+|---|---|---|
+| total | 18 / 50 | **19 / 50** |
+| `plate_placed` | 4 / 10 | **5 / 10** |
+| `task_success` | 0 / 10 | 0 / 10 |
+| gained | — | seed 3, `plate_placed` |
+| lost | — | **nothing** |
+
+The control reproduces the shipped 18 / 50 seed for seed, so the +1 is measured
+against a reproducing baseline rather than a remembered one.
+
+**+1 sub-goal on ten seeds is inside this project's own noise.** Section 8a
+records 24 cells running 10–19 with sd 2.0. So the total is *not* the evidence.
+Two other things are:
+
+1. **The prediction named the seed in advance and only that seed moved.** Nine
+   of ten seeds have byte-identical sub-goal vectors to the control.
+2. **The look-back is observably absent, not merely harmless.**
+   `evidence/plate_seed3_with_knob.json` re-runs seed 3 with the knob set and
+   finds **no `_final` waypoint emitted at all**; the plate's last waypoint is
+   `plate_retreat_again2` at t=101.1 and it drifts 34.9 → 37.3 mm across the
+   remaining ~120 s, including the drawer re-check.
+
+That second check is load-bearing, and it is the reason the adoption is not a
+coincidence: **three unrelated cells run the same day — `MUG_HOLD_FRAC` 1.55 and
+1.75 and `MUG_HOP` 0.0, none of which touches the plate look-back — also gained
+seed 3's plate.** Seed 3 is fragile to any perturbation of the late episode, so
+"seed 3 gained" is on its own worth nothing. What distinguishes this change is
+that the block it removes can be watched not running.
+
+`scripts/test_plate_lookback.py` pins all of it, 12/12, and goes red at the old
+value: `PLATE_FINAL_TOL=0.028` fails `thresholds_are_distinct` and
+`reject_scoring_plate_does_not_trigger_final_lookback` and exits 1. It exercises
+the **accept** path as well as the reject path — a plate 60 mm out must still
+trigger the look-back, because a look-back that never fires again would be a
+regression rather than a fix.
+
+### What did not change
+
+`task_success` is still **0 / 10**. `spoon_placed` is still **0 / 10**, so no
+seed has all five sub-goals and none is close.
+
+Both non-privileged scene modes were **re-run under the adopted controller** so
+the three-way comparison stays like-for-like rather than quoting a new
+privileged number against two old ones: `--scene perceived` is **9 / 50** and
+`--scene blind` is **5 / 50**, both unchanged. The change moves the privileged
+path only, which is what a plate look-back that fires or does not fire should
+do — the perceived path does not place the plate on any seed, so it has no
+placement for the look-back to protect. Seed 9's plate is still lost, to
+a different cause — it goes from 8.5 mm at t=70.7 to 53.3 mm by t=165.5, during
+the mug section — and that cause is measured and unfixed.
+
+## 8f. Refuted the same tick: the mug is not tipped, it is upside down
+
+The mug reaches its mat on **3 / 10** seeds and scores on **1 / 10**. The two it
+loses are one clause away: seeds 5 and 6 finish 49.9 mm and 23.9 mm from
+`target_mug`, both inside the 50 mm tolerance, and both fail only `upright`.
+
+Their final upright cosine is **-1.000** against a 0.906 bar. That is inverted,
+not tipped. The one mug that *is* on its side, seed 2 at 0.001, is 359 mm from
+its mat and was never going to score.
+
+This matters because the tree already contained a remedy for the wrong failure.
+`hold_above_base()`'s docstring states the cause as *"dragging it from the top
+rim tipped it over"*, and the helper written to fix it is **switched off by its
+own default**: `MUG_HOLD_FRAC = 2.0` and `dinner_table_script()` reads
+`mug_at = None if MUG_HOLD_FRAC >= 1.95`, so the shipped rollout grips the fixed
+`mug_grasp` site and `hold_above_base` is never called.
+
+Turning it on does not help. Three cells against the same reproducing control,
+prediction written first in `evidence/mug_upright_prereg.json`:
+
+| cell | total | `mug_placed` | gained | lost |
+|---|---|---|---|---|
+| shipped control | 18 / 50 | 1 / 10 | — | — |
+| `MUG_HOLD_FRAC=1.55` | 19 / 50 | **1 / 10** | mug on 2, plate on 3 and 9 | mug on 0, fork on 9 |
+| `MUG_HOLD_FRAC=1.75` | 17 / 50 | 2 / 10 | plate on 3, mug on 6 | plate on 1, fork on 7, drawer on 8 |
+| `MUG_HOP=0.0` | 16 / 50 | **0 / 10** | plate on 3 and 9 | mug on 0, plate on 1, drawer on 4 and 8 |
+
+**Not one cell moved seeds 5 or 6**, the two the mechanism named, and every cell
+shuffled sub-goals on seeds the mechanism does not touch — fork, drawer, plate.
+That is two arms sharing one timeline, not a grip-height effect. The
+pre-registered falsifier said do not adopt on that evidence, and nothing was
+adopted. The shipped mug path is byte-for-byte what it was.
+
+`evidence/mug_inversion.json` times the topple to a waypoint. On seed 2 the
+cosine goes 0.995 → 0.519 at `mug_left2_release` → 0.000 at `mug_left2_clear`,
+and the same move throws the mug from 273 mm to 358 mm — backwards. **The mug
+goes over during a release, after the grip has ended**, which is a failure no
+grip height can explain. On seed 5 it is progressive across successive drags,
+and the shunt then keeps grasping and dragging a mug that is already down —
+`_shunt` has no notion of which way up the mug is — which is how seeds 5 and 6
+arrive at their mats successfully and inverted.
+
+No cause for the release-topple is claimed and no fix is proposed. Three were
+tested and all three are refuted.
 
 ## 9. Reproducing every number in this document
 

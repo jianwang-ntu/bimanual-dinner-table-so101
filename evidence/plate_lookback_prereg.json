@@ -1,0 +1,55 @@
+{
+ "prereg": "plate_final_lookback_threshold",
+ "written_at_utc": "2026-09-09T21:20:00Z",
+ "written_before": "the PLATE_FINAL_TOL cell was run",
+ "job": "lablab:ai-infra-summit-hackathon",
+ "criterion": "T1 (weight 30) -- End-to-End Task Completion & Bimanual Manipulation",
+
+ "the_finding": {
+  "measured_by": "scripts/measure_mug_shunt.py -> evidence/mug_shunt.json, shipped controller unmodified, seeds 0-9",
+  "headline": "The plate reaches its mat on 6 of 10 seeds and is SCORED on 4. The two it loses are lost to the end-of-episode look-back that exists to prevent exactly that loss.",
+  "seed_3_verbatim_from_block_marks": {
+   "t=101.1 plate_retreat_again2": "34.9 mm -- INSIDE the scorer's 50 mm bar; this plate was scoring",
+   "t=195.9 plate_above_final": "34.9 mm -- unchanged through the whole mug section; nothing disturbed it",
+   "t=197.9 plate_descend_final": "37.8 mm",
+   "t=199.6 plate_seek1_final": "42.9 mm",
+   "t=201.0 plate_pinch_final": "52.9 mm -- now OUTSIDE the bar, pushed there by the look-back's own descent and pinch",
+   "t=202.2..207.2 plate_drag1..5_final": "52.9, 52.9, 52.9, 52.9, 52.9 -- five drag waypoints, zero movement: the hook missed the rim, so there is nothing holding the plate to drag",
+   "final": "52.9 mm, plate_placed = False"
+  },
+  "seed_9_verbatim_from_block_marks": {
+   "t=70.7 plate_retreat": "8.5 mm -- comfortably scoring",
+   "t=165.5 plate_above_final": "53.3 mm -- lost during the mug section, which is a DIFFERENT defect and is not what this change addresses",
+   "t=167.4..181.8 the whole final block": "53.3 mm at every one of twelve waypoints -- the look-back fired and moved the plate by 0.0 mm",
+   "final": "53.3 mm, plate_placed = False"
+  },
+  "what_the_two_seeds_show_together": "On the only two seeds where the final look-back matters, it is 0 for 2: once it did nothing, once it destroyed a placement that was already good. Its measured value on this seed set is negative."
+ },
+
+ "the_mechanism": {
+  "claim": "PLATE_TOL = 0.028 is a BUILD tolerance being used as a REPAIR trigger. Firing at 28 mm is free earlier in the episode -- there is more episode left to fix a miss. At the end of the episode there is not, so firing on a plate between 28 mm and the scorer's 50 mm risks a placement that was already good against a re-hook that measurably misses the rim.",
+  "why_the_hook_misses": "The plate is on its mat by then, not where the first hook found it, and _drag_plate re-descends from a Home-relative pose. _plate_untouched drives three seek steps; on seed 3 seek1 fired and the pinch still closed on air, which is what the five zero-movement drags record.",
+  "not_claimed": "This does NOT claim the look-back is useless. It claims the trigger is set at the wrong bar for the one place it is used with no episode left."
+ },
+
+ "the_change": {
+  "file": "envs/controller.py",
+  "what": "PLATE_FINAL_TOL, a separate threshold for the end-of-episode look-back only, plus _plate_short_final that reads it. The two earlier retries still use PLATE_TOL and are untouched.",
+  "default": "PLATE_FINAL_TOL defaults to PLATE_TOL, so with no environment set the rollout emits exactly the moves it always did. Verified: PLATE_FINAL_TOL == PLATE_TOL == 0.028 at import.",
+  "cell_under_test": "PLATE_FINAL_TOL=0.045 -- the scorer's own 50 mm bar with 5 mm of margin."
+ },
+
+ "predictions_registered_now": {
+  "Q1_primary": "Seed 3's final look-back does not fire (34.9 mm < 45 mm), the plate stays at 34.9 mm, and seed 3 GAINS plate_placed. plate_placed 4/10 -> 5/10, total 18/50 -> 19/50.",
+  "Q2_null": "Seed 9 is unchanged: its plate is at 53.3 mm when the predicate is evaluated, so the look-back still fires, and it is already measured to move the plate 0.0 mm.",
+  "Q3_side_effect_declared_in_advance": "Not firing on seed 3 also removes ~14 s of simulation and leaves the right arm in a different pose entering the drawer re-check that follows. Other seeds' drawer_open could move. That is a REAL risk of this change and it is stated before the run, not after.",
+  "Q4_falsifier": "If seed 3 does not gain plate_placed, the mechanism is wrong and the change is not adopted. If any seed LOSES a sub-goal, the net is reported as measured -- including if it is negative."
+ },
+
+ "adoption_rule_fixed_in_advance": "Adopt only if Q1 holds seed-for-seed AND the ten-seed total does not fall. A total that rises without seed 3 being the seed that gained is a coincidence, not this mechanism, and is not grounds to adopt.",
+
+ "not_claimed": [
+  "This does not make task_success non-zero. spoon_placed is 0/10 and is untouched by anything here.",
+  "This does not address seed 9's real loss, which happens during the mug section between t=70.7 and t=165.5 and is a separate, unfixed finding."
+ ]
+}
