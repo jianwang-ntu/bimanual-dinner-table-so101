@@ -95,9 +95,55 @@ Four constants in `envs/controller.py` moved together — `CUTLERY_SQUARE`,
 `CUTLERY_DESCEND_SQUARE`, `CUTLERY_PLAN_AT_OPEN` True and
 `CUTLERY_DESCEND_OPENING` 0.45 → 0.60 — and the cutlery is picked by the solver
 that puts the jaw closing axis where it was asked. Sub-goals **15 / 50 → 18 / 50**
-and `fork_placed` **0 / 10 → 3 / 10**, the first cutlery this entry has ever
-placed. `task_success` is still **0 / 10** and `spoon_placed` still **0 / 10**:
-the task is not completed on any seed.
+and `fork_placed` **0 / 10 → 3 / 10**, the first time the fork's sub-goal has
+ever fired. `task_success` is still **0 / 10** and `spoon_placed` still
+**0 / 10**: the task is not completed on any seed. And that 3 / 10 is *not a
+placement* — see the correction immediately below, which was measured two
+ticks later and which this section originally got wrong.
+
+### Corrected 2026-09-09 — `fork_placed` 3 / 10 is not a placement
+
+Measured by `scripts/measure_fork_release.py`, checked by
+`scripts/test_fork_release.py` (17 / 17) and by a 15-mutant campaign against
+that checker (`scripts/mutate_fork_release.py`, 15 / 15 killed, baseline green):
+
+**The left arm — the arm that runs `_place(target_fork)` — never holds the
+fork.** Not on any of the ten seeds, not at any waypoint. The right arm picks
+it out of the drawer and holds it 4.5–5.0 mm from its own jaw meeting point out
+over the hand-off site; the fork then falls to the table during the `fork_take`
+move; and `_place` goes on to execute its whole over / down / release / retreat
+sequence on an **empty gripper** — arriving 0.9–4.4 mm from `target_fork` on six
+of the ten seeds while carrying nothing.
+
+The number itself does not move. `fork_placed` is still **3 / 10** and seeds 2,
+7 and 9 still satisfy the predicate honestly: the fork really is within 45 mm of
+its target, resting and undropped. What is corrected is the *mechanism*. On
+those three seeds the fork travels a further **66.6, 75.9 and 106.8 mm after the
+jaws open**, so what the scorer records is where a dropped fork came to rest
+once later phases had nudged it — not a placement this controller performed.
+
+"Never held" is not a check that cannot fail. The same contact detector, on the
+same rollouts, registers the **right** arm's grasp on 9 of 10 seeds, and the
+fork's *height* corroborates the reading without using contact data at all: from
+`fork_take` onward it is 752.5 mm on every seed that ever left the drawer, which
+is the table top.
+
+Two explanations were raised by this measurement and then refuted by it, kept
+here because they were raised:
+
+- The taker does **not** knock the fork out of the giver's jaws. Its jaw meeting
+  point never comes within **62.3 mm** of the fork anywhere in the hand-off.
+  (Its *links* are not instrumented, so a link collision is not excluded — only
+  the jaw one. That residual is open.)
+- The solver is **not** failing. The IK residual for the taker's two hand-off
+  waypoints is **1.58–7.67 mm** on every seed. The pose is found; the arm does
+  not get to it. At `fork_take_above`, with the fork still held aloft and
+  motionless, the taker sits 63.7–92.3 mm from it against a commanded 40 mm
+  standoff.
+
+One code fact the finding turns on: `_handoff` carries a `taker_jaw` parameter
+whose own docstring says it exists because "a taker aimed at the same line
+closes on the giver's fingers". **Neither of its two call sites passes it.**
 
 Two things are recorded against it. The perceived scene source regressed
 (12 / 50 → 9 / 50) and the perceived path now places nothing. And the adoption

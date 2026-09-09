@@ -331,8 +331,10 @@ controller, same seeds, same scorer — only `--scene` changes:
 | `blind` — the nominal, un-randomized layout | **5 / 50** for the blind negative control | 5 / 10 | 0 / 10 | 0 / 10 |
 
 Re-measured 2026-09-09T03:00Z against the adopted squared-cutlery controller.
-The privileged column also carries `fork_placed` **3 / 10**, the first cutlery
-this entry has ever placed; the perceived and blind columns carry 0 / 10 for it.
+The privileged column also carries `fork_placed` **3 / 10**, the first time that
+sub-goal has ever fired; the perceived and blind columns carry 0 / 10 for it.
+That 3 / 10 is a true score and **not a placement** — F-FORK-HANDOFF-001 below
+measures that the placing arm never holds the fork on any seed.
 Both non-privileged columns fell (12 → 9 and 9 → 5) while privileged rose
 15 → 18. That is a real cost and it is not netted off anywhere in this
 document.
@@ -804,7 +806,7 @@ measured the last two as losses.
 | | shipped before | adopted | delta |
 |---|---|---|---|
 | sub-goals, privileged | 15 / 50 | **18 / 50** | +3 |
-| `fork_placed` | 0 / 10 | **3 / 10** | first cutlery this entry has ever placed |
+| `fork_placed` | 0 / 10 | **3 / 10** | the sub-goal fires for the first time — but *not* by being placed; see F-FORK-HANDOFF-001 |
 | `spoon_placed` | 0 / 10 | 0 / 10 | — |
 | `plate_placed` | 4 / 10 | 4 / 10 | — |
 | `mug_placed` | 1 / 10 | 1 / 10 | — |
@@ -935,3 +937,73 @@ absence statement, restoring the stale sentence the video record actually
 shipped, and moving a number in `evidence/` while leaving this document alone
 must each make it fail — and each is checked. It needs only the Python standard
 library, so a judge can run it on a fresh clone before installing anything.
+
+---
+
+## 9. F-FORK-HANDOFF-001 — the fork is never carried to its target
+
+*Measured 2026-09-09T05:30Z. Probe `scripts/measure_fork_release.py`, evidence
+`evidence/fork_release.json`, checker `scripts/test_fork_release.py` (17 / 17),
+mutation campaign `scripts/mutate_fork_release.py` (15 / 15 killed, baseline
+green, the evidence file byte-identical before and after).*
+
+Section 8's adoption left a residual that looked like a release problem: the
+fork peaks 118–123 mm above its start on 7 of 10 seeds and then scores
+14.0–143.6 mm from `target_fork` against a 45 mm tolerance. The next step on
+record was therefore "the release, not the grasp", and it asked for a direct
+measurement of where the fork sits in the jaws at release rather than another
+sweep.
+
+**The measurement does not answer that question. It dissolves it.**
+
+| | measured |
+|---|---|
+| seeds where the **placing** arm ever touches the fork | **0 / 10** |
+| seeds where the **picking** arm does (the positive control) | **9 / 10** |
+| fork height from `fork_take` onward | **752.5 mm** on every seed that left the drawer — the table top |
+| `_place(target_fork)` gripper state | **empty, 10 / 10 seeds, every waypoint** |
+| jaw-meeting-point error at `target_fork_down` | **0.9–4.4 mm on 6 of 10** — the empty jaws arrive |
+| taker's closest approach to the fork, whole hand-off | **62.3 mm** |
+| taker IK residual at its two hand-off waypoints | **1.58–7.67 mm** |
+
+The right arm picks the fork out of the drawer and holds it 4.5–5.0 mm from its
+own jaw meeting point, out over the hand-off site, through `fork_lift`,
+`fork_present` and `fork_meet` — and on three seeds through `fork_take_above`
+as well. During the `fork_take` move the fork leaves those jaws and falls to the
+table. The left arm then runs the entire placement sequence on nothing, and runs
+it *well*: it puts an empty jaw meeting point within 4.4 mm of `target_fork` on
+six seeds of ten.
+
+**So `fork_placed` 3 / 10 is a true score and not a placement.** Seeds 2, 7 and
+9 satisfy the predicate honestly — the fork is inside 45 mm, resting, undropped
+— but on each of them the fork moves a further **66.6, 75.9 and 106.8 mm after
+the jaws open**. What is being scored is where a dropped fork came to rest once
+later phases nudged it. The figure is not restated anywhere in this document;
+the mechanism behind it is.
+
+Two hypotheses this tick raised and its own data refuted, kept because they
+were raised:
+
+1. **The taker knocks it out.** Refuted for the jaws: the taker's meeting point
+   never comes within 62.3 mm of the fork at any hand-off waypoint on any seed.
+   Its *links* are not instrumented, so a link collision remains open — stated
+   as a residual, not resolved in our favour.
+2. **The solver cannot find the pose.** Refuted: the residual is 1.58–7.67 mm at
+   both `fork_take_above` and `fork_take`, on all ten seeds. The pose is solved
+   and the arm does not reach it — at `fork_take_above`, with the fork still
+   held aloft and motionless, the taker sits 63.7–92.3 mm away against a
+   commanded 40 mm standoff.
+
+One code fact the finding turns on. `_handoff` takes a `taker_jaw` parameter
+whose own docstring says it exists because "a taker aimed at the same line
+closes on the giver's fingers". **Neither of its two call sites passes it**, so
+both cutlery hand-offs send the taker in on the giver's own grip line. That is
+not asserted as the cause — the taker never arrives, so it never closes on
+anything — but it is a named remedy for a named failure that has never once
+been switched on, and it is asserted as dead code by the checker.
+
+What this does **not** establish: why the giver loses the fork during a move in
+which the giver is not commanded. The probe records contacts, positions and
+solver residuals, not grip forces. The next step is that question, and it is
+about the hand-off, not about the release.
+
