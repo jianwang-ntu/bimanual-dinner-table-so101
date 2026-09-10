@@ -501,27 +501,58 @@ object is over that lip.
 > so the scorer is recording where a dropped fork came to rest. See
 > "F-FORK-HANDOFF-001 — the fork is never carried to its target" below.
 
-**It is two different faults, not one.** `scripts/measure_grasp_feasibility.py`
-solves the grasp, teleports the arm onto the solved pose and runs MuJoCo's own
-collision pass — no dynamics, no servos, so saturation and contact rejection
-cannot be the explanation:
+**CORRECTED 2026-09-10T22:20Z. This section previously said the fork was "an
+execution failure against a pose that is known good" and the spoon "a geometric
+impossibility where the scene parks it", and printed a table of clearances to
+support it. Both halves are false on the controller that ships, and the table
+was measured on one that does not.**
 
-| | fork | spoon |
+The numbers it quoted come from `evidence/grasp_feasibility.json`, written
+2026-09-05T20:19Z. `envs/controller.py` has moved five commits since, two of
+which — `9f7ea48` "the cutlery was never solved for its jaw axis" and `824e5ed`
+"square the cutlery pick" — replaced the solver that plans both cutlery
+descents. The document kept quoting the old file because nothing checked it:
+`scripts/test_technical_summary.py` reads eight evidence files and
+`grasp_feasibility.json` is not one of them, so this claim could go stale
+without any control going red.
+
+`scripts/measure_spoon_site_grip.py` re-derives it on the shipped arm, ten seeds,
+each waypoint's own planned target and jaw axis, using
+`measure_grasp_feasibility.run()`'s grip test verbatim — and agreeing with that
+reference implementation on 10 of 10 seeds, both waypoints, as its instrument
+check:
+
+| at each waypoint's own planned pose | fork (right) | spoon (left) |
 |---|---|---|
-| lowest pose clearing the woodwork, 3 seeds | 6.0 / 6.0 / 6.0 mm | 58 / 22 / 44 mm |
-| jaws relative to the 5.0 mm handle top there | **3.3–3.9 mm below** | **10.4–48.4 mm above** |
-| grips at that pose | **yes** | **no** |
-| clearance crossed over both arms | 8–18 mm | 30–40 mm |
+| **as this document used to state it** | 6.0 / 6.0 / 6.0 mm, grips **yes** | 58 / 22 / 44 mm, grips **no** |
+| lowest pose clearing the woodwork, 10 seeds | 6–26 mm, median **24** | 2–50 mm, median **8** |
+| jaws vs the 5.0 mm handle top there | −12.9 to +5.7 mm | −38.8 to +4.6 mm |
+| **grips at that pose** | **4 / 10 seeds** | **5 / 10 seeds** |
 
-So the **fork** is an execution failure against a pose that is known good, and
-the **spoon** is a geometric impossibility where the scene parks it. The cross
-over (arm, object) makes the spoon's failure a property of the object rather
-than of the arm it was given. The cause is an authored constant in
-`envs/dinner_table.py` — `('spoon', -0.032)` against `('fork', 0.018)` — which
-parks the spoon 36 mm behind `drawer_front`, the tallest of the four walls,
-while the fork sits 86 mm behind it. It is the same never-randomized constant
-section 5 records: those 20 sub-goals have been scored against one arbitrary
-draw, and that draw is an infeasible one for the spoon.
+So the two-fault story is withdrawn. On the shipped arm neither pose is
+reliably good and neither is impossible: both are seed-dependent, and the
+spoon's planned grasp is collision-free with the jaws around the handle on
+*more* seeds than the fork's, not fewer. The spoon is nevertheless placed 0/10
+and the fork 3/10, so **grasp-pose feasibility is not what separates them**, and
+it is not what explains the spoon's zero. Row 6 of the table below already
+pointed this way and was read as a dead end rather than as a refutation: moving
+the spoon to positions where its pose *is* feasible still placed it 0/10.
+
+That relocates the spoon's failure from planning to execution — where the fork's
+was already known to be — and it is the first thing a future attempt should
+measure, rather than another approach-geometry sweep.
+
+**One control in that probe FAILED and the mechanism it tested is refuted.**
+The hypothesis was that the spoon's difficulty is its distance behind
+`drawer_front` — 42–55 mm, against the fork's 75–86 mm. If so, pushing the spoon
+*toward* that wall must make it worse. It does not: at −40 mm the grip count
+rises to 8/10 from 5/10 at the parked position, while the intermediate −20 mm
+station is 0/10. A non-monotone response is the signature of the IK picking a
+different solution branch, not of a wall. `measure_spoon_site_grip.py` exits
+non-zero on this and the failure is recorded rather than dropped. The
+`('spoon', -0.032)` / `('fork', 0.018)` constants in `envs/dinner_table.py` are
+still un-randomized — section 5's point stands — but this document no longer
+claims that constant makes the spoon ungraspable.
 
 **Six explanations have been tested and falsified**, across 40 swept variants.
 Every sweep runs the same ten evaluation seeds and the same unchanged scorer,
